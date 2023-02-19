@@ -17,6 +17,8 @@
     "auth0-js": "^9.20.1",
     "convex": "^0.9.1",
     "next": "13.1.6",
+    "primeicons": "^6.0.1",
+    "primereact": "^9.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.5"

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 "use client"
 
 import Image from "next/image";
@@ -12,6 +13,7 @@ export default function Home() {
   const { user } = useUser();
   return (
     <>
+    <p>Public Meeple Party Front Page</p>
       {!!user && (
         <p>
           {user?.name} <a href="/api/auth/logout">Logout</a>
