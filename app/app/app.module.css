@@ -44,3 +44,10 @@
 }
 
 .user {}
+
+.content {
+    max-width: 1200px;
+    min-width: 800px;
+    margin: auto;
+    padding: 1rem 0.5rem;
+}

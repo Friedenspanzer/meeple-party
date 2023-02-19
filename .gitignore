@@ -40,3 +40,6 @@ next-env.d.ts
 
 # convex
 convex/README.md
+
+# dev database
+prisma/*.db
