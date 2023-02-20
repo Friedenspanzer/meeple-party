@@ -1,10 +1,12 @@
 -- CreateTable
 CREATE TABLE "UserProfile" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "realName" TEXT,
-    "picture" TEXT
+    "picture" TEXT,
+
+    CONSTRAINT "UserProfile_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
