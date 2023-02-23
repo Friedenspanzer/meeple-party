@@ -93,16 +93,29 @@ async function fetchGameData(gameId: number): Promise<GameExtended> {
   const parser = new XMLParser({
     ignoreAttributes: false,
   });
-  //TODO Check if this is a boardgame, the API actually returns RPGs and presumably videogames m)
   return fetch(`https://api.geekdo.com/xmlapi/boardgame/${gameId}`, {
     next: { revalidate: DAILY },
   })
     .then((response) => response.text())
     .then((xml) => parser.parse(xml))
-    .then((bggGame) => {
-      return bggGame.boardgames;
-    })
-    .then((bggGame) => convertGame(bggGame));
+    .then((bggGame) => bggGame.boardgames)
+    .then(checkData)
+    .then(convertGame)
+    .catch((e) => {
+      throw e;
+    });
+}
+
+function checkData(boardgames: any) {
+  if (!!boardgames.boardgame.error) {
+    throw Error(`BGG API error: ${boardgames.boardgame.error['@_message']}`);
+  }
+  if (!!boardgames.boardgame["@_subtypemismatch"]) {
+    throw Error(
+      `Item with ID ${boardgames.boardgame["@_objectid"]} is not a boardgame.`
+    );
+  }
+  return boardgames;
 }
 
 function convertGame(boardgames: any): GameExtended {
