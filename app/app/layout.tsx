@@ -1,20 +1,17 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
 import { UserProfile } from ".prisma/client";
+import Avatar from "@/components/Avatar/Avatar";
 import CompleteUserProfile from "@/components/CompleteUserProfile/CompleteUserProfile";
-import {
-  UserContext,
-  UserProfile as Auth0User,
-  useUser,
-} from "@auth0/nextjs-auth0/client";
+import { UserProfile as Auth0User, useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import styles from "./app.module.css";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
   const { user, error, isLoading } = useUser();
   const [userProfile, setUserProfile] = useState<
     UserProfile | null | undefined
@@ -48,7 +45,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="spinner-border" />
       </div>
     );
-  } else if (!user || !!error) {
+  } else if (!user || !!error || !userProfile) {
     return (
       <>
         <h2>Not logged in</h2>
@@ -91,10 +88,28 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </Link>
           </ul>
           <div className={styles.user}>
-            User: {user.name}{" "}
-            <Link href="/api/auth/logout" prefetch={false}>
-              Logut
-            </Link>
+            <div className={styles.avatar}>
+              <Avatar image={userProfile.picture} name={userProfile.name} />
+            </div>
+            <div className={styles.username}>{userProfile.name}</div>
+            <div className={styles.realname}>{userProfile.realName}</div>
+            <div className={styles.usermenu}>
+              <div className="dropdown">
+                <button
+                  className="btn btn-outline-secondary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                ></button>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a href="/api/auth/logout" className="dropdown-item">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </nav>
         <div className={styles.content}>
@@ -125,7 +140,7 @@ function tryPrefillFields(
     id: profile?.id || -1,
     email: profile?.email || user.email || "",
     name: profile?.name || user.nickname || "",
-    picture: profile?.picture || user.picture || null,
+    picture: profile?.picture || null,
     realName: profile?.realName || user.name || null,
   };
 }

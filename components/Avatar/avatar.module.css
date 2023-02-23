@@ -1,0 +1,22 @@
+.image {
+  --avatar-size: 40px;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  object-fit: cover;
+  border-radius: calc(var(--avatar-size) / 2);
+  box-shadow: var(--bs-box-shadow-sm);
+}
+
+.dummy {
+  --avatar-size: 40px;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: calc(var(--avatar-size) / 2);
+  background-color: coral;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: var(--bs-light);
+  box-shadow: var(--bs-box-shadow-sm);
+}

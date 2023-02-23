@@ -9,6 +9,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "cf.geekdo-images.com",
       },
+      {
+        protocol: "https",
+        hostname: "*.googleusercontent.com"
+      }
     ],
   },
 };
