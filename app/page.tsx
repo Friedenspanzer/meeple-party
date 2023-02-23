@@ -16,7 +16,7 @@ export default function Home() {
     <p>Public Meeple Party Front Page</p>
       {!!user && (
         <p>
-          {user?.name} <a href="/api/auth/logout">Logout</a>
+          {user?.name} <a href="/api/auth/logout">Logout</a> <Link href="/app">Go to app</Link>
         </p>
       )}
       {!user && (
