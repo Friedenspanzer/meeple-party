@@ -1,53 +1,54 @@
 .menuBar {
-    background-color: var(--surface-overlay);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1), 0px 4px 5px -2px rgba(0, 0, 0, 0.12), 0px 10px 15px -5px rgba(0, 0, 0, 0.2);
+  background-color: var(--surface-overlay);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1),
+    0px 4px 5px -2px rgba(0, 0, 0, 0.12), 0px 10px 15px -5px rgba(0, 0, 0, 0.2);
 }
 
 .spinner {
-    overflow: hidden;
-    margin: auto;
-    width: fit-content;
-    height: fit-content;
-    margin-top: 10rem;
+  overflow: hidden;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 10rem;
 }
 
 .logo {
-
 }
 
 .menu {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
 }
 
 .menu a {
-    color: var(--text-color);
-    text-decoration: none;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 .menu li {
-    height: 2rem;
-    padding: 0 2rem 0 2rem;
-    border-bottom: 2px solid var(--surface-border);
+  height: 2rem;
+  padding: 0 2rem 0 2rem;
+  border-bottom: 2px solid #aaa;
 }
 .menu li:hover {
-    border-bottom: 2px solid var(--surface-500);
+  border-bottom: 2px solid #777;
 }
 
 .active {
-    border-bottom: 2px solid var(--primary-color) !important;
+  border-bottom: 2px solid #2482fd !important;
 }
 
-.user {}
+.user {
+}
 
 .content {
-    max-width: 1200px;
-    min-width: 800px;
-    margin: auto;
-    padding: 1rem 0.5rem;
+  max-width: 1200px;
+  min-width: 800px;
+  margin: auto;
+  padding: 1rem 0.5rem;
 }

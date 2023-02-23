@@ -11,8 +11,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import styles from "./app.module.css";
-import Spinner from "react-bootstrap/Spinner";
-import Modal from "react-bootstrap/Modal";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -47,29 +45,25 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   if (!!isLoading || !!loadingProfile) {
     return (
       <div className={styles.spinner}>
-        <Spinner animation="border" />
+        <div className="spinner-border" />
       </div>
     );
   } else if (!user || !!error) {
     return (
-      <Modal.Dialog>
-        <Modal.Header>
-          <Modal.Title>Not logged in</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>
-            You are not logged in to Meeple Party. This <em>should</em> fix
-            itself but apparently that didn&apos;t work. There&apos;s probably
-            something wrong with the intertubes. Please go back to the{" "}
-            <Link href="/">front page of Meeple Party and try again.</Link>
-          </p>
-        </Modal.Body>
-      </Modal.Dialog>
+      <>
+        <h2>Not logged in</h2>
+        <p>
+          You are not logged in to Meeple Party. This <em>should</em> fix itself
+          but apparently that didn&apos;t work. There&apos;s probably something
+          wrong with the intertubes. Please go back to the{" "}
+          <Link href="/">front page of Meeple Party and try again.</Link>
+        </p>
+      </>
     );
   } else {
     return (
       <>
-        <nav className={styles.menuBar}>
+        <nav className={styles.menuBar} style={{marginBottom: 0}}>
           <div className={styles.logo}>Meeple Party!</div>
           <ul className={styles.menu}>
             <Link href="/app">
@@ -83,7 +77,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                   pathname?.startsWith("/app/collection") ? styles.active : ""
                 }
               >
-                Collection
+                Your Collection
               </li>
             </Link>
             <Link href="/app/friends">

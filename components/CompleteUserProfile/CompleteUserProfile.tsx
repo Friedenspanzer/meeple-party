@@ -1,13 +1,6 @@
-"use client";
-
 import { UserProfile } from "@prisma/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./CompleteUserProfile.module.css";
-import Image from "next/image";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner";
 
 export interface CompleteUserProfileProps {
   userProfile: UserProfile;
@@ -49,10 +42,11 @@ export default function CompleteUserProfile(props: CompleteUserProfileProps) {
         Hi there! 👋 Sorry to interrupt, but we still need some information from
         you.
       </p>
-      <Form className="container-sm row row-cols-3">
-        <Form.Group controlId="completeUserProfileName" className="col">
-          <Form.Label>Display name</Form.Label>
-          <Form.Control
+      <form className="container-sm row row-cols-3">
+        <div className="col">
+          <label>Display name</label>
+          <input
+            className="form-control"
             type="text"
             placeholder="Display name"
             value={username}
@@ -61,13 +55,12 @@ export default function CompleteUserProfile(props: CompleteUserProfileProps) {
             }}
             disabled={updating}
           />
-          <Form.Text className="text-muted">
-            What you will be publicly known as
-          </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="completeUserProfileRealName" className="col">
-          <Form.Label>Real name (optional)</Form.Label>
-          <Form.Control
+          <p className="text-muted">What you will be publicly known as</p>
+        </div>
+        <div className="col">
+          <label>Real name (optional)</label>
+          <input
+            className="form-control"
             type="text"
             placeholder="Display name"
             value={!!realName ? realName : ""}
@@ -76,23 +69,37 @@ export default function CompleteUserProfile(props: CompleteUserProfileProps) {
             }}
             disabled={updating}
           />
-          <Form.Text className="text-muted">
-            Only shown to your friends
-          </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="completeUserProfileEmail" className="col">
-          <Form.Label>E-Mail address</Form.Label>
-          <Form.Control
+          <p className="text-muted">Only shown to your friends</p>
+        </div>
+        <div className="col">
+          <label>E-Mail address</label>
+          <input
+            className="form-control"
             type="email"
             placeholder="Enter email"
             disabled
             value={userProfile.email}
           />
-        </Form.Group>
-      </Form>
-      <Button onClick={sendCurrentData} disabled={updating}>
-        {updating ? <><Spinner animation="grow" size="sm" />Sending ...</> : "Submit"}
-      </Button>
+        </div>
+      </form>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={sendCurrentData}
+        disabled={updating}
+      >
+        {updating ? (
+          <>
+            <div
+              className="spinner-border spinner-border-sm"
+              style={{ marginRight: "0.5rem" }}
+            />
+            Sending ...
+          </>
+        ) : (
+          "Submit"
+        )}
+      </button>
     </>
   );
 }
