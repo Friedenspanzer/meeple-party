@@ -13,12 +13,14 @@ export default async function Game({ params }: { params: { gameId: string } }) {
     return (
       <>
         <h1>{games[0].name}</h1>
-        <Image
-          src={games[0].image}
-          width="300"
-          height="300"
-          alt={games[0].name}
-        />
+        {games[0].image && (
+          <Image
+            src={games[0].image}
+            width="300"
+            height="300"
+            alt={games[0].name}
+          />
+        )}
       </>
     );
   } catch (e) {
