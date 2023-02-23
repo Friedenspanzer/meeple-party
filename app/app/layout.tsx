@@ -9,10 +9,10 @@ import {
 } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Dialog } from "primereact/dialog";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { createContext, useEffect, useState } from "react";
 import styles from "./app.module.css";
+import Spinner from "react-bootstrap/Spinner";
+import Modal from "react-bootstrap/Modal";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -47,24 +47,24 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   if (!!isLoading || !!loadingProfile) {
     return (
       <div className={styles.spinner}>
-        <ProgressSpinner />
+        <Spinner animation="border" />
       </div>
     );
   } else if (!user || !!error) {
     return (
-      <Dialog
-        header="Not logged in"
-        visible={true}
-        onHide={() => router.replace("/")}
-        style={{ maxWidth: "50vw" }}
-      >
-        <p>
-          You are not logged in to Meeple Party. This <em>should</em> fix itself
-          but apparently that didn&apos;t work. There&apos;s probably something
-          wrong with the intertubes. Please go back to the{" "}
-          <Link href="/">front page of Meeple Party and try again.</Link>
-        </p>
-      </Dialog>
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>Not logged in</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            You are not logged in to Meeple Party. This <em>should</em> fix
+            itself but apparently that didn&apos;t work. There&apos;s probably
+            something wrong with the intertubes. Please go back to the{" "}
+            <Link href="/">front page of Meeple Party and try again.</Link>
+          </p>
+        </Modal.Body>
+      </Modal.Dialog>
     );
   } else {
     return (
@@ -79,13 +79,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </Link>
             <Link href="/app/collection">
               <li
-                className={pathname?.startsWith("/app/collection") ? styles.active : ""}
+                className={
+                  pathname?.startsWith("/app/collection") ? styles.active : ""
+                }
               >
                 Collection
               </li>
             </Link>
             <Link href="/app/friends">
-              <li className={pathname?.startsWith("/app/friends") ? styles.active : ""}>
+              <li
+                className={
+                  pathname?.startsWith("/app/friends") ? styles.active : ""
+                }
+              >
                 Friends
               </li>
             </Link>
@@ -97,11 +103,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </nav>
-        <div className={styles.content}>
+        <div className="container-xl">
           {isCompleteUserProfile(userProfile) ? (
             children
           ) : (
-            <CompleteUserProfile userProfile={userProfile as UserProfile} onUserProfileComplete={setUserProfile} />
+            <CompleteUserProfile
+              userProfile={userProfile as UserProfile}
+              onUserProfileComplete={setUserProfile}
+            />
           )}
         </div>
       </>

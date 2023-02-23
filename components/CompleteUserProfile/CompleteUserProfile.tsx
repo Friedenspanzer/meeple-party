@@ -1,13 +1,13 @@
 "use client";
 
 import { UserProfile } from "@prisma/client";
-import { InputText } from "primereact/inputtext";
-import { Card } from "primereact/card";
-import { Button } from "primereact/button";
-import { Avatar } from "primereact/avatar";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./CompleteUserProfile.module.css";
+import Image from "next/image";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
 
 export interface CompleteUserProfileProps {
   userProfile: UserProfile;
@@ -29,8 +29,8 @@ export default function CompleteUserProfile(props: CompleteUserProfileProps) {
       method: "POST",
       body: JSON.stringify({
         email: userProfile.email,
-        name: userProfile.name,
-        realName: userProfile.realName,
+        name: username,
+        realName: realName,
         picture: userProfile.picture,
       }),
     })
@@ -44,54 +44,55 @@ export default function CompleteUserProfile(props: CompleteUserProfileProps) {
 
   return (
     <>
-      <Card title="Complete your user Profile">
-        <p>
-          Hi there! 👋 Sorry to interrupt, but we still need some information
-          from you.
-        </p>
-        <div className={styles.formContainer}>
-          <div className="p-float-label">
-            <InputText
-              id="email"
-              value={userProfile.email}
-              disabled
-              size={40}
-            />
-            <label htmlFor="email">E-Mail address</label>
-          </div>
-          <div className="p-float-label">
-            <InputText
-              id="username"
-              value={username}
-              onChange={(e) => {
-                setUserName(e.currentTarget.value);
-              }}
-              size={40}
-            />
-            <label htmlFor="username">Display name</label>
-          </div>
-          <div className="p-float-label">
-            <InputText
-              id="realName"
-              value={realName}
-              onChange={(e) => {
-                setRealName(e.currentTarget.value);
-              }}
-              size={40}
-            />
-            <label htmlFor="username">Real name</label>
-          </div>
-          {!!userProfile.picture && (
-            <Avatar image={userProfile.picture} size="large" />
-          )}
-        </div>
-        <Button
-          label="Submit"
-          icon="pi pi-check"
-          loading={updating}
-          onClick={sendCurrentData}
-        />
-      </Card>
+      <h2>Complete your user profile</h2>
+      <p>
+        Hi there! 👋 Sorry to interrupt, but we still need some information from
+        you.
+      </p>
+      <Form className="container-sm row row-cols-3">
+        <Form.Group controlId="completeUserProfileName" className="col">
+          <Form.Label>Display name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Display name"
+            value={username}
+            onChange={(e) => {
+              setUserName(e.currentTarget.value);
+            }}
+            disabled={updating}
+          />
+          <Form.Text className="text-muted">
+            What you will be publicly known as
+          </Form.Text>
+        </Form.Group>
+        <Form.Group controlId="completeUserProfileRealName" className="col">
+          <Form.Label>Real name (optional)</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Display name"
+            value={!!realName ? realName : ""}
+            onChange={(e) => {
+              setRealName(e.currentTarget.value);
+            }}
+            disabled={updating}
+          />
+          <Form.Text className="text-muted">
+            Only shown to your friends
+          </Form.Text>
+        </Form.Group>
+        <Form.Group controlId="completeUserProfileEmail" className="col">
+          <Form.Label>E-Mail address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            disabled
+            value={userProfile.email}
+          />
+        </Form.Group>
+      </Form>
+      <Button onClick={sendCurrentData} disabled={updating}>
+        {updating ? <><Spinner animation="grow" size="sm" />Sending ...</> : "Submit"}
+      </Button>
     </>
   );
 }
