@@ -8,11 +8,13 @@ export default function GameBox(props: { game: Game }) {
     <div className={`${styles.gamebox}`}>
       <div className={styles.imageBox}>
         <Link href={`/app/collection/game/${game.id}`}>
-          <img
-            src={game.image}
-            className={`card-img-top ${styles.image}`}
-            alt={game.name}
-          />
+          {!!game.image && (
+            <img
+              src={game.image}
+              className={`card-img-top ${styles.image}`}
+              alt={game.name}
+            />
+          )}
         </Link>
       </div>
       <div className={styles.title}>
