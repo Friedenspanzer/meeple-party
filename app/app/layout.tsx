@@ -94,9 +94,21 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className={styles.username}>{userProfile.name}</div>
             <div className={styles.realname}>{userProfile.realName}</div>
             <div className={styles.usermenu}>
-              <a href="/api/auth/logout" className="btn btn-danger">
-                Logout
-              </a>
+              <div className="dropdown">
+                <button
+                  className="btn btn-outline-secondary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                ></button>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a href="/api/auth/logout" className="dropdown-item">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </nav>
