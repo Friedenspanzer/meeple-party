@@ -65,7 +65,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <>
         <nav className={styles.menuBar}>
           <div className={styles.logo}>Meeple Party!</div>
-          <ul className={styles.menu} style={{marginBottom: 0}}>
+          <ul className={styles.menu} style={{ marginBottom: 0 }}>
             <Link href="/app">
               <li className={pathname === "/app" ? styles.active : ""}>
                 Dashboard
@@ -97,7 +97,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </nav>
-        <div className="container-xl">
+        <div className={styles.content}>
           {isCompleteUserProfile(userProfile) ? (
             children
           ) : (
@@ -106,6 +106,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               onUserProfileComplete={setUserProfile}
             />
           )}
+          <div className="clearfix"></div>
         </div>
       </>
     );

@@ -1,6 +1,5 @@
 import GameBox from "@/components/GameBox/GameBox";
 import { fetchGames } from "@/utility/games";
-import Link from "next/link";
 
 export default async function Collection() {
   const games = await fetchGames([
