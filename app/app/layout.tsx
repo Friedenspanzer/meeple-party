@@ -79,13 +79,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </Link>
             <Link href="/app/collection">
               <li
-                className={pathname === "/app/collection" ? styles.active : ""}
+                className={pathname?.startsWith("/app/collection") ? styles.active : ""}
               >
                 Collection
               </li>
             </Link>
             <Link href="/app/friends">
-              <li className={pathname === "/app/friends" ? styles.active : ""}>
+              <li className={pathname?.startsWith("/app/friends") ? styles.active : ""}>
                 Friends
               </li>
             </Link>
