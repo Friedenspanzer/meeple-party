@@ -1,12 +1,22 @@
-"use client";
-
 import { Game } from "@/datatypes/game";
-import { Card } from "primereact/card";
+import styles from "./gamebox.module.css";
+import Image from "next/image";
 
 export default function GameBox(props: { game: Game }) {
   const { game } = props;
   return (
-    <Card title={game.name} subTitle={game.year}>
-    </Card>
+    <div className={`${styles.gamebox}`}>
+      <div className={styles.imageBox}>
+        <img
+          src={game.image}
+          className={`card-img-top ${styles.image}`}
+          alt={game.name}
+        />
+      </div>
+      <div className={styles.title}>
+        <h3 className="card-title">{game.name}</h3>
+      </div>
+      <div className={styles.info}></div>
+    </div>
   );
 }
