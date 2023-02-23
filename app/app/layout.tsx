@@ -63,9 +63,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   } else {
     return (
       <>
-        <nav className={styles.menuBar} style={{marginBottom: 0}}>
+        <nav className={styles.menuBar}>
           <div className={styles.logo}>Meeple Party!</div>
-          <ul className={styles.menu}>
+          <ul className={styles.menu} style={{marginBottom: 0}}>
             <Link href="/app">
               <li className={pathname === "/app" ? styles.active : ""}>
                 Dashboard
