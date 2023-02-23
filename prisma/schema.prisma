@@ -14,4 +14,31 @@ model UserProfile {
   name      String  @unique
   realName  String?
   picture   String?
+  games     GameCollection[]
+}
+
+model Game {
+  id          Int           @id
+  name        String
+  thumbnail   String?
+  image       String?
+  year        Int
+  playingTime Int
+  minPlayers  Int
+  maxPlayers  Int
+  updatedAt   DateTime?     @updatedAt
+  users       GameCollection[]
+}
+
+model GameCollection {
+  user        UserProfile @relation(fields: [userId], references: [id])
+  userId      Int
+  game        Game        @relation(fields: [gameId], references:[id])
+  gameId      Int
+
+  own         Boolean
+  wantToPlay  Boolean
+  wishlist    Boolean
+
+  @@id([userId, gameId])
 }
