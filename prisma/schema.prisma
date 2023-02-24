@@ -14,6 +14,7 @@ model UserProfile {
   name      String  @unique
   realName  String?
   picture   String?
+  bggName   String?
   games     GameCollection[]
 }
 
