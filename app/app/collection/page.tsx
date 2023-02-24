@@ -1,16 +1,72 @@
-import GameBox from "@/components/GameBox/GameBox";
-import { fetchGames } from "@/utility/games";
+"use client";
 
-export default async function Collection() {
-  const games = await fetchGames([
-    224517, 174430, 341169, 295770, 342942, 366013, 316554,
-  ]);
+import GameBox from "@/components/GameBox/GameBox";
+import { Game } from "@/datatypes/game";
+import { fetchGames } from "@/utility/games";
+import { GameCollection } from "@prisma/client";
+import { useEffect, useState } from "react";
+import styles from "./collection.module.css";
+
+type State = "owned" | "wishlist" | "wanttoplay";
+interface GameCollectionWithGame extends GameCollection {
+  game: Game;
+}
+
+function collectionFilter(currentState: State, game: GameCollectionWithGame) {
+  return (
+    (currentState === "owned" && game.own) ||
+    (currentState === "wishlist" && game.wishlist) ||
+    (currentState === "wanttoplay" && game.wantToPlay)
+  );
+}
+
+export default function Collection() {
+  const [gameCollection, setGameCollection] = useState<
+    GameCollectionWithGame[]
+  >([]);
+  const [currentPage, setCurrentPage] = useState<State>("owned");
+  useEffect(() => {
+    fetch("/api/database/collection")
+      .then((result) => result.json())
+      .then((gameCollection) => setGameCollection(gameCollection));
+  }, []);
   return (
     <>
-      <h1>Collection</h1>
-      {games.map((g) => (
-        <GameBox game={g} key={g.id} />
-      ))}
+      <ul className="nav nav-pills">
+        <li className="nav-item">
+          <button
+            className={`nav-link ${currentPage === "owned" ? "active" : ""}`}
+            aria-current="page"
+            onClick={(e) => setCurrentPage("owned")}
+          >
+            Owned games
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`nav-link ${currentPage === "wishlist" ? "active" : ""}`}
+            onClick={(e) => setCurrentPage("wishlist")}
+          >
+            Wishlist
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`nav-link ${
+              currentPage === "wanttoplay" ? "active" : ""
+            }`}
+            onClick={(e) => setCurrentPage("wanttoplay")}
+          >
+            Games you want to play
+          </button>
+        </li>
+      </ul>
+      {gameCollection
+        .filter((g) => collectionFilter(currentPage, g))
+        .map((g) => g.game)
+        .map((g) => (
+          <GameBox game={g} key={g.id} />
+        ))}
     </>
   );
 }
