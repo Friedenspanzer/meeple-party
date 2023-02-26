@@ -5,32 +5,22 @@ import Image from "next/image";
 import { CollectionStatus } from "@/pages/api/database/collection/[gameId]";
 import { useCallback, useEffect, useState } from "react";
 
-export default function GameBox(props: { game: Game }) {
-  const { game } = props;
+export interface GameBoxProps {
+  game: Game;
+  status?: CollectionStatus;
+}
+
+export default function GameBox(props: GameBoxProps) {
+  const { game, status } = props;
   const [collectionStatus, setCollectionStatus] = useState<CollectionStatus>({
     own: false,
     wantToPlay: false,
     wishlist: false,
   });
-  const [loading, setLoading] = useState(true);
-
-  //TODO Performance improvement, not every game box has to initialize this itself
-  const updateData = useCallback(() => {
-    return fetch(`/api/database/collection/${game.id}`)
-      .then((response) => response.json())
-      .then((json) => JSON.parse(json))
-      .then((status: CollectionStatus) => {
-        setCollectionStatus({
-          own: status.own || false,
-          wantToPlay: status.wantToPlay || false,
-          wishlist: status.wishlist || false,
-        });
-      });
-  }, [game.id]);
+  const [loading, setLoading] = useState(false);
 
   const setStatus = useCallback(
     (status: CollectionStatus) => {
-      console.log("HURZ");
       setLoading(true);
       fetch(`/api/database/collection/${game.id}`, {
         method: "POST",
@@ -46,9 +36,23 @@ export default function GameBox(props: { game: Game }) {
   );
 
   useEffect(() => {
-    setLoading(true);
-    updateData().then(() => setLoading(false));
-  }, [updateData]);
+    if (!!status) {
+      setCollectionStatus(status);
+    } else {
+      setLoading(true);
+      fetch(`/api/database/collection/${game.id}`)
+        .then((response) => response.json())
+        .then((json) => JSON.parse(json))
+        .then((status: CollectionStatus) => {
+          setCollectionStatus({
+            own: status.own || false,
+            wantToPlay: status.wantToPlay || false,
+            wishlist: status.wishlist || false,
+          });
+        })
+        .then(() => setLoading(false));
+    }
+  }, [setStatus, status]);
 
   return (
     <div className={`${styles.gamebox}`}>

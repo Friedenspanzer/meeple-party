@@ -1,8 +1,7 @@
 "use client";
 
 import { UserContext } from "@/context/userContext";
-import { CollectionStatus } from "@/pages/api/database/collection/index";
-import { setServers } from "dns";
+import { CollectionStatus } from "@/pages/api/database/collection/[gameId]";
 import { XMLParser } from "fast-xml-parser";
 import { useContext, useEffect, useState } from "react";
 import styles from "./sync.module.css";
@@ -80,7 +79,7 @@ export default function CollectionSyncPage() {
         const wantToPlay = item.status["@_wanttoplay"] === "1";
         const wishlist = item.status["@_wishlist"] === "1";
         console.log(gameId, own, wantToPlay, wishlist);
-        const result = await fetch(`/api/database/collectionStatus/${gameId}`, {
+        const result = await fetch(`/api/database/collection/${gameId}`, {
           method: "POST",
           body: JSON.stringify({
             own,
@@ -153,7 +152,7 @@ export default function CollectionSyncPage() {
           {progressBar(step)}
           <p>
             Requesting your collection. This may take a couple of seconds.
-            There&apos;s nothign you can do here.
+            There&apos;s nothing you can do here.
           </p>
         </>
       );

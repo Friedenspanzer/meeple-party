@@ -69,9 +69,8 @@ export default function Collection() {
       </ul>
       {gameCollection
         .filter((g) => collectionFilter(currentPage, g))
-        .map((g) => g.game)
         .map((g) => (
-          <GameBox game={g} key={g.id} />
+          <GameBox game={g.game} status={g} key={g.game.id} />
         ))}
     </>
   );
