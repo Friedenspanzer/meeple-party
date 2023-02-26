@@ -79,17 +79,20 @@ export default function CollectionSyncPage() {
         const wantToPlay = item.status["@_wanttoplay"] === "1";
         const wishlist = item.status["@_wishlist"] === "1";
         console.log(gameId, own, wantToPlay, wishlist);
-        const result = await fetch(`/api/database/collection/${gameId}`, {
-          method: "POST",
-          body: JSON.stringify({
-            own,
-            wishlist,
-            wantToPlay,
-          } as CollectionStatus),
-        });
+        if (own || wantToPlay || wishlist) {
+          await fetch(`/api/database/collection/${gameId}`, {
+            method: "POST",
+            body: JSON.stringify({
+              own,
+              wishlist,
+              wantToPlay,
+            } as CollectionStatus),
+          });
+        }
         //TODO Error handling
         //TODO Progress messages
         //TODO The progress bar does not update as state setting is not immediate
+        //TODO Check if entries are already in sync before updating
         setImportProgress(importProgress + 1);
       }
     }
