@@ -14,6 +14,7 @@ export default function GameBox(props: { game: Game }) {
   });
   const [loading, setLoading] = useState(true);
 
+  //TODO Performance improvement, not every game box has to initialize this itself
   const updateData = useCallback(() => {
     return fetch(`/api/database/collection/${game.id}`)
       .then((response) => response.json())
@@ -26,6 +27,23 @@ export default function GameBox(props: { game: Game }) {
         });
       });
   }, [game.id]);
+
+  const setStatus = useCallback(
+    (status: CollectionStatus) => {
+      console.log("HURZ");
+      setLoading(true);
+      fetch(`/api/database/collection/${game.id}`, {
+        method: "POST",
+        body: JSON.stringify(status),
+      })
+        .then(() =>
+          //TODO Error handling
+          setCollectionStatus(status)
+        )
+        .then(() => setLoading(false));
+    },
+    [game.id]
+  );
 
   useEffect(() => {
     setLoading(true);
@@ -76,21 +94,43 @@ export default function GameBox(props: { game: Game }) {
                 " " +
                 (collectionStatus.own && styles.own)
               }
+              onClick={() =>
+                setStatus({
+                  ...collectionStatus,
+                  own: !collectionStatus.own,
+                })
+              }
             >
               <i className="bi bi-box-seam-fill"></i>
             </button>
-            <button className={
+            <button
+              className={
                 styles.collectionStatusButton +
                 " " +
                 (collectionStatus.wantToPlay && styles.wantToPlay)
-              }>
+              }
+              onClick={() =>
+                setStatus({
+                  ...collectionStatus,
+                  wantToPlay: !collectionStatus.wantToPlay,
+                })
+              }
+            >
               <i className="bi bi-joystick"></i>
             </button>
-            <button className={
+            <button
+              className={
                 styles.collectionStatusButton +
                 " " +
                 (collectionStatus.wishlist && styles.wishlist)
-              }>
+              }
+              onClick={() =>
+                setStatus({
+                  ...collectionStatus,
+                  wishlist: !collectionStatus.wishlist,
+                })
+              }
+            >
               <i className="bi bi-gift-fill"></i>
             </button>{" "}
           </>
