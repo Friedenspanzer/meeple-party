@@ -1,5 +1,4 @@
 export default function Head() {
-  //TODO Load script locally
   return (
     <>
       <title>Meeple Party</title>
