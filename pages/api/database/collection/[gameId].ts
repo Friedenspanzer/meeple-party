@@ -50,25 +50,11 @@ export default withApiAuthRequired(async function handle(
       const parameters = JSON.parse(req.body) as CollectionStatus;
       const game = await fetchGames(gameId);
 
-      //TODO Remove from collection when all settings are false
-      await prisma.gameCollection.upsert({
-        where: {
-          userId_gameId: {
-            gameId,
-            userId,
-          },
-        },
-        update: {
-          ...getCollectionStatusPartial(parameters),
-        },
-        create: {
-          userId,
-          gameId,
-          own: !!parameters.own,
-          wantToPlay: !!parameters.wantToPlay,
-          wishlist: !!parameters.wishlist,
-        },
-      });
+      if (parameters.own || parameters.wantToPlay || parameters.wishlist) {
+        await upsertStatus(gameId, userId, parameters);
+      } else {
+        await deleteStatus(gameId, userId);
+      }
       return res.status(200).json({ success: true });
     } catch (e) {
       return res.status(500).json({ success: false, error: e });
@@ -112,4 +98,35 @@ async function getUserId(session: Session): Promise<number> {
     throw new Error("Could not fetch User ID");
   }
   return userProfile.id;
+}
+
+async function upsertStatus(
+  gameId: number,
+  userId: number,
+  status: CollectionStatus
+) {
+  await prisma.gameCollection.upsert({
+    where: {
+      userId_gameId: {
+        gameId,
+        userId,
+      },
+    },
+    update: {
+      ...getCollectionStatusPartial(status),
+    },
+    create: {
+      userId,
+      gameId,
+      own: !!status.own,
+      wantToPlay: !!status.wantToPlay,
+      wishlist: !!status.wishlist,
+    },
+  });
+}
+
+async function deleteStatus(gameId: number, userId: number) {
+  await prisma.gameCollection.delete({
+    where: { userId_gameId: { gameId, userId } },
+  });
 }
