@@ -103,7 +103,7 @@ function getGameId(req: NextApiRequest): number {
   return Number.parseInt(gameId);
 }
 
-async function getUserId(session: Session): number {
+async function getUserId(session: Session): Promise<number> {
   const user = session.user as UserProfile;
   const userProfile = await prisma.userProfile.findUnique({
     where: { email: user.email as string },
