@@ -1,14 +1,16 @@
 .gamebox {
-    float: left;
-    width: 200px;
-    height: 300px;
-    margin: 0.5rem;
-    border: 1px solid grey;
+  float: left;
+  width: 200px;
+  margin: 0.5rem;
+  border: 1px solid grey;
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
 }
 
 .imageBox {
   width: 100%;
   height: 150px;
+  background-color: var(--bs-gray-dark);
 }
 
 .image {
@@ -18,15 +20,83 @@
 }
 
 .title {
-    height: 50px;
-    padding: 0.5rem;
+  height: 50px;
+  padding: 0.5rem;
 }
 
 .title h3 {
-    font-size: 16px;
-    line-height: 16px;
+  font-size: 20px;
+  line-height: 20px;
+  height: 45px;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.title h3 a {
+  color: var(--bs-body-color);
+  text-decoration: none;
 }
 
 .info {
-    height: 100px;
+  height: 60px;
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.infoBox {
+  margin: 0.5rem;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid var(--bs-border-color);
+  border-right: 1px solid var(--bs-border-color);
+}
+
+.metric {
+  text-align: center;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 0.6rem;
+  text-align: center;
+  color: var(--bs-light-text);
+}
+
+.collectionStatus {
+  height: 40px;
+  display: flex;
+  background-color: var(--bs-border-color);
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.collectionStatusButton {
+  width: 66.7px;
+  height: 100%;
+  border: 0;
+  text-align: center;
+}
+
+.collectionStatusButton:hover {
+  font-weight: bold;
+}
+
+.collectionStatusButton i {
+  break-after: always;
+  font-size: 1.5rem;
+}
+
+.own {
+  background-color: var(--bs-green);
+}
+
+.wantToPlay {
+  background-color: var(--bs-blue);
+}
+
+.wishlist {
+  background-color: var(--bs-red);
 }

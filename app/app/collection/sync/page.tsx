@@ -1,7 +1,7 @@
 "use client";
 
 import { UserContext } from "@/context/userContext";
-import { CollectionPost } from "@/pages/api/database/collection";
+import { CollectionStatus } from "@/pages/api/database/collection/index";
 import { setServers } from "dns";
 import { XMLParser } from "fast-xml-parser";
 import { useContext, useEffect, useState } from "react";
@@ -80,14 +80,13 @@ export default function CollectionSyncPage() {
         const wantToPlay = item.status["@_wanttoplay"] === "1";
         const wishlist = item.status["@_wishlist"] === "1";
         console.log(gameId, own, wantToPlay, wishlist);
-        const result = await fetch("/api/database/collection", {
+        const result = await fetch(`/api/database/collectionStatus/${gameId}`, {
           method: "POST",
           body: JSON.stringify({
-            game: gameId,
             own,
             wishlist,
             wantToPlay,
-          } as CollectionPost),
+          } as CollectionStatus),
         });
         //TODO Error handling
         //TODO Progress messages
