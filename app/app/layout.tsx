@@ -4,6 +4,7 @@
 import { UserProfile } from ".prisma/client";
 import Avatar from "@/components/Avatar/Avatar";
 import CompleteUserProfile from "@/components/CompleteUserProfile/CompleteUserProfile";
+import { UserContext } from "@/context/userContext";
 import { UserProfile as Auth0User, useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -30,14 +31,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         .then(() => setLoadingProfile(false));
     }
   }, [user]);
-
-  const UserContext = createContext<UserProfile>({
-    id: -1,
-    email: "",
-    name: "",
-    picture: "",
-    realName: "",
-  });
 
   if (!!isLoading || !!loadingProfile) {
     return (
@@ -114,7 +107,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </nav>
         <div className={styles.content}>
           {isCompleteUserProfile(userProfile) ? (
-            children
+            <UserContext.Provider value={userProfile}>
+              {children}
+            </UserContext.Provider>
           ) : (
             <CompleteUserProfile
               userProfile={userProfile as UserProfile}
@@ -142,5 +137,6 @@ function tryPrefillFields(
     name: profile?.name || user.nickname || "",
     picture: profile?.picture || null,
     realName: profile?.realName || user.name || null,
+    bggName: profile?.bggName || null
   };
 }

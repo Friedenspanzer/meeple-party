@@ -5,6 +5,7 @@ import { Game } from "@/datatypes/game";
 import { fetchGames } from "@/utility/games";
 import { GameCollection } from "@prisma/client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import styles from "./collection.module.css";
 
 type State = "owned" | "wishlist" | "wanttoplay";
@@ -59,6 +60,11 @@ export default function Collection() {
           >
             Games you want to play
           </button>
+        </li>
+        <li className="nav-item">
+          <Link href="/app/collection/sync" className="nav-link">
+            Import from BoardGameGeek
+          </Link>
         </li>
       </ul>
       {gameCollection

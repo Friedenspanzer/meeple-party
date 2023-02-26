@@ -108,7 +108,7 @@ async function fetchGameData(gameId: number): Promise<GameExtended> {
 
 function checkData(boardgames: any) {
   if (!!boardgames.boardgame.error) {
-    throw Error(`BGG API error: ${boardgames.boardgame.error['@_message']}`);
+    throw Error(`BGG API error: ${boardgames.boardgame.error["@_message"]}`);
   }
   if (!!boardgames.boardgame["@_subtypemismatch"]) {
     throw Error(
@@ -149,7 +149,9 @@ function getPrimaryName(bggGame: any): string {
 }
 
 function getDesigners(bggGame: any): string[] {
-  if (Array.isArray(bggGame.boardgamedesigner)) {
+  if (!bggGame.boardgamedesigner) {
+    return [];
+  } else if (Array.isArray(bggGame.boardgamedesigner)) {
     return bggGame.boardgamedesigner.map((designer: any) => designer["#text"]);
   } else {
     return [bggGame.boardgamedesigner["#text"]];

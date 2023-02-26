@@ -17,9 +17,9 @@ export default withApiAuthRequired(async function handle(
       const userProfile = await prisma.userProfile.findUnique({
         where: { email: user.email as string },
       });
-      return res.status(200).json(userProfile);
+      res.status(200).json(userProfile);
     } else {
-      return res.status(401).send({});
+      res.status(401).send({});
     }
   } else if (req.method === "POST") {
     const userProfile = JSON.parse(req.body);
@@ -33,8 +33,8 @@ export default withApiAuthRequired(async function handle(
       },
       update: userProfile,
     });
-    return res.status(200).json(newProfile);
+    res.status(200).json(newProfile);
   } else {
-    return res.status(405).send({});
+    res.status(405).send({});
   }
 });
