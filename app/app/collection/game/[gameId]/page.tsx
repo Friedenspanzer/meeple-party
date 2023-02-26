@@ -5,7 +5,7 @@ import { fetchGames, fetchGamesExtended } from "@/utility/games";
 import { notFound } from "next/navigation";
 
 export default async function Game({ params }: { params: { gameId: string } }) {
-  if (!Number.isInteger) {
+  if (!Number.isInteger(params.gameId)) {
     notFound();
   }
   try {
