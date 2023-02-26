@@ -52,7 +52,7 @@ export default function GameBox(props: GameBoxProps) {
         })
         .then(() => setLoading(false));
     }
-  }, [setStatus, status]);
+  }, [setStatus, status, game.id]);
 
   return (
     <div className={`${styles.gamebox}`}>
