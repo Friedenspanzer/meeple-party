@@ -5,11 +5,12 @@ import { fetchGames, fetchGamesExtended } from "@/utility/games";
 import { notFound } from "next/navigation";
 
 export default async function Game({ params }: { params: { gameId: string } }) {
-  if (!Number.isInteger(params.gameId)) {
+  const id = Number.parseInt(params.gameId);
+  if (!Number.isInteger(id)) {
     notFound();
   }
   try {
-    const games = await fetchGames(Number.parseInt(params.gameId));
+    const games = await fetchGames(id);
     return (
       <>
         <h1>{games[0].name}</h1>
