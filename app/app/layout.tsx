@@ -8,7 +8,7 @@ import { UserContext } from "@/context/userContext";
 import { UserProfile as Auth0User, useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./app.module.css";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -137,6 +137,6 @@ function tryPrefillFields(
     name: profile?.name || user.nickname || "",
     picture: profile?.picture || null,
     realName: profile?.realName || user.name || null,
-    bggName: profile?.bggName || null
+    bggName: profile?.bggName || null,
   };
 }
