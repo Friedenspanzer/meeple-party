@@ -1,5 +1,5 @@
 import "./globals.css";
-import "bootstrap/dist/css/bootstrap.css";
+import "@/theme/theme.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { UserProvider } from "@auth0/nextjs-auth0/client";
