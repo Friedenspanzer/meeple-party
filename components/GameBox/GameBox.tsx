@@ -1,5 +1,5 @@
 import { Game } from "@/datatypes/game";
-import styles from "./gamebox.module.css";
+import styles from "./gamebox.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { CollectionStatus } from "@/pages/api/database/collection/[gameId]";
@@ -132,7 +132,7 @@ export default function GameBox(props: GameBoxProps) {
                 })
               }
             >
-              <i className="bi bi-joystick"></i>
+              <i className="bi bi-dice-3-fill"></i>
             </button>
             <button
               className={

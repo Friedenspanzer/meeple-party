@@ -1,8 +1,9 @@
 .gamebox {
   float: left;
-  width: 250px;
+  width: 200px;
   margin: 0.5rem;
-  border: 1px solid grey;
+  border: 1px solid var(--bs-border-color);
+  background-color: var(--bs-gray-100);
   border-radius: var(--bs-border-radius);
   overflow: hidden;
 }
@@ -78,10 +79,12 @@
   height: 100%;
   border: 0;
   text-align: center;
+
 }
 
 .collectionStatusButton:hover {
   font-weight: bold;
+  background-color: var(--bs-gray-200);
 }
 
 .collectionStatusButton i {
@@ -90,13 +93,13 @@
 }
 
 .own {
-  background-color: var(--bs-green);
+  color: var(--bs-green);
 }
 
 .wantToPlay {
-  background-color: var(--bs-blue);
+  color: var(--bs-blue);
 }
 
 .wishlist {
-  background-color: var(--bs-red);
+  color: var(--bs-red);
 }
