@@ -27,6 +27,8 @@ model Game {
   playingTime Int
   minPlayers  Int
   maxPlayers  Int
+  weight      Float         @default(3)
+  BGGRating   Float         @default(5)
   updatedAt   DateTime?     @updatedAt
   users       GameCollection[]
 }

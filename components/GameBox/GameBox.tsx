@@ -76,12 +76,24 @@ export default function GameBox(props: GameBoxProps) {
       </div>
       <div className={styles.info}>
         <div className={styles.infoBox}>
-          <div className={styles.metric}>2-5</div>
+          <div className={styles.metric}>
+            {game.minPlayers === game.maxPlayers ? (
+              game.minPlayers
+            ) : (
+              <>
+                {game.minPlayers}-{game.maxPlayers}
+              </>
+            )}
+          </div>
           <div className={styles.label}>Players</div>
         </div>
         <div className={styles.infoBox}>
-          <div className={styles.metric}>80min</div>
+          <div className={styles.metric}>{game.playingTime}</div>
           <div className={styles.label}>Playing time</div>
+        </div>
+        <div className={styles.infoBox}>
+          <div className={styles.metric}>{round(game.weight)}</div>
+          <div className={styles.label}>Weight</div>
         </div>
       </div>
       <div className={styles.collectionStatus}>
@@ -143,3 +155,9 @@ export default function GameBox(props: GameBoxProps) {
     </div>
   );
 }
+
+function round(x: number): number {
+  return Math.round(x * 10) / 10;
+}
+
+//TODO "x friends own" and "x friends want to play"

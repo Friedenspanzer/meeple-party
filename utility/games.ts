@@ -76,6 +76,8 @@ function convertForDataBase(game: GameExtended) {
     playingTime: game.playingTime,
     minPlayers: game.minPlayers,
     maxPlayers: game.maxPlayers,
+    weight: game.weight,
+    BGGRating: game.BGGRating
   };
 }
 
@@ -93,7 +95,7 @@ async function fetchGameData(gameId: number): Promise<GameExtended> {
   const parser = new XMLParser({
     ignoreAttributes: false,
   });
-  return fetch(`https://api.geekdo.com/xmlapi/boardgame/${gameId}`, {
+  return fetch(`https://api.geekdo.com/xmlapi/boardgame/${gameId}&stats=1`, {
     next: { revalidate: DAILY },
   })
     .then((response) => response.text())
@@ -131,6 +133,8 @@ function convertGame(boardgames: any): GameExtended {
     playingTime: boardgames.boardgame.playingtime,
     minPlayers: boardgames.boardgame.minplayers,
     maxPlayers: boardgames.boardgame.maxplayers,
+    weight: getWeight(boardgames.boardgame),
+    BGGRating: getRating(boardgames.boardgame),
   };
 }
 
@@ -166,5 +170,29 @@ function getArtists(bggGame: any): string[] {
   } else {
     console.log(bggGame.boardgameartist);
     return [bggGame.boardgameartist["#text"]];
+  }
+}
+
+function getRating(bggGame: any): number {
+  if (
+    !bggGame.statistics ||
+    !bggGame.statistics.ratings ||
+    !bggGame.statistics.ratings.bayesaverage
+  ) {
+    return 0.0;
+  } else {
+    return Number.parseFloat(bggGame.statistics.ratings.bayesaverage);
+  }
+}
+
+function getWeight(bggGame: any): number {
+  if (
+    !bggGame.statistics ||
+    !bggGame.statistics.ratings ||
+    !bggGame.statistics.ratings.averageweight
+  ) {
+    return 0.0;
+  } else {
+    return Number.parseFloat(bggGame.statistics.ratings.averageweight);
   }
 }
