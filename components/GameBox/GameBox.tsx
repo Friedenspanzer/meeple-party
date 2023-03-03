@@ -1,5 +1,5 @@
 import { Game } from "@/datatypes/game";
-import styles from "./gamebox.module.scss";
+import styles from "./gamebox.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { CollectionStatus } from "@/pages/api/database/collection/[gameId]";
