@@ -48,19 +48,35 @@ export default function CollectionSyncPage() {
   const typeDone = async function () {
     setLoading(true);
     setStep("request");
+    //TODO API sometimes answers with 429 after a few requests and the import fails
     const tryFetchCollection = () => {
-      fetch(`https://api.geekdo.com/xmlapi/collection/${bggName}`)
-        .then((response) => response.text())
-        .then((xml) => xmlParser.parse(xml))
-        .then((obj) => {
-          console.log(obj);
-          if (!obj.message && !!obj.items["@_totalitems"]) {
-            console.log(obj.items["@_totalitems"]);
-            setLoading(false);
-            requestDone(obj);
-          } else {
+      fetch(`https://api.geekdo.com/xmlapi/collection/${bggName}`, {
+        // mode: "no-cors",
+      })
+        .then((response) => {
+          if (response.status === 202) {
             setTimeout(tryFetchCollection, 2500);
+          } else if (response.status === 200) {
+            response
+              .text()
+              .then((xml) => xmlParser.parse(xml))
+              .then((obj) => {
+                setLoading(false);
+                requestDone(obj);
+              });
+          } else {
+            console.error("Unexpected response status from BGG API", response);
+            throw new Error("Unexpected response status from BGG API");
           }
+        })
+        .catch((reason) => {
+          console.error(
+            "Fetching data from BGG API failed for unexpected reasons",
+            reason
+          );
+          throw new Error(
+            "Fetching data from BGG API failed for unexpected reasons"
+          );
         });
     };
     tryFetchCollection();
