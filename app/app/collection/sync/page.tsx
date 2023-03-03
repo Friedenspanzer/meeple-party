@@ -10,8 +10,8 @@ type Step = "username" | "type" | "request" | "import" | "done";
 
 interface ImportStep {
   text: string;
-  type: "own" | "wanttoplay" | "wishlist";
-  operation: "added" | "removed";
+  operation: "added" | "removed" | "changed";
+  image?: string;
 }
 
 const xmlParser = new XMLParser({
@@ -38,7 +38,15 @@ export default function CollectionSyncPage() {
       const own = head.status["@_own"] === "1";
       const wantToPlay = head.status["@_wanttoplay"] === "1";
       const wishlist = head.status["@_wishlist"] === "1";
-      await postNewCollectionStatus(gameId, own, wantToPlay, wishlist);
+      const importStep = await changeCollectionStatus(
+        gameId,
+        own,
+        wantToPlay,
+        wishlist
+      );
+      if (!!importStep) {
+        setImportSteps((prev) => [...prev, importStep]);
+      }
       setImportProgress((prev) => prev + 1);
       setItemsToImport(tail);
     }
@@ -196,15 +204,17 @@ export default function CollectionSyncPage() {
               {importProgress} / {toImport}
             </div>
           </div>
-          <ul>
-            {importSteps.map((s, i) => (
-              <li key={i}>{s.text}</li>
-            ))}
-          </ul>
+          {renderImportSteps(importSteps)}
         </>
       );
     case "done":
-      return <p>done</p>;
+      return (
+        <>
+          <h2>Import from your BoardGameGeek account</h2>
+          {progressBar(step)}
+          {renderImportSteps(importSteps)}
+        </>
+      );
     default:
       return <p>?</p>;
   }
@@ -224,12 +234,27 @@ function progressBar(active: Step) {
   );
 }
 
-async function postNewCollectionStatus(
+function renderImportSteps(importSteps: ImportStep[]) {
+  return (
+    <ul className={styles.importSteps}>
+      {importSteps.map((s, i) => (
+        <li key={i} className={styles.importStep}>
+          {s.operation === "added" && (
+            <i className={`bi bi-plus-circle-fill ${styles.importStepIcon}`}></i>
+          )}
+          {s.text}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+async function changeCollectionStatus(
   gameId: number,
   own: boolean,
   wishlist: boolean,
   wantToPlay: boolean
-) {
+): Promise<ImportStep | undefined> {
   if (own || wantToPlay || wishlist) {
     await fetch(`/api/database/collection/${gameId}`, {
       method: "POST",
@@ -239,5 +264,10 @@ async function postNewCollectionStatus(
         wantToPlay,
       } as CollectionStatus),
     });
+    return {
+      text: `${gameId} added to your collection.`,
+      operation: "added",
+    };
   }
+  return;
 }
