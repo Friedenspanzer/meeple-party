@@ -1,17 +1,21 @@
 "use client";
 
 import { UserContext } from "@/context/userContext";
-import { CollectionStatus } from "@/pages/api/database/collection/[gameId]";
+import {
+  CollectionStatus,
+  CollectionUpdate,
+} from "@/pages/api/database/collection/[gameId]";
 import { XMLParser } from "fast-xml-parser";
 import { useContext, useEffect, useState } from "react";
 import styles from "./sync.module.css";
+import Image from "next/image";
 
 type Step = "username" | "type" | "request" | "import" | "done";
 
 interface ImportStep {
   text: string;
   operation: "added" | "removed" | "changed";
-  image?: string;
+  image: string | null;
 }
 
 const xmlParser = new XMLParser({
@@ -38,14 +42,14 @@ export default function CollectionSyncPage() {
       const own = head.status["@_own"] === "1";
       const wantToPlay = head.status["@_wanttoplay"] === "1";
       const wishlist = head.status["@_wishlist"] === "1";
-      const importStep = await changeCollectionStatus(
+      const newImportSteps = await changeCollectionStatus(
         gameId,
         own,
         wantToPlay,
         wishlist
       );
-      if (!!importStep) {
-        setImportSteps((prev) => [...prev, importStep]);
+      if (!!newImportSteps) {
+        setImportSteps((prev) => [...prev, ...newImportSteps]);
       }
       setImportProgress((prev) => prev + 1);
       setItemsToImport(tail);
@@ -240,8 +244,11 @@ function renderImportSteps(importSteps: ImportStep[]) {
       {importSteps.map((s, i) => (
         <li key={i} className={styles.importStep}>
           {s.operation === "added" && (
-            <i className={`bi bi-plus-circle-fill ${styles.importStepIcon}`}></i>
+            <i
+              className={`bi bi-plus-circle-fill ${styles.importStepIcon}`}
+            ></i>
           )}
+          {s.image && <Image src={s.image} width="50" height="50" alt={s.text} className={styles.importStepImage} /> }
           {s.text}
         </li>
       ))}
@@ -254,20 +261,46 @@ async function changeCollectionStatus(
   own: boolean,
   wishlist: boolean,
   wantToPlay: boolean
-): Promise<ImportStep | undefined> {
+): Promise<ImportStep[] | undefined> {
   if (own || wantToPlay || wishlist) {
-    await fetch(`/api/database/collection/${gameId}`, {
-      method: "POST",
-      body: JSON.stringify({
-        own,
-        wishlist,
-        wantToPlay,
-      } as CollectionStatus),
-    });
-    return {
-      text: `${gameId} added to your collection.`,
-      operation: "added",
-    };
+    //TODO Better error handling
+    const result: CollectionUpdate = await fetch(
+      `/api/database/collection/${gameId}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          own,
+          wishlist,
+          wantToPlay,
+        } as CollectionStatus),
+      }
+    ).then((response) => response.json());
+    if (!result.success) {
+      return
+    }
+    const ret: ImportStep[] = [];
+    if (result.status.own) {
+      ret.push({
+        text: `${result.game.name} added to your collection.`,
+        operation: "added",
+        image: result.game.image,
+      });
+    }
+    if (result.status.wishlist) {
+      ret.push({
+        text: `${result.game.name} added to your wishlist.`,
+        operation: "added",
+        image: result.game.image,
+      });
+    }
+    if (result.status.wantToPlay) {
+      ret.push({
+        text: `${result.game.name} added to your want to play games.`,
+        operation: "added",
+        image: result.game.image,
+      });
+    }
+    return ret;
   }
   return;
 }

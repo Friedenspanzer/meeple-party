@@ -1,3 +1,4 @@
+import { Game } from "@/datatypes/game";
 import { prisma } from "@/db";
 import { fetchGames } from "@/utility/games";
 import { getSession, Session, withApiAuthRequired } from "@auth0/nextjs-auth0";
@@ -8,6 +9,12 @@ export interface CollectionStatus {
   own: undefined | boolean;
   wantToPlay: undefined | boolean;
   wishlist: undefined | boolean;
+}
+
+export interface CollectionUpdate {
+  success: boolean;
+  game: Game;
+  status: CollectionStatus;
 }
 
 export default withApiAuthRequired(async function handle(
@@ -48,14 +55,16 @@ export default withApiAuthRequired(async function handle(
     try {
       const gameId = getGameId(req);
       const parameters = JSON.parse(req.body) as CollectionStatus;
-      const game = await fetchGames(gameId);
+      const game = (await fetchGames(gameId))[0];
 
       if (parameters.own || parameters.wantToPlay || parameters.wishlist) {
         await upsertStatus(gameId, userId, parameters);
       } else {
         await deleteStatus(gameId, userId);
       }
-      return res.status(200).json({ success: true });
+      return res
+        .status(200)
+        .json({ success: true, status: parameters, game } as CollectionUpdate);
     } catch (e) {
       return res.status(500).json({ success: false, error: e });
     }
