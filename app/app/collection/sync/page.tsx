@@ -26,6 +26,28 @@ export default function CollectionSyncPage() {
   const [importSteps, setImportSteps] = useState<ImportStep[]>([]);
   const [importProgress, setImportProgress] = useState(0);
   const [toImport, setToImport] = useState(0);
+  const [itemsToImport, setItemsToImport] = useState<any>(undefined);
+
+  useEffect(() => {
+    //TODO Error handling
+    //TODO Progress messages
+    //TODO Check if entries are already in sync before updating
+    async function importNext() {
+      const [head, ...tail] = itemsToImport;
+      const gameId = head["@_objectid"];
+      const own = head.status["@_own"] === "1";
+      const wantToPlay = head.status["@_wanttoplay"] === "1";
+      const wishlist = head.status["@_wishlist"] === "1";
+      await postNewCollectionStatus(gameId, own, wantToPlay, wishlist);
+      setImportProgress((prev) => prev + 1);
+      setItemsToImport(tail);
+    }
+    if (!!itemsToImport && itemsToImport.length > 0) {
+      importNext();
+    } else if (!!itemsToImport) {
+      setStep("done");
+    }
+  }, [itemsToImport]);
 
   const bggAccountDone = () => {
     if (bggName !== userProfile.bggName) {
@@ -88,29 +110,8 @@ export default function CollectionSyncPage() {
     setStep("import");
     if (!!importObject) {
       const items = importObject.items.item;
+      setItemsToImport(items);
       setToImport(items.length);
-      for (let item of items) {
-        const gameId = item["@_objectid"];
-        const own = item.status["@_own"] === "1";
-        const wantToPlay = item.status["@_wanttoplay"] === "1";
-        const wishlist = item.status["@_wishlist"] === "1";
-        console.log(gameId, own, wantToPlay, wishlist);
-        if (own || wantToPlay || wishlist) {
-          await fetch(`/api/database/collection/${gameId}`, {
-            method: "POST",
-            body: JSON.stringify({
-              own,
-              wishlist,
-              wantToPlay,
-            } as CollectionStatus),
-          });
-        }
-        //TODO Error handling
-        //TODO Progress messages
-        //TODO The progress bar does not update as state setting is not immediate
-        //TODO Check if entries are already in sync before updating
-        setImportProgress(importProgress + 1);
-      }
     }
   };
 
@@ -195,7 +196,6 @@ export default function CollectionSyncPage() {
               {importProgress} / {toImport}
             </div>
           </div>
-          {(importProgress / toImport) * 100}
           <ul>
             {importSteps.map((s, i) => (
               <li key={i}>{s.text}</li>
@@ -222,4 +222,22 @@ function progressBar(active: Step) {
       <li className={active === "done" ? styles.active : ""}>Done</li>
     </ul>
   );
+}
+
+async function postNewCollectionStatus(
+  gameId: number,
+  own: boolean,
+  wishlist: boolean,
+  wantToPlay: boolean
+) {
+  if (own || wantToPlay || wishlist) {
+    await fetch(`/api/database/collection/${gameId}`, {
+      method: "POST",
+      body: JSON.stringify({
+        own,
+        wishlist,
+        wantToPlay,
+      } as CollectionStatus),
+    });
+  }
 }
