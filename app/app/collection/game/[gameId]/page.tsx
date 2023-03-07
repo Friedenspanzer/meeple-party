@@ -25,6 +25,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
       </>
     );
   } catch (e) {
+    console.error("Error fetching game data", e);
     notFound();
   }
 }
