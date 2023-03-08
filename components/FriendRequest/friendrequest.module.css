@@ -6,19 +6,25 @@
   background-color: var(--bs-gray-100);
   border-radius: var(--bs-border-radius);
 
-  width: 600px;
-  height: 60px;
+  width: 700px;
+  height: 54px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 1rem;
+}
+
+.stale {
+  filter: opacity(0.5) blur(0.5px) grayscale(1);
 }
 
 .content {
   width: 400px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 1;
+  flex-grow: 1;
 }
 
 .name {
@@ -32,5 +38,9 @@
 }
 
 .actionButtons {
-  background-color: red;
+  flex-shrink: 0;
+}
+
+.actionButtons button {
+  width: 115px;
 }

@@ -1,3 +1,3 @@
 export default function Collection() {
-    return <h1>Friends!</h1>;
+    return <h2>Friends</h2>;
 }

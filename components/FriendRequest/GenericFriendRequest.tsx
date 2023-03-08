@@ -5,13 +5,18 @@ import styles from "./friendrequest.module.css";
 
 export interface GenericFriendRequestProps {
   request: Relationship;
+  stale: boolean;
   children: React.ReactNode;
 }
 
-const GenericFriendRequest: React.FC<GenericFriendRequestProps> = (props) => {
-  const { profile, lastUpdate } = props.request;
+const GenericFriendRequest: React.FC<GenericFriendRequestProps> = ({
+  request,
+  stale,
+  children,
+}) => {
+  const { profile, lastUpdate } = request;
   return (
-    <div className={styles.friendRequest}>
+    <div className={`${styles.friendRequest} ${stale && styles.stale}`}>
       <Avatar image={profile.picture} name={profile.name} />
       <div className={styles.content}>
         <div className={styles.name}>
@@ -22,7 +27,7 @@ const GenericFriendRequest: React.FC<GenericFriendRequestProps> = (props) => {
           <ReactTimeAgo date={lastUpdate} />
         </div>
       </div>
-      <div className={styles.actionButtons}>{props.children}</div>
+      <div className={styles.actionButtons}>{children}</div>
     </div>
   );
 };

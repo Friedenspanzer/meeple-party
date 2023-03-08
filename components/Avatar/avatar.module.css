@@ -5,6 +5,7 @@
   object-fit: cover;
   border-radius: calc(var(--avatar-size) / 2);
   box-shadow: var(--bs-box-shadow-sm);
+  flex-shrink: 0;
 }
 
 .dummy {
@@ -19,4 +20,5 @@
   font-weight: bold;
   color: var(--bs-light);
   box-shadow: var(--bs-box-shadow-sm);
+  flex-shrink: 0;
 }
