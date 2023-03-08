@@ -1,0 +1,36 @@
+.friendRequest {
+  margin: 0.5rem;
+  padding: 0.5rem;
+
+  border: 1px solid var(--bs-border-color);
+  background-color: var(--bs-gray-100);
+  border-radius: var(--bs-border-radius);
+
+  width: 600px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.content {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.name small {
+  margin-left: 0.5rem;
+  font-weight: lighter;
+}
+
+.actionButtons {
+  background-color: red;
+}

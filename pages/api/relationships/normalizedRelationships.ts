@@ -1,8 +1,5 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import {
-  PrivateUserProfile,
-  PublicUserProfile,
-} from "@/datatypes/userProfile";
+import { PrivateUserProfile, PublicUserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
 import { UserProfile as Auth0Profile } from "@auth0/nextjs-auth0/client";
@@ -95,7 +92,10 @@ function getProfile(
     relationship.recipientId === userId
       ? relationship.sender
       : relationship.recipient;
-  if (relationship.type === "FRIENDSHIP") {
+  if (
+    relationship.type === "FRIENDSHIP" ||
+    isFriendRequestReveiced(relationship, userId)
+  ) {
     return convertToPrivateProfile(profile);
   } else {
     return convertToPublicProfile(profile);
@@ -115,4 +115,14 @@ function convertToPublicProfile(profile: UserProfile): PublicUserProfile {
     name: profile.name,
     picture: profile.picture,
   };
+}
+
+function isFriendRequestReveiced(
+  relationship: FullPrismaRelationship,
+  userId: number
+): boolean {
+  return (
+    relationship.type === "FRIEND_REQUEST" &&
+    relationship.recipientId === userId
+  );
 }
