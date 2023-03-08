@@ -1,4 +1,5 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
+import ReactTimeAgo from "react-time-ago";
 import Avatar from "../Avatar/Avatar";
 import styles from "./friendrequest.module.css";
 
@@ -17,7 +18,9 @@ const GenericFriendRequest: React.FC<GenericFriendRequestProps> = (props) => {
           {profile.name}
           {"realName" in profile && <small>{profile.realName}</small>}
         </div>
-        <div className={styles.meta}>{lastUpdate.toLocaleString()}</div>
+        <div className={styles.meta}>
+          <ReactTimeAgo date={lastUpdate} />
+        </div>
       </div>
       <div className={styles.actionButtons}>{props.children}</div>
     </div>
