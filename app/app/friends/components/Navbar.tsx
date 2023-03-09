@@ -2,12 +2,14 @@
 
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  NavigationBar,
+  NavigationItem,
+} from "@/components/NavigationBar/NavigationBar";
 
 const Navbar: React.FC = ({}) => {
   const [relationships, setRelationships] = useState<Relationship[]>();
-  const pathname = usePathname();
 
   useEffect(() => {
     fetch("/api/relationships/normalizedRelationships")
@@ -16,34 +18,20 @@ const Navbar: React.FC = ({}) => {
   }, []);
 
   return (
-    <ul className="nav nav-pills nav-fill">
-      <li className="nav-item">
-        <Link
-          href="/app/friends"
-          className={`nav-link ${pathname === "/app/friends" && "active"}`}
-        >
-          Activity
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link
-          href="/app/friends/requests"
-          className={`nav-link ${
-            pathname === "/app/friends/requests" && "active"
-          }`}
-        >
-          Your requests
-          {!!relationships && (
-            <>
-              &nbsp;
-              <span className="badge rounded-pill text-bg-secondary">
-                {requestCount(relationships)}
-              </span>
-            </>
-          )}
-        </Link>
-      </li>
-    </ul>
+    <NavigationBar>
+      <NavigationItem href="/app/friends">Activity</NavigationItem>
+      <NavigationItem href="/app/friends/requests">
+        Your requests
+        {!!relationships && (
+          <>
+            &nbsp;
+            <span className="badge rounded-pill text-bg-secondary">
+              {requestCount(relationships)}
+            </span>
+          </>
+        )}
+      </NavigationItem>
+    </NavigationBar>
   );
 };
 
