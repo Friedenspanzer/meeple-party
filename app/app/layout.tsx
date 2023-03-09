@@ -11,6 +11,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./app.module.css";
 
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
+
+TimeAgo.addDefaultLocale(en);
+
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, error, isLoading } = useUser();
