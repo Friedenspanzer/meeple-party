@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   experimental: {
     appDir: true,
   },
@@ -11,8 +12,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "*.googleusercontent.com"
-      }
+        hostname: "*.googleusercontent.com",
+      },
     ],
   },
 };
