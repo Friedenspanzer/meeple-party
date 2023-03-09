@@ -57,7 +57,7 @@ export default function GameBox(props: GameBoxProps) {
   return (
     <div className={`${styles.gamebox}`}>
       <div className={styles.imageBox}>
-        <Link href={`/app/collection/game/${game.id}`}>
+        <Link href={`/app/game/${game.id}`}>
           {!!game.image && (
             <Image
               src={game.image}
@@ -71,7 +71,7 @@ export default function GameBox(props: GameBoxProps) {
       </div>
       <div className={styles.title}>
         <h3 className="card-title">
-          <Link href={`/app/collection/game/${game.id}`}>{game.name}</Link>
+          <Link href={`/app/game/${game.id}`}>{game.name}</Link>
         </h3>
       </div>
       <div className={styles.info}>
