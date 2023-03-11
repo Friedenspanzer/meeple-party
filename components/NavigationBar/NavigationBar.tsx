@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import styles from "./navigationbar.module.css";
 
 export interface NavigationBarProps {
   fill?: boolean;
@@ -27,7 +28,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
 
   return (
     <li className="nav-item">
-      <Link href={href} className={`nav-link ${pathname === href && "active"}`}>
+      <Link href={href} className={`nav-link ${pathname === href && "active"} ${styles.bar}`}>
         {children}
       </Link>
     </li>

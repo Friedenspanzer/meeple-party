@@ -23,7 +23,7 @@ export default function Collection() {
   return (
     <>
       {gameCollection
-        .filter((g) => g.own)
+        .filter((g) => g.wantToPlay)
         .map((g) => (
           <GameBox game={g.game} status={g} key={g.game.id} />
         ))}
