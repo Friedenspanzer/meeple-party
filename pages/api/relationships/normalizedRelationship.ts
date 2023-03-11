@@ -1,7 +1,7 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { PrivateUserProfile, PublicUserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
-import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
+import { getSession, Session, withApiAuthRequired } from "@auth0/nextjs-auth0";
 import { UserProfile as Auth0Profile } from "@auth0/nextjs-auth0/client";
 import {
   Relationship as PrismaRelationship,
@@ -13,42 +13,35 @@ export default withApiAuthRequired(async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "GET") {
-    const session = await getSession(req, res);
-    if (!!session) {
-      const user = session.user as Auth0Profile;
-      if (!user.email) {
-        throw new Error("User from Auth0 does not have an E-Mail adress");
-      }
-      const userProfile = await prisma.userProfile.findUnique({
-        where: { email: user.email as string },
-      });
-
-      if (!userProfile) {
-        //TODO Better error handling
-        return res.status(500).send({});
-      }
-
-      const relationships = await prisma.relationship.findMany({
-        where: {
-          OR: [{ recipientId: userProfile.id }, { senderId: userProfile.id }],
-        },
-        include: {
-          recipient: true,
-          sender: true,
-        },
-      });
-
-      const normalizedRelationships = relationships.map((r) =>
-        normalizeRelationship(r, userProfile.id)
-      );
-
-      res.status(200).json(normalizedRelationships);
-    } else {
-      res.status(401).send({});
-    }
+  const session = await getSession(req, res);
+  if (!session) {
+    res.status(401).send({});
   } else {
-    res.status(405).send({});
+    try {
+      const userProfile = await getUserProfile(session);
+
+      if (req.method === "GET") {
+        const relationships = await prisma.relationship.findMany({
+          where: {
+            OR: [{ recipientId: userProfile.id }, { senderId: userProfile.id }],
+          },
+          include: {
+            recipient: true,
+            sender: true,
+          },
+        });
+
+        const normalizedRelationships = relationships.map((r) =>
+          normalizeRelationship(r, userProfile.id)
+        );
+
+        res.status(200).json(normalizedRelationships);
+      } else {
+        res.status(405).send({});
+      }
+    } catch (e) {
+      return res.status(500).json({ success: false, error: e });
+    }
   }
 });
 
@@ -125,4 +118,20 @@ function isFriendRequestReveiced(
     relationship.type === "FRIEND_REQUEST" &&
     relationship.recipientId === userId
   );
+}
+
+async function getUserProfile(session: Session): Promise<UserProfile> {
+  const user = session.user as Auth0Profile;
+  if (!user.email) {
+    throw new Error("User from Auth0 does not have an E-Mail adress");
+  }
+  const userProfile = await prisma.userProfile.findUnique({
+    where: { email: user.email as string },
+  });
+
+  if (!userProfile) {
+    throw new Error("No user profile corresponding to Auth0 user found.");
+  }
+
+  return userProfile;
 }
