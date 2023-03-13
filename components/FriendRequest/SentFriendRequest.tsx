@@ -1,5 +1,5 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import GenericFriendRequest from "./GenericFriendRequest";
 
 export interface SentFriendRequestProps {
@@ -14,6 +14,17 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
   const [updating, setUpdating] = useState(false);
   const [stale, setStale] = useState(false);
 
+  const withdrawRequest = useCallback(() => {
+    setUpdating(true);
+    //TODO Error handling
+    fetch(`/api/relationships/${request.profile.id}`, {
+      method: "DELETE",
+    }).then(() => {
+      setUpdating(false);
+      setStale(true);
+    });
+  }, [request]);
+
   return (
     <GenericFriendRequest request={request} stale={stale}>
       {updating ? (
@@ -22,8 +33,8 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={(_) => setUpdating(true)}
-          disabled={updating}
+          onClick={withdrawRequest}
+          disabled={updating || stale}
         >
           <i className="bi bi-trash"></i> Withdraw
         </button>
