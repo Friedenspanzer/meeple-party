@@ -14,6 +14,11 @@ const Navbar: React.FC = ({}) => {
   useEffect(() => {
     fetch("/api/relationships/all")
       .then((result) => result.json())
+      .then((relationships: Relationship[]) =>
+        relationships.filter(
+          (r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED
+        )
+      )
       .then(setRelationships);
   }, []);
 
@@ -22,11 +27,11 @@ const Navbar: React.FC = ({}) => {
       <NavigationItem href="/app/friends">Activity</NavigationItem>
       <NavigationItem href="/app/friends/requests">
         Your requests
-        {!!relationships && (
+        {!!relationships && relationships.length > 0 && (
           <>
             &nbsp;
             <span className="badge rounded-pill text-bg-secondary">
-              {requestCount(relationships)}
+              {relationships.length}
             </span>
           </>
         )}
@@ -34,11 +39,5 @@ const Navbar: React.FC = ({}) => {
     </NavigationBar>
   );
 };
-
-function requestCount(relationships: Relationship[]): number {
-  return relationships.filter(
-    (r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED
-  ).length;
-}
 
 export default Navbar;
