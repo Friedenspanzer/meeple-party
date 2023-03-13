@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 
-const FriendsLayout: React.FC<{ children: React.Component }> = ({
+const FriendsLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
