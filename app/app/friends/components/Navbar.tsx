@@ -12,7 +12,7 @@ const Navbar: React.FC = ({}) => {
   const [relationships, setRelationships] = useState<Relationship[]>();
 
   useEffect(() => {
-    fetch("/api/relationships/normalizedRelationship")
+    fetch("/api/relationships/all")
       .then((result) => result.json())
       .then(setRelationships);
   }, []);

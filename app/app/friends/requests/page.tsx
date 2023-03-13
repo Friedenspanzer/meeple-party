@@ -9,7 +9,7 @@ const FriendRequests: React.FC = (props) => {
   const [relationships, setRelationships] = useState<Relationship[]>();
 
   useEffect(() => {
-    fetch("/api/relationships/normalizedRelationship")
+    fetch("/api/relationships/all")
       .then((result) => result.json())
       .then(setRelationships);
   }, []);

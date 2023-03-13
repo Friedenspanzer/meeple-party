@@ -90,7 +90,7 @@ function getCollectionStatusPartial(status: {
 }
 
 function getGameId(req: NextApiRequest): number {
-  let { gameId } = req.query;
+  const { gameId } = req.query;
   if (!gameId || Array.isArray(gameId)) {
     throw new Error("Game ID format error");
   }

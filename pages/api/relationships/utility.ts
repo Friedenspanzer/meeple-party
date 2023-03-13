@@ -1,56 +1,20 @@
+
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { PrivateUserProfile, PublicUserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
-import { getSession, Session, withApiAuthRequired } from "@auth0/nextjs-auth0";
+import { Session } from "@auth0/nextjs-auth0";
 import { UserProfile as Auth0Profile } from "@auth0/nextjs-auth0/client";
 import {
   Relationship as PrismaRelationship,
   UserProfile,
 } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
 
-export default withApiAuthRequired(async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const session = await getSession(req, res);
-  if (!session) {
-    res.status(401).send({});
-  } else {
-    try {
-      const userProfile = await getUserProfile(session);
-
-      if (req.method === "GET") {
-        const relationships = await prisma.relationship.findMany({
-          where: {
-            OR: [{ recipientId: userProfile.id }, { senderId: userProfile.id }],
-          },
-          include: {
-            recipient: true,
-            sender: true,
-          },
-        });
-
-        const normalizedRelationships = relationships.map((r) =>
-          normalizeRelationship(r, userProfile.id)
-        );
-
-        res.status(200).json(normalizedRelationships);
-      } else {
-        res.status(405).send({});
-      }
-    } catch (e) {
-      return res.status(500).json({ success: false, error: e });
-    }
-  }
-});
-
-type FullPrismaRelationship = PrismaRelationship & {
+export type FullPrismaRelationship = PrismaRelationship & {
   sender: UserProfile;
   recipient: UserProfile;
 };
 
-function normalizeRelationship(
+export function normalizeRelationship(
   prismaRelationship: FullPrismaRelationship,
   userId: number
 ): Relationship {
@@ -61,7 +25,7 @@ function normalizeRelationship(
   };
 }
 
-function getRelationshipType(
+export function getRelationshipType(
   relationship: FullPrismaRelationship,
   userId: number
 ): RelationshipType {
@@ -77,7 +41,7 @@ function getRelationshipType(
   throw new Error("Error determining relationship type");
 }
 
-function getProfile(
+export function getProfile(
   relationship: FullPrismaRelationship,
   userId: number
 ): PrivateUserProfile | PublicUserProfile {
@@ -95,14 +59,14 @@ function getProfile(
   }
 }
 
-function convertToPrivateProfile(profile: UserProfile): PrivateUserProfile {
+export function convertToPrivateProfile(profile: UserProfile): PrivateUserProfile {
   return {
     ...convertToPublicProfile(profile),
     realName: profile.realName,
   };
 }
 
-function convertToPublicProfile(profile: UserProfile): PublicUserProfile {
+export function convertToPublicProfile(profile: UserProfile): PublicUserProfile {
   return {
     id: profile.id,
     name: profile.name,
@@ -110,7 +74,7 @@ function convertToPublicProfile(profile: UserProfile): PublicUserProfile {
   };
 }
 
-function isFriendRequestReveiced(
+export function isFriendRequestReveiced(
   relationship: FullPrismaRelationship,
   userId: number
 ): boolean {
@@ -120,7 +84,7 @@ function isFriendRequestReveiced(
   );
 }
 
-async function getUserProfile(session: Session): Promise<UserProfile> {
+export async function getUserProfile(session: Session): Promise<UserProfile> {
   const user = session.user as Auth0Profile;
   if (!user.email) {
     throw new Error("User from Auth0 does not have an E-Mail adress");
