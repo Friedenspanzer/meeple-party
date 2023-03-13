@@ -27,6 +27,17 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
     });
   }, [request]);
 
+  const acceptRequest = useCallback(() => {
+    setUpdating(true);
+    //TODO Error handling
+    fetch(`/api/relationships/${request.profile.id}`, {
+      method: "PATCH",
+    }).then(() => {
+      setUpdating(false);
+      setStale(true);
+    });
+  }, [request]);
+
   return (
     <GenericFriendRequest request={request} stale={stale}>
       {updating ? (
@@ -44,7 +55,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
           <button
             type="button"
             className="btn btn-success"
-            onClick={(_) => setUpdating(true)}
+            onClick={(_) => acceptRequest()}
             disabled={updating || stale}
           >
             <i className="bi bi-check2"></i> Accept

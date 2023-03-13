@@ -1,4 +1,3 @@
-
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { PrivateUserProfile, PublicUserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
@@ -9,7 +8,7 @@ import {
   UserProfile,
 } from "@prisma/client";
 
-export type FullPrismaRelationship = PrismaRelationship & {
+type FullPrismaRelationship = PrismaRelationship & {
   sender: UserProfile;
   recipient: UserProfile;
 };
@@ -59,14 +58,18 @@ export function getProfile(
   }
 }
 
-export function convertToPrivateProfile(profile: UserProfile): PrivateUserProfile {
+export function convertToPrivateProfile(
+  profile: UserProfile
+): PrivateUserProfile {
   return {
     ...convertToPublicProfile(profile),
     realName: profile.realName,
   };
 }
 
-export function convertToPublicProfile(profile: UserProfile): PublicUserProfile {
+export function convertToPublicProfile(
+  profile: UserProfile
+): PublicUserProfile {
   return {
     id: profile.id,
     name: profile.name,
