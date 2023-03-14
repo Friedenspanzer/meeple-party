@@ -1,19 +1,16 @@
 import { prisma } from "@/db";
-import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
-import { UserProfile } from "@auth0/nextjs-auth0/client";
+import { withUser } from "@/utility/apiAuth";
+import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default withApiAuthRequired(async function handle(
+export default withUser(async function handle(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
+  user: User
 ) {
-  const session = await getSession(req, res);
-  if (!session) {
-    return res.status(401).send({});
-  } else if (req.method === "GET") {
-    const user = session.user as UserProfile;
-    const userProfile = await prisma.userProfile.findUnique({
-      where: { email: user.email as string },
+  if (req.method === "GET") {
+    const userProfile = await prisma.user.findUnique({
+      where: { id: user.id },
       include: { games: { include: { game: true } } },
     });
     return res.status(200).json(userProfile?.games);

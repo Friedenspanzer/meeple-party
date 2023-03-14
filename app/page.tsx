@@ -4,25 +4,25 @@
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { user } = useUser();
+  const { data: session } = useSession();
   return (
     <>
       <p>Public Meeple Party Front Page</p>
-      {!!user && (
+      {!!session?.user && (
         <p>
-          {user?.name} <a href="/api/auth/logout">Logout</a>{" "}
+          {session.user.name} <a href="/api/auth/signout">Logout</a>{" "}
           <Link href="/app">Go to app</Link>
         </p>
       )}
-      {!user && (
+      {!session?.user && (
         <p>
-          <a href="/api/auth/login">Login</a>
+          <a href="/api/auth/signin">Login</a>
         </p>
       )}
     </>

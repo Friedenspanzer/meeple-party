@@ -1,99 +1,97 @@
 import { RelationshipType } from "@/datatypes/relationship";
 import { prisma } from "@/db";
-import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
-import { RelationshipType as PrismaRelationshipType } from "@prisma/client";
+import { withUser } from "@/utility/apiAuth";
+import {
+  RelationshipType as PrismaRelationshipType,
+  User,
+} from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getUserProfile, normalizeRelationship } from "./utility";
+import { normalizeRelationship } from "./utility";
 
-export default withApiAuthRequired(async function handle(
+export default withUser(async function handle(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
+  user: User
 ) {
-  const session = await getSession(req, res);
-  if (!session) {
-    res.status(401).send({});
-  } else {
-    try {
-      const userProfile = await getUserProfile(session);
-      const targetUserProfileId = getUserProfileId(req);
+  try {
+    const targetUserProfileId = getUserProfileId(req);
 
-      if (req.method === "GET") {
-        const normalizedRelationships = await findNormalizedRelationships(
-          userProfile.id,
-          targetUserProfileId
-        );
-        res.status(200).json(normalizedRelationships);
-      } else if (req.method === "DELETE") {
-        await prisma.relationship.deleteMany({
-          where: {
-            OR: [
-              {
-                senderId: targetUserProfileId,
-                recipientId: userProfile.id,
-                type: PrismaRelationshipType.FRIEND_REQUEST,
-              },
-              {
-                senderId: userProfile.id,
-                recipientId: targetUserProfileId,
-                type: PrismaRelationshipType.FRIEND_REQUEST,
-              },
-              {
-                senderId: userProfile.id,
-                recipientId: targetUserProfileId,
-                type: PrismaRelationshipType.FRIENDSHIP,
-              },
-              {
-                senderId: targetUserProfileId,
-                recipientId: userProfile.id,
-                type: PrismaRelationshipType.FRIENDSHIP,
-              },
-            ],
-          },
-        });
-        return res.status(200).json({});
-      } else if (req.method === "PATCH") {
-        const normalizedRelationships = await findNormalizedRelationships(
-          userProfile.id,
-          targetUserProfileId
-        );
-        console.log(normalizedRelationships);
-        if (
-          normalizedRelationships.length > 1 ||
-          normalizedRelationships[0].type !==
-            RelationshipType.FRIEND_REQUEST_RECEIVED
-        ) {
-          return res.status(401).send({});
-        } else {
-          await prisma.relationship.update({
-            where: {
-              senderId_recipientId: {
-                recipientId: userProfile.id,
-                senderId: targetUserProfileId,
-              },
+    if (req.method === "GET") {
+      const normalizedRelationships = await findNormalizedRelationships(
+        user.id,
+        targetUserProfileId
+      );
+      res.status(200).json(normalizedRelationships);
+    } else if (req.method === "DELETE") {
+      await prisma.relationship.deleteMany({
+        where: {
+          OR: [
+            {
+              senderId: targetUserProfileId,
+              recipientId: user.id,
+              type: PrismaRelationshipType.FRIEND_REQUEST,
             },
-            data: { type: PrismaRelationshipType.FRIENDSHIP },
-          });
-          return res.status(200).send({});
-        }
+            {
+              senderId: user.id,
+              recipientId: targetUserProfileId,
+              type: PrismaRelationshipType.FRIEND_REQUEST,
+            },
+            {
+              senderId: user.id,
+              recipientId: targetUserProfileId,
+              type: PrismaRelationshipType.FRIENDSHIP,
+            },
+            {
+              senderId: targetUserProfileId,
+              recipientId: user.id,
+              type: PrismaRelationshipType.FRIENDSHIP,
+            },
+          ],
+        },
+      });
+      return res.status(200).json({});
+    } else if (req.method === "PATCH") {
+      const normalizedRelationships = await findNormalizedRelationships(
+        user.id,
+        targetUserProfileId
+      );
+      console.log(normalizedRelationships);
+      if (
+        normalizedRelationships.length > 1 ||
+        normalizedRelationships[0].type !==
+          RelationshipType.FRIEND_REQUEST_RECEIVED
+      ) {
+        return res.status(401).send({});
       } else {
-        res.status(405).send({});
+        await prisma.relationship.update({
+          where: {
+            senderId_recipientId: {
+              recipientId: user.id,
+              senderId: targetUserProfileId,
+            },
+          },
+          data: { type: PrismaRelationshipType.FRIENDSHIP },
+        });
+        return res.status(200).send({});
       }
-    } catch (e) {
-      return res.status(500).json({ success: false, error: e });
+    } else {
+      res.status(405).send({});
     }
+  } catch (e) {
+    return res.status(500).json({ success: false, error: e });
   }
 });
 
-function getUserProfileId(req: NextApiRequest): number {
+function getUserProfileId(req: NextApiRequest): string {
   const { userProfileId } = req.query;
   if (!userProfileId || Array.isArray(userProfileId)) {
     throw new Error("User Profile ID format error");
   }
   //TODO Validation
-  return Number.parseInt(userProfileId);
+  return userProfileId;
 }
 
-async function findNormalizedRelationships(selfId: number, otherId: number) {
+async function findNormalizedRelationships(selfId: string, otherId: string) {
   const relationships = await prisma.relationship.findMany({
     where: {
       OR: [

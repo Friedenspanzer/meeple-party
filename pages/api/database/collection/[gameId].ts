@@ -1,8 +1,8 @@
 import { Game } from "@/datatypes/game";
 import { prisma } from "@/db";
+import { withUser } from "@/utility/apiAuth";
 import { fetchGames } from "@/utility/games";
-import { getSession, Session, withApiAuthRequired } from "@auth0/nextjs-auth0";
-import { UserProfile } from "@auth0/nextjs-auth0/client";
+import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export interface CollectionStatus {
@@ -17,19 +17,16 @@ export interface CollectionUpdate {
   status: CollectionStatus;
 }
 
-export default withApiAuthRequired(async function handle(
+export default withUser(async function handle(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
+  user: User
 ) {
-  const session = await getSession(req, res);
-  if (!session) {
-    return res.status(401).send("");
-  } else if (req.method === "GET") {
+  if (req.method === "GET") {
     try {
       const gameId = getGameId(req);
-      const userId = await getUserId(session);
       const collection = await prisma.gameCollection.findUnique({
-        where: { userId_gameId: { gameId, userId } },
+        where: { userId_gameId: { gameId, userId: user.id } },
       });
       if (!collection) {
         return res.status(200).json(
@@ -51,16 +48,15 @@ export default withApiAuthRequired(async function handle(
       return res.status(500).json({ success: false, error: e });
     }
   } else if (req.method === "POST") {
-    const userId = await getUserId(session);
     try {
       const gameId = getGameId(req);
       const parameters = JSON.parse(req.body) as CollectionStatus;
       const game = (await fetchGames(gameId))[0];
 
       if (parameters.own || parameters.wantToPlay || parameters.wishlist) {
-        await upsertStatus(gameId, userId, parameters);
+        await upsertStatus(gameId, user.id, parameters);
       } else {
-        await deleteStatus(gameId, userId);
+        await deleteStatus(gameId, user.id);
       }
       return res
         .status(200)
@@ -98,20 +94,9 @@ function getGameId(req: NextApiRequest): number {
   return Number.parseInt(gameId);
 }
 
-async function getUserId(session: Session): Promise<number> {
-  const user = session.user as UserProfile;
-  const userProfile = await prisma.userProfile.findUnique({
-    where: { email: user.email as string },
-  });
-  if (!userProfile) {
-    throw new Error("Could not fetch User ID");
-  }
-  return userProfile.id;
-}
-
 async function upsertStatus(
   gameId: number,
-  userId: number,
+  userId: string,
   status: CollectionStatus
 ) {
   await prisma.gameCollection.upsert({
@@ -134,7 +119,7 @@ async function upsertStatus(
   });
 }
 
-async function deleteStatus(gameId: number, userId: number) {
+async function deleteStatus(gameId: number, userId: string) {
   await prisma.gameCollection.delete({
     where: { userId_gameId: { gameId, userId } },
   });

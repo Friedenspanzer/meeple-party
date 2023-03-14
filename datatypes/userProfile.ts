@@ -1,4 +1,4 @@
-import { UserProfile } from "@prisma/client";
+import { User } from "@prisma/client";
 
-export type PrivateUserProfile = Omit<UserProfile, "bggName" | "email">;
-export type PublicUserProfile = Omit<PrivateUserProfile, "realName">;
+export type PrivateUser = Omit<User, "bggName" | "email" | "emailVerified">;
+export type PublicUser = Omit<PrivateUser, "realName">;

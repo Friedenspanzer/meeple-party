@@ -1,3 +1,5 @@
+"use client";
+
 import { Game } from "@/datatypes/game";
 import styles from "./gamebox.module.css";
 import Link from "next/link";

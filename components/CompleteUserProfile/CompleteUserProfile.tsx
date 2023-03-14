@@ -1,36 +1,32 @@
-import { UserProfile } from "@prisma/client";
+"use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/context/userContext";
 
-export interface CompleteUserProfileProps {
-  userProfile: UserProfile;
-  onUserProfileComplete: (userProfile: UserProfile) => void;
-}
+export default function CompleteUserProfile() {
+  const { user, loading } = useUser();
 
-export default function CompleteUserProfile(props: CompleteUserProfileProps) {
-  const { userProfile, onUserProfileComplete } = props;
-  const [username, setUserName] = useState(userProfile.name);
-  const [realName, setRealName] = useState(userProfile.realName || "");
+  if (!user) {
+    throw new Error(
+      "User profile completion component can only be called with a user"
+    );
+  }
+
+  const [username, setUserName] = useState(user.name);
+  const [realName, setRealName] = useState(user.realName || "");
 
   const [updating, setUpdating] = useState(false);
 
-  const router = useRouter();
-
   const sendCurrentData = () => {
     setUpdating(true);
-    fetch("/api/database/activeUserProfile", {
+    fetch("/api/user", {
       method: "POST",
       body: JSON.stringify({
-        email: userProfile.email,
         name: username,
         realName: realName,
-        picture: userProfile.picture,
       }),
-    })
-      .then((value) => value.json())
-      .then((value) => {
-        onUserProfileComplete(value);
-      });
+    }).then(() => setUpdating(false));
   };
 
   //TODO Input sanitation and validation
@@ -49,7 +45,7 @@ export default function CompleteUserProfile(props: CompleteUserProfileProps) {
             className="form-control"
             type="text"
             placeholder="Display name"
-            value={username}
+            value={username ?? ""}
             onChange={(e) => {
               setUserName(e.currentTarget.value);
             }}
@@ -78,7 +74,7 @@ export default function CompleteUserProfile(props: CompleteUserProfileProps) {
             type="email"
             placeholder="Enter email"
             disabled
-            value={userProfile.email}
+            value={user.email ?? ""}
           />
         </div>
       </form>

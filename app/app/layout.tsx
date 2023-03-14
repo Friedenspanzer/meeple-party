@@ -1,49 +1,29 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
-import { UserProfile } from ".prisma/client";
 import Avatar from "@/components/Avatar/Avatar";
-import CompleteUserProfile from "@/components/CompleteUserProfile/CompleteUserProfile";
-import { UserContext } from "@/context/userContext";
-import { UserProfile as Auth0User, useUser } from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import styles from "./app.module.css";
 
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
+import { useUser } from "@/context/userContext";
+import CompleteUserProfile from "@/components/CompleteUserProfile/CompleteUserProfile";
 
 TimeAgo.addDefaultLocale(en);
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { user, error, isLoading } = useUser();
-  const [userProfile, setUserProfile] = useState<
-    UserProfile | null | undefined
-  >(undefined);
-  const [loadingProfile, setLoadingProfile] = useState(true);
+  const { user, loading } = useUser();
 
-  useEffect(() => {
-    if (!!user) {
-      fetch("/api/database/activeUserProfile")
-        .then((value) => value.json())
-        .then((value) => {
-          setUserProfile(value);
-          return value;
-        })
-        .then((value) => setUserProfile(tryPrefillFields(value, user)))
-        .then(() => setLoadingProfile(false));
-    }
-  }, [user]);
-
-  if (!!isLoading || !!loadingProfile) {
+  if (!!loading) {
     return (
       <div className={styles.spinner}>
         <div className="spinner-border" />
       </div>
     );
-  } else if (!user || !!error || !userProfile) {
+  } else if (!user) {
     return (
       <>
         <h2>Not logged in</h2>
@@ -87,10 +67,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </ul>
           <div className={styles.user}>
             <div className={styles.avatar}>
-              <Avatar image={userProfile.picture} name={userProfile.name} />
+              <Avatar image={user.image} name={!!user.name ? user.name : ""} />
             </div>
-            <div className={styles.username}>{userProfile.name}</div>
-            <div className={styles.realname}>{userProfile.realName}</div>
+            <div className={styles.username}>{user.name}</div>
+            <div className={styles.realname}>{user.realName}</div>
             <div className={styles.usermenu}>
               <div className="dropdown">
                 <button
@@ -101,7 +81,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 ></button>
                 <ul className="dropdown-menu">
                   <li>
-                    <a href="/api/auth/logout" className="dropdown-item">
+                    <a href="/api/auth/signout" className="dropdown-item">
                       Logout
                     </a>
                   </li>
@@ -110,38 +90,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </nav>
+        {!user.profileComplete ? <CompleteUserProfile /> :
         <div className={styles.content}>
-          {isCompleteUserProfile(userProfile) ? (
-            <UserContext.Provider value={userProfile}>
-              {children}
-            </UserContext.Provider>
-          ) : (
-            <CompleteUserProfile
-              userProfile={userProfile as UserProfile}
-              onUserProfileComplete={setUserProfile}
-            />
-          )}
+          {children}
           <div className="clearfix"></div>
-        </div>
+        </div> }
       </>
     );
   }
-}
-
-function isCompleteUserProfile(profile: UserProfile | undefined | null) {
-  return !!profile && profile.id > 0 && !!profile.email && !!profile.name;
-}
-
-function tryPrefillFields(
-  profile: UserProfile | undefined | null,
-  user: Auth0User
-): UserProfile {
-  return {
-    id: profile?.id || -1,
-    email: profile?.email || user.email || "",
-    name: profile?.name || user.nickname || "",
-    picture: profile?.picture || null,
-    realName: profile?.realName || user.name || null,
-    bggName: profile?.bggName || null,
-  };
 }

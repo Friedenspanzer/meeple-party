@@ -1,6 +1,6 @@
-import { UserContext } from "@/context/userContext";
+import { useUser } from "@/context/userContext";
 import { XMLParser } from "fast-xml-parser";
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export interface RequestProps {
   onDone: (bggObject: any) => void;
@@ -12,14 +12,18 @@ const xmlParser = new XMLParser({
 
 const Request: React.FC<RequestProps> = (props) => {
   const { onDone } = props;
-  const userProfile = useContext(UserContext);
+  const { user, loading } = useUser();
+
+  if (!user) {
+    throw new Error("Request component can only be called with a valid user.");
+  }
 
   const tryFetchCollection = useCallback(() => {
     /*
      * TODO The API answers with 429 after too many requests. The timeout should be high enough
      * for that to not happen but it should be handled anyway
      */
-    fetch(`https://api.geekdo.com/xmlapi/collection/${userProfile.bggName}`)
+    fetch(`https://api.geekdo.com/xmlapi/collection/${user.bggName}`)
       .then((response) => {
         if (response.status === 202) {
           setTimeout(tryFetchCollection, 20000);
@@ -44,7 +48,7 @@ const Request: React.FC<RequestProps> = (props) => {
           "Fetching data from BGG API failed for unexpected reasons"
         );
       });
-  }, [onDone, userProfile.bggName]);
+  }, [onDone, user.bggName]);
 
   useEffect(() => {
     tryFetchCollection();

@@ -1,23 +1,27 @@
-import { UserContext } from "@/context/userContext";
-import { useCallback, useContext, useState } from "react";
+import { useUser } from "@/context/userContext";
+import { useContext, useState } from "react";
 
 export interface UsernameProps {
   onDone: () => void;
 }
 
 const Username: React.FC<UsernameProps> = (props) => {
-  const userProfile = useContext(UserContext);
-  const [bggName, setBggName] = useState(userProfile.bggName);
+  const { user } = useUser();
+
+  if (!user) {
+    throw new Error("Username component can only be called with a valid user.");
+  }
+
+  const [bggName, setBggName] = useState(user.bggName);
   const [loading, setLoading] = useState(false);
 
   //TODO Input validation
   const onReady = () => {
     setLoading(true);
-    userProfile.bggName = bggName;
-    fetch("/api/database/activeUserProfile", {
+    user.bggName = bggName;
+    fetch("/api/user", {
       method: "POST",
       body: JSON.stringify({
-        ...userProfile,
         bggName: bggName,
       }),
     }).then(() => {

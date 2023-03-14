@@ -14,7 +14,7 @@ export interface NavigationItemProps {
 }
 
 export const NavigationBar: React.FC<NavigationBarProps> = ({
-  fill,
+  fill = true,
   children,
 }) => {
   return <ul className={`nav nav-pills ${fill && "nav-fill"}`}>{children}</ul>;
@@ -33,8 +33,4 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
       </Link>
     </li>
   );
-};
-
-NavigationBar.defaultProps = {
-  fill: true,
 };

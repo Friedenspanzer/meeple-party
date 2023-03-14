@@ -1,21 +1,18 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import { PrivateUserProfile, PublicUserProfile } from "@/datatypes/userProfile";
+import { PrivateUser, PublicUser } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import { Session } from "@auth0/nextjs-auth0";
 import { UserProfile as Auth0Profile } from "@auth0/nextjs-auth0/client";
-import {
-  Relationship as PrismaRelationship,
-  UserProfile,
-} from "@prisma/client";
+import { Relationship as PrismaRelationship, User } from "@prisma/client";
 
 type FullPrismaRelationship = PrismaRelationship & {
-  sender: UserProfile;
-  recipient: UserProfile;
+  sender: User;
+  recipient: User;
 };
 
 export function normalizeRelationship(
   prismaRelationship: FullPrismaRelationship,
-  userId: number
+  userId: string
 ): Relationship {
   return {
     profile: getProfile(prismaRelationship, userId),
@@ -26,7 +23,7 @@ export function normalizeRelationship(
 
 export function getRelationshipType(
   relationship: FullPrismaRelationship,
-  userId: number
+  userId: string
 ): RelationshipType {
   if (relationship.type === "FRIENDSHIP") {
     return RelationshipType.FRIENDSHIP;
@@ -42,8 +39,8 @@ export function getRelationshipType(
 
 export function getProfile(
   relationship: FullPrismaRelationship,
-  userId: number
-): PrivateUserProfile | PublicUserProfile {
+  userId: string
+): PrivateUser | PublicUser {
   const profile =
     relationship.recipientId === userId
       ? relationship.sender
@@ -58,47 +55,27 @@ export function getProfile(
   }
 }
 
-export function convertToPrivateProfile(
-  profile: UserProfile
-): PrivateUserProfile {
+export function convertToPrivateProfile(user: User): PrivateUser {
   return {
-    ...convertToPublicProfile(profile),
-    realName: profile.realName,
+    ...convertToPublicProfile(user),
+    realName: user.realName,
   };
 }
 
-export function convertToPublicProfile(
-  profile: UserProfile
-): PublicUserProfile {
+export function convertToPublicProfile(user: User): PublicUser {
   return {
-    id: profile.id,
-    name: profile.name,
-    picture: profile.picture,
+    id: user.id,
+    name: user.name,
+    image: user.image,
   };
 }
 
 export function isFriendRequestReveiced(
   relationship: FullPrismaRelationship,
-  userId: number
+  userId: string
 ): boolean {
   return (
     relationship.type === "FRIEND_REQUEST" &&
     relationship.recipientId === userId
   );
-}
-
-export async function getUserProfile(session: Session): Promise<UserProfile> {
-  const user = session.user as Auth0Profile;
-  if (!user.email) {
-    throw new Error("User from Auth0 does not have an E-Mail adress");
-  }
-  const userProfile = await prisma.userProfile.findUnique({
-    where: { email: user.email as string },
-  });
-
-  if (!userProfile) {
-    throw new Error("No user profile corresponding to Auth0 user found.");
-  }
-
-  return userProfile;
 }

@@ -12,7 +12,7 @@ const Navbar: React.FC = ({}) => {
   const [relationships, setRelationships] = useState<Relationship[]>();
 
   useEffect(() => {
-    fetch("/api/relationships/all")
+    fetch("/api/relationships")
       .then((result) => result.json())
       .then((relationships: Relationship[]) =>
         relationships.filter(
