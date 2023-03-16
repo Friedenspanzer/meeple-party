@@ -1,8 +1,5 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { PrivateUser, PublicUser } from "@/datatypes/userProfile";
-import { prisma } from "@/db";
-import { Session } from "@auth0/nextjs-auth0";
-import { UserProfile as Auth0Profile } from "@auth0/nextjs-auth0/client";
 import { Relationship as PrismaRelationship, User } from "@prisma/client";
 
 type FullPrismaRelationship = PrismaRelationship & {
