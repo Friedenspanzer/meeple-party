@@ -17,7 +17,7 @@ const GenericFriendRequest: React.FC<GenericFriendRequestProps> = ({
   const { profile, lastUpdate } = request;
   return (
     <div className={`${styles.friendRequest} ${stale && styles.stale}`}>
-      <Avatar image={profile.picture} name={profile.name} />
+      <Avatar image={profile.image} name={profile.name ?? ""} />
       <div className={styles.content}>
         <div className={styles.name}>
           {profile.name}
