@@ -1,32 +1,22 @@
-"use client";
-
 import GameBox from "@/components/GameBox/GameBox";
-import { Game } from "@/datatypes/game";
-import { GameCollection } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { prisma } from "@/db";
+import { getServerUser } from "@/utility/serverSession";
 
-type State = "owned" | "wishlist" | "wanttoplay";
-interface GameCollectionWithGame extends GameCollection {
-  game: Game;
-}
-
-export default function Collection() {
-  const [gameCollection, setGameCollection] = useState<
-    GameCollectionWithGame[]
-  >([]);
-  const [currentPage, setCurrentPage] = useState<State>("owned");
-  useEffect(() => {
-    fetch("/api/database/collection")
-      .then((result) => result.json())
-      .then((gameCollection) => setGameCollection(gameCollection));
-  }, []);
+export default async function Collection() {
+  const user = await getServerUser();
+  const gameCollection = await prisma.gameCollection.findMany({
+    where: { userId: user.id, wantToPlay: true },
+    include: { game: true },
+  });
   return (
     <>
-      {gameCollection
-        .filter((g) => g.wantToPlay)
-        .map((g) => (
-          <GameBox game={g.game} status={g} key={g.game.id} />
-        ))}
+      {gameCollection.map((g) => {
+        const { updatedAt, ...cleanGame } = g.game;
+        const { game, ...cleanStatus } = g;
+        return (
+          <GameBox game={cleanGame} status={cleanStatus} key={cleanGame.id} />
+        );
+      })}
     </>
   );
 }
