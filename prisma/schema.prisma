@@ -46,6 +46,10 @@ model User {
   profileComplete       Boolean          @default(false)
   role                  Role             @default(USER)
   realName              String?
+  about                 String?
+  place                 String?
+  preference            String?
+  favorites             Game[]
   image                 String?
   bggName               String?
   games                 GameCollection[] @relation()
@@ -74,6 +78,7 @@ model Game {
   BGGRating   Float            @default(5)
   updatedAt   DateTime?        @updatedAt
   users       GameCollection[]
+  favoritedBy User[]
 }
 
 model GameCollection {
