@@ -48,17 +48,23 @@ export default async function ProfilePage({
           className={styles.avatar}
         />
         <h1 className={styles.name}>{user.name}</h1>
-        {isMe && (
-          <abbr
-            className={classNames(["bi bi-person-circle", styles.nameAside])}
-            title="It's you!"
-          ></abbr>
-        )}
         {(isFriend || isMe) && (
           <h2 className={styles.realName}>{user.realName}</h2>
         )}
+        <div className={styles.roles}>
+          <Role role={user.role} />
+          {isMe && (
+            <span className="badge text-bg-light">
+              <i className="bi bi-person-circle"></i> It&apos;s you!
+            </span>
+          )}
+          {isFriend && (
+            <span className="badge text-bg-dark">
+              <i className="bi bi-person-fill"></i> Friend
+            </span>
+          )}
+        </div>
       </div>
-      <Role role={user.role} />
       {!isMe && !isFriend && <ProfileRelationship targetUserId={user.id} />}
     </>
   );
