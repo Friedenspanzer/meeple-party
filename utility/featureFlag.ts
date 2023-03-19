@@ -6,6 +6,5 @@ export async function useFeatureFlagServer(flag: string): Promise<boolean> {
   const dbResult = await prisma.featureFlag.findFirst({
     where: { roles: { has: user.role }, name: flag },
   });
-  console.log("Reading feature flag", dbResult);
   return !!dbResult;
 }
