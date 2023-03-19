@@ -44,6 +44,7 @@ model User {
   accounts              Account[]
   sessions              Session[]
   profileComplete       Boolean          @default(false)
+  role                  Role             @default(USER)
   realName              String?
   image                 String?
   bggName               String?
@@ -105,4 +106,17 @@ model Relationship {
   cratedAt  DateTime @default(now())
 
   @@id([senderId, recipientId])
+}
+
+enum Role {
+  USER
+  PREMIUM
+  FRIENDS_FAMILY
+  ADMIN
+}
+
+model FeatureFlag {
+  id    Int    @id @default(autoincrement())
+  name  String
+  roles Role[]
 }

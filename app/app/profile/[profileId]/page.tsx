@@ -1,6 +1,5 @@
 import Avatar from "@/components/Avatar/Avatar";
-import GameBox from "@/components/GameBox/GameBox";
-import { Game } from "@/datatypes/game";
+import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
 import { Relationship, RelationshipType, User } from "@prisma/client";
@@ -59,6 +58,7 @@ export default async function ProfilePage({
           <h2 className={styles.realName}>{user.realName}</h2>
         )}
       </div>
+      <Role role={user.role} />
       {!isMe && !isFriend && <ProfileRelationship targetUserId={user.id} />}
     </>
   );
