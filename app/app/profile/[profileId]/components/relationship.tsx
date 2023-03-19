@@ -69,7 +69,7 @@ const ProfileRelationship: React.FC<ProfileRelationshipProps> = ({
       {!loading &&
         relationship?.type === RelationshipType.FRIEND_REQUEST_SENT && (
           <>
-            <h3>Your have sent a friend request</h3>
+            <h3>Your sent friend request</h3>
             <SentFriendRequest request={relationship} />
           </>
         )}

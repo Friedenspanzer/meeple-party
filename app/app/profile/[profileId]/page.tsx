@@ -1,4 +1,5 @@
 import Avatar from "@/components/Avatar/Avatar";
+import GameBox from "@/components/GameBox/GameBox";
 import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
@@ -23,11 +24,7 @@ export default async function ProfilePage({
     include: {
       receivedRelationships: true,
       sentRelationships: true,
-      games: {
-        include: {
-          game: true,
-        },
-      },
+      favorites: true,
     },
   });
   if (!user) {
@@ -39,9 +36,11 @@ export default async function ProfilePage({
   const isMe = loggedInUser.id === user.id;
   const isFriend = getAllFriendIds(user).includes(loggedInUser.id);
 
+  const moreHeaders = getMoreHeaders(user);
+
   return (
     <>
-      <div className={styles.name}>
+      <div className={styles.profile}>
         <Avatar
           image={user.image}
           name={user.name || ""}
@@ -50,6 +49,12 @@ export default async function ProfilePage({
         <h1 className={styles.name}>{user.name}</h1>
         {(isFriend || isMe) && (
           <h2 className={styles.realName}>{user.realName}</h2>
+        )}
+        {isFriend && !!moreHeaders && (
+          <div
+            className={styles.moreHeader}
+            dangerouslySetInnerHTML={{ __html: moreHeaders }}
+          />
         )}
         <div className={styles.roles}>
           <Role role={user.role} />
@@ -64,8 +69,36 @@ export default async function ProfilePage({
             </span>
           )}
         </div>
+        {!isMe && !isFriend && (
+          <div className={styles.request}>
+            <ProfileRelationship targetUserId={user.id} />
+          </div>
+        )}
+        <div className={styles.content}>
+          <div className={styles.about}>
+            {!!user.about && (
+              <>
+                <h3>About</h3>
+                <p>{user.about}</p>
+              </>
+            )}
+            {!!user.preference && (
+              <>
+                <h3>What I like</h3>
+                <p>{user.preference}</p>
+              </>
+            )}
+          </div>
+          {user.favorites.length > 0 && (
+            <div className={styles.favorites}>
+              <h3>Favorite games</h3>
+              {user.favorites.slice(0, 6).map((g) => (
+                <GameBox game={g} key={g.id} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-      {!isMe && !isFriend && <ProfileRelationship targetUserId={user.id} />}
     </>
   );
 }
@@ -78,4 +111,18 @@ function getAllFriendIds(user: UserWithRelationships): string[] {
     .filter((r) => r.type === RelationshipType.FRIENDSHIP)
     .map((r) => r.senderId);
   return [...sentFriendships, ...receivedFriendships];
+}
+
+function getMoreHeaders(user: User): string | undefined {
+  if (!user.place && !user.bggName) {
+    return;
+  }
+  const headers = [];
+  if (!!user.place) {
+    headers.push(`From <strong>${user.place}</strong>`);
+  }
+  if (!!user.bggName) {
+    headers.push(`<strong>${user.bggName}</strong> on BoardGameGeek`);
+  }
+  return headers.join(" &bullet; ");
 }
