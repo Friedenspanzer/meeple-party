@@ -81,6 +81,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 ></button>
                 <ul className="dropdown-menu">
                   <li>
+                    <Link href={`/app/profile/${user.id}`} className="dropdown-item">
+                      Your profile
+                    </Link>
+                  </li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
                     <a href="/api/auth/signout" className="dropdown-item">
                       Logout
                     </a>
