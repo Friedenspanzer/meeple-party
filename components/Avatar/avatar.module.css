@@ -21,4 +21,5 @@
   color: var(--bs-light);
   box-shadow: var(--bs-box-shadow-sm);
   flex-shrink: 0;
+  font-size: 1.4rem;
 }

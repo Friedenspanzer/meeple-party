@@ -1,8 +1,13 @@
+import classNames from "classnames";
 import Image from "next/image";
 import styles from "./avatar.module.css";
 
-export default function Avatar(props: { image: string | null; name: string }) {
-  const { image, name } = props;
+export default function Avatar(props: {
+  image: string | null;
+  name: string;
+  className?: string;
+}) {
+  const { image, name, className } = props;
   if (!!image) {
     return (
       <Image
@@ -10,14 +15,14 @@ export default function Avatar(props: { image: string | null; name: string }) {
         width="40"
         height="40"
         alt={!!name ? name : "User avatar"}
-        className={styles.image}
+        className={classNames([styles.image, className])}
       />
     );
   } else {
     const color = getColor(name);
     return (
       <div
-        className={styles.dummy}
+        className={classNames([styles.dummy, className])}
         style={{ backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})` }}
       >
         {name[0]}
