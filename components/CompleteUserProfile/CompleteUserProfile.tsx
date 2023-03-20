@@ -21,7 +21,7 @@ export default function CompleteUserProfile() {
   const sendCurrentData = () => {
     setUpdating(true);
     fetch("/api/user", {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify({
         name: username,
         realName: realName,

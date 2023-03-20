@@ -20,7 +20,7 @@ const Username: React.FC<UsernameProps> = (props) => {
     setLoading(true);
     user.bggName = bggName;
     fetch("/api/user", {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify({
         bggName: bggName,
       }),

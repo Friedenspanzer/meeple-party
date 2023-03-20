@@ -9,7 +9,7 @@ export default withUser(async function handle(
   user: User
 ) {
   try {
-    if (req.method === "POST") {
+    if (req.method === "PATCH") {
       const newUserDetails = updatePartialUser(user, JSON.parse(req.body));
       await prisma.user.update({
         where: { id: user.id },
