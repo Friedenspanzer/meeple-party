@@ -11,8 +11,6 @@ const EditProfile: React.FC = ({}) => {
     throw new Error("Could not load user");
   }
 
-  const [preferences, setPreferences] = useState(user.preference || "");
-
   const [profileName, setProfileName] = useState(user.name || "");
   const [profileNameError, setProfileNameError] = useState<string | false>(
     false
@@ -26,6 +24,11 @@ const EditProfile: React.FC = ({}) => {
 
   const [about, setAbout] = useState(user.about || "");
   const [aboutError, setAboutError] = useState<string | false>(false);
+
+  const [preferences, setPreferences] = useState(user.preference || "");
+  const [preferencesError, setPreferencesError] = useState<string | false>(
+    false
+  );
 
   useEffect(() => {
     if (!profileName || profileName.length === 0) {
@@ -60,6 +63,14 @@ const EditProfile: React.FC = ({}) => {
       setAboutError(false);
     }
   }, [about]);
+
+  useEffect(() => {
+    if (preferences.length > 3000) {
+      setPreferencesError("The text must not exceed 3000 characters.");
+    } else {
+      setPreferencesError(false);
+    }
+  }, [preferences]);
 
   return (
     <form className="grid gap-3" noValidate>
@@ -176,7 +187,7 @@ const EditProfile: React.FC = ({}) => {
               "text-danger": aboutError,
             })}
           >
-            {aboutError || "Will be publicly shown to everybody. Must be set."}
+            {aboutError || "Will be publicly shown to everybody."}
           </div>
         </div>
 
@@ -185,21 +196,41 @@ const EditProfile: React.FC = ({}) => {
             Your gaming preferences
           </label>
           <textarea
-            className="form-control"
+            className={classNames({
+              "form-control": true,
+              "border-danger": !!preferencesError,
+            })}
             id="place"
             rows={10}
             value={preferences}
+            onChange={(e) => setPreferences(e.currentTarget.value)}
             placeholder="Tell your friends about the kind of games you like"
           ></textarea>
-          <div id="placeHelp" className="form-text">
-            Will be publicly shown to everybody.
+          <div
+            id="profileNameHelp"
+            className={classNames({
+              "form-text": true,
+              "text-danger": preferencesError,
+            })}
+          >
+            {preferencesError || "Will be publicly shown to everybody."}
           </div>
         </div>
       </div>
 
-      <div className="row justify-content-between">
-        <div className="col-1">
-          <button type="button" className="btn btn-primary">
+      <div className="row">
+        <div className="col-4">
+          <button
+            type="button"
+            className="btn btn-primary"
+            disabled={
+              !!profileNameError ||
+              !!realNameError ||
+              !!placeError ||
+              !!aboutError ||
+              !!preferencesError
+            }
+          >
             Save
           </button>
         </div>
