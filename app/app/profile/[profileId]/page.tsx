@@ -4,7 +4,6 @@ import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
 import { Relationship, RelationshipType, User } from "@prisma/client";
-import classNames from "classnames";
 import { notFound } from "next/navigation";
 import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
