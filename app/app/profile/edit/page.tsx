@@ -174,6 +174,20 @@ const EditProfile: React.FC = ({}) => {
           </div>
         </div>
       </div>
+
+      <div className="row justify-content-between">
+        <div className="col-1">
+          <button type="button" className="btn btn-primary">
+            Save
+          </button>
+        </div>
+        <div className="alert alert-warning col-8" role="alert">
+          <i className="bi bi-exclamation-octagon-fill"></i>{" "}
+          <strong>Beware:</strong> Everything that is shown to your friends may
+          also be shown to people you send friend requests to (but not people
+          sending friend requests to you).
+        </div>
+      </div>
     </form>
   );
 };
