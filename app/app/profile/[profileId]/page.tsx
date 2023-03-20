@@ -4,6 +4,7 @@ import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
 import { Relationship, RelationshipType, User } from "@prisma/client";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
@@ -69,8 +70,19 @@ export default async function ProfilePage({
           )}
         </div>
         {!isMe && !isFriend && (
-          <div className={styles.request}>
+          <div className={styles.action}>
             <ProfileRelationship targetUserId={user.id} />
+          </div>
+        )}
+        {isMe && (
+          <div className={styles.action}>
+            <Link
+              className="btn btn-primary"
+              href="/app/profile/edit"
+              role="button"
+            >
+              Edit your profile
+            </Link>
           </div>
         )}
         <div className={styles.content}>

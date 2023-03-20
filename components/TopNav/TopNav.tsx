@@ -63,6 +63,14 @@ export default function TopNav() {
                     </Link>
                   </li>
                   <li>
+                    <Link
+                      href={`/app/profile/edit`}
+                      className="dropdown-item"
+                    >
+                      Edit your profile
+                    </Link>
+                  </li>
+                  <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>

@@ -38,7 +38,7 @@
   gap: 0.25rem;
 }
 
-.request {
+.action {
   grid-row: 4;
   grid-column: 2 / span 2;
 }
