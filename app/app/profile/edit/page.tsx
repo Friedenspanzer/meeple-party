@@ -11,13 +11,19 @@ const EditProfile: React.FC = ({}) => {
     throw new Error("Could not load user");
   }
 
-  const [realName, setRealName] = useState(user.realName || "");
-  const [place, setPlace] = useState(user.place || "");
   const [about, setAbout] = useState(user.about || "");
   const [preferences, setPreferences] = useState(user.preference || "");
 
   const [profileName, setProfileName] = useState(user.name || "");
-  const [profileNameError, setProfileNameError] = useState<string | null>(null);
+  const [profileNameError, setProfileNameError] = useState<string | false>(
+    false
+  );
+
+  const [realName, setRealName] = useState(user.realName || "");
+  const [realNameError, setRealNameError] = useState<string | false>(false);
+
+  const [place, setPlace] = useState(user.place || "");
+  const [placeError, setPlaceError] = useState<string | false>(false);
 
   useEffect(() => {
     if (!profileName || profileName.length === 0) {
@@ -25,9 +31,25 @@ const EditProfile: React.FC = ({}) => {
     } else if (profileName.length > 30) {
       setProfileNameError("Your profile name must not exceed 30 characters.");
     } else {
-      setProfileNameError(null);
+      setProfileNameError(false);
     }
-  }, [profileName, realName, place, about, preferences]);
+  }, [profileName]);
+
+  useEffect(() => {
+    if (realName.length > 60) {
+      setRealNameError("The name given to us must not exceed 60 characters.");
+    } else {
+      setRealNameError(false);
+    }
+  }, [realName]);
+
+  useEffect(() => {
+    if (place.length > 30) {
+      setPlaceError("The place given to us must not exceed 30 characters.");
+    } else {
+      setPlaceError(false);
+    }
+  }, [place]);
 
   return (
     <form className="grid gap-3" noValidate>
@@ -61,9 +83,8 @@ const EditProfile: React.FC = ({}) => {
               "text-danger": profileNameError,
             })}
           >
-            {!!profileNameError
-              ? profileNameError
-              : "Will be publicly shown to everybody. Must be set."}
+            {profileNameError ||
+              "Will be publicly shown to everybody. Must be set."}
           </div>
         </div>
 
@@ -73,14 +94,24 @@ const EditProfile: React.FC = ({}) => {
           </label>
           <input
             type="text"
-            className="form-control"
+            className={classNames({
+              "form-control": true,
+              "border-danger": !!realNameError,
+            })}
             id="realName"
             placeholder="Real name"
             aria-describedby="realNameHelp"
             value={realName}
+            onChange={(e) => setRealName(e.currentTarget.value)}
           />
-          <div id="realNameHelp" className="form-text">
-            Will only be shown to your friends.
+          <div
+            id="profileNameHelp"
+            className={classNames({
+              "form-text": true,
+              "text-danger": realNameError,
+            })}
+          >
+            {realNameError || "Will only be shown to your friends."}
           </div>
         </div>
 
@@ -90,14 +121,24 @@ const EditProfile: React.FC = ({}) => {
           </label>
           <input
             type="text"
-            className="form-control"
+            className={classNames({
+              "form-control": true,
+              "border-danger": !!placeError,
+            })}
             id="place"
             placeholder="Where you live"
             aria-describedby="placeHelp"
             value={place}
+            onChange={(e) => setPlace(e.currentTarget.value)}
           />
-          <div id="placeHelp" className="form-text">
-            Will only be shown to your friends.
+          <div
+            id="profileNameHelp"
+            className={classNames({
+              "form-text": true,
+              "text-danger": placeError,
+            })}
+          >
+            {placeError || "Will only be shown to your friends."}
           </div>
         </div>
       </div>
