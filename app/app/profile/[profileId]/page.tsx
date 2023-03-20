@@ -49,7 +49,7 @@ export default async function ProfilePage({
         {(isFriend || isMe) && (
           <h2 className={styles.realName}>{user.realName}</h2>
         )}
-        {isFriend && !!moreHeaders && (
+        {(isFriend || isMe) && !!moreHeaders && (
           <div
             className={styles.moreHeader}
             dangerouslySetInnerHTML={{ __html: moreHeaders }}
