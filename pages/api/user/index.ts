@@ -9,7 +9,18 @@ export default withUser(async function handle(
   user: User
 ) {
   try {
-    if (req.method === "PATCH") {
+    if (req.method === "POST") {
+      const newUserDetails = JSON.parse(req.body);
+      //TODO Validation
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          ...newUserDetails,
+          profileComplete: isProfileComplete(newUserDetails),
+        },
+      });
+      res.status(200).send({});
+    } else if (req.method === "PATCH") {
       const newUserDetails = updatePartialUser(user, JSON.parse(req.body));
       await prisma.user.update({
         where: { id: user.id },
@@ -21,7 +32,7 @@ export default withUser(async function handle(
       res.status(200).send({});
     }
   } catch (e) {
-    return res.status(500).json({ success: false, error: e });
+    res.status(500).json({ success: false, error: e });
   }
 });
 

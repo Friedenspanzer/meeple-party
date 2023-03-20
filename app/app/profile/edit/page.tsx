@@ -1,8 +1,9 @@
 "use client";
 
 import { useUser } from "@/context/userContext";
+import { User } from "@prisma/client";
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const EditProfile: React.FC = ({}) => {
   const { user } = useUser();
@@ -29,6 +30,25 @@ const EditProfile: React.FC = ({}) => {
   const [preferencesError, setPreferencesError] = useState<string | false>(
     false
   );
+
+  const [sending, setSending] = useState(false);
+
+  const updateUser = () => {
+    setSending(true);
+    const newUserDetails: User = {
+      ...user,
+      name: profileName,
+      realName,
+      place,
+      about,
+      preference: preferences,
+    };
+    //TODO Error Handling
+    fetch("/api/user", {
+      method: "POST",
+      body: JSON.stringify(newUserDetails),
+    }).then(() => setSending(false));
+  };
 
   useEffect(() => {
     if (!profileName || profileName.length === 0) {
@@ -224,13 +244,21 @@ const EditProfile: React.FC = ({}) => {
             type="button"
             className="btn btn-primary"
             disabled={
+              sending ||
               !!profileNameError ||
               !!realNameError ||
               !!placeError ||
               !!aboutError ||
               !!preferencesError
             }
+            onClick={(e) => updateUser()}
           >
+            {sending && (
+              <>
+                <div className="spinner-border spinner-border-sm" />
+                &nbsp;
+              </>
+            )}
             Save
           </button>
         </div>
