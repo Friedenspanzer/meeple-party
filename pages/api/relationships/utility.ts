@@ -56,6 +56,7 @@ export function convertToPrivateProfile(user: User): PrivateUser {
   return {
     ...convertToPublicProfile(user),
     realName: user.realName,
+    place: user.place
   };
 }
 
