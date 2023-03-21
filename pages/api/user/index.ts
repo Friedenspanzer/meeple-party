@@ -16,13 +16,18 @@ export default withUser(async function handle(
       });
       res.status(200).json(extendedDetails);
     } else if (req.method === "POST") {
-      const newUserDetails = JSON.parse(req.body);
+      const { favorites, ...newUserDetails } = JSON.parse(req.body);
       //TODO Validation
       await prisma.user.update({
         where: { id: user.id },
         data: {
           ...newUserDetails,
           profileComplete: isProfileComplete(newUserDetails),
+          favorites: {
+            set: favorites.map((f: number) => ({
+              id: f,
+            })),
+          },
         },
       });
       res.status(200).send({});
