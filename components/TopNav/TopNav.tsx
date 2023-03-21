@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useUser } from "@/context/userContext";
 import Link from "next/link";
