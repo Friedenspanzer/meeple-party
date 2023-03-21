@@ -1,12 +1,15 @@
 "use client";
 
 import GamePill from "@/components/GamePill/GamePill";
+import GameSearch, {
+  GameSearchChildren,
+} from "@/components/GameSearch/GameSearch";
 import Spinner from "@/components/Spinner/Spinner";
 import { useUser } from "@/context/userContext";
 import { Game } from "@/datatypes/game";
 import { User } from "@prisma/client";
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const EditProfile: React.FC = ({}) => {
   const { user } = useUser();
@@ -38,15 +41,47 @@ const EditProfile: React.FC = ({}) => {
 
   const [sending, setSending] = useState(false);
 
+  const FavoriteGameResult: React.FC<GameSearchChildren> = ({
+    searchResult,
+  }) => {
+    return (
+      <>
+        {searchResult.map((r) => (
+          <GamePill game={r.id} key={r.id}>
+            &nbsp;
+            <i
+              className="bi bi-plus"
+              style={{ cursor: "pointer" }}
+              onClick={(_) => addToFavorites(r.id)}
+            ></i>
+          </GamePill>
+        ))}
+      </>
+    );
+  };
+
+  const addToFavorites = useCallback(
+    (gameId: number) => {
+      //TODO Error handling
+      fetch(`/api/games/${gameId}`)
+        .then((response) => response.json())
+        .then((game) => {
+          setFavorites(favorites ? [...favorites, game] : [game]);
+        });
+    },
+    [favorites]
+  );
+
   const updateUser = () => {
     setSending(true);
-    const newUserDetails: User = {
+    const newUserDetails = {
       ...user,
       name: profileName,
       realName,
       place,
       about,
       preference: preferences,
+      favorites: favorites ? favorites.map((f) => f.id) : [],
     };
     //TODO Error Handling
     fetch("/api/user", {
@@ -256,8 +291,32 @@ const EditProfile: React.FC = ({}) => {
           {favorites ? (
             <>
               {favorites.map((f) => (
-                <GamePill game={f} key={f.id} />
+                <GamePill game={f} key={f.id}>
+                  &nbsp;
+                  <i
+                    className="bi bi-x"
+                    style={{ cursor: "pointer" }}
+                    onClick={(_) =>
+                      setFavorites(favorites.filter((g) => g.id !== f.id))
+                    }
+                  ></i>
+                </GamePill>
               ))}
+              <br />
+              <br />
+              <button
+                className="btn btn-secondary btn-sm"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseGameSearch"
+                type="button"
+                aria-expanded="false"
+                aria-controls="collapseGameSearch"
+              >
+                Add games
+              </button>
+              <div className="collapse" id="collapseGameSearch">
+                <GameSearch resultView={FavoriteGameResult} />
+              </div>
             </>
           ) : (
             <Spinner />
@@ -265,7 +324,7 @@ const EditProfile: React.FC = ({}) => {
         </div>
       </div>
 
-      <div className="row">
+      <div className="row mb-4">
         <div className="col-4">
           <button
             type="button"

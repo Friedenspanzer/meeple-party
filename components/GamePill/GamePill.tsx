@@ -10,9 +10,15 @@ type DefaultProperties = Omit<React.HTMLAttributes<HTMLDivElement>, "onClick">;
 export interface GamePillProps extends DefaultProperties {
   game: number | Game;
   action?: (gameId: number) => void;
+  children?: React.ReactNode;
 }
 
-const GamePill: React.FC<GamePillProps> = ({ game, action, ...props }) => {
+const GamePill: React.FC<GamePillProps> = ({
+  game,
+  action,
+  children,
+  ...props
+}) => {
   const [gameData, setGameData] = useState<Game>();
 
   useEffect(() => {
@@ -52,6 +58,7 @@ const GamePill: React.FC<GamePillProps> = ({ game, action, ...props }) => {
             />
           )}
           {gameData?.name}
+          {children}
         </div>
       ) : (
         <div className={classNames(styles.pill, styles.dummy)} />
