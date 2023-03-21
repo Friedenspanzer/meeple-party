@@ -9,7 +9,29 @@ export default withUser(async function handle(
   user: User
 ) {
   try {
-    if (req.method === "POST") {
+    if (req.method === "GET") {
+      const extendedDetails = await prisma.user.findUnique({
+        where: { id: user.id },
+        include: { favorites: true },
+      });
+      res.status(200).json(extendedDetails);
+    } else if (req.method === "POST") {
+      const { favorites, ...newUserDetails } = JSON.parse(req.body);
+      //TODO Validation
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          ...newUserDetails,
+          profileComplete: isProfileComplete(newUserDetails),
+          favorites: {
+            set: favorites.map((f: number) => ({
+              id: f,
+            })),
+          },
+        },
+      });
+      res.status(200).send({});
+    } else if (req.method === "PATCH") {
       const newUserDetails = updatePartialUser(user, JSON.parse(req.body));
       await prisma.user.update({
         where: { id: user.id },
@@ -21,7 +43,7 @@ export default withUser(async function handle(
       res.status(200).send({});
     }
   } catch (e) {
-    return res.status(500).json({ success: false, error: e });
+    res.status(500).json({ success: false, error: e });
   }
 });
 

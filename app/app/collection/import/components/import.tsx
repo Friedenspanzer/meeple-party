@@ -1,7 +1,7 @@
 import {
   CollectionUpdate,
   CollectionStatus,
-} from "@/pages/api/database/collection/[gameId]";
+} from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
 import { ImportConfiguration, ImportStep } from "../page";
 import ImportSteps from "./importSteps";
@@ -79,7 +79,7 @@ async function changeCollectionStatus(
   if (own || wantToPlay || wishlist) {
     //TODO Better error handling
     const result: CollectionUpdate = await fetch(
-      `/api/database/collection/${gameId}`,
+      `/api/collection/${gameId}`,
       {
         method: "POST",
         body: JSON.stringify({

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/userContext";
+import Spinner from "../Spinner/Spinner";
 
 export default function CompleteUserProfile() {
   const { user, loading } = useUser();
@@ -21,7 +22,7 @@ export default function CompleteUserProfile() {
   const sendCurrentData = () => {
     setUpdating(true);
     fetch("/api/user", {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify({
         name: username,
         realName: realName,
@@ -86,10 +87,7 @@ export default function CompleteUserProfile() {
       >
         {updating ? (
           <>
-            <div
-              className="spinner-border spinner-border-sm"
-              style={{ marginRight: "0.5rem" }}
-            />
+            <Spinner style={{ marginRight: "0.5rem" }} />
             Sending ...
           </>
         ) : (

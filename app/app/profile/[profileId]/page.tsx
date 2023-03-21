@@ -1,9 +1,10 @@
 import Avatar from "@/components/Avatar/Avatar";
+import GameBox from "@/components/GameBox/GameBox";
 import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
 import { Relationship, RelationshipType, User } from "@prisma/client";
-import classNames from "classnames";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
@@ -23,11 +24,7 @@ export default async function ProfilePage({
     include: {
       receivedRelationships: true,
       sentRelationships: true,
-      games: {
-        include: {
-          game: true,
-        },
-      },
+      favorites: true,
     },
   });
   if (!user) {
@@ -39,27 +36,80 @@ export default async function ProfilePage({
   const isMe = loggedInUser.id === user.id;
   const isFriend = getAllFriendIds(user).includes(loggedInUser.id);
 
+  const moreHeaders = getMoreHeaders(user);
+
   return (
     <>
-      <div className={styles.name}>
+      <div className={styles.profile}>
         <Avatar
           image={user.image}
           name={user.name || ""}
           className={styles.avatar}
         />
         <h1 className={styles.name}>{user.name}</h1>
-        {isMe && (
-          <abbr
-            className={classNames(["bi bi-person-circle", styles.nameAside])}
-            title="It's you!"
-          ></abbr>
-        )}
         {(isFriend || isMe) && (
           <h2 className={styles.realName}>{user.realName}</h2>
         )}
+        {(isFriend || isMe) && !!moreHeaders && (
+          <div
+            className={styles.moreHeader}
+            dangerouslySetInnerHTML={{ __html: moreHeaders }}
+          />
+        )}
+        <div className={styles.roles}>
+          <Role role={user.role} />
+          {isMe && (
+            <span className="badge text-bg-light">
+              <i className="bi bi-person-circle"></i> It&apos;s you!
+            </span>
+          )}
+          {isFriend && (
+            <span className="badge text-bg-dark">
+              <i className="bi bi-person-fill"></i> Friend
+            </span>
+          )}
+        </div>
+        {!isMe && !isFriend && (
+          <div className={styles.action}>
+            <ProfileRelationship targetUserId={user.id} />
+          </div>
+        )}
+        {isMe && (
+          <div className={styles.action}>
+            <Link
+              className="btn btn-primary"
+              href="/app/profile/edit"
+              role="button"
+            >
+              Edit your profile
+            </Link>
+          </div>
+        )}
+        <div className={styles.content}>
+          <div className={styles.about}>
+            {!!user.about && (
+              <>
+                <h3>About</h3>
+                <p>{user.about}</p>
+              </>
+            )}
+            {!!user.preference && (
+              <>
+                <h3>What I like</h3>
+                <p>{user.preference}</p>
+              </>
+            )}
+          </div>
+          {user.favorites.length > 0 && (
+            <div className={styles.favorites}>
+              <h3>Favorite games</h3>
+              {user.favorites.slice(0, 6).map((g) => (
+                <GameBox game={g} key={g.id} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-      <Role role={user.role} />
-      {!isMe && !isFriend && <ProfileRelationship targetUserId={user.id} />}
     </>
   );
 }
@@ -72,4 +122,18 @@ function getAllFriendIds(user: UserWithRelationships): string[] {
     .filter((r) => r.type === RelationshipType.FRIENDSHIP)
     .map((r) => r.senderId);
   return [...sentFriendships, ...receivedFriendships];
+}
+
+function getMoreHeaders(user: User): string | undefined {
+  if (!user.place && !user.bggName) {
+    return;
+  }
+  const headers = [];
+  if (!!user.place) {
+    headers.push(`From <strong>${user.place}</strong>`);
+  }
+  if (!!user.bggName) {
+    headers.push(`<strong>${user.bggName}</strong> on BoardGameGeek`);
+  }
+  return headers.join(" &bullet; ");
 }

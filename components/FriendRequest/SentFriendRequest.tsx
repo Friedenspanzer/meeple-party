@@ -1,5 +1,6 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { useCallback, useState } from "react";
+import Spinner from "../Spinner/Spinner";
 import GenericFriendRequest from "./GenericFriendRequest";
 
 export interface SentFriendRequestProps {
@@ -28,7 +29,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
   return (
     <GenericFriendRequest request={request} stale={stale}>
       {updating ? (
-        <div className="spinner-border spinner-border-sm" />
+        <Spinner size="small" />
       ) : (
         <button
           type="button"

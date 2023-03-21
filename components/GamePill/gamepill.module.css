@@ -1,0 +1,40 @@
+.pill {
+  --game-pill-height: 2rem;
+
+  background-color: var(--bs-dark-bg-subtle);
+  display: inline-block;
+  height: var(--game-pill-height);
+  border-radius: calc(var(--game-pill-height) / 2);
+  padding: 0;
+  padding-right: calc(var(--game-pill-height) / 2);
+  line-height: var(--game-pill-height);
+  vertical-align: middle;
+  margin: 0.25rem;
+  overflow: hidden;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.dummy {
+  -webkit-mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/300%
+    100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2.5s infinite;
+  max-width: 200px;
+  width: 50px;
+}
+
+.image {
+  height: 100%;
+  width: var(--game-pill-height);
+  object-fit: cover;
+  margin-right: 0.2rem;
+}
+
+@keyframes shimmer {
+  100% {
+    -webkit-mask-position: left;
+  }
+}

@@ -2,6 +2,7 @@
 
 import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequest";
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
+import Spinner from "@/components/Spinner/Spinner";
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { useCallback, useEffect, useState } from "react";
 
@@ -27,7 +28,7 @@ const SendFriendRequestButton: React.FC<{ profileId: string }> = ({
   }, [profileId]);
 
   return updating ? (
-    <div className="spinner-border spinner-border-sm" />
+    <Spinner size="small" />
   ) : (
     <button
       type="button"
@@ -59,7 +60,7 @@ const ProfileRelationship: React.FC<ProfileRelationshipProps> = ({
 
   return (
     <>
-      {loading && <div className="spinner-border" />}
+      {loading && <Spinner />}
       {!loading && !relationship && (
         <SendFriendRequestButton profileId={targetUserId} />
       )}
@@ -69,7 +70,7 @@ const ProfileRelationship: React.FC<ProfileRelationshipProps> = ({
       {!loading &&
         relationship?.type === RelationshipType.FRIEND_REQUEST_SENT && (
           <>
-            <h3>Your have sent a friend request</h3>
+            <h3>Your sent friend request</h3>
             <SentFriendRequest request={relationship} />
           </>
         )}
