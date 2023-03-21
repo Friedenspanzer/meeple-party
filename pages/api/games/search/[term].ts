@@ -2,7 +2,7 @@ import { prisma } from "@/db";
 import { XMLParser } from "fast-xml-parser";
 import { NextApiRequest, NextApiResponse } from "next";
 
-type SearchResult = {
+export type SearchResult = {
   id: number;
   name: string;
 };
