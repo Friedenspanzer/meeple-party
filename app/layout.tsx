@@ -9,7 +9,7 @@ import AuthProvider from "@/context/authContext";
 import UserProvider from "@/context/userContext";
 
 async function getSession(cookie: string): Promise<Session> {
-  const response = await fetch("http://localhost:3000/api/auth/session", {
+  const response = await fetch("/api/auth/session", {
     headers: {
       cookie,
     },
