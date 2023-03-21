@@ -9,7 +9,13 @@ export default withUser(async function handle(
   user: User
 ) {
   try {
-    if (req.method === "POST") {
+    if (req.method === "GET") {
+      const extendedDetails = await prisma.user.findUnique({
+        where: { id: user.id },
+        include: { favorites: true },
+      });
+      res.status(200).json(extendedDetails);
+    } else if (req.method === "POST") {
       const newUserDetails = JSON.parse(req.body);
       //TODO Validation
       await prisma.user.update({

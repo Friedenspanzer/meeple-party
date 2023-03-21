@@ -1,10 +1,12 @@
 "use client";
 
+import GamePill from "@/components/GamePill/GamePill";
 import Spinner from "@/components/Spinner/Spinner";
 import { useUser } from "@/context/userContext";
+import { Game } from "@/datatypes/game";
 import { User } from "@prisma/client";
 import classNames from "classnames";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const EditProfile: React.FC = ({}) => {
   const { user } = useUser();
@@ -31,6 +33,8 @@ const EditProfile: React.FC = ({}) => {
   const [preferencesError, setPreferencesError] = useState<string | false>(
     false
   );
+
+  const [favorites, setFavorites] = useState<Game[] | false>(false);
 
   const [sending, setSending] = useState(false);
 
@@ -92,6 +96,12 @@ const EditProfile: React.FC = ({}) => {
       setPreferencesError(false);
     }
   }, [preferences]);
+
+  useEffect(() => {
+    fetch("/api/user")
+      .then((response) => response.json())
+      .then((u) => setFavorites(u.favorites));
+  }, [user]);
 
   return (
     <form className="grid gap-3" noValidate>
@@ -236,6 +246,22 @@ const EditProfile: React.FC = ({}) => {
           >
             {preferencesError || "Will be publicly shown to everybody."}
           </div>
+        </div>
+      </div>
+
+      <div className="row mb-4">
+        <div className="col-12">
+          <label className="form-label">Your favorite games</label>
+          <br />
+          {favorites ? (
+            <>
+              {favorites.map((f) => (
+                <GamePill game={f} key={f.id} />
+              ))}
+            </>
+          ) : (
+            <Spinner />
+          )}
         </div>
       </div>
 
