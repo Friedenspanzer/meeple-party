@@ -4,7 +4,7 @@ import { Game } from "@/datatypes/game";
 import styles from "./gamebox.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { CollectionStatus } from "@/pages/api/database/collection/[gameId]";
+import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useCallback, useEffect, useState } from "react";
 
 export interface GameBoxProps {
@@ -24,7 +24,7 @@ export default function GameBox(props: GameBoxProps) {
   const setStatus = useCallback(
     (status: CollectionStatus) => {
       setLoading(true);
-      fetch(`/api/database/collection/${game.id}`, {
+      fetch(`/api/collection/${game.id}`, {
         method: "POST",
         body: JSON.stringify(status),
       })
@@ -42,7 +42,7 @@ export default function GameBox(props: GameBoxProps) {
       setCollectionStatus(status);
     } else {
       setLoading(true);
-      fetch(`/api/database/collection/${game.id}`)
+      fetch(`/api/collection/${game.id}`)
         .then((response) => response.json())
         .then((json) => JSON.parse(json))
         .then((status: CollectionStatus) => {
