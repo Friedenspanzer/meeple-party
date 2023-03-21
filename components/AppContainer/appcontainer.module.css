@@ -1,0 +1,15 @@
+.spinner {
+  overflow: hidden;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 10rem;
+}
+
+.content {
+  max-width: 1200px;
+  min-width: 800px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 1rem 0.5rem;
+}

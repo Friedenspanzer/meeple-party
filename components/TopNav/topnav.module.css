@@ -1,0 +1,68 @@
+.menuBar {
+  background-color: var(--surface-overlay);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--bs-primary-bg-subtle);
+}
+
+
+.logo {
+}
+
+.menu {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.menu a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.menu li {
+  height: 2rem;
+  padding: 0 2rem 0 2rem;
+  border-bottom: 2px solid var(--bs-gray-600);
+}
+.menu li:hover {
+  border-bottom: 2px solid var(--bs-gray-800);
+}
+
+.active {
+  border-bottom: 2px solid var(--bs-primary) !important;
+  color: var(--bs-primary);
+}
+
+.user {
+  display: grid;
+  column-gap: 0.4rem;
+  align-items: center;
+}
+
+.avatar {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.username {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: bold;
+  line-height: 1rem;
+}
+
+.realname {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+}
+
+.usermenu {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  padding-left: 0.7rem;
+}

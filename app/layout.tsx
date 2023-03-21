@@ -1,17 +1,39 @@
 import "./globals.css";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+import "@/theme/theme.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-export default function RootLayout({
+import { headers } from "next/headers";
+import { Session } from "next-auth";
+
+import AuthProvider from "@/context/authContext";
+import UserProvider from "@/context/userContext";
+
+async function getSession(cookie: string): Promise<Session> {
+  const response = await fetch("http://localhost:3000/api/auth/session", {
+    headers: {
+      cookie,
+    },
+  });
+
+  const session = await response.json();
+
+  return Object.keys(session).length > 0 ? session : null;
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = getSession(headers().get("cookie") ?? "");
   return (
     <html lang="en">
-      <UserProvider>
-        <head />
-        <body>{children}</body>
-      </UserProvider>
+      <head />
+      <body>
+        <AuthProvider>
+          <UserProvider>{children}</UserProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }
