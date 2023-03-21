@@ -64,7 +64,9 @@ export function convertToPublicProfile(user: User): PublicUser {
     id: user.id,
     name: user.name,
     image: user.image,
-    role: user.role
+    role: user.role,
+    about: user.about,
+    preference: user.preference
   };
 }
 
