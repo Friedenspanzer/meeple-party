@@ -1,11 +1,13 @@
 .pill {
+  --game-pill-height: 2rem;
+
   background-color: var(--bs-dark-bg-subtle);
   display: inline-block;
-  height: 1.4rem;
-  border-radius: 0.7rem;
+  height: var(--game-pill-height);
+  border-radius: calc(var(--game-pill-height) / 2);
   padding: 0;
-  padding-right: 0.7rem;
-  line-height: 1.4rem;
+  padding-right: calc(var(--game-pill-height) / 2);
+  line-height: var(--game-pill-height);
   vertical-align: middle;
   margin: 0.25rem;
   overflow: hidden;
@@ -13,7 +15,6 @@
 
 .clickable {
   cursor: pointer;
-  color: red;
 }
 
 .dummy {
@@ -27,7 +28,7 @@
 
 .image {
   height: 100%;
-  width: 1.5rem;
+  width: var(--game-pill-height);
   object-fit: cover;
   margin-right: 0.2rem;
 }

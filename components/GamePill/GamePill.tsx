@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./gamepill.module.css";
 
-export interface GamePillProps extends React.HTMLAttributes<HTMLDivElement> {
+type DefaultProperties = Omit<React.HTMLAttributes<HTMLDivElement>, "onClick">;
+
+export interface GamePillProps extends DefaultProperties {
   game: number | Game;
   action?: (gameId: number) => void;
 }
@@ -29,7 +31,11 @@ const GamePill: React.FC<GamePillProps> = ({ game, action, ...props }) => {
       {!!gameData ? (
         <div
           {...props}
-          className={classNames([props.className, styles.pill])}
+          className={classNames([
+            props.className,
+            styles.pill,
+            !!action && styles.clickable,
+          ])}
           onClick={(e) => {
             if (!!action) {
               action(gameData.id);
