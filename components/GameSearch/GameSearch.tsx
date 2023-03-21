@@ -2,6 +2,7 @@ import { SearchResult } from "@/pages/api/games/search/[term]";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import Spinner from "../Spinner/Spinner";
 import styles from "./gamesearch.module.css";
 
 export interface GameSearchChildren {
@@ -51,7 +52,7 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
             setTerm(e.currentTarget.value);
           }}
         />
-        {dirty && <div className="spinner-border spinner-border-sm" />}
+        {dirty && <Spinner size="small" />}
       </div>
       {!dirty && !!result && resultView({ searchResult: result })}
     </>

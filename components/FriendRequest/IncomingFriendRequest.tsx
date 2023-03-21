@@ -1,5 +1,6 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { useCallback, useState } from "react";
+import Spinner from "../Spinner/Spinner";
 import GenericFriendRequest from "./GenericFriendRequest";
 
 export interface IncomingFriendRequestProps {
@@ -41,7 +42,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
   return (
     <GenericFriendRequest request={request} stale={stale}>
       {updating ? (
-        <div className="spinner-border spinner-border-sm" />
+        <Spinner size="small" />
       ) : (
         <div className="btn-group" role="group">
           <button

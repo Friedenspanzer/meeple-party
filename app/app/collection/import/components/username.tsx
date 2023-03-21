@@ -1,3 +1,4 @@
+import Spinner from "@/components/Spinner/Spinner";
 import { useUser } from "@/context/userContext";
 import { useContext, useState } from "react";
 
@@ -52,7 +53,7 @@ const Username: React.FC<UsernameProps> = (props) => {
       >
         Next{" "}
         {loading ? (
-          <div className="spinner-border spinner-border-sm" />
+          <Spinner size="small" />
         ) : (
           <i className="bi bi-caret-right-square"></i>
         )}

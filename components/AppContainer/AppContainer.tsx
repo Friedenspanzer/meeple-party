@@ -7,6 +7,7 @@ import Link from "next/link";
 import CompleteUserProfile from "../CompleteUserProfile/CompleteUserProfile";
 import TopNav from "../TopNav/TopNav";
 import styles from "./appcontainer.module.css";
+import Spinner from "../Spinner/Spinner";
 
 TimeAgo.addDefaultLocale(en);
 
@@ -20,7 +21,7 @@ const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
   if (!!loading) {
     return (
       <div className={styles.spinner}>
-        <div className="spinner-border" />
+        <Spinner />
       </div>
     );
   } else if (!user) {

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useCallback, useEffect, useState } from "react";
+import Spinner from "../Spinner/Spinner";
 
 export interface GameBoxProps {
   game: Game;
@@ -101,7 +102,7 @@ export default function GameBox(props: GameBoxProps) {
       <div className={styles.collectionStatus}>
         {loading && (
           <div className={styles.spinner}>
-            <div className="spinner-border" />
+            <Spinner />
           </div>
         )}
         {!loading && (

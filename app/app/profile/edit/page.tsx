@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/Spinner/Spinner";
 import { useUser } from "@/context/userContext";
 import { User } from "@prisma/client";
 import classNames from "classnames";
@@ -255,7 +256,7 @@ const EditProfile: React.FC = ({}) => {
           >
             {sending && (
               <>
-                <div className="spinner-border spinner-border-sm" />
+                <Spinner size="small" />
                 &nbsp;
               </>
             )}
