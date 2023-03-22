@@ -1,6 +1,7 @@
 import { prisma } from "@/db";
 import { XMLParser } from "fast-xml-parser";
 import { NextApiRequest, NextApiResponse } from "next";
+import validator from "validator";
 
 export type SearchResult = {
   id: number;
@@ -17,11 +18,14 @@ export default async function handle(
 ) {
   try {
     if (req.method === "GET") {
-      //TODO Validation
       const { term } = req.query;
+      if (!term || Array.isArray(term) || validator.isLength(term, { min: 1, max: 150 })) {
+        throw Error("Search term has an invalid format.");
+      }
+      const sanitizedTerm = validator.stripLow(validator.trim(term));
       const searchResults = await Promise.all([
-        searchInDatabase(term as string),
-        searchOnBgg(term as string),
+        searchInDatabase(sanitizedTerm),
+        searchOnBgg(sanitizedTerm),
       ]).then(mergeSearchResults);
       res.status(200).json(searchResults);
     } else {
