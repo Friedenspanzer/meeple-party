@@ -1,6 +1,7 @@
 import { Game, GameExtended } from "@/datatypes/game";
 import { XMLParser } from "fast-xml-parser";
 import { PrismaClient } from "@prisma/client";
+import entities from "entities";
 
 const prisma = new PrismaClient();
 
@@ -123,8 +124,8 @@ function checkData(boardgames: any) {
 function convertGame(boardgames: any): GameExtended {
   return {
     id: Number.parseInt(boardgames.boardgame["@_objectid"]),
-    name: getPrimaryName(boardgames.boardgame),
-    description: boardgames.boardgame.description,
+    name: entities.decodeHTML(getPrimaryName(boardgames.boardgame)),
+    description: entities.decodeHTML(boardgames.boardgame.description),
     thumbnail: boardgames.boardgame.thumbnail,
     image: boardgames.boardgame.image,
     year: boardgames.boardgame.yearpublished,
