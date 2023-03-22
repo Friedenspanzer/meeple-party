@@ -24,7 +24,7 @@ export async function fetchGames(gameIds: GameIds): Promise<Game[]> {
     .filter(
       (g) =>
         !g.updatedAt ||
-        (Date.now().valueOf() - g.updatedAt.valueOf()) / 1000 > MONTHLY
+        (Date.now().valueOf() - g.updatedAt.valueOf()) / 1000 > getUpdateInterval()
     )
     .map((g) => g.id);
 
@@ -195,5 +195,13 @@ function getWeight(bggGame: any): number {
     return 0.0;
   } else {
     return Number.parseFloat(bggGame.statistics.ratings.averageweight);
+  }
+}
+
+function getUpdateInterval() {
+  if (process.env.BGG_UPDATE_INTERVAL) {
+    return Number.parseInt(process.env.BGG_UPDATE_INTERVAL)
+  } else {
+    return MONTHLY;
   }
 }
