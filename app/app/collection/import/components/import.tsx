@@ -73,8 +73,8 @@ export default Import;
 async function changeCollectionStatus(
   gameId: number,
   own: boolean,
-  wishlist: boolean,
-  wantToPlay: boolean
+  wantToPlay: boolean,
+  wishlist: boolean
 ): Promise<ImportStep[] | undefined> {
   if (own || wantToPlay || wishlist) {
     //TODO Better error handling
