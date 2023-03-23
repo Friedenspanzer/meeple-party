@@ -26,7 +26,8 @@ const Import: React.FC<ImportProps> = (props) => {
       const gameId = head["@_objectid"];
       const own = head.status["@_own"] === "1";
       const wantToPlay = head.status["@_wanttoplay"] === "1";
-      const wishlist = head.status["@_wishlist"] === "1";
+      const wishlist =
+        head.status["@_wishlist"] === "1" || head.status["@_wanttobuy"] === "1";
       const newImportSteps = await changeCollectionStatus(
         gameId,
         own,
