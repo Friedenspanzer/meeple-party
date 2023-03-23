@@ -19,7 +19,11 @@ export default async function handle(
   try {
     if (req.method === "GET") {
       const { term } = req.query;
-      if (!term || Array.isArray(term) || validator.isLength(term, { min: 1, max: 150 })) {
+      if (
+        !term ||
+        Array.isArray(term) ||
+        !validator.isLength(term, { min: 1, max: 150 })
+      ) {
         throw Error("Search term has an invalid format.");
       }
       const sanitizedTerm = validator.stripLow(validator.trim(term));
