@@ -1,7 +1,5 @@
-import { XMLParser } from "fast-xml-parser";
 import Image from "next/image";
-import { GameExtended } from "@/datatypes/game";
-import { fetchGames, fetchGamesExtended } from "@/utility/games";
+import { fetchGames } from "@/utility/games";
 import { notFound } from "next/navigation";
 
 export default async function Game({ params }: { params: { gameId: string } }) {

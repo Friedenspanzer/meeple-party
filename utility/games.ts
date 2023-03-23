@@ -1,6 +1,7 @@
 import { Game, GameExtended } from "@/datatypes/game";
 import { XMLParser } from "fast-xml-parser";
 import { PrismaClient } from "@prisma/client";
+import { decodeHTML } from "entities";
 
 const prisma = new PrismaClient();
 
@@ -23,7 +24,8 @@ export async function fetchGames(gameIds: GameIds): Promise<Game[]> {
     .filter(
       (g) =>
         !g.updatedAt ||
-        (Date.now().valueOf() - g.updatedAt.valueOf()) / 1000 > MONTHLY
+        (Date.now().valueOf() - g.updatedAt.valueOf()) / 1000 >
+          getUpdateInterval()
     )
     .map((g) => g.id);
 
@@ -77,7 +79,7 @@ function convertForDataBase(game: GameExtended) {
     minPlayers: game.minPlayers,
     maxPlayers: game.maxPlayers,
     weight: game.weight,
-    BGGRating: game.BGGRating
+    BGGRating: game.BGGRating,
   };
 }
 
@@ -123,8 +125,8 @@ function checkData(boardgames: any) {
 function convertGame(boardgames: any): GameExtended {
   return {
     id: Number.parseInt(boardgames.boardgame["@_objectid"]),
-    name: getPrimaryName(boardgames.boardgame),
-    description: boardgames.boardgame.description,
+    name: decodeHTML(getPrimaryName(boardgames.boardgame)),
+    description: decodeHTML(boardgames.boardgame.description),
     thumbnail: boardgames.boardgame.thumbnail,
     image: boardgames.boardgame.image,
     year: boardgames.boardgame.yearpublished,
@@ -194,5 +196,13 @@ function getWeight(bggGame: any): number {
     return 0.0;
   } else {
     return Number.parseFloat(bggGame.statistics.ratings.averageweight);
+  }
+}
+
+function getUpdateInterval() {
+  if (process.env.BGG_UPDATE_INTERVAL) {
+    return Number.parseInt(process.env.BGG_UPDATE_INTERVAL);
+  } else {
+    return MONTHLY;
   }
 }

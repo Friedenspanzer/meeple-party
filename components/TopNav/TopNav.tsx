@@ -1,8 +1,11 @@
+"use client";
+
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useUser } from "@/context/userContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Avatar from "../Avatar/Avatar";
+import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
 import styles from "./topnav.module.css";
 
 export default function TopNav() {
@@ -35,7 +38,8 @@ export default function TopNav() {
                   pathname?.startsWith("/app/friends") ? styles.active : ""
                 }
               >
-                Friends
+                Friends&nbsp;
+                <FriendRequestsBadge />
               </li>
             </Link>
           </ul>
@@ -63,10 +67,7 @@ export default function TopNav() {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href={`/app/profile/edit`}
-                      className="dropdown-item"
-                    >
+                    <Link href={`/app/profile/edit`} className="dropdown-item">
                       Edit your profile
                     </Link>
                   </li>
