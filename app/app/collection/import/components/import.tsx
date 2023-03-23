@@ -77,17 +77,14 @@ async function changeCollectionStatus(
 ): Promise<ImportStep[] | undefined> {
   if (own || wantToPlay || wishlist) {
     //TODO Better error handling
-    const result: CollectionUpdate = await fetch(
-      `/api/collection/${gameId}`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          own,
-          wishlist,
-          wantToPlay,
-        } as CollectionStatus),
-      }
-    ).then((response) => response.json());
+    const result: CollectionUpdate = await fetch(`/api/collection/${gameId}`, {
+      method: "POST",
+      body: JSON.stringify({
+        own,
+        wantToPlay,
+        wishlist,
+      } as CollectionStatus),
+    }).then((response) => response.json());
     if (!result.success) {
       return;
     }
