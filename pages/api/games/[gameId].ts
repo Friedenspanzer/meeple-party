@@ -1,5 +1,4 @@
 import { fetchGames } from "@/utility/games";
-import { XMLParser } from "fast-xml-parser";
 import { NextApiRequest, NextApiResponse } from "next";
 import validator from "validator";
 
@@ -7,11 +6,6 @@ export type SearchResult = {
   id: number;
   name: string;
 };
-
-const parser = new XMLParser({
-  ignoreAttributes: false,
-});
-
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
