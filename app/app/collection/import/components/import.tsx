@@ -91,7 +91,7 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
       }
     }
     if (!!currentCollection && itemsToImport.length > 0) {
-      importNext(itemsToImport, currentCollection);
+      setTimeout(() => importNext(itemsToImport, currentCollection), 500);
     }
   }, [itemsToImport, currentCollection]);
 
