@@ -45,6 +45,7 @@ export default withUser(async function handle(
         } as CollectionStatus)
       );
     } catch (e) {
+      console.error(e);
       return res.status(500).json({ success: false, error: e });
     }
   } else if (req.method === "POST") {
@@ -52,6 +53,8 @@ export default withUser(async function handle(
       const gameId = getGameId(req);
       const parameters = JSON.parse(req.body) as CollectionStatus;
       const game = (await fetchGames(gameId))[0];
+
+      console.log(game.name, parameters);
 
       if (parameters.own || parameters.wantToPlay || parameters.wishlist) {
         await upsertStatus(gameId, user.id, parameters);
@@ -62,6 +65,7 @@ export default withUser(async function handle(
         .status(200)
         .json({ success: true, status: parameters, game } as CollectionUpdate);
     } catch (e) {
+      console.error(e);
       return res.status(500).json({ success: false, error: e });
     }
   }

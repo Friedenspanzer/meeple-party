@@ -1,0 +1,50 @@
+.importSteps {
+  width: 500px;
+  margin: auto;
+}
+
+.importStep {
+  display: flex;
+  min-height: 5rem;
+  margin-top: 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-left: calc(var(--bs-border-width) * 5) var(--bs-border-style)
+    var(--bs-border-color);
+  padding-left: 1rem;
+}
+
+.add {
+  border-left-color: var(--bs-green);
+}
+
+.change {
+  border-left-color: var(--bs-blue);
+}
+
+.remove {
+  border-left-color: var(--bs-red);
+}
+
+.picture {
+  height: 4rem;
+  width: 4rem;
+  object-fit: cover;
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+}
+
+.own {
+  color: var(--bs-green);
+}
+
+.wantToPlay {
+  color: var(--bs-blue);
+}
+
+.wishlist {
+  color: var(--bs-red);
+}

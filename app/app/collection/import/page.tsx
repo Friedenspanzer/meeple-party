@@ -9,11 +9,6 @@ import Import from "./components/import";
 
 type Step = "username" | "type" | "request" | "import" | "done";
 
-export interface ImportStep {
-  text: string;
-  operation: "added" | "removed" | "changed";
-  image: string | null;
-}
 export interface ImportConfiguration {}
 
 export default function CollectionSyncPage() {
@@ -45,7 +40,6 @@ export default function CollectionSyncPage() {
         <Import
           configuration={importConfiguration}
           bggObject={bggObject}
-          onDone={() => setStep("done")}
         />
       )}
     </>
