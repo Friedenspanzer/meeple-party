@@ -115,7 +115,7 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
         </div>
       </div>
       <div className={styles.importSteps}>
-        {importSteps.reverse().map((s) => (
+        {[...importSteps].reverse().map((s) => (
           <ImportStep step={s} key={s.text} />
         ))}
       </div>
