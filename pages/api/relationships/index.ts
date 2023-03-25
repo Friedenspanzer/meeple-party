@@ -30,6 +30,7 @@ export default withUser(async function handle(
       res.status(405).send({});
     }
   } catch (e) {
-    return res.status(500).json({ success: false, error: e });
+      console.error(e);
+      return res.status(500).json({ success: false, error: e });
   }
 });
