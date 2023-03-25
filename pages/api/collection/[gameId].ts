@@ -53,6 +53,8 @@ export default withUser(async function handle(
       const parameters = JSON.parse(req.body) as CollectionStatus;
       const game = (await fetchGames(gameId))[0];
 
+      console.log(game.name, parameters);
+
       if (parameters.own || parameters.wantToPlay || parameters.wishlist) {
         await upsertStatus(gameId, user.id, parameters);
       } else {
