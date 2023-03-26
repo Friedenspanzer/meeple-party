@@ -37,14 +37,13 @@ interface GameCollectionStatus extends CollectionStatus {
 }
 
 const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
-  const toImport = bggObject.items.item.length;
-
   const [itemsToImport, setItemsToImport] = useState<GameCollectionStatus[]>(
     []
   );
   const [currentCollection, setCurrentCollection] =
     useState<GameCollectionStatus[]>();
   const [importSteps, setImportSteps] = useState<ImportStepDefinition[]>([]);
+  const [totalNumberOfImports, setTotalNumberOfImports] = useState(0);
 
   useEffect(() => {
     async function readCollections() {
@@ -73,7 +72,9 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
       );
 
       setCurrentCollection(currentCollection);
-      setItemsToImport(mergeToChangeset(currentCollection, bggCollection));
+      const changeSet = mergeToChangeset(currentCollection, bggCollection);
+      setTotalNumberOfImports(changeSet.length);
+      setItemsToImport(changeSet);
     }
     readCollections();
   }, [bggObject.items.item]);
@@ -103,15 +104,22 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
         aria-label="Number of games to import"
         aria-valuenow={itemsToImport.length}
         aria-valuemin={0}
-        aria-valuemax={toImport}
+        aria-valuemax={totalNumberOfImports}
       >
         <div
           className="progress-bar"
           style={{
-            width: `${((toImport - itemsToImport.length) / toImport) * 100}%`,
+            width: `${
+              totalNumberOfImports > 0
+                ? ((totalNumberOfImports - itemsToImport.length) /
+                    totalNumberOfImports) *
+                  100
+                : 100
+            }%`,
           }}
         >
-          {toImport - itemsToImport.length} / {toImport}
+          {totalNumberOfImports - itemsToImport.length} / {totalNumberOfImports}
+          {totalNumberOfImports === 0 && " - Nothing to import"}
         </div>
       </div>
       <div className={styles.importSteps}>

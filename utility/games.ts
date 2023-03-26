@@ -148,9 +148,9 @@ function getPrimaryName(bggGame: any): string {
         found = name["#text"];
       }
     });
-    return found;
+    return "" + found;
   } else {
-    return bggGame.name["#text"];
+    return "" + bggGame.name["#text"];
   }
 }
 
