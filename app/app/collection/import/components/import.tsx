@@ -110,13 +110,16 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
           className="progress-bar"
           style={{
             width: `${
-              ((totalNumberOfImports - itemsToImport.length) /
-                totalNumberOfImports) *
-              100
+              totalNumberOfImports > 0
+                ? ((totalNumberOfImports - itemsToImport.length) /
+                    totalNumberOfImports) *
+                  100
+                : 100
             }%`,
           }}
         >
           {totalNumberOfImports - itemsToImport.length} / {totalNumberOfImports}
+          {totalNumberOfImports === 0 && " - Nothing to import"}
         </div>
       </div>
       <div className={styles.importSteps}>
