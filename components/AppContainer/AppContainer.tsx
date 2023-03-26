@@ -8,6 +8,7 @@ import CompleteUserProfile from "../CompleteUserProfile/CompleteUserProfile";
 import TopNav from "../TopNav/TopNav";
 import styles from "./appcontainer.module.css";
 import Spinner from "../Spinner/Spinner";
+import Footer from "../Footer/Footer";
 
 TimeAgo.addDefaultLocale(en);
 
@@ -48,6 +49,7 @@ const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
             <div className="clearfix"></div>
           </div>
         )}
+        <Footer />
       </>
     );
   }
