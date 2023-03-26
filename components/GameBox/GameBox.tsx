@@ -7,9 +7,10 @@ import Image from "next/image";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useCallback, useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
+import classNames from "classnames";
 
 export interface GameBoxProps {
-  game: Game;
+  game: Game | number;
   status?: CollectionStatus;
 }
 
@@ -21,11 +22,12 @@ export default function GameBox(props: GameBoxProps) {
     wishlist: false,
   });
   const [loading, setLoading] = useState(false);
+  const [gameData, setGameData] = useState<Game>();
 
   const setStatus = useCallback(
     (status: CollectionStatus) => {
       setLoading(true);
-      fetch(`/api/collection/${game.id}`, {
+      fetch(`/api/collection/${getGameId(game)}`, {
         method: "POST",
         body: JSON.stringify(status),
       })
@@ -35,7 +37,7 @@ export default function GameBox(props: GameBoxProps) {
         )
         .then(() => setLoading(false));
     },
-    [game.id]
+    [game]
   );
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function GameBox(props: GameBoxProps) {
       setCollectionStatus(status);
     } else {
       setLoading(true);
-      fetch(`/api/collection/${game.id}`)
+      fetch(`/api/collection/${getGameId(game)}`)
         .then((response) => response.json())
         .then((json) => JSON.parse(json))
         .then((status: CollectionStatus) => {
@@ -55,17 +57,36 @@ export default function GameBox(props: GameBoxProps) {
         })
         .then(() => setLoading(false));
     }
-  }, [setStatus, status, game.id]);
+  }, [setStatus, status, game]);
 
-  return (
+  useEffect(() => {
+    if (typeof game === "number") {
+      fetch(`/api/games/${game}`)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw Error(`${response.status} ${response.statusText}`);
+          }
+        })
+        .then(setGameData)
+        .catch((reason) => {
+          throw Error(`Error loading data for game ${game}. Reason: ${reason}`);
+        });
+    } else {
+      setGameData(game);
+    }
+  }, [game]);
+
+  return gameData ? (
     <div className={`${styles.gamebox}`}>
       <div className={styles.imageBox}>
-        <Link href={`/app/game/${game.id}`}>
-          {!!game.image && (
+        <Link href={`/app/game/${gameData.id}`}>
+          {!!gameData.image && (
             <Image
-              src={game.image}
+              src={gameData.image}
               className={`card-img-top ${styles.image}`}
-              alt={game.name}
+              alt={gameData.name}
               width="200"
               height="150"
             />
@@ -74,28 +95,28 @@ export default function GameBox(props: GameBoxProps) {
       </div>
       <div className={styles.title}>
         <h3 className="card-title">
-          <Link href={`/app/game/${game.id}`}>{game.name}</Link>
+          <Link href={`/app/game/${gameData.id}`}>{gameData.name}</Link>
         </h3>
       </div>
       <div className={styles.info}>
         <div className={styles.infoBox}>
           <div className={styles.metric}>
-            {game.minPlayers === game.maxPlayers ? (
-              game.minPlayers
+            {gameData.minPlayers === gameData.maxPlayers ? (
+              gameData.minPlayers
             ) : (
               <>
-                {game.minPlayers}-{game.maxPlayers}
+                {gameData.minPlayers}-{gameData.maxPlayers}
               </>
             )}
           </div>
           <div className={styles.label}>Players</div>
         </div>
         <div className={styles.infoBox}>
-          <div className={styles.metric}>{game.playingTime}</div>
+          <div className={styles.metric}>{gameData.playingTime}</div>
           <div className={styles.label}>Playing time</div>
         </div>
         <div className={styles.infoBox}>
-          <div className={styles.metric}>{round(game.weight)}</div>
+          <div className={styles.metric}>{round(gameData.weight)}</div>
           <div className={styles.label}>Weight</div>
         </div>
       </div>
@@ -156,7 +177,16 @@ export default function GameBox(props: GameBoxProps) {
         )}
       </div>
     </div>
+  ) : (
+    <div className={classNames(styles.gamebox, "shimmer")} />
   );
+}
+
+function getGameId(game: Game | number) {
+  if (typeof game === "number") {
+    return game;
+  }
+  return game.id;
 }
 
 function round(x: number): number {
