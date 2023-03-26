@@ -41,4 +41,7 @@ $danger: #e72330;
 @import "../node_modules/bootstrap/scss/transitions";
 
 // Customizing
-@import "./custom/forms"
+@import "./custom/forms";
+
+// Own styles
+@import "./shimmer.scss";

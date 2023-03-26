@@ -11,19 +11,11 @@
   vertical-align: middle;
   margin: 0.25rem;
   overflow: hidden;
+  min-width: 50px;
 }
 
 .clickable {
   cursor: pointer;
-}
-
-.dummy {
-  -webkit-mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/300%
-    100%;
-  background-repeat: no-repeat;
-  animation: shimmer 2.5s infinite;
-  max-width: 200px;
-  width: 50px;
 }
 
 .image {
@@ -31,10 +23,4 @@
   width: var(--game-pill-height);
   object-fit: cover;
   margin-right: 0.2rem;
-}
-
-@keyframes shimmer {
-  100% {
-    -webkit-mask-position: left;
-  }
 }

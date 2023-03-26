@@ -61,7 +61,7 @@ const GamePill: React.FC<GamePillProps> = ({
           {children}
         </div>
       ) : (
-        <div className={classNames(styles.pill, styles.dummy)} />
+        <div className={classNames(styles.pill, "shimmer")} />
       )}
     </>
   );
