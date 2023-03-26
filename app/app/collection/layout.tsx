@@ -11,11 +11,11 @@ const CollectionLayout: React.FC<CollectionLayoutProps> = ({ children }) => {
     <>
       <NavigationBar>
         <NavigationItem href="/app/collection">Owned</NavigationItem>
-        <NavigationItem href="/app/collection/wishlist">
-          Wishlist
-        </NavigationItem>
         <NavigationItem href="/app/collection/wanttoplay">
           Want To Play
+        </NavigationItem>
+        <NavigationItem href="/app/collection/wishlist">
+          Wishlist
         </NavigationItem>
         <NavigationItem href="/app/collection/import">
           Import from BoardGameGeek
