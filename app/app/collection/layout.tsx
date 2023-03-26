@@ -17,6 +17,7 @@ const CollectionLayout: React.FC<CollectionLayoutProps> = ({ children }) => {
         <NavigationItem href="/app/collection/wishlist">
           Wishlist
         </NavigationItem>
+        <NavigationItem href="/app/collection/search">Search</NavigationItem>
         <NavigationItem href="/app/collection/import">
           Import from BoardGameGeek
         </NavigationItem>

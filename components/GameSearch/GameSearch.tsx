@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchResult } from "@/pages/api/games/search/[term]";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
