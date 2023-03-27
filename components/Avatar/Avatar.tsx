@@ -1,15 +1,18 @@
 import classNames from "classnames";
 import Image from "next/image";
+import { CSSProperties } from "react";
 import styles from "./avatar.module.css";
 
 export default function Avatar({
   image,
   name,
   className,
+  style,
 }: {
   image?: string | null;
   name: string;
   className?: string;
+  style?: CSSProperties;
 }) {
   if (!!image) {
     return (
@@ -19,6 +22,7 @@ export default function Avatar({
         height="40"
         alt={!!name ? name : "User avatar"}
         className={classNames([styles.image, className])}
+        style={style}
       />
     );
   } else {
@@ -26,7 +30,10 @@ export default function Avatar({
     return (
       <div
         className={classNames([styles.dummy, className])}
-        style={{ backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})` }}
+        style={{
+          ...style,
+          backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
+        }}
       >
         {name[0]}
       </div>
