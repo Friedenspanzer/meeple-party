@@ -1,5 +1,4 @@
 .image {
-  --avatar-size: 40px;
   width: var(--avatar-size);
   height: var(--avatar-size);
   object-fit: cover;
@@ -9,7 +8,6 @@
 }
 
 .dummy {
-  --avatar-size: 40px;
   width: var(--avatar-size);
   height: var(--avatar-size);
   border-radius: calc(var(--avatar-size) / 2);
