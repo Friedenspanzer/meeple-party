@@ -2,12 +2,15 @@ import classNames from "classnames";
 import Image from "next/image";
 import styles from "./avatar.module.css";
 
-export default function Avatar(props: {
-  image: string | null;
+export default function Avatar({
+  image,
+  name,
+  className,
+}: {
+  image?: string | null;
   name: string;
   className?: string;
 }) {
-  const { image, name, className } = props;
   if (!!image) {
     return (
       <Image
