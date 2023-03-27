@@ -10,13 +10,15 @@ export default async function Collection() {
   });
   return (
     <>
-      {gameCollection.map((g) => {
-        const { updatedAt, ...cleanGame } = g.game;
-        const { game, ...cleanStatus } = g;
-        return (
-          <GameBox game={cleanGame} status={cleanStatus} key={cleanGame.id} />
-        );
-      })}
+      {gameCollection
+        .sort((a, b) => a.game.name > b.game.name ? 1 : -1)
+        .map((g) => {
+          const { updatedAt, ...cleanGame } = g.game;
+          const { game, ...cleanStatus } = g;
+          return (
+            <GameBox game={cleanGame} status={cleanStatus} key={cleanGame.id} />
+          );
+        })}
     </>
   );
 }
