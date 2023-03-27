@@ -1,18 +1,23 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
-import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Spinner from "@/components/Spinner/Spinner";
+import Image from "next/image";
 
 export default function Home() {
   const { data: session, status } = useSession();
   return (
     <>
       <div className={styles.frontpageContainer}>
-        <h1>Meeple Party</h1>
+        <Image
+          src="/logo.svg"
+          width={500}
+          height={500}
+          alt="Meeple Party"
+        />
         <p>
           Meeple Party is currently in closed Alpha. If you received an invite
           go on and register an account and then ask the administrator to unlock

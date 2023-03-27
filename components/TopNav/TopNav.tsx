@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import Avatar from "../Avatar/Avatar";
 import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
 import styles from "./topnav.module.css";
+import Image from "next/image";
 
 export default function TopNav() {
   const pathname = usePathname();
@@ -16,7 +17,13 @@ export default function TopNav() {
     <>
       {!!user && (
         <nav className={styles.menuBar}>
-          <div className={styles.logo}>Meeple Party!</div>
+          <Image
+            src="/logo.svg"
+            width={100}
+            height={100}
+            alt="Meeple Party"
+            className={styles.logo}
+          />
           <ul className={styles.menu} style={{ marginBottom: 0 }}>
             <Link href="/app">
               <li className={pathname === "/app" ? styles.active : ""}>
