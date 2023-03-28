@@ -52,7 +52,7 @@ function getColor(name: string) {
 function hashCode(str: string): number {
   var h: number = 0;
   for (var i = 0; i < str.length; i++) {
-    h = 31 * h + str.charCodeAt(i);
+    h = (h + 6700417 * str.charCodeAt(i)) & 0xffffff;
   }
-  return h & 0xffffffff;
+  return h;
 }
