@@ -38,6 +38,26 @@ export default async function Game({ params }: { params: { gameId: string } }) {
               />
               <h2 className={styles.gameName}>{game.name}</h2>
               <span className={styles.gameYear}>{game.year}</span>
+              {game.designers.length > 0 && (
+                <div className={classNames(styles.staff, styles.design)}>
+                  <h3>Design</h3>
+                  <ul>
+                    {[...game.designers].reverse().map((d) => (
+                      <li key={d}>{d}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {game.artists.length > 0 && (
+                <div className={classNames(styles.staff, styles.art)}>
+                  <h3>Art</h3>
+                  <ul>
+                    {[...game.artists].reverse().map((d) => (
+                      <li key={d}>{d}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <div
                 className={classNames(
                   styles.playerCount,
