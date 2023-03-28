@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { fetchGames } from "@/utility/games";
 import { notFound } from "next/navigation";
 import styles from "./gamepage.module.css";
 import classNames from "classnames";
+import { getBggGame } from "@/utility/bgg";
 
 export default async function Game({ params }: { params: { gameId: string } }) {
   const id = Number.parseInt(params.gameId);
@@ -10,10 +10,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
     notFound();
   }
   try {
-    const [game, ...otherGames] = await fetchGames(id);
-    if (otherGames.length > 0) {
-      throw Error(`Error fetching data for game ${id}`);
-    }
+    const game = await getBggGame(id);
     return (
       <div className={styles.container}>
         <div className={styles.header}>
@@ -71,5 +68,5 @@ export default async function Game({ params }: { params: { gameId: string } }) {
 }
 
 function round(i: number): number {
-  return Math.round(i*10)/10;
+  return Math.round(i * 10) / 10;
 }

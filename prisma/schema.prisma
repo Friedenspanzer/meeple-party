@@ -75,7 +75,8 @@ model Game {
   minPlayers  Int
   maxPlayers  Int
   weight      Float            @default(3)
-  BGGRating   Float            @default(5)
+  BGGRating   Float?
+  BGGRank     Int?
   updatedAt   DateTime?        @updatedAt
   users       GameCollection[]
   favoritedBy User[]

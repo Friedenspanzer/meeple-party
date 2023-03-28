@@ -16,7 +16,7 @@ export default async function handle(
       if (!gameId || Array.isArray(gameId) || !validator.isInt(gameId)) {
         throw new Error("Error parsing game id.");
       }
-      const games = await fetchGames(validator.toInt(gameId));
+      const games = await fetchGames([validator.toInt(gameId)]);
       if (!games || games.length === 0) {
         throw new Error("No game with that ID found");
       }
