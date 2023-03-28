@@ -5,9 +5,11 @@
   align-items: center;
   padding: 0.5rem;
   background-color: var(--bs-primary-bg-subtle);
+  height: var(--header-height);
 }
 
 .logo {
+  height: calc(var(--header-height) - 1rem);
 }
 
 .menu {

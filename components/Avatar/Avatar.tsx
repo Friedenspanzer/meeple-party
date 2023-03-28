@@ -1,13 +1,19 @@
 import classNames from "classnames";
 import Image from "next/image";
+import { CSSProperties } from "react";
 import styles from "./avatar.module.css";
 
-export default function Avatar(props: {
-  image: string | null;
+export default function Avatar({
+  image,
+  name,
+  className,
+  style,
+}: {
+  image?: string | null;
   name: string;
   className?: string;
+  style?: CSSProperties;
 }) {
-  const { image, name, className } = props;
   if (!!image) {
     return (
       <Image
@@ -16,6 +22,7 @@ export default function Avatar(props: {
         height="40"
         alt={!!name ? name : "User avatar"}
         className={classNames([styles.image, className])}
+        style={style}
       />
     );
   } else {
@@ -23,7 +30,10 @@ export default function Avatar(props: {
     return (
       <div
         className={classNames([styles.dummy, className])}
-        style={{ backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})` }}
+        style={{
+          ...style,
+          backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
+        }}
       >
         {name[0]}
       </div>
@@ -42,7 +52,7 @@ function getColor(name: string) {
 function hashCode(str: string): number {
   var h: number = 0;
   for (var i = 0; i < str.length; i++) {
-    h = 31 * h + str.charCodeAt(i);
+    h = (h + 6700417 * str.charCodeAt(i)) & 0xffffff;
   }
-  return h & 0xffffffff;
+  return h;
 }

@@ -13,5 +13,5 @@
   min-width: 800px;
   min-height: 100vh;
   margin: auto;
-  padding: 1rem 0.5rem;
+  padding: var(--content-padding-top) 0.5rem;
 }

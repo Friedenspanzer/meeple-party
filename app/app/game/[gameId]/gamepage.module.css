@@ -1,0 +1,162 @@
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 0.5rem;
+}
+
+.header {
+  width: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  z-index: 2;
+  -webkit-transform: translate3d(0, 0, 0);
+  grid-row: 1;
+  grid-column: 1 / span 2;
+}
+
+.headerImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(5px) brightness(80%);
+  transform: scale(1.1);
+  object-fit: cover;
+  z-index: 1;
+}
+
+.headerContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 500px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.titleImage {
+  max-width: 200px;
+  height: 100%;
+}
+
+.headerInformation {
+  flex-grow: 1;
+  display: grid;
+  align-items: end;
+  background-color: rgba(75, 15, 138, 0.5);
+  color: rgba(250, 250, 250);
+  padding: 0.5rem;
+  gap: 0 1rem;
+  grid-template-columns: min-content 1fr max-content max-content max-content;
+  grid-template-rows: min-content 1.5rem;
+}
+
+.rating {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+}
+
+.gameName {
+  margin: 0;
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.gameYear {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.design {
+  grid-row: 1 / span 2;
+  grid-column: 3;
+}
+
+.staff {
+  display: flex;
+  align-items: flex-end;
+}
+
+.staff h3 {
+  font-size: 1rem;
+  margin: 0;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+.staff ul {
+  font-size: 0.9rem;
+  list-style-type: none;
+  font-weight: lighter;
+  padding: 0;
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
+.art {
+  grid-row: 1 / span 2;
+  grid-column: 4;
+}
+
+.playerCount {
+  grid-row: 1 / span 2;
+  grid-column: 5;
+}
+
+.playingTime {
+  grid-row: 1 / span 2;
+  grid-column: 6;
+}
+
+.weight {
+  grid-row: 1 / span 2;
+  grid-column: 7;
+}
+
+.additionalInfo {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: bold;
+  align-items: center;
+}
+
+.additionalInfo h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.additionalInfo small {
+  font-size: 0.6rem;
+  font-weight: lighter;
+}
+
+.description {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.meta {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.group {
+  margin-bottom: 0.5rem;
+}
+
+.group a {
+  text-decoration: none;
+}
+
+.avatar {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}

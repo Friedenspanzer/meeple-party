@@ -1,30 +1,41 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
-import Image from "next/image";
-import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-
-const inter = Inter({ subsets: ["latin"] });
+import Spinner from "@/components/Spinner/Spinner";
+import Image from "next/image";
 
 export default function Home() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   return (
     <>
-      <p>Public Meeple Party Front Page</p>
-      {!!session?.user && (
+      <div className={styles.frontpageContainer}>
+        <Image
+          src="/logo.svg"
+          width={500}
+          height={500}
+          alt="Meeple Party"
+        />
         <p>
-          {session.user.name} <a href="/api/auth/signout">Logout</a>{" "}
-          <Link href="/app">Go to app</Link>
+          Meeple Party is currently in closed Alpha. If you received an invite
+          go on and register an account and then ask the administrator to unlock
+          your account.
         </p>
-      )}
-      {!session?.user && (
-        <p>
-          <a href="/api/auth/signin">Login</a>
-        </p>
-      )}
+        {status === "authenticated" && !!session.user && (
+          <>
+            <strong>Logged in as {session.user.name}</strong>
+            <Link href="/app">Go to app</Link>
+            <br />
+            <a href="/api/auth/signout">Logout</a>
+          </>
+        )}
+        {status === "unauthenticated" && (
+          <a href="/api/auth/signin">Login/Register</a>
+        )}
+        {status === "loading" && <Spinner />}
+      </div>
     </>
   );
 }
