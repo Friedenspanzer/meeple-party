@@ -85,6 +85,10 @@ export default async function Game({ params }: { params: { gameId: string } }) {
             </div>
           </div>
         </div>
+        <div
+          className={styles.description}
+          dangerouslySetInnerHTML={{ __html: game.description }}
+        ></div>
       </div>
     );
   } catch (e) {
