@@ -170,7 +170,6 @@ function getArtists(bggGame: any): string[] {
   } else if (Array.isArray(bggGame.boardgameartist)) {
     return bggGame.boardgameartist.map((artist: any) => artist["#text"]);
   } else {
-    console.log(bggGame.boardgameartist);
     return [bggGame.boardgameartist["#text"]];
   }
 }
