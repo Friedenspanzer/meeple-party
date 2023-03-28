@@ -8,6 +8,7 @@ import { getCollectionStatusOfFriends } from "@/selectors/collections";
 import { getServerUser } from "@/utility/serverSession";
 import Avatar from "@/components/Avatar/Avatar";
 import Link from "next/link";
+import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
 
 export default async function Game({ params }: { params: { gameId: string } }) {
   const id = Number.parseInt(params.gameId);
@@ -96,9 +97,13 @@ export default async function Game({ params }: { params: { gameId: string } }) {
           dangerouslySetInnerHTML={{ __html: game.description }}
         ></div>
         <div className={styles.meta}>
+          <h3>Your collection</h3>
+          <div className={styles.group}>
+            <CollectionStatusButtons gameId={game.id} />
+          </div>
           {friendCollections.own.length > 0 && (
             <div className={styles.group}>
-              <h3>Own</h3>
+              <h3>Owned by</h3>
               {friendCollections.own.map((c) => (
                 <Link href={`/app/profile/${c.id}`} key={c.id}>
                   <Avatar
