@@ -4,6 +4,10 @@ import styles from "./gamepage.module.css";
 import classNames from "classnames";
 import { getBggGame } from "@/utility/bgg";
 import BggRating from "@/components/BggRating/BggRating";
+import { getCollectionStatusOfFriends } from "@/selectors/collections";
+import { getServerUser } from "@/utility/serverSession";
+import Avatar from "@/components/Avatar/Avatar";
+import Link from "next/link";
 
 export default async function Game({ params }: { params: { gameId: string } }) {
   const id = Number.parseInt(params.gameId);
@@ -11,7 +15,9 @@ export default async function Game({ params }: { params: { gameId: string } }) {
     notFound();
   }
   try {
+    const user = await getServerUser();
     const game = await getBggGame(id);
+    const friendCollections = await getCollectionStatusOfFriends(id, user.id);
     return (
       <div className={styles.container}>
         <div className={styles.header}>
@@ -89,6 +95,50 @@ export default async function Game({ params }: { params: { gameId: string } }) {
           className={styles.description}
           dangerouslySetInnerHTML={{ __html: game.description }}
         ></div>
+        <div className={styles.meta}>
+          {friendCollections.own.length > 0 && (
+            <div className={styles.group}>
+              <h3>Own</h3>
+              {friendCollections.own.map((c) => (
+                <Link href={`/app/profile/${c.id}`} key={c.id}>
+                  <Avatar
+                    name={c.name || ""}
+                    image={c.image}
+                    className={styles.avatar}
+                  />
+                </Link>
+              ))}
+            </div>
+          )}
+          {friendCollections.wantToPlay.length > 0 && (
+            <div className={styles.group}>
+              <h3>Want to play</h3>
+              {friendCollections.wantToPlay.map((c) => (
+                <Link href={`/app/profile/${c.id}`} key={c.id}>
+                  <Avatar
+                    name={c.name || ""}
+                    image={c.image}
+                    className={styles.avatar}
+                  />
+                </Link>
+              ))}
+            </div>
+          )}
+          {friendCollections.wishlist.length > 0 && (
+            <div className={styles.group}>
+              <h3>Wishlist</h3>
+              {friendCollections.wishlist.map((c) => (
+                <Link href={`/app/profile/${c.id}`} key={c.id}>
+                  <Avatar
+                    name={c.name || ""}
+                    image={c.image}
+                    className={styles.avatar}
+                  />
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
   } catch (e) {
