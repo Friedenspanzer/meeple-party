@@ -1,0 +1,97 @@
+.container {
+  position: relative;
+  top: calc(var(--content-padding-top) * -1);
+}
+
+.header {
+  width: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  z-index: 2;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.headerImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(10px) brightness(80%);
+  transform: scale(1.1);
+  object-fit: cover;
+  z-index: 1;
+}
+
+.headerContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 500px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.titleImage {
+  max-width: 200px;
+  height: 100%;
+}
+
+.headerInformation {
+  flex-grow: 1;
+  display: grid;
+  align-items: flex-end;
+  justify-content: space-between;
+  background-color: rgba(75, 15, 138, 0.5);
+  color: rgba(250, 250, 250);
+  padding: 0.5rem;
+}
+
+.gameName {
+  margin: 0;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.gameYear {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.playerCount {
+  grid-row: 1 / span 2;
+  grid-column: 3;
+}
+
+.playingTime {
+  grid-row: 1 / span 2;
+  grid-column: 4;
+}
+
+.weight {
+  grid-row: 1 / span 2;
+  grid-column: 5;
+}
+
+.additionalInfo {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: bold;
+  align-items: center;
+}
+
+.additionalInfo h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.additionalInfo small {
+  font-size: 0.6rem;
+  font-weight: lighter;
+}
