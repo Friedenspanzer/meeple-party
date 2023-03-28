@@ -5,12 +5,12 @@ import styles from "./gamebox.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
-import { useCallback, useEffect, useState } from "react";
-import Spinner from "../Spinner/Spinner";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import Avatar from "../Avatar/Avatar";
-import { StatusByUser } from "@/pages/api/collection/friends/byGame/[gameId]";
+import { StatusByUser } from "@/datatypes/collection";
 import { PrivateUser } from "@/datatypes/userProfile";
+import CollectionStatusButtons from "../CollectionStatusButtons/CollectionStatusButtons";
 
 export interface GameBoxProps {
   game: Game | number;
@@ -19,49 +19,8 @@ export interface GameBoxProps {
 
 export default function GameBox(props: GameBoxProps) {
   const { game, status } = props;
-  const [collectionStatus, setCollectionStatus] = useState<CollectionStatus>({
-    own: false,
-    wantToPlay: false,
-    wishlist: false,
-  });
-  const [loading, setLoading] = useState(false);
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
-
-  const setStatus = useCallback(
-    (status: CollectionStatus) => {
-      setLoading(true);
-      fetch(`/api/collection/${getGameId(game)}`, {
-        method: "POST",
-        body: JSON.stringify(status),
-      })
-        .then(() =>
-          //TODO Error handling
-          setCollectionStatus(status)
-        )
-        .then(() => setLoading(false));
-    },
-    [game]
-  );
-
-  useEffect(() => {
-    if (!!status) {
-      setCollectionStatus(status);
-    } else {
-      setLoading(true);
-      fetch(`/api/collection/${getGameId(game)}`)
-        .then((response) => response.json())
-        .then((json) => JSON.parse(json))
-        .then((status: CollectionStatus) => {
-          setCollectionStatus({
-            own: status.own || false,
-            wantToPlay: status.wantToPlay || false,
-            wishlist: status.wishlist || false,
-          });
-        })
-        .then(() => setLoading(false));
-    }
-  }, [setStatus, status, game]);
 
   useEffect(() => {
     fetch(`/api/collection/friends/byGame/${getGameId(game)}`)
@@ -142,62 +101,7 @@ export default function GameBox(props: GameBoxProps) {
             <div className={styles.label}>Weight</div>
           </div>
         </div>
-        <div className={styles.collectionStatus}>
-          {loading && (
-            <div className={styles.spinner}>
-              <Spinner />
-            </div>
-          )}
-          {!loading && (
-            <>
-              <button
-                className={
-                  styles.collectionStatusButton +
-                  " " +
-                  (collectionStatus.own && styles.own)
-                }
-                onClick={() =>
-                  setStatus({
-                    ...collectionStatus,
-                    own: !collectionStatus.own,
-                  })
-                }
-              >
-                <i className="bi bi-box-seam-fill"></i>
-              </button>
-              <button
-                className={
-                  styles.collectionStatusButton +
-                  " " +
-                  (collectionStatus.wantToPlay && styles.wantToPlay)
-                }
-                onClick={() =>
-                  setStatus({
-                    ...collectionStatus,
-                    wantToPlay: !collectionStatus.wantToPlay,
-                  })
-                }
-              >
-                <i className="bi bi-dice-3-fill"></i>
-              </button>
-              <button
-                className={
-                  styles.collectionStatusButton +
-                  " " +
-                  (collectionStatus.wishlist && styles.wishlist)
-                }
-                onClick={() =>
-                  setStatus({
-                    ...collectionStatus,
-                    wishlist: !collectionStatus.wishlist,
-                  })
-                }
-              >
-                <i className="bi bi-gift-fill"></i>
-              </button>{" "}
-            </>
-          )}
-        </div>
+        <CollectionStatusButtons gameId={getGameId(game)} status={status} className={styles.collectionbuttons} />
       </div>
       {friendCollections && (
         <Link href={`/app/game/${gameData.id}`} className={styles.friends}>

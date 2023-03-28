@@ -1,0 +1,37 @@
+.collectionStatus {
+  height: 40px;
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.collectionStatusButton {
+  width: calc(100% / 3);
+  height: 100%;
+  border: 0;
+  text-align: center;
+  background-color: transparent;
+}
+
+.collectionStatusButton:hover {
+  font-weight: bold;
+  /* background-color: var(--bs-gray-200); */
+}
+
+.collectionStatusButton i {
+  break-after: always;
+  font-size: 1.5rem;
+}
+
+.own {
+  color: var(--bs-green);
+}
+
+.wantToPlay {
+  color: var(--bs-blue);
+}
+
+.wishlist {
+  color: var(--bs-red);
+}
