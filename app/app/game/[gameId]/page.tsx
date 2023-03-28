@@ -17,8 +17,8 @@ export default async function Game({ params }: { params: { gameId: string } }) {
         <div className={styles.header}>
           <Image
             src={game.image || ""}
-            width={1200}
-            height={400}
+            width={600}
+            height={200}
             alt={game.name}
             className={styles.headerImage}
           />
