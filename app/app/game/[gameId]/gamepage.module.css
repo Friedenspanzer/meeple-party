@@ -9,6 +9,8 @@
   overflow: hidden;
   z-index: 2;
   -webkit-transform: translate3d(0, 0, 0);
+  grid-row: 1;
+  grid-column: 1 / span 2;
 }
 
 .headerImage {
@@ -44,22 +46,28 @@
 .headerInformation {
   flex-grow: 1;
   display: grid;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: center;
   background-color: rgba(75, 15, 138, 0.5);
   color: rgba(250, 250, 250);
   padding: 0.5rem;
+  gap: 0 1rem;
+  grid-template-columns: min-content 1fr max-content max-content max-content;
+}
+
+.rating {
+  grid-row: 1 / span 2;
+  grid-column: 1;
 }
 
 .gameName {
   margin: 0;
   grid-row: 1;
-  grid-column: 1;
+  grid-column: 2;
 }
 
 .gameYear {
   grid-row: 2;
-  grid-column: 1;
+  grid-column: 2;
 }
 
 .playerCount {

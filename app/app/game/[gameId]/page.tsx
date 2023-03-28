@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import styles from "./gamepage.module.css";
 import classNames from "classnames";
 import { getBggGame } from "@/utility/bgg";
+import BggRating from "@/components/BggRating/BggRating";
 
 export default async function Game({ params }: { params: { gameId: string } }) {
   const id = Number.parseInt(params.gameId);
@@ -30,6 +31,11 @@ export default async function Game({ params }: { params: { gameId: string } }) {
               className={styles.titleImage}
             />
             <div className={styles.headerInformation}>
+              <BggRating
+                rating={game.BGGRating}
+                rank={game.BGGRank}
+                className={styles.rating}
+              />
               <h2 className={styles.gameName}>{game.name}</h2>
               <span className={styles.gameYear}>{game.year}</span>
               <div
