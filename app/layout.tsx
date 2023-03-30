@@ -5,6 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import AuthProvider from "@/context/authContext";
 import UserProvider from "@/context/userContext";
 import Script from "next/script";
+import Analytics from "@/components/Analytics/Analytics";
 
 export const metadata = {
   title: {
@@ -26,6 +27,7 @@ export default async function RootLayout({
         <AuthProvider>
           <UserProvider>{children}</UserProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
