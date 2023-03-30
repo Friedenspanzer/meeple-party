@@ -11,10 +11,12 @@ export default async function Collection() {
   });
   return (
     <GameCollection
-      games={gameCollection.map(({ game, own, wantToPlay, wishlist }) => ({
-        game: cleanGame(game),
-        status: { own, wantToPlay, wishlist },
-      }))}
+      games={gameCollection
+        .sort((a, b) => (a.game.name > b.game.name ? 1 : -1))
+        .map(({ game, own, wantToPlay, wishlist }) => ({
+          game: cleanGame(game),
+          status: { own, wantToPlay, wishlist },
+        }))}
     />
   );
 }
