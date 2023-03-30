@@ -1,6 +1,7 @@
-import GameBox from "@/components/GameBox/GameBox";
+import GameCollection from "@/components/GameCollection/GameCollection";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
+import { Game } from "@prisma/client";
 
 export default async function Collection() {
   const user = await getServerUser();
@@ -9,16 +10,16 @@ export default async function Collection() {
     include: { game: true },
   });
   return (
-    <>
-      {gameCollection
-        .sort((a, b) => (a.game.name > b.game.name ? 1 : -1))
-        .map((g) => {
-          const { updatedAt, ...cleanGame } = g.game;
-          const { game, ...cleanStatus } = g;
-          return (
-            <GameBox game={cleanGame} status={cleanStatus} key={cleanGame.id} />
-          );
-        })}
-    </>
+    <GameCollection
+      games={gameCollection.map(({ game, own, wantToPlay, wishlist }) => ({
+        game: cleanGame(game),
+        status: { own, wantToPlay, wishlist },
+      }))}
+    />
   );
+}
+
+function cleanGame(game: Game) {
+  const { updatedAt, ...cleanGame } = game;
+  return cleanGame;
 }
