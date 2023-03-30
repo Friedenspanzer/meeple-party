@@ -17,6 +17,7 @@ export default async function Collection() {
           game: cleanGame(game),
           status: { own, wantToPlay, wishlist },
         }))}
+        showFriendCollection={true}
     />
   );
 }

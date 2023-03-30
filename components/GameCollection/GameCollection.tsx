@@ -14,7 +14,7 @@ export interface GameCollectionProps
 
 const GameCollection: React.FC<GameCollectionProps> = ({
   games,
-  showFriendCollection = false, //TODO beachten
+  showFriendCollection = false,
   children,
   ...props
 }) => {
@@ -23,7 +23,12 @@ const GameCollection: React.FC<GameCollectionProps> = ({
       {children}
       <div>
         {games.map(({ game, status }) => (
-          <GameBox game={game} status={status} key={getGameId(game)} />
+          <GameBox
+            game={game}
+            status={status}
+            key={getGameId(game)}
+            showFriendCollection={showFriendCollection}
+          />
         ))}
       </div>
     </div>

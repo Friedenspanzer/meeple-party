@@ -15,10 +15,10 @@ import CollectionStatusButtons from "../CollectionStatusButtons/CollectionStatus
 export interface GameBoxProps {
   game: Game | number;
   status?: CollectionStatus;
+  showFriendCollection?: boolean
 }
 
-export default function GameBox(props: GameBoxProps) {
-  const { game, status } = props;
+export default function GameBox({ game, status, showFriendCollection = false }: GameBoxProps) {
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
 
@@ -103,7 +103,7 @@ export default function GameBox(props: GameBoxProps) {
         </div>
         <CollectionStatusButtons gameId={getGameId(game)} status={status} className={styles.collectionbuttons} />
       </div>
-      {friendCollections && (
+      {showFriendCollection && friendCollections && (
         <Link href={`/app/game/${gameData.id}`} className={styles.friends}>
           <div className={styles.collection}>
             <UserList users={friendCollections.own} />
