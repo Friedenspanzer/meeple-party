@@ -7,6 +7,7 @@ import {
 import { Game } from "@/datatypes/game";
 import { getAllGamesOfFriends, getCollection } from "@/selectors/collections";
 import { getServerUser } from "@/utility/serverSession";
+import styles from "./dashboard.module.css";
 
 export default async function App() {
   const user = await getServerUser();
@@ -15,16 +16,29 @@ export default async function App() {
   const collectedGames = myGameCollection.map((g) =>
     collectGames(g, friendCollections)
   );
+  const gamesThatEnoughPeopleWantToPlay = collectedGames.filter(
+    enoughPeopleWantToPlay
+  );
   return (
     <>
       <GameCollection
-        games={collectedGames
+        games={gamesThatEnoughPeopleWantToPlay
           .filter(atLeastOnePersonOwns)
-          .filter(enoughPeopleWantToPlay)
           .map(uncollectGames)}
         showFriendCollection
+        className={styles.collection}
       >
         <h2>Games you could play right now</h2>
+      </GameCollection>
+      <GameCollection
+        games={gamesThatEnoughPeopleWantToPlay
+          .filter(somebodyWantsToBuy)
+          .filter(nobodyOwns)
+          .map(uncollectGames)}
+        showFriendCollection
+        className={styles.collection}
+      >
+        <h2>Games somebody should probably buy already</h2>
       </GameCollection>
     </>
   );
@@ -74,6 +88,14 @@ function atLeastOnePersonOwns({
   );
 }
 
+function nobodyOwns({ game, status, friendCollections }: CollectedGame) {
+  return (
+    !status.own &&
+    friendCollections &&
+    !friendCollections.find((f) => f.game.id === game.id && f.status.own)
+  );
+}
+
 function enoughPeopleWantToPlay({
   game,
   status,
@@ -89,4 +111,16 @@ function enoughPeopleWantToPlay({
     }
   });
   return count >= game.minPlayers;
+}
+
+function somebodyWantsToBuy({
+  game,
+  status,
+  friendCollections,
+}: CollectedGame) {
+  return (
+    status.wishlist ||
+    (friendCollections &&
+      friendCollections.find((f) => f.game.id === game.id && f.status.wishlist))
+  );
 }
