@@ -7,15 +7,27 @@ export interface StatusByUser {
   wantToPlay: PrivateUser[];
 }
 
+export type GameCollectionStatus = {
+  own: boolean;
+  wantToPlay: boolean;
+  wishlist: boolean;
+};
+
 export interface GameCollection {
   game: Game;
-  status: {
-    own: boolean;
-    wantToPlay: boolean;
-    wishlist: boolean;
-  };
+  status: GameCollectionStatus;
 }
 
 export interface UserGameCollection extends GameCollection {
   user: PrivateUser | PublicUser;
+}
+
+export type FriendCollectionStatus = {
+  own: PrivateUser[];
+  wantToPlay: PrivateUser[];
+  wishlist: PrivateUser[];
+};
+
+export interface ExtendedGameCollection extends GameCollection {
+  friendCollections: FriendCollectionStatus;
 }

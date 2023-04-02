@@ -13,7 +13,9 @@ export async function getBggGames(ids: number[]): Promise<BggGame[]> {
   if (ids.length === 0) {
     return [];
   }
-  return fetch(`https://api.geekdo.com/xmlapi/boardgame/${ids.join(",")}?stats=1`)
+  return fetch(
+    `https://api.geekdo.com/xmlapi/boardgame/${ids.join(",")}?stats=1`
+  )
     .then((response) => {
       if (response.ok) {
         return response.text();
@@ -23,6 +25,22 @@ export async function getBggGames(ids: number[]): Promise<BggGame[]> {
       );
     })
     .then((text) => parseBggGames(text));
+}
+
+export async function searchBggGames(term: string): Promise<number[]> {
+  if (!term || term.length === 0) {
+    return [];
+  }
+  return fetch(`https://api.geekdo.com/xmlapi/search?search=${term}`)
+    .then((response) => response.text())
+    .then(parseGameIdsFromSearchResult);
+}
+
+function parseGameIdsFromSearchResult(xmlString: string): number[] {
+  const bggObject = parser.parse(xmlString);
+  checkData(bggObject);
+  const bggGames = splitBggObject(bggObject);
+  return bggGames.map((g) => validator.toInt(g["@_objectid"]));
 }
 
 function parseBggGames(xmlString: string): BggGame[] {

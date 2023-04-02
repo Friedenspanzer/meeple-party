@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchResult } from "@/pages/api/games/search/[term]";
+import { ExtendedGameCollection } from "@/datatypes/collection";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
@@ -8,7 +8,7 @@ import Spinner from "../Spinner/Spinner";
 import styles from "./gamesearch.module.css";
 
 export interface GameSearchChildren {
-  searchResult: SearchResult[];
+  searchResult: ExtendedGameCollection[];
 }
 
 export interface GameSearchProps {
@@ -17,7 +17,7 @@ export interface GameSearchProps {
 
 const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
   const [term, setTerm] = useState<string>("");
-  const [result, setResult] = useState<SearchResult[]>([]);
+  const [result, setResult] = useState<ExtendedGameCollection[]>([]);
   const [dirty, setDirty] = useState(false);
 
   const [debouncedTerm] = useDebounce(term, 500);
