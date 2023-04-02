@@ -19,20 +19,31 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
   const [term, setTerm] = useState<string>("");
   const [result, setResult] = useState<ExtendedGameCollection[]>([]);
   const [dirty, setDirty] = useState(false);
+  const [error, setError] = useState(false);
 
   const [debouncedTerm] = useDebounce(term, 500);
 
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
+    setError(false);
     if (!debouncedTerm || debouncedTerm.length === 0) {
       setResult([]);
       setDirty(false);
     } else {
       fetch(`/api/games/search/${debouncedTerm}`, { signal })
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw Error(`${response.status} ${response.statusText}`);
+          }
+        })
         .then(setResult)
-        .catch(() => setResult([]))
+        .catch(() => {
+          setResult([]);
+          setError(true);
+        })
         .finally(() => setDirty(false));
     }
     return () => {
@@ -63,7 +74,17 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
         />
         {dirty && <Spinner size="small" />}
       </div>
-      {!dirty && !!result && resultView({ searchResult: result })}
+      {!dirty && !error && !!result && resultView({ searchResult: result })}
+      {error && (
+        <div className="alert alert-danger col-5" role="alert">
+          <h4>
+            <i className="bi bi-exclamation-octagon-fill"></i> Error during game
+            search
+          </h4>
+          Please try again later. If this persists please contact your
+          administrator.
+        </div>
+      )}
     </>
   );
 };
