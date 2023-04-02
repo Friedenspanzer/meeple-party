@@ -22,12 +22,6 @@ export interface UserGameCollection extends GameCollection {
   user: PrivateUser | PublicUser;
 }
 
-export type FriendCollectionStatus = {
-  own: PrivateUser[];
-  wantToPlay: PrivateUser[];
-  wishlist: PrivateUser[];
-};
-
 export interface ExtendedGameCollection extends GameCollection {
-  friendCollections: FriendCollectionStatus;
+  friendCollections: StatusByUser;
 }

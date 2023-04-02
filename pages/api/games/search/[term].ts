@@ -1,6 +1,6 @@
 import {
   ExtendedGameCollection,
-  FriendCollectionStatus,
+  StatusByUser,
   GameCollectionStatus,
 } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
@@ -82,7 +82,7 @@ function extractFriendCollectionStatus(
   friendCollections: (GameCollection & {
     user: User;
   })[]
-): FriendCollectionStatus {
+): StatusByUser {
   const collection = friendCollections.filter((c) => c.gameId === gameId);
   return {
     own: collection.filter((c) => c.own).map((c) => c.user),

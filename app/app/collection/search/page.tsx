@@ -9,7 +9,12 @@ const resultView: React.FC<GameSearchChildren> = ({ searchResult }) => {
   return (
     <>
       {searchResult.map(({ game, status, friendCollections }) => (
-        <GameBox game={game} status={status} key={game.id} />
+        <GameBox
+          game={game}
+          status={status}
+          friendCollection={friendCollections}
+          key={game.id}
+        />
       ))}
     </>
   );

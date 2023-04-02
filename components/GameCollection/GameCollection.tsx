@@ -44,7 +44,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
                 game={game}
                 status={status}
                 key={getGameId(game)}
-                showFriendCollection={showFriendCollection}
+                friendCollection={showFriendCollection}
               />
             ))}
         </div>
