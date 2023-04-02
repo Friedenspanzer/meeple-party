@@ -40,7 +40,7 @@ function parseGameIdsFromSearchResult(xmlString: string): number[] {
   const bggObject = parser.parse(xmlString);
   checkData(bggObject);
   const bggGames = splitBggObject(bggObject);
-  return bggGames.map((g) => validator.toInt(g["@_objectid"]));
+  return bggGames.slice(0, 50).map((g) => validator.toInt(g["@_objectid"]));
 }
 
 function parseBggGames(xmlString: string): BggGame[] {
