@@ -23,16 +23,23 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
   const [debouncedTerm] = useDebounce(term, 500);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     if (!debouncedTerm || debouncedTerm.length === 0) {
       setResult([]);
       setDirty(false);
     } else {
-      //TODO Better error handling
-      fetch(`/api/games/search/${debouncedTerm}`)
+      fetch(`/api/games/search/${debouncedTerm}`, { signal })
         .then((response) => response.json())
         .then(setResult)
-        .then(() => setDirty(false));
+        .catch(() => setResult([]))
+        .finally(() => setDirty(false));
     }
+    return () => {
+      if (controller) {
+        controller.abort();
+      }
+    };
   }, [debouncedTerm]);
 
   return (
