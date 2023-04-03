@@ -14,6 +14,7 @@ const resultView: React.FC<GameSearchChildren> = ({ searchResult }) => {
           status={status}
           friendCollection={friendCollections}
           key={game.id}
+          showFriendCollection={true}
         />
       ))}
     </>
