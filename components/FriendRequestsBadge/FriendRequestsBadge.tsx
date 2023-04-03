@@ -3,7 +3,7 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { useEffect, useState } from "react";
 
-const FriendRequestsBadge: React.FC = ({}) => {
+const FriendRequestsBadge: React.FC = () => {
   const [relationships, setRelationships] = useState<Relationship[]>();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const FriendRequestsBadge: React.FC = ({}) => {
       .then(setRelationships);
   }, []);
 
-  if (!!relationships && relationships.length > 0) {
+  if (relationships && relationships.length > 0) {
     return (
       <span className="badge rounded-pill text-bg-secondary">
         {relationships.length}

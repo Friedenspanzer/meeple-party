@@ -148,7 +148,7 @@ function getPrimaryName(bggGame: any): string {
   if (Array.isArray(bggGame.name)) {
     let found = bggGame.name[0]["#text"];
     bggGame.name.forEach((name: any) => {
-      if (!!name["@_primary"]) {
+      if (name["@_primary"]) {
         found = name["#text"];
       }
     });
@@ -168,10 +168,10 @@ function splitBggObject(bggObject: any): any[] {
 
 function checkData(bggObject: any) {
   //TODO Test this
-  if (!!bggObject.boardgames.boardgame.error) {
+  if (bggObject.boardgames.boardgame.error) {
     throw Error(`BGG API error: ${bggObject.boardgame.error["@_message"]}`);
   }
-  if (!!bggObject.boardgames.boardgame["@_subtypemismatch"]) {
+  if (bggObject.boardgames.boardgame["@_subtypemismatch"]) {
     throw Error(
       `Item with ID ${bggObject.boardgame["@_objectid"]} is not a boardgame.`
     );

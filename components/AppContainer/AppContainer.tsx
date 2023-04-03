@@ -19,7 +19,7 @@ export interface AppContainerProps {
 const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
   const { user, loading } = useUser();
 
-  if (!!loading) {
+  if (loading) {
     return (
       <div className={styles.spinner}>
         <Spinner />

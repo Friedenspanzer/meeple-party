@@ -87,11 +87,11 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
       const [head, ...tail] = toImport;
       setItemsToImport(tail);
       const importStep = await changeCollectionStatus(head, current);
-      if (!!importStep) {
+      if (importStep) {
         setImportSteps((i) => [...i, importStep]);
       }
     }
-    if (!!currentCollection && itemsToImport.length > 0) {
+    if (currentCollection && itemsToImport.length > 0) {
       setTimeout(() => importNext(itemsToImport, currentCollection), 500);
     }
   }, [itemsToImport, currentCollection]);
@@ -201,7 +201,6 @@ async function changeCollectionStatus(
     }
     return createImportStep(result, currentCollection);
   }
-  return;
 }
 
 function createImportStep(
@@ -211,7 +210,7 @@ function createImportStep(
   const current = currentCollection.find(
     (c) => c.gameId === collectionUpdate.game.id
   );
-  if (!!current) {
+  if (current) {
     return {
       operation: "change",
       lists: {
