@@ -5,7 +5,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    unoptimized: true,
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: "https",
