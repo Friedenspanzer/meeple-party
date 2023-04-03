@@ -1,13 +1,15 @@
 import GameCollection from "@/components/GameCollection/GameCollection";
-import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import {
   GameCollection as GameCollectionType,
+  GameCollectionStatus,
+  StatusByUser,
   UserGameCollection,
 } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { getAllGamesOfFriends, getCollection } from "@/selectors/collections";
 import { getServerUser } from "@/utility/serverSession";
 import styles from "./dashboard.module.css";
+import { PrivateUser } from "@/datatypes/userProfile";
 
 export default async function App() {
   const user = await getServerUser();
@@ -68,11 +70,29 @@ function collectGames(
 
 function uncollectGames(collectedGame: CollectedGame): {
   game: number | Game;
-  status?: CollectionStatus | undefined;
+  status?: GameCollectionStatus;
+  friendCollections?: StatusByUser;
 } {
   return {
     game: collectedGame.game,
     status: collectedGame.status,
+    friendCollections: {
+      own: collectedGame.friendCollections
+        ? collectedGame.friendCollections
+            .filter((c) => c.status.own)
+            .map((c) => c.user as PrivateUser)
+        : [],
+      wishlist: collectedGame.friendCollections
+        ? collectedGame.friendCollections
+            .filter((c) => c.status.wishlist)
+            .map((c) => c.user as PrivateUser)
+        : [],
+      wantToPlay: collectedGame.friendCollections
+        ? collectedGame.friendCollections
+            .filter((c) => c.status.wantToPlay)
+            .map((c) => c.user as PrivateUser)
+        : [],
+    },
   };
 }
 

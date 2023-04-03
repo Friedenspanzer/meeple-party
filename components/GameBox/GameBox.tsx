@@ -49,7 +49,7 @@ export default function GameBox({
         setFriendCollections(friendCollection);
       }
     }
-  }, [game, friendCollection]);
+  }, [game, friendCollection, showFriendCollection]);
 
   useEffect(() => {
     if (typeof game === "number") {
