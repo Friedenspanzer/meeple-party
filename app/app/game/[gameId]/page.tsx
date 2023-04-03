@@ -28,6 +28,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
             height={200}
             alt={game.name}
             className={styles.headerImage}
+            unoptimized
           />
           <div className={styles.headerContent}>
             <Image
@@ -36,6 +37,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
               height={200}
               alt={game.name}
               className={styles.titleImage}
+              unoptimized
             />
             <div className={styles.headerInformation}>
               <BggRating

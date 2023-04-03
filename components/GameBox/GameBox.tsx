@@ -75,13 +75,14 @@ export default function GameBox({
       <div className={styles.gamebox}>
         <div className={styles.imageBox}>
           <Link href={`/app/game/${gameData.id}`}>
-            {!!gameData.image && (
+            {!!gameData.thumbnail && (
               <Image
-                src={gameData.image}
+                src={gameData.thumbnail}
                 className={`card-img-top ${styles.image}`}
                 alt={gameData.name}
                 width="200"
                 height="150"
+                unoptimized
               />
             )}
           </Link>

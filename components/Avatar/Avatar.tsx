@@ -23,6 +23,8 @@ export default function Avatar({
         alt={!!name ? name : "User avatar"}
         className={classNames([styles.image, className])}
         style={style}
+        unoptimized
+        referrerPolicy="no-referrer"
       />
     );
   } else {

@@ -55,6 +55,7 @@ const GamePill: React.FC<GamePillProps> = ({
               height={26}
               alt={gameData?.name || ""}
               className={styles.image}
+              unoptimized
             />
           )}
           {gameData?.name}
