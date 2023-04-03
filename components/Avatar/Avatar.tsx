@@ -14,7 +14,7 @@ export default function Avatar({
   className?: string;
   style?: CSSProperties;
 }) {
-  if (!!image) {
+  if (image) {
     return (
       <Image
         src={image}
@@ -52,8 +52,8 @@ function getColor(name: string) {
 }
 
 function hashCode(str: string): number {
-  var h: number = 0;
-  for (var i = 0; i < str.length; i++) {
+  let h: number = 0;
+  for (let i = 0; i < str.length; i++) {
     h = (h + 6700417 * str.charCodeAt(i)) & 0xffffff;
   }
   return h;

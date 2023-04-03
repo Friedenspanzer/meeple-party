@@ -4,7 +4,7 @@ import {
 } from "@/components/NavigationBar/NavigationBar";
 import FriendRequestsBadge from "@/components/FriendRequestsBadge/FriendRequestsBadge";
 
-const Navbar: React.FC = ({}) => {
+const Navbar: React.FC = () => {
   return (
     <NavigationBar>
       <NavigationItem href="/app/friends">Activity</NavigationItem>

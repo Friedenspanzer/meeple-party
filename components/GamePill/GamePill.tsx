@@ -43,7 +43,7 @@ const GamePill: React.FC<GamePillProps> = ({
             !!action && styles.clickable,
           ])}
           onClick={(e) => {
-            if (!!action) {
+            if (action) {
               action(gameData.id);
             }
           }}

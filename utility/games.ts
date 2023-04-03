@@ -31,7 +31,7 @@ export async function fetchGames(gameIds: number[]): Promise<Game[]> {
   const missingGames = (await getBggGames(missingIds)).map(convertForDataBase);
   const staleGames = (await getBggGames(staleIds)).map(convertForDataBase);
 
-  if (!!missingGames && missingGames.length > 0) {
+  if (missingGames && missingGames.length > 0) {
     if (DEV) {
       console.log(
         "Inserting missing games",
@@ -40,7 +40,7 @@ export async function fetchGames(gameIds: number[]): Promise<Game[]> {
     }
     await prisma.game.createMany({ data: missingGames });
   }
-  if (!!staleGames && staleGames.length > 0) {
+  if (staleGames && staleGames.length > 0) {
     if (DEV) {
       console.log(
         "Updating stale games",

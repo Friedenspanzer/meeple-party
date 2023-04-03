@@ -7,11 +7,10 @@ import GameSearch, {
 import Spinner from "@/components/Spinner/Spinner";
 import { useUser } from "@/context/userContext";
 import { Game } from "@/datatypes/game";
-import { User } from "@prisma/client";
 import classNames from "classnames";
 import { useCallback, useEffect, useState } from "react";
 
-const EditProfile: React.FC = ({}) => {
+const EditProfile: React.FC = () => {
   const { user } = useUser();
 
   if (!user) {

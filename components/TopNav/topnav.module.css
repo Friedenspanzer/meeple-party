@@ -1,5 +1,4 @@
 .menuBar {
-  background-color: var(--surface-overlay);
   display: flex;
   justify-content: space-between;
   align-items: center;

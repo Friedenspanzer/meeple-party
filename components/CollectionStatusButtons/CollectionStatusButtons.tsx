@@ -41,7 +41,7 @@ export default function CollectionStatusButtons({
   );
 
   useEffect(() => {
-    if (!!status) {
+    if (status) {
       setCollectionStatus(status);
     } else {
       setLoading(true);
