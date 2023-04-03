@@ -112,7 +112,7 @@ export default async function ProfilePage({
           <div className={styles.favorites}>
             <h3>Favorite games</h3>
             {user.favorites.slice(0, 6).map((g) => (
-              <GameBox game={g} key={g.id} />
+              <GameBox game={g} key={g.id} showFriendCollection={false} />
             ))}
           </div>
         )}
