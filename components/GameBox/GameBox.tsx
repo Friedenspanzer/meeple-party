@@ -15,20 +15,22 @@ import CollectionStatusButtons from "../CollectionStatusButtons/CollectionStatus
 export interface GameBoxProps {
   game: Game | number;
   status?: CollectionStatus;
-  friendCollection?: boolean | StatusByUser;
+  friendCollection?: StatusByUser;
+  showFriendCollection: boolean;
 }
 
 export default function GameBox({
   game,
   status,
-  friendCollection = false,
+  friendCollection,
+  showFriendCollection = false,
 }: GameBoxProps) {
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
 
   useEffect(() => {
-    if (friendCollection) {
-      if (typeof friendCollection === "boolean") {
+    if (showFriendCollection) {
+      if (!friendCollection) {
         fetch(`/api/collection/friends/byGame/${getGameId(game)}`)
           .then((response) => {
             if (response.ok) {
@@ -117,7 +119,7 @@ export default function GameBox({
           className={styles.collectionbuttons}
         />
       </div>
-      {friendCollections && (
+      {showFriendCollection && friendCollections && (
         <Link href={`/app/game/${gameData.id}`} className={styles.friends}>
           <div className={styles.collection}>
             <UserList users={friendCollections.own} />
