@@ -7,6 +7,7 @@ import { Game } from "@/datatypes/game";
 import { prisma } from "@/db";
 import { withUser } from "@/utility/apiAuth";
 import { searchBggGames } from "@/utility/bgg";
+import { findFriendCollection } from "@/utility/collections";
 import { fetchGames } from "@/utility/games";
 import { GameCollection, RelationshipType, User } from "@prisma/client";
 import { XMLParser } from "fast-xml-parser";
@@ -51,7 +52,7 @@ async function enrichGameData(
   return games.map((game) => ({
     game,
     status: extractStatus(game.id, myCollectionStatus),
-    friendCollections: extractFriendCollectionStatus(
+    friendCollections: findFriendCollection(
       game.id,
       myFriendsCollectionStatus
     ),
@@ -74,20 +75,6 @@ function extractStatus(
     own: status.own,
     wantToPlay: status.wantToPlay,
     wishlist: status.wishlist,
-  };
-}
-
-function extractFriendCollectionStatus(
-  gameId: number,
-  friendCollections: (GameCollection & {
-    user: User;
-  })[]
-): StatusByUser {
-  const collection = friendCollections.filter((c) => c.gameId === gameId);
-  return {
-    own: collection.filter((c) => c.own).map((c) => c.user),
-    wantToPlay: collection.filter((c) => c.wantToPlay).map((c) => c.user),
-    wishlist: collection.filter((c) => c.wishlist).map((c) => c.user),
   };
 }
 

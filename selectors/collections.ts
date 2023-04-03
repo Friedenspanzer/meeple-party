@@ -61,6 +61,38 @@ export async function getCollectionStatusOfFriends(
   return convertToStatusByUser(result);
 }
 
+export async function getMultipleCollectionStatusOfFriends(
+  gameIds: number[],
+  userId: string
+) {
+  return await prisma.gameCollection.findMany({
+    where: {
+      gameId: { in: gameIds },
+      user: {
+        OR: [
+          {
+            receivedRelationships: {
+              some: {
+                senderId: userId,
+                type: RelationshipType.FRIENDSHIP,
+              },
+            },
+          },
+          {
+            sentRelationships: {
+              some: {
+                recipientId: userId,
+                type: RelationshipType.FRIENDSHIP,
+              },
+            },
+          },
+        ],
+      },
+    },
+    include: { user: true },
+  });
+}
+
 export async function getAllGamesOfFriends(
   userId: string
 ): Promise<UserGameCollection[]> {
