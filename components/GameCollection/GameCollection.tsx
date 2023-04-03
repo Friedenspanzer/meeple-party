@@ -1,9 +1,9 @@
 "use client";
 
+import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
-import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import classNames from "classnames";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import GameBox from "../GameBox/GameBox";
 import styles from "./gamecollection.module.css";
 
@@ -11,7 +11,8 @@ export interface GameCollectionProps
   extends React.HTMLAttributes<HTMLDivElement> {
   games: {
     game: Game | number;
-    status?: CollectionStatus;
+    status?: GameCollectionStatus;
+    friendCollections?: StatusByUser;
   }[];
   showFriendCollection?: boolean;
   children?: React.ReactNode;
@@ -39,12 +40,13 @@ const GameCollection: React.FC<GameCollectionProps> = ({
         <div className={styles.games}>
           {games
             .slice(getOffset(), getOffset() + ITEMS_PER_PAGE)
-            .map(({ game, status }) => (
+            .map(({ game, status, friendCollections }) => (
               <GameBox
                 game={game}
                 status={status}
                 key={getGameId(game)}
                 showFriendCollection={showFriendCollection}
+                friendCollection={friendCollections}
               />
             ))}
         </div>

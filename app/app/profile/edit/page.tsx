@@ -46,13 +46,13 @@ const EditProfile: React.FC = ({}) => {
   }) => {
     return (
       <>
-        {searchResult.map((r) => (
-          <GamePill game={r.id} key={r.id}>
+        {searchResult.map(({ game, status, friendCollections }) => (
+          <GamePill game={game} key={game.id}>
             &nbsp;
             <i
               className="bi bi-plus"
               style={{ cursor: "pointer" }}
-              onClick={(_) => addToFavorites(r.id)}
+              onClick={(_) => addToFavorites(game.id)}
             ></i>
           </GamePill>
         ))}

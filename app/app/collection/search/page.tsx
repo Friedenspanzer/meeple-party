@@ -8,8 +8,14 @@ import GameSearch, {
 const resultView: React.FC<GameSearchChildren> = ({ searchResult }) => {
   return (
     <>
-      {searchResult.map((r) => (
-        <GameBox game={r.id} key={r.id} />
+      {searchResult.map(({ game, status, friendCollections }) => (
+        <GameBox
+          game={game}
+          status={status}
+          friendCollection={friendCollections}
+          key={game.id}
+          showFriendCollection={true}
+        />
       ))}
     </>
   );

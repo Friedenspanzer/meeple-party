@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchResult } from "@/pages/api/games/search/[term]";
+import { ExtendedGameCollection } from "@/datatypes/collection";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
@@ -8,7 +8,7 @@ import Spinner from "../Spinner/Spinner";
 import styles from "./gamesearch.module.css";
 
 export interface GameSearchChildren {
-  searchResult: SearchResult[];
+  searchResult: ExtendedGameCollection[];
 }
 
 export interface GameSearchProps {
@@ -17,22 +17,40 @@ export interface GameSearchProps {
 
 const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
   const [term, setTerm] = useState<string>("");
-  const [result, setResult] = useState<SearchResult[]>([]);
+  const [result, setResult] = useState<ExtendedGameCollection[]>([]);
   const [dirty, setDirty] = useState(false);
+  const [error, setError] = useState(false);
 
   const [debouncedTerm] = useDebounce(term, 500);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    setError(false);
     if (!debouncedTerm || debouncedTerm.length === 0) {
       setResult([]);
       setDirty(false);
     } else {
-      //TODO Better error handling
-      fetch(`/api/games/search/${debouncedTerm}`)
-        .then((response) => response.json())
+      fetch(`/api/games/search/${debouncedTerm}`, { signal })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw Error(`${response.status} ${response.statusText}`);
+          }
+        })
         .then(setResult)
-        .then(() => setDirty(false));
+        .catch(() => {
+          setResult([]);
+          setError(true);
+        })
+        .finally(() => setDirty(false));
     }
+    return () => {
+      if (controller) {
+        controller.abort();
+      }
+    };
   }, [debouncedTerm]);
 
   return (
@@ -56,7 +74,17 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
         />
         {dirty && <Spinner size="small" />}
       </div>
-      {!dirty && !!result && resultView({ searchResult: result })}
+      {!dirty && !error && !!result && resultView({ searchResult: result })}
+      {error && (
+        <div className="alert alert-danger col-5" role="alert">
+          <h4>
+            <i className="bi bi-exclamation-octagon-fill"></i> Error during game
+            search
+          </h4>
+          Please try again later. If this persists please contact your
+          administrator.
+        </div>
+      )}
     </>
   );
 };

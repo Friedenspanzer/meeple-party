@@ -1,5 +1,7 @@
 import GameCollection from "@/components/GameCollection/GameCollection";
 import { prisma } from "@/db";
+import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
+import { findFriendCollection } from "@/utility/collections";
 import { getServerUser } from "@/utility/serverSession";
 import { Game } from "@prisma/client";
 
@@ -9,6 +11,10 @@ export default async function Collection() {
     where: { userId: user.id, own: true },
     include: { game: true },
   });
+  const friendCollections = await getMultipleCollectionStatusOfFriends(
+    gameCollection.map((g) => g.gameId),
+    user.id
+  );
   return (
     <GameCollection
       games={gameCollection
@@ -16,6 +22,7 @@ export default async function Collection() {
         .map(({ game, own, wantToPlay, wishlist }) => ({
           game: cleanGame(game),
           status: { own, wantToPlay, wishlist },
+          friendCollections: findFriendCollection(game.id, friendCollections),
         }))}
       showFriendCollection={true}
     />

@@ -15,29 +15,41 @@ import CollectionStatusButtons from "../CollectionStatusButtons/CollectionStatus
 export interface GameBoxProps {
   game: Game | number;
   status?: CollectionStatus;
-  showFriendCollection?: boolean
+  friendCollection?: StatusByUser;
+  showFriendCollection: boolean;
 }
 
-export default function GameBox({ game, status, showFriendCollection = false }: GameBoxProps) {
+export default function GameBox({
+  game,
+  status,
+  friendCollection,
+  showFriendCollection = false,
+}: GameBoxProps) {
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
 
   useEffect(() => {
-    fetch(`/api/collection/friends/byGame/${getGameId(game)}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw Error(`${response.status} ${response.statusText}`);
-        }
-      })
-      .then(setFriendCollections)
-      .catch((reason) => {
-        throw Error(
-          `Error loading friend collection data for game ${game}. Reason: ${reason}`
-        );
-      });
-  }, [game]);
+    if (showFriendCollection) {
+      if (!friendCollection) {
+        fetch(`/api/collection/friends/byGame/${getGameId(game)}`)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw Error(`${response.status} ${response.statusText}`);
+            }
+          })
+          .then(setFriendCollections)
+          .catch((reason) => {
+            throw Error(
+              `Error loading friend collection data for game ${game}. Reason: ${reason}`
+            );
+          });
+      } else {
+        setFriendCollections(friendCollection);
+      }
+    }
+  }, [game, friendCollection, showFriendCollection]);
 
   useEffect(() => {
     if (typeof game === "number") {
@@ -101,7 +113,11 @@ export default function GameBox({ game, status, showFriendCollection = false }: 
             <div className={styles.label}>Weight</div>
           </div>
         </div>
-        <CollectionStatusButtons gameId={getGameId(game)} status={status} className={styles.collectionbuttons} />
+        <CollectionStatusButtons
+          gameId={getGameId(game)}
+          status={status}
+          className={styles.collectionbuttons}
+        />
       </div>
       {showFriendCollection && friendCollections && (
         <Link href={`/app/game/${gameData.id}`} className={styles.friends}>
