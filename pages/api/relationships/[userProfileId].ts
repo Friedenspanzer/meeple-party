@@ -1,12 +1,12 @@
 import { RelationshipType } from "@/datatypes/relationship";
 import { prisma } from "@/db";
+import { normalizeRelationship } from "@/selectors/relationships";
 import { withUser } from "@/utility/apiAuth";
 import {
   RelationshipType as PrismaRelationshipType,
   User,
 } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import { normalizeRelationship } from "./utility";
 
 export default withUser(async function handle(
   req: NextApiRequest,
@@ -95,8 +95,8 @@ export default withUser(async function handle(
       res.status(405).send({});
     }
   } catch (e) {
-      console.error(e);
-      return res.status(500).json({ success: false, error: e });
+    console.error(e);
+    return res.status(500).json({ success: false, error: e });
   }
 });
 
