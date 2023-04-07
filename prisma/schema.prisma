@@ -92,6 +92,8 @@ model GameCollection {
   wantToPlay Boolean
   wishlist   Boolean
 
+  updatedAt DateTime? @updatedAt
+
   @@id([userId, gameId])
 }
 
