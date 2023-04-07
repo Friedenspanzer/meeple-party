@@ -1,5 +1,6 @@
+"use client"
+
 import { Game } from "@/datatypes/game";
-import { fetchGames } from "@/utility/games";
 import classNames from "classnames";
 import Image from "next/image";
 import { useEffect, useState } from "react";
