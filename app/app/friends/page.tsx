@@ -28,7 +28,10 @@ export default async function Friends() {
           const ret = (
             <div className={styles.line} key={update.updatedAt?.toTimeString()}>
               {update.userId !== lastFriendId ? (
-                <Link href="" className={styles.link}>
+                <Link
+                  href={`/app/profile/${update.userId}`}
+                  className={styles.link}
+                >
                   <Person
                     name={update.user.name!}
                     image={update.user.image || undefined}
