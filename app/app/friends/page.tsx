@@ -55,6 +55,22 @@ export default async function Friends() {
         })}
       </div>
       <h2>All your friends</h2>
+      <div className={styles.friendContainer}>
+        {myFriends.map((friend) => (
+          <Link
+            href={`/app/profile/${friend.id}`}
+            className={styles.link}
+            key={friend.id}
+          >
+            <Person
+              name={friend.name!}
+              image={friend.image || undefined}
+              realName={friend.realName || undefined}
+              className={styles.listPerson}
+            />
+          </Link>
+        ))}
+      </div>
     </>
   );
 }
