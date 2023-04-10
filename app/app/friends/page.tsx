@@ -50,6 +50,7 @@ export default async function Friends() {
                 wantToPlay={update.wantToPlay}
                 wishlist={update.wishlist}
                 className={styles.change}
+                href={`/app/game/${update.gameId}`}
               />
             </div>
           );

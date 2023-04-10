@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import Link from "next/link";
 import styles from "./collectionchange.module.css";
 
 interface CollectionChangeProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -8,6 +9,7 @@ interface CollectionChangeProps extends React.HTMLAttributes<HTMLDivElement> {
   wishlist?: boolean;
   image: string;
   text: string;
+  href?: string;
 }
 
 const CollectionChange: React.FC<CollectionChangeProps> = ({
@@ -17,6 +19,7 @@ const CollectionChange: React.FC<CollectionChangeProps> = ({
   wishlist = false,
   image,
   text,
+  href,
   ...props
 }) => {
   return (
@@ -45,7 +48,13 @@ const CollectionChange: React.FC<CollectionChangeProps> = ({
           ])}
         ></i>
       </div>
-      <img src={image} alt={text} className={styles.picture} />
+      {href ? (
+        <Link href={href}>
+          <img src={image} alt={text} className={styles.picture} />
+        </Link>
+      ) : (
+        <img src={image} alt={text} className={styles.picture} />
+      )}
       {text}
     </div>
   );
