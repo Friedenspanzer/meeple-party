@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useUser } from "@/context/userContext";
 import Spinner from "../Spinner/Spinner";
 
 export default function CompleteUserProfile() {
-  const { user, loading } = useUser();
+  const { user } = useUser();
 
   if (!user) {
     throw new Error(

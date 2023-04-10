@@ -1,4 +1,3 @@
-import "./globals.css";
 import "@/theme/theme.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 

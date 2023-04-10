@@ -154,10 +154,10 @@ function getMoreHeaders(user: User): string | undefined {
     return;
   }
   const headers = [];
-  if (!!user.place) {
+  if (user.place) {
     headers.push(`From <strong>${user.place}</strong>`);
   }
-  if (!!user.bggName) {
+  if (user.bggName) {
     headers.push(`<strong>${user.bggName}</strong> on BoardGameGeek`);
   }
   return headers.join(" &bullet; ");
