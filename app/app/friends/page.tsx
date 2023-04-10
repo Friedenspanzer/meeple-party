@@ -1,9 +1,9 @@
-import GamePill from "@/components/GamePill/GamePill";
+import CollectionChange from "@/components/CollectionChange/CollectionChange";
 import Person from "@/components/Person/Person";
 import { prisma } from "@/db";
 import { getFriends } from "@/selectors/relationships";
 import { getServerUser } from "@/utility/serverSession";
-import classNames from "classnames";
+import { Game, GameCollection, User } from "@prisma/client";
 import Link from "next/link";
 import styles from "./friends.module.css";
 
@@ -16,66 +16,73 @@ export default async function Friends() {
       userId: { in: myFriends.map((f) => f.id) },
     },
     orderBy: { updatedAt: "desc" },
-    take: 50,
+    take: 20,
     include: { user: true, game: true },
   });
+  let lastFriendId = "";
   return (
     <>
       <h2>Your friend&apos;s collection updates</h2>
-      {myFriends.map((friend) => {
-        const friendUpdates = collectionUpdates.filter(
-          (u) => u.userId === friend.id
-        );
-        const friendOwns = friendUpdates
-          .filter((u) => u.own)
-          .map((u) => u.game);
-        const friendWantsToPlay = friendUpdates
-          .filter((u) => u.wantToPlay)
-          .map((u) => u.game);
-        return (
-          <div className={classNames("card", styles.card)} key={friend.id}>
-            <div className="card-header">
-              <Person
-                key={friend.id}
-                name={friend.name!}
-                realName={friend.realName || undefined}
-                image={friend.image || undefined}
+      <div className={styles.updateContainer}>
+        {collectionUpdates.map((update) => {
+          const ret = (
+            <div className={styles.line} key={update.updatedAt?.toTimeString()}>
+              {update.userId !== lastFriendId ? (
+                <Link href="" className={styles.link}>
+                  <Person
+                    name={update.user.name!}
+                    image={update.user.image || undefined}
+                    className={styles.person}
+                    realName={update.user.realName || undefined}
+                  />
+                </Link>
+              ) : (
+                <div className={styles.person}></div>
+              )}
+              <CollectionChange
+                image={update.game.image!}
+                operation="add"
+                text={generateText(update)}
+                own={update.own}
+                wantToPlay={update.wantToPlay}
+                wishlist={update.wishlist}
+                className={styles.change}
               />
             </div>
-            <div className="card-body">
-              {friendOwns.length > 0 && (
-                <>
-                  <h4>Owns</h4>
-                  {friendOwns.map((g) => (
-                    <Link
-                      href={`/app/game/${g.id}`}
-                      key={g.id}
-                      className={styles.link}
-                    >
-                      <GamePill game={g} />
-                    </Link>
-                  ))}
-                </>
-              )}
-              {friendWantsToPlay.length > 0 && (
-                <>
-                  <h4 className={styles.wantToPlay}>Wants to play</h4>
-                  {friendWantsToPlay.map((g) => (
-                    <Link
-                      href={`/app/game/${g.id}`}
-                      key={g.id}
-                      className={styles.link}
-                    >
-                      <GamePill game={g} />
-                    </Link>
-                  ))}
-                </>
-              )}
-            </div>
-          </div>
-        );
-      })}
+          );
+          lastFriendId = update.userId;
+          return ret;
+        })}
+      </div>
       <h2>All your friends</h2>
     </>
   );
+}
+
+function generateText(
+  update: GameCollection & {
+    user: User;
+    game: Game;
+  }
+): string {
+  const verbArray: string[] = [];
+  if (update.own) {
+    verbArray.push("owns");
+  }
+  if (update.wantToPlay) {
+    verbArray.push("wants to play");
+  }
+  if (update.wishlist) {
+    verbArray.push("wishes for");
+  }
+  return `${update.user.name} now ${joinVerbs(verbArray)} ${update.game.name}`;
+}
+
+function joinVerbs(verbs: string[]): string {
+  if (verbs.length === 1) {
+    return verbs[0];
+  } else {
+    const last = verbs.pop();
+    return `${verbs.join(", ")} and ${last}`;
+  }
 }

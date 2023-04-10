@@ -1,7 +1,22 @@
-.card {
-  margin-bottom: 1rem;
+.updateContainer {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: min-content;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  gap: 1rem;
+}
+
+.person {
+  height: min-content;
+  margin-top: 1rem;
 }
 
 .link {
-  color: black;
+  color: unset;
+  text-decoration: unset;
 }
