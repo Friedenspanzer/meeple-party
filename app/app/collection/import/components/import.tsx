@@ -11,6 +11,7 @@ import { Game, GameCollection } from "@prisma/client";
 import styles from "./import.module.css";
 import Image from "next/image";
 import classNames from "classnames";
+import CollectionChange from "@/components/CollectionChange/CollectionChange";
 
 export interface ImportProps {
   configuration: ImportConfiguration;
@@ -124,56 +125,18 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
       </div>
       <div className={styles.importSteps}>
         {[...importSteps].reverse().map((s) => (
-          <ImportStep step={s} key={s.text} />
+          <CollectionChange
+            key={s.text}
+            operation={s.operation}
+            image={s.image!}
+            text={s.text}
+            own={s.lists.own}
+            wantToPlay={s.lists.wantToPlay}
+            wishlist={s.lists.wishlist}
+          />
         ))}
       </div>
     </>
-  );
-};
-
-export interface ImportStepProps {
-  step: ImportStepDefinition;
-}
-
-const ImportStep: React.FC<ImportStepProps> = ({ step }) => {
-  return (
-    <div
-      className={classNames({
-        [styles.importStep]: true,
-        [styles.add]: step.operation === "add",
-        [styles.change]: step.operation === "change",
-        [styles.remove]: step.operation === "remove",
-      })}
-    >
-      <div className={styles.lists}>
-        <i
-          className={classNames([
-            "bi bi-box-seam-fill",
-            { [styles.own]: step.lists.own },
-          ])}
-        ></i>
-        <i
-          className={classNames([
-            "bi bi-dice-3-fill",
-            { [styles.wantToPlay]: step.lists.wantToPlay },
-          ])}
-        ></i>
-        <i
-          className={classNames([
-            "bi bi-gift-fill",
-            { [styles.wishlist]: step.lists.wishlist },
-          ])}
-        ></i>
-      </div>
-      <Image
-        src={step.image!}
-        width={100}
-        height={100}
-        alt={step.text}
-        className={styles.picture}
-      />
-      {step.text}
-    </div>
   );
 };
 
