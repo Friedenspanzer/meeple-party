@@ -37,32 +37,7 @@
 }
 
 .user {
-  display: grid;
-  column-gap: 0.4rem;
+  display: flex;
+  gap: 0.4rem;
   align-items: center;
-}
-
-.avatar {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-}
-
-.username {
-  grid-column: 2;
-  grid-row: 1;
-  font-weight: bold;
-  line-height: 1rem;
-}
-
-.realname {
-  grid-column: 2;
-  grid-row: 2;
-  font-size: 0.75rem;
-  line-height: 0.75rem;
-}
-
-.usermenu {
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  padding-left: 0.7rem;
 }

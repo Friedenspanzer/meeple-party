@@ -4,10 +4,10 @@
 import { useUser } from "@/context/userContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Avatar from "../Avatar/Avatar";
 import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
 import styles from "./topnav.module.css";
 import Image from "next/image";
+import Person from "../Person/Person";
 
 export default function TopNav() {
   const pathname = usePathname();
@@ -51,11 +51,11 @@ export default function TopNav() {
             </Link>
           </ul>
           <div className={styles.user}>
-            <div className={styles.avatar}>
-              <Avatar image={user.image} name={!!user.name ? user.name : ""} />
-            </div>
-            <div className={styles.username}>{user.name}</div>
-            <div className={styles.realname}>{user.realName}</div>
+            <Person
+              name={user.name!}
+              image={user.image || undefined}
+              realName={user.realName || undefined}
+            />
             <div className={styles.usermenu}>
               <div className="dropdown">
                 <button
