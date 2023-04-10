@@ -9,8 +9,6 @@ import { ImportConfiguration } from "../page";
 import validator from "validator";
 import { Game, GameCollection } from "@prisma/client";
 import styles from "./import.module.css";
-import Image from "next/image";
-import classNames from "classnames";
 import CollectionChange from "@/components/CollectionChange/CollectionChange";
 
 export interface ImportProps {
