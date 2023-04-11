@@ -8,55 +8,70 @@ import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
 import styles from "./topnav.module.css";
 import Image from "next/image";
 import Person from "../Person/Person";
+import classNames from "classnames";
 
 export default function TopNav() {
   const pathname = usePathname();
   const { user } = useUser();
 
-  return (
-    <>
-      {!!user && (
-        <nav className={styles.menuBar}>
+  if (user) {
+    return (
+      <nav className="navbar navbar-expand-lg bg-primary-subtle">
+        <div className="container-fluid">
           <Image
             src="/logo.svg"
             width={100}
             height={100}
             alt="Meeple Party"
-            className={styles.logo}
+            className="navbar-brand"
           />
-          <ul className={styles.menu} style={{ marginBottom: 0 }}>
-            <Link href="/app">
-              <li className={pathname === "/app" ? styles.active : ""}>
-                Dashboard
-              </li>
-            </Link>
-            <Link href="/app/collection">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li
-                className={
-                  pathname?.startsWith("/app/collection") ? styles.active : ""
-                }
+                className={classNames("nav-item", {
+                  active: pathname === "/app",
+                })}
               >
-                Your Collection
+                <Link href="/app" className="nav-link">
+                  Dashboard
+                </Link>
               </li>
-            </Link>
-            <Link href="/app/friends">
               <li
-                className={
-                  pathname?.startsWith("/app/friends") ? styles.active : ""
-                }
+                className={classNames("nav-item", {
+                  active: pathname?.startsWith("/app/collection"),
+                })}
               >
-                Friends&nbsp;
-                <FriendRequestsBadge />
+                <Link href="/app/collection" className="nav-link">
+                  Collection
+                </Link>
               </li>
-            </Link>
-          </ul>
-          <div className={styles.user}>
-            <Person
-              name={user.name!}
-              image={user.image || undefined}
-              realName={user.realName || undefined}
-            />
-            <div className={styles.usermenu}>
+              <li
+                className={classNames("nav-item", {
+                  active: pathname?.startsWith("/app/friends"),
+                })}
+              >
+                <Link href="/app/friends" className="nav-link">
+                  Friends&nbsp; <FriendRequestsBadge />
+                </Link>
+              </li>
+            </ul>
+            <div className={classNames("d-flex", styles.user)}>
+              <Person
+                name={user.name!}
+                image={user.image || undefined}
+                realName={user.realName || undefined}
+              />
               <div className="dropdown">
                 <button
                   className="btn btn-outline-secondary dropdown-toggle"
@@ -64,7 +79,7 @@ export default function TopNav() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 ></button>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <Link
                       href={`/app/profile/${user.id}`}
@@ -90,8 +105,10 @@ export default function TopNav() {
               </div>
             </div>
           </div>
-        </nav>
-      )}
-    </>
-  );
+        </div>
+      </nav>
+    );
+  } else {
+    return <></>;
+  }
 }
