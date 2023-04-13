@@ -5,6 +5,7 @@ import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
 import { Game, Relationship, RelationshipType, User } from "@prisma/client";
+import classNames from "classnames";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProfileRelationship from "./components/relationship";
@@ -48,23 +49,42 @@ export default async function ProfilePage({
   const moreHeaders = getMoreHeaders(user);
 
   return (
-    <div className={styles.profile}>
-      <Avatar
-        image={user.image}
-        name={user.name || ""}
-        className={styles.avatar}
-      />
-      <h1 className={styles.name}>{user.name}</h1>
-      {(isFriend || isMe) && (
-        <h2 className={styles.realName}>{user.realName}</h2>
-      )}
+    <div className="container-md">
+      <div className="row align-items-center">
+        <div className="col-md-1">
+          <Avatar
+            image={user.image}
+            name={user.name || ""}
+            className={styles.avatar}
+          />
+        </div>
+        <div className="col">
+          <h1 className={styles.name}>{user.name}</h1>
+          {(isFriend || isMe) && (
+            <h2 className={styles.realName}>{user.realName}</h2>
+          )}
+        </div>
+        {isMe && (
+          <div className="col-4">
+            <Link
+              className="btn btn-primary"
+              href="/app/profile/edit"
+              role="button"
+            >
+              Edit your profile
+            </Link>
+          </div>
+        )}
+      </div>
       {(isFriend || isMe) && !!moreHeaders && (
-        <div
-          className={styles.moreHeader}
-          dangerouslySetInnerHTML={{ __html: moreHeaders }}
-        />
+        <div className="row my-2">
+          <div
+            className={classNames(styles.moreHeader, "col-11 offset-md-1")}
+            dangerouslySetInnerHTML={{ __html: moreHeaders }}
+          />
+        </div>
       )}
-      <div className={styles.roles}>
+      <div className={classNames(styles.roles, "col-11 offset-md-1")}>
         <Role role={user.role} />
         {isMe && (
           <span className="badge text-bg-light">
@@ -82,19 +102,8 @@ export default async function ProfilePage({
           <ProfileRelationship targetUserId={user.id} />
         </div>
       )}
-      {isMe && (
-        <div className={styles.action}>
-          <Link
-            className="btn btn-primary"
-            href="/app/profile/edit"
-            role="button"
-          >
-            Edit your profile
-          </Link>
-        </div>
-      )}
-      <div className={styles.content}>
-        <div className={styles.about}>
+      <div className="row my-2">
+        <div className="col-md-7 offset-md-1">
           {!!user.about && (
             <>
               <h3>About</h3>
@@ -109,7 +118,7 @@ export default async function ProfilePage({
           )}
         </div>
         {user.favorites.length > 0 && (
-          <div className={styles.favorites}>
+          <div className="col-md-3">
             <h3>Favorite games</h3>
             {user.favorites.slice(0, 6).map((g) => (
               <GameBox game={g} key={g.id} showFriendCollection={false} />
