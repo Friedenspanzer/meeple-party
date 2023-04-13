@@ -12,11 +12,11 @@
   border: 0;
   text-align: center;
   background-color: transparent;
+  color: black;
 }
 
 .collectionStatusButton:hover {
   font-weight: bold;
-  /* background-color: var(--bs-gray-200); */
 }
 
 .collectionStatusButton i {
