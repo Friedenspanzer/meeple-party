@@ -44,8 +44,8 @@ $danger: #e72330;
 
 // Customizing
 @import "./custom/forms";
-@import "./custom/navbar.scss";
+@import "./custom/navbar";
 
 // Own styles
-@import "./variables.scss";
-@import "./shimmer.scss";
+@import "./variables";
+@import "./shimmer";
