@@ -16,7 +16,7 @@ export default function TopNav() {
 
   if (user) {
     return (
-      <nav className="navbar navbar-expand-lg bg-primary-subtle">
+      <nav className="navbar navbar-expand-md bg-primary-subtle shadow-sm">
         <div className="container-fluid">
           <Image
             src="/logo.svg"
