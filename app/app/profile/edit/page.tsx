@@ -146,7 +146,7 @@ const EditProfile: React.FC = () => {
       </div>
 
       <div className="row mb-4">
-        <div className="col-4">
+        <div className="col-md-4">
           <label htmlFor="profileName" className="form-label">
             Profile name
           </label>
@@ -174,7 +174,7 @@ const EditProfile: React.FC = () => {
           </div>
         </div>
 
-        <div className="col-4">
+        <div className="col-md-4">
           <label htmlFor="realName" className="form-label">
             Real name
           </label>
@@ -201,7 +201,7 @@ const EditProfile: React.FC = () => {
           </div>
         </div>
 
-        <div className="col-4">
+        <div className="col-md-4">
           <label htmlFor="place" className="form-label">
             Place
           </label>
@@ -230,7 +230,7 @@ const EditProfile: React.FC = () => {
       </div>
 
       <div className="row mb-4">
-        <div className="col-6">
+        <div className="col-md-6">
           <label htmlFor="place" className="form-label">
             About yourself
           </label>
@@ -256,7 +256,7 @@ const EditProfile: React.FC = () => {
           </div>
         </div>
 
-        <div className="col-6">
+        <div className="col-md-6">
           <label htmlFor="place" className="form-label">
             Your gaming preferences
           </label>
@@ -324,6 +324,12 @@ const EditProfile: React.FC = () => {
       </div>
 
       <div className="row mb-4">
+        <div className="alert alert-warning col-md-8 order-md-2" role="alert">
+          <i className="bi bi-exclamation-octagon-fill"></i>{" "}
+          <strong>Beware:</strong> Everything that is shown to your friends may
+          also be shown to people you send friend requests to (but not people
+          sending friend requests to you).
+        </div>
         <div className="col-4">
           <button
             type="button"
@@ -346,12 +352,6 @@ const EditProfile: React.FC = () => {
             )}
             Save
           </button>
-        </div>
-        <div className="alert alert-warning col-8" role="alert">
-          <i className="bi bi-exclamation-octagon-fill"></i>{" "}
-          <strong>Beware:</strong> Everything that is shown to your friends may
-          also be shown to people you send friend requests to (but not people
-          sending friend requests to you).
         </div>
       </div>
     </form>
