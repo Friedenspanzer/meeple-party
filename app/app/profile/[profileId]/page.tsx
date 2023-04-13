@@ -50,60 +50,67 @@ export default async function ProfilePage({
 
   return (
     <div className="container-md">
-      <div className="row align-items-center">
-        <div className="col-md-1">
+      <div className={classNames("row align-items-center pt-2", styles.header)}>
+        <div
+          className={classNames(
+            "col-md-2 pt-2 ml-2 d-flex flex-md-column align-items-center",
+            styles.avatar
+          )}
+        >
           <Avatar
             image={user.image}
             name={user.name || ""}
             className={styles.avatar}
           />
-        </div>
-        <div className="col">
-          <h1 className={styles.name}>{user.name}</h1>
-          {(isFriend || isMe) && (
-            <h2 className={styles.realName}>{user.realName}</h2>
+          <Role role={user.role} />
+          {isMe && (
+            <span className="badge text-bg-light">
+              <i className="bi bi-person-circle"></i> It&apos;s you!
+            </span>
+          )}
+          {isFriend && (
+            <span className="badge text-bg-dark">
+              <i className="bi bi-person-fill"></i> Friend
+            </span>
           )}
         </div>
-        {isMe && (
-          <div className="col-4">
-            <Link
-              className="btn btn-primary"
-              href="/app/profile/edit"
-              role="button"
-            >
-              Edit your profile
-            </Link>
+        <div className="col">
+          <div className="row mt-1">
+            {isMe && (
+              <div className="col-md-2 order-md-2">
+                <Link
+                  className="btn btn-primary"
+                  href="/app/profile/edit"
+                  role="button"
+                >
+                  Edit your profile
+                </Link>
+              </div>
+            )}
+            <div className="col order-md-1">
+              <h1 className={styles.name}>{user.name}</h1>
+              {(isFriend || isMe) && (
+                <h2 className={styles.realName}>{user.realName}</h2>
+              )}
+            </div>
           </div>
-        )}
-      </div>
-      {(isFriend || isMe) && !!moreHeaders && (
-        <div className="row my-2">
-          <div
-            className={classNames(styles.moreHeader, "col-11 offset-md-1")}
-            dangerouslySetInnerHTML={{ __html: moreHeaders }}
-          />
+          {(isFriend || isMe) && !!moreHeaders && (
+            <div className={classNames("row pb-2")}>
+              <div
+                className={classNames(styles.moreHeader, "col-11")}
+                dangerouslySetInnerHTML={{ __html: moreHeaders }}
+              />
+            </div>
+          )}
+          {!isMe && !isFriend && (
+            <div className={styles.action}>
+              <ProfileRelationship targetUserId={user.id} />
+            </div>
+          )}
         </div>
-      )}
-      <div className={classNames(styles.roles, "col-11 offset-md-1")}>
-        <Role role={user.role} />
-        {isMe && (
-          <span className="badge text-bg-light">
-            <i className="bi bi-person-circle"></i> It&apos;s you!
-          </span>
-        )}
-        {isFriend && (
-          <span className="badge text-bg-dark">
-            <i className="bi bi-person-fill"></i> Friend
-          </span>
-        )}
       </div>
-      {!isMe && !isFriend && (
-        <div className={styles.action}>
-          <ProfileRelationship targetUserId={user.id} />
-        </div>
-      )}
-      <div className="row my-2">
-        <div className="col-md-7 offset-md-1">
+      <div className="row py-2">
+        <div className="col-md-9">
           {!!user.about && (
             <>
               <h3>About</h3>
@@ -127,22 +134,25 @@ export default async function ProfilePage({
         )}
       </div>
       {(isFriend || isMe) && (
-        <GameCollection
-          games={user.games
-            .sort((a, b) => (a.game.name > b.game.name ? 1 : -1))
-            .map(({ game, own, wantToPlay, wishlist }) => ({
-              game: cleanGame(game),
-              status: {
-                own,
-                wantToPlay,
-                wishlist,
-              },
-            }))}
-          className={styles.collection}
-          showFriendCollection={false}
-        >
-          <h3>{user.name}&#39;s collection</h3>
-        </GameCollection>
+        <div className="row py2">
+          <div className="col">
+            <GameCollection
+              games={user.games
+                .sort((a, b) => (a.game.name > b.game.name ? 1 : -1))
+                .map(({ game, own, wantToPlay, wishlist }) => ({
+                  game: cleanGame(game),
+                  status: {
+                    own,
+                    wantToPlay,
+                    wishlist,
+                  },
+                }))}
+              showFriendCollection={false}
+            >
+              <h3>{user.name}&#39;s collection</h3>
+            </GameCollection>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -1,3 +1,11 @@
+.header {
+  background-color: rgba(75, 15, 138, 0.5);
+}
+
+.avatar {
+  gap: 0.25rem;
+}
+
 .name {
   margin: 0;
 }
