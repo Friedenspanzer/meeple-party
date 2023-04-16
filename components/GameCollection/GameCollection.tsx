@@ -3,7 +3,7 @@
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import classNames from "classnames";
-import { useCallback, useEffect, useState } from "react";
+import { ReactFragment, useCallback, useEffect, useState } from "react";
 import GameBox from "../GameBox/GameBox";
 import styles from "./gamecollection.module.css";
 import { useDebounce } from "use-debounce";
@@ -123,37 +123,35 @@ function pageButtons(
   }
   pagesToShow.push(totalNumberOfPages - 1);
   let lastButtonShown = -1;
-  return (
-    <>
-      {pagesToShow.map((page) => {
-        const showFiller = lastButtonShown !== page - 1;
-        lastButtonShown = page;
-        return (
-          <>
-            {showFiller && (
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                disabled
-              >
-                …
-              </button>
-            )}
-            <button
-              type="button"
-              className={classNames("btn btn-primary", {
-                active: page === currentPage,
-              })}
-              key={page}
-              onClick={() => setPage(page)}
-            >
-              {page + 1}
-            </button>
-          </>
-        );
-      })}
-    </>
-  );
+  const pageElements: JSX.Element[] = [];
+  pagesToShow.forEach((page) => {
+    if (lastButtonShown !== page - 1) {
+      pageElements.push(
+        <button
+          type="button"
+          className="btn btn-outline-primary"
+          key={page + totalNumberOfPages + 10}
+          disabled
+        >
+          …
+        </button>
+      );
+    }
+    lastButtonShown = page;
+    pageElements.push(
+      <button
+        type="button"
+        className={classNames("btn btn-primary", {
+          active: page === currentPage,
+        })}
+        key={page}
+        onClick={() => setPage(page)}
+      >
+        {page + 1}
+      </button>
+    );
+  });
+  return pageElements;
 }
 
 export default GameCollection;
