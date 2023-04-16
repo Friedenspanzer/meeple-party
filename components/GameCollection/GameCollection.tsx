@@ -71,24 +71,46 @@ function pageButtons(
   currentPage: number,
   setPage: (page: number) => void
 ) {
-  const pages = Array(totalNumberOfPages);
-  for (let i = 0; i < totalNumberOfPages; i++) {
-    pages[i] = i;
+  const pagesToShow = Array();
+  pagesToShow.push(0);
+  for (
+    let i = Math.max(currentPage - 2, 1);
+    i <= Math.min(currentPage + 2, totalNumberOfPages - 2);
+    i++
+  ) {
+    pagesToShow.push(i);
   }
+  pagesToShow.push(totalNumberOfPages - 1);
+  let lastButtonShown = -1;
   return (
     <>
-      {pages.map((page) => (
-        <button
-          type="button"
-          className={classNames("btn btn-primary", {
-            active: page === currentPage,
-          })}
-          key={page}
-          onClick={() => setPage(page)}
-        >
-          {page + 1}
-        </button>
-      ))}
+      {pagesToShow.map((page) => {
+        const showFiller = lastButtonShown !== page - 1;
+        lastButtonShown = page;
+        return (
+          <>
+            {showFiller && (
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                disabled
+              >
+                …
+              </button>
+            )}
+            <button
+              type="button"
+              className={classNames("btn btn-primary", {
+                active: page === currentPage,
+              })}
+              key={page}
+              onClick={() => setPage(page)}
+            >
+              {page + 1}
+            </button>
+          </>
+        );
+      })}
     </>
   );
 }
