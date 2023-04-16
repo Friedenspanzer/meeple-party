@@ -1,5 +1,6 @@
 "use client";
 
+import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./navigationbar.module.css";
@@ -27,8 +28,11 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   const pathname = usePathname();
 
   return (
-    <li className="nav-item">
-      <Link href={href} className={`nav-link ${pathname === href && "active"} ${styles.bar}`}>
+    <li className={classNames("nav-item", styles.navItem)}>
+      <Link
+        href={href}
+        className={`nav-link ${pathname === href && "active"} ${styles.bar}`}
+      >
         {children}
       </Link>
     </li>

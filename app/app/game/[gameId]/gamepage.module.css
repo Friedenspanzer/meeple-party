@@ -10,6 +10,7 @@
   min-height: 500px;
   overflow: hidden;
   z-index: 2;
+  transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
   grid-row: 1;
   grid-column: 1 / span 2;
@@ -159,4 +160,104 @@
 .avatar {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width:992px) {
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    min-height: unset;
+    overflow: unset;
+    transform: unset;
+    -webkit-transform: unset;
+    order: 1;
+  }
+
+  .headerImage {
+    display: none;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    align-items: center;
+    min-height: unset;
+    position: relative;
+  }
+
+  .headerInformation {
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: unset;
+    align-items: unset;
+    gap: 0.5rem 0;
+  }
+
+  .rating {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 2;
+  }
+
+  .gameName {
+    grid-row: 1;
+    grid-column: 3 / span 4;
+    margin-left: -40px;
+  }
+
+  .gameYear {
+    grid-row: 2;
+    grid-column: 3 / span 4;
+    margin-left: -40px;
+  }
+
+  .design {
+    grid-row: 3;
+    grid-column: 1 / span 3;
+  }
+
+  .art {
+    grid-row: 3;
+    grid-column: 4 / span 3;
+  }
+
+  .playerCount {
+    grid-row: 5;
+    grid-column: 1 / span 2;
+  }
+
+  .playingTime {
+    grid-row: 5;
+    grid-column: 3 / Span 2;
+  }
+
+  .weight {
+    grid-row: 5;
+    grid-column: 5 / span 2;
+  }
+
+  .staff {
+    align-items: flex-start;
+  }
+
+  .staff ul {
+    display: flex;
+    flex-direction: column-reverse;
+    font-weight: 400;
+  }
+
+  .staff h3 {
+    min-width: 52px;
+    text-align: right;
+  }
+
+  .meta {
+    order: 2;
+  }
+
+  .description {
+    order: 3;
+  }
 }

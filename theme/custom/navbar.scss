@@ -1,0 +1,22 @@
+.navbar-brand {
+  height: 45px;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--text-color);
+}
+
+.nav-item {
+  border-bottom: 2px solid var(--bs-gray-600);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.nav-item:hover {
+  border-bottom-color: var(--bs-gray-800);
+}
+
+.nav-item.active {
+  border-bottom-color: var(--bs-primary);
+}

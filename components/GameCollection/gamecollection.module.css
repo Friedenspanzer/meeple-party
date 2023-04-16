@@ -8,4 +8,14 @@
 
 .games {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.page {
+  width: 2.5rem;
 }

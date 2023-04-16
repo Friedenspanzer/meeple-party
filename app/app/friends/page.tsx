@@ -23,25 +23,25 @@ export default async function Friends() {
   return (
     <>
       <h2>Your friend&apos;s collection updates</h2>
-      <div className={styles.updateContainer}>
+      <div className="container">
         {collectionUpdates.map((update) => {
           const ret = (
-            <div className={styles.line} key={update.updatedAt?.toTimeString()}>
-              {update.userId !== lastFriendId ? (
-                <Link
-                  href={`/app/profile/${update.userId}`}
-                  className={styles.link}
-                >
-                  <Person
-                    name={update.user.name!}
-                    image={update.user.image || undefined}
-                    className={styles.person}
-                    realName={update.user.realName || undefined}
-                  />
-                </Link>
-              ) : (
-                <div className={styles.person}></div>
-              )}
+            <div className="row" key={update.updatedAt?.toTimeString()}>
+              <div className="col-lg-3">
+                {update.userId !== lastFriendId && (
+                  <Link
+                    href={`/app/profile/${update.userId}`}
+                    className={styles.link}
+                  >
+                    <Person
+                      name={update.user.name!}
+                      image={update.user.image || undefined}
+                      className={styles.person}
+                      realName={update.user.realName || undefined}
+                    />
+                  </Link>
+                )}
+              </div>
               <CollectionChange
                 image={update.game.image!}
                 operation="add"
@@ -49,7 +49,7 @@ export default async function Friends() {
                 own={update.own}
                 wantToPlay={update.wantToPlay}
                 wishlist={update.wishlist}
-                className={styles.change}
+                className="col-lg-9"
                 href={`/app/game/${update.gameId}`}
               />
             </div>

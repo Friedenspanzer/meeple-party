@@ -3,9 +3,11 @@
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import classNames from "classnames";
-import { useCallback, useState } from "react";
+import { ReactFragment, useCallback, useEffect, useState } from "react";
 import GameBox from "../GameBox/GameBox";
 import styles from "./gamecollection.module.css";
+import { useDebounce } from "use-debounce";
+import validator from "validator";
 
 export interface GameCollectionProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,11 +29,36 @@ const GameCollection: React.FC<GameCollectionProps> = ({
   ...props
 }) => {
   const [page, setPage] = useState(0);
+  const [inputPage, setInputPage] = useState("1");
   const totalNumberOfPages = Math.ceil(games.length / ITEMS_PER_PAGE);
+
+  const [debouncedInputPage] = useDebounce(inputPage, 1000);
 
   const getOffset = useCallback(() => {
     return page * ITEMS_PER_PAGE;
   }, [page]);
+
+  useEffect(() => {
+    setInputPage(`${page + 1}`);
+  }, [page]);
+
+  useEffect(() => {
+    if (
+      debouncedInputPage.length === 0 ||
+      !validator.isInt(debouncedInputPage)
+    ) {
+      setInputPage(validator.toString(page + 1));
+    } else {
+      const targetPage = validator.toInt(debouncedInputPage);
+      if (targetPage < 1) {
+        setPage(0);
+      } else if (targetPage > totalNumberOfPages) {
+        setPage(totalNumberOfPages - 1);
+      } else {
+        setPage(targetPage - 1);
+      }
+    }
+  }, [debouncedInputPage, totalNumberOfPages]);
 
   return (
     <div {...props}>
@@ -47,12 +74,27 @@ const GameCollection: React.FC<GameCollectionProps> = ({
                 key={getGameId(game)}
                 showFriendCollection={showFriendCollection}
                 friendCollection={friendCollections}
+                className={styles.gameBox}
               />
             ))}
         </div>
-        <div className={classNames("btn-group", styles.pages)}>
-          {pageButtons(totalNumberOfPages, page, setPage)}
-        </div>
+        {totalNumberOfPages > 1 && (
+          <>
+            <div className={classNames("btn-group", styles.pages)}>
+              {pageButtons(totalNumberOfPages, page, setPage)}
+            </div>
+            <div>
+              <input
+                type="number"
+                value={inputPage}
+                onChange={(e) => setInputPage(e.currentTarget.value)}
+                aria-label="Current page"
+                className={styles.page}
+              />{" "}
+              of {totalNumberOfPages}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -70,26 +112,46 @@ function pageButtons(
   currentPage: number,
   setPage: (page: number) => void
 ) {
-  const pages = Array(totalNumberOfPages);
-  for (let i = 0; i < totalNumberOfPages; i++) {
-    pages[i] = i;
+  const pagesToShow = Array();
+  pagesToShow.push(0);
+  for (
+    let i = Math.max(currentPage - 2, 1);
+    i <= Math.min(currentPage + 2, totalNumberOfPages - 2);
+    i++
+  ) {
+    pagesToShow.push(i);
   }
-  return (
-    <>
-      {pages.map((page) => (
+  pagesToShow.push(totalNumberOfPages - 1);
+  let lastButtonShown = -1;
+  const pageElements: JSX.Element[] = [];
+  pagesToShow.forEach((page) => {
+    if (lastButtonShown !== page - 1) {
+      pageElements.push(
         <button
           type="button"
-          className={classNames("btn btn-primary", {
-            active: page === currentPage,
-          })}
-          key={page}
-          onClick={() => setPage(page)}
+          className="btn btn-outline-primary"
+          key={page + totalNumberOfPages + 10}
+          disabled
         >
-          {page + 1}
+          …
         </button>
-      ))}
-    </>
-  );
+      );
+    }
+    lastButtonShown = page;
+    pageElements.push(
+      <button
+        type="button"
+        className={classNames("btn btn-primary", {
+          active: page === currentPage,
+        })}
+        key={page}
+        onClick={() => setPage(page)}
+      >
+        {page + 1}
+      </button>
+    );
+  });
+  return pageElements;
 }
 
 export default GameCollection;

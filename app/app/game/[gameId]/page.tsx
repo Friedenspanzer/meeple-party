@@ -19,6 +19,20 @@ export default async function Game({ params }: { params: { gameId: string } }) {
     const user = await getServerUser();
     const game = await getBggGame(id);
     const friendCollections = await getCollectionStatusOfFriends(id, user.id);
+    const gameDesigners =
+      game.designers.length <= 5
+        ? game.designers
+        : [
+            ...game.designers.slice(0, 5),
+            `... and ${game.designers.length - 5} more`,
+          ];
+    const gameArtists =
+      game.artists.length <= 5
+        ? game.artists
+        : [
+            ...game.artists.slice(0, 5),
+            `... and ${game.artists.length - 5} more`,
+          ];
     return (
       <div className={styles.container}>
         <div className={styles.header}>
@@ -47,21 +61,21 @@ export default async function Game({ params }: { params: { gameId: string } }) {
               />
               <h2 className={styles.gameName}>{game.name}</h2>
               <span className={styles.gameYear}>{game.year}</span>
-              {game.designers.length > 0 && (
+              {gameDesigners.length > 0 && (
                 <div className={classNames(styles.staff, styles.design)}>
                   <h3>Design</h3>
                   <ul>
-                    {[...game.designers].reverse().map((d) => (
+                    {[...gameDesigners].reverse().map((d) => (
                       <li key={d}>{d}</li>
                     ))}
                   </ul>
                 </div>
               )}
-              {game.artists.length > 0 && (
+              {gameArtists.length > 0 && (
                 <div className={classNames(styles.staff, styles.art)}>
                   <h3>Art</h3>
                   <ul>
-                    {[...game.artists].reverse().map((d) => (
+                    {[...gameArtists].reverse().map((d) => (
                       <li key={d}>{d}</li>
                     ))}
                   </ul>

@@ -17,17 +17,21 @@ const FriendRequests: React.FC = (props) => {
   return (
     <>
       <h2>Incoming requests</h2>
-      {relationships
-        ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED)
-        .map((r) => (
-          <IncomingFriendRequest request={r} key={r.profile.id} />
-        ))}
+      <div className="container-md">
+        {relationships
+          ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED)
+          .map((r) => (
+            <IncomingFriendRequest request={r} key={r.profile.id} />
+          ))}
+      </div>
       <h2>Sent requests</h2>
-      {relationships
-        ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_SENT)
-        .map((r) => (
-          <SentFriendRequest request={r} key={r.profile.id} />
-        ))}
+      <div className="container-md">
+        {relationships
+          ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_SENT)
+          .map((r) => (
+            <SentFriendRequest request={r} key={r.profile.id} />
+          ))}
+      </div>
     </>
   );
 };

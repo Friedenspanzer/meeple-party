@@ -40,10 +40,12 @@ $danger: #e72330;
 @import "../node_modules/bootstrap/scss/alert";
 @import "../node_modules/bootstrap/scss/transitions";
 @import "../node_modules/bootstrap/scss/card";
+@import "../node_modules/bootstrap/scss/navbar";
 
 // Customizing
 @import "./custom/forms";
+@import "./custom/navbar";
 
 // Own styles
-@import "./variables.scss";
-@import "./shimmer.scss";
+@import "./variables";
+@import "./shimmer";
