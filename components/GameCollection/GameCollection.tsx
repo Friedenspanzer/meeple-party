@@ -47,6 +47,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
                 key={getGameId(game)}
                 showFriendCollection={showFriendCollection}
                 friendCollection={friendCollections}
+                className={styles.gameBox}
               />
             ))}
         </div>

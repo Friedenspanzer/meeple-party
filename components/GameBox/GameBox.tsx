@@ -12,7 +12,7 @@ import { StatusByUser } from "@/datatypes/collection";
 import { PrivateUser } from "@/datatypes/userProfile";
 import CollectionStatusButtons from "../CollectionStatusButtons/CollectionStatusButtons";
 
-export interface GameBoxProps {
+export interface GameBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   game: Game | number;
   status?: CollectionStatus;
   friendCollection?: StatusByUser;
@@ -24,6 +24,8 @@ export default function GameBox({
   status,
   friendCollection,
   showFriendCollection = false,
+  className,
+  ...props
 }: GameBoxProps) {
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
@@ -71,7 +73,7 @@ export default function GameBox({
   }, [game]);
 
   return gameData ? (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)} {...props}>
       <div className={styles.gamebox}>
         <div className={styles.imageBox}>
           <Link href={`/app/game/${gameData.id}`}>
