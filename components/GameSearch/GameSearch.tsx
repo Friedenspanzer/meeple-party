@@ -76,7 +76,7 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
       </div>
       {!dirty && !error && !!result && resultView({ searchResult: result })}
       {error && (
-        <div className="alert alert-danger col-5" role="alert">
+        <div className="alert alert-danger col-md-5" role="alert">
           <h4>
             <i className="bi bi-exclamation-octagon-fill"></i> Error during game
             search

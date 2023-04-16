@@ -20,7 +20,7 @@ const Username: React.FC<UsernameProps> = (props) => {
 
   const onReady = () => {
     const sanitizedName = sanitizeBggName(bggName!);
-    const validationResult = validateBggName(sanitizedName)
+    const validationResult = validateBggName(sanitizedName);
     if (!validationResult) {
       setNameError(false);
       setLoading(true);
@@ -41,40 +41,43 @@ const Username: React.FC<UsernameProps> = (props) => {
 
   return (
     <>
-      <form className="container-sm row row-cols-3">
-        <div className="col">
-          <label>Your BoardGameGeek username</label>
-          <input
-            className="form-control"
-            type="text"
-            placeholder="BoardGameGeek username"
-            value={!!bggName ? bggName : ""}
-            onChange={(e) => setBggName(e.currentTarget.value)}
-            aria-describedby="bggNameHelp"
-          />
-          {nameError &&
-            <div
-              id="bggNameHelp"
-              className="form-text text-danger"
+      <form>
+        <div className="row align-items-baseline g-4">
+          <div className="col-md-auto">
+            <label>Your BoardGameGeek username</label>
+          </div>
+          <div className="col-md-4">
+            <input
+              className="form-control"
+              type="text"
+              placeholder="BoardGameGeek username"
+              value={!!bggName ? bggName : ""}
+              onChange={(e) => setBggName(e.currentTarget.value)}
+              aria-describedby="bggNameHelp"
+            />
+            {nameError && (
+              <div id="bggNameHelp" className="form-text text-danger">
+                {nameError}
+              </div>
+            )}
+          </div>
+          <div className="col align-self-start">
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={onReady}
+              disabled={loading}
             >
-              {nameError}
-            </div>
-          }
+              Next{" "}
+              {loading ? (
+                <Spinner size="small" />
+              ) : (
+                <i className="bi bi-caret-right-square"></i>
+              )}
+            </button>
+          </div>
         </div>
       </form>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={onReady}
-        disabled={loading}
-      >
-        Next{" "}
-        {loading ? (
-          <Spinner size="small" />
-        ) : (
-          <i className="bi bi-caret-right-square"></i>
-        )}
-      </button>
     </>
   );
 };
