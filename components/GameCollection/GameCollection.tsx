@@ -8,6 +8,8 @@ import { useDebounce } from "use-debounce";
 import validator from "validator";
 import GameBox from "../GameBox/GameBox";
 import styles from "./gamecollection.module.css";
+import { useDebounce } from "use-debounce";
+import validator from "validator";
 
 export interface GameCollectionProps
   extends React.HTMLAttributes<HTMLDivElement> {
