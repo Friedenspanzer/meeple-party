@@ -3,9 +3,11 @@
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import classNames from "classnames";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GameBox from "../GameBox/GameBox";
 import styles from "./gamecollection.module.css";
+import { useDebounce } from "use-debounce";
+import validator from "validator";
 
 export interface GameCollectionProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,11 +29,36 @@ const GameCollection: React.FC<GameCollectionProps> = ({
   ...props
 }) => {
   const [page, setPage] = useState(0);
+  const [inputPage, setInputPage] = useState("1");
   const totalNumberOfPages = Math.ceil(games.length / ITEMS_PER_PAGE);
+
+  const [debouncedInputPage] = useDebounce(inputPage, 1000);
 
   const getOffset = useCallback(() => {
     return page * ITEMS_PER_PAGE;
   }, [page]);
+
+  useEffect(() => {
+    setInputPage(`${page + 1}`);
+  }, [page]);
+
+  useEffect(() => {
+    if (
+      debouncedInputPage.length === 0 ||
+      !validator.isInt(debouncedInputPage)
+    ) {
+      setInputPage(validator.toString(page + 1));
+    } else {
+      const targetPage = validator.toInt(debouncedInputPage);
+      if (targetPage < 1) {
+        setPage(0);
+      } else if (targetPage > totalNumberOfPages) {
+        setPage(totalNumberOfPages - 1);
+      } else {
+        setPage(targetPage - 1);
+      }
+    }
+  }, [debouncedInputPage, totalNumberOfPages]);
 
   return (
     <div {...props}>
@@ -53,6 +80,16 @@ const GameCollection: React.FC<GameCollectionProps> = ({
         </div>
         <div className={classNames("btn-group", styles.pages)}>
           {pageButtons(totalNumberOfPages, page, setPage)}
+        </div>
+        <div>
+          <input
+            type="number"
+            value={inputPage}
+            onChange={(e) => setInputPage(e.currentTarget.value)}
+            aria-label="Current page"
+            className={styles.page}
+          />{" "}
+          of {totalNumberOfPages}
         </div>
       </div>
     </div>
