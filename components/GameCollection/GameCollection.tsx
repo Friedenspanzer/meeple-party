@@ -3,11 +3,11 @@
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import classNames from "classnames";
-import { ReactFragment, useCallback, useEffect, useState } from "react";
-import GameBox from "../GameBox/GameBox";
-import styles from "./gamecollection.module.css";
+import { useCallback, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
+import GameBox from "../GameBox/GameBox";
+import styles from "./gamecollection.module.css";
 
 export interface GameCollectionProps
   extends React.HTMLAttributes<HTMLDivElement> {
