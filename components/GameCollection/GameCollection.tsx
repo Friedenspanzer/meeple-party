@@ -78,19 +78,23 @@ const GameCollection: React.FC<GameCollectionProps> = ({
               />
             ))}
         </div>
-        <div className={classNames("btn-group", styles.pages)}>
-          {pageButtons(totalNumberOfPages, page, setPage)}
-        </div>
-        <div>
-          <input
-            type="number"
-            value={inputPage}
-            onChange={(e) => setInputPage(e.currentTarget.value)}
-            aria-label="Current page"
-            className={styles.page}
-          />{" "}
-          of {totalNumberOfPages}
-        </div>
+        {totalNumberOfPages > 1 && (
+          <>
+            <div className={classNames("btn-group", styles.pages)}>
+              {pageButtons(totalNumberOfPages, page, setPage)}
+            </div>
+            <div>
+              <input
+                type="number"
+                value={inputPage}
+                onChange={(e) => setInputPage(e.currentTarget.value)}
+                aria-label="Current page"
+                className={styles.page}
+              />{" "}
+              of {totalNumberOfPages}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
