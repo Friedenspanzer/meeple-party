@@ -1,24 +1,12 @@
 "use client";
 
-import GameBox from "@/components/GameBox/GameBox";
+import GameCollection from "@/components/GameCollection/GameCollection";
 import GameSearch, {
   GameSearchChildren,
 } from "@/components/GameSearch/GameSearch";
 
 const resultView: React.FC<GameSearchChildren> = ({ searchResult }) => {
-  return (
-    <>
-      {searchResult.map(({ game, status, friendCollections }) => (
-        <GameBox
-          game={game}
-          status={status}
-          friendCollection={friendCollections}
-          key={game.id}
-          showFriendCollection={true}
-        />
-      ))}
-    </>
-  );
+  return <GameCollection games={searchResult} />;
 };
 
 export default function Search() {
