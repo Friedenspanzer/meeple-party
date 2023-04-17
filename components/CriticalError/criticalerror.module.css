@@ -1,0 +1,16 @@
+.modal {
+  display: unset;
+}
+
+.content {
+  border-color: var(--bs-danger);
+}
+
+.header {
+  background-color: var(--bs-danger);
+  border-color: var(--bs-danger);
+}
+
+.footer {
+  background-color: var(--bs-danger-bg-subtle);
+}
