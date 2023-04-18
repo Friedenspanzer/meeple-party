@@ -9,7 +9,7 @@ import Spinner from "@/components/Spinner/Spinner";
 import { useUser } from "@/context/userContext";
 import { Game } from "@/datatypes/game";
 import classNames from "classnames";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const EditProfile: React.FC = () => {
   const { user } = useUser();
@@ -44,25 +44,6 @@ const EditProfile: React.FC = () => {
   const [apiError, setApiError] = useState<string | false>(false);
   const [apiErrorDetail, setApiErrorDetail] = useState<string>();
 
-  const FavoriteGameResult: React.FC<GameSearchChildren> = ({
-    searchResult,
-  }) => {
-    return (
-      <>
-        {searchResult.map(({ game, status, friendCollections }) => (
-          <GamePill game={game} key={game.id}>
-            &nbsp;
-            <i
-              className="bi bi-plus"
-              style={{ cursor: "pointer" }}
-              onClick={(_) => addToFavorites(game.id)}
-            ></i>
-          </GamePill>
-        ))}
-      </>
-    );
-  };
-
   const addToFavorites = useCallback(
     (gameId: number) => {
       fetch(`/api/games/${gameId}`)
@@ -79,6 +60,11 @@ const EditProfile: React.FC = () => {
         });
     },
     [favorites]
+  );
+
+  const FavoriteGameResult = useMemo(
+    () => bindFavoriteGameResult(addToFavorites),
+    [addToFavorites]
   );
 
   const updateUser = () => {
@@ -378,5 +364,29 @@ const EditProfile: React.FC = () => {
     </>
   );
 };
+
+function bindFavoriteGameResult(
+  addToFavorites: (gameId: number) => void
+): React.FC<GameSearchChildren> {
+  const FavoriteGameResult: React.FC<GameSearchChildren> = ({
+    searchResult,
+  }) => {
+    return (
+      <>
+        {searchResult.map(({ game }) => (
+          <GamePill game={game} key={game.id}>
+            &nbsp;
+            <i
+              className="bi bi-plus"
+              style={{ cursor: "pointer" }}
+              onClick={(_) => addToFavorites(game.id)}
+            ></i>
+          </GamePill>
+        ))}
+      </>
+    );
+  };
+  return FavoriteGameResult;
+}
 
 export default EditProfile;
