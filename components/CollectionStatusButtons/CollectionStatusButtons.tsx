@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import styles from "./collectionstatusbuttons.module.css";
 import Spinner from "../Spinner/Spinner";
 import classNames from "classnames";
+import CriticalError from "../CriticalError/CriticalError";
 
 export interface CollectionStatusButtonProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,6 +24,8 @@ export default function CollectionStatusButtons({
     wantToPlay: false,
     wishlist: false,
   });
+  const [error, setError] = useState<string | false>(false);
+  const [errorDetail, setErrorDetail] = useState<string>();
 
   const setStatus = useCallback(
     (status: CollectionStatus) => {
@@ -31,10 +34,14 @@ export default function CollectionStatusButtons({
         method: "POST",
         body: JSON.stringify(status),
       })
-        .then(() =>
-          //TODO Error handling
-          setCollectionStatus(status)
-        )
+        .then((response) => {
+          if (response.ok) {
+            setCollectionStatus(status);
+          } else {
+            setError(`Error writing collection status for game ${gameId}`);
+            setErrorDetail(`${response.status} ${response.statusText}`);
+          }
+        })
         .then(() => setLoading(false));
     },
     [gameId]
@@ -58,6 +65,10 @@ export default function CollectionStatusButtons({
         .then(() => setLoading(false));
     }
   }, [status, gameId]);
+
+  if (error) {
+    return <CriticalError message={error} details={errorDetail} />;
+  }
 
   return (
     <div
