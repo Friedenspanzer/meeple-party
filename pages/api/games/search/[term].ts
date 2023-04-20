@@ -52,10 +52,7 @@ async function enrichGameData(
   return games.map((game) => ({
     game,
     status: extractStatus(game.id, myCollectionStatus),
-    friendCollections: findFriendCollection(
-      game.id,
-      myFriendsCollectionStatus
-    ),
+    friendCollections: findFriendCollection(game.id, myFriendsCollectionStatus),
   }));
 }
 

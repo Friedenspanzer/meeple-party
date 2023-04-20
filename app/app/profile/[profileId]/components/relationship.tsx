@@ -1,5 +1,6 @@
 "use client";
 
+import CriticalError from "@/components/CriticalError/CriticalError";
 import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequest";
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
 import Spinner from "@/components/Spinner/Spinner";
@@ -15,29 +16,39 @@ const SendFriendRequestButton: React.FC<{ profileId: string }> = ({
 }) => {
   const [updating, setUpdating] = useState(false);
   const [stale, setStale] = useState(false);
+  const [error, setError] = useState<string | false>(false);
+  const [errorDetail, setErrorDetail] = useState<string>();
 
   const sendRequest = useCallback(() => {
     setUpdating(true);
-    //TODO Error handling
     fetch(`/api/relationships/${profileId}`, {
       method: "POST",
-    }).then(() => {
-      setUpdating(false);
-      setStale(true);
+    }).then((response) => {
+      if (response.ok) {
+        setUpdating(false);
+        setStale(true);
+      } else {
+        setError("Error sending friend request.");
+        setErrorDetail(`${response.status} ${response.statusText}`);
+        setUpdating(false);
+      }
     });
   }, [profileId]);
 
   return updating ? (
     <Spinner size="small" />
   ) : (
-    <button
-      type="button"
-      className="btn btn-primary"
-      onClick={sendRequest}
-      disabled={updating || stale}
-    >
-      <i className="bi bi-people-fill"></i> Send friend request
-    </button>
+    <>
+      {error && <CriticalError message={error} details={errorDetail} />}
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={sendRequest}
+        disabled={updating || stale}
+      >
+        <i className="bi bi-people-fill"></i> Send friend request
+      </button>
+    </>
   );
 };
 

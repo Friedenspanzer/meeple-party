@@ -10,6 +10,7 @@ import validator from "validator";
 import { Game, GameCollection } from "@prisma/client";
 import styles from "./import.module.css";
 import CollectionChange from "@/components/CollectionChange/CollectionChange";
+import CriticalError from "@/components/CriticalError/CriticalError";
 
 export interface ImportProps {
   configuration: ImportConfiguration;
@@ -44,13 +45,22 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
   const [importSteps, setImportSteps] = useState<ImportStepDefinition[]>([]);
   const [totalNumberOfImports, setTotalNumberOfImports] = useState(0);
 
+  const [error, setError] = useState<string | false>(false);
+  const [errorDetail, setErrorDetail] = useState<string>();
+
   useEffect(() => {
     async function readCollections() {
-      //TODO Error handling
       const currentCollection: GameCollectionStatus[] = await fetch(
         "/api/collection"
       )
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            setError(`Error loading collection data.`);
+            setErrorDetail(`${response.status} ${response.statusText}`);
+          }
+        })
         .then((collection) =>
           collection.map((c: GameCollectionFromDatabase) => ({
             gameId: c.gameId,
@@ -97,6 +107,7 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
 
   return (
     <>
+      {error && <CriticalError message={error} details={errorDetail} />}
       <div
         className="progress"
         role="progressbar"
@@ -145,7 +156,6 @@ async function changeCollectionStatus(
   currentCollection: GameCollectionStatus[]
 ): Promise<ImportStepDefinition | undefined> {
   if (newStatus.own || newStatus.wantToPlay || newStatus.wishlist) {
-    //TODO Better error handling
     const result: CollectionUpdate = await fetch(
       `/api/collection/${newStatus.gameId}`,
       {
@@ -156,7 +166,13 @@ async function changeCollectionStatus(
           wishlist: newStatus.wishlist,
         } as CollectionStatus),
       }
-    ).then((response) => response.json());
+    ).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw Error(`${response.status} ${response.statusText}`);
+      }
+    });
     if (!result.success) {
       return;
     }

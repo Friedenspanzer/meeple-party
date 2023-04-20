@@ -36,14 +36,12 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
           if (response.ok) {
             return response.json();
           } else {
-            throw Error(`${response.status} ${response.statusText}`);
+            console.error(`${response.status} ${response.statusText}`);
+            setResult([]);
+            setError(true);
           }
         })
         .then(setResult)
-        .catch(() => {
-          setResult([]);
-          setError(true);
-        })
         .finally(() => setDirty(false));
     }
     return () => {
@@ -74,15 +72,20 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
         />
         {dirty && <Spinner size="small" />}
       </div>
-      {!dirty && !error && !!result && resultView({ searchResult: result })}
+      {!dirty && !error && result && resultView({ searchResult: result })}
       {error && (
-        <div className="alert alert-danger col-md-5" role="alert">
+        <div className="alert alert-danger col-md-6" role="alert">
           <h4>
             <i className="bi bi-exclamation-octagon-fill"></i> Error during game
             search
           </h4>
           Please try again later. If this persists please contact your
           administrator.
+        </div>
+      )}
+      {!dirty && !error && term.length > 0 && result.length === 0 && (
+        <div className="alert alert-info col-md-6" role="alert">
+          <i className="bi bi-binoculars-fill"></i> No results found
         </div>
       )}
     </>

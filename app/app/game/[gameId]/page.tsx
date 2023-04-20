@@ -33,26 +33,39 @@ export default async function Game({ params }: { params: { gameId: string } }) {
             ...game.artists.slice(0, 5),
             `... and ${game.artists.length - 5} more`,
           ];
+
     return (
       <div className={styles.container}>
-        <div className={styles.header}>
-          <Image
-            src={game.image || ""}
-            width={600}
-            height={200}
-            alt={game.name}
-            className={styles.headerImage}
-            unoptimized
-          />
-          <div className={styles.headerContent}>
+        <div
+          className={classNames(styles.header, {
+            [styles.noImage]: !game.image,
+          })}
+        >
+          {game.image && (
             <Image
-              src={game.image || ""}
-              width={200}
+              src={game.image}
+              width={600}
               height={200}
               alt={game.name}
-              className={styles.titleImage}
+              className={styles.headerImage}
               unoptimized
             />
+          )}
+          <div
+            className={classNames(styles.headerContent, {
+              [styles.noImage]: !game.image,
+            })}
+          >
+            {game.image && (
+              <Image
+                src={game.image || ""}
+                width={200}
+                height={200}
+                alt={game.name}
+                className={styles.titleImage}
+                unoptimized
+              />
+            )}
             <div className={styles.headerInformation}>
               <BggRating
                 rating={game.BGGRating}
