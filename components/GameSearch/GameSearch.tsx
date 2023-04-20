@@ -36,14 +36,12 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
           if (response.ok) {
             return response.json();
           } else {
-            throw Error(`${response.status} ${response.statusText}`);
+            console.error(`${response.status} ${response.statusText}`);
+            setResult([]);
+            setError(true);
           }
         })
         .then(setResult)
-        .catch(() => {
-          setResult([]);
-          setError(true);
-        })
         .finally(() => setDirty(false));
     }
     return () => {
