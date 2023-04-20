@@ -15,6 +15,9 @@ export interface ImportConfiguration {
     owned: boolean;
     preordered: boolean;
   };
+  markAsWantToPlay: {
+    wantToPlay: boolean;
+  },
   markAsWishlisted: {
     wantToBuy: boolean;
     wishlist: boolean;

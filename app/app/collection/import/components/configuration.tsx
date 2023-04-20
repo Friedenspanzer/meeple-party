@@ -12,6 +12,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
   const [configuration, setConfiguration] = useState<ImportConfiguration>({
     mode: "update",
     markAsOwned: { owned: true, preordered: true },
+    markAsWantToPlay: { wantToPlay: true },
     markAsWishlisted: {
       wantToBuy: true,
       wishlist: true,
