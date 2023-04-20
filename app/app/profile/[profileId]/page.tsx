@@ -142,9 +142,16 @@ export default async function ProfilePage({
         {user.favorites.length > 0 && (
           <div className="col-md-3">
             <h3>Favorite games</h3>
-            {user.favorites.slice(0, 6).map((g) => (
-              <GameBox game={g} key={g.id} showFriendCollection={false} />
-            ))}
+            {user.favorites.slice(0, 6).map((g) => {
+              const { updatedAt, ...cleanGame } = g;
+              return (
+                <GameBox
+                  game={cleanGame}
+                  key={g.id}
+                  showFriendCollection={false}
+                />
+              );
+            })}
           </div>
         )}
       </div>
