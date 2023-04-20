@@ -159,7 +159,9 @@ function getPrimaryName(bggGame: any): string {
 }
 
 function splitBggObject(bggObject: any): any[] {
-  if (Array.isArray(bggObject.boardgames.boardgame)) {
+  if (!bggObject.boardgames.boardgame) {
+    return [];
+  } else if (Array.isArray(bggObject.boardgames.boardgame)) {
     return bggObject.boardgames.boardgame;
   } else {
     return [bggObject.boardgames.boardgame];
@@ -167,7 +169,9 @@ function splitBggObject(bggObject: any): any[] {
 }
 
 function checkData(bggObject: any) {
-  //TODO Test this
+  if (!bggObject?.boardgame?.boardgame) {
+    return;
+  }
   if (bggObject.boardgames.boardgame.error) {
     throw Error(`BGG API error: ${bggObject.boardgame.error["@_message"]}`);
   }
