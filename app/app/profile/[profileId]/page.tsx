@@ -43,7 +43,7 @@ export default async function ProfilePage({
       },
     },
   });
-  if (!user) {
+  if (!user || !user.profileComplete) {
     notFound();
   }
 
