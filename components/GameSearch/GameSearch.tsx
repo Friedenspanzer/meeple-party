@@ -85,7 +85,7 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
           administrator.
         </div>
       )}
-      {!dirty && !error && result.length === 0 && (
+      {!dirty && !error && term.length > 0 && result.length === 0 && (
         <div className="alert alert-info col-md-6" role="alert">
           <i className="bi bi-binoculars-fill"></i> No results found
         </div>
