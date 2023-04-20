@@ -130,7 +130,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
       </div>
       <div className="row mb-2 g-2">
         <div className="col-md-4">
-          <h4>Own</h4>
+          <h4><i className="bi bi-box-seam-fill"></i> Own</h4>
           <div className="form-check form-switch">
             <input
               className="form-check-input"
@@ -178,7 +178,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <h4>Want To Play</h4>
+          <h4><i className="bi bi-dice-3-fill"></i> Want To Play</h4>
           <div className="form-check form-switch">
             <input
               className="form-check-input"
@@ -205,7 +205,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <h4>Wishlist</h4>
+          <h4><i className="bi bi-gift-fill"></i> Wishlist</h4>
           <div className="form-check form-switch">
             <input
               className="form-check-input"
