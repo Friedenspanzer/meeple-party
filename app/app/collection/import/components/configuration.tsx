@@ -125,10 +125,10 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
       </div>
       <div className="row mb-2">
         <div className="col">
-          <h3>What BGG status to import</h3>
+          <h3>What BGG status to import to which Meeple Party status</h3>
         </div>
       </div>
-      <div className="row mb-2">
+      <div className="row mb-2 g-2">
         <div className="col-md-4">
           <h4>Own</h4>
           <div className="form-check form-switch">
@@ -304,7 +304,50 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         </div>
       </div>
-      <div className="row mt-3">
+      {configuration.markAsOwned.preordered &&
+        configuration.markAsWishlisted.preordered && (
+          <div className="row mb-2">
+            <div className="col alert alert-warning">
+              <i className="bi bi-exclamation-octagon-fill"></i>{" "}
+              <strong>
+                You have selected to import the BGG status Preordered twice.
+              </strong>{" "}
+              This will set both Meeple Party status at once.
+            </div>
+          </div>
+        )}
+      {configuration.mode === "merge" &&
+        ((!configuration.markAsOwned.owned &&
+          !configuration.markAsOwned.preordered) ||
+          !configuration.markAsWantToPlay.wantToPlay ||
+          (!configuration.markAsWishlisted.preordered &&
+            !configuration.markAsWishlisted.wantInTrade &&
+            !configuration.markAsWishlisted.wantToBuy &&
+            !configuration.markAsWishlisted.wishlist)) && (
+          <div className="row mb-2">
+            <div className="col alert alert-warning">
+              <i className="bi bi-exclamation-octagon-fill"></i>{" "}
+              <strong>
+                You chose not to import any BGG status for one or more Meeple
+                Party status in Merge mode.
+              </strong>{" "}
+              While this will work the result may not be what you intended. That
+              status <em>will</em> be imported but every game on BoardGameGeek
+              will report this status as not set. So for games that are in both
+              your collections that status will also be unset in Meeple Party.
+            </div>
+          </div>
+        )}
+      {configuration.mode === "overwrite" && (
+        <div className="row mb-2">
+          <div className="col alert alert-warning">
+            <i className="bi bi-exclamation-octagon-fill"></i>{" "}
+            <strong>You chose Overwrite mode.</strong> Every status you set in
+            Meeple Party but did not replicate on BoardGameGeek will be lost.
+          </div>
+        </div>
+      )}
+      <div className="row">
         <div className="col">
           <button
             type="button"
