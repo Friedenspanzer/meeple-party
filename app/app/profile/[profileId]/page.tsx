@@ -4,7 +4,13 @@ import GameCollection from "@/components/GameCollection/GameCollection";
 import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
 import { getServerUser } from "@/utility/serverSession";
-import { Game, Relationship, RelationshipType, User } from "@prisma/client";
+import {
+  Game,
+  Relationship,
+  RelationshipType,
+  User,
+  GameCollection as PrismaGameCollection,
+} from "@prisma/client";
 import classNames from "classnames";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -41,10 +47,19 @@ export default async function ProfilePage({
     notFound();
   }
 
+  user.games.sort((a, b) => (a.game.name > b.game.name ? 1 : -1));
+
   const loggedInUser = await getServerUser();
 
   const isMe = loggedInUser.id === user.id;
   const isFriend = getAllFriendIds(user).includes(loggedInUser.id);
+
+  const myCollectionStatus = await prisma.gameCollection.findMany({
+    where: {
+      userId: loggedInUser.id,
+      gameId: { in: user.games.map((g) => g.gameId) },
+    },
+  });
 
   const moreHeaders = getMoreHeaders(user);
 
@@ -137,16 +152,10 @@ export default async function ProfilePage({
         <div className="row py2">
           <div className="col">
             <GameCollection
-              games={user.games
-                .sort((a, b) => (a.game.name > b.game.name ? 1 : -1))
-                .map(({ game, own, wantToPlay, wishlist }) => ({
-                  game: cleanGame(game),
-                  status: {
-                    own,
-                    wantToPlay,
-                    wishlist,
-                  },
-                }))}
+              games={user.games.map(({ game }) => ({
+                game: cleanGame(game),
+                status: getStatus(game.id, myCollectionStatus),
+              }))}
               showFriendCollection={false}
             >
               <h3>{user.name}&#39;s collection</h3>
@@ -156,6 +165,19 @@ export default async function ProfilePage({
       )}
     </div>
   );
+}
+
+function getStatus(gameId: number, myCollection: PrismaGameCollection[]) {
+  const relatedGame = myCollection.find((c) => c.gameId === gameId);
+  if (!relatedGame) {
+    return { own: false, wantToPlay: false, wishlist: false };
+  } else {
+    return {
+      own: relatedGame.own,
+      wantToPlay: relatedGame.wantToPlay,
+      wishlist: relatedGame.wishlist,
+    };
+  }
 }
 
 function getAllFriendIds(user: UserWithRelationships): string[] {
