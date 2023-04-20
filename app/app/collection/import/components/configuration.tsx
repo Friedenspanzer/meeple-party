@@ -69,7 +69,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         </div>
         {configuration.mode === "update" && (
-          <div className="col-10">
+          <div className="col-md-10">
             <h4>
               <i className="bi bi-patch-plus"></i> Update
             </h4>
@@ -86,7 +86,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         )}
         {configuration.mode === "merge" && (
-          <div className="col-10">
+          <div className="col-md-10">
             <h4>
               <i className="bi bi-box-arrow-in-left"></i> Merge
             </h4>
@@ -107,7 +107,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         )}
         {configuration.mode === "overwrite" && (
-          <div className="col-10">
+          <div className="col-md-10">
             <h4>
               <i className="bi bi-eraser-fill"></i> Overwrite
             </h4>
@@ -122,6 +122,187 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
             </p>
           </div>
         )}
+      </div>
+      <div className="row mb-2">
+        <div className="col">
+          <h3>What BGG status to import</h3>
+        </div>
+      </div>
+      <div className="row mb-2">
+        <div className="col-md-4">
+          <h4>Own</h4>
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckOwnOwn"
+              checked={configuration.markAsOwned.owned}
+              onChange={(e) =>
+                setConfiguration({
+                  ...configuration,
+                  markAsOwned: {
+                    ...configuration.markAsOwned,
+                    owned: e.currentTarget.checked,
+                  },
+                })
+              }
+            />
+            <label className="form-check-label" htmlFor="flexSwitchCheckOwnOwn">
+              Owned
+            </label>
+          </div>
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckOwnPreordered"
+              checked={configuration.markAsOwned.preordered}
+              onChange={(e) =>
+                setConfiguration({
+                  ...configuration,
+                  markAsOwned: {
+                    ...configuration.markAsOwned,
+                    preordered: e.currentTarget.checked,
+                  },
+                })
+              }
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckOwnPreordered"
+            >
+              Preordered
+            </label>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <h4>Want To Play</h4>
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckWantToPlay"
+              checked={configuration.markAsWantToPlay.wantToPlay}
+              onChange={(e) =>
+                setConfiguration({
+                  ...configuration,
+                  markAsWantToPlay: {
+                    ...configuration.markAsWantToPlay,
+                    wantToPlay: e.currentTarget.checked,
+                  },
+                })
+              }
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckWantToPlay"
+            >
+              Want to Play
+            </label>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <h4>Wishlist</h4>
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckWishlistWantToBuy"
+              checked={configuration.markAsWishlisted.wantToBuy}
+              onChange={(e) =>
+                setConfiguration({
+                  ...configuration,
+                  markAsWishlisted: {
+                    ...configuration.markAsWishlisted,
+                    wantToBuy: e.currentTarget.checked,
+                  },
+                })
+              }
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckWishlistWantToBuy"
+            >
+              Want to Buy
+            </label>
+          </div>
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckWishlistWishlist"
+              checked={configuration.markAsWishlisted.wishlist}
+              onChange={(e) =>
+                setConfiguration({
+                  ...configuration,
+                  markAsWishlisted: {
+                    ...configuration.markAsWishlisted,
+                    wishlist: e.currentTarget.checked,
+                  },
+                })
+              }
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckWishlistWishlist"
+            >
+              Wishlist
+            </label>
+          </div>
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckWishlistWantInTrade"
+              checked={configuration.markAsWishlisted.wantInTrade}
+              onChange={(e) =>
+                setConfiguration({
+                  ...configuration,
+                  markAsWishlisted: {
+                    ...configuration.markAsWishlisted,
+                    wantInTrade: e.currentTarget.checked,
+                  },
+                })
+              }
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckWishlistWantInTrade"
+            >
+              Want in Trade
+            </label>
+          </div>
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckWishlistPreorder"
+              checked={configuration.markAsWishlisted.preordered}
+              onChange={(e) =>
+                setConfiguration({
+                  ...configuration,
+                  markAsWishlisted: {
+                    ...configuration.markAsWishlisted,
+                    preordered: e.currentTarget.checked,
+                  },
+                })
+              }
+            />
+            <label
+              className="form-check-label"
+              htmlFor="flexSwitchCheckWishlistPreorder"
+            >
+              Preorder
+            </label>
+          </div>
+        </div>
       </div>
       <div className="row mt-3">
         <div className="col">
