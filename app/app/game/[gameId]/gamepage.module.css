@@ -16,6 +16,11 @@
   grid-column: 1 / span 2;
 }
 
+.noImage {
+  min-height: unset !important;
+  position: unset !important;
+}
+
 .headerImage {
   position: absolute;
   top: 0;
@@ -162,7 +167,7 @@
   margin-bottom: 0.5rem;
 }
 
-@media screen and (max-width:992px) {
+@media screen and (max-width: 992px) {
   .container {
     width: 100%;
     display: flex;
