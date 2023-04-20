@@ -2,7 +2,7 @@
 
 import { User } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 interface UserProviderProps {
   children?: React.ReactNode;
@@ -33,16 +33,15 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     setLoading(session.status === "loading");
   }, [session.status]);
 
-  return (
-    <UserContext.Provider
-      value={{
-        user: session.data?.user as User,
-        loading,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
+  const value = useMemo(
+    () => ({
+      user: session.data?.user as User,
+      loading,
+    }),
+    [session.data, loading]
   );
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export function useUser() {
