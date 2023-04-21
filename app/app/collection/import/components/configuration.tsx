@@ -348,9 +348,8 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
         <div className="row mb-2">
           <div className="col alert alert-warning">
             <i className="bi bi-exclamation-octagon-fill"></i>{" "}
-            <strong>You chose Overwrite mode.</strong>{" "}
-            Every status you set in Meeple Party but did not replicate on
-            BoardGameGeek will be lost.
+            <strong>You chose Overwrite mode.</strong> Every status you set in
+            Meeple Party but did not replicate on BoardGameGeek will be lost.
           </div>
         </div>
       )}
@@ -365,11 +364,9 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           <div className="row mb-2">
             <div className="col alert alert-danger">
               <i className="bi bi-exclamation-octagon-fill"></i>{" "}
-              <strong>
-                You chose Overwrite mode but not any status.
-              </strong>{" "}
-              This will just delete your whole collection. If this is what
-              you&#39;d like to do go on.
+              <strong>You chose Overwrite mode but not any status.</strong> This
+              will just delete your whole collection. If this is what you&#39;d
+              like to do go on.
             </div>
           </div>
         )}
