@@ -43,7 +43,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
     if (!filter) {
       return games;
     } else {
-      return applyFilter(filter, games);
+      return applyFilters(filter, games);
     }
   }, [filter, games]);
 
@@ -178,11 +178,29 @@ function pageButtons(
   return pageElements;
 }
 
-function applyFilter(
+function applyFilters(
   filter: GameCollectionFilterOptions,
   games: GameInfo[]
 ): GameInfo[] {
-  return games;
+  return applyWeightFilters(filter, games);
+}
+
+function applyWeightFilters(
+  filter: GameCollectionFilterOptions,
+  games: GameInfo[]
+): GameInfo[] {
+  let filteredGames = games;
+  if (filter.weight.max) {
+    filteredGames = filteredGames.filter(
+      (g) => g.game.weight <= filter.weight.max!
+    );
+  }
+  if (filter.weight.min) {
+    filteredGames = filteredGames.filter(
+      (g) => g.game.weight >= filter.weight.min!
+    );
+  }
+  return filteredGames;
 }
 
 export default GameCollection;
