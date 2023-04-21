@@ -1,8 +1,10 @@
 "use client";
 
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImportConfiguration } from "../page";
+
+const LOCAL_STORAGE_KEY = "importConfiguration";
 
 export interface ConfigurationProps {
   onDone: (configuration: ImportConfiguration) => void;
@@ -20,6 +22,18 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
       preordered: false,
     },
   });
+
+  useEffect(() => {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (data) {
+      setConfiguration(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(configuration));
+  }, [configuration]);
+
   return (
     <>
       <div className="row mb-2">
