@@ -246,27 +246,16 @@ function mergeToChangesetUpdate(
   currentCollection: GameCollectionStatus[],
   bggCollection: GameCollectionStatus[]
 ): GameCollectionStatus[] {
-  const changeSet: GameCollectionStatus[] = [];
-  bggCollection.forEach((bgg) => {
-    const current = currentCollection.find((c) => c.gameId === bgg.gameId);
-    if (!current) {
-      if (bgg.own || bgg.wishlist || bgg.wantToPlay) {
-        changeSet.push({ ...bgg });
-      }
-    } else if (
-      (bgg.own && !current.own) ||
-      (bgg.wantToPlay && !current.wantToPlay) ||
-      (bgg.wishlist && !current.wishlist)
-    ) {
-      changeSet.push({
-        gameId: bgg.gameId,
-        own: bgg.own || current.own,
-        wantToPlay: bgg.wantToPlay || current.wantToPlay,
-        wishlist: bgg.wishlist || current.wishlist,
-      });
-    }
-  });
-  return changeSet;
+  return mergeNewAndUpdated(
+    currentCollection,
+    bggCollection,
+    (current, bgg) => ({
+      gameId: bgg.gameId,
+      own: bgg.own || current.own,
+      wantToPlay: bgg.wantToPlay || current.wantToPlay,
+      wishlist: bgg.wishlist || current.wishlist,
+    })
+  );
 }
 
 function mergeToChangesetOverwrite(
@@ -292,27 +281,12 @@ function mergeToChangesetMerge(
   currentCollection: GameCollectionStatus[],
   bggCollection: GameCollectionStatus[]
 ): GameCollectionStatus[] {
-  const changeSet: GameCollectionStatus[] = [];
-  bggCollection.forEach((bgg) => {
-    const current = currentCollection.find((c) => c.gameId === bgg.gameId);
-    if (!current) {
-      if (bgg.own || bgg.wishlist || bgg.wantToPlay) {
-        changeSet.push({ ...bgg });
-      }
-    } else if (
-      (bgg.own && !current.own) ||
-      (bgg.wantToPlay && !current.wantToPlay) ||
-      (bgg.wishlist && !current.wishlist)
-    ) {
-      changeSet.push({
-        gameId: bgg.gameId,
-        own: bgg.own,
-        wantToPlay: bgg.wantToPlay,
-        wishlist: bgg.wishlist,
-      });
-    }
-  });
-  return changeSet;
+  return mergeNewAndUpdated(currentCollection, bggCollection, (_, bgg) => ({
+    gameId: bgg.gameId,
+    own: bgg.own,
+    wantToPlay: bgg.wantToPlay,
+    wishlist: bgg.wishlist,
+  }));
 }
 
 function convertBggCollectionItem(
@@ -338,4 +312,35 @@ function convertBggCollectionItem(
       (configuration.markAsWishlisted.wishlist &&
         bggItem.status["@_wishlist"] === "1"),
   };
+}
+
+function mergeNewAndUpdated(
+  currentCollection: GameCollectionStatus[],
+  bggCollection: GameCollectionStatus[],
+  mergeFunction: (
+    current: GameCollectionStatus,
+    bgg: GameCollectionStatus
+  ) => GameCollectionStatus
+): GameCollectionStatus[] {
+  const changeSet: GameCollectionStatus[] = [];
+  bggCollection.forEach((bgg) => {
+    const current = currentCollection.find((c) => c.gameId === bgg.gameId);
+    if (!current) {
+      if (bgg.own || bgg.wishlist || bgg.wantToPlay) {
+        changeSet.push({ ...bgg });
+      }
+    } else if (
+      (bgg.own && !current.own) ||
+      (bgg.wantToPlay && !current.wantToPlay) ||
+      (bgg.wishlist && !current.wishlist)
+    ) {
+      changeSet.push({
+        gameId: bgg.gameId,
+        own: bgg.own || current.own,
+        wantToPlay: bgg.wantToPlay || current.wantToPlay,
+        wishlist: bgg.wishlist || current.wishlist,
+      });
+    }
+  });
+  return changeSet;
 }
