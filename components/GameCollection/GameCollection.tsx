@@ -13,7 +13,7 @@ import GameCollectionFilter, {
 import styles from "./gamecollection.module.css";
 
 type GameInfo = {
-  game: Game | number;
+  game: Game;
   status?: GameCollectionStatus;
   friendCollections?: StatusByUser;
 };
