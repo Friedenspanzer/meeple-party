@@ -130,7 +130,9 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
       </div>
       <div className="row mb-2 g-2">
         <div className="col-md-4">
-          <h4><i className="bi bi-box-seam-fill"></i> Own</h4>
+          <h4>
+            <i className="bi bi-box-seam-fill"></i> Own
+          </h4>
           <div className="form-check form-switch">
             <input
               className="form-check-input"
@@ -178,7 +180,9 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <h4><i className="bi bi-dice-3-fill"></i> Want To Play</h4>
+          <h4>
+            <i className="bi bi-dice-3-fill"></i> Want To Play
+          </h4>
           <div className="form-check form-switch">
             <input
               className="form-check-input"
@@ -205,7 +209,9 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <h4><i className="bi bi-gift-fill"></i> Wishlist</h4>
+          <h4>
+            <i className="bi bi-gift-fill"></i> Wishlist
+          </h4>
           <div className="form-check form-switch">
             <input
               className="form-check-input"
@@ -342,11 +348,31 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
         <div className="row mb-2">
           <div className="col alert alert-warning">
             <i className="bi bi-exclamation-octagon-fill"></i>{" "}
-            <strong>You chose Overwrite mode.</strong> Every status you set in
-            Meeple Party but did not replicate on BoardGameGeek will be lost.
+            <strong>You chose Overwrite mode.</strong>{" "}
+            Every status you set in Meeple Party but did not replicate on
+            BoardGameGeek will be lost.
           </div>
         </div>
       )}
+      {configuration.mode === "overwrite" &&
+        !configuration.markAsOwned.owned &&
+        !configuration.markAsOwned.preordered &&
+        !configuration.markAsWantToPlay.wantToPlay &&
+        !configuration.markAsWishlisted.preordered &&
+        !configuration.markAsWishlisted.wantInTrade &&
+        !configuration.markAsWishlisted.wantToBuy &&
+        !configuration.markAsWishlisted.wishlist && (
+          <div className="row mb-2">
+            <div className="col alert alert-danger">
+              <i className="bi bi-exclamation-octagon-fill"></i>{" "}
+              <strong>
+                You chose Overwrite mode but not any status.
+              </strong>{" "}
+              This will just delete your whole collection. If this is what
+              you&#39;d like to do go on.
+            </div>
+          </div>
+        )}
       <div className="row">
         <div className="col">
           <button
