@@ -11,7 +11,6 @@ import { Game, GameCollection } from "@prisma/client";
 import styles from "./import.module.css";
 import CollectionChange from "@/components/CollectionChange/CollectionChange";
 import CriticalError from "@/components/CriticalError/CriticalError";
-import { config } from "process";
 
 export interface ImportProps {
   configuration: ImportConfiguration;
