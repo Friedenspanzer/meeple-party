@@ -9,12 +9,29 @@ import Import from "./components/import";
 
 type Step = "username" | "type" | "request" | "import" | "done";
 
-export interface ImportConfiguration {}
+export type ImportMode = "update" | "merge" | "overwrite";
+
+export interface ImportConfiguration {
+  mode: ImportMode;
+  markAsOwned: {
+    owned: boolean;
+    preordered: boolean;
+  };
+  markAsWantToPlay: {
+    wantToPlay: boolean;
+  };
+  markAsWishlisted: {
+    wantToBuy: boolean;
+    wishlist: boolean;
+    wantInTrade: boolean;
+    preordered: boolean;
+  };
+}
 
 export default function CollectionSyncPage() {
   const [step, setStep] = useState<Step>("username");
   const [importConfiguration, setImportConfiguration] =
-    useState<ImportConfiguration>({}); //TODO Use default configuration
+    useState<ImportConfiguration>();
   const [bggObject, setBggObject] = useState<any>(undefined);
 
   const stepComponent = (
@@ -37,10 +54,7 @@ export default function CollectionSyncPage() {
         />
       )}
       {step === "import" && (
-        <Import
-          configuration={importConfiguration}
-          bggObject={bggObject}
-        />
+        <Import configuration={importConfiguration!} bggObject={bggObject} />
       )}
     </>
   );

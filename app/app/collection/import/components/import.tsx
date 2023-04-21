@@ -5,7 +5,7 @@ import {
   CollectionStatus,
 } from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
-import { ImportConfiguration } from "../page";
+import { ImportConfiguration, ImportMode } from "../page";
 import validator from "validator";
 import { Game, GameCollection } from "@prisma/client";
 import styles from "./import.module.css";
@@ -71,22 +71,20 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
         );
 
       const bggCollection: GameCollectionStatus[] = bggObject.items.item.map(
-        (i: any) => ({
-          gameId: validator.toInt(i["@_objectid"]),
-          own: i.status["@_own"] === "1",
-          wantToPlay: i.status["@_wanttoplay"] === "1",
-          wishlist:
-            i.status["@_wishlist"] === "1" || i.status["@_wanttobuy"] === "1",
-        })
+        (i: any) => convertBggCollectionItem(i, configuration)
       );
 
       setCurrentCollection(currentCollection);
-      const changeSet = mergeToChangeset(currentCollection, bggCollection);
+      const changeSet = mergeToChangeset(
+        currentCollection,
+        bggCollection,
+        configuration.mode
+      );
       setTotalNumberOfImports(changeSet.length);
       setItemsToImport(changeSet);
     }
     readCollections();
-  }, [bggObject.items.item]);
+  }, [bggObject.items.item, configuration]);
 
   useEffect(() => {
     async function importNext(
@@ -155,29 +153,27 @@ async function changeCollectionStatus(
   newStatus: GameCollectionStatus,
   currentCollection: GameCollectionStatus[]
 ): Promise<ImportStepDefinition | undefined> {
-  if (newStatus.own || newStatus.wantToPlay || newStatus.wishlist) {
-    const result: CollectionUpdate = await fetch(
-      `/api/collection/${newStatus.gameId}`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          own: newStatus.own,
-          wantToPlay: newStatus.wantToPlay,
-          wishlist: newStatus.wishlist,
-        } as CollectionStatus),
-      }
-    ).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw Error(`${response.status} ${response.statusText}`);
-      }
-    });
-    if (!result.success) {
-      return;
+  const result: CollectionUpdate = await fetch(
+    `/api/collection/${newStatus.gameId}`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        own: newStatus.own,
+        wantToPlay: newStatus.wantToPlay,
+        wishlist: newStatus.wishlist,
+      } as CollectionStatus),
     }
-    return createImportStep(result, currentCollection);
+  ).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw Error(`${response.status} ${response.statusText}`);
+    }
+  });
+  if (!result.success) {
+    return;
   }
+  return createImportStep(result, currentCollection);
 }
 
 function createImportStep(
@@ -188,16 +184,34 @@ function createImportStep(
     (c) => c.gameId === collectionUpdate.game.id
   );
   if (current) {
-    return {
-      operation: "change",
-      lists: {
-        wishlist: !!collectionUpdate.status.wishlist && !current.wishlist,
-        wantToPlay: !!collectionUpdate.status.wantToPlay && !current.wantToPlay,
-        own: !!collectionUpdate.status.own && !current.own,
-      },
-      text: `${collectionUpdate.game.name} updated in your collection.`,
-      image: collectionUpdate.game.thumbnail,
-    };
+    if (
+      collectionUpdate.status.own ||
+      collectionUpdate.status.wantToPlay ||
+      collectionUpdate.status.wishlist
+    ) {
+      return {
+        operation: "change",
+        lists: {
+          wishlist: !!collectionUpdate.status.wishlist && !current.wishlist,
+          wantToPlay:
+            !!collectionUpdate.status.wantToPlay && !current.wantToPlay,
+          own: !!collectionUpdate.status.own && !current.own,
+        },
+        text: `${collectionUpdate.game.name} updated in your collection.`,
+        image: collectionUpdate.game.thumbnail,
+      };
+    } else {
+      return {
+        operation: "remove",
+        lists: {
+          wishlist: false,
+          wantToPlay: false,
+          own: false,
+        },
+        text: `${collectionUpdate.game.name} removed from your collection.`,
+        image: collectionUpdate.game.thumbnail,
+      };
+    }
   } else {
     return {
       operation: "add",
@@ -214,7 +228,99 @@ function createImportStep(
 
 function mergeToChangeset(
   currentCollection: GameCollectionStatus[],
+  bggCollection: GameCollectionStatus[],
+  mode: ImportMode
+): GameCollectionStatus[] {
+  if (mode === "update") {
+    return mergeToChangesetUpdate(currentCollection, bggCollection);
+  } else if (mode === "merge") {
+    return mergeToChangesetMerge(currentCollection, bggCollection);
+  } else if (mode === "overwrite") {
+    return mergeToChangesetOverwrite(currentCollection, bggCollection);
+  } else {
+    return [];
+  }
+}
+
+function mergeToChangesetUpdate(
+  currentCollection: GameCollectionStatus[],
   bggCollection: GameCollectionStatus[]
+): GameCollectionStatus[] {
+  return mergeNewAndUpdated(
+    currentCollection,
+    bggCollection,
+    (current, bgg) => ({
+      gameId: bgg.gameId,
+      own: bgg.own || current.own,
+      wantToPlay: bgg.wantToPlay || current.wantToPlay,
+      wishlist: bgg.wishlist || current.wishlist,
+    })
+  );
+}
+
+function mergeToChangesetOverwrite(
+  currentCollection: GameCollectionStatus[],
+  bggCollection: GameCollectionStatus[]
+): GameCollectionStatus[] {
+  const changeSet = mergeToChangesetMerge(currentCollection, bggCollection);
+  currentCollection.forEach((c) => {
+    const change = changeSet.find((change) => change.gameId === c.gameId);
+    if (!change) {
+      changeSet.push({
+        gameId: c.gameId,
+        own: false,
+        wishlist: false,
+        wantToPlay: false,
+      });
+    }
+  });
+  return changeSet;
+}
+
+function mergeToChangesetMerge(
+  currentCollection: GameCollectionStatus[],
+  bggCollection: GameCollectionStatus[]
+): GameCollectionStatus[] {
+  return mergeNewAndUpdated(currentCollection, bggCollection, (_, bgg) => ({
+    gameId: bgg.gameId,
+    own: bgg.own,
+    wantToPlay: bgg.wantToPlay,
+    wishlist: bgg.wishlist,
+  }));
+}
+
+function convertBggCollectionItem(
+  bggItem: any,
+  configuration: ImportConfiguration
+): { gameId: number; own: boolean; wantToPlay: boolean; wishlist: boolean } {
+  return {
+    gameId: validator.toInt(bggItem["@_objectid"]),
+    own:
+      (configuration.markAsOwned.owned && bggItem.status["@_own"] === "1") ||
+      (configuration.markAsOwned.preordered &&
+        bggItem.status["@_preordered"] === "1"),
+    wantToPlay:
+      configuration.markAsWantToPlay.wantToPlay &&
+      bggItem.status["@_wanttoplay"] === "1",
+    wishlist:
+      (configuration.markAsWishlisted.preordered &&
+        bggItem.status["@_preordered"] === "1") ||
+      (configuration.markAsWishlisted.wantInTrade &&
+        bggItem.status["@_want"] === "1") ||
+      (configuration.markAsWishlisted.wantToBuy &&
+        bggItem.status["@_wanttobuy"] === "1") ||
+      (configuration.markAsWishlisted.wishlist &&
+        bggItem.status["@_wishlist"] === "1"),
+  };
+}
+
+function mergeNewAndUpdated(
+  currentCollection: GameCollectionStatus[],
+  bggCollection: GameCollectionStatus[],
+  mergeFunction: (
+    current: GameCollectionStatus,
+    bgg: GameCollectionStatus
+  ) => GameCollectionStatus
 ): GameCollectionStatus[] {
   const changeSet: GameCollectionStatus[] = [];
   bggCollection.forEach((bgg) => {
@@ -230,9 +336,9 @@ function mergeToChangeset(
     ) {
       changeSet.push({
         gameId: bgg.gameId,
-        own: bgg.own,
-        wantToPlay: bgg.wantToPlay,
-        wishlist: bgg.wishlist,
+        own: bgg.own || current.own,
+        wantToPlay: bgg.wantToPlay || current.wantToPlay,
+        wishlist: bgg.wishlist || current.wishlist,
       });
     }
   });
