@@ -9,15 +9,17 @@ import Import from "./components/import";
 
 type Step = "username" | "type" | "request" | "import" | "done";
 
+export type ImportMode = "update" | "merge" | "overwrite";
+
 export interface ImportConfiguration {
-  mode: "update" | "merge" | "overwrite";
+  mode: ImportMode;
   markAsOwned: {
     owned: boolean;
     preordered: boolean;
   };
   markAsWantToPlay: {
     wantToPlay: boolean;
-  },
+  };
   markAsWishlisted: {
     wantToBuy: boolean;
     wishlist: boolean;
