@@ -3,19 +3,24 @@
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import classNames from "classnames";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
 import GameBox from "../GameBox/GameBox";
+import GameCollectionFilter, {
+  GameCollectionFilterOptions,
+} from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
+
+type GameInfo = {
+  game: Game | number;
+  status?: GameCollectionStatus;
+  friendCollections?: StatusByUser;
+};
 
 export interface GameCollectionProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  games: {
-    game: Game | number;
-    status?: GameCollectionStatus;
-    friendCollections?: StatusByUser;
-  }[];
+  games: GameInfo[];
   showFriendCollection?: boolean;
   children?: React.ReactNode;
 }
@@ -30,9 +35,21 @@ const GameCollection: React.FC<GameCollectionProps> = ({
 }) => {
   const [page, setPage] = useState(0);
   const [inputPage, setInputPage] = useState("1");
-  const totalNumberOfPages = Math.ceil(games.length / ITEMS_PER_PAGE);
+  const [filter, setFilter] = useState<GameCollectionFilterOptions>();
 
   const [debouncedInputPage] = useDebounce(inputPage, 1000);
+
+  const filteredGames = useMemo(() => {
+    if (!filter) {
+      return games;
+    } else {
+      return applyFilter(filter, games);
+    }
+  }, [filter, games]);
+
+  const totalNumberOfPages = useMemo(() => {
+    return Math.ceil(filteredGames.length / ITEMS_PER_PAGE);
+  }, [filteredGames]);
 
   const getOffset = useCallback(() => {
     return page * ITEMS_PER_PAGE;
@@ -60,12 +77,19 @@ const GameCollection: React.FC<GameCollectionProps> = ({
     }
   }, [debouncedInputPage, totalNumberOfPages]);
 
+  useEffect(() => {
+    if (page > totalNumberOfPages) {
+      setPage(0);
+    }
+  }, [totalNumberOfPages, page]);
+
   return (
     <div {...props}>
       {children}
       <div className={styles.container}>
+        <GameCollectionFilter onFilterChange={setFilter} />
         <div className={styles.games}>
-          {games
+          {filteredGames
             .slice(getOffset(), getOffset() + ITEMS_PER_PAGE)
             .map(({ game, status, friendCollections }) => (
               <GameBox
@@ -152,6 +176,13 @@ function pageButtons(
     );
   });
   return pageElements;
+}
+
+function applyFilter(
+  filter: GameCollectionFilterOptions,
+  games: GameInfo[]
+): GameInfo[] {
+  return games;
 }
 
 export default GameCollection;
