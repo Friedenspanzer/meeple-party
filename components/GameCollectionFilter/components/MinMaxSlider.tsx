@@ -1,5 +1,7 @@
+import classNames from "classnames";
 import { useCallback, useEffect, useId, useState } from "react";
 import validator from "validator";
+import styles from "./minmaxsliders.module.css";
 
 interface MinMaxSlidersProps {
   onChange: (min?: number, max?: number) => void;
@@ -49,40 +51,68 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
   }, [minValue, maxValue, onChange]);
 
   return (
-    <div className="row">
-      <div className="col-6">
-          Min{minValue !== undefined && `: ${minValue}`}
-        <label htmlFor={minId} className="form-label">
-        </label>
-        <input
-          type="range"
-          className="form-range"
-          id={minId}
-          min={min}
-          max={max}
-          step={step}
-          list={datalist}
-          value={minValue || min}
-          onChange={(e) => changeMinValue(e.target.value)}
-        ></input>
+    <>
+      <div className="row text-center">
+        <div className={classNames("col-6", styles.value)}>
+          {minValue || "-"}
+        </div>
+        <div className={classNames("col-6", styles.value)}>
+          {maxValue || "-"}
+        </div>
       </div>
-      <div className="col-6">
-          Max{maxValue !== undefined && `: ${maxValue}`}
-        <label htmlFor={maxId} className="form-label">
-        </label>
-        <input
-          type="range"
-          className="form-range"
-          id={maxId}
-          min={min}
-          max={max}
-          step={step}
-          list={datalist}
-          value={maxValue || max}
-          onChange={(e) => changeMaxValue(e.target.value)}
-        ></input>
+      <div className="row text-center">
+        <div className="col-6">
+          <input
+            type="range"
+            className="form-range"
+            id={minId}
+            min={min}
+            max={max}
+            step={step}
+            list={datalist}
+            value={minValue || min}
+            onChange={(e) => changeMinValue(e.target.value)}
+          ></input>
+        </div>
+        <div className="col-6">
+          <input
+            type="range"
+            className="form-range"
+            id={maxId}
+            min={min}
+            max={max}
+            step={step}
+            list={datalist}
+            value={maxValue || max}
+            onChange={(e) => changeMaxValue(e.target.value)}
+          ></input>
+        </div>
       </div>
-    </div>
+      <div className="row text-center">
+        <div className="col-6">
+          <label
+            htmlFor={minId}
+            className={classNames("form-label", styles.label, {
+              [styles.activeLabel]: !!minValue,
+            })}
+            onClick={() => setMinValue(undefined)}
+          >
+            Min {minValue && <i className="bi bi-x-circle"></i>}
+          </label>
+        </div>
+        <div className="col-6">
+          <label
+            htmlFor={maxId}
+            className={classNames("form-label", styles.label, {
+              [styles.activeLabel]: !!maxValue,
+            })}
+            onClick={() => setMaxValue(undefined)}
+          >
+            Max {maxValue && <i className="bi bi-x-circle"></i>}
+          </label>
+        </div>
+      </div>
+    </>
   );
 };
 

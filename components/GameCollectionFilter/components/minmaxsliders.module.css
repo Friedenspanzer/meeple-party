@@ -1,0 +1,11 @@
+.label {
+  font-size: 0.7rem;
+}
+
+.value {
+  font-size: 1.3rem;
+}
+
+.activeLabel {
+  cursor: pointer;
+}
