@@ -1,0 +1,21 @@
+.accordion {
+  --bs-accordion-active-bg: var(--bs-primary);
+  --bs-accordion-bg: var(--bs-primary-subtle-bg);
+  --bs-accordion-active-color: var(--bs-light);
+  --bs-accordion-btn-focus-border-color: rgba(0, 0, 0, 0);
+}
+
+.button:focus {
+  box-shadow: none;
+}
+
+.activeButton {
+  font-weight: bold;
+  color: var(--bs-primary)
+}
+
+.value {
+  padding-left: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: lighter;
+}

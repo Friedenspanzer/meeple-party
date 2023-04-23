@@ -182,7 +182,25 @@ function applyFilters(
   filter: GameCollectionFilterOptions,
   games: GameInfo[]
 ): GameInfo[] {
-  return applyWeightFilters(filter, games);
+  return applyPlayingTimeFilters(filter, applyWeightFilters(filter, games));
+}
+
+function applyPlayingTimeFilters(
+  filter: GameCollectionFilterOptions,
+  games: GameInfo[]
+): GameInfo[] {
+  let filteredGames = games;
+  if (filter.playingTime.max) {
+    filteredGames = filteredGames.filter(
+      (g) => g.game.playingTime <= filter.playingTime.max!
+    );
+  }
+  if (filter.playingTime.min) {
+    filteredGames = filteredGames.filter(
+      (g) => g.game.playingTime >= filter.playingTime.min!
+    );
+  }
+  return filteredGames;
 }
 
 function applyWeightFilters(
