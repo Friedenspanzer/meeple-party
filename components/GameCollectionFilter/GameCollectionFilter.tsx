@@ -47,7 +47,10 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
       <div className="row">
         <div className="col-1">
           <button
-            className="btn btn-primary"
+            className={classNames("btn", {
+              "btn-primary": anyFilterActive(filter),
+              "btn-outline-primary": !anyFilterActive(filter),
+            })}
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target={`#${id}`}
@@ -121,6 +124,14 @@ function getMinMaxValue(min?: number, max?: number) {
   } else {
     return `${min} - ${max}`;
   }
+}
+
+function anyFilterActive(filter: GameCollectionFilterOptions) {
+  return minOrMaxActive(filter.playingTime) || minOrMaxActive(filter.weight);
+}
+
+function minOrMaxActive(filter: MinMaxFilterOption) {
+  return !!filter.min || !!filter.max;
 }
 
 export default GameCollectionFilter;
