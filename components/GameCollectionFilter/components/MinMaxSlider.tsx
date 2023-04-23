@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
 import validator from "validator";
 
 interface MinMaxSlidersProps {
-  label: string;
   onChange: (min?: number, max?: number) => void;
   min?: number;
   max?: number;
@@ -11,7 +10,6 @@ interface MinMaxSlidersProps {
 }
 
 const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
-  label,
   onChange,
   min,
   max,
@@ -20,6 +18,9 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
 }) => {
   const [minValue, setMinValue] = useState<number>();
   const [maxValue, setMaxValue] = useState<number>();
+
+  const minId = useId();
+  const maxId = useId();
 
   const changeMinValue = useCallback(
     (newValue: string) => {
@@ -50,13 +51,13 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
   return (
     <div className="row">
       <div className="col-6">
-        <label htmlFor={`sliderMin${label}`} className="form-label">
           Min{minValue !== undefined && `: ${minValue}`}
+        <label htmlFor={minId} className="form-label">
         </label>
         <input
           type="range"
           className="form-range"
-          id={`sliderMin${label}`}
+          id={minId}
           min={min}
           max={max}
           step={step}
@@ -66,13 +67,13 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
         ></input>
       </div>
       <div className="col-6">
-        <label htmlFor={`sliderMax${label}`} className="form-label">
           Max{maxValue !== undefined && `: ${maxValue}`}
+        <label htmlFor={maxId} className="form-label">
         </label>
         <input
           type="range"
           className="form-range"
-          id={`sliderMax${label}`}
+          id={maxId}
           min={min}
           max={max}
           step={step}

@@ -84,7 +84,6 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               min={1}
               max={5}
               step={0.1}
-              label="weight"
               onChange={changeWeight}
               datalist="markersWeight"
             />
@@ -101,7 +100,6 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               min={0}
               max={360}
               step={10}
-              label="playingTime"
               onChange={changePlayingTime}
             />
           </Section>
