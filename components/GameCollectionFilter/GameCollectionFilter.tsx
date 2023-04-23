@@ -26,6 +26,11 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   useEffect(() => {
     onFilterChange(filter);
   }, [filter, onFilterChange]);
+
+  const changeWeight = useCallback((min?: number, max?: number) => {
+    setFilter((filter) => ({ ...filter, weight: { min, max } }));
+  }, []);
+
   return (
     <div {...props} className={classNames(props.className, "container")}>
       <datalist id="markersWeight">
@@ -36,21 +41,55 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
         <option value="4"></option>
         <option value="5"></option>
       </datalist>
-      <div className="row">
-        <div className={classNames("col-4", styles.heading)}>Weight</div>
-      </div>
-      <div className="row">
-        <MinMaxSliders
-          min={0}
-          max={5}
-          step={0.1}
-          label="weight"
-          onChange={(min, max) => {
-            setFilter({ ...filter, weight: { min, max } });
-          }}
-          datalist="markersWeight"
-        />
-      </div>
+
+      <>
+        <div className="row">
+          <div className="col-1">
+            <button
+              className="btn btn-primary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#filterOffanvas"
+              aria-controls="filterOffanvas"
+            >
+              <i className="bi bi-funnel-fill"></i>
+            </button>
+          </div>
+        </div>
+        <div
+          className="offcanvas offcanvas-start"
+          tabIndex={-1}
+          id="filterOffanvas"
+          aria-labelledby="filterOffcanvasLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="filterOffcanvasLabel">
+              Filter games
+            </h5>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="offcanvas-body">
+            <div className="row">
+              <div className={classNames("col-4", styles.heading)}>Weight</div>
+            </div>
+            <div className="row">
+              <MinMaxSliders
+                min={0}
+                max={5}
+                step={0.1}
+                label="weight"
+                onChange={changeWeight}
+                datalist="markersWeight"
+              />
+            </div>
+          </div>
+        </div>
+      </>
     </div>
   );
 };
@@ -103,7 +142,7 @@ function MinMaxSliders({
 
   return (
     <>
-      <div className="col-2">
+      <div className="col-6">
         <label htmlFor={`sliderMin${label}`} className="form-label">
           Min{minValue !== undefined && `: ${minValue}`}
         </label>
@@ -119,7 +158,7 @@ function MinMaxSliders({
           onChange={(e) => changeMinValue(e.target.value)}
         ></input>
       </div>
-      <div className="col-2">
+      <div className="col-6">
         <label htmlFor={`sliderMax${label}`} className="form-label">
           Max{maxValue !== undefined && `: ${maxValue}`}
         </label>
