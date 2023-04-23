@@ -7,6 +7,8 @@ import Section from "./components/Section";
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
   onFilterChange: (filter: GameCollectionFilterOptions) => void;
+  totalCount?: number;
+  filteredCount?: number;
 }
 
 type MinMaxFilterOption = {
@@ -21,6 +23,8 @@ export interface GameCollectionFilterOptions {
 
 const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   onFilterChange,
+  totalCount,
+  filteredCount,
   ...props
 }) => {
   const id = useId();
@@ -69,6 +73,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
         <div className={classNames("offcanvas-header", styles.offcanvasHeader)}>
           <h5 className="offcanvas-title" id="filterOffcanvasLabel">
             Filter games
+            {filteredCount && totalCount && ` (${filteredCount}/${totalCount})`}
           </h5>
           <button
             type="button"

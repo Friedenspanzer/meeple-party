@@ -87,7 +87,11 @@ const GameCollection: React.FC<GameCollectionProps> = ({
     <div {...props}>
       {children}
       <div className={styles.container}>
-        <GameCollectionFilter onFilterChange={setFilter} />
+        <GameCollectionFilter
+          onFilterChange={setFilter}
+          totalCount={games.length}
+          filteredCount={filteredGames.length}
+        />
         <div className={styles.games}>
           {filteredGames
             .slice(getOffset(), getOffset() + ITEMS_PER_PAGE)
