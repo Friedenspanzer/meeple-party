@@ -1,3 +1,17 @@
+.offcanvas {
+  background-color: var(--bs-primary-bg-subtle);
+  font-size: 0.7rem;
+}
+
+.offcanvasHeader {
+  background-color: var(--bs-primary);
+  color: var(--bs-light)
+}
+
+.offcanvasBody {
+  padding: 0;
+}
+
 .heading {
   font-weight: bold;
 }
