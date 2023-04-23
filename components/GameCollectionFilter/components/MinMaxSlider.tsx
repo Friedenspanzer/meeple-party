@@ -62,7 +62,7 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
           max={max}
           step={step}
           list={datalist}
-          value={minValue}
+          value={minValue || min}
           onChange={(e) => changeMinValue(e.target.value)}
         ></input>
       </div>
@@ -78,7 +78,7 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
           max={max}
           step={step}
           list={datalist}
-          value={maxValue}
+          value={maxValue || max}
           onChange={(e) => changeMaxValue(e.target.value)}
         ></input>
       </div>
