@@ -25,6 +25,11 @@ export interface GameCollectionProps
   children?: React.ReactNode;
 }
 
+type FilterFunction = (
+  filter: GameCollectionFilterOptions,
+  games: GameInfo[]
+) => GameInfo[];
+
 const ITEMS_PER_PAGE = 15;
 
 const GameCollection: React.FC<GameCollectionProps> = ({
@@ -186,13 +191,37 @@ function applyFilters(
   filter: GameCollectionFilterOptions,
   games: GameInfo[]
 ): GameInfo[] {
-  return applyPlayingTimeFilters(filter, applyWeightFilters(filter, games));
+  return chainFilters(filter, games, [
+    nameFilter,
+    playingTimeFilter,
+    weightFilter,
+  ]);
 }
 
-function applyPlayingTimeFilters(
+function chainFilters(
   filter: GameCollectionFilterOptions,
-  games: GameInfo[]
-): GameInfo[] {
+  games: GameInfo[],
+  filterFunctions: FilterFunction[]
+) {
+  let filteredGames = games;
+  filterFunctions.forEach((f) => {
+    filteredGames = f(filter, filteredGames);
+  });
+  return filteredGames;
+}
+
+const nameFilter: FilterFunction = (filter, games) => {
+  if (!filter.name) {
+    return games;
+  }
+  return [
+    ...games.filter((g) =>
+      g.game.name.toLowerCase().includes(filter.name!.toLowerCase())
+    ),
+  ];
+};
+
+const playingTimeFilter: FilterFunction = (filter, games) => {
   let filteredGames = games;
   if (filter.playingTime.max) {
     filteredGames = filteredGames.filter(
@@ -205,12 +234,9 @@ function applyPlayingTimeFilters(
     );
   }
   return filteredGames;
-}
+};
 
-function applyWeightFilters(
-  filter: GameCollectionFilterOptions,
-  games: GameInfo[]
-): GameInfo[] {
+const weightFilter: FilterFunction = (filter, games) => {
   let filteredGames = games;
   if (filter.weight.max) {
     filteredGames = filteredGames.filter(
@@ -223,6 +249,6 @@ function applyWeightFilters(
     );
   }
   return filteredGames;
-}
+};
 
 export default GameCollection;

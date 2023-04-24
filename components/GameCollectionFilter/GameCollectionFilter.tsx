@@ -7,8 +7,8 @@ import Section from "./components/Section";
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
   onFilterChange: (filter: GameCollectionFilterOptions) => void;
-  totalCount?: number;
-  filteredCount?: number;
+  totalCount: number;
+  filteredCount: number;
 }
 
 type MinMaxFilterOption = {
@@ -17,6 +17,7 @@ type MinMaxFilterOption = {
 };
 
 export interface GameCollectionFilterOptions {
+  name?: string;
   weight: MinMaxFilterOption;
   playingTime: MinMaxFilterOption;
 }
@@ -27,7 +28,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   filteredCount,
   ...props
 }) => {
-  const id = useId();
+  const offcanvasId = useId();
 
   const [filter, setFilter] = useState<GameCollectionFilterOptions>({
     weight: { min: undefined, max: undefined },
@@ -37,6 +38,10 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   useEffect(() => {
     onFilterChange(filter);
   }, [filter, onFilterChange]);
+
+  const changeName = useCallback((name?: string) => {
+    setFilter((filter) => ({ ...filter, name }));
+  }, []);
 
   const changeWeight = useCallback((min?: number, max?: number) => {
     setFilter((filter) => ({ ...filter, weight: { min, max } }));
@@ -57,23 +62,31 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             })}
             type="button"
             data-bs-toggle="offcanvas"
-            data-bs-target={`#${id}`}
-            aria-controls={id}
+            data-bs-target={`#${offcanvasId}`}
+            aria-controls={offcanvasId}
           >
             <i className="bi bi-funnel-fill"></i>
           </button>
+        </div>
+        <div className="col-4">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Game name"
+            value={filter.name}
+            onChange={(e) => changeName(e.target.value)}
+          />
         </div>
       </div>
       <div
         className={classNames("offcanvas offcanvas-start", styles.offcanvas)}
         tabIndex={-1}
-        id={id}
+        id={offcanvasId}
         aria-labelledby="filterOffcanvasLabel"
       >
         <div className={classNames("offcanvas-header", styles.offcanvasHeader)}>
           <h5 className="offcanvas-title" id="filterOffcanvasLabel">
-            Filter games
-            {filteredCount && totalCount && ` (${filteredCount}/${totalCount})`}
+            Filter games ({filteredCount}/{totalCount})
           </h5>
           <button
             type="button"
@@ -83,6 +96,17 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
           ></button>
         </div>
         <div className={classNames("offcanvas-body", styles.offcanvasBody)}>
+          <div className="row">
+            <div className="col m-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Game name"
+                value={filter.name}
+                onChange={(e) => changeName(e.target.value)}
+              />
+            </div>
+          </div>
           <Section
             title="Weight"
             value={getMinMaxValue(filter.weight.min, filter.weight.max)}
