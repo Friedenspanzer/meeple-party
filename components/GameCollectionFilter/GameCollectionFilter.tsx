@@ -77,6 +77,12 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             onChange={(e) => changeName(e.target.value)}
           />
         </div>
+        <div className="col-7">
+          <FilterOverview
+            filter={filter}
+            onFilterChange={(filter) => setFilter(filter)}
+          />
+        </div>
       </div>
       <div
         className={classNames("offcanvas offcanvas-start", styles.offcanvas)}
@@ -141,7 +147,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   );
 };
 
-function getMinMaxValue(min?: number, max?: number) {
+export function getMinMaxValue(min?: number, max?: number) {
   if (!min && !max) {
     return undefined;
   } else if (min && !max) {
@@ -159,7 +165,7 @@ function anyFilterActive(filter: GameCollectionFilterOptions) {
   return minOrMaxActive(filter.playingTime) || minOrMaxActive(filter.weight);
 }
 
-function minOrMaxActive(filter: MinMaxFilterOption) {
+export function minOrMaxActive(filter: MinMaxFilterOption) {
   return !!filter.min || !!filter.max;
 }
 
