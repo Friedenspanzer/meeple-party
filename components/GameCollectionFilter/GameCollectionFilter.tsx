@@ -201,11 +201,23 @@ export function getMinMaxValue(min?: number, max?: number) {
 }
 
 function anyFilterActive(filter: GameCollectionFilterOptions) {
-  return minOrMaxActive(filter.playingTime) || minOrMaxActive(filter.weight);
+  return (
+    minOrMaxActive(filter.playingTime) ||
+    minOrMaxActive(filter.weight) ||
+    collectionStatusActive(filter.collectionStatus)
+  );
 }
 
 export function minOrMaxActive(filter: MinMaxFilterOption) {
   return !!filter.min || !!filter.max;
+}
+
+function collectionStatusActive(filter: CollectionStatusFilterOption) {
+  return (
+    filter.own !== undefined ||
+    filter.wantToPlay !== undefined ||
+    filter.wishlist !== undefined
+  );
 }
 
 export default GameCollectionFilter;
