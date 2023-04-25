@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
+import Fuse from "fuse.js";
 import GameBox from "../GameBox/GameBox";
 import GameCollectionFilter, {
   FilterPreset,
@@ -244,11 +245,8 @@ const nameFilter: FilterFunction = (filter, games) => {
   if (!filter.name) {
     return games;
   }
-  return [
-    ...games.filter((g) =>
-      g.game.name.toLowerCase().includes(filter.name!.toLowerCase())
-    ),
-  ];
+  const fuse = new Fuse(games, { keys: ["game.name"], threshold: 0.34 });
+  return [...fuse.search(filter.name)].map((g) => g.item);
 };
 
 const playingTimeFilter: FilterFunction = (filter, games) => {

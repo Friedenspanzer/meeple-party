@@ -24,6 +24,7 @@
     "classnames": "^2.3.2",
     "entities": "^4.4.0",
     "fast-xml-parser": "^4.1.2",
+    "fuse.js": "^6.6.2",
     "javascript-time-ago": "^2.5.9",
     "next": "13.1.6",
     "next-auth": "^4.20.1",
