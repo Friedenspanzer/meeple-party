@@ -13,6 +13,7 @@ export interface GameCollectionFilterProps
   onFilterChange: (filter: GameCollectionFilterOptions) => void;
   totalCount: number;
   filteredCount: number;
+  presets?: FilterPreset[];
 }
 
 export type MinMaxFilterOption = {
@@ -33,24 +34,23 @@ export interface GameCollectionFilterOptions {
   collectionStatus: CollectionStatusFilterOption;
 }
 
+export type FilterPreset = {
+  name: string;
+  filter: GameCollectionFilterOptions;
+};
+
 const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   onFilterChange,
   totalCount,
   filteredCount,
+  presets,
   ...props
 }) => {
   const offcanvasId = useId();
 
-  const [filter, setFilter] = useState<GameCollectionFilterOptions>({
-    name: undefined,
-    weight: { min: undefined, max: undefined },
-    playingTime: { min: undefined, max: undefined },
-    collectionStatus: {
-      own: undefined,
-      wantToPlay: undefined,
-      wishlist: undefined,
-    },
-  });
+  const [filter, setFilter] = useState<GameCollectionFilterOptions>(
+    getEmptyFilter()
+  );
 
   useEffect(() => {
     onFilterChange(filter);
@@ -79,18 +79,58 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
     <div {...props} className={classNames(props.className, "container")}>
       <div className="row">
         <div className="col-1">
-          <button
-            className={classNames("btn", {
-              "btn-primary": anyFilterActive(filter),
-              "btn-outline-primary": !anyFilterActive(filter),
-            })}
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target={`#${offcanvasId}`}
-            aria-controls={offcanvasId}
-          >
-            <i className="bi bi-funnel-fill"></i>
-          </button>
+          {presets ? (
+            <div className="btn-group">
+              <button
+                className={classNames("btn", {
+                  "btn-primary": anyFilterActive(filter),
+                  "btn-outline-primary": !anyFilterActive(filter),
+                })}
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target={`#${offcanvasId}`}
+                aria-controls={offcanvasId}
+              >
+                <i className="bi bi-funnel-fill"></i>
+              </button>
+              <div className="btn-group dropend" role="group">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                ></button>
+                <ul className="dropdown-menu">
+                  <li>
+                    <h6 className="dropdown-header">Filter presets</h6>
+                  </li>
+                  {presets.map((p) => (
+                    <li key={p.name}>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => setFilter(p.filter)}
+                      >
+                        {p.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <button
+              className={classNames("btn", {
+                "btn-primary": anyFilterActive(filter),
+                "btn-outline-primary": !anyFilterActive(filter),
+              })}
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target={`#${offcanvasId}`}
+              aria-controls={offcanvasId}
+            >
+              <i className="bi bi-funnel-fill"></i>
+            </button>
+          )}
         </div>
         <div className="col-4">
           <input
@@ -218,6 +258,19 @@ function collectionStatusActive(filter: CollectionStatusFilterOption) {
     filter.wantToPlay !== undefined ||
     filter.wishlist !== undefined
   );
+}
+
+export function getEmptyFilter(): GameCollectionFilterOptions {
+  return {
+    name: undefined,
+    weight: { min: undefined, max: undefined },
+    playingTime: { min: undefined, max: undefined },
+    collectionStatus: {
+      own: undefined,
+      wantToPlay: undefined,
+      wishlist: undefined,
+    },
+  };
 }
 
 export default GameCollectionFilter;
