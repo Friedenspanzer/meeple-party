@@ -77,8 +77,8 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
 
   return (
     <div {...props} className={classNames(props.className, "container")}>
-      <div className="row">
-        <div className="col-1">
+      <div className="row g-2">
+        <div className="col-md-1">
           {presets ? (
             <div className="btn-group">
               <button
@@ -132,7 +132,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             </button>
           )}
         </div>
-        <div className="col-4">
+        <div className="col-md-4">
           <input
             type="text"
             className="form-control"
@@ -141,7 +141,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             onChange={(e) => changeName(e.target.value)}
           />
         </div>
-        <div className="col-7">
+        <div className="col-md-7">
           <FilterOverview
             filter={filter}
             onFilterChange={(filter) => setFilter(filter)}
