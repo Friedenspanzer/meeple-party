@@ -8,7 +8,7 @@ import { Game } from "@prisma/client";
 export default async function Collection() {
   const user = await getServerUser();
   const gameCollection = await prisma.gameCollection.findMany({
-    where: { userId: user.id, own: true },
+    where: { userId: user.id },
     include: { game: true },
   });
   const friendCollections = await getMultipleCollectionStatusOfFriends(
