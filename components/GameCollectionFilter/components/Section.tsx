@@ -20,7 +20,9 @@ const Section: React.FC<SectionProps> = ({
 
   return (
     <div
-      className={classNames("accordion accordion-flush", styles.accordion)}
+      className={classNames("accordion accordion-flush", styles.accordion, {
+        [styles.hasActiveButton]: active,
+      })}
       id={collapseId}
     >
       <div className="accordion-item">
@@ -30,16 +32,16 @@ const Section: React.FC<SectionProps> = ({
           })}
         >
           <button
-            className={classNames("accordion-button collapsed", styles.button, {
-              [styles.activeButton]: active,
-            })}
+            className={classNames("accordion-button collapsed", styles.button)}
             type="button"
             data-bs-toggle="collapse"
             data-bs-target={`#${elementId}`}
             aria-expanded="false"
             aria-controls={elementId}
           >
-            {title}
+            <span className={classNames({ [styles.activeButton]: active })}>
+              {title}
+            </span>
             {value && (
               <>
                 <small className={styles.value}>{value}</small>

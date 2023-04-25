@@ -1,7 +1,7 @@
 .accordion {
   --bs-accordion-active-bg: var(--bs-primary);
-  --bs-accordion-bg: var(--bs-primary-subtle-bg);
   --bs-accordion-active-color: var(--bs-light);
+  --bs-accordion-bg: var(--bs-primary-subtle-bg);
   --bs-accordion-btn-focus-border-color: rgba(0, 0, 0, 0);
 }
 
@@ -9,9 +9,12 @@
   box-shadow: none;
 }
 
+.hasActiveButton {
+  --bs-accordion-btn-color: var(--bs-primary);
+}
+
 .activeButton {
   font-weight: bold;
-  color: var(--bs-primary)
 }
 
 .value {
