@@ -43,6 +43,48 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
           }}
         />
       )}
+      {filter.collectionStatus.own !== undefined && (
+        <FilterPill
+          filter="Own"
+          value={yesNo(filter.collectionStatus.own!)}
+          onRemove={() => {
+            onFilterChange({
+              ...filter,
+              collectionStatus: { ...filter.collectionStatus, own: undefined },
+            });
+          }}
+        />
+      )}
+      {filter.collectionStatus.wantToPlay !== undefined && (
+        <FilterPill
+          filter="Want to play"
+          value={yesNo(filter.collectionStatus.wantToPlay!)}
+          onRemove={() => {
+            onFilterChange({
+              ...filter,
+              collectionStatus: {
+                ...filter.collectionStatus,
+                wantToPlay: undefined,
+              },
+            });
+          }}
+        />
+      )}
+      {filter.collectionStatus.wishlist !== undefined && (
+        <FilterPill
+          filter="Wishlist"
+          value={yesNo(filter.collectionStatus.wishlist!)}
+          onRemove={() => {
+            onFilterChange({
+              ...filter,
+              collectionStatus: {
+                ...filter.collectionStatus,
+                wishlist: undefined,
+              },
+            });
+          }}
+        />
+      )}
     </>
   );
 };
@@ -74,6 +116,14 @@ function FilterPill({
       <div className={classNames(styles.value, "text-bg-light")}>{value}</div>
     </div>
   );
+}
+
+function yesNo(b: boolean) {
+  if (b) {
+    return "Yes";
+  } else {
+    return "No";
+  }
 }
 
 export default FilterOverview;

@@ -4,6 +4,9 @@ import styles from "./gamecollectionfilter.module.css";
 import MinMaxSliders from "./components/MinMaxSlider";
 import Section from "./components/Section";
 import FilterOverview from "./components/FilterOverview";
+import CollectionStatus, {
+  getCombinedText,
+} from "./components/CollectionStatus";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,10 +20,17 @@ export type MinMaxFilterOption = {
   max?: number;
 };
 
+export type CollectionStatusFilterOption = {
+  own?: boolean;
+  wantToPlay?: boolean;
+  wishlist?: boolean;
+};
+
 export interface GameCollectionFilterOptions {
   name?: string;
   weight: MinMaxFilterOption;
   playingTime: MinMaxFilterOption;
+  collectionStatus: CollectionStatusFilterOption;
 }
 
 const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
@@ -32,8 +42,14 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   const offcanvasId = useId();
 
   const [filter, setFilter] = useState<GameCollectionFilterOptions>({
+    name: undefined,
     weight: { min: undefined, max: undefined },
     playingTime: { min: undefined, max: undefined },
+    collectionStatus: {
+      own: undefined,
+      wantToPlay: undefined,
+      wishlist: undefined,
+    },
   });
 
   useEffect(() => {
@@ -51,6 +67,13 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   const changePlayingTime = useCallback((playingTime: MinMaxFilterOption) => {
     setFilter((filter) => ({ ...filter, playingTime }));
   }, []);
+
+  const changeCollectionStatus = useCallback(
+    (collectionStatus: CollectionStatusFilterOption) => {
+      setFilter((filter) => ({ ...filter, collectionStatus }));
+    },
+    []
+  );
 
   return (
     <div {...props} className={classNames(props.className, "container")}>
@@ -141,6 +164,20 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               step={10}
               onChange={changePlayingTime}
               value={filter.playingTime}
+            />
+          </Section>
+          <Section
+            title="Collection status"
+            value={getCombinedText(filter.collectionStatus)}
+            active={
+              filter.collectionStatus.own !== undefined ||
+              filter.collectionStatus.wantToPlay !== undefined ||
+              filter.collectionStatus.wishlist !== undefined
+            }
+          >
+            <CollectionStatus
+              filter={filter.collectionStatus}
+              onChange={changeCollectionStatus}
             />
           </Section>
         </div>

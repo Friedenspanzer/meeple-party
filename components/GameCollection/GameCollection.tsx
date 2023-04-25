@@ -193,6 +193,7 @@ function applyFilters(
 ): GameInfo[] {
   return chainFilters(filter, games, [
     nameFilter,
+    collectionFilter,
     playingTimeFilter,
     weightFilter,
   ]);
@@ -246,6 +247,26 @@ const weightFilter: FilterFunction = (filter, games) => {
   if (filter.weight.min) {
     filteredGames = filteredGames.filter(
       (g) => g.game.weight >= filter.weight.min!
+    );
+  }
+  return filteredGames;
+};
+
+const collectionFilter: FilterFunction = (filter, games) => {
+  let filteredGames = games;
+  if (filter.collectionStatus.own !== undefined) {
+    filteredGames = filteredGames.filter(
+      (g) => g.status?.own === filter.collectionStatus.own
+    );
+  }
+  if (filter.collectionStatus.wantToPlay !== undefined) {
+    filteredGames = filteredGames.filter(
+      (g) => g.status?.wantToPlay === filter.collectionStatus.wantToPlay
+    );
+  }
+  if (filter.collectionStatus.wishlist !== undefined) {
+    filteredGames = filteredGames.filter(
+      (g) => g.status?.wishlist === filter.collectionStatus.wishlist
     );
   }
   return filteredGames;
