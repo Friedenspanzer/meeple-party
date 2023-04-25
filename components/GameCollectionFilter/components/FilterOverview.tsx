@@ -2,6 +2,7 @@ import classNames from "classnames";
 import {
   GameCollectionFilterOptions,
   getMinMaxValue,
+  getPlayerCountValue,
   minOrMaxActive,
 } from "../GameCollectionFilter";
 import styles from "./filteroverview.module.css";
@@ -17,6 +18,21 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
 }) => {
   return (
     <>
+      {!!filter.playerCount.count && (
+        <FilterPill
+          filter="Player count"
+          value={getPlayerCountValue(filter.playerCount)}
+          onRemove={() => {
+            onFilterChange({
+              ...filter,
+              playerCount: {
+                ...filter.playerCount,
+                count: undefined,
+              },
+            });
+          }}
+        />
+      )}
       {minOrMaxActive(filter.weight) && (
         <FilterPill
           filter="Weight"

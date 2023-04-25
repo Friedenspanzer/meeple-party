@@ -7,6 +7,7 @@ import FilterOverview from "./components/FilterOverview";
 import CollectionStatus, {
   getCombinedText,
 } from "./components/CollectionStatus";
+import PlayerCount from "./components/PlayerCount";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,11 +28,17 @@ export type CollectionStatusFilterOption = {
   wishlist?: boolean;
 };
 
+export type PlayerCountFilterOption = {
+  type: "exact" | "supports" | "atleast";
+  count?: number;
+};
+
 export interface GameCollectionFilterOptions {
   name?: string;
   weight: MinMaxFilterOption;
   playingTime: MinMaxFilterOption;
   collectionStatus: CollectionStatusFilterOption;
+  playerCount: PlayerCountFilterOption;
 }
 
 export type FilterPreset = {
@@ -71,6 +78,13 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   const changeCollectionStatus = useCallback(
     (collectionStatus: CollectionStatusFilterOption) => {
       setFilter((filter) => ({ ...filter, collectionStatus }));
+    },
+    []
+  );
+
+  const changePlayerCount = useCallback(
+    (playerCount: PlayerCountFilterOption) => {
+      setFilter((filter) => ({ ...filter, playerCount }));
     },
     []
   );
@@ -178,6 +192,16 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             </div>
           </div>
           <Section
+            title="Player count"
+            value={getPlayerCountValue(filter.playerCount)}
+            active={!!filter.playerCount.count}
+          >
+            <PlayerCount
+              filter={filter.playerCount}
+              onChange={changePlayerCount}
+            />
+          </Section>
+          <Section
             title="Weight"
             value={getMinMaxValue(filter.weight.min, filter.weight.max)}
             active={!!filter.weight.min || !!filter.weight.max}
@@ -240,11 +264,26 @@ export function getMinMaxValue(min?: number, max?: number) {
   }
 }
 
+export function getPlayerCountValue(
+  playerCount: PlayerCountFilterOption
+): string {
+  if (!playerCount.count) {
+    return "";
+  } else if (playerCount.type === "atleast") {
+    return `> ${playerCount.count}`;
+  } else if (playerCount.type === "exact") {
+    return `= ${playerCount.count}`;
+  } else {
+    return `supports ${playerCount.count}`;
+  }
+}
+
 function anyFilterActive(filter: GameCollectionFilterOptions) {
   return (
     minOrMaxActive(filter.playingTime) ||
     minOrMaxActive(filter.weight) ||
-    collectionStatusActive(filter.collectionStatus)
+    collectionStatusActive(filter.collectionStatus) ||
+    !!filter.playerCount.count
   );
 }
 
@@ -269,6 +308,10 @@ export function getEmptyFilter(): GameCollectionFilterOptions {
       own: undefined,
       wantToPlay: undefined,
       wishlist: undefined,
+    },
+    playerCount: {
+      type: "supports",
+      count: undefined,
     },
   };
 }

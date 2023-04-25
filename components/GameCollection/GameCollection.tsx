@@ -223,6 +223,7 @@ function applyFilters(
 ): GameInfo[] {
   return chainFilters(filter, games, [
     nameFilter,
+    playerCountFilter,
     collectionFilter,
     playingTimeFilter,
     weightFilter,
@@ -247,6 +248,33 @@ const nameFilter: FilterFunction = (filter, games) => {
   }
   const fuse = new Fuse(games, { keys: ["game.name"], threshold: 0.34 });
   return [...fuse.search(filter.name)].map((g) => g.item);
+};
+
+const playerCountFilter: FilterFunction = (filter, games) => {
+  if (!filter.playerCount.count) {
+    return [...games];
+  } else if (filter.playerCount.type === "exact") {
+    return [
+      ...games.filter(
+        (g) =>
+          g.game.minPlayers === filter.playerCount.count &&
+          g.game.maxPlayers === filter.playerCount.count
+      ),
+    ];
+  } else if (filter.playerCount.type === "atleast") {
+    return [
+      ...games.filter((g) => g.game.minPlayers <= filter.playerCount.count!),
+    ];
+  } else if (filter.playerCount.type === "supports") {
+    return [
+      ...games.filter(
+        (g) =>
+          g.game.minPlayers <= filter.playerCount.count! &&
+          g.game.maxPlayers >= filter.playerCount.count!
+      ),
+    ];
+  }
+  return [...games];
 };
 
 const playingTimeFilter: FilterFunction = (filter, games) => {
