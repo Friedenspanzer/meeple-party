@@ -8,7 +8,9 @@ import { useDebounce } from "use-debounce";
 import validator from "validator";
 import GameBox from "../GameBox/GameBox";
 import GameCollectionFilter, {
+  FilterPreset,
   GameCollectionFilterOptions,
+  getEmptyFilter,
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
 
@@ -60,6 +62,8 @@ const GameCollection: React.FC<GameCollectionProps> = ({
     return page * ITEMS_PER_PAGE;
   }, [page]);
 
+  const presets = useMemo(getFilterPresets, []);
+
   useEffect(() => {
     setInputPage(`${page + 1}`);
   }, [page]);
@@ -96,6 +100,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
           onFilterChange={setFilter}
           totalCount={games.length}
           filteredCount={filteredGames.length}
+          presets={presets}
         />
         <div className={styles.games}>
           {filteredGames
@@ -185,6 +190,30 @@ function pageButtons(
     );
   });
   return pageElements;
+}
+
+function getFilterPresets(): FilterPreset[] {
+  return [
+    {
+      name: "Own",
+      filter: { ...getEmptyFilter(), collectionStatus: { own: true } },
+    },
+    {
+      name: "Want to play",
+      filter: { ...getEmptyFilter(), collectionStatus: { wantToPlay: true } },
+    },
+    {
+      name: "Wishlist",
+      filter: { ...getEmptyFilter(), collectionStatus: { wishlist: true } },
+    },
+    {
+      name: "Own and want to play",
+      filter: {
+        ...getEmptyFilter(),
+        collectionStatus: { own: true, wantToPlay: true },
+      },
+    },
+  ];
 }
 
 function applyFilters(
