@@ -12,7 +12,7 @@ export interface GameCollectionFilterProps
   filteredCount: number;
 }
 
-type MinMaxFilterOption = {
+export type MinMaxFilterOption = {
   min?: number;
   max?: number;
 };
@@ -44,12 +44,12 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
     setFilter((filter) => ({ ...filter, name }));
   }, []);
 
-  const changeWeight = useCallback((min?: number, max?: number) => {
-    setFilter((filter) => ({ ...filter, weight: { min, max } }));
+  const changeWeight = useCallback((weight: MinMaxFilterOption) => {
+    setFilter((filter) => ({ ...filter, weight }));
   }, []);
 
-  const changePlayingTime = useCallback((min?: number, max?: number) => {
-    setFilter((filter) => ({ ...filter, playingTime: { min, max } }));
+  const changePlayingTime = useCallback((playingTime: MinMaxFilterOption) => {
+    setFilter((filter) => ({ ...filter, playingTime }));
   }, []);
 
   return (
@@ -124,7 +124,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               max={5}
               step={0.1}
               onChange={changeWeight}
-              datalist="markersWeight"
+              value={filter.weight}
             />
           </Section>
           <Section
@@ -140,6 +140,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               max={360}
               step={10}
               onChange={changePlayingTime}
+              value={filter.playingTime}
             />
           </Section>
         </div>

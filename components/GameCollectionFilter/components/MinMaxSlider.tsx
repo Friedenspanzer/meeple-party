@@ -1,14 +1,15 @@
 import classNames from "classnames";
-import { useCallback, useEffect, useId, useState } from "react";
+import { useCallback, useId } from "react";
 import validator from "validator";
+import { MinMaxFilterOption } from "../GameCollectionFilter";
 import styles from "./minmaxsliders.module.css";
 
 interface MinMaxSlidersProps {
-  onChange: (min?: number, max?: number) => void;
+  onChange: (values: MinMaxFilterOption) => void;
+  value: MinMaxFilterOption;
   min?: number;
   max?: number;
   step?: number;
-  datalist?: string;
 }
 
 const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
@@ -16,48 +17,45 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
   min,
   max,
   step,
-  datalist,
+  value,
 }) => {
-  const [minValue, setMinValue] = useState<number>();
-  const [maxValue, setMaxValue] = useState<number>();
-
   const minId = useId();
   const maxId = useId();
 
   const changeMinValue = useCallback(
     (newValue: string) => {
       const val = validator.toFloat(newValue);
-      if (maxValue && val > maxValue) {
-        setMaxValue(val);
+      const setValue = { min: value.min, max: value.max };
+      if (value.max && val > value.max) {
+        setValue.max = val;
       }
-      setMinValue(val);
+      setValue.min = val;
+      onChange(setValue);
     },
-    [maxValue]
+    [value, onChange]
   );
 
   const changeMaxValue = useCallback(
     (newValue: string) => {
       const val = validator.toFloat(newValue);
-      if (minValue && val < minValue) {
-        setMinValue(val);
+      const setValue = { min: value.min, max: value.max };
+      if (value.min && val < value.min) {
+        setValue.min = val;
       }
-      setMaxValue(val);
+      setValue.max = val;
+      onChange(setValue);
     },
-    [minValue]
+    [value, onChange]
   );
-
-  useEffect(() => {
-    onChange(minValue, maxValue);
-  }, [minValue, maxValue, onChange]);
 
   return (
     <>
       <div className="row text-center">
         <div className={classNames("col-6", styles.value)}>
-          {minValue || "-"}
+          {value.min || "-"}
         </div>
         <div className={classNames("col-6", styles.value)}>
-          {maxValue || "-"}
+          {value.max || "-"}
         </div>
       </div>
       <div className="row text-center">
@@ -69,8 +67,7 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
             min={min}
             max={max}
             step={step}
-            list={datalist}
-            value={minValue || min}
+            value={value.min || min}
             onChange={(e) => changeMinValue(e.target.value)}
           ></input>
         </div>
@@ -82,8 +79,7 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
             min={min}
             max={max}
             step={step}
-            list={datalist}
-            value={maxValue || max}
+            value={value.max || max}
             onChange={(e) => changeMaxValue(e.target.value)}
           ></input>
         </div>
@@ -93,22 +89,22 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
           <label
             htmlFor={minId}
             className={classNames("form-label", styles.label, {
-              [styles.activeLabel]: !!minValue,
+              [styles.activeLabel]: !!value.min,
             })}
-            onClick={() => setMinValue(undefined)}
+            onClick={() => onChange({ ...value, min: undefined })}
           >
-            Min {minValue && <i className="bi bi-x-circle"></i>}
+            Min {value.min && <i className="bi bi-x-circle"></i>}
           </label>
         </div>
         <div className="col-6">
           <label
             htmlFor={maxId}
             className={classNames("form-label", styles.label, {
-              [styles.activeLabel]: !!maxValue,
+              [styles.activeLabel]: !!value.max,
             })}
-            onClick={() => setMaxValue(undefined)}
+            onClick={() => onChange({ ...value, max: undefined })}
           >
-            Max {maxValue && <i className="bi bi-x-circle"></i>}
+            Max {value.max && <i className="bi bi-x-circle"></i>}
           </label>
         </div>
       </div>
