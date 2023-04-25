@@ -3,6 +3,7 @@ import { useCallback, useEffect, useId, useState } from "react";
 import styles from "./gamecollectionfilter.module.css";
 import MinMaxSliders from "./components/MinMaxSlider";
 import Section from "./components/Section";
+import FilterOverview from "./components/FilterOverview";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
