@@ -7,6 +7,10 @@ import { Game, GameCollection, User } from "@prisma/client";
 import Link from "next/link";
 import styles from "./friends.module.css";
 
+export const metadata = {
+  title: 'Friend activity',
+}
+
 export default async function Friends() {
   const user = await getServerUser();
   const myFriends = await getFriends(user.id);

@@ -14,8 +14,27 @@ import {
 import classNames from "classnames";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata, ResolvingMetadata } from "next/types";
+import { cache } from "react";
 import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
+
+export async function generateMetadata(
+  {
+    params,
+  }: {
+    params: { profileId: string };
+  },
+  parent?: ResolvingMetadata
+): Promise<Metadata> {
+  const user = await getUser(params.profileId);
+  if (!user || !user.profileComplete) {
+    notFound();
+  }
+  return {
+    title: user.name
+  }
+}
 
 type UserWithRelationships = User & {
   sentRelationships: Relationship[];
@@ -27,22 +46,7 @@ export default async function ProfilePage({
 }: {
   params: { profileId: string };
 }) {
-  const user = await prisma.user.findUnique({
-    where: { id: params.profileId },
-    include: {
-      receivedRelationships: true,
-      sentRelationships: true,
-      favorites: true,
-      games: {
-        where: {
-          own: true,
-        },
-        include: {
-          game: true,
-        },
-      },
-    },
-  });
+  const user = await getUser(params.profileId);
   if (!user || !user.profileComplete) {
     notFound();
   }
@@ -216,3 +220,22 @@ function cleanGame(game: Game) {
   const { updatedAt, ...cleanGame } = game;
   return cleanGame;
 }
+
+const getUser = cache(async (id: string) => {
+  return await prisma.user.findUnique({
+    where: { id },
+    include: {
+      receivedRelationships: true,
+      sentRelationships: true,
+      favorites: true,
+      games: {
+        where: {
+          own: true,
+        },
+        include: {
+          game: true,
+        },
+      },
+    },
+  });
+});

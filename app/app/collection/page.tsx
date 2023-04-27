@@ -6,6 +6,10 @@ import { emptyFilter } from "@/utility/filter";
 import { getServerUser } from "@/utility/serverSession";
 import { Game } from "@prisma/client";
 
+export const metadata = {
+  title: 'Your collection',
+}
+
 export default async function Collection() {
   const user = await getServerUser();
   const gameCollection = (
