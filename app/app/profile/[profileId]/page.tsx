@@ -19,21 +19,18 @@ import { cache } from "react";
 import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
 
-export async function generateMetadata(
-  {
-    params,
-  }: {
-    params: { profileId: string };
-  },
-  parent?: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { profileId: string };
+}): Promise<Metadata> {
   const user = await getUser(params.profileId);
   if (!user || !user.profileComplete) {
     notFound();
   }
   return {
-    title: user.name
-  }
+    title: user.name,
+  };
 }
 
 type UserWithRelationships = User & {

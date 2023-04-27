@@ -12,8 +12,7 @@ import CollectionStatusButtons from "@/components/CollectionStatusButtons/Collec
 import { Metadata, ResolvingMetadata } from "next/types";
 
 export async function generateMetadata(
-  { params }: { params: { gameId: string } },
-  parent?: ResolvingMetadata
+  { params }: { params: { gameId: string } }
 ): Promise<Metadata> {
   const id = Number.parseInt(params.gameId);
   if (!Number.isInteger(id)) {
