@@ -280,14 +280,27 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
                 onChange={changePlayerCount}
               />
             </Section>
-            <MinMaxSection
-              minMax={filter.weight}
-              changeFunction={changeWeight}
+            <Section
               title="Weight"
-              min={1}
-              max={5}
-              step={0.1}
-            />
+              value={getMinMaxValue(filter.weight.min, filter.weight.max)}
+              active={!!filter.weight.min || !!filter.weight.max}
+            >
+              <div className="row">
+                <div className="col">
+                  <WeightPresets
+                    weightFilter={filter.weight}
+                    onChange={changeWeight}
+                  />
+                </div>
+              </div>
+              <MinMaxSliders
+                min={1}
+                max={5}
+                step={0.1}
+                onChange={changeWeight}
+                value={filter.weight}
+              />
+            </Section>
             <MinMaxSection
               minMax={filter.playingTime}
               changeFunction={changePlayingTime}
@@ -369,6 +382,108 @@ function MinMaxSection({
       />
     </Section>
   );
+}
+
+function WeightPresets({
+  weightFilter,
+  onChange,
+}: {
+  weightFilter: MinMaxFilterOption;
+  onChange: (weight: MinMaxFilterOption) => void;
+}) {
+  return (
+    <div
+      className="btn-group btn-group-sm"
+      role="group"
+      aria-label="Basic example"
+    >
+      <button
+        type="button"
+        className={classNames("btn", styles.weightPresetButtons, {
+          "btn-primary": isLight(weightFilter),
+          "btn-outline-primary": !isLight(weightFilter),
+        })}
+        onClick={() => onChange({ max: 1.5, min: undefined })}
+      >
+        Light
+      </button>
+      <button
+        type="button"
+        className={classNames("btn", styles.weightPresetButtons, {
+          "btn-primary": isMediumLight(weightFilter),
+          "btn-outline-primary": !isMediumLight(weightFilter),
+        })}
+        onClick={() => onChange({ min: 1.5, max: 2.5 })}
+      >
+        Medium Light
+      </button>
+      <button
+        type="button"
+        className={classNames("btn", styles.weightPresetButtons, {
+          "btn-primary": isMedium(weightFilter),
+          "btn-outline-primary": !isMedium(weightFilter),
+        })}
+        onClick={() => onChange({ min: 2.5, max: 3.5 })}
+      >
+        Medium
+      </button>
+      <button
+        type="button"
+        className={classNames("btn", styles.weightPresetButtons, {
+          "btn-primary": isMediumHeavy(weightFilter),
+          "btn-outline-primary": !isMediumHeavy(weightFilter),
+        })}
+        onClick={() => onChange({ min: 3.5, max: 4.5 })}
+      >
+        Medium Heavy
+      </button>
+      <button
+        type="button"
+        className={classNames("btn", styles.weightPresetButtons, {
+          "btn-primary": isHeavy(weightFilter),
+          "btn-outline-primary": !isHeavy(weightFilter),
+        })}
+        onClick={() => onChange({ min: 4.5, max: undefined })}
+      >
+        Heavy
+      </button>
+    </div>
+  );
+}
+
+function isLight(weightFilter: MinMaxFilterOption) {
+  return weightFilter.max && weightFilter.max === 1.5;
+}
+
+function isMediumLight(weightFilter: MinMaxFilterOption) {
+  return (
+    weightFilter.min &&
+    weightFilter.max &&
+    weightFilter.min === 1.5 &&
+    weightFilter.max === 2.5
+  );
+}
+
+function isMedium(weightFilter: MinMaxFilterOption) {
+  return (
+    weightFilter.min &&
+    weightFilter.max &&
+    weightFilter.min === 2.5 &&
+    weightFilter.max === 3.5
+  );
+}
+
+function isMediumHeavy(weightFilter: MinMaxFilterOption) {
+  return (
+    weightFilter.min &&
+    weightFilter.max &&
+    weightFilter.min === 3.5 &&
+    weightFilter.max === 4.5
+  );
+}
+
+function isHeavy(weightFilter: MinMaxFilterOption) {
+  return weightFilter.min && weightFilter.min === 4.5;
 }
 
 export function getMinMaxValue(min?: number, max?: number) {
