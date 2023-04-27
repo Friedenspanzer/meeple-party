@@ -10,6 +10,7 @@ import CollectionStatus, {
   getCombinedText,
 } from "./components/CollectionStatus";
 import PlayerCount from "./components/PlayerCount";
+import Group from "./components/Group";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -219,64 +220,70 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               />
             </div>
           </div>
-          <Section
-            title="Player count"
-            value={getPlayerCountValue(filter.playerCount)}
-            active={!!filter.playerCount.count}
-          >
-            <PlayerCount
-              filter={filter.playerCount}
-              onChange={changePlayerCount}
+          <Group title="Game attributes">
+            <Section
+              title="Player count"
+              value={getPlayerCountValue(filter.playerCount)}
+              active={!!filter.playerCount.count}
+            >
+              <PlayerCount
+                filter={filter.playerCount}
+                onChange={changePlayerCount}
+              />
+            </Section>
+            <MinMaxSection
+              minMax={filter.weight}
+              changeFunction={changeWeight}
+              title="Weight"
+              min={1}
+              max={5}
+              step={0.1}
             />
-          </Section>
-          <MinMaxSection
-            minMax={filter.weight}
-            changeFunction={changeWeight}
-            title="Weight"
-            min={1}
-            max={5}
-            step={0.1}
-          />
-          <MinMaxSection
-            minMax={filter.playingTime}
-            changeFunction={changePlayingTime}
-            title="Playing time"
-            min={0}
-            max={360}
-            step={10}
-          />
-          <Section
-            title="Collection status"
-            value={getCombinedText(filter.collectionStatus)}
-            active={
-              filter.collectionStatus.own !== undefined ||
-              filter.collectionStatus.wantToPlay !== undefined ||
-              filter.collectionStatus.wishlist !== undefined
-            }
-          >
-            <CollectionStatus
-              filter={filter.collectionStatus}
-              onChange={changeCollectionStatus}
+            <MinMaxSection
+              minMax={filter.playingTime}
+              changeFunction={changePlayingTime}
+              title="Playing time"
+              min={0}
+              max={360}
+              step={10}
             />
-          </Section>
-          <MinMaxSection
-            minMax={filter.friends.own}
-            changeFunction={changeFriendsOwn}
-            title="Friends own"
-            max={25}
-          />
-          <MinMaxSection
-            minMax={filter.friends.wantToPlay}
-            changeFunction={changeFriendsWantToPlay}
-            title="Friends want to play"
-            max={25}
-          />
-          <MinMaxSection
-            minMax={filter.friends.wishlist}
-            changeFunction={changeFriendsWishlist}
-            title="Friends wish"
-            max={25}
-          />
+          </Group>
+          <Group title="Your collection">
+            <Section
+              title="Collection status"
+              value={getCombinedText(filter.collectionStatus)}
+              active={
+                filter.collectionStatus.own !== undefined ||
+                filter.collectionStatus.wantToPlay !== undefined ||
+                filter.collectionStatus.wishlist !== undefined
+              }
+            >
+              <CollectionStatus
+                filter={filter.collectionStatus}
+                onChange={changeCollectionStatus}
+              />
+            </Section>
+          </Group>
+          <Group title="Your friends">
+            <MinMaxSection
+              minMax={filter.friends.own}
+              changeFunction={changeFriendsOwn}
+              title="Friends own"
+              max={25}
+            />
+            <MinMaxSection
+              minMax={filter.friends.wantToPlay}
+              changeFunction={changeFriendsWantToPlay}
+              title="Friends want to play"
+              max={25}
+            />
+            <MinMaxSection
+              minMax={filter.friends.wishlist}
+              changeFunction={changeFriendsWishlist}
+              title="Friends wish"
+              max={25}
+            />
+          </Group>
         </div>
       </div>
     </div>
