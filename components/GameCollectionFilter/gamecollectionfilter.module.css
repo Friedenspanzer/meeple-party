@@ -10,3 +10,10 @@
 .offcanvasBody {
   padding: 0;
 }
+
+.sortButton {
+  min-width: 197px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

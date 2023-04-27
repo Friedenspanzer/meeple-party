@@ -17,8 +17,7 @@ export default async function App() {
   const myGameCollection = await getCollection(user.id);
   const friendCollections = await getAllGamesOfFriends(user.id);
   const collectedGames = myGameCollection
-    .map((g) => collectGames(g, friendCollections))
-    .sort(gameSortOrder);
+    .map((g) => collectGames(g, friendCollections));
   const gamesThatEnoughPeopleWantToPlay = collectedGames.filter(
     enoughPeopleWantToPlay
   );
@@ -79,14 +78,6 @@ function collectGames(
       (g) => g.game.id === myGame.game.id
     ),
   };
-}
-
-function gameSortOrder(a: CollectedGame, b: CollectedGame) {
-  if (a.game.minPlayers === b.game.minPlayers) {
-    return a.game.name > b.game.name ? 1 : -1;
-  } else {
-    return b.game.minPlayers - a.game.minPlayers;
-  }
 }
 
 function uncollectGames(collectedGame: CollectedGame): {

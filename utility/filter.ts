@@ -18,4 +18,5 @@ export const emptyFilter: GameCollectionFilterOptions = {
     wantToPlay: { min: undefined, max: undefined },
     wishlist: { min: undefined, max: undefined },
   },
+  sort: "name",
 };

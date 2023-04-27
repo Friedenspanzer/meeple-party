@@ -11,6 +11,7 @@ import GameBox from "../GameBox/GameBox";
 import GameCollectionFilter, {
   FilterPreset,
   GameCollectionFilterOptions,
+  SortOrder,
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
 import { emptyFilter } from "@/utility/filter";
@@ -57,7 +58,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
     if (!filter) {
       return games;
     } else {
-      return applyFilters(filter, games);
+      return applySorting(filter, applyFilters(filter, games));
     }
   }, [filter, games]);
 
@@ -236,6 +237,91 @@ function applyFilters(
     weightFilter,
     friendFilter,
   ]);
+}
+
+function applySorting(
+  filter: GameCollectionFilterOptions,
+  games: GameInfo[]
+): GameInfo[] {
+  const sortFunction = getSortFunction(filter.sort);
+  return games.sort((a, b) =>
+    useFallbackFunction(a, b, sortFunction, sortFunctionName)
+  );
+}
+
+function useFallbackFunction(
+  a: GameInfo,
+  b: GameInfo,
+  sortFunction: (a: GameInfo, b: GameInfo) => number,
+  fallbackFunction: (a: GameInfo, b: GameInfo) => number
+): number {
+  if (!sortFunction) {
+    return fallbackFunction(a, b);
+  } else {
+    const order = sortFunction(a, b);
+    if (!order || order === 0) {
+      return fallbackFunction(a, b);
+    } else {
+      return order;
+    }
+  }
+}
+
+function getSortFunction(
+  sortOrder: SortOrder
+): (a: GameInfo, b: GameInfo) => number {
+  switch (sortOrder) {
+    case "collectionStatus":
+      return sortFunctionCollectionStatus;
+    case "friendsOwn":
+      return (a, b) =>
+        (b.friendCollections?.own.length || 0) -
+        (a.friendCollections?.own.length || 0);
+    case "friendsWantToPlay":
+      return (a, b) =>
+        (b.friendCollections?.wantToPlay.length || 0) -
+        (a.friendCollections?.wantToPlay.length || 0);
+    case "friendsWish":
+      return (a, b) =>
+        (b.friendCollections?.wishlist.length || 0) -
+        (a.friendCollections?.wishlist.length || 0);
+    case "maxPlayers":
+      return (a, b) => b.game.maxPlayers - a.game.maxPlayers;
+    case "minPlayers":
+      return (a, b) => b.game.minPlayers - a.game.minPlayers;
+    case "name":
+      return sortFunctionName;
+    case "playingTime":
+      return (a, b) => b.game.playingTime - a.game.playingTime;
+    case "weight":
+      return (a, b) => b.game.weight - a.game.weight;
+  }
+}
+
+function sortFunctionName(a: GameInfo, b: GameInfo): number {
+  return a.game.name > b.game.name ? 1 : -1;
+}
+
+function sortFunctionCollectionStatus(a: GameInfo, b: GameInfo): number {
+  if (a.status?.own && !b.status?.own) {
+    return -1;
+  }
+  if (b.status?.own && !a.status?.own) {
+    return 1;
+  }
+  if (a.status?.wantToPlay && !b.status?.wantToPlay) {
+    return -1;
+  }
+  if (b.status?.wantToPlay && !a.status?.wantToPlay) {
+    return 1;
+  }
+  if (a.status?.wishlist && !b.status?.wishlist) {
+    return -1;
+  }
+  if (b.status?.wishlist && !a.status?.wishlist) {
+    return 1;
+  }
+  return 0;
 }
 
 function chainFilters(

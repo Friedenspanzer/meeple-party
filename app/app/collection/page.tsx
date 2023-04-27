@@ -13,7 +13,7 @@ export default async function Collection() {
       where: { userId: user.id },
       include: { game: true },
     })
-  ).sort((a, b) => (a.game.name > b.game.name ? 1 : -1));
+  );
   const friendCollections = await getMultipleCollectionStatusOfFriends(
     gameCollection.map((g) => g.gameId),
     user.id

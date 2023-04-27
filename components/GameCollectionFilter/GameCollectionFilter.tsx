@@ -38,6 +38,19 @@ export type PlayerCountFilterOption = {
   count?: number;
 };
 
+const sortOrderOptions = [
+  "name",
+  "minPlayers",
+  "maxPlayers",
+  "weight",
+  "playingTime",
+  "collectionStatus",
+  "friendsOwn",
+  "friendsWantToPlay",
+  "friendsWish",
+] as const;
+export type SortOrder = (typeof sortOrderOptions)[number];
+
 export interface GameCollectionFilterOptions {
   name?: string;
   weight: MinMaxFilterOption;
@@ -49,6 +62,7 @@ export interface GameCollectionFilterOptions {
     wantToPlay: MinMaxFilterOption;
     wishlist: MinMaxFilterOption;
   };
+  sort: SortOrder;
 }
 
 export type FilterPreset = {
@@ -121,6 +135,10 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
     }));
   }, []);
 
+  const changeSortOrder = useCallback((sort: SortOrder) => {
+    setFilter((filter) => ({ ...filter, sort }));
+  }, []);
+
   return (
     <div {...props} className={classNames(props.className, "container")}>
       <div className="row g-2">
@@ -178,7 +196,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             </button>
           )}
         </div>
-        <div className="col-md-4">
+        <div className="col-md-3">
           <input
             type="text"
             className="form-control"
@@ -187,11 +205,39 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             onChange={(e) => changeName(e.target.value)}
           />
         </div>
-        <div className="col-md-7">
+        <div className="col-md-5">
           <FilterOverview
             filter={filter}
             onFilterChange={(filter) => setFilter(filter)}
           />
+        </div>
+        <div className="col-md-3">
+          <div className="dropdown">
+            <button
+              className={classNames(
+                "btn btn-primary dropdown-toggle",
+                styles.sortButton
+              )}
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i className="bi bi-sort-down-alt"></i>{" "}
+              {sortOrderDescription(filter.sort)}
+            </button>
+            <ul className="dropdown-menu">
+              {sortOrderOptions.map((option) => (
+                <li key={option}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => changeSortOrder(option)}
+                  >
+                    {sortOrderDescription(option)}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <div
@@ -372,6 +418,29 @@ function collectionStatusActive(filter: CollectionStatusFilterOption) {
     filter.wantToPlay !== undefined ||
     filter.wishlist !== undefined
   );
+}
+
+function sortOrderDescription(sortOrder: SortOrder): string {
+  switch (sortOrder) {
+    case "collectionStatus":
+      return "Collection status";
+    case "friendsOwn":
+      return "Friends owning";
+    case "friendsWantToPlay":
+      return "Friends want to play";
+    case "friendsWish":
+      return "Friends wish";
+    case "maxPlayers":
+      return "Max players";
+    case "minPlayers":
+      return "Min players";
+    case "name":
+      return "Name";
+    case "playingTime":
+      return "Playing time";
+    case "weight":
+      return "Weight";
+  }
 }
 
 export default GameCollectionFilter;
