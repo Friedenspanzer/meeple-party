@@ -18,7 +18,13 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
   fill = true,
   children,
 }) => {
-  return <ul className={`nav nav-pills ${fill && "nav-fill"}`}>{children}</ul>;
+  return (
+    <ul
+      className={classNames("nav nav-pills", styles.bar, { "nav-fill": fill })}
+    >
+      {children}
+    </ul>
+  );
 };
 
 export const NavigationItem: React.FC<NavigationItemProps> = ({

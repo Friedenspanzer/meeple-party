@@ -1,0 +1,16 @@
+.icon {
+  font-size: 2rem;
+}
+
+.positive {
+  color: var(--bs-primary);
+}
+
+.negative {
+  color: var(--bs-danger);
+}
+
+.textual {
+  font-size: 1.3rem;
+  min-height: 63px;
+}

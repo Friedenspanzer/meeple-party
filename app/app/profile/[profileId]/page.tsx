@@ -164,6 +164,7 @@ export default async function ProfilePage({
                 status: getStatus(game.id, myCollectionStatus),
               }))}
               showFriendCollection={false}
+              showFilter={false}
             >
               <h3>{user.name}&#39;s collection</h3>
             </GameCollection>

@@ -1,0 +1,23 @@
+.offcanvas {
+  background-color: var(--bs-primary-bg-subtle);
+}
+
+.offcanvasHeader {
+  background-color: var(--bs-primary);
+  color: var(--bs-light);
+}
+
+.offcanvasBody {
+  padding: 0;
+}
+
+.sortButton {
+  min-width: 197px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.weightPresetButtons {
+  font-size: 0.74rem;
+}

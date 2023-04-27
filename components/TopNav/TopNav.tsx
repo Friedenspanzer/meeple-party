@@ -74,7 +74,7 @@ export default function TopNav() {
               />
               <div className="dropdown">
                 <button
-                  className="btn btn-outline-secondary dropdown-toggle"
+                  className="btn btn-outline-primary dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"

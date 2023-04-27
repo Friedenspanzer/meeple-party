@@ -10,14 +10,15 @@ import { getAllGamesOfFriends, getCollection } from "@/selectors/collections";
 import { getServerUser } from "@/utility/serverSession";
 import styles from "./dashboard.module.css";
 import { PrivateUser } from "@/datatypes/userProfile";
+import { emptyFilter } from "@/utility/filter";
 
 export default async function App() {
   const user = await getServerUser();
   const myGameCollection = await getCollection(user.id);
   const friendCollections = await getAllGamesOfFriends(user.id);
-  const collectedGames = myGameCollection
-    .map((g) => collectGames(g, friendCollections))
-    .sort(gameSortOrder);
+  const collectedGames = myGameCollection.map((g) =>
+    collectGames(g, friendCollections)
+  );
   const gamesThatEnoughPeopleWantToPlay = collectedGames.filter(
     enoughPeopleWantToPlay
   );
@@ -28,6 +29,43 @@ export default async function App() {
           .filter(atLeastOnePersonOwns)
           .map(uncollectGames)}
         showFriendCollection
+        filterPresets={[
+          {
+            name: "Games you own",
+            filter: { ...emptyFilter, collectionStatus: { own: true } },
+          },
+          {
+            name: "Games you don't own",
+            filter: { ...emptyFilter, collectionStatus: { own: false } },
+          },
+          {
+            name: "No solo play",
+            filter: {
+              ...emptyFilter,
+              friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
+            },
+          },
+          {
+            name: "Games you own, no solo play",
+            filter: {
+              ...emptyFilter,
+              collectionStatus: { own: true },
+              friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
+            },
+          },
+          {
+            name: "Games you don't own, no solo play",
+            filter: {
+              ...emptyFilter,
+              collectionStatus: { own: false },
+              friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
+            },
+          },
+        ]}
+        defaultFilter={{
+          ...emptyFilter,
+          friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
+        }}
         className={styles.collection}
       >
         <h2>Games you could play right now</h2>
@@ -38,7 +76,32 @@ export default async function App() {
           .filter(nobodyOwns)
           .map(uncollectGames)}
         showFriendCollection
+        filterPresets={[
+          {
+            name: "Your wishlist",
+            filter: { ...emptyFilter, collectionStatus: { wishlist: true } },
+          },
+          {
+            name: "No solo play",
+            filter: {
+              ...emptyFilter,
+              friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
+            },
+          },
+          {
+            name: "Your wishlist, no solo play",
+            filter: {
+              ...emptyFilter,
+              collectionStatus: { wishlist: true },
+              friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
+            },
+          },
+        ]}
         className={styles.collection}
+        defaultFilter={{
+          ...emptyFilter,
+          friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
+        }}
       >
         <h2>Games somebody should probably buy already</h2>
       </GameCollection>
@@ -66,14 +129,6 @@ function collectGames(
       (g) => g.game.id === myGame.game.id
     ),
   };
-}
-
-function gameSortOrder(a: CollectedGame, b: CollectedGame) {
-  if (a.game.minPlayers === b.game.minPlayers) {
-    return a.game.name > b.game.name ? 1 : -1;
-  } else {
-    return b.game.minPlayers - a.game.minPlayers;
-  }
 }
 
 function uncollectGames(collectedGame: CollectedGame): {
