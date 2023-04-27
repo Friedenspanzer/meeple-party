@@ -12,6 +12,10 @@ import styles from "./dashboard.module.css";
 import { PrivateUser } from "@/datatypes/userProfile";
 import { emptyFilter } from "@/utility/filter";
 
+export const metadata = {
+  title: 'Dashboard',
+}
+
 export default async function App() {
   const user = await getServerUser();
   const myGameCollection = await getCollection(user.id);

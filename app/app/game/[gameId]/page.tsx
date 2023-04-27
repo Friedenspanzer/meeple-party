@@ -9,6 +9,20 @@ import { getServerUser } from "@/utility/serverSession";
 import Avatar from "@/components/Avatar/Avatar";
 import Link from "next/link";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
+import { Metadata, ResolvingMetadata } from "next/types";
+
+export async function generateMetadata(
+  { params }: { params: { gameId: string } }
+): Promise<Metadata> {
+  const id = Number.parseInt(params.gameId);
+  if (!Number.isInteger(id)) {
+    notFound();
+  }
+  const game = await getBggGame(id);
+  return {
+    title: game.name
+  }
+}
 
 export default async function Game({ params }: { params: { gameId: string } }) {
   const id = Number.parseInt(params.gameId);
