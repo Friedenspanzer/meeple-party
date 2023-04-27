@@ -2,6 +2,7 @@ import GameCollection from "@/components/GameCollection/GameCollection";
 import { prisma } from "@/db";
 import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
 import { findFriendCollection } from "@/utility/collections";
+import { emptyFilter } from "@/utility/filter";
 import { getServerUser } from "@/utility/serverSession";
 import { Game } from "@prisma/client";
 
@@ -24,6 +25,7 @@ export default async function Collection() {
           status: { own, wantToPlay, wishlist },
           friendCollections: findFriendCollection(game.id, friendCollections),
         }))}
+      defaultFilter={{ ...emptyFilter, collectionStatus: { own: true } }}
       showFriendCollection={true}
     />
   );

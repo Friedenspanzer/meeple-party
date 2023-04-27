@@ -16,6 +16,7 @@ import { emptyFilter } from "@/utility/filter";
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
   onFilterChange: (filter: GameCollectionFilterOptions) => void;
+  defaultFilter?: GameCollectionFilterOptions;
   totalCount: number;
   filteredCount: number;
   presets?: FilterPreset[];
@@ -60,12 +61,14 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   totalCount,
   filteredCount,
   presets,
+  defaultFilter,
   ...props
 }) => {
   const offcanvasId = useId();
 
-  const [filter, setFilter] =
-    useState<GameCollectionFilterOptions>(emptyFilter);
+  const [filter, setFilter] = useState<GameCollectionFilterOptions>(
+    defaultFilter || emptyFilter
+  );
 
   useEffect(() => {
     onFilterChange(filter);

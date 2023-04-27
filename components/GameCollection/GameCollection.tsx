@@ -26,6 +26,7 @@ export interface GameCollectionProps
   games: GameInfo[];
   showFriendCollection?: boolean;
   showFilter?: boolean;
+  defaultFilter?: GameCollectionFilterOptions;
   filterPresets?: FilterPreset[];
   children?: React.ReactNode;
 }
@@ -42,6 +43,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
   showFriendCollection = false,
   showFilter = true,
   filterPresets = getDefaultFilterPresets(),
+  defaultFilter,
   children,
   ...props
 }) => {
@@ -105,6 +107,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
             totalCount={games.length}
             filteredCount={filteredGames.length}
             presets={filterPresets}
+            defaultFilter={defaultFilter}
           />
         )}
         <div className={styles.games}>
