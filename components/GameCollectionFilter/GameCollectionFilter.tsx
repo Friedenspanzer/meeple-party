@@ -201,35 +201,22 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               onChange={changePlayerCount}
             />
           </Section>
-          <Section
+          <MinMaxSection
+            minMax={filter.weight}
+            changeFunction={changeWeight}
             title="Weight"
-            value={getMinMaxValue(filter.weight.min, filter.weight.max)}
-            active={!!filter.weight.min || !!filter.weight.max}
-          >
-            <MinMaxSliders
-              min={1}
-              max={5}
-              step={0.1}
-              onChange={changeWeight}
-              value={filter.weight}
-            />
-          </Section>
-          <Section
+            min={1}
+            max={5}
+            step={0.1}
+          />
+          <MinMaxSection
+            minMax={filter.playingTime}
+            changeFunction={changePlayingTime}
             title="Playing time"
-            value={getMinMaxValue(
-              filter.playingTime.min,
-              filter.playingTime.max
-            )}
-            active={!!filter.playingTime.min || !!filter.playingTime.max}
-          >
-            <MinMaxSliders
-              min={0}
-              max={360}
-              step={10}
-              onChange={changePlayingTime}
-              value={filter.playingTime}
-            />
-          </Section>
+            min={0}
+            max={360}
+            step={10}
+          />
           <Section
             title="Collection status"
             value={getCombinedText(filter.collectionStatus)}
@@ -249,6 +236,38 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
     </div>
   );
 };
+
+function MinMaxSection({
+  minMax,
+  changeFunction,
+  title,
+  max,
+  min = 0,
+  step = 1,
+}: {
+  minMax: MinMaxFilterOption;
+  changeFunction: (minMax: MinMaxFilterOption) => void;
+  title: string;
+  max: number;
+  min?: number;
+  step?: number;
+}) {
+  return (
+    <Section
+      title={title}
+      value={getMinMaxValue(minMax.min, minMax.max)}
+      active={!!minMax.min || !!minMax.max}
+    >
+      <MinMaxSliders
+        min={min}
+        max={max}
+        step={step}
+        onChange={changeFunction}
+        value={minMax}
+      />
+    </Section>
+  );
+}
 
 export function getMinMaxValue(min?: number, max?: number) {
   if (!min && !max) {
