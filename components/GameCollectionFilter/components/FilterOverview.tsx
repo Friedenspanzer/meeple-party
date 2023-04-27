@@ -62,7 +62,7 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       {filter.collectionStatus.own !== undefined && (
         <FilterPill
           filter="Own"
-          value={yesNo(filter.collectionStatus.own!)}
+          value={yesNo(filter.collectionStatus.own)}
           onRemove={() => {
             onFilterChange({
               ...filter,
@@ -74,7 +74,7 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       {filter.collectionStatus.wantToPlay !== undefined && (
         <FilterPill
           filter="Want to play"
-          value={yesNo(filter.collectionStatus.wantToPlay!)}
+          value={yesNo(filter.collectionStatus.wantToPlay)}
           onRemove={() => {
             onFilterChange({
               ...filter,
@@ -89,13 +89,70 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       {filter.collectionStatus.wishlist !== undefined && (
         <FilterPill
           filter="Wishlist"
-          value={yesNo(filter.collectionStatus.wishlist!)}
+          value={yesNo(filter.collectionStatus.wishlist)}
           onRemove={() => {
             onFilterChange({
               ...filter,
               collectionStatus: {
                 ...filter.collectionStatus,
                 wishlist: undefined,
+              },
+            });
+          }}
+        />
+      )}
+      {minOrMaxActive(filter.friends.own) && (
+        <FilterPill
+          filter="Friends own"
+          value={
+            getMinMaxValue(filter.friends.own.min, filter.friends.own.max) || ""
+          }
+          onRemove={() => {
+            onFilterChange({
+              ...filter,
+              friends: {
+                ...filter.friends,
+                own: { min: undefined, max: undefined },
+              },
+            });
+          }}
+        />
+      )}
+      {minOrMaxActive(filter.friends.wantToPlay) && (
+        <FilterPill
+          filter="Friends want to play"
+          value={
+            getMinMaxValue(
+              filter.friends.wantToPlay.min,
+              filter.friends.wantToPlay.max
+            ) || ""
+          }
+          onRemove={() => {
+            onFilterChange({
+              ...filter,
+              friends: {
+                ...filter.friends,
+                wantToPlay: { min: undefined, max: undefined },
+              },
+            });
+          }}
+        />
+      )}
+      {minOrMaxActive(filter.friends.wishlist) && (
+        <FilterPill
+          filter="Friends wish"
+          value={
+            getMinMaxValue(
+              filter.friends.wishlist.min,
+              filter.friends.wishlist.max
+            ) || ""
+          }
+          onRemove={() => {
+            onFilterChange({
+              ...filter,
+              friends: {
+                ...filter.friends,
+                wishlist: { min: undefined, max: undefined },
               },
             });
           }}
@@ -117,7 +174,7 @@ function FilterPill({
   return (
     <div
       className={classNames("badge rounded-pill", styles.pill)}
-      onClick={(_) => {
+      onClick={() => {
         onRemove();
       }}
     >

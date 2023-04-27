@@ -1,3 +1,5 @@
+"use client";
+
 import classNames from "classnames";
 import { useCallback, useEffect, useId, useState } from "react";
 import styles from "./gamecollectionfilter.module.css";
@@ -39,6 +41,11 @@ export interface GameCollectionFilterOptions {
   playingTime: MinMaxFilterOption;
   collectionStatus: CollectionStatusFilterOption;
   playerCount: PlayerCountFilterOption;
+  friends: {
+    own: MinMaxFilterOption;
+    wantToPlay: MinMaxFilterOption;
+    wishlist: MinMaxFilterOption;
+  };
 }
 
 export type FilterPreset = {
@@ -88,6 +95,27 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
     },
     []
   );
+
+  const changeFriendsOwn = useCallback((own: MinMaxFilterOption) => {
+    setFilter((filter) => ({ ...filter, friends: { ...filter.friends, own } }));
+  }, []);
+
+  const changeFriendsWantToPlay = useCallback(
+    (wantToPlay: MinMaxFilterOption) => {
+      setFilter((filter) => ({
+        ...filter,
+        friends: { ...filter.friends, wantToPlay },
+      }));
+    },
+    []
+  );
+
+  const changeFriendsWishlist = useCallback((wishlist: MinMaxFilterOption) => {
+    setFilter((filter) => ({
+      ...filter,
+      friends: { ...filter.friends, wishlist },
+    }));
+  }, []);
 
   return (
     <div {...props} className={classNames(props.className, "container")}>
@@ -231,6 +259,24 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               onChange={changeCollectionStatus}
             />
           </Section>
+          <MinMaxSection
+            minMax={filter.friends.own}
+            changeFunction={changeFriendsOwn}
+            title="Friends own"
+            max={25}
+          />
+          <MinMaxSection
+            minMax={filter.friends.wantToPlay}
+            changeFunction={changeFriendsWantToPlay}
+            title="Friends want to play"
+            max={25}
+          />
+          <MinMaxSection
+            minMax={filter.friends.wishlist}
+            changeFunction={changeFriendsWishlist}
+            title="Friends wish"
+            max={25}
+          />
         </div>
       </div>
     </div>
@@ -331,6 +377,11 @@ export function getEmptyFilter(): GameCollectionFilterOptions {
     playerCount: {
       type: "supports",
       count: undefined,
+    },
+    friends: {
+      own: { min: undefined, max: undefined },
+      wantToPlay: { min: undefined, max: undefined },
+      wishlist: { min: undefined, max: undefined },
     },
   };
 }

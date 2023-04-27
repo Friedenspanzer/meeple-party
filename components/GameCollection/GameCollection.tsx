@@ -227,6 +227,7 @@ function applyFilters(
     collectionFilter,
     playingTimeFilter,
     weightFilter,
+    friendFilter,
   ]);
 }
 
@@ -322,6 +323,66 @@ const collectionFilter: FilterFunction = (filter, games) => {
   if (filter.collectionStatus.wishlist !== undefined) {
     filteredGames = filteredGames.filter(
       (g) => g.status?.wishlist === filter.collectionStatus.wishlist
+    );
+  }
+  return filteredGames;
+};
+
+const friendFilter: FilterFunction = (filter, games) => {
+  return chainFilters(filter, games, [
+    friendOwnFilter,
+    friendWantToPlayFilter,
+    friendWishlistFilter,
+  ]);
+};
+
+const friendOwnFilter: FilterFunction = (filter, games) => {
+  let filteredGames = games;
+  if (filter.friends.own.max) {
+    filteredGames = filteredGames.filter(
+      (g) => (g.friendCollections?.own.length || 0) <= filter.friends.own.max!
+    );
+  }
+  if (filter.friends.own.min) {
+    filteredGames = filteredGames.filter(
+      (g) => (g.friendCollections?.own.length || 0) >= filter.friends.own.min!
+    );
+  }
+  return filteredGames;
+};
+const friendWantToPlayFilter: FilterFunction = (filter, games) => {
+  let filteredGames = games;
+  if (filter.friends.wantToPlay.max) {
+    filteredGames = filteredGames.filter(
+      (g) =>
+        (g.friendCollections?.wantToPlay.length || 0) <=
+        filter.friends.wantToPlay.max!
+    );
+  }
+  if (filter.friends.wantToPlay.min) {
+    filteredGames = filteredGames.filter(
+      (g) =>
+        (g.friendCollections?.wantToPlay.length || 0) >=
+        filter.friends.wantToPlay.min!
+    );
+  }
+  return filteredGames;
+};
+
+const friendWishlistFilter: FilterFunction = (filter, games) => {
+  let filteredGames = games;
+  if (filter.friends.wishlist.max) {
+    filteredGames = filteredGames.filter(
+      (g) =>
+        (g.friendCollections?.wishlist.length || 0) <=
+        filter.friends.wishlist.max!
+    );
+  }
+  if (filter.friends.wishlist.min) {
+    filteredGames = filteredGames.filter(
+      (g) =>
+        (g.friendCollections?.wishlist.length || 0) >=
+        filter.friends.wishlist.min!
     );
   }
   return filteredGames;
