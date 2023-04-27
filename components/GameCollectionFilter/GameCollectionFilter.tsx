@@ -11,6 +11,7 @@ import CollectionStatus, {
 } from "./components/CollectionStatus";
 import PlayerCount from "./components/PlayerCount";
 import Group from "./components/Group";
+import { emptyFilter } from "@/utility/filter";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -63,9 +64,8 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
 }) => {
   const offcanvasId = useId();
 
-  const [filter, setFilter] = useState<GameCollectionFilterOptions>(
-    getEmptyFilter()
-  );
+  const [filter, setFilter] =
+    useState<GameCollectionFilterOptions>(emptyFilter);
 
   useEffect(() => {
     onFilterChange(filter);
@@ -369,28 +369,6 @@ function collectionStatusActive(filter: CollectionStatusFilterOption) {
     filter.wantToPlay !== undefined ||
     filter.wishlist !== undefined
   );
-}
-
-export function getEmptyFilter(): GameCollectionFilterOptions {
-  return {
-    name: undefined,
-    weight: { min: undefined, max: undefined },
-    playingTime: { min: undefined, max: undefined },
-    collectionStatus: {
-      own: undefined,
-      wantToPlay: undefined,
-      wishlist: undefined,
-    },
-    playerCount: {
-      type: "supports",
-      count: undefined,
-    },
-    friends: {
-      own: { min: undefined, max: undefined },
-      wantToPlay: { min: undefined, max: undefined },
-      wishlist: { min: undefined, max: undefined },
-    },
-  };
 }
 
 export default GameCollectionFilter;

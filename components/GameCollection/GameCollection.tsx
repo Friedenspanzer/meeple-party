@@ -11,9 +11,9 @@ import GameBox from "../GameBox/GameBox";
 import GameCollectionFilter, {
   FilterPreset,
   GameCollectionFilterOptions,
-  getEmptyFilter,
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
+import { emptyFilter } from "@/utility/filter";
 
 type GameInfo = {
   game: Game;
@@ -25,6 +25,8 @@ export interface GameCollectionProps
   extends React.HTMLAttributes<HTMLDivElement> {
   games: GameInfo[];
   showFriendCollection?: boolean;
+  showFilter?: boolean;
+  filterPresets?: FilterPreset[];
   children?: React.ReactNode;
 }
 
@@ -38,6 +40,8 @@ const ITEMS_PER_PAGE = 15;
 const GameCollection: React.FC<GameCollectionProps> = ({
   games,
   showFriendCollection = false,
+  showFilter = true,
+  filterPresets = getDefaultFilterPresets(),
   children,
   ...props
 }) => {
@@ -62,8 +66,6 @@ const GameCollection: React.FC<GameCollectionProps> = ({
   const getOffset = useCallback(() => {
     return page * ITEMS_PER_PAGE;
   }, [page]);
-
-  const presets = useMemo(getFilterPresets, []);
 
   useEffect(() => {
     setInputPage(`${page + 1}`);
@@ -97,12 +99,14 @@ const GameCollection: React.FC<GameCollectionProps> = ({
     <div {...props}>
       {children}
       <div className={styles.container}>
-        <GameCollectionFilter
-          onFilterChange={setFilter}
-          totalCount={games.length}
-          filteredCount={filteredGames.length}
-          presets={presets}
-        />
+        {showFilter && (
+          <GameCollectionFilter
+            onFilterChange={setFilter}
+            totalCount={games.length}
+            filteredCount={filteredGames.length}
+            presets={filterPresets}
+          />
+        )}
         <div className={styles.games}>
           {filteredGames
             .slice(getOffset(), getOffset() + ITEMS_PER_PAGE)
@@ -193,24 +197,24 @@ function pageButtons(
   return pageElements;
 }
 
-function getFilterPresets(): FilterPreset[] {
+function getDefaultFilterPresets(): FilterPreset[] {
   return [
     {
       name: "Own",
-      filter: { ...getEmptyFilter(), collectionStatus: { own: true } },
+      filter: { ...emptyFilter, collectionStatus: { own: true } },
     },
     {
       name: "Want to play",
-      filter: { ...getEmptyFilter(), collectionStatus: { wantToPlay: true } },
+      filter: { ...emptyFilter, collectionStatus: { wantToPlay: true } },
     },
     {
       name: "Wishlist",
-      filter: { ...getEmptyFilter(), collectionStatus: { wishlist: true } },
+      filter: { ...emptyFilter, collectionStatus: { wishlist: true } },
     },
     {
       name: "Own and want to play",
       filter: {
-        ...getEmptyFilter(),
+        ...emptyFilter,
         collectionStatus: { own: true, wantToPlay: true },
       },
     },

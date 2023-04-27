@@ -6,7 +6,7 @@ import GameSearch, {
 } from "@/components/GameSearch/GameSearch";
 
 const resultView: React.FC<GameSearchChildren> = ({ searchResult }) => {
-  return <GameCollection games={searchResult} />;
+  return <GameCollection games={searchResult} showFilter={false} />;
 };
 
 export default function Search() {

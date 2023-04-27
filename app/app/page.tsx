@@ -10,6 +10,7 @@ import { getAllGamesOfFriends, getCollection } from "@/selectors/collections";
 import { getServerUser } from "@/utility/serverSession";
 import styles from "./dashboard.module.css";
 import { PrivateUser } from "@/datatypes/userProfile";
+import { emptyFilter } from "@/utility/filter";
 
 export default async function App() {
   const user = await getServerUser();
@@ -28,6 +29,12 @@ export default async function App() {
           .filter(atLeastOnePersonOwns)
           .map(uncollectGames)}
         showFriendCollection
+        filterPresets={[
+          {
+            name: "Games you own",
+            filter: { ...emptyFilter, collectionStatus: { own: true } },
+          },
+        ]}
         className={styles.collection}
       >
         <h2>Games you could play right now</h2>
@@ -38,6 +45,12 @@ export default async function App() {
           .filter(nobodyOwns)
           .map(uncollectGames)}
         showFriendCollection
+        filterPresets={[
+          {
+            name: "Your wishlist",
+            filter: { ...emptyFilter, collectionStatus: { wishlist: true } },
+          },
+        ]}
         className={styles.collection}
       >
         <h2>Games somebody should probably buy already</h2>
