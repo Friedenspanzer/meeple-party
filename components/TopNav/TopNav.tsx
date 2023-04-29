@@ -90,7 +90,7 @@ export default function TopNav() {
                   </li>
                   <li>
                     <Link href={`/app/profile/edit`} className="dropdown-item">
-                      Edit your profile
+                      Settings
                     </Link>
                   </li>
                   <li>
