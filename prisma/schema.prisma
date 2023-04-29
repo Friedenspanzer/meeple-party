@@ -37,21 +37,26 @@ model Session {
 }
 
 model User {
-  id                    String           @id @default(cuid())
-  name                  String?
-  email                 String?          @unique
-  emailVerified         DateTime?
-  accounts              Account[]
-  sessions              Session[]
-  profileComplete       Boolean          @default(false)
-  role                  Role             @default(USER)
-  realName              String?
-  about                 String?
-  place                 String?
-  preference            String?
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  accounts      Account[]
+  sessions      Session[]
+
+  profileComplete Boolean @default(false)
+  role            Role    @default(USER)
+
+  realName   String?
+  about      String?
+  place      String?
+  preference String?
+  image      String?
+  bggName    String?
+
+  preferences Json @default("{}") @db.Json
+
   favorites             Game[]
-  image                 String?
-  bggName               String?
   games                 GameCollection[] @relation()
   sentRelationships     Relationship[]   @relation("sender")
   receivedRelationships Relationship[]   @relation("recipient")

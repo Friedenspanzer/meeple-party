@@ -79,7 +79,7 @@ const EditProfile: React.FC = () => {
       favorites: favorites ? favorites.map((f) => f.id) : [],
     };
     fetch("/api/user", {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify(newUserDetails),
     }).then((response) => {
       if (response.ok) {
