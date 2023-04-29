@@ -28,6 +28,7 @@ export default async function RootLayout({
         </AuthProvider>
         <Analytics />
       </body>
+      <Script src="/bootstrap.bundle.min.js" />
     </html>
   );
 }

@@ -9,7 +9,7 @@ import { getServerUser } from "@/utility/serverSession";
 import Avatar from "@/components/Avatar/Avatar";
 import Link from "next/link";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
-import { Metadata, ResolvingMetadata } from "next/types";
+import { Metadata } from "next/types";
 
 export async function generateMetadata(
   { params }: { params: { gameId: string } }

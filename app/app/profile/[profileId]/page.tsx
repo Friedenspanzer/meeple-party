@@ -14,7 +14,7 @@ import {
 import classNames from "classnames";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Metadata, ResolvingMetadata } from "next/types";
+import { Metadata } from "next/types";
 import { cache } from "react";
 import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
