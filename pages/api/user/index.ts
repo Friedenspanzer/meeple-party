@@ -3,10 +3,6 @@ import { withUser } from "@/utility/apiAuth";
 import { Game, Prisma, User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
-type ExtendedUser = User & {
-  favorites: Game[];
-};
-
 export default withUser(async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
