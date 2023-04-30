@@ -41,7 +41,9 @@ function updatedUserDetails(user: User, requestObject: any) {
     realName: requestObject.realName ? requestObject.realName : user.realName,
     place: requestObject.place ? requestObject.place : user.place,
     about: requestObject.about ? requestObject.about : user.about,
-    preference: requestObject.preference ? requestObject.preference : user.preference,
+    preference: requestObject.preference
+      ? requestObject.preference
+      : user.preference,
     preferences: (requestObject.preferences
       ? requestObject.preferences
       : user.preferences) as Prisma.JsonObject,

@@ -1,0 +1,25 @@
+.success {
+  color: var(--bs-success);
+}
+
+.error {
+  color: var(--bs-danger);
+}
+
+.status {
+  animation-name: fadeOut;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
