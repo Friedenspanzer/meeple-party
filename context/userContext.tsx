@@ -11,13 +11,16 @@ interface UserProviderProps {
 interface UserContext {
   user?: User;
   loading: boolean;
+  update: () => void;
 }
 
-const UserContext = createContext<UserContext>({ loading: true });
+const UserContext = createContext<UserContext>({
+  loading: true,
+  update: () => {},
+});
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const session = useSession();
-  const [loading, setLoading] = useState(true);
 
   if (!session) {
     throw new Error(
@@ -29,16 +32,13 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     throw new Error("Could not load user from session.");
   }
 
-  useEffect(() => {
-    setLoading(session.status === "loading");
-  }, [session.status]);
-
   const value = useMemo(
     () => ({
       user: session.data?.user as User,
-      loading,
+      loading: session.status === "loading",
+      update: () => session.update(),
     }),
-    [session.data, loading]
+    [session]
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
