@@ -1,5 +1,6 @@
 "use client";
 
+import { useUser } from "@/context/userContext";
 import { UserPreferences } from "@/datatypes/userProfile";
 import classNames from "classnames";
 import { useCallback, useId, useState } from "react";
@@ -25,7 +26,9 @@ const AutoUpdateToggle: React.FC<AutoUpdateToggleProps> = ({
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const update = useCallback(
+  const { update: updateUser } = useUser();
+
+  const updateValue = useCallback(
     (newValue: boolean) => {
       setSuccess(false);
       setError(false);
@@ -39,6 +42,7 @@ const AutoUpdateToggle: React.FC<AutoUpdateToggleProps> = ({
         if (response.ok) {
           setSuccess(true);
           setDirty(false);
+          updateUser();
         } else {
           setChecked(!newValue);
           setDirty(false);
@@ -46,7 +50,7 @@ const AutoUpdateToggle: React.FC<AutoUpdateToggleProps> = ({
         }
       });
     },
-    [onChange]
+    [onChange, updateUser]
   );
 
   return (
@@ -80,7 +84,7 @@ const AutoUpdateToggle: React.FC<AutoUpdateToggleProps> = ({
             role="switch"
             id={switchId}
             checked={checked}
-            onChange={(e) => update(e.currentTarget.checked)}
+            onChange={(e) => updateValue(e.currentTarget.checked)}
             disabled={dirty}
           />
         </div>
