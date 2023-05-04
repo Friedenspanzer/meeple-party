@@ -1,14 +1,8 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
-"use client";
-
 import styles from "./page.module.css";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
-import Spinner from "@/components/Spinner/Spinner";
 import Image from "next/image";
+import LoginButtons from "@/components/LoginButtons/LoginButtons";
 
 export default function Home() {
-  const { data: session, status } = useSession();
   return (
     <div className="container text-center">
       <div className="row justify-content-center mb-4">
@@ -31,20 +25,7 @@ export default function Home() {
       </div>
       <div className="row justify-content-center">
         <div className="col-md-6">
-          {status === "authenticated" && !!session.user && (
-            <>
-              <strong>Logged in as {session.user.name}</strong>
-              <br />
-              <Link href="/app">Go to app</Link>
-              <br />
-              <br />
-              <a href="/api/auth/signout">Logout</a>
-            </>
-          )}
-          {status === "unauthenticated" && (
-            <a href="/api/auth/signin">Login/Register</a>
-          )}
-          {status === "loading" && <Spinner />}
+          <LoginButtons />
         </div>
       </div>
     </div>

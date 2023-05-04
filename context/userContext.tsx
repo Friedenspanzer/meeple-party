@@ -12,17 +12,14 @@ interface UserContext {
   user?: User;
   loading: boolean;
   update: () => void;
-  initializing: boolean;
 }
 
 const UserContext = createContext<UserContext>({
   loading: true,
   update: () => {},
-  initializing: true,
 });
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [initializing, setIninitializing] = useState(true);
   const session = useSession();
 
   if (!session) {
@@ -35,18 +32,13 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     throw new Error("Could not load user from session.");
   }
 
-  useEffect(() => {
-    setIninitializing((value) => !value || session.status === "loading");
-  }, [session.status]);
-
   const value = useMemo(
     () => ({
       user: session.data?.user as User,
       loading: session.status === "loading",
       update: () => session.update(),
-      initializing,
     }),
-    [session, initializing]
+    [session]
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
