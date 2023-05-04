@@ -38,17 +38,21 @@ const AutoUpdateToggle: React.FC<AutoUpdateToggleProps> = ({
       fetch("/api/user", {
         method: "PATCH",
         body: JSON.stringify({ preferences }),
-      }).then((response) => {
-        if (response.ok) {
-          setSuccess(true);
-          setDirty(false);
-          updateUser();
-        } else {
+      })
+        .then((response) => {
+          if (response.ok) {
+            setSuccess(true);
+            setDirty(false);
+            updateUser();
+          } else {
+            throw Error(`${response.status} ${response.statusText}`);
+          }
+        })
+        .catch(() => {
           setChecked(!newValue);
           setDirty(false);
           setError(true);
-        }
-      });
+        });
     },
     [onChange, updateUser]
   );
