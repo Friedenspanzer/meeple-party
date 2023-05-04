@@ -5,7 +5,7 @@ import { useUser } from "@/context/userContext";
 import Link from "next/link";
 import Spinner from "../Spinner/Spinner";
 
-const LoginButtons: React.FC<{}> = ({}) => {
+const LoginButtons: React.FC<{}> = () => {
   const { user, loading } = useUser();
   if (!loading && user) {
     return (
