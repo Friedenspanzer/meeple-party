@@ -51,12 +51,15 @@ const EditProfile: React.FC = () => {
           if (response.ok) {
             return response.json();
           } else {
-            setApiError(`Error fetching game data for game ${gameId}.`);
-            setApiErrorDetail(`${response.status} ${response.statusText}`);
+            throw Error(`${response.status} ${response.statusText}`);
           }
         })
         .then((game) => {
           setFavorites(favorites ? [...favorites, game] : [game]);
+        })
+        .catch((error) => {
+          setApiError(`Error fetching game data for game ${gameId}.`);
+          setApiErrorDetail(error);
         });
     },
     [favorites]
@@ -79,16 +82,20 @@ const EditProfile: React.FC = () => {
       favorites: favorites ? favorites.map((f) => f.id) : [],
     };
     fetch("/api/user", {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify(newUserDetails),
-    }).then((response) => {
-      if (response.ok) {
-        setSending(false);
-      } else {
+    })
+      .then((response) => {
+        if (response.ok) {
+          setSending(false);
+        } else {
+          throw Error(`${response.status} ${response.statusText}`);
+        }
+      })
+      .catch((error) => {
         setApiError(`Error updating profile data.`);
-        setApiErrorDetail(`${response.status} ${response.statusText}`);
-      }
-    });
+        setApiErrorDetail(error);
+      });
   };
 
   useEffect(() => {
@@ -135,8 +142,18 @@ const EditProfile: React.FC = () => {
 
   useEffect(() => {
     fetch("/api/user")
-      .then((response) => response.json())
-      .then((u) => setFavorites(u.favorites));
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw Error(`${response.status} ${response.statusText}`);
+        }
+      })
+      .then((u) => setFavorites(u.favorites))
+      .catch((error) => {
+        setApiError(`Error fetching favorite games`);
+        setApiErrorDetail(error);
+      });
   }, [user]);
 
   return (

@@ -24,9 +24,11 @@ export default async function RootLayout({
       <body>
         <Script src="/bootstrap.bundle.min.js" />
         <AuthProvider>
-          <UserProvider>{children}</UserProvider>
+          <UserProvider>
+            {children}
+            <Analytics />
+          </UserProvider>
         </AuthProvider>
-        <Analytics />
       </body>
       <Script src="/bootstrap.bundle.min.js" />
     </html>

@@ -1,6 +1,6 @@
 import { prisma } from "@/db";
 import { withUser } from "@/utility/apiAuth";
-import { User } from "@prisma/client";
+import { Game, Prisma, User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default withUser(async function handle(
@@ -15,24 +15,9 @@ export default withUser(async function handle(
         include: { favorites: true },
       });
       res.status(200).json(extendedDetails);
-    } else if (req.method === "POST") {
-      const { favorites, ...newUserDetails } = JSON.parse(req.body);
-      //TODO Validation
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          ...newUserDetails,
-          profileComplete: isProfileComplete(newUserDetails),
-          favorites: {
-            set: favorites.map((f: number) => ({
-              id: f,
-            })),
-          },
-        },
-      });
-      res.status(200).send({});
     } else if (req.method === "PATCH") {
-      const newUserDetails = updatePartialUser(user, JSON.parse(req.body));
+      const newUserDetails = updatedUserDetails(user, JSON.parse(req.body));
+      console.log("Details", newUserDetails);
       await prisma.user.update({
         where: { id: user.id },
         data: {
@@ -48,12 +33,27 @@ export default withUser(async function handle(
   }
 });
 
-function updatePartialUser(user: User, requestObject: any): Partial<User> {
+function updatedUserDetails(user: User, requestObject: any) {
   return {
-    bggName: !!requestObject.bggName ? requestObject.bggName : user.bggName,
-    image: !!requestObject.image ? requestObject.image : user.image,
-    name: !!requestObject.name ? requestObject.name : user.name,
-    realName: !!requestObject.realName ? requestObject.realName : user.realName,
+    bggName: requestObject.bggName ? requestObject.bggName : user.bggName,
+    image: requestObject.image ? requestObject.image : user.image,
+    name: requestObject.name ? requestObject.name : user.name,
+    realName: requestObject.realName ? requestObject.realName : user.realName,
+    place: requestObject.place ? requestObject.place : user.place,
+    about: requestObject.about ? requestObject.about : user.about,
+    preference: requestObject.preference
+      ? requestObject.preference
+      : user.preference,
+    preferences: (requestObject.preferences
+      ? requestObject.preferences
+      : user.preferences) as Prisma.JsonObject,
+    favorites: requestObject.favorites
+      ? {
+          set: requestObject.favorites.map((f: number) => ({
+            id: f,
+          })),
+        }
+      : undefined,
   };
 }
 
