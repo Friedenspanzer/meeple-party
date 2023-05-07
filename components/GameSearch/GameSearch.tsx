@@ -41,6 +41,9 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
             setError(true);
           }
         })
+        .then((result: ExtendedGameCollection[]) =>
+          result.sort(searchResultSortOrder)
+        )
         .then(setResult)
         .finally(() => setDirty(false));
     }
@@ -91,5 +94,20 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
     </>
   );
 };
+
+function searchResultSortOrder(
+  a: ExtendedGameCollection,
+  b: ExtendedGameCollection
+): number {
+  if (!a.game.BGGRank && b.game.BGGRank) {
+    return 1;
+  } else if (a.game.BGGRank && !b.game.BGGRank) {
+    return -1;
+  } else if (!a.game.BGGRank && !b.game.BGGRank) {
+    return a.game.name.localeCompare(b.game.name);
+  } else {
+    return a.game.BGGRank! - b.game.BGGRank!;
+  }
+}
 
 export default GameSearch;
