@@ -23,7 +23,12 @@ export default withUser(async function handle(
 ) {
   try {
     if (req.method === "PUT") {
-      const form = new formidable.IncomingForm();
+      const form = new formidable.IncomingForm({
+        maxFields: 1,
+        maxFiles: 1,
+        maxFileSize: 1024 * 1024,
+        maxFieldsSize: 1,
+      });
       form.parse(req, async (err, _, files) => {
         try {
           if (err) {
