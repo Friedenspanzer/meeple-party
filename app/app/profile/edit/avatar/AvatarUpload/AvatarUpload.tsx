@@ -14,35 +14,39 @@ const AvatarUpload: React.FC = () => {
     "waiting"
   );
 
-  const onFileSelect = useCallback((files: FileList | null) => {
-    if (!files) {
-      setError("No files selected.");
-    } else if (files.length > 1) {
-      setError("Multiple files selected.");
-    } else if (files[0].size > 1048576) {
-      setError("File is bigger than 1MB.");
-    } else if (!ALLOWED_FILE_TYPES.includes(files[0].type)) {
-      setError("File type not allowed.");
-    } else {
-      setError(false);
-      setProgress("uploading");
-      const formData = new FormData();
-      formData.append("avatar", files[0]);
-      fetch("/api/user/avatar", { method: "PUT", body: formData }).then(
-        (result) => {
-          if (result.ok) {
-            setProgress("done");
-            updateUser();
-          } else {
+  const onFileSelect = useCallback(
+    (files: FileList | null) => {
+      if (!files) {
+        setError("No files selected.");
+      } else if (files.length > 1) {
+        setError("Multiple files selected.");
+      } else if (files[0].size > 1048576) {
+        setError("File is bigger than 1MB.");
+      } else if (!ALLOWED_FILE_TYPES.includes(files[0].type)) {
+        setError("File type not allowed.");
+      } else {
+        setError(false);
+        setProgress("uploading");
+        const formData = new FormData();
+        formData.append("avatar", files[0]);
+        fetch("/api/user/avatar", { method: "PUT", body: formData })
+          .then((result) => {
+            if (result.ok) {
+              setProgress("done");
+              updateUser();
+            } else {
+              throw Error(`${result.status}: ${result.statusText}`);
+            }
+          })
+          .catch((error) => {
             setProgress("waiting");
             setError("Error uploading file.");
-            console.error(result.statusText);
-          }
-        }
-      );
-    }
-    console.log(files);
-  }, []);
+            console.error(error);
+          });
+      }
+    },
+    [updateUser]
+  );
 
   return (
     <>
