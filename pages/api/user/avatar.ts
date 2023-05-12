@@ -44,6 +44,9 @@ export default withUser(async function handle(
           res.status(500).json({ success: false, error: e });
         }
       });
+    } else if (req.method === "DELETE") {
+      await updateInDatabase(null, user);
+      res.status(200).send({});
     } else {
       res.status(405).send({});
     }
@@ -78,8 +81,8 @@ function getOldPath(user: User) {
   return `${user.id}/${matches[0]}`;
 }
 
-async function updateInDatabase(filename: string, user: User) {
-  const fullPath = `${PROFILE_PICTURE_BASE_PATH}${filename}`;
+async function updateInDatabase(filename: string | null, user: User) {
+  const fullPath = filename ? `${PROFILE_PICTURE_BASE_PATH}${filename}` : null;
   await prisma.user.update({
     where: { id: user.id },
     data: { image: fullPath },

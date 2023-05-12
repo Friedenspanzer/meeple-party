@@ -50,7 +50,7 @@ const AvatarUpload: React.FC = () => {
 
   return (
     <>
-      <div className="row">
+      <div className="row mt-4">
         <div className="col-12">
           <label htmlFor={fileUploadId} className="form-label">
             Choose an image file
