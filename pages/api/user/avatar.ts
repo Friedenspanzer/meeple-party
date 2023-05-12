@@ -58,7 +58,7 @@ export default withUser(async function handle(
 
 async function deleteOldFile(user: User) {
   const oldPath = getOldPath(user);
-  if (oldPath) {
+  if (oldPath && oldPath.startsWith(PROFILE_PICTURE_BASE_PATH)) {
     const { error } = await supabase.storage
       .from("profilepictures")
       .remove([oldPath]);
