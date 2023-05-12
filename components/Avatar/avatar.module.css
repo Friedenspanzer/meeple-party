@@ -5,6 +5,7 @@
   border-radius: calc(var(--avatar-size) / 2);
   box-shadow: var(--bs-box-shadow-sm);
   flex-shrink: 0;
+  background-color: var(--bs-secondary);
 }
 
 .dummy {

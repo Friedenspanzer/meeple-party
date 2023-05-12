@@ -1,5 +1,9 @@
 import SendAnalyticsData from "@/components/AutoUpdateToggle/Toggles/SendAnalyticsData";
 
+export const metadata = {
+  title: 'Privacy settings',
+}
+
 export default async function Privacy() {
   return (
     <>
