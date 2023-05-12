@@ -5,8 +5,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import formidable from "formidable";
 import fs from "fs";
 import { prisma } from "@/db";
-
-const ALLOWED_FILE_TYPES = ["image/png", "image/jpeg"];
+import {
+  AVATAR_ALLOWED_FILE_SIZE,
+  AVATAR_ALLOWED_FILE_TYPES,
+} from "@/constants/avatar";
 
 export const config = {
   api: {
@@ -110,9 +112,9 @@ function getSingleFile(files: formidable.Files) {
   if (!files.avatar || Array.isArray(files.avatar)) {
     throw Error("File was passed in a wrong format.");
   }
-  if (!ALLOWED_FILE_TYPES.includes(files.avatar.mimetype || "")) {
+  if (!AVATAR_ALLOWED_FILE_TYPES.includes(files.avatar.mimetype || "")) {
     throw Error("Mime type not allowed.");
-  } else if (files.avatar.size > 1048576) {
+  } else if (files.avatar.size > AVATAR_ALLOWED_FILE_SIZE) {
     throw Error("File is too big.");
   }
   return files.avatar;

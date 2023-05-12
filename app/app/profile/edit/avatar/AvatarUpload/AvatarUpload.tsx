@@ -1,10 +1,9 @@
 "use client";
 
 import Spinner from "@/components/Spinner/Spinner";
+import { AVATAR_ALLOWED_FILE_SIZE, AVATAR_ALLOWED_FILE_TYPES } from "@/constants/avatar";
 import { useUser } from "@/context/userContext";
 import { useCallback, useId, useState } from "react";
-
-const ALLOWED_FILE_TYPES = ["image/png", "image/jpeg"];
 
 const AvatarUpload: React.FC = () => {
   const fileUploadId = useId();
@@ -20,9 +19,9 @@ const AvatarUpload: React.FC = () => {
         setError("No files selected.");
       } else if (files.length > 1) {
         setError("Multiple files selected.");
-      } else if (files[0].size > 1048576) {
+      } else if (files[0].size > AVATAR_ALLOWED_FILE_SIZE) {
         setError("File is bigger than 1MB.");
-      } else if (!ALLOWED_FILE_TYPES.includes(files[0].type)) {
+      } else if (!AVATAR_ALLOWED_FILE_TYPES.includes(files[0].type)) {
         setError("File type not allowed.");
       } else {
         setError(false);
