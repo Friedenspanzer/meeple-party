@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import Image from "next/image";
-import LoginButtons from "@/components/LoginButtons/LoginButtons";
+import LoginButtons from "@/app/LoginButtons/LoginButtons";
 
 export default function Home() {
   return (
