@@ -1,28 +1,42 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
+import Avatar from "@/components/Avatar/Avatar";
 import { useUser } from "@/context/userContext";
+import classNames from "classnames";
 import Link from "next/link";
 import Spinner from "../../components/Spinner/Spinner";
+import styles from "./login.module.css";
 
-const LoginButtons: React.FC<{}> = () => {
+const Login: React.FC = () => {
   const { user, loading } = useUser();
-  if (!loading && user) {
-    return (
-      <>
-        <strong>Logged in as {user.name}</strong>
-        <br />
-        <Link href="/app">Go to app</Link>
-        <br />
-        <br />
-        <a href="/api/auth/signout">Logout</a>
-      </>
-    );
-  } else if (!loading && !user) {
-    return <a href="/api/auth/signin">Login/Register</a>;
-  }
-
-  return <Spinner />;
+  return (
+    <div className={classNames("card", styles.card)}>
+      <div className="card-body d-flex align-items-center justify-content-center flex-column">
+        {!loading && user && (
+          <>
+            <Avatar name={user.name || ""} image={user.image} />
+            <strong>{user.name}</strong>
+            {user.realName ? <small>{user.realName}</small> : <br />}
+            <Link href="/app" className="btn btn-primary mt-2">
+              Go to app <i className="bi bi-arrow-right-circle"></i>
+            </Link>
+            <a href="/api/auth/signout" className="btn btn-secondary mt-2">
+              Logout <i className="bi bi-door-open"></i>
+            </a>
+          </>
+        )}
+        {!loading && !user && (
+          <>
+            <a className="btn btn-primary" href="/api/auth/signin">
+              Login or Register
+            </a>
+          </>
+        )}
+        {loading && <Spinner />}
+      </div>
+    </div>
+  );
 };
 
-export default LoginButtons;
+export default Login;

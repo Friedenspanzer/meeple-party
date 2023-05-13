@@ -1,12 +1,13 @@
-import styles from "./page.module.css";
+import Login from "@/app/Login/Login";
+import classNames from "classnames";
 import Image from "next/image";
-import LoginButtons from "@/app/LoginButtons/LoginButtons";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className="container text-center">
-      <div className="row justify-content-center mb-4">
-        <div className="col-md-6">
+    <div className={classNames("container-fluid", styles.header)}>
+      <div className="row align-items-center g-5 p-5">
+        <div className="col-md-3">
           <Image
             src="/logo.svg"
             width={300}
@@ -15,17 +16,14 @@ export default function Home() {
             className={styles.image}
           />
         </div>
-      </div>
-      <div className="row justify-content-center mb-4">
-        <div className="col-sm-6">
-          Meeple Party is currently in closed Alpha. If you received an invite
-          go on and register an account and then ask the administrator to unlock
-          your account.
-        </div>
-      </div>
-      <div className="row justify-content-center">
         <div className="col-md-6">
-          <LoginButtons />
+          <h1 className="display-1">Meeple Party</h1>
+          <h2 className="display-6">
+            The place to meet your friends for board games
+          </h2>
+        </div>
+        <div className="col-md-3">
+          <Login />
         </div>
       </div>
     </div>
