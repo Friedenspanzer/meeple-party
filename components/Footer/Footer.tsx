@@ -21,7 +21,7 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="." title="Reddit">
+            <Link href="https://www.reddit.com/r/meepleparty/" title="Reddit">
               <i className="bi bi-reddit"></i>
             </Link>
           </li>
