@@ -151,7 +151,7 @@ export default function Home() {
                 Every new feature will always be added to the main project.
                 There will be no closed-source additions and you will always be
                 free to host your own version of Meeple Party with all the
-                features wihtout paying us a dime.
+                features without paying us a dime.
               </p>
             </div>
           </div>
@@ -161,9 +161,9 @@ export default function Home() {
               <p>
                 Gaming is for everybody and Meeple Party is for everybody. We
                 pledge to protect vulnerable and marginalized people as best as
-                we can. We expected everybody to demonstrate empathy and
-                kindness and will never tolerate harassment, insults, hate
-                speech or behaviour that endangers others.
+                we can. We expect everybody to demonstrate empathy and kindness
+                and will never tolerate harassment, insults, hate speech or
+                behaviour that endangers others.
               </p>
             </div>
             <div className="col-md-6">
