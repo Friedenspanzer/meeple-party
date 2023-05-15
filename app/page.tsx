@@ -104,7 +104,7 @@ export default function Home() {
             <p>
               Connect with the people you already know. Meeple Party is not a
               social network like the others, we don&apos;t even want you to
-              befriend people you haven&apos; met. Just fill in the circle of
+              befriend people you haven&apos;t met. Just fill in the circle of
               friends and acquaintances you already play games with.
             </p>
             <p>
