@@ -176,41 +176,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="row mt-4">
-          <div className="col">
-            <h2>Get in touch</h2>
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col-6">
-            <h3>Message us</h3>
-          </div>
-          <div className="col-3">
-            <h3>Social media</h3>
-            <ul className={styles.social}>
-              <li>
-                <Link href="." title="Mastodon">
-                  <i className="bi bi-mastodon"></i>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://github.com/Friedenspanzer/meeple-party/"
-                  title="Github"
-                >
-                  <i className="bi bi-github"></i>
-                </Link>
-              </li>
-              <li>
-                <Link href="." title="Reddit">
-                  <i className="bi bi-reddit"></i>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </>
   );
 }
