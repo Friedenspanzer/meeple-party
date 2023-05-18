@@ -5,7 +5,7 @@ import Avatar from "@/components/Avatar/Avatar";
 import { useUser } from "@/context/userContext";
 import classNames from "classnames";
 import Link from "next/link";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../../components/Spinner/Spinner";
 import styles from "./login.module.css";
 
 const Login: React.FC = () => {
