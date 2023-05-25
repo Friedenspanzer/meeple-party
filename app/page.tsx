@@ -1,6 +1,7 @@
 import Login from "@/app/components/Login/Login";
 import classNames from "classnames";
 import Image from "next/image";
+import Slogan from "./components/Slogan/Slogan";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -19,9 +20,7 @@ export default function Home() {
           </div>
           <div className="col-md-6">
             <h1 className="display-1">Meeple Party</h1>
-            <h2 className="display-6">
-              The place to browse your friend&apos;s collections.
-            </h2>
+            <Slogan />
           </div>
           <div className="col-md-3">
             <Login />
