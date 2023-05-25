@@ -29,7 +29,7 @@ export default function Home() {
       </div>
       <div className="container">
         <div className="row mt-4 g-4">
-          <div className="col-4">
+          <div className="col-md-4">
             <div className="card text-bg-primary">
               <Image
                 src="/highlight-card-1.png"
@@ -39,38 +39,46 @@ export default function Home() {
                 height={300}
               />
               <div className="card-body">
-                <h5 className="card-title">Cool feature</h5>
-                <p className="card-text">Look at this cool feature!</p>
+                <h5 className="card-title">Combined collection views</h5>
+                <p className="card-text">
+                  See what your group of friends want to play at a glance.
+                </p>
               </div>
             </div>
           </div>
-          <div className="col-4">
+          <div className="col-md-4">
             <div className="card text-bg-primary">
               <Image
                 src="/highlight-card-2.png"
                 className={classNames("card-img-top", styles.feature)}
-                alt="Screenshot of a cool feature"
+                alt="Screenshot of Meeple Party's filtering feature."
                 width={300}
                 height={300}
               />
               <div className="card-body">
-                <h5 className="card-title">Cool feature</h5>
-                <p className="card-text">Look at this cool feature!</p>
+                <h5 className="card-title">Exhaustive filtering</h5>
+                <p className="card-text">
+                  Filter on game attributes, your and your friend&apos;s
+                  collection status blazingly fast.
+                </p>
               </div>
             </div>
           </div>
-          <div className="col-4">
+          <div className="col-md-4">
             <div className="card text-bg-primary">
               <Image
                 src="/highlight-card-3.png"
                 className={classNames("card-img-top", styles.feature)}
-                alt="Screenshot of a cool feature"
+                alt="Screenshot of Meeple Party's activity stream"
                 width={300}
                 height={300}
               />
               <div className="card-body">
-                <h5 className="card-title">Cool feature</h5>
-                <p className="card-text">Look at this cool feature!</p>
+                <h5 className="card-title">Activity stream</h5>
+                <p className="card-text">
+                  Instantly see when your friends get a new game or want to play
+                  one of your&apos;s.
+                </p>
               </div>
             </div>
           </div>
@@ -106,10 +114,10 @@ export default function Home() {
               friends and acquaintances you already play games with.
             </p>
             <p>
-              Then have a look at the games they own and just mark every game
-              you want to play. Meeple Party will do the rest for you and tell
-              you exactly what game that somebody owns enough people in your
-              circle of friends want to play.
+              Then have a look at the games they own and mark every game you
+              want to play. Meeple Party will do the rest for you and tell you
+              exactly what game that somebody owns enough people in your circle
+              of friends want to play.
             </p>
           </div>
         </div>

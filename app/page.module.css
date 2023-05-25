@@ -9,6 +9,7 @@
 .feature {
   height: 200px;
   object-fit: cover;
+  object-position: top;
 }
 
 .number {
