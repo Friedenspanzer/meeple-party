@@ -37,14 +37,9 @@ export default function Footer() {
           href="https://github.com/Friedenspanzer/meeple-party/issues"
           target="_blank"
         >
-          Issue Tracking
+          Issues
         </Link>
-        <Link
-          href="https://github.com/Friedenspanzer/meeple-party/pulls?q=is%3Apr+is%3Aclosed"
-          target="_blank"
-        >
-          Latest Changes
-        </Link>
+        <Link href="/changelog">Latest Changes</Link>
       </div>
     </div>
   );
