@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import styles from "./changelog.module.css";
 import Image from "next/image";
 import Link from "next/link";
