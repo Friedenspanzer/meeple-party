@@ -56,7 +56,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
         </div>
       </>
     );
-  } catch {
+  } catch (e) {
+    console.log(e);
     notFound();
   }
 }
