@@ -8,7 +8,7 @@ export default function Footer() {
         {" "}
         <ul className={styles.social}>
           <li>
-            <Link href="." title="Mastodon">
+            <Link href="https://brettspiel.space/@meepleparty" title="Mastodon" rel="me">
               <i className="bi bi-mastodon"></i>
             </Link>
           </li>
