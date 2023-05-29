@@ -42,7 +42,7 @@ export type FriendCollectionFilterOptions = {
   own: MinMaxFilterOption;
   wantToPlay: MinMaxFilterOption;
   wishlist: MinMaxFilterOption;
-}
+};
 
 const sortOrderOptions = [
   "name",
@@ -539,7 +539,11 @@ function collectionStatusActive(filter: CollectionStatusFilterOption) {
 }
 
 function friendCollectionStatusActive(filter: FriendCollectionFilterOptions) {
-  return minOrMaxActive(filter.own) || minOrMaxActive(filter.wantToPlay) || minOrMaxActive(filter.wishlist);
+  return (
+    minOrMaxActive(filter.own) ||
+    minOrMaxActive(filter.wantToPlay) ||
+    minOrMaxActive(filter.wishlist)
+  );
 }
 
 function sortOrderDescription(sortOrder: SortOrder): string {
