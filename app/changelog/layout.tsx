@@ -24,10 +24,6 @@ export default async function Layout({
             <i className="bi bi-arrow-left"></i> Back to front page
           </Link>
         </div>
-        <div className="col-3"></div>
-        <div className="col-1">
-          <i className={classNames("bi bi-rss", styles.feed)}></i>
-        </div>
       </div>
       {children}
     </div>
