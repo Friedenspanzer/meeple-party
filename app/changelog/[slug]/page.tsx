@@ -12,50 +12,53 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound();
   }
   const fileName = `${slug}.md`;
-  const update = parseFile(fileName);
 
-  const content = marked(update.content, {
-    mangle: false,
-    headerIds: undefined,
-    headerPrefix: undefined,
-  });
+  try {
+    const update = parseFile(fileName);
 
-  return (
-    <>
-      <div className="row justify-content-center">
-        <div className="col-6">
-          {update.image && (
-            <Image
-              src={`/images/changelog/${update.image}`}
-              className={classNames("card-img-top", styles.image)}
-              alt={update.title}
-              height={1000}
-              width={1000}
-            />
-          )}
-          <h2>
-            {update.title}{" "}
-            <small className={classNames("text-body-secondary")}>
-              {update.date}
-            </small>
-          </h2>
+    const content = marked(update.content, {
+      mangle: false,
+      headerIds: undefined,
+      headerPrefix: undefined,
+    });
+
+    return (
+      <>
+        <div className="row justify-content-center">
+          <div className="col-6">
+            {update.image && (
+              <Image
+                src={`/images/changelog/${update.image}`}
+                className={classNames("card-img-top", styles.image)}
+                alt={update.title}
+                height={1000}
+                width={1000}
+              />
+            )}
+            <h2>
+              {update.title}{" "}
+              <small className="text-body-secondary">{update.date}</small>
+            </h2>
+          </div>
         </div>
-      </div>
-      <div className="row justify-content-center">
-        <div
-          className="col-6"
-          dangerouslySetInnerHTML={{ __html: content }}
-        ></div>
-      </div>
-      <div className="row justify-content-center">
-        <div className="col-6">
-          <Link href="/changelog">
-            <i className="bi bi-arrow-left"></i> Back to the changelog
-          </Link>
+        <div className="row justify-content-center">
+          <div
+            className="col-6"
+            dangerouslySetInnerHTML={{ __html: content }}
+          ></div>
         </div>
-      </div>
-    </>
-  );
+        <div className="row justify-content-center">
+          <div className="col-6">
+            <Link href="/changelog">
+              <i className="bi bi-arrow-left"></i> Back to the changelog
+            </Link>
+          </div>
+        </div>
+      </>
+    );
+  } catch {
+    notFound();
+  }
 }
 
 export const generateStaticParams = async () => {
