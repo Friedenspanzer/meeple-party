@@ -26,14 +26,15 @@ export default function Slogan() {
   return (
     <h2
       className={classNames("display-6", styles.slogan)}
-      dangerouslySetInnerHTML={{ __html: slogan || "" }}
       onClick={() => newSlogan(index)}
-    ></h2>
+    >
+      {slogan}
+    </h2>
   );
 }
 
 const slogans = [
-  "When your friend&apos;s collections keep growing.",
+  "When your friend's collections keep growing.",
   "Spend more time playing, less time browsing.",
   "Please send a Pull request with more slogans.",
   "Share a virtual shelf with your friends.",
@@ -44,6 +45,7 @@ const slogans = [
   "There's not enough purple on the internet.",
   "It's free!",
   "Unclench your jaw.",
+  "Don't break your bag hauling all your games.",
 ] as const;
 
 function clearSelection() {
