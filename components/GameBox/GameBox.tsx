@@ -75,8 +75,8 @@ export default function GameBox({
   return gameData ? (
     <div className={classNames(styles.container, className)} {...props}>
       <div className={styles.gamebox}>
-        <div className={styles.imageBox}>
-          <Link href={`/app/game/${gameData.id}`}>
+        <Link href={`/app/game/${gameData.id}`}>
+          <div className={styles.imageBox}>
             {!!gameData.thumbnail && (
               <Image
                 src={gameData.thumbnail}
@@ -87,8 +87,8 @@ export default function GameBox({
                 unoptimized
               />
             )}
-          </Link>
-        </div>
+          </div>
+        </Link>
         <div className={styles.title}>
           <h3 className="card-title">
             <Link href={`/app/game/${gameData.id}`}>{gameData.name}</Link>
