@@ -10,6 +10,7 @@
   height: 200px;
   object-fit: cover;
   object-position: top;
+  filter: grayscale(0.3);
 }
 
 .number {
@@ -25,4 +26,10 @@
 .instruction {
   font-size: 1.3rem;
   font-weight: 300;
+}
+
+@media screen and (max-width: 992px) {
+  .number {
+    justify-content: center;
+  }
 }
