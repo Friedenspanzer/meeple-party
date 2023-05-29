@@ -38,6 +38,12 @@ export type PlayerCountFilterOption = {
   count?: number;
 };
 
+export type FriendCollectionFilterOptions = {
+  own: MinMaxFilterOption;
+  wantToPlay: MinMaxFilterOption;
+  wishlist: MinMaxFilterOption;
+};
+
 const sortOrderOptions = [
   "name",
   "minPlayers",
@@ -57,11 +63,7 @@ export interface GameCollectionFilterOptions {
   playingTime: MinMaxFilterOption;
   collectionStatus: CollectionStatusFilterOption;
   playerCount: PlayerCountFilterOption;
-  friends: {
-    own: MinMaxFilterOption;
-    wantToPlay: MinMaxFilterOption;
-    wishlist: MinMaxFilterOption;
-  };
+  friends: FriendCollectionFilterOptions;
   sort: SortOrder;
 }
 
@@ -519,6 +521,7 @@ function anyFilterActive(filter: GameCollectionFilterOptions) {
     minOrMaxActive(filter.playingTime) ||
     minOrMaxActive(filter.weight) ||
     collectionStatusActive(filter.collectionStatus) ||
+    friendCollectionStatusActive(filter.friends) ||
     !!filter.playerCount.count
   );
 }
@@ -532,6 +535,14 @@ function collectionStatusActive(filter: CollectionStatusFilterOption) {
     filter.own !== undefined ||
     filter.wantToPlay !== undefined ||
     filter.wishlist !== undefined
+  );
+}
+
+function friendCollectionStatusActive(filter: FriendCollectionFilterOptions) {
+  return (
+    minOrMaxActive(filter.own) ||
+    minOrMaxActive(filter.wantToPlay) ||
+    minOrMaxActive(filter.wishlist)
   );
 }
 

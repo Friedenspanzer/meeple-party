@@ -1,3 +1,28 @@
 .image {
-  height: 300px;
+  width: 100%;
+}
+
+.highlight {
+  background-color: var(--bs-secondary-bg-subtle);
+}
+
+.feature {
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.number {
+  font-size: 3rem;
+  color: var(--bs-primary);
+}
+
+.instructionTitle {
+  font-size: 3rem;
+  line-height: 4.2rem;
+}
+
+.instruction {
+  font-size: 1.3rem;
+  font-weight: 300;
 }

@@ -1,0 +1,18 @@
+.feed {
+  font-size: 2rem;
+  color: rgb(255, 148, 38);
+}
+
+.image {
+  max-height: 150px;
+  object-fit: cover;
+}
+
+.date {
+  white-space: nowrap;
+}
+
+.link {
+  color: unset;
+  text-decoration: none;
+}

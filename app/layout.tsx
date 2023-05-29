@@ -5,6 +5,7 @@ import AuthProvider from "@/context/authContext";
 import UserProvider from "@/context/userContext";
 import Script from "next/script";
 import Analytics from "@/components/Analytics/Analytics";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata = {
   title: {
@@ -29,6 +30,7 @@ export default async function RootLayout({
             <Analytics />
           </UserProvider>
         </AuthProvider>
+        <Footer />
       </body>
       <Script src="/bootstrap.bundle.min.js" />
     </html>
