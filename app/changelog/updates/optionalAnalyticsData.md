@@ -5,4 +5,4 @@ image: "analytics.png"
 excerpt: "Sending analytics data can now be toggled in the user settings."
 ---
 
-There's a new menu in your account for privacy settings. It's pretty empty there right now but you can choose to share analytics data with us. You can go to the menu [right here](/app/profile/edit/privacy)!
+There's a new menu in your account for privacy settings. It's pretty empty there right now but you can choose to share analytics data with us.
