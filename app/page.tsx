@@ -1,6 +1,7 @@
 import Login from "@/app/components/Login/Login";
 import classNames from "classnames";
 import Image from "next/image";
+import { PropsWithChildren } from "react";
 import Slogan from "./components/Slogan/Slogan";
 import styles from "./page.module.css";
 
@@ -83,58 +84,37 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="row mt-4">
-          <div className={classNames("col-1", styles.number)}>
-            <i className="bi bi-1-circle-fill"></i>
-          </div>
-          <div className={classNames("col", styles.instruction)}>
-            <h3 className={classNames(styles.instructionTitle)}>
-              Fill your collection
-            </h3>
-            <p>
-              Tell us what games you own. We know, for most people this is
-              busywork. But trust us that it will be worth it. Or you can do it
-              later, one game at a time. If you already maintain your collection
-              on BoardGameGeek you can just import it.
-            </p>
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className={classNames("col-1", styles.number)}>
-            <i className="bi bi-2-circle-fill"></i>
-          </div>
-          <div className={classNames("col", styles.instruction)}>
-            <h3 className={classNames(styles.instructionTitle)}>
-              Find your friends and check out their games
-            </h3>
-            <p>
-              Connect with the people you already know. Meeple Party is not a
-              social network like the others, we don&apos;t even want you to
-              befriend people you haven&apos;t met. Just fill in the circle of
-              friends and acquaintances you already play games with.
-            </p>
-            <p>
-              Then have a look at the games they own and mark every game you
-              want to play. Meeple Party will do the rest for you and tell you
-              exactly what game that somebody owns enough people in your circle
-              of friends want to play.
-            </p>
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className={classNames("col-1", styles.number)}>
-            <i className="bi bi-3-circle-fill"></i>
-          </div>
-          <div className={classNames("col", styles.instruction)}>
-            <h3 className={classNames(styles.instructionTitle)}>
-              Go play some games
-            </h3>
-            <p>
-              Tell your friends you found some matches and fix a date for a game
-              night. Everybody can just look up what games to bring.
-            </p>
-          </div>
-        </div>
+        <Instruction heading="Fill your collection" number={1}>
+          <p>
+            Tell us what games you own. We know, for most people this is
+            busywork. But trust us that it will be worth it. Or you can do it
+            later, one game at a time. If you already maintain your collection
+            on BoardGameGeek you can just import it.
+          </p>
+        </Instruction>
+        <Instruction
+          heading="Find your friends and check out their games"
+          number={2}
+        >
+          <p>
+            Connect with the people you already know. Meeple Party is not a
+            social network like the others, we don&apos;t even want you to
+            befriend people you haven&apos;t met. Just fill in the circle of
+            friends and acquaintances you already play games with.
+          </p>
+          <p>
+            Then have a look at the games they own and mark every game you want
+            to play. Meeple Party will do the rest for you and tell you exactly
+            what game that somebody owns enough people in your circle of friends
+            want to play.
+          </p>
+        </Instruction>
+        <Instruction heading="Go play some games" number={3}>
+          <p>
+            Tell your friends you found some matches and fix a date for a game
+            night. Everybody can just look up what games to bring.
+          </p>
+        </Instruction>
       </div>
       <div
         className={classNames("container-fluid pt-4 pb-4", styles.highlight)}
@@ -183,5 +163,20 @@ export default function Home() {
         </div>
       </div>
     </>
+  );
+}
+
+type InstructionProps = PropsWithChildren<{ number: number; heading: string }>;
+function Instruction({ number, heading, children }: InstructionProps) {
+  return (
+    <div className="row mt-4">
+      <div className={classNames("col-md-1", styles.number)}>
+        <i className={`bi bi-${number}-circle-fill`}></i>
+      </div>
+      <div className={classNames("col", styles.instruction)}>
+        <h3 className={classNames(styles.instructionTitle)}>{heading}</h3>
+        {children}
+      </div>
+    </div>
   );
 }
