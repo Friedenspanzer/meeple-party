@@ -7,6 +7,8 @@ import Script from "next/script";
 import Analytics from "@/components/Analytics/Analytics";
 import Footer from "@/components/Footer/Footer";
 
+import styles from "./page.module.css";
+
 export const metadata = {
   title: {
     default: "Meeple Party",
@@ -26,7 +28,7 @@ export default async function RootLayout({
         <Script src="/bootstrap.bundle.min.js" />
         <AuthProvider>
           <UserProvider>
-            {children}
+            <div className={styles.container}>{children}</div>
             <Analytics />
           </UserProvider>
         </AuthProvider>
