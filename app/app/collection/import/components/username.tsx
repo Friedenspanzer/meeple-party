@@ -51,7 +51,7 @@ const Username: React.FC<UsernameProps> = (props) => {
               className="form-control"
               type="text"
               placeholder="BoardGameGeek username"
-              value={!!bggName ? bggName : ""}
+              value={bggName ?? ""}
               onChange={(e) => setBggName(e.currentTarget.value)}
               aria-describedby="bggNameHelp"
             />
