@@ -1,0 +1,33 @@
+.button {
+  transition: 220ms all ease-in-out;
+}
+
+.google {
+  color: #fef7fb;
+  background-color: #4285f4;
+}
+
+.google:hover, .google:focus, .google:active {
+  color: #fef7fb !important;
+  background-color: #306bca  !important;
+}
+
+.twitter {
+  color: #eee;
+  background-color: #1da1f2;
+}
+
+.twitter:hover, .twitter:focus, .twitter:active {
+  color: #eee !important;
+  background-color: #0b89d8  !important;
+}
+
+.github {
+  color: #e6edf3;
+  background-color: #0d1117;
+}
+
+.github:hover, .github:focus, .github:active {
+  color: #eee !important;
+  background-color: #10376e  !important;
+}

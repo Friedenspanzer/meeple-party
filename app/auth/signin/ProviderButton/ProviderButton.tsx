@@ -1,6 +1,8 @@
 "use client";
 
+import classNames from "classnames";
 import { ClientSafeProvider, signIn } from "next-auth/react";
+import styles from "./providerbutton.module.css";
 
 interface ProviderButtonProps {
   provider: ClientSafeProvider;
@@ -12,7 +14,11 @@ const ProviderButton: React.FC<ProviderButtonProps> = ({ provider }) => {
       <div className="col-md-2 d-grid">
         <button
           type="button"
-          className="btn btn-primary"
+          className={classNames(
+            "btn",
+            styles.button,
+            styles[provider.id] || "btn-primary"
+          )}
           onClick={() => signIn(provider.id)}
         >
           <>
@@ -32,8 +38,8 @@ function getIcon(id: string) {
       return <i className="bi bi-google"></i>;
     case "github":
       return <i className="bi bi-github"></i>;
-      case "twitter":
-        return <i className="bi bi-twitter"></i>;
+    case "twitter":
+      return <i className="bi bi-twitter"></i>;
     default:
       return <></>;
   }
