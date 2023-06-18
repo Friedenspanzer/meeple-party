@@ -3,16 +3,29 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useUser } from "@/context/userContext";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
 import styles from "./topnav.module.css";
 import Image from "next/image";
 import Person from "../Person/Person";
 import classNames from "classnames";
+import { signOut } from "next-auth/react";
+import { useCallback } from "react";
 
 export default function TopNav() {
   const pathname = usePathname();
   const { user } = useUser();
+  const router = useRouter();
+
+  const logout = useCallback(() => {
+    signOut({ redirect: false })
+      .then(() => {
+        router.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [router]);
 
   if (user) {
     return (
@@ -97,9 +110,9 @@ export default function TopNav() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a href="/api/auth/signout" className="dropdown-item">
+                    <button onClick={logout} className="dropdown-item">
                       Logout
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>
