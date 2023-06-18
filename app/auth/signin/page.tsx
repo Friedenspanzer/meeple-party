@@ -2,9 +2,7 @@ import { getServerSession } from "@/utility/serverSession";
 import { getProviders } from "next-auth/react";
 import { redirect } from "next/navigation";
 import ProviderButton from "./ProviderButton/ProviderButton";
-import Image from "next/image";
 import Link from "next/link";
-import styles from "./signin.module.css";
 import EmailLogin from "./EmailLogin/EmailLogin";
 
 export default async function SignIn() {
@@ -17,18 +15,7 @@ export default async function SignIn() {
   const providers = (await getProviders()) ?? [];
 
   return (
-    <div className="container align-middle">
-      <div className="row justify-content-center">
-        <div className="col-md-3 text-center mt-5">
-          <Image
-            src="/logo.svg"
-            width={300}
-            height={300}
-            alt="Meeple Party"
-            className={styles.image}
-          />
-        </div>
-      </div>
+    <>
       <div className="row justify-content-center">
         <div className="col-6 text-center">
           <h1>Log in to Meeple Party</h1>
@@ -62,6 +49,6 @@ export default async function SignIn() {
           </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 }
