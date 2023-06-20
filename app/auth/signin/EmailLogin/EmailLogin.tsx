@@ -32,7 +32,7 @@ const EmailLogin: React.FC = () => {
 
   return (
     <div className="row justify-content-center">
-      <div className="col-3 d-flex">
+      <div className="col-md-3 d-flex">
         <div className="input-group needs-validation">
           <input
             type="email"

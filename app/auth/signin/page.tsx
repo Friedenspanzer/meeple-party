@@ -17,13 +17,13 @@ export default async function SignIn() {
   return (
     <>
       <div className="row justify-content-center">
-        <div className="col-6 text-center">
+        <div className="col-md-6 text-center">
           <h1>Log in to Meeple Party</h1>
         </div>
       </div>
 
       <div className="row mt-5 justify-content-center">
-        <div className="col-6 text-center">
+        <div className="col-md-6 text-center">
           <h4>Using your email address</h4>
         </div>
       </div>
@@ -31,7 +31,7 @@ export default async function SignIn() {
       <EmailLogin />
 
       <div className="row mt-5 justify-content-center">
-        <div className="col-6 text-center">
+        <div className="col-md-6 text-center">
           <h4>Using social login</h4>
         </div>
       </div>
