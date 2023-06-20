@@ -37,7 +37,7 @@ const EmailLogin: React.FC = () => {
           <input
             type="email"
             className={classNames("form-control", {
-              ["is-valid"]: valid,
+              ["is-valid"]: valid && address.length > 0,
               ["is-invalid"]: !valid && address.length > 0,
             })}
             placeholder="name@example.com"
@@ -50,7 +50,7 @@ const EmailLogin: React.FC = () => {
             type="button"
             className="btn btn-primary"
             onClick={() => tryLogin(address)}
-            disabled={loading || !valid}
+            disabled={loading || !valid || address.length === 0}
           >
             {loading ? (
               <Spinner size="small" />
