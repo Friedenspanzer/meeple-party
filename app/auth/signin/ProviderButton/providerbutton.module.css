@@ -1,5 +1,12 @@
 .button {
   transition: 220ms all ease-in-out;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.text {
+  width: 55px;
 }
 
 .google {
@@ -19,7 +26,7 @@
 
 .github:hover, .github:focus, .github:active {
   color: #eee !important;
-  background-color: #10376e  !important;
+  background-color: #262e3b  !important;
 }
 
 .discord {
@@ -29,7 +36,7 @@
 
 .discord:hover, .discord:focus, .discord:active {
   color: #FFFFFF !important;
-  background-color: #8891f2  !important;
+  background-color: #333fbd  !important;
 }
 
 .twitch {

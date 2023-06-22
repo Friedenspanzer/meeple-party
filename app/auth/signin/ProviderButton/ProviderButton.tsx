@@ -27,7 +27,8 @@ const ProviderButton: React.FC<ProviderButtonProps> = ({ provider }) => {
           onClick={login}
         >
           <>
-            {getIcon(provider.id)}&nbsp;{provider.name}
+            <div className={styles.icon}>{getIcon(provider.id)}</div>
+            <div className={styles.text}>{provider.name}</div>
           </>
         </button>
       </div>
@@ -45,8 +46,8 @@ function getIcon(id: string) {
       return <i className="bi bi-github"></i>;
     case "discord":
       return <i className="bi bi-discord"></i>;
-      case "twitch":
-        return <i className="bi bi-twitch"></i>;
+    case "twitch":
+      return <i className="bi bi-twitch"></i>;
     default:
       return <></>;
   }
