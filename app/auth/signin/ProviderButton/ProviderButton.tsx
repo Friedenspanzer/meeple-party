@@ -43,8 +43,6 @@ function getIcon(id: string) {
       return <i className="bi bi-google"></i>;
     case "github":
       return <i className="bi bi-github"></i>;
-    case "twitter":
-      return <i className="bi bi-twitter"></i>;
     default:
       return <></>;
   }

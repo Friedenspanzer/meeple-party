@@ -12,16 +12,6 @@
   background-color: #306bca  !important;
 }
 
-.twitter {
-  color: #eee;
-  background-color: #1da1f2;
-}
-
-.twitter:hover, .twitter:focus, .twitter:active {
-  color: #eee !important;
-  background-color: #0b89d8  !important;
-}
-
 .github {
   color: #e6edf3;
   background-color: #0d1117;
