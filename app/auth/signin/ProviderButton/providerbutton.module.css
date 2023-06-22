@@ -21,3 +21,13 @@
   color: #eee !important;
   background-color: #10376e  !important;
 }
+
+.discord {
+  color: #FFFFFF;
+  background-color: #5865F2;
+}
+
+.discord:hover, .discord:focus, .discord:active {
+  color: #FFFFFF !important;
+  background-color: #8891f2  !important;
+}

@@ -17,7 +17,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "pbs.twimg.com"
+        hostname: "cdn.discordapp.com"
       }
     ],
   },
