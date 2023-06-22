@@ -1,27 +1,26 @@
 "use client";
 
-import { Relationship, RelationshipType } from "@/datatypes/relationship";
+import { RelationshipType } from "@/datatypes/relationship";
+import useRelationships from "@/hooks/useRelationships";
 import { useEffect, useState } from "react";
 
 const FriendRequestsBadge: React.FC = () => {
-  const [relationships, setRelationships] = useState<Relationship[]>();
+  const { relationships } = useRelationships();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    fetch("/api/relationships")
-      .then((result) => result.json())
-      .then((relationships: Relationship[]) =>
-        relationships.filter(
+    if (relationships) {
+      setCount(
+        relationships?.filter(
           (r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED
-        )
-      )
-      .then(setRelationships);
-  }, []);
+        ).length
+      );
+    }
+  }, [relationships]);
 
-  if (relationships && relationships.length > 0) {
+  if (count > 0) {
     return (
-      <span className="badge rounded-pill text-bg-secondary">
-        {relationships.length}
-      </span>
+      <span className="badge rounded-pill text-bg-secondary">{count}</span>
     );
   } else {
     return <></>;
