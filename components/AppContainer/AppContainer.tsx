@@ -9,12 +9,16 @@ import TopNav from "../TopNav/TopNav";
 import styles from "./appcontainer.module.css";
 import Spinner from "../Spinner/Spinner";
 import classNames from "classnames";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 TimeAgo.addDefaultLocale(en);
 
 export interface AppContainerProps {
   children?: React.ReactNode;
 }
+
+const queryClient = new QueryClient();
 
 const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
   const { user, loading } = useUser();
@@ -40,15 +44,18 @@ const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
   } else {
     return (
       <>
-        <TopNav />
-        {!user.profileComplete ? (
-          <CompleteUserProfile />
-        ) : (
-          <div className={classNames(styles.content, "container")}>
-            {children}
-            <div className="clearfix"></div>
-          </div>
-        )}
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <TopNav />
+          {!user.profileComplete ? (
+            <CompleteUserProfile />
+          ) : (
+            <div className={classNames(styles.content, "container")}>
+              {children}
+              <div className="clearfix"></div>
+            </div>
+          )}
+        </QueryClientProvider>
       </>
     );
   }
