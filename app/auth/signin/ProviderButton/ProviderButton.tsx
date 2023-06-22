@@ -45,6 +45,8 @@ function getIcon(id: string) {
       return <i className="bi bi-github"></i>;
     case "discord":
       return <i className="bi bi-discord"></i>;
+      case "twitch":
+        return <i className="bi bi-twitch"></i>;
     default:
       return <></>;
   }

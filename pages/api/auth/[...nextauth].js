@@ -3,6 +3,7 @@ import EmailProvider from "next-auth/providers/email";
 import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
+import TwitchProvider from "next-auth/providers/twitch";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/db";
 
@@ -25,6 +26,10 @@ export const authOptions = {
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET
+    }),
+    TwitchProvider({
+      clientId: process.env.TWITCH_CLIENT_ID,
+      clientSecret: process.env.TWITCH_CLIENT_SECRET
     })
   ],
   callbacks: {

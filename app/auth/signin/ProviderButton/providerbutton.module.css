@@ -31,3 +31,13 @@
   color: #FFFFFF !important;
   background-color: #8891f2  !important;
 }
+
+.twitch {
+  color: #F0F0FF;
+  background-color: #9146FF;
+}
+
+.twitch:hover, .twitch:focus, .twitch:active {
+  color: #F0F0FF !important;
+  background-color: #6021bd  !important;
+}
