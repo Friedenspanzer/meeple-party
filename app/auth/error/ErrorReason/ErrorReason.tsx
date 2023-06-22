@@ -1,8 +1,6 @@
 "use client";
 
-import Spinner from "@/components/Spinner/Spinner";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
 import Link from "next/link";
 
 const ErrorReason: React.FC = () => {
