@@ -35,7 +35,8 @@ export const authOptions = {
     },
   },
   pages: {
-    signIn: "/auth/signin"
+    signIn: "/auth/signin",
+    verifyRequest: '/auth/verify'
   },
   theme: {
     brandColor: '#8c35e9',
