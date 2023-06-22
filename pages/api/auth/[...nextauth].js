@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
+import EmailProvider from "next-auth/providers/email";
+import DiscordProvider from "next-auth/providers/discord";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
-import EmailProvider from "next-auth/providers/email";
+import TwitchProvider from "next-auth/providers/twitch";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/db";
 
@@ -21,12 +23,29 @@ export const authOptions = {
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET
+    }),
+    TwitchProvider({
+      clientId: process.env.TWITCH_CLIENT_ID,
+      clientSecret: process.env.TWITCH_CLIENT_SECRET
+    })
   ],
   callbacks: {
     session({ session, token, user }) {
       session.user = user;
       return session;
     },
+  },
+  pages: {
+    signIn: "/auth/signin",
+    verifyRequest: "/auth/verify",
+    error: "/auth/error"
+  },
+  theme: {
+    brandColor: '#8c35e9',
+    logo: "/logo.svg"
   },
   debug: false,
 };
