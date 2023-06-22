@@ -1,4 +1,6 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
+import useRelationships from "@/hooks/useRelationships";
+import axios from "axios";
 import { useCallback, useState } from "react";
 import CriticalError from "../CriticalError/CriticalError";
 import Spinner from "../Spinner/Spinner";
@@ -14,49 +16,39 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
   if (request.type !== RelationshipType.FRIEND_REQUEST_RECEIVED) {
     throw new Error("Wrong type for component IncomingFriendRequest");
   }
-
   const [updating, setUpdating] = useState(false);
-  const [stale, setStale] = useState(false);
-
-  const [error, setError] = useState<string | false>(false);
-  const [errorDetail, setErrorDetail] = useState<string>();
+  const { invalidate } = useRelationships();
 
   const denyRequest = useCallback(() => {
     setUpdating(true);
-    fetch(`/api/relationships/${request.profile.id}`, {
-      method: "DELETE",
-    }).then((response) => {
-      if (response.ok) {
+    axios
+      .delete(`/api/relationships/${request.profile.id}`)
+      .then(() => {
         setUpdating(false);
-        setStale(true);
-      } else {
-        setError(`Error denying friend request.`);
-        setErrorDetail(`${response.status} ${response.statusText}`);
-      }
-    });
-  }, [request]);
+        invalidate();
+      })
+      .catch((reason) => {
+        setUpdating(false);
+        console.error(reason);
+      });
+  }, [request, invalidate]);
 
   const acceptRequest = useCallback(() => {
     setUpdating(true);
-    fetch(`/api/relationships/${request.profile.id}`, {
-      method: "PATCH",
-    }).then((response) => {
-      if (response.ok) {
+    axios
+      .patch(`/api/relationships/${request.profile.id}`)
+      .then(() => {
         setUpdating(false);
-        setStale(true);
-      } else {
-        setError(`Error accepting friend request.`);
-        setErrorDetail(`${response.status} ${response.statusText}`);
-      }
-    });
-  }, [request]);
-
-  if (error) {
-    return <CriticalError message={error} details={errorDetail} />;
-  }
+        invalidate();
+      })
+      .catch((reason) => {
+        setUpdating(false);
+        console.error(reason);
+      });
+  }, [request, invalidate]);
 
   return (
-    <GenericFriendRequest request={request} stale={stale}>
+    <GenericFriendRequest request={request}>
       {updating ? (
         <Spinner size="small" />
       ) : (
@@ -65,7 +57,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
             type="button"
             className="btn btn-danger"
             onClick={(_) => denyRequest()}
-            disabled={updating || stale}
+            disabled={updating}
           >
             <i className="bi bi-dash-circle"></i> Deny
           </button>
@@ -73,7 +65,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
             type="button"
             className="btn btn-success"
             onClick={(_) => acceptRequest()}
-            disabled={updating || stale}
+            disabled={updating}
           >
             <i className="bi bi-check2"></i> Accept
           </button>

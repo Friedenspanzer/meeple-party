@@ -1,4 +1,6 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
+import useRelationships from "@/hooks/useRelationships";
+import axios from "axios";
 import { useCallback, useState } from "react";
 import CriticalError from "../CriticalError/CriticalError";
 import Spinner from "../Spinner/Spinner";
@@ -14,32 +16,23 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
   }
 
   const [updating, setUpdating] = useState(false);
-  const [stale, setStale] = useState(false);
-
-  const [error, setError] = useState<string | false>(false);
-  const [errorDetail, setErrorDetail] = useState<string>();
+  const { invalidate } = useRelationships();
 
   const withdrawRequest = useCallback(() => {
     setUpdating(true);
-    fetch(`/api/relationships/${request.profile.id}`, {
-      method: "DELETE",
-    }).then((response) => {
-      if (response.ok) {
+    axios
+      .delete(`/api/relationships/${request.profile.id}`)
+      .then(() => {
         setUpdating(false);
-        setStale(true);
-      } else {
-        setError(`Error withdrawing friend request.`);
-        setErrorDetail(`${response.status} ${response.statusText}`);
-      }
-    });
-  }, [request]);
-
-  if (error) {
-    return <CriticalError message={error} details={errorDetail} />;
-  }
+        invalidate();
+      })
+      .catch((reason) => {
+        console.error(reason);
+      });
+  }, [request, invalidate]);
 
   return (
-    <GenericFriendRequest request={request} stale={stale}>
+    <GenericFriendRequest request={request}>
       {updating ? (
         <Spinner size="small" />
       ) : (
@@ -47,7 +40,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
           type="button"
           className="btn btn-danger"
           onClick={withdrawRequest}
-          disabled={updating || stale}
+          disabled={updating}
         >
           <i className="bi bi-trash"></i> Withdraw
         </button>

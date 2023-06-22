@@ -2,17 +2,11 @@
 
 import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequest";
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
-import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import { useEffect, useState } from "react";
+import { RelationshipType } from "@/datatypes/relationship";
+import useRelationships from "@/hooks/useRelationships";
 
 const FriendRequests: React.FC = (props) => {
-  const [relationships, setRelationships] = useState<Relationship[]>();
-
-  useEffect(() => {
-    fetch("/api/relationships")
-      .then((result) => result.json())
-      .then(setRelationships);
-  }, []);
+  const { relationships } = useRelationships();
 
   return (
     <>
