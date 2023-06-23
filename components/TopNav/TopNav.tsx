@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-html-link-for-pages */
-import { useUser } from "@/context/userContext";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
@@ -11,10 +9,11 @@ import Person from "../Person/Person";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";
 import { useCallback } from "react";
+import useUserProfile from "@/hooks/useUserProfile";
 
 export default function TopNav() {
   const pathname = usePathname();
-  const { user } = useUser();
+  const { userProfile } = useUserProfile();
   const router = useRouter();
 
   const logout = useCallback(() => {
@@ -27,7 +26,7 @@ export default function TopNav() {
       });
   }, [router]);
 
-  if (user) {
+  if (userProfile) {
     return (
       <nav className="navbar navbar-expand-md bg-primary-subtle shadow-sm">
         <div className="container-fluid">
@@ -81,9 +80,9 @@ export default function TopNav() {
             </ul>
             <div className={classNames("d-flex", styles.user)}>
               <Person
-                name={user.name!}
-                image={user.image || undefined}
-                realName={user.realName || undefined}
+                name={userProfile.name!}
+                image={userProfile.image || undefined}
+                realName={userProfile.realName || undefined}
               />
               <div className="dropdown">
                 <button
@@ -95,7 +94,7 @@ export default function TopNav() {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <Link
-                      href={`/app/profile/${user.id}`}
+                      href={`/app/profile/${userProfile.id}`}
                       className="dropdown-item"
                     >
                       Your profile
