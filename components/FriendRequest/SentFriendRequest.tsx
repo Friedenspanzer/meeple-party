@@ -1,8 +1,7 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import useRelationships from "@/hooks/useRelationships";
+import useRelationship from "@/hooks/useRelationship";
 import axios from "axios";
 import { useCallback, useState } from "react";
-import CriticalError from "../CriticalError/CriticalError";
 import Spinner from "../Spinner/Spinner";
 import GenericFriendRequest from "./GenericFriendRequest";
 
@@ -16,7 +15,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
   }
 
   const [updating, setUpdating] = useState(false);
-  const { invalidate } = useRelationships();
+  const { invalidate } = useRelationship(request.profile.id);
 
   const withdrawRequest = useCallback(() => {
     setUpdating(true);

@@ -1,6 +1,7 @@
 import { Relationship } from "@/datatypes/relationship";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect } from "react";
 
 interface Result {
   isLoading: boolean;
@@ -20,6 +21,14 @@ export default function useRelationships(): Result {
         .then((response) => response.data);
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      data.forEach((r) => {
+        queryClient.setQueryData(["relationship", r.profile.id], () => r);
+      });
+    }
+  }, [data, queryClient]);
 
   return {
     isLoading,

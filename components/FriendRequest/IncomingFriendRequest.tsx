@@ -1,8 +1,7 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import useRelationships from "@/hooks/useRelationships";
+import useRelationship from "@/hooks/useRelationship";
 import axios from "axios";
 import { useCallback, useState } from "react";
-import CriticalError from "../CriticalError/CriticalError";
 import Spinner from "../Spinner/Spinner";
 import GenericFriendRequest from "./GenericFriendRequest";
 
@@ -17,7 +16,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
     throw new Error("Wrong type for component IncomingFriendRequest");
   }
   const [updating, setUpdating] = useState(false);
-  const { invalidate } = useRelationships();
+  const { invalidate } = useRelationship(request.profile.id);
 
   const denyRequest = useCallback(() => {
     setUpdating(true);
