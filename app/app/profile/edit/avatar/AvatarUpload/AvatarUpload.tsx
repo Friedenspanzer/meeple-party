@@ -74,7 +74,7 @@ const AvatarUpload: React.FC = () => {
           )}
           {progress === "uploading" && <Spinner />}
           {progress === "done" && (
-            <div className="alert alert-danger" role="alert">
+            <div className="alert alert-success" role="alert">
               <i className="bi bi-check-circle-fill"></i> Successfully uploaded
               your avatar!
             </div>
