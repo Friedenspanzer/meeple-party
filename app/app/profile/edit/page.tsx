@@ -6,33 +6,33 @@ import GameSearch, {
   GameSearchChildren,
 } from "@/components/GameSearch/GameSearch";
 import Spinner from "@/components/Spinner/Spinner";
-import { useUser } from "@/context/userContext";
 import { Game } from "@/datatypes/game";
+import useUserProfile from "@/hooks/useUserProfile";
 import classNames from "classnames";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 const EditProfile: React.FC = () => {
-  const { user } = useUser();
+  const { isLoading, userProfile, invalidate } = useUserProfile();
 
-  if (!user) {
+  if (!isLoading && !userProfile) {
     throw new Error("Could not load user");
   }
 
-  const [profileName, setProfileName] = useState(user.name || "");
+  const [profileName, setProfileName] = useState("");
   const [profileNameError, setProfileNameError] = useState<string | false>(
     false
   );
 
-  const [realName, setRealName] = useState(user.realName || "");
+  const [realName, setRealName] = useState("");
   const [realNameError, setRealNameError] = useState<string | false>(false);
 
-  const [place, setPlace] = useState(user.place || "");
+  const [place, setPlace] = useState("");
   const [placeError, setPlaceError] = useState<string | false>(false);
 
-  const [about, setAbout] = useState(user.about || "");
+  const [about, setAbout] = useState("");
   const [aboutError, setAboutError] = useState<string | false>(false);
 
-  const [preferences, setPreferences] = useState(user.preference || "");
+  const [preferences, setPreferences] = useState("");
   const [preferencesError, setPreferencesError] = useState<string | false>(
     false
   );
@@ -73,7 +73,7 @@ const EditProfile: React.FC = () => {
   const updateUser = () => {
     setSending(true);
     const newUserDetails = {
-      ...user,
+      ...userProfile,
       name: profileName,
       realName,
       place,
@@ -91,6 +91,9 @@ const EditProfile: React.FC = () => {
         } else {
           throw Error(`${response.status} ${response.statusText}`);
         }
+      })
+      .then(() => {
+        invalidate();
       })
       .catch((error) => {
         setApiError(`Error updating profile data.`);
@@ -141,20 +144,15 @@ const EditProfile: React.FC = () => {
   }, [preferences]);
 
   useEffect(() => {
-    fetch("/api/user")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw Error(`${response.status} ${response.statusText}`);
-        }
-      })
-      .then((u) => setFavorites(u.favorites))
-      .catch((error) => {
-        setApiError(`Error fetching favorite games`);
-        setApiErrorDetail(error);
-      });
-  }, [user]);
+    if (userProfile) {
+      setProfileName(userProfile?.name || "");
+      setRealName(userProfile?.realName || "");
+      setPlace(userProfile?.place || "");
+      setAbout(userProfile?.about || "");
+      setPreferences(userProfile?.preference || "");
+      setFavorites(userProfile?.favorites);
+    }
+  }, [userProfile]);
 
   return (
     <>
