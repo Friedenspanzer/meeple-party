@@ -1,22 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { useUser } from "@/context/userContext";
+import { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
+import useUserProfile from "@/hooks/useUserProfile";
 
 export default function CompleteUserProfile() {
-  const { user } = useUser();
+  const { isLoading, userProfile, invalidate } = useUserProfile();
 
-  if (!user) {
-    throw new Error(
-      "User profile completion component can only be called with a user"
-    );
-  }
-
-  const [username, setUserName] = useState(user.name);
-  const [realName, setRealName] = useState(user.realName || "");
+  const [username, setUserName] = useState("");
+  const [realName, setRealName] = useState("");
 
   const [updating, setUpdating] = useState(false);
+
+  useEffect(() => {
+    if (userProfile) {
+      setUserName(userProfile.name || "");
+      setRealName(userProfile.realName || "");
+    }
+  }, [userProfile]);
 
   const sendCurrentData = () => {
     setUpdating(true);
@@ -26,8 +27,14 @@ export default function CompleteUserProfile() {
         name: username,
         realName: realName,
       }),
-    }).then(() => setUpdating(false));
+    })
+      .then(() => setUpdating(false))
+      .then(() => invalidate());
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   //TODO Input sanitation and validation
 
@@ -74,7 +81,7 @@ export default function CompleteUserProfile() {
             type="email"
             placeholder="Enter email"
             disabled
-            value={user.email ?? ""}
+            value={userProfile?.email ?? ""}
           />
         </div>
       </form>
