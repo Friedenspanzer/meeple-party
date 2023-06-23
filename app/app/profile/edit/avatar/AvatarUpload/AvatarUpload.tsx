@@ -1,13 +1,16 @@
 "use client";
 
 import Spinner from "@/components/Spinner/Spinner";
-import { AVATAR_ALLOWED_FILE_SIZE, AVATAR_ALLOWED_FILE_TYPES } from "@/constants/avatar";
-import { useUser } from "@/context/userContext";
+import {
+  AVATAR_ALLOWED_FILE_SIZE,
+  AVATAR_ALLOWED_FILE_TYPES,
+} from "@/constants/avatar";
+import useUserProfile from "@/hooks/useUserProfile";
 import { useCallback, useId, useState } from "react";
 
 const AvatarUpload: React.FC = () => {
   const fileUploadId = useId();
-  const { update: updateUser } = useUser();
+  const { invalidate } = useUserProfile();
   const [error, setError] = useState<false | string>(false);
   const [progress, setProgress] = useState<"waiting" | "uploading" | "done">(
     "waiting"
@@ -32,7 +35,7 @@ const AvatarUpload: React.FC = () => {
           .then((result) => {
             if (result.ok) {
               setProgress("done");
-              updateUser();
+              invalidate();
             } else {
               throw Error(`${result.status}: ${result.statusText}`);
             }
@@ -44,7 +47,7 @@ const AvatarUpload: React.FC = () => {
           });
       }
     },
-    [updateUser]
+    [invalidate]
   );
 
   return (
