@@ -92,9 +92,7 @@ const EditProfile: React.FC = () => {
           throw Error(`${response.status} ${response.statusText}`);
         }
       })
-      .then(() => {
-        invalidate();
-      })
+      .then(invalidate)
       .catch((error) => {
         setApiError(`Error updating profile data.`);
         setApiErrorDetail(error);
