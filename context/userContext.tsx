@@ -2,7 +2,7 @@
 
 import { User } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo } from "react";
 
 interface UserProviderProps {
   children?: React.ReactNode;

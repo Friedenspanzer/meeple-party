@@ -1,4 +1,5 @@
 import AppContainer from "@/components/AppContainer/AppContainer";
+import DataContainer from "@/components/DataContainer/DataContainer";
 import { useFeatureFlagServer } from "@/utility/featureFlag";
 import { notFound } from "next/navigation";
 
@@ -11,13 +12,15 @@ export default async function AppLayout({
     const showApp = await useFeatureFlagServer("show_app");
     return (
       <>
-        {showApp && <AppContainer>{children}</AppContainer>}
-        {!showApp && (
-          <>
-            <h1>Meeple Party is currently invite-only</h1>
-            <p>Please ask the administrator to unlock your account.</p>
-          </>
-        )}
+        <DataContainer>
+          {showApp && <AppContainer>{children}</AppContainer>}
+          {!showApp && (
+            <>
+              <h1>Meeple Party is currently invite-only</h1>
+              <p>Please ask the administrator to unlock your account.</p>
+            </>
+          )}
+        </DataContainer>
       </>
     );
   } catch {

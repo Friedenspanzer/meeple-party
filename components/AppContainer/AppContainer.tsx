@@ -9,6 +9,9 @@ import TopNav from "../TopNav/TopNav";
 import styles from "./appcontainer.module.css";
 import Spinner from "../Spinner/Spinner";
 import classNames from "classnames";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import useUserProfile from "@/hooks/useUserProfile";
 
 TimeAgo.addDefaultLocale(en);
 
@@ -17,15 +20,15 @@ export interface AppContainerProps {
 }
 
 const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
-  const { user, loading } = useUser();
+  const { isLoading, userProfile } = useUserProfile();
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={styles.spinner}>
         <Spinner />
       </div>
     );
-  } else if (!user) {
+  } else if (!userProfile) {
     return (
       <>
         <h2>Not logged in</h2>
@@ -40,8 +43,9 @@ const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
   } else {
     return (
       <>
+        <ReactQueryDevtools initialIsOpen={false} />
         <TopNav />
-        {!user.profileComplete ? (
+        {!userProfile.profileComplete ? (
           <CompleteUserProfile />
         ) : (
           <div className={classNames(styles.content, "container")}>

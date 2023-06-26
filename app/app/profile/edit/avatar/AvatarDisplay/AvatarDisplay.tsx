@@ -2,11 +2,11 @@
 
 import Avatar from "@/components/Avatar/Avatar";
 import Spinner from "@/components/Spinner/Spinner";
-import { useUser } from "@/context/userContext";
+import useUserProfile from "@/hooks/useUserProfile";
 import { useCallback, useState } from "react";
 
 const AvatarDisplay: React.FC = () => {
-  const { user, loading: loadingUser, update: updateUser } = useUser();
+  const { isLoading, userProfile, invalidate } = useUserProfile();
   const [loading, setLoading] = useState(false);
 
   const removeAvatar = useCallback(() => {
@@ -18,23 +18,23 @@ const AvatarDisplay: React.FC = () => {
         }
       })
       .then(() => setLoading(false))
-      .then(updateUser)
+      .then(invalidate)
       .catch((error) => {
         console.error(error);
       });
-  }, [updateUser]);
+  }, [invalidate]);
 
-  if (loadingUser) {
+  if (isLoading) {
     return <Spinner />;
   }
 
   return (
     <div className="row mt-4">
       <div className="col-2">
-        <Avatar name={user?.name || ""} image={user?.image} />
+        <Avatar name={userProfile?.name || ""} image={userProfile?.image} />
       </div>
       <div className="col">
-        {user?.image && (
+        {userProfile?.image && (
           <button
             type="button"
             className="btn btn-warning"
