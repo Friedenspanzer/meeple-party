@@ -4,7 +4,7 @@ import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequ
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
 import Spinner from "@/components/Spinner/Spinner";
 import { RelationshipType } from "@/datatypes/relationship";
-import useRelationship from "@/hooks/useRelationship";
+import useRelationship from "@/hooks/api/useRelationship";
 import axios from "axios";
 import { useCallback, useState } from "react";
 

@@ -1,5 +1,5 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import useRelationship from "@/hooks/useRelationship";
+import useRelationship from "@/hooks/api/useRelationship";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import Spinner from "../Spinner/Spinner";

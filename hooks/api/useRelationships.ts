@@ -1,18 +1,18 @@
 import { Relationship } from "@/datatypes/relationship";
-import { RelationshipGetResult } from "@/pages/api/v2/relationships";
+import { RelationshipsGetResult } from "@/pages/api/v2/relationships";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
 import { Result } from "./types";
 
-export default function useRelationships(): Result<RelationshipGetResult> {
+export default function useRelationships(): Result<RelationshipsGetResult> {
   const queryKey = ["relationships"];
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey,
     queryFn: () => {
       return axios
-        .get<RelationshipGetResult>("/api/v2/relationships")
+        .get<RelationshipsGetResult>("/api/v2/relationships")
         .then((response) => response.data);
     },
   });

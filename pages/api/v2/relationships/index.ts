@@ -3,9 +3,10 @@ import { prisma } from "@/db";
 import { normalizeRelationship } from "@/selectors/relationships";
 import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { ApiErrorMethodUnknown } from "../types";
 import { withErrorHandling, withUser } from "../utility";
 
-export interface RelationshipGetResult {
+export interface RelationshipsGetResult {
   normalizedRelationships: Relationship[];
 }
 
@@ -32,9 +33,9 @@ export default withErrorHandling(
 
       res
         .status(200)
-        .json({ normalizedRelationships } as RelationshipGetResult);
+        .json({ normalizedRelationships } as RelationshipsGetResult);
     } else {
-      res.status(405).send({});
+      throw new ApiErrorMethodUnknown();
     }
   })
 );

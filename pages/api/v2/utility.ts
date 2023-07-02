@@ -2,7 +2,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
-import { ApiError } from "./types";
+import { ApiError, ApiErrorMessage } from "./types";
 
 type ApiHandler = (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
 type ApiHandlerWithUser = (
@@ -26,7 +26,14 @@ export function withErrorHandling(handler: ApiHandler): ApiHandler {
     try {
       return await handler(req, res);
     } catch (reason) {
-      res.status(401).send({ reason } as ApiError);
+      console.error("API error: ", reason);
+      if (reason instanceof ApiError) {
+        res
+          .status(reason.code)
+          .send({ reason: reason.message } as ApiErrorMessage);
+      } else {
+        res.status(500).send({ reason } as ApiErrorMessage);
+      }
     }
   };
 }
