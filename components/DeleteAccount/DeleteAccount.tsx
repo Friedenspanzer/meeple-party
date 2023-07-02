@@ -8,7 +8,7 @@ import Spinner from "../Spinner/Spinner";
 
 type Step = "Button" | "Confirmation" | "Input" | "Deleting";
 
-const DeleteAccount: React.FC = ({}) => {
+const DeleteAccount: React.FC = () => {
   const [step, setStep] = useState<Step>("Button");
   const [confirmation, setConfirmation] = useState("");
   const { userProfile } = useUserProfile();
