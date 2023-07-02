@@ -1,6 +1,8 @@
 "use client";
 
 import useUserProfile from "@/hooks/useUserProfile";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Spinner from "../Spinner/Spinner";
 
@@ -10,9 +12,18 @@ const DeleteAccount: React.FC = ({}) => {
   const [step, setStep] = useState<Step>("Button");
   const [confirmation, setConfirmation] = useState("");
   const { userProfile } = useUserProfile();
+  const router = useRouter();
 
   const deleteAccount = () => {
     setStep("Deleting");
+    axios
+      .delete("/api/user")
+      .then(() => {
+        router.push("/");
+      })
+      .catch((error) => {
+        console.error("Error deleting account", error);
+      });
   };
 
   switch (step) {
