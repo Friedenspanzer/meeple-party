@@ -11,6 +11,7 @@ const ProfileEditLayout: React.FC<CollectionLayoutProps> = ({ children }) => {
     <>
       <NavigationBar>
         <NavigationItem href="/app/profile/edit">Profile</NavigationItem>
+        <NavigationItem href="/app/profile/edit/settings">Settings</NavigationItem>
         <NavigationItem href="/app/profile/edit/avatar">Your Avatar</NavigationItem>
         <NavigationItem href="/app/profile/edit/privacy">
           Privacy
