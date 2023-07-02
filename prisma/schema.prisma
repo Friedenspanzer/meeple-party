@@ -88,7 +88,7 @@ model Game {
 }
 
 model GameCollection {
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
   game   Game   @relation(fields: [gameId], references: [id])
   gameId Int
