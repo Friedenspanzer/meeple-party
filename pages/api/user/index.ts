@@ -17,7 +17,6 @@ export default withUser(async function handle(
       res.status(200).json(extendedDetails);
     } else if (req.method === "PATCH") {
       const newUserDetails = updatedUserDetails(user, JSON.parse(req.body));
-      console.log("Details", newUserDetails);
       await prisma.user.update({
         where: { id: user.id },
         data: {
@@ -26,6 +25,11 @@ export default withUser(async function handle(
         },
       });
       res.status(200).send({});
+    } else if (req.method === "DELETE") {
+      await prisma.user.delete({ where: { id: user.id } });
+      res.status(200).send({});
+    } else {
+      res.status(405).send({});
     }
   } catch (e) {
     console.error(e);
