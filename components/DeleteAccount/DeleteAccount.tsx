@@ -12,14 +12,13 @@ const DeleteAccount: React.FC = ({}) => {
   const [step, setStep] = useState<Step>("Button");
   const [confirmation, setConfirmation] = useState("");
   const { userProfile } = useUserProfile();
-  const router = useRouter();
 
   const deleteAccount = () => {
     setStep("Deleting");
     axios
       .delete("/api/user")
       .then(() => {
-        router.push("/");
+        window.location.assign("/");
       })
       .catch((error) => {
         console.error("Error deleting account", error);
