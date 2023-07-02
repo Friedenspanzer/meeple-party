@@ -1,5 +1,5 @@
 ---
-title: "Account deletions"
+title: "Account deletion"
 date: "2023-07-02"
 image: "accountdeletion.png"
 excerpt: "User can now delete their own accounts"
@@ -9,4 +9,4 @@ We're sad to see you go but we're absolutely sure that you should have the last 
 
 The delete feature is available in the user menu under Settings. It's currently pretty empty there but surely that menu will fill up in no time.
 
-Deletion will delete *everything*. Right now that's basically just your collection and friends list but in the future that will mean every last bit of data that every feature currently planned or unplanned will ever create. Everything will be purged, never to return. Because that's just polite.
+Deletion will delete _everything_. Right now that's basically just your collection and friends list but in the future that will mean every last bit of data that every feature currently planned or unplanned will ever create. Everything will be purged, never to return. Because that's just polite.
