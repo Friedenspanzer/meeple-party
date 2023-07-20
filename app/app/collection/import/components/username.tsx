@@ -1,6 +1,6 @@
 import Spinner from "@/components/Spinner/Spinner";
-import { useUser } from "@/context/userContext";
-import { useState } from "react";
+import useUserProfile from "@/hooks/useUserProfile";
+import { useState, useEffect } from "react";
 import validator from "validator";
 
 export interface UsernameProps {
@@ -8,13 +8,13 @@ export interface UsernameProps {
 }
 
 const Username: React.FC<UsernameProps> = (props) => {
-  const { user } = useUser();
+  const { isLoading, userProfile, invalidate } = useUserProfile();
 
-  if (!user) {
+  if (!isLoading && !userProfile) {
     throw new Error("Username component can only be called with a valid user.");
   }
 
-  const [bggName, setBggName] = useState(user.bggName);
+  const [bggName, setBggName] = useState("");
   const [nameError, setNameError] = useState<string | false>(false);
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +24,10 @@ const Username: React.FC<UsernameProps> = (props) => {
     if (!validationResult) {
       setNameError(false);
       setLoading(true);
-      user.bggName = sanitizeBggName(sanitizedName);
+
+      if (!userProfile) return;
+
+      userProfile.bggName = sanitizeBggName(sanitizedName);
       fetch("/api/user", {
         method: "PATCH",
         body: JSON.stringify({
@@ -32,12 +35,19 @@ const Username: React.FC<UsernameProps> = (props) => {
         }),
       }).then(() => {
         setLoading(false);
+        invalidate();
         props.onDone();
       });
     } else {
       setNameError(validationResult);
     }
   };
+
+  useEffect(() => {
+    if (userProfile && userProfile.bggName) {
+      setBggName(userProfile.bggName);
+    }
+  }, [userProfile]);
 
   return (
     <>
