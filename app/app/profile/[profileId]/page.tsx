@@ -133,12 +133,6 @@ export default async function ProfilePage({
               <p>{user.about}</p>
             </>
           )}
-          {!!user.preference && (
-            <>
-              <h3>What I like</h3>
-              <p>{user.preference}</p>
-            </>
-          )}
         </div>
         {user.favorites.length > 0 && (
           <div className="col-md-3">

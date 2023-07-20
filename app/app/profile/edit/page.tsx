@@ -9,6 +9,7 @@ import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
 import useUserProfile from "@/hooks/useUserProfile";
 import classNames from "classnames";
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 const EditProfile: React.FC = () => {
@@ -31,11 +32,6 @@ const EditProfile: React.FC = () => {
 
   const [about, setAbout] = useState("");
   const [aboutError, setAboutError] = useState<string | false>(false);
-
-  const [preferences, setPreferences] = useState("");
-  const [preferencesError, setPreferencesError] = useState<string | false>(
-    false
-  );
 
   const [favorites, setFavorites] = useState<Game[] | false>(false);
 
@@ -78,7 +74,6 @@ const EditProfile: React.FC = () => {
       realName,
       place,
       about,
-      preference: preferences,
       favorites: favorites ? favorites.map((f) => f.id) : [],
     };
     fetch("/api/user", {
@@ -134,20 +129,11 @@ const EditProfile: React.FC = () => {
   }, [about]);
 
   useEffect(() => {
-    if (preferences.length > 3000) {
-      setPreferencesError("The text must not exceed 3000 characters.");
-    } else {
-      setPreferencesError(false);
-    }
-  }, [preferences]);
-
-  useEffect(() => {
     if (userProfile) {
       setProfileName(userProfile?.name || "");
       setRealName(userProfile?.realName || "");
       setPlace(userProfile?.place || "");
       setAbout(userProfile?.about || "");
-      setPreferences(userProfile?.preference || "");
       setFavorites(userProfile?.favorites);
     }
   }, [userProfile]);
@@ -216,7 +202,7 @@ const EditProfile: React.FC = () => {
                 "text-danger": realNameError,
               })}
             >
-              {realNameError || "Will only be shown to your friends."}
+              {realNameError || "Will be publically shown to everyone."}
             </div>
           </div>
 
@@ -243,7 +229,7 @@ const EditProfile: React.FC = () => {
                 "text-danger": placeError,
               })}
             >
-              {placeError || "Will only be shown to your friends."}
+              {placeError || "Will be publicly shown to everyone."}
             </div>
           </div>
         </div>
@@ -272,32 +258,6 @@ const EditProfile: React.FC = () => {
               })}
             >
               {aboutError || "Will be publicly shown to everybody."}
-            </div>
-          </div>
-
-          <div className="col-md-6">
-            <label htmlFor="place" className="form-label">
-              Your gaming preferences
-            </label>
-            <textarea
-              className={classNames({
-                "form-control": true,
-                "border-danger": !!preferencesError,
-              })}
-              id="place"
-              rows={10}
-              value={preferences}
-              onChange={(e) => setPreferences(e.currentTarget.value)}
-              placeholder="Tell your friends about the kind of games you like"
-            ></textarea>
-            <div
-              id="profileNameHelp"
-              className={classNames({
-                "form-text": true,
-                "text-danger": preferencesError,
-              })}
-            >
-              {preferencesError || "Will be publicly shown to everybody."}
             </div>
           </div>
         </div>
@@ -343,11 +303,10 @@ const EditProfile: React.FC = () => {
         </div>
 
         <div className="row mb-4">
-          <div className="alert alert-warning col-md-8 order-md-2" role="alert">
-            <i className="bi bi-exclamation-octagon-fill"></i>{" "}
-            <strong>Beware:</strong> Everything that is shown to your friends
-            may also be shown to people you send friend requests to (but not
-            people sending friend requests to you).
+          <div className="alert alert-info col-md-8 order-md-2" role="alert">
+            <i className="bi bi-info-circle"></i> For some things you can change
+            what&apos;s shown to everybody in your{" "}
+            <Link href="/app/profile/edit/privacy">privacy settings</Link>.
           </div>
           <div className="col-4">
             <button
@@ -358,8 +317,7 @@ const EditProfile: React.FC = () => {
                 !!profileNameError ||
                 !!realNameError ||
                 !!placeError ||
-                !!aboutError ||
-                !!preferencesError
+                !!aboutError
               }
               onClick={(e) => updateUser()}
             >
