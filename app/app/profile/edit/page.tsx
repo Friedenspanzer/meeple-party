@@ -237,7 +237,7 @@ const EditProfile: React.FC = () => {
         <div className="row mb-4">
           <div className="col-md-6">
             <label htmlFor="place" className="form-label">
-              About yourself
+              Your profile
             </label>
             <textarea
               className={classNames({
@@ -248,7 +248,7 @@ const EditProfile: React.FC = () => {
               rows={10}
               value={about}
               onChange={(e) => setAbout(e.currentTarget.value)}
-              placeholder="Write something about yourself"
+              placeholder="Write something to spice up your profile page."
             ></textarea>
             <div
               id="profileNameHelp"

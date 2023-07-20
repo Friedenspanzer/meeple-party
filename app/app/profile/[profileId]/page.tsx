@@ -129,7 +129,6 @@ export default async function ProfilePage({
         <div className="col-md-9">
           {!!user.about && (
             <>
-              <h3>About</h3>
               <p>{user.about}</p>
             </>
           )}
