@@ -44,7 +44,7 @@ const Username: React.FC<UsernameProps> = (props) => {
   };
 
   useEffect(() => {
-    if (userProfile && userProfile.bggName) {
+    if (userProfile?.bggName) {
       setBggName(userProfile.bggName);
     }
   }, [userProfile]);

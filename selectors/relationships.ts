@@ -84,8 +84,7 @@ function convertToPublicProfile(user: User): PublicUser {
     name: user.name,
     image: user.image,
     role: user.role,
-    about: user.about,
-    preference: user.preference,
+    about: user.about
   };
 }
 
