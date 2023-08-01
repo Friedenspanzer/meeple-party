@@ -3,6 +3,7 @@ import GameBox from "@/components/GameBox/GameBox";
 import GameCollection from "@/components/GameCollection/GameCollection";
 import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
+import { cleanUserDetails } from "@/pages/api/user";
 import { getServerUser } from "@/utility/serverSession";
 import {
   Game,
@@ -24,6 +25,8 @@ export async function generateMetadata({
 }: {
   params: { profileId: string };
 }): Promise<Metadata> {
+  const loggedInUser = await getServerUser();
+  const isMe = loggedInUser.id === params.profileId;
   const user = await getUser(params.profileId);
   if (!user || !user.profileComplete) {
     notFound();
@@ -43,16 +46,15 @@ export default async function ProfilePage({
 }: {
   params: { profileId: string };
 }) {
-  const user = await getUser(params.profileId);
+  const loggedInUser = await getServerUser();
+  const isMe = loggedInUser.id === params.profileId;
+
+  const user = await getUser(params.profileId, isMe);
   if (!user || !user.profileComplete) {
     notFound();
   }
 
   user.games.sort((a, b) => (a.game.name > b.game.name ? 1 : -1));
-
-  const loggedInUser = await getServerUser();
-
-  const isMe = loggedInUser.id === user.id;
   const isFriend = getAllFriendIds(user).includes(loggedInUser.id);
 
   const myCollectionStatus = await prisma.gameCollection.findMany({
@@ -105,7 +107,7 @@ export default async function ProfilePage({
             )}
             <div className="col order-md-1">
               <h1 className={styles.name}>{user.name}</h1>
-              {(isFriend || isMe) && (
+              {user.realName && (
                 <h2 className={styles.realName}>{user.realName}</h2>
               )}
             </div>
@@ -211,8 +213,8 @@ function cleanGame(game: Game) {
   return cleanGame;
 }
 
-const getUser = cache(async (id: string) => {
-  return await prisma.user.findUnique({
+const getUser = cache(async (id: string, ownProfile: boolean = false) => {
+  const extendedUserData = await prisma.user.findUnique({
     where: { id },
     include: {
       receivedRelationships: true,
@@ -228,4 +230,26 @@ const getUser = cache(async (id: string) => {
       },
     },
   });
+
+  if (extendedUserData) {
+    const {
+      receivedRelationships,
+      sentRelationships,
+      favorites,
+      games,
+      ...userData
+    } = extendedUserData;
+
+    const clean = ownProfile ? userData : cleanUserDetails(userData);
+
+    return {
+      receivedRelationships,
+      sentRelationships,
+      favorites,
+      games,
+      ...clean,
+    };
+  }
+
+  return null;
 });

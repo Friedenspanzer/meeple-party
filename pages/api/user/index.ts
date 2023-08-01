@@ -1,3 +1,4 @@
+import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import { withUser } from "@/utility/apiAuth";
 import { Game, Prisma, User } from "@prisma/client";
@@ -14,7 +15,16 @@ export default withUser(async function handle(
         where: { id: user.id },
         include: { favorites: true },
       });
-      res.status(200).json(extendedDetails);
+      if (extendedDetails) {
+        const { favorites, ...userData } = extendedDetails;
+        const result = {
+          ...cleanUserDetails(userData),
+          favorites,
+        };
+        res.status(200).json(result);
+      } else {
+        res.status(404).send({});
+      }
     } else if (req.method === "PATCH") {
       const newUserDetails = updatedUserDetails(user, JSON.parse(req.body));
       await prisma.user.update({
@@ -36,6 +46,18 @@ export default withUser(async function handle(
     res.status(500).json({ success: false, error: e });
   }
 });
+
+export function cleanUserDetails(user: User): User {
+  const preferences = {
+    ...defaultUserPreferences,
+    ...(user.preferences as Prisma.JsonObject),
+  };
+
+  return {
+    ...user,
+    realName: preferences.showRealNameInProfile ? user.realName : null,
+  };
+}
 
 function updatedUserDetails(user: User, requestObject: any) {
   return {

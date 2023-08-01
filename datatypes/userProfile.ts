@@ -8,8 +8,10 @@ export type PublicUser = Omit<PrivateUser, "realName" | "place">;
 
 export type UserPreferences = {
   sendAnalyticsData: boolean;
+  showRealNameInProfile: boolean;
 };
 
 export const defaultUserPreferences: UserPreferences = {
   sendAnalyticsData: false,
+  showRealNameInProfile: false
 };
