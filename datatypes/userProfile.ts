@@ -8,9 +8,13 @@ export type UserProfile = Omit<
 export type UserPreferences = {
   sendAnalyticsData: boolean;
   showRealNameInProfile: boolean;
+  showPlaceInProfile: boolean;
+  allowSearchByPlace: boolean;
 };
 
 export const defaultUserPreferences: UserPreferences = {
   sendAnalyticsData: false,
-  showRealNameInProfile: false
+  showRealNameInProfile: false,
+  showPlaceInProfile: false,
+  allowSearchByPlace: false,
 };
