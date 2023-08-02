@@ -32,7 +32,7 @@ const GenericFriendRequest: React.FC<GenericFriendRequestProps> = ({
         </div>
         <div className={styles.name}>
           {profile.name}
-          {"realName" in profile && <small>{profile.realName}</small>}
+          {profile.realName && <small>{profile.realName}</small>}
         </div>
         <div className={styles.meta}>
           <ReactTimeAgo date={lastUpdate} />

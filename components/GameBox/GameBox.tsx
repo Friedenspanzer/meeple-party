@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import Avatar from "../Avatar/Avatar";
 import { StatusByUser } from "@/datatypes/collection";
-import { PrivateUser } from "@/datatypes/userProfile";
+import { UserProfile } from "@/datatypes/userProfile";
 import CollectionStatusButtons from "../CollectionStatusButtons/CollectionStatusButtons";
 
 export interface GameBoxProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -152,7 +152,7 @@ function round(x: number): number {
   return Math.round(x * 10) / 10;
 }
 
-function UserList({ users }: { users: PrivateUser[] }) {
+function UserList({ users }: { users: UserProfile[] }) {
   return (
     <>
       {users.map((u, i) => (
@@ -166,7 +166,7 @@ function CollectionAvatar({
   user,
   index,
 }: {
-  user: PrivateUser;
+  user: UserProfile;
   index: number;
 }) {
   return (
