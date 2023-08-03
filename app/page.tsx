@@ -30,7 +30,18 @@ export default function Home() {
         </div>
       </div>
       <div className="container">
-        <div className="row mt-4 g-4">
+        <div className="row mt-3">
+          <div className="col-md-6 offset-md-3 alert alert-warning">
+            <h3>👨‍💻 Meeple Party is currently in beta!</h3>
+            I&apos;m doing my best but I&apos;m still doing my best as a hobby
+            in my free time. Some parts are still a bit rough. Not everything
+            may work as you expect or at all. You may lose data at some point.
+            Things may take a little longer to fix then I&apos;d like. If you
+            notice something strange or broken please report it (see footer for
+            various places to do so).
+          </div>
+        </div>
+        <div className="row g-4">
           <div className="col-md-4">
             <div className="card text-bg-primary">
               <Image
