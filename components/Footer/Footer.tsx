@@ -8,7 +8,11 @@ export default function Footer() {
         {" "}
         <ul className={styles.social}>
           <li>
-            <Link href="https://brettspiel.space/@meepleparty" title="Mastodon" rel="me">
+            <Link
+              href="https://brettspiel.space/@meepleparty"
+              title="Mastodon"
+              rel="me"
+            >
               <i className="bi bi-mastodon"></i>
             </Link>
           </li>
@@ -21,8 +25,8 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link href="https://www.reddit.com/r/meepleparty/" title="Reddit">
-              <i className="bi bi-reddit"></i>
+            <Link href="https://discord.gg/x9R46w4SME" title="Discord">
+              <i className="bi bi-discord"></i>
             </Link>
           </li>
         </ul>
