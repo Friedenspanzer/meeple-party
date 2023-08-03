@@ -16,12 +16,7 @@ export default withUser(async function handle(
         include: { favorites: true },
       });
       if (extendedDetails) {
-        const { favorites, ...userData } = extendedDetails;
-        const result = {
-          ...cleanUserDetails(userData),
-          favorites,
-        };
-        res.status(200).json(result);
+        res.status(200).json(extendedDetails);
       } else {
         res.status(404).send({});
       }
