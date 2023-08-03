@@ -25,8 +25,6 @@ export async function generateMetadata({
 }: {
   params: { profileId: string };
 }): Promise<Metadata> {
-  const loggedInUser = await getServerUser();
-  const isMe = loggedInUser.id === params.profileId;
   const user = await getUser(params.profileId);
   if (!user || !user.profileComplete) {
     notFound();
@@ -49,7 +47,7 @@ export default async function ProfilePage({
   const loggedInUser = await getServerUser();
   const isMe = loggedInUser.id === params.profileId;
 
-  const user = await getUser(params.profileId, isMe);
+  const user = await getUser(params.profileId, loggedInUser.id);
   if (!user || !user.profileComplete) {
     notFound();
   }
@@ -112,7 +110,7 @@ export default async function ProfilePage({
               )}
             </div>
           </div>
-          {(isFriend || isMe) && !!moreHeaders && (
+          {moreHeaders && (
             <div className={classNames("row pb-2")}>
               <div
                 className={classNames(styles.moreHeader, "col-11")}
@@ -213,7 +211,7 @@ function cleanGame(game: Game) {
   return cleanGame;
 }
 
-const getUser = cache(async (id: string, ownProfile: boolean = false) => {
+const getUser = async (id: string, loggedInUserId?: string) => {
   const extendedUserData = await prisma.user.findUnique({
     where: { id },
     include: {
@@ -240,7 +238,12 @@ const getUser = cache(async (id: string, ownProfile: boolean = false) => {
       ...userData
     } = extendedUserData;
 
-    const clean = ownProfile ? userData : cleanUserDetails(userData);
+    const isFriend =
+      loggedInUserId &&
+      getAllFriendIds(extendedUserData).includes(loggedInUserId);
+    const isMe = loggedInUserId && extendedUserData.id === loggedInUserId;
+
+    const clean = isMe || isFriend ? userData : cleanUserDetails(userData);
 
     return {
       receivedRelationships,
@@ -252,4 +255,4 @@ const getUser = cache(async (id: string, ownProfile: boolean = false) => {
   }
 
   return null;
-});
+};
