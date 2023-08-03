@@ -50,7 +50,6 @@ model User {
   realName   String?
   about      String?
   place      String?
-  preference String?
   image      String?
   bggName    String?
 

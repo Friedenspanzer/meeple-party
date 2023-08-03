@@ -1,4 +1,4 @@
-import { PrivateUser, PublicUser } from "@/datatypes/userProfile";
+import { UserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import {
   Relationship as PrismaRelationship,
@@ -6,8 +6,9 @@ import {
   User,
 } from "@prisma/client";
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
+import { cleanUserDetails } from "@/pages/api/user";
 
-export async function getFriends(userId: string): Promise<PrivateUser[]> {
+export async function getFriends(userId: string): Promise<UserProfile[]> {
   const friends = await prisma.relationship.findMany({
     where: {
       type: PrismaRelationshipType.FRIENDSHIP,
@@ -23,7 +24,7 @@ export async function getFriends(userId: string): Promise<PrivateUser[]> {
     normalizeRelationship(r, userId)
   );
 
-  return normalizedRelationships.map((r) => r.profile as PrivateUser);
+  return normalizedRelationships.map((r) => r.profile as UserProfile);
 }
 
 type FullPrismaRelationship = PrismaRelationship & {
@@ -45,47 +46,27 @@ export function normalizeRelationship(
 function getProfile(
   relationship: FullPrismaRelationship,
   userId: string
-): PrivateUser | PublicUser {
+): UserProfile {
   const profile =
     relationship.recipientId === userId
       ? relationship.sender
       : relationship.recipient;
-  if (
-    relationship.type === "FRIENDSHIP" ||
-    isFriendRequestReveiced(relationship, userId)
-  ) {
-    return convertToPrivateProfile(profile);
-  } else {
-    return convertToPublicProfile(profile);
-  }
+  return relationship.type === PrismaRelationshipType.FRIENDSHIP
+    ? profile
+    : convertToUserProfile(profile);
 }
 
-function isFriendRequestReveiced(
-  relationship: FullPrismaRelationship,
-  userId: string
-): boolean {
-  return (
-    relationship.type === "FRIEND_REQUEST" &&
-    relationship.recipientId === userId
-  );
-}
-
-function convertToPrivateProfile(user: User): PrivateUser {
+function convertToUserProfile(user: User): UserProfile {
+  const cleanUser = cleanUserDetails(user);
   return {
-    ...convertToPublicProfile(user),
-    realName: user.realName,
-    place: user.place,
-  };
-}
-
-function convertToPublicProfile(user: User): PublicUser {
-  return {
-    id: user.id,
-    name: user.name,
-    image: user.image,
-    role: user.role,
-    about: user.about,
-    preference: user.preference,
+    id: cleanUser.id,
+    name: cleanUser.name,
+    image: cleanUser.image,
+    role: cleanUser.role,
+    about: cleanUser.about,
+    realName: cleanUser.realName,
+    place: cleanUser.place,
+    bggName: cleanUser.bggName,
   };
 }
 

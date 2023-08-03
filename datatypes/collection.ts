@@ -1,10 +1,10 @@
 import { Game } from "./game";
-import { PrivateUser, PublicUser } from "./userProfile";
+import { UserProfile } from "./userProfile";
 
 export interface StatusByUser {
-  own: PrivateUser[];
-  wishlist: PrivateUser[];
-  wantToPlay: PrivateUser[];
+  own: UserProfile[];
+  wishlist: UserProfile[];
+  wantToPlay: UserProfile[];
 }
 
 export type GameCollectionStatus = {
@@ -19,7 +19,7 @@ export interface GameCollection {
 }
 
 export interface UserGameCollection extends GameCollection {
-  user: PrivateUser | PublicUser;
+  user: UserProfile;
 }
 
 export interface ExtendedGameCollection extends GameCollection {

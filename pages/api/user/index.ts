@@ -1,6 +1,7 @@
+import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import { withUser } from "@/utility/apiAuth";
-import { Game, Prisma, User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default withUser(async function handle(
@@ -14,7 +15,11 @@ export default withUser(async function handle(
         where: { id: user.id },
         include: { favorites: true },
       });
-      res.status(200).json(extendedDetails);
+      if (extendedDetails) {
+        res.status(200).json(extendedDetails);
+      } else {
+        res.status(404).send({});
+      }
     } else if (req.method === "PATCH") {
       const newUserDetails = updatedUserDetails(user, JSON.parse(req.body));
       await prisma.user.update({
@@ -37,6 +42,19 @@ export default withUser(async function handle(
   }
 });
 
+export function cleanUserDetails(user: User): User {
+  const preferences = {
+    ...defaultUserPreferences,
+    ...(user.preferences as Prisma.JsonObject),
+  };
+
+  return {
+    ...user,
+    realName: preferences.showRealNameInProfile ? user.realName : null,
+    place: preferences.showPlaceInProfile ? user.place : null,
+  };
+}
+
 function updatedUserDetails(user: User, requestObject: any) {
   return {
     bggName: requestObject.bggName ? requestObject.bggName : user.bggName,
@@ -45,9 +63,6 @@ function updatedUserDetails(user: User, requestObject: any) {
     realName: requestObject.realName ? requestObject.realName : user.realName,
     place: requestObject.place ? requestObject.place : user.place,
     about: requestObject.about ? requestObject.about : user.about,
-    preference: requestObject.preference
-      ? requestObject.preference
-      : user.preference,
     preferences: (requestObject.preferences
       ? requestObject.preferences
       : user.preferences) as Prisma.JsonObject,
