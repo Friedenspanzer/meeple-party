@@ -12,7 +12,7 @@ export default function Home() {
           <div className="col-md-3">
             <Image
               src="/logo.svg"
-              width={300}
+              width={400}
               height={300}
               alt="Meeple Party"
               className={styles.image}
@@ -36,9 +36,9 @@ export default function Home() {
               <Image
                 src="/highlight-card-1.png"
                 className={classNames("card-img-top", styles.feature)}
-                alt="Screenshot of a cool feature"
-                width={300}
-                height={300}
+                alt="Screenshot of combined collection views"
+                width={414}
+                height={200}
               />
               <div className="card-body">
                 <h5 className="card-title">Combined collection views</h5>
@@ -54,8 +54,8 @@ export default function Home() {
                 src="/highlight-card-2.png"
                 className={classNames("card-img-top", styles.feature)}
                 alt="Screenshot of Meeple Party's filtering feature."
-                width={300}
-                height={300}
+                width={414}
+                height={200}
               />
               <div className="card-body">
                 <h5 className="card-title">Exhaustive filtering</h5>
@@ -72,8 +72,8 @@ export default function Home() {
                 src="/highlight-card-3.png"
                 className={classNames("card-img-top", styles.feature)}
                 alt="Screenshot of Meeple Party's activity stream"
-                width={300}
-                height={300}
+                width={414}
+                height={200}
               />
               <div className="card-body">
                 <h5 className="card-title">Activity stream</h5>
