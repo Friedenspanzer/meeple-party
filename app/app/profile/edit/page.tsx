@@ -7,13 +7,21 @@ import GameSearch, {
 } from "@/components/GameSearch/GameSearch";
 import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
 import classNames from "classnames";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 const EditProfile: React.FC = () => {
   const { isLoading, userProfile, invalidate } = useUserProfile();
+  const { preferences, loading: preferencesLoading } = useUserPreferences();
 
   if (!isLoading && !userProfile) {
     throw new Error("Could not load user");
@@ -175,7 +183,7 @@ const EditProfile: React.FC = () => {
               })}
             >
               {profileNameError ||
-                "Will be publicly shown to everybody. Must be set."}
+                "Will be shown to everybody. Must be set."}
             </div>
           </div>
 
@@ -202,7 +210,8 @@ const EditProfile: React.FC = () => {
                 "text-danger": realNameError,
               })}
             >
-              {realNameError || "Will be publically shown to everyone."}
+              {realNameError ||
+                getPrivacyStatement(!preferences?.showRealNameInProfile)}
             </div>
           </div>
 
@@ -229,7 +238,7 @@ const EditProfile: React.FC = () => {
                 "text-danger": placeError,
               })}
             >
-              {placeError || "Will be publicly shown to everyone."}
+              {placeError || getPrivacyStatement(!preferences?.showPlaceInProfile)}
             </div>
           </div>
         </div>
@@ -359,5 +368,31 @@ function bindFavoriteGameResult(
   };
   return FavoriteGameResult;
 }
+
+function getPrivacyStatement(privateInformation: boolean) {
+  if (privateInformation) {
+    return <PrivacyStatementPrivate />;
+  } else {
+    return <PrivacyStatementPublic />;
+  }
+}
+
+const PrivacyStatementPrivate: React.FC = () => {
+  return (
+    <>
+      Will only be shown to your friends.{" "}
+      <Link href="/app/profile/edit/privacy">Change</Link>
+    </>
+  );
+};
+
+const PrivacyStatementPublic: React.FC = () => {
+  return (
+    <>
+      Will be shown to everybody.{" "}
+      <Link href="/app/profile/edit/privacy">Change</Link>
+    </>
+  );
+};
 
 export default EditProfile;
