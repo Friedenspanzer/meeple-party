@@ -20,7 +20,7 @@ export default function Avatar({
         src={image}
         width="40"
         height="40"
-        alt={!!name ? name : "User avatar"}
+        alt={name || "User avatar"}
         className={classNames([styles.image, className])}
         style={style}
         unoptimized
@@ -28,7 +28,7 @@ export default function Avatar({
       />
     );
   } else {
-    const color = getColor(name);
+    const color = getColor(name || "");
     return (
       <div
         className={classNames([styles.dummy, className])}
@@ -37,7 +37,7 @@ export default function Avatar({
           backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
         }}
       >
-        {name[0]}
+        {name ? name[0].toUpperCase() : "?"}
       </div>
     );
   }
