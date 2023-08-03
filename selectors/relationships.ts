@@ -51,7 +51,9 @@ function getProfile(
     relationship.recipientId === userId
       ? relationship.sender
       : relationship.recipient;
-  return convertToUserProfile(profile);
+  return relationship.type === PrismaRelationshipType.FRIENDSHIP
+    ? profile
+    : convertToUserProfile(profile);
 }
 
 function convertToUserProfile(user: User): UserProfile {
