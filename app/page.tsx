@@ -21,7 +21,9 @@ export default function Home() {
           </div>
           <div className="col-md-6">
             <h1 className="display-1">Meeple Party</h1>
-            <Slogan />
+            <h2 className="display-6">
+              Spend more time playing, less time browsing.
+            </h2>
           </div>
           <div className="col-md-3">
             <Login />
