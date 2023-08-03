@@ -1,5 +1,6 @@
 import { Relationship } from "@/datatypes/relationship";
 import classNames from "classnames";
+import Link from "next/link";
 import ReactTimeAgo from "react-time-ago";
 import Avatar from "../Avatar/Avatar";
 import styles from "./friendrequest.module.css";
@@ -28,11 +29,15 @@ const GenericFriendRequest: React.FC<GenericFriendRequestProps> = ({
     >
       <div className={classNames(styles.content, "col-md-7")}>
         <div className={styles.image}>
-          <Avatar image={profile.image} name={profile.name ?? ""} />
+          <Link href={`/app/profile/${profile.id}`}>
+            <Avatar image={profile.image} name={profile.name ?? ""} />
+          </Link>
         </div>
         <div className={styles.name}>
-          {profile.name}
-          {profile.realName && <small>{profile.realName}</small>}
+          <Link href={`/app/profile/${profile.id}`}>
+            {profile.name}
+            {profile.realName && <small>{profile.realName}</small>}
+          </Link>
         </div>
         <div className={styles.meta}>
           <ReactTimeAgo date={lastUpdate} />

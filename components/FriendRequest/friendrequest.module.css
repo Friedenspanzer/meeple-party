@@ -26,6 +26,11 @@
   grid-row: 1;
 }
 
+.name a {
+  color: unset;
+  text-decoration: unset;
+}
+
 .image {
   grid-column: 1;
   grid-row: 1 / span 2;
