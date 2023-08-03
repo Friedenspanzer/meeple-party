@@ -8,6 +8,11 @@ export default function Footer() {
         {" "}
         <ul className={styles.social}>
           <li>
+            <Link href="mailto:contact@meeple.party" title="E-Mail">
+              <i className="bi bi-envelope-fill"></i>
+            </Link>
+          </li>
+          <li>
             <Link
               href="https://brettspiel.space/@meepleparty"
               title="Mastodon"
