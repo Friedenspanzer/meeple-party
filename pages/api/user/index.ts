@@ -1,7 +1,7 @@
 import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import { withUser } from "@/utility/apiAuth";
-import { Game, Prisma, User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default withUser(async function handle(
@@ -56,6 +56,7 @@ export function cleanUserDetails(user: User): User {
   return {
     ...user,
     realName: preferences.showRealNameInProfile ? user.realName : null,
+    place: preferences.showPlaceInProfile ? user.place : null,
   };
 }
 
