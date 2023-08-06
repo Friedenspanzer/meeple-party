@@ -11,6 +11,7 @@ import Avatar from "../Avatar/Avatar";
 import { StatusByUser } from "@/datatypes/collection";
 import { UserProfile } from "@/datatypes/userProfile";
 import CollectionStatusButtons from "../CollectionStatusButtons/CollectionStatusButtons";
+import useGame from "@/hooks/api/useGame";
 
 export interface GameBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   game: Game | number;
@@ -27,8 +28,9 @@ export default function GameBox({
   className,
   ...props
 }: GameBoxProps) {
-  const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
+
+  const { data: gameData, isLoading } = useGame(getGameId(game));
 
   useEffect(() => {
     if (showFriendCollection) {
@@ -53,26 +55,11 @@ export default function GameBox({
     }
   }, [game, friendCollection, showFriendCollection]);
 
-  useEffect(() => {
-    if (typeof game === "number") {
-      fetch(`/api/games/${game}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw Error(`${response.status} ${response.statusText}`);
-          }
-        })
-        .then(setGameData)
-        .catch((reason) => {
-          throw Error(`Error loading data for game ${game}. Reason: ${reason}`);
-        });
-    } else {
-      setGameData(game);
-    }
-  }, [game]);
+  if (isLoading || !gameData) {
+    return <div className={classNames(styles.gamebox, "shimmer")} />;
+  }
 
-  return gameData ? (
+  return (
     <div className={classNames(styles.container, className)} {...props}>
       <div className={styles.gamebox}>
         <Link href={`/app/game/${gameData.id}`}>
@@ -136,8 +123,6 @@ export default function GameBox({
         </Link>
       )}
     </div>
-  ) : (
-    <div className={classNames(styles.gamebox, "shimmer")} />
   );
 }
 
