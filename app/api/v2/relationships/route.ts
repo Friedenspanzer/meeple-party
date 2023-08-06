@@ -1,7 +1,6 @@
 import { prisma } from "@/db";
-import { normalizeRelationship } from "@/selectors/relationships";
 import { NextResponse } from "next/server";
-import { getUser } from "../utility";
+import { getUser, normalizeRelationship } from "../utility";
 
 export async function GET(request: Request) {
   const user = await getUser();

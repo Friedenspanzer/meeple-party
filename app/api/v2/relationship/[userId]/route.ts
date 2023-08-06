@@ -1,8 +1,7 @@
 import { Relationship } from "@/datatypes/relationship";
 import { prisma } from "@/db";
-import { normalizeRelationship } from "@/selectors/relationships";
 import { NextResponse } from "next/server";
-import { getUser } from "../../utility";
+import { getUser, normalizeRelationship } from "../../utility";
 
 export interface RelationshipGetResult {
   normalizedRelationship: Relationship | null;

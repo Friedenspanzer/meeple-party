@@ -8,6 +8,9 @@ import {
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import { cleanUserDetails } from "@/pages/api/user";
 
+/**
+ * @deprecated This method should be replaced by the API V2 version.
+ */
 export async function getFriends(userId: string): Promise<UserProfile[]> {
   const friends = await prisma.relationship.findMany({
     where: {
@@ -32,6 +35,9 @@ type FullPrismaRelationship = PrismaRelationship & {
   recipient: User;
 };
 
+/**
+ * @deprecated This method should be replaced by the API V2 version.
+ */
 export function normalizeRelationship(
   prismaRelationship: FullPrismaRelationship,
   userId: string
