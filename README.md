@@ -12,8 +12,26 @@ So I asked myself why we weren't just presented with this information. And that 
 
 I don't want Meeple Party to become *Yet another social network but it's about board games*. I have Mastodon, BoardGameGeek, Reddit and [Unknowns](https://unknowns.de/) to talk to strangers about board games and I really enjoy it most of the times. So Meeple Party should just be about me and my friends and empower us to get games to the table we would have otherwise missed. Every feature added should add to this simple goal.
 
+## Roadmap
+
+### Planned features
+
+- [Internationalization](https://github.com/Friedenspanzer/meeple-party/issues/94)
+- [User list](https://github.com/Friedenspanzer/meeple-party/issues/93)
+- [User groups](https://github.com/Friedenspanzer/meeple-party/issues/96)
+- Easier friend discovery
+  - [Friends of my friends](https://github.com/Friedenspanzer/meeple-party/issues/48)
+  - [Account search](https://github.com/Friedenspanzer/meeple-party/issues/95)
+
+### Vision
+
+- A full-featured notification system to be notified of my friends acquisitions, friend requests, group invites and so on.
+- Game night organization with invitations and game voting. Possibly with publicly shareable links so people that are not registered on Meeple Party can participate in the voting.
+- Pitching games to friends by writing a few sentences and showing them prominently in my friends feed (kind of similar to Steam reviews). I don't want this to end up as a full-featured review system so it will have sensible limitations.
+
 ## Contributing
 
-The easiest way of helping Meeple Party get better is contributing to the community here on GitHub. If you notice something not working [open an issue](https://github.com/Friedenspanzer/meeple-party/issues) for it. If you wish something worked differently open an issue or [create a thread in the discussions](https://github.com/Friedenspanzer/meeple-party/discussions).
+The easiest way of helping Meeple Party get better is contributing to the community here on GitHub. If you notice something not working [open an issue](https://github.com/Friedenspanzer/meeple-party/issues) for it. If you 
+wish something worked differently open an issue or [create a thread in the discussions](https://github.com/Friedenspanzer/meeple-party/discussions).
 
 If you want to get a bit more involved feel free to send pull requests my way. If there's already an issue for the thing you want to change it's best to assign yourself to the issue so nobody else does the same. Also please only assign yourself to issues you're actually willing to work on. If it's an extensive change you didn't discuss beforehand expect me to take a little while to review and think about it and maybe also not like it that much.

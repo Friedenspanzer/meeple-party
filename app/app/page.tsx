@@ -9,7 +9,7 @@ import { Game } from "@/datatypes/game";
 import { getAllGamesOfFriends, getCollection } from "@/selectors/collections";
 import { getServerUser } from "@/utility/serverSession";
 import styles from "./dashboard.module.css";
-import { PrivateUser } from "@/datatypes/userProfile";
+import { UserProfile } from "@/datatypes/userProfile";
 import { emptyFilter } from "@/utility/filter";
 
 export const metadata = {
@@ -147,17 +147,17 @@ function uncollectGames(collectedGame: CollectedGame): {
       own: collectedGame.friendCollections
         ? collectedGame.friendCollections
             .filter((c) => c.status.own)
-            .map((c) => c.user as PrivateUser)
+            .map((c) => c.user as UserProfile)
         : [],
       wishlist: collectedGame.friendCollections
         ? collectedGame.friendCollections
             .filter((c) => c.status.wishlist)
-            .map((c) => c.user as PrivateUser)
+            .map((c) => c.user as UserProfile)
         : [],
       wantToPlay: collectedGame.friendCollections
         ? collectedGame.friendCollections
             .filter((c) => c.status.wantToPlay)
-            .map((c) => c.user as PrivateUser)
+            .map((c) => c.user as UserProfile)
         : [],
     },
   };

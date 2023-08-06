@@ -1,7 +1,10 @@
 "use client";
 
 import { useUser } from "@/context/userContext";
-import { UserPreferences } from "@/datatypes/userProfile";
+import {
+  defaultUserPreferences,
+  UserPreferences,
+} from "@/datatypes/userProfile";
 import { getUserPreferences } from "@/utility/userProfile";
 
 type UseUserPreferencesResult =
@@ -24,9 +27,10 @@ export function useUserPreferences(): UseUserPreferencesResult {
     };
   } else {
     if (!user) {
-      throw new Error(
-        "Could not load user preferences. Did you forget wrapping your components in a UserProvider?"
-      );
+      return {
+        preferences: defaultUserPreferences,
+        loading: false,
+      };
     } else {
       return {
         preferences: getUserPreferences(user),

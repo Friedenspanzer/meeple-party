@@ -4,7 +4,7 @@ import {
   UserGameCollection,
 } from "@/datatypes/collection";
 import { Game as CleanGame } from "@/datatypes/game";
-import { PrivateUser } from "@/datatypes/userProfile";
+import { UserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import {
   Game,
@@ -138,18 +138,18 @@ function convertToStatusByUser(
   })[]
 ): StatusByUser {
   return {
-    own: dbResult.filter((r) => r.own).map((r) => convertToPrivateUser(r.user)),
+    own: dbResult.filter((r) => r.own).map((r) => convertToUserDetails(r.user)),
     wishlist: dbResult
       .filter((r) => r.wishlist)
-      .map((r) => convertToPrivateUser(r.user)),
+      .map((r) => convertToUserDetails(r.user)),
     wantToPlay: dbResult
       .filter((r) => r.wantToPlay)
-      .map((r) => convertToPrivateUser(r.user)),
+      .map((r) => convertToUserDetails(r.user)),
   };
 }
 
-function convertToPrivateUser(dbUser: User): PrivateUser {
-  const { email, emailVerified, bggName, profileComplete, ...user } = dbUser;
+function convertToUserDetails(dbUser: User): UserProfile {
+  const { email, emailVerified, profileComplete, ...user } = dbUser;
   return user;
 }
 

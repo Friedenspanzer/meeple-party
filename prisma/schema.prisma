@@ -50,7 +50,6 @@ model User {
   realName   String?
   about      String?
   place      String?
-  preference String?
   image      String?
   bggName    String?
 
@@ -88,9 +87,9 @@ model Game {
 }
 
 model GameCollection {
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
-  game   Game   @relation(fields: [gameId], references: [id])
+  game   Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId Int
 
   own        Boolean

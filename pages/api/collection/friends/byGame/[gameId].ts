@@ -1,4 +1,3 @@
-import { PrivateUser, PublicUser } from "@/datatypes/userProfile";
 import { getCollectionStatusOfFriends } from "@/selectors/collections";
 import { withUser } from "@/utility/apiAuth";
 import { User } from "@prisma/client";
