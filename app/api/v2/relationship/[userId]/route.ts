@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { getUser, normalizeRelationship } from "../../utility";
 
 export interface RelationshipGetResult {
-  normalizedRelationship: Relationship | null;
+  normalizedRelationship: Relationship;
 }
 
 export async function GET(
