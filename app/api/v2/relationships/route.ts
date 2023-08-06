@@ -1,6 +1,11 @@
+import { Relationship } from "@/datatypes/relationship";
 import { prisma } from "@/db";
 import { NextResponse } from "next/server";
 import { getUser, normalizeRelationship } from "../utility";
+
+export interface RelationshipsGetResult {
+  normalizedRelationships: Relationship[];
+}
 
 export async function GET(request: Request) {
   const user = await getUser();

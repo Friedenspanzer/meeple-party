@@ -1,5 +1,4 @@
-import { Relationship } from "@/datatypes/relationship";
-import { RelationshipsGetResult } from "@/pages/api/v2/relationships";
+import { RelationshipsGetResult } from "@/app/api/v2/relationships/route";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
