@@ -1,12 +1,11 @@
 import GameCollection from "@/components/GameCollection/GameCollection";
+import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import { prisma } from "@/db";
 import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
 import { findFriendCollection } from "@/utility/collections";
 import { emptyFilter } from "@/utility/filter";
-import getQueryClient from "@/utility/queryClient";
 import { getServerUser } from "@/utility/serverSession";
 import { Game } from "@prisma/client";
-import { dehydrate, Hydrate } from "@tanstack/react-query";
 
 export const metadata = {
   title: "Your collection",
@@ -23,14 +22,8 @@ export default async function Collection() {
     user.id
   );
 
-  const queryClient = getQueryClient();
-  gameCollection.forEach((g) => {
-    queryClient.setQueryData(["game", g.gameId], g.game);
-  });
-  const dehydratedState = dehydrate(queryClient);
-
   return (
-    <Hydrate state={dehydratedState}>
+    <PrefetchedGameData data={gameCollection.map((g) => g.game)}>
       <GameCollection
         games={gameCollection.map(({ game, own, wantToPlay, wishlist }) => ({
           game: cleanGame(game),
@@ -40,7 +33,7 @@ export default async function Collection() {
         defaultFilter={{ ...emptyFilter, collectionStatus: { own: true } }}
         showFriendCollection={true}
       />
-    </Hydrate>
+    </PrefetchedGameData>
   );
 }
 
