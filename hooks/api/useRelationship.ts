@@ -1,29 +1,20 @@
+import { RelationshipGetResult } from "@/app/api/v2/relationship/[userId]/route";
 import { Relationship } from "@/datatypes/relationship";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { Result } from "./types";
 
-interface Result {
-  isLoading: boolean;
-  isError: boolean;
-  relationship: Relationship | undefined | null;
-  invalidate: () => void;
-}
-
-export default function useRelationship(userId: string): Result {
+export default function useRelationship(userId: string): Result<Relationship> {
   const queryKey = ["relationship", userId];
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey,
     queryFn: () => {
       return axios
-        .get<Relationship[]>(`/api/relationships/${userId}`)
+        .get<RelationshipGetResult>(`/api/v2/relationships/${userId}`)
         .then((response) => response.data)
-        .then((relationships) => {
-          if (relationships.length === 1) {
-            return relationships[0];
-          } else {
-            return null;
-          }
+        .then((relationship) => {
+          return relationship.normalizedRelationship;
         });
     },
   });
@@ -31,7 +22,7 @@ export default function useRelationship(userId: string): Result {
   return {
     isLoading,
     isError,
-    relationship: data,
+    data,
     invalidate: () => {
       queryClient.invalidateQueries({ queryKey: ["relationships"] });
       queryClient.invalidateQueries({ queryKey });
