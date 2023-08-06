@@ -31,7 +31,7 @@ export async function GET(
       { status: 404 }
     );
   } else {
-    NextResponse.json({
+    return NextResponse.json({
       normalizedRelationship: normalizedRelationships[0],
     } as RelationshipGetResult);
   }
