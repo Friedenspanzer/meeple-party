@@ -23,5 +23,7 @@ export async function GET(request: Request) {
     normalizeRelationship(r, user.id)
   );
 
-  return NextResponse.json(normalizedRelationships);
+  return NextResponse.json({
+    normalizedRelationships,
+  } as RelationshipsGetResult);
 }
