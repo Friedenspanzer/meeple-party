@@ -4,7 +4,7 @@ import { RelationshipType } from "@/datatypes/relationship";
 import useRelationships from "@/hooks/api/useRelationships";
 import { useEffect, useState } from "react";
 
-const FriendRequestsBadge: React.FC = ({}) => {
+const FriendRequestsBadge: React.FC = () => {
   const { data: relationships } = useRelationships();
   const [count, setCount] = useState(0);
 

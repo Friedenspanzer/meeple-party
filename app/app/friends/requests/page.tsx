@@ -6,7 +6,7 @@ import Spinner from "@/components/Spinner/Spinner";
 import { RelationshipType } from "@/datatypes/relationship";
 import useRelationships from "@/hooks/api/useRelationships";
 
-const FriendRequests: React.FC = ({}) => {
+const FriendRequests: React.FC = () => {
   const { isLoading, data: relationships } = useRelationships();
 
   if (isLoading) {
