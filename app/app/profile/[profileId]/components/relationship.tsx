@@ -52,7 +52,7 @@ const SendFriendRequestButton: React.FC<{ profileId: string }> = ({
 const ProfileRelationship: React.FC<ProfileRelationshipProps> = ({
   targetUserId,
 }) => {
-  const { isLoading, relationship } = useRelationship(targetUserId);
+  const { isLoading, data: relationship } = useRelationship(targetUserId);
 
   return (
     <>

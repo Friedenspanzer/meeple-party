@@ -11,7 +11,7 @@ const FriendRequestsBadge: React.FC = ({}) => {
   useEffect(() => {
     if (relationships) {
       setCount(
-        relationships?.normalizedRelationships?.filter(
+        relationships?.filter(
           (r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED
         ).length
       );
