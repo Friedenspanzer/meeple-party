@@ -1,5 +1,6 @@
 "use client";
 
+import { GameGetResult } from "@/app/api/v2/game/[gameId]/route";
 import CriticalError from "@/components/CriticalError/CriticalError";
 import GamePill from "@/components/GamePill/GamePill";
 import GameSearch, {
@@ -7,17 +8,14 @@ import GameSearch, {
 } from "@/components/GameSearch/GameSearch";
 import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
+import { useGameQueryKey } from "@/hooks/api/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
+import { useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import classNames from "classnames";
 import Link from "next/link";
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const EditProfile: React.FC = () => {
   const { isLoading, userProfile, invalidate } = useUserProfile();
@@ -48,17 +46,16 @@ const EditProfile: React.FC = () => {
   const [apiError, setApiError] = useState<string | false>(false);
   const [apiErrorDetail, setApiErrorDetail] = useState<string>();
 
+  const queryClient = useQueryClient();
+  const { getKey } = useGameQueryKey();
+
   const addToFavorites = useCallback(
     (gameId: number) => {
-      fetch(`/api/games/${gameId}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw Error(`${response.status} ${response.statusText}`);
-          }
-        })
+      axios
+        .get<GameGetResult>(`/api/v2/game/${gameId}`)
+        .then((response) => response.data.game)
         .then((game) => {
+          queryClient.setQueryData(getKey(gameId), game);
           setFavorites(favorites ? [...favorites, game] : [game]);
         })
         .catch((error) => {
@@ -66,7 +63,7 @@ const EditProfile: React.FC = () => {
           setApiErrorDetail(error);
         });
     },
-    [favorites]
+    [favorites, getKey, queryClient]
   );
 
   const FavoriteGameResult = useMemo(
@@ -182,8 +179,7 @@ const EditProfile: React.FC = () => {
                 "text-danger": profileNameError,
               })}
             >
-              {profileNameError ||
-                "Will be shown to everybody. Must be set."}
+              {profileNameError || "Will be shown to everybody. Must be set."}
             </div>
           </div>
 
@@ -238,7 +234,8 @@ const EditProfile: React.FC = () => {
                 "text-danger": placeError,
               })}
             >
-              {placeError || getPrivacyStatement(!preferences?.showPlaceInProfile)}
+              {placeError ||
+                getPrivacyStatement(!preferences?.showPlaceInProfile)}
             </div>
           </div>
         </div>

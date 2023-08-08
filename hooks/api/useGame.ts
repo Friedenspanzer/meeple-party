@@ -7,7 +7,8 @@ import { Result } from "./types";
 const twoWeeksInMilliSeconds = 1000 * 60 * 60 * 24 * 14;
 
 export default function useGame(gameId: number): Result<Game> {
-  const queryKey = ["game", gameId];
+  const { getKey } = useGameQueryKey();
+  const queryKey = getKey(gameId);
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey,
@@ -27,5 +28,15 @@ export default function useGame(gameId: number): Result<Game> {
     invalidate: () => {
       queryClient.invalidateQueries({ queryKey });
     },
+  };
+}
+
+interface GameQueryKey {
+  getKey: (gameId: number) => any[];
+}
+
+export function useGameQueryKey(): GameQueryKey {
+  return {
+    getKey: (gameId) => ["game", gameId],
   };
 }
