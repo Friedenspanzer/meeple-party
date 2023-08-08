@@ -8,7 +8,7 @@ import GameSearch, {
 } from "@/components/GameSearch/GameSearch";
 import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
-import { useGameQueryKey } from "@/hooks/api/useGame";
+import { useGameQuery, useGameQueryKey } from "@/hooks/api/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useQueryClient } from "@tanstack/react-query";
@@ -46,16 +46,12 @@ const EditProfile: React.FC = () => {
   const [apiError, setApiError] = useState<string | false>(false);
   const [apiErrorDetail, setApiErrorDetail] = useState<string>();
 
-  const queryClient = useQueryClient();
-  const { getKey } = useGameQueryKey();
+  const { get: getGame } = useGameQuery();
 
   const addToFavorites = useCallback(
     (gameId: number) => {
-      axios
-        .get<GameGetResult>(`/api/v2/game/${gameId}`)
-        .then((response) => response.data.game)
+      getGame(gameId)
         .then((game) => {
-          queryClient.setQueryData(getKey(gameId), game);
           setFavorites(favorites ? [...favorites, game] : [game]);
         })
         .catch((error) => {
@@ -63,7 +59,7 @@ const EditProfile: React.FC = () => {
           setApiErrorDetail(error);
         });
     },
-    [favorites, getKey, queryClient]
+    [favorites, getGame]
   );
 
   const FavoriteGameResult = useMemo(
