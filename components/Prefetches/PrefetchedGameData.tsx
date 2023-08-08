@@ -1,5 +1,5 @@
+import { Game } from "@/datatypes/game";
 import getQueryClient from "@/utility/queryClient";
-import { Game } from "@prisma/client";
 import { dehydrate, Hydrate } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
 
