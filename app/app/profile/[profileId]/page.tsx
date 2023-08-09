@@ -3,6 +3,7 @@ import GameBox from "@/components/GameBox/GameBox";
 import GameCollection from "@/components/GameCollection/GameCollection";
 import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
+import { cleanUserDetails } from "@/pages/api/user";
 import { getServerUser } from "@/utility/serverSession";
 import {
   Game,
@@ -43,16 +44,15 @@ export default async function ProfilePage({
 }: {
   params: { profileId: string };
 }) {
-  const user = await getUser(params.profileId);
+  const loggedInUser = await getServerUser();
+  const isMe = loggedInUser.id === params.profileId;
+
+  const user = await getUser(params.profileId, loggedInUser.id);
   if (!user || !user.profileComplete) {
     notFound();
   }
 
   user.games.sort((a, b) => (a.game.name > b.game.name ? 1 : -1));
-
-  const loggedInUser = await getServerUser();
-
-  const isMe = loggedInUser.id === user.id;
   const isFriend = getAllFriendIds(user).includes(loggedInUser.id);
 
   const myCollectionStatus = await prisma.gameCollection.findMany({
@@ -105,12 +105,12 @@ export default async function ProfilePage({
             )}
             <div className="col order-md-1">
               <h1 className={styles.name}>{user.name}</h1>
-              {(isFriend || isMe) && (
+              {user.realName && (
                 <h2 className={styles.realName}>{user.realName}</h2>
               )}
             </div>
           </div>
-          {(isFriend || isMe) && !!moreHeaders && (
+          {moreHeaders && (
             <div className={classNames("row pb-2")}>
               <div
                 className={classNames(styles.moreHeader, "col-11")}
@@ -129,14 +129,7 @@ export default async function ProfilePage({
         <div className="col-md-9">
           {!!user.about && (
             <>
-              <h3>About</h3>
               <p>{user.about}</p>
-            </>
-          )}
-          {!!user.preference && (
-            <>
-              <h3>What I like</h3>
-              <p>{user.preference}</p>
             </>
           )}
         </div>
@@ -218,8 +211,8 @@ function cleanGame(game: Game) {
   return cleanGame;
 }
 
-const getUser = cache(async (id: string) => {
-  return await prisma.user.findUnique({
+const getUser = async (id: string, loggedInUserId?: string) => {
+  const extendedUserData = await prisma.user.findUnique({
     where: { id },
     include: {
       receivedRelationships: true,
@@ -235,4 +228,31 @@ const getUser = cache(async (id: string) => {
       },
     },
   });
-});
+
+  if (extendedUserData) {
+    const {
+      receivedRelationships,
+      sentRelationships,
+      favorites,
+      games,
+      ...userData
+    } = extendedUserData;
+
+    const isFriend =
+      loggedInUserId &&
+      getAllFriendIds(extendedUserData).includes(loggedInUserId);
+    const isMe = loggedInUserId && extendedUserData.id === loggedInUserId;
+
+    const clean = isMe || isFriend ? userData : cleanUserDetails(userData);
+
+    return {
+      receivedRelationships,
+      sentRelationships,
+      favorites,
+      games,
+      ...clean,
+    };
+  }
+
+  return null;
+};

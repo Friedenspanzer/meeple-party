@@ -2,7 +2,6 @@ import Login from "@/app/components/Login/Login";
 import classNames from "classnames";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
-import Slogan from "./components/Slogan/Slogan";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -13,7 +12,7 @@ export default function Home() {
           <div className="col-md-3">
             <Image
               src="/logo.svg"
-              width={300}
+              width={400}
               height={300}
               alt="Meeple Party"
               className={styles.image}
@@ -21,7 +20,9 @@ export default function Home() {
           </div>
           <div className="col-md-6">
             <h1 className="display-1">Meeple Party</h1>
-            <Slogan />
+            <h2 className="display-6">
+              Spend more time playing, less time browsing.
+            </h2>
           </div>
           <div className="col-md-3">
             <Login />
@@ -29,15 +30,26 @@ export default function Home() {
         </div>
       </div>
       <div className="container">
-        <div className="row mt-4 g-4">
+        <div className="row mt-3">
+          <div className="col-md-6 offset-md-3 alert alert-warning">
+            <h3>👨‍💻 Meeple Party is currently in beta!</h3>
+            I&apos;m doing my best but I&apos;m still doing my best as a hobby
+            in my free time. Some parts are still a bit rough. Not everything
+            may work as you expect or at all. You may lose data at some point.
+            Things may take a little longer to fix then I&apos;d like. If you
+            notice something strange or broken please report it (see footer for
+            various places to do so).
+          </div>
+        </div>
+        <div className="row g-4">
           <div className="col-md-4">
             <div className="card text-bg-primary">
               <Image
                 src="/highlight-card-1.png"
                 className={classNames("card-img-top", styles.feature)}
-                alt="Screenshot of a cool feature"
-                width={300}
-                height={300}
+                alt="Screenshot of combined collection views"
+                width={414}
+                height={200}
               />
               <div className="card-body">
                 <h5 className="card-title">Combined collection views</h5>
@@ -53,8 +65,8 @@ export default function Home() {
                 src="/highlight-card-2.png"
                 className={classNames("card-img-top", styles.feature)}
                 alt="Screenshot of Meeple Party's filtering feature."
-                width={300}
-                height={300}
+                width={414}
+                height={200}
               />
               <div className="card-body">
                 <h5 className="card-title">Exhaustive filtering</h5>
@@ -71,8 +83,8 @@ export default function Home() {
                 src="/highlight-card-3.png"
                 className={classNames("card-img-top", styles.feature)}
                 alt="Screenshot of Meeple Party's activity stream"
-                width={300}
-                height={300}
+                width={414}
+                height={200}
               />
               <div className="card-body">
                 <h5 className="card-title">Activity stream</h5>

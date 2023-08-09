@@ -1,15 +1,20 @@
 import { User } from "@prisma/client";
 
-export type PrivateUser = Omit<
+export type UserProfile = Omit<
   User,
-  "bggName" | "email" | "emailVerified" | "profileComplete" | "preferences"
+  "email" | "emailVerified" | "profileComplete" | "preferences"
 >;
-export type PublicUser = Omit<PrivateUser, "realName" | "place">;
 
 export type UserPreferences = {
   sendAnalyticsData: boolean;
+  showRealNameInProfile: boolean;
+  showPlaceInProfile: boolean;
+  allowSearchByPlace: boolean;
 };
 
 export const defaultUserPreferences: UserPreferences = {
   sendAnalyticsData: false,
+  showRealNameInProfile: false,
+  showPlaceInProfile: false,
+  allowSearchByPlace: false,
 };

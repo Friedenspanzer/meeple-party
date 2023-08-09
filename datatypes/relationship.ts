@@ -1,4 +1,4 @@
-import { PrivateUser, PublicUser } from "./userProfile";
+import { UserProfile } from "./userProfile";
 
 export enum RelationshipType {
   FRIEND_REQUEST_SENT,
@@ -7,7 +7,7 @@ export enum RelationshipType {
 }
 
 export type Relationship = {
-  profile: PrivateUser | PublicUser;
+  profile: UserProfile;
   type: RelationshipType;
   lastUpdate: Date;
 };
