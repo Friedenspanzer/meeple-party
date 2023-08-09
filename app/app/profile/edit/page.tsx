@@ -1,18 +1,16 @@
 "use client";
 
-import { GameGetResult } from "@/app/api/v2/game/[gameId]/route";
 import CriticalError from "@/components/CriticalError/CriticalError";
 import GamePill from "@/components/GamePill/GamePill";
 import GameSearch, {
   GameSearchChildren,
 } from "@/components/GameSearch/GameSearch";
+import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
 import { useGameQuery, useGameQueryKey } from "@/hooks/api/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
-import { useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import classNames from "classnames";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -269,9 +267,9 @@ const EditProfile: React.FC = () => {
             <label className="form-label">Your favorite games</label>
             <br />
             {favorites ? (
-              <>
+              <PrefetchedGameData data={favorites}>
                 {favorites.map((f) => (
-                  <GamePill game={f} key={f.id}>
+                  <GamePill gameId={f.id} key={f.id}>
                     &nbsp;
                     <i
                       className="bi bi-x"
@@ -297,7 +295,7 @@ const EditProfile: React.FC = () => {
                 <div className="collapse" id="collapseGameSearch">
                   <GameSearch resultView={FavoriteGameResult} />
                 </div>
-              </>
+              </PrefetchedGameData>
             ) : (
               <Spinner />
             )}
@@ -345,9 +343,9 @@ function bindFavoriteGameResult(
     searchResult,
   }) => {
     return (
-      <>
+      <PrefetchedGameData data={searchResult.map((c) => c.game)}>
         {searchResult.map(({ game }) => (
-          <GamePill game={game} key={game.id}>
+          <GamePill gameId={game.id} key={game.id}>
             &nbsp;
             <i
               className="bi bi-plus"
@@ -356,7 +354,7 @@ function bindFavoriteGameResult(
             ></i>
           </GamePill>
         ))}
-      </>
+      </PrefetchedGameData>
     );
   };
   return FavoriteGameResult;
