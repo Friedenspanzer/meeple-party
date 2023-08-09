@@ -13,8 +13,7 @@ function getGame(gameId: number) {
 }
 
 export default function useGame(gameId: number): Result<Game> {
-  const { getKey } = useGameQueryKey();
-  const queryKey = getKey(gameId);
+  const queryKey = useGameQueryKey()(gameId);
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey,
@@ -33,29 +32,17 @@ export default function useGame(gameId: number): Result<Game> {
   };
 }
 
-interface GameQuery {
-  get: (gameId: number) => Promise<Game>;
-}
-
-export function useGameQuery(): GameQuery {
+export function useGameQuery(): (gameId: number) => Promise<Game> {
   const queryClient = useQueryClient();
-  const { getKey } = useGameQueryKey();
-  return {
-    get: (gameId) => {
-      return getGame(gameId).then((game) => {
-        queryClient.setQueryData(getKey(gameId), game);
-        return game;
-      });
-    },
+  const getKey = useGameQueryKey();
+  return (gameId) => {
+    return getGame(gameId).then((game) => {
+      queryClient.setQueryData(getKey(gameId), game);
+      return game;
+    });
   };
 }
 
-interface GameQueryKey {
-  getKey: (gameId: number) => any[];
-}
-
-export function useGameQueryKey(): GameQueryKey {
-  return {
-    getKey: (gameId) => ["game", gameId],
-  };
+export function useGameQueryKey(): (gameId: number) => any[] {
+  return (gameId) => ["game", gameId];
 }

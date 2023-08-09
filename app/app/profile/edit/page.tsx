@@ -46,7 +46,7 @@ const EditProfile: React.FC = () => {
   const [apiError, setApiError] = useState<string | false>(false);
   const [apiErrorDetail, setApiErrorDetail] = useState<string>();
 
-  const { get: getGame } = useGameQuery();
+  const getGame = useGameQuery();
 
   const addToFavorites = useCallback(
     (gameId: number) => {
