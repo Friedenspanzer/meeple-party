@@ -13,10 +13,10 @@ function getGame(gameId: number) {
 }
 
 export default function useGame(gameId: number): Result<Game> {
-  const queryKey = useGameQueryKey()(gameId);
+  const queryKey = useGameQueryKey();
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
-    queryKey,
+    queryKey: queryKey(gameId),
     queryFn: () => getGame(gameId),
     refetchOnWindowFocus: false,
     staleTime: twoWeeksInMilliSeconds,
@@ -27,7 +27,7 @@ export default function useGame(gameId: number): Result<Game> {
     isError,
     data,
     invalidate: () => {
-      queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: queryKey(gameId) });
     },
   };
 }
