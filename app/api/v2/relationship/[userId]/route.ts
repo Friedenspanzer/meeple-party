@@ -3,9 +3,12 @@ import { prisma } from "@/db";
 import { NextResponse } from "next/server";
 import { getUser, normalizeRelationship } from "../../utility";
 
-export interface RelationshipGetResult {
+interface RelationshipReadResult {
   normalizedRelationship: Relationship;
 }
+
+export type RelationshipGetResult = RelationshipReadResult;
+export type RelationshipDeleteResult = RelationshipReadResult;
 
 export async function GET(
   request: Request,
@@ -14,9 +17,7 @@ export async function GET(
   const user = await getUser();
   const targetUserId = params.userId;
 
-  if (targetUserId.length < 20 || targetUserId.length > 40) {
-    throw new Error("User Profile ID format error");
-  }
+  checkUserId(targetUserId);
 
   const normalizedRelationships = await findNormalizedRelationships(
     user.id,
@@ -37,8 +38,53 @@ export async function GET(
   }
 }
 
-async function findNormalizedRelationships(selfId: string, otherId: string) {
-  const relationships = await prisma.relationship.findMany({
+export async function DELETE(
+  request: Request,
+  { params }: { params: { userId: string } }
+) {
+  const user = await getUser();
+  const targetUserId = params.userId;
+
+  checkUserId(targetUserId);
+
+  const relationships = await findRelationships(user.id, targetUserId);
+
+  if (relationships.length > 1) {
+    return new Response("More than one relationship found", { status: 500 });
+  } else if (relationships.length === 0) {
+    return new Response(
+      `You don't have a relationship with user ${targetUserId}`,
+      { status: 404 }
+    );
+  } else {
+    const targetRelationship = relationships[0];
+
+    await prisma.relationship.delete({
+      where: {
+        senderId_recipientId: {
+          recipientId: targetRelationship.recipientId,
+          senderId: targetRelationship.senderId,
+        },
+      },
+    });
+
+    return NextResponse.json({
+      normalizedRelationship: normalizeRelationship(
+        targetRelationship,
+        user.id
+      ),
+    } as RelationshipDeleteResult);
+  }
+}
+
+function checkUserId(id: string) {
+  if (id.length < 20 || id.length > 40) {
+    throw new Error("User Profile ID format error");
+  }
+}
+
+async function findRelationships(selfId: string, otherId: string) {
+  return await prisma.relationship.findMany({
     where: {
       OR: [
         { recipientId: selfId, senderId: otherId },
@@ -50,6 +96,9 @@ async function findNormalizedRelationships(selfId: string, otherId: string) {
       sender: true,
     },
   });
+}
 
+async function findNormalizedRelationships(selfId: string, otherId: string) {
+  const relationships = await findRelationships(selfId, otherId);
   return relationships.map((r) => normalizeRelationship(r, selfId));
 }
