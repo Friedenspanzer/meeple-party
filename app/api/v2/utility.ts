@@ -4,26 +4,16 @@ import {
   UserPreferences,
   UserProfile,
 } from "@/datatypes/userProfile";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import {
   Prisma,
   Relationship as PrismaRelationship,
   User,
 } from "@prisma/client";
-import { getServerSession } from "next-auth/next";
 
-type FullPrismaRelationship = PrismaRelationship & {
+export type FullPrismaRelationship = PrismaRelationship & {
   sender: User;
   recipient: User;
 };
-
-export async function getUser(): Promise<User> {
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user) {
-    throw Error("Unauthorized");
-  }
-  return session.user;
-}
 
 export function convertToUserProfile(
   user: User,
@@ -37,7 +27,7 @@ export function convertToUserProfile(
     realName: allowRealName(user, friend) ? user.realName : null,
     about: user.about,
     place: allowPlace(user, friend) ? user.place : null,
-    bggName: allowBggName(user, friend) ? user.bggName : null,
+    bggName: allowBggName(user, friend) ? user.bggName : null
   };
 }
 

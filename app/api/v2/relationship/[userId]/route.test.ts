@@ -4,25 +4,36 @@
 
 import { prismaMock } from "@/utility/prismaMock";
 import { mock, mockReset } from "jest-mock-extended";
-import { GET } from "./route";
-import { getUser } from "../../utility";
+import { GET, RelationshipGetResult } from "./route";
+import { convertToUserProfile, FullPrismaRelationship } from "../../utility";
 import "whatwg-fetch";
-import { User } from "@prisma/client";
-import { generateString } from "@/utility/test";
+import {
+  Prisma,
+  Relationship,
+  RelationshipType as PrismaRelationshipType,
+  User,
+} from "@prisma/client";
+import {
+  generateFullPrismaRelationship,
+  generatePrismaUser,
+  generateString,
+} from "@/utility/test";
+import { getUser } from "../../authentication";
+import { RelationshipType } from "@/datatypes/relationship";
+import { UserProfile } from "@/datatypes/userProfile";
 
-jest.mock("../../utility");
+jest.mock("../../authentication");
 
 const requestMock = mock<Request>();
-const userMock = mock<User>();
+const myUser = generatePrismaUser();
 const getUserMock = jest.mocked(getUser);
 
 describe("GET relationship/[userId]", () => {
   beforeEach(() => {
     mockReset(requestMock);
-    mockReset(userMock);
     mockReset(getUserMock);
 
-    getUserMock.mockResolvedValue(userMock);
+    getUserMock.mockResolvedValue(myUser);
   });
   it("fails for short user ids", async () => {
     await expect(
@@ -38,7 +49,7 @@ describe("GET relationship/[userId]", () => {
       })
     ).rejects.toEqual(new Error("User Profile ID format error"));
   });
-  it("returns 404 when no relationship was found", async () => {
+  it("returns 404 when no relationship is found", async () => {
     prismaMock.relationship.findMany.mockResolvedValue([]);
 
     const result = await GET(requestMock, {
@@ -46,5 +57,45 @@ describe("GET relationship/[userId]", () => {
     });
 
     expect(result.status).toBe(404);
+  });
+  it("returns 500 when multiple relationships are found", async () => {
+    prismaMock.relationship.findMany.mockResolvedValue([
+      generateFullPrismaRelationship(),
+      generateFullPrismaRelationship(),
+    ]);
+
+    const result = await GET(requestMock, {
+      params: { userId: generateString(25) },
+    });
+
+    expect(result.status).toBe(500);
+  });
+  it("returns an existing friendship", async () => {
+    const otherUser = generatePrismaUser();
+    const expectedUser: UserProfile = convertToUserProfile(otherUser, true);
+
+    const relationship = generateFullPrismaRelationship(
+      PrismaRelationshipType.FRIENDSHIP,
+      myUser,
+      otherUser
+    );
+
+    prismaMock.relationship.findMany.mockResolvedValue([relationship]);
+
+    const result = await GET(requestMock, {
+      params: { userId: myUser.id },
+    });
+
+    expect(result.status).toBe(200);
+
+    const data = (await result.json()) as RelationshipGetResult;
+
+    expect(data.normalizedRelationship.profile).toEqual(expectedUser);
+    expect(data.normalizedRelationship.type).toEqual(
+      RelationshipType.FRIENDSHIP
+    );
+    expect(new Date(data.normalizedRelationship.lastUpdate)).toEqual(
+      relationship.updatedAt
+    );
   });
 });

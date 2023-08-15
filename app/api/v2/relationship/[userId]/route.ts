@@ -1,7 +1,8 @@
 import { Relationship } from "@/datatypes/relationship";
 import { prisma } from "@/db";
 import { NextResponse } from "next/server";
-import { getUser, normalizeRelationship } from "../../utility";
+import { getUser } from "../../authentication";
+import { normalizeRelationship } from "../../utility";
 
 interface RelationshipReadResult {
   normalizedRelationship: Relationship;
@@ -26,7 +27,7 @@ export async function GET(
 
   if (normalizedRelationships.length > 1) {
     return new Response("More than one relationship found", { status: 500 });
-  } else if (normalizedRelationships.length === 0) {
+  } else if (!normalizedRelationships || normalizedRelationships.length === 0) {
     return new Response(
       `You don't have a relationship with user ${targetUserId}`,
       { status: 404 }
