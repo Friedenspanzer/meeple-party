@@ -5,14 +5,9 @@
 import { prismaMock } from "@/utility/prismaMock";
 import { mock, mockReset } from "jest-mock-extended";
 import { GET, RelationshipGetResult } from "./route";
-import { convertToUserProfile, FullPrismaRelationship } from "../../utility";
+import { convertToUserProfile } from "../../utility";
 import "whatwg-fetch";
-import {
-  Prisma,
-  Relationship,
-  RelationshipType as PrismaRelationshipType,
-  User,
-} from "@prisma/client";
+import { RelationshipType as PrismaRelationshipType } from "@prisma/client";
 import {
   generateFullPrismaRelationship,
   generatePrismaUser,
@@ -151,5 +146,61 @@ describe("GET relationship/[userId]", () => {
         sender: true,
       },
     });
+  });
+  it("returns an existing sent friend request", async () => {
+    const otherUser = generatePrismaUser();
+    const expectedUser: UserProfile = convertToUserProfile(otherUser, false);
+
+    const relationship = generateFullPrismaRelationship(
+      PrismaRelationshipType.FRIEND_REQUEST,
+      myUser,
+      otherUser
+    );
+
+    prismaMock.relationship.findMany.mockResolvedValue([relationship]);
+
+    const result = await GET(requestMock, {
+      params: { userId: otherUser.id },
+    });
+
+    expect(result.status).toBe(200);
+
+    const data = (await result.json()) as RelationshipGetResult;
+
+    expect(data.normalizedRelationship.profile).toEqual(expectedUser);
+    expect(data.normalizedRelationship.type).toEqual(
+      RelationshipType.FRIEND_REQUEST_SENT
+    );
+    expect(new Date(data.normalizedRelationship.lastUpdate)).toEqual(
+      relationship.updatedAt
+    );
+  });
+  it("returns an existing received friend request", async () => {
+    const otherUser = generatePrismaUser();
+    const expectedUser: UserProfile = convertToUserProfile(otherUser, false);
+
+    const relationship = generateFullPrismaRelationship(
+      PrismaRelationshipType.FRIEND_REQUEST,
+      otherUser,
+      myUser
+    );
+
+    prismaMock.relationship.findMany.mockResolvedValue([relationship]);
+
+    const result = await GET(requestMock, {
+      params: { userId: otherUser.id },
+    });
+
+    expect(result.status).toBe(200);
+
+    const data = (await result.json()) as RelationshipGetResult;
+
+    expect(data.normalizedRelationship.profile).toEqual(expectedUser);
+    expect(data.normalizedRelationship.type).toEqual(
+      RelationshipType.FRIEND_REQUEST_RECEIVED
+    );
+    expect(new Date(data.normalizedRelationship.lastUpdate)).toEqual(
+      relationship.updatedAt
+    );
   });
 });
