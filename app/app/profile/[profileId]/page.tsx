@@ -104,7 +104,12 @@ export default async function ProfilePage({
               </div>
             )}
             <div className="col order-md-1">
-              <h1 className={styles.name}>{user.name}</h1>
+              <div className="d-flex align-items-center">
+                <h1 className={styles.name}>{user.name}</h1>
+                <a onClick={()=>{navigator.clipboard.writeText("https://meeple.party/app/profile/"+user.id)}}>
+                  <i className="bi bi-clipboard2"></i> Copy Profile Link
+                </a>
+              </div>
               {user.realName && (
                 <h2 className={styles.realName}>{user.realName}</h2>
               )}
