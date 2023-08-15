@@ -2,8 +2,6 @@ import { FullPrismaRelationship } from "@/app/api/v2/utility";
 import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { RelationshipType, Role, User } from "@prisma/client";
 
-test("Foo", () => {});
-
 export function generateString(length = 32) {
   let result = "";
   const characters =
