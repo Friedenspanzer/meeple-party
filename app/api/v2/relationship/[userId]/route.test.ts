@@ -83,7 +83,7 @@ describe("GET relationship/[userId]", () => {
     prismaMock.relationship.findMany.mockResolvedValue([relationship]);
 
     const result = await GET(requestMock, {
-      params: { userId: myUser.id },
+      params: { userId: otherUser.id },
     });
 
     expect(result.status).toBe(200);
@@ -97,5 +97,59 @@ describe("GET relationship/[userId]", () => {
     expect(new Date(data.normalizedRelationship.lastUpdate)).toEqual(
       relationship.updatedAt
     );
+
+    expect(prismaMock.relationship.findMany).toHaveBeenCalledWith({
+      where: {
+        OR: [
+          { recipientId: myUser.id, senderId: otherUser.id },
+          { recipientId: otherUser.id, senderId: myUser.id },
+        ],
+      },
+      include: {
+        recipient: true,
+        sender: true,
+      },
+    });
+  });
+  it("returns an existing reverse friendship", async () => {
+    const otherUser = generatePrismaUser();
+    const expectedUser: UserProfile = convertToUserProfile(otherUser, true);
+
+    const relationship = generateFullPrismaRelationship(
+      PrismaRelationshipType.FRIENDSHIP,
+      otherUser,
+      myUser
+    );
+
+    prismaMock.relationship.findMany.mockResolvedValue([relationship]);
+
+    const result = await GET(requestMock, {
+      params: { userId: otherUser.id },
+    });
+
+    expect(result.status).toBe(200);
+
+    const data = (await result.json()) as RelationshipGetResult;
+
+    expect(data.normalizedRelationship.profile).toEqual(expectedUser);
+    expect(data.normalizedRelationship.type).toEqual(
+      RelationshipType.FRIENDSHIP
+    );
+    expect(new Date(data.normalizedRelationship.lastUpdate)).toEqual(
+      relationship.updatedAt
+    );
+
+    expect(prismaMock.relationship.findMany).toHaveBeenCalledWith({
+      where: {
+        OR: [
+          { recipientId: myUser.id, senderId: otherUser.id },
+          { recipientId: otherUser.id, senderId: myUser.id },
+        ],
+      },
+      include: {
+        recipient: true,
+        sender: true,
+      },
+    });
   });
 });
