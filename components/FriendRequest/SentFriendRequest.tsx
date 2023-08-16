@@ -1,7 +1,5 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import useRelationship from "@/hooks/api/useRelationship";
-import axios from "axios";
-import { useCallback, useState } from "react";
 import Spinner from "../Spinner/Spinner";
 import GenericFriendRequest from "./GenericFriendRequest";
 
@@ -14,32 +12,18 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
     throw new Error("Wrong type for component SentFriendRequest");
   }
 
-  const [updating, setUpdating] = useState(false);
-  const { invalidate } = useRelationship(request.profile.id);
-
-  const withdrawRequest = useCallback(() => {
-    setUpdating(true);
-    axios
-      .delete(`/api/relationships/${request.profile.id}`)
-      .then(() => {
-        setUpdating(false);
-        invalidate();
-      })
-      .catch((reason) => {
-        console.error(reason);
-      });
-  }, [request, invalidate]);
+  const { deleteFunction, isLoading } = useRelationship(request.profile.id);
 
   return (
     <GenericFriendRequest request={request}>
-      {updating ? (
+      {isLoading ? (
         <Spinner size="small" />
       ) : (
         <button
           type="button"
           className="btn btn-danger"
-          onClick={withdrawRequest}
-          disabled={updating}
+          onClick={deleteFunction}
+          disabled={isLoading}
         >
           <i className="bi bi-trash"></i> Withdraw
         </button>
