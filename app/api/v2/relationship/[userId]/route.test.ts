@@ -4,7 +4,7 @@
 
 import { prismaMock } from "@/utility/prismaMock";
 import { mock, mockReset } from "jest-mock-extended";
-import { GET, RelationshipGetResult } from "./route";
+import { DELETE, GET, RelationshipGetResult } from "./route";
 import { convertToUserProfile } from "../../utility";
 import "whatwg-fetch";
 import { RelationshipType as PrismaRelationshipType } from "@prisma/client";
@@ -202,5 +202,49 @@ describe("GET relationship/[userId]", () => {
     expect(new Date(data.normalizedRelationship.lastUpdate)).toEqual(
       relationship.updatedAt
     );
+  });
+});
+
+describe("DELETE relationship/[userId]", () => {
+  beforeEach(() => {
+    mockReset(requestMock);
+    mockReset(getUserMock);
+
+    getUserMock.mockResolvedValue(myUser);
+  });
+  it("fails for short user ids", async () => {
+    await expect(
+      DELETE(requestMock, {
+        params: { userId: generateString(19) },
+      })
+    ).rejects.toEqual(new Error("User Profile ID format error"));
+  });
+  it("fails for long user ids", async () => {
+    await expect(
+      DELETE(requestMock, {
+        params: { userId: generateString(41) },
+      })
+    ).rejects.toEqual(new Error("User Profile ID format error"));
+  });
+  it("returns 404 when no relationship is found", async () => {
+    prismaMock.relationship.findMany.mockResolvedValue([]);
+
+    const result = await DELETE(requestMock, {
+      params: { userId: generateString(25) },
+    });
+
+    expect(result.status).toBe(404);
+  });
+  it("returns 500 when multiple relationships are found", async () => {
+    prismaMock.relationship.findMany.mockResolvedValue([
+      generateFullPrismaRelationship(),
+      generateFullPrismaRelationship(),
+    ]);
+
+    const result = await DELETE(requestMock, {
+      params: { userId: generateString(25) },
+    });
+
+    expect(result.status).toBe(500);
   });
 });
