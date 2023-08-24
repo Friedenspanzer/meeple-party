@@ -47,10 +47,10 @@ export default async function Home() {
                 height={200}
               />
               <div className="card-body">
-                <h5 className="card-title">Combined collection views</h5>
-                <p className="card-text">
-                  See what your group of friends want to play at a glance.
-                </p>
+                <h5 className="card-title">
+                  {t("Features.CollectionView.Heading")}
+                </h5>
+                <p className="card-text">{t("Features.CollectionView.Text")}</p>
               </div>
             </div>
           </div>
@@ -64,11 +64,8 @@ export default async function Home() {
                 height={200}
               />
               <div className="card-body">
-                <h5 className="card-title">Exhaustive filtering</h5>
-                <p className="card-text">
-                  Filter on game attributes, your and your friend&apos;s
-                  collection status blazingly fast.
-                </p>
+                <h5 className="card-title">{t("Features.Filters.Heading")}</h5>
+                <p className="card-text">{t("Features.Filters.Text")}</p>
               </div>
             </div>
           </div>
@@ -82,45 +79,21 @@ export default async function Home() {
                 height={200}
               />
               <div className="card-body">
-                <h5 className="card-title">Activity stream</h5>
-                <p className="card-text">
-                  Instantly see when your friends get a new game or want to play
-                  one of your&apos;s.
-                </p>
+                <h5 className="card-title">{t("Features.Stream.Heading")}</h5>
+                <p className="card-text">{t("Features.Stream.Text")}</p>
               </div>
             </div>
           </div>
         </div>
-        <Instruction heading="Fill your collection" number={1}>
-          <p>
-            Tell us what games you own. We know, for most people this is
-            busywork. But trust us that it will be worth it. Or you can do it
-            later, one game at a time. If you already maintain your collection
-            on BoardGameGeek you can just import it.
-          </p>
+        <Instruction heading={t("Steps.Fill.Heading")} number={1}>
+          <p>{t("Steps.Fill.Text")}</p>
         </Instruction>
-        <Instruction
-          heading="Find your friends and check out their games"
-          number={2}
-        >
-          <p>
-            Connect with the people you already know. Meeple Party is not a
-            social network like the others, we don&apos;t even want you to
-            befriend people you haven&apos;t met. Just fill in the circle of
-            friends and acquaintances you already play games with.
-          </p>
-          <p>
-            Then have a look at the games they own and mark every game you want
-            to play. Meeple Party will do the rest for you and tell you exactly
-            what game that somebody owns enough people in your circle of friends
-            want to play.
-          </p>
+        <Instruction heading={t("Steps.Friends.Heading")} number={2}>
+          <p>{t("Steps.Friends.Text_A")}</p>
+          <p>{t("Steps.Friends.Text_B")}</p>
         </Instruction>
-        <Instruction heading="Go play some games" number={3}>
-          <p>
-            Tell your friends you found some matches and fix a date for a game
-            night. Everybody can just look up what games to bring.
-          </p>
+        <Instruction heading={t("Steps.Play.Heading")} number={3}>
+          <p>{t("Steps.Play.Text")}</p>
         </Instruction>
       </div>
       <div
@@ -129,42 +102,22 @@ export default async function Home() {
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <h2>Pricing</h2>
-              <p>
-                Meeple Party is currently free and there will always be a free
-                version available. We may however add a premium account system
-                one day but we swear no features you currently have will be
-                taken away from you in the process.
-              </p>
+              <h2>{t("Statements.Pricing.Heading")}</h2>
+              <p>{t("Statements.Pricing.Text")}</p>
             </div>
             <div className="col-md-6">
-              <h2>Free and open-source</h2>
-              <p>
-                Meeple party is free and open-source and will always remain so.
-                Every new feature will always be added to the main project.
-                There will be no closed-source additions and you will always be
-                free to host your own version of Meeple Party with all the
-                features without paying us a dime.
-              </p>
+              <h2>{t("Statements.Free.Heading")}</h2>
+              <p>{t("Statements.Free.Text")}</p>
             </div>
           </div>
           <div className="row">
             <div className="col-md-6">
-              <h2>Everybody is welcome</h2>
-              <p>
-                Gaming is for everybody and Meeple Party is for everybody. We
-                pledge to protect vulnerable and marginalized people as best as
-                we can. We expect everybody to demonstrate empathy and kindness
-                and will never tolerate harassment, insults, hate speech or
-                behaviour that endangers others.
-              </p>
+              <h2>{t("Statements.Welcome.Heading")}</h2>
+              <p>{t("Statements.Welcome.Text")}</p>
             </div>
             <div className="col-md-6">
-              <h2>Transparency</h2>
-              <p>
-                We try to run and develop Meeple Party as openly as is feasible
-                and include the community on every step of the way.
-              </p>
+              <h2>{t("Statements.Transparency.Heading")}</h2>
+              <p>{t("Statements.Transparency.Text")}</p>
             </div>
           </div>
         </div>
