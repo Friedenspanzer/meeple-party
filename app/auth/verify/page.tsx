@@ -1,19 +1,15 @@
+import { useTranslation } from "@/i18n";
+
 export default async function Page() {
+  const { t } = await useTranslation("auth");
   return (
     <>
       <div className="row mt-5 justify-content-center">
         <div className="col-md-6 text-center">
-          <h4>Check your email</h4>
-          <p className="lead">
-            A login link has been sent to the provided email address.
-          </p>
-          <p>
-            If you haven&apos;t received the email in a few minutes check your
-            spam folder. If it isn&apos;t there either please try again.
-          </p>
-          <p>
-            You can close this window, you won&apos;t need it for logging in.
-          </p>
+          <h4>{t("Verify.CheckEmail")}</h4>
+          <p className="lead">{t("Verify.LoginLinkSent")}</p>
+          <p>{t("Verify.CheckAgain")}</p>
+          <p>{t("Verify.CanClose")}</p>
         </div>
       </div>
     </>

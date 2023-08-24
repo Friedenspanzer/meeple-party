@@ -2,38 +2,28 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslation } from "@/i18n/client";
 
 const ErrorReason: React.FC = () => {
   const searchParams = useSearchParams();
   const reason = searchParams?.get("error");
+  const { t } = useTranslation("auth");
 
   switch (reason) {
     case "Verification":
       return (
         <>
-          <p>
-            The provided verfication token has expired or has already been used.
-          </p>
+          <p>{t("Errors.TokenExpired")}</p>
           <Link className="btn btn-primary" href="/api/auth/signin">
-            Try login in again
+            {t("TryAgain")}
           </Link>
         </>
       );
     case "Configuration":
     case "AccessDenied":
-      return (
-        <p>
-          There is something wrong with the server configuration. If this
-          persists please contact the server administrator.
-        </p>
-      );
+      return <p>{t("Errors.Configuration")}</p>;
     default:
-      return (
-        <p>
-          Sorry, no further information is available at this time. If this
-          persists please contact the server administrator.
-        </p>
-      );
+      return <p>{t("Errors.Generic")}</p>;
   }
 };
 
