@@ -6,6 +6,7 @@ import UserProvider from "@/context/userContext";
 import Script from "next/script";
 import Analytics from "@/components/Analytics/Analytics";
 import Footer from "@/components/Footer/Footer";
+import { dir } from "i18next";
 
 import styles from "./page.module.css";
 
@@ -22,7 +23,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="de" dir={dir("de")}>
       <head />
       <body>
         <Script src="/bootstrap.bundle.min.js" />

@@ -3,8 +3,10 @@ import classNames from "classnames";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import styles from "./page.module.css";
+import { useTranslation } from "@/i18n";
 
-export default function Home() {
+export default async function Home() {
+  const { t } = await useTranslation("frontpage");
   return (
     <>
       <div className={classNames("container-fluid", styles.highlight)}>
@@ -20,9 +22,7 @@ export default function Home() {
           </div>
           <div className="col-md-6">
             <h1 className="display-1">Meeple Party</h1>
-            <h2 className="display-6">
-              Spend more time playing, less time browsing.
-            </h2>
+            <h2 className="display-6">{t("Header.Slogan")}</h2>
           </div>
           <div className="col-md-3">
             <Login />
@@ -32,13 +32,8 @@ export default function Home() {
       <div className="container">
         <div className="row mt-3">
           <div className="col-md-6 offset-md-3 alert alert-warning">
-            <h3>👨‍💻 Meeple Party is currently in beta!</h3>
-            I&apos;m doing my best but I&apos;m still doing my best as a hobby
-            in my free time. Some parts are still a bit rough. Not everything
-            may work as you expect or at all. You may lose data at some point.
-            Things may take a little longer to fix then I&apos;d like. If you
-            notice something strange or broken please report it (see footer for
-            various places to do so).
+            <h3>👨‍💻 {t("Beta.Heading")}</h3>
+            {t("Beta.Text")}
           </div>
         </div>
         <div className="row g-4">
