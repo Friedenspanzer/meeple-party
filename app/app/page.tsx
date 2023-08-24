@@ -11,10 +11,11 @@ import { getServerUser } from "@/utility/serverSession";
 import styles from "./dashboard.module.css";
 import { UserProfile } from "@/datatypes/userProfile";
 import { emptyFilter } from "@/utility/filter";
+import { useTranslation } from "@/i18n";
 
 export const metadata = {
-  title: 'Dashboard',
-}
+  title: "Dashboard",
+};
 
 export default async function App() {
   const user = await getServerUser();
@@ -26,6 +27,8 @@ export default async function App() {
   const gamesThatEnoughPeopleWantToPlay = collectedGames.filter(
     enoughPeopleWantToPlay
   );
+  const { t } = await useTranslation();
+  const { t: dt } = await useTranslation("dashboard");
   return (
     <>
       <GameCollection
@@ -35,22 +38,22 @@ export default async function App() {
         showFriendCollection
         filterPresets={[
           {
-            name: "Games you own",
+            name: t("Filters.Preset.GamesYouOwn"),
             filter: { ...emptyFilter, collectionStatus: { own: true } },
           },
           {
-            name: "Games you don't own",
+            name: t("Filters.Preset.GamesYouDontOwn"),
             filter: { ...emptyFilter, collectionStatus: { own: false } },
           },
           {
-            name: "No solo play",
+            name: t("Filters.Preset.NoSolo"),
             filter: {
               ...emptyFilter,
               friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
             },
           },
           {
-            name: "Games you own, no solo play",
+            name: t("Filters.Preset.GamesYouOwnNoSolo"),
             filter: {
               ...emptyFilter,
               collectionStatus: { own: true },
@@ -58,7 +61,7 @@ export default async function App() {
             },
           },
           {
-            name: "Games you don't own, no solo play",
+            name: t("Filters.Preset.GamesYouDontOwnNoSolo"),
             filter: {
               ...emptyFilter,
               collectionStatus: { own: false },
@@ -72,7 +75,7 @@ export default async function App() {
         }}
         className={styles.collection}
       >
-        <h2>Games you could play right now</h2>
+        <h2>{dt("PlayRightNow")}</h2>
       </GameCollection>
       <GameCollection
         games={gamesThatEnoughPeopleWantToPlay
@@ -82,18 +85,18 @@ export default async function App() {
         showFriendCollection
         filterPresets={[
           {
-            name: "Your wishlist",
+            name: t("Filters.Preset.YourWishlist"),
             filter: { ...emptyFilter, collectionStatus: { wishlist: true } },
           },
           {
-            name: "No solo play",
+            name: t("Filters.Preset.NoSolo"),
             filter: {
               ...emptyFilter,
               friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
             },
           },
           {
-            name: "Your wishlist, no solo play",
+            name: t("Filters.Preset.YourWishlistNoSolo"),
             filter: {
               ...emptyFilter,
               collectionStatus: { wishlist: true },
@@ -107,7 +110,7 @@ export default async function App() {
           friends: { ...emptyFilter.friends, wantToPlay: { min: 1 } },
         }}
       >
-        <h2>Games somebody should probably buy already</h2>
+        <h2>{dt("SomebodyShouldBuy")}</h2>
       </GameCollection>
     </>
   );

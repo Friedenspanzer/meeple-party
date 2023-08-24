@@ -2,5 +2,16 @@
   "Login": {
     "GoToApp": "Zur App",
     "Logout": "Ausloggen"
+  },
+  "Filters": {
+    "Preset": {
+      "GamesYouOwn": "Im Besitz",
+      "GamesYouDontOwn": "Nicht im Besitz",
+      "NoSolo": "Keine Solo-Spiele",
+      "GamesYouOwnNoSolo": "Im Besitz, keine Solo-Spiele",
+      "GamesYouDontOwnNoSolo": "Nicht im Besitz, keine Solo-Spiele",
+      "YourWishlist": "Dein Wunschzettel",
+      "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele"
+    }
   }
 }

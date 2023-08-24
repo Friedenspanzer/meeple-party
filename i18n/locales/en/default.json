@@ -2,5 +2,16 @@
   "Login": {
     "GoToApp": "Go to app",
     "Logout": "Logout"
+  },
+  "Filters": {
+    "Preset": {
+      "GamesYouOwn": "Games you own",
+      "GamesYouDontOwn": "Games you don't own",
+      "NoSolo": "No solo play",
+      "GamesYouOwnNoSolo": "Games you own, no solo play",
+      "GamesYouDontOwnNoSolo": "Games you don't own, no solo play",
+      "YourWishlist": "Your wishlist",
+      "YourWishlistNoSolo": "Your wishlist, no solo play"
+    }
   }
 }
