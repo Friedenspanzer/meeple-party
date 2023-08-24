@@ -1,5 +1,56 @@
 {
   "Header": {
     "Slogan": "Spielt mehr, diskutiert weniger."
+  },
+  "Beta": {
+    "Heading": "Meeple Party ist noch Beta!",
+    "Text": "Ich tu mein Bestes, aber ich tu mein Bestes als ein Hobby in meiner Freizeit. Einige Stellen sind noch etwas unrund. Nicht alles wird so funktionieren wie du es erwartest, oder überhaupt funktionieren. Du wirst vielleicht irgendwann Daten verlieren. Sachen zu reparieren dauert oft ein bisschen länger als mir selbst gefällt. Wenn dir etwas komisch vorkommt oder offensichtlich kaputt ist melde es bitte (schaut in der Fußzeile nach für einige Kontaktmöglichkeiten)."
+  },
+  "Features": {
+    "CollectionView": {
+      "Heading": "Zusammengefasste Sammlung",
+      "Text": "Sieh auf einen Blick, was dein Freundeskreis spielen will."
+    },
+    "Filters": {
+      "Heading": "Weitreichende Filter",
+      "Text": "Filtere nach den Eigenschaften von Spielen, deinem Sammlungsstatus und dem deiner Freund*innen."
+    },
+    "Stream": {
+      "Heading": "Aktivitätsverlauf",
+      "Text": "Sieh sofort wenn deine Freund*innen ein neues Spiel haben oder eines spielen wollen."
+    }
+  },
+  "Steps": {
+    "Fill": {
+      "Heading": "Trage deine Sammlung ein",
+      "Text": "Sag uns welche Spiele du hast. Ja, für die meisten Leute ist das langweiliger Verwaltungskram. Aber vertrau uns, es wird sich lohnen! Du kannst es aber natürlich auch später machen, ein Spiel nach dem anderen. Wenn du deine Sammlung schon auf BoardGameGeek gepflegt hast kannst du sie einfach importieren."
+    },
+    "Friends": {
+      "Heading": "Finde deine Freunde und stöbere in ihren Spielen",
+      "Text_A": "Finde die Leute, die du schon kennst. Meeple Party ist kein soziales Netzwerk wie die anderen, wir wollen nciht mal dass du Leute anfreundest die du kaum kennst. Trag einfach deine Freund*innen und Bekannte ein die du schon hast und mit denen du schon Spiele spielst.",
+      "Text_B": "Dann kannst du loslegen und dir ihre Spiele ansehen. Markiere alle, die du spielen möchtest. Meeple Party erledigt für euch dann den Rest und sagt euch welches eurer Spiele ihr sofort spielen könntet."
+    },
+    "Play": {
+      "Heading": "Geh Spiele spielen",
+      "Text": "Sag deinen Freund*innen dass es ein paar Treffer gab und macht einen Termin für euren Spieleabend aus. Alle können einfach nachsehen, welche Spiele sie mitbringen sollen."
+    }
+  },
+  "Statements": {
+    "Pricing": {
+      "Heading": "Preis",
+      "Text": "Meeple Party ist derzeit kostenlos und es wird immer eine kostenlose Version geben. Wir werden allerdings möglicherweise irgendwann bezahlte Accounts einführen, aber wir versprechen dir dabei keine Funktionen wegzunehmen, die du schon hast."
+    },
+    "Free": {
+      "Heading": "Frei und Open Source",
+      "Text": "Meeple party ist frei und Open Source und wird das für immer bleiben. Jedes neue Feature wird immer in das Haupt-Projekt hinzugefügt werden. Es wird keine geheimen Ergänzungen geben und du wirst immer die Möglichkeit haben dein eigenes, kleines Meeple Party zu betreiben. Mit allen Funktionen, ohne uns einen Cent dafür zu bezahlen."
+    },
+    "Welcome": {
+      "Heading": "Alle sind willkommen",
+      "Text": "Spiele sind für alle und Meeple Party ist für alle. Wir versprechen gefährdete und marginalisierte Personen zu schützen so gut wir können. Wir erwarten von allen, Empathie und Güte zu zeigen und werden niemals Belästigung, Beleidigung, Hassrede oder für andere gefährliches Verhalten tolerieren."
+    },
+    "Transparency": {
+      "Heading": "Transparenz",
+      "Text": "Wir versuchen Meeple Party so offen wie praktisch möglich zu betreiben und zu entwickeln. Wir wollen die Community auf jedem Schritt des Weges mitnehmen."
+    }
   }
 }
