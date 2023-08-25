@@ -11,7 +11,7 @@ import { getServerUser } from "@/utility/serverSession";
 import styles from "./dashboard.module.css";
 import { UserProfile } from "@/datatypes/userProfile";
 import { emptyFilter } from "@/utility/filter";
-import { useTranslation } from "@/i18n";
+import { getTranslation } from "@/i18n";
 
 export const metadata = {
   title: "Dashboard",
@@ -27,8 +27,8 @@ export default async function App() {
   const gamesThatEnoughPeopleWantToPlay = collectedGames.filter(
     enoughPeopleWantToPlay
   );
-  const { t } = await useTranslation();
-  const { t: dt } = await useTranslation("dashboard");
+  const { t } = await getTranslation();
+  const { t: dt } = await getTranslation("dashboard");
   return (
     <>
       <GameCollection

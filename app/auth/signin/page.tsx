@@ -4,11 +4,11 @@ import { redirect } from "next/navigation";
 import ProviderButton from "./ProviderButton/ProviderButton";
 import Link from "next/link";
 import EmailLogin from "./EmailLogin/EmailLogin";
-import { useTranslation } from "@/i18n";
+import { getTranslation } from "@/i18n";
 
 export default async function SignIn() {
   const session = await getServerSession();
-  const { t } = await useTranslation("auth");
+  const { t } = await getTranslation("auth");
 
   if (session) {
     redirect("/app");

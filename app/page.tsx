@@ -3,10 +3,10 @@ import classNames from "classnames";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import styles from "./page.module.css";
-import { useTranslation } from "@/i18n";
+import { getTranslation } from "@/i18n";
 
 export default async function Home() {
-  const { t } = await useTranslation("frontpage");
+  const { t } = await getTranslation("frontpage");
   return (
     <>
       <div className={classNames("container-fluid", styles.highlight)}>

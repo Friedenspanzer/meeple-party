@@ -1,7 +1,7 @@
 import styles from "./changelog.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslation } from "@/i18n";
+import { getTranslation } from "@/i18n";
 
 export const metadata = {
   title: "Changelog",
@@ -12,7 +12,7 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const { t } = await useTranslation("changelog");
+  const { t } = await getTranslation("changelog");
   return (
     <div className="container mb-5">
       <div className="row align-items-center">

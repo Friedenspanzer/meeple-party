@@ -1,10 +1,10 @@
 import Spinner from "@/components/Spinner/Spinner";
-import { useTranslation } from "@/i18n";
+import { getTranslation } from "@/i18n";
 import { Suspense } from "react";
 import ErrorReason from "./ErrorReason/ErrorReason";
 
 export default async function Page() {
-  const { t } = await useTranslation("auth");
+  const { t } = await getTranslation("auth");
   return (
     <>
       <div className="row justify-content-center">

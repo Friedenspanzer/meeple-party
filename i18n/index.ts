@@ -18,7 +18,7 @@ const initI18next = async (ns?: string) => {
   return i18nInstance;
 };
 
-export async function useTranslation(ns?: string, options: any = {}) {
+export async function getTranslation(ns?: string, options: any = {}) {
   const lng = getLanguage();
   const i18nextInstance = await initI18next(ns);
   return {

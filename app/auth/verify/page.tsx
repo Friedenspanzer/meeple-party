@@ -1,7 +1,7 @@
-import { useTranslation } from "@/i18n";
+import { getTranslation } from "@/i18n";
 
 export default async function Page() {
-  const { t } = await useTranslation("auth");
+  const { t } = await getTranslation("auth");
   return (
     <>
       <div className="row mt-5 justify-content-center">
