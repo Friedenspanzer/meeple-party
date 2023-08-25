@@ -6,11 +6,9 @@ import { findFriendCollection } from "@/utility/collections";
 import { emptyFilter } from "@/utility/filter";
 import { getServerUser } from "@/utility/serverSession";
 import { Game } from "@prisma/client";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
-export async function generateMetadata(
-  parent?: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const { t } = await getTranslation("collection");
   return {
     title: t("Title"),
