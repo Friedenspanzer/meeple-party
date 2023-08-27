@@ -13,5 +13,14 @@
       "YourWishlist": "Dein Wunschzettel",
       "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele"
     }
+  },
+  "States": {
+    "Own": "Im Besitz",
+    "WantToPlay": "Will ich spielen",
+    "Wishlist": "Wunschliste"
+  },
+  "Actions": {
+    "SaveAndContinue": "Speichern und weiter",
+    "Next": "Weiter"
   }
 }

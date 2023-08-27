@@ -16,7 +16,7 @@
   },
   "States": {
     "Own": "Own",
-    "WantToPlay": "WantToPlay",
+    "WantToPlay": "Want To Play",
     "Wishlist": "Wishlist"
   },
   "Actions": {
