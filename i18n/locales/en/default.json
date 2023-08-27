@@ -13,5 +13,14 @@
       "YourWishlist": "Your wishlist",
       "YourWishlistNoSolo": "Your wishlist, no solo play"
     }
+  },
+  "States": {
+    "Own": "Own",
+    "WantToPlay": "WantToPlay",
+    "Wishlist": "Wishlist"
+  },
+  "Actions": {
+    "SaveAndContinue": "Save and continue",
+    "Next": "Next"
   }
 }

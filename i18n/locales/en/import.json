@@ -1,0 +1,62 @@
+{
+  "Steps": {
+    "Account": "BGG Account",
+    "Configuration": "Configuration",
+    "Request": "Request",
+    "Import": "Import"
+  },
+  "Name": {
+    "YourName": "Your BoardGameGeek username"
+  },
+  "Configuration": {
+    "Mode": "Import mode",
+    "Update": "Update",
+    "Merge": "Merge",
+    "Overwrite": "Overwrite",
+    "BggToMeepleParty": "What BGG status to import to which Meeple Party status",
+    "BggStatus": {
+      "Owned": "Owned",
+      "Preordered": "Preordered",
+      "WantToPlay": "WantToPlay",
+      "WantToBuy": "WantToBuy",
+      "Wishlist": "Wishlist",
+      "WantInTrade": "WantInTrade"
+    },
+    "Explanations": {
+      "Update": "<p>Adds everything from your BoardGameGeek collection to Meeple Party. Does not delete anything. Does not remove collection states from Meeple Party.</p><p>A game that is flagged as Own and Want To Play in Meeple Party and Want To Play and Wishlist on BoardGameGeek will be flagged as Own, Want To Play and Wishlist afterwards.</p>",
+      "Merge": "<p>Games in your BoardGameGeek collection but not your Meeple Party collection will be imported. Games in your Meeple Party collection but not in your BoardGameGeek collection will remain unchanged.</p><p>For all games in both collections the collection state from BoardGameGeek will overwrite the collection state in Meeple Party.</p><p>A game that is flagged as Own and Want To Play in Meeple Party and Want To Play and Wishlist on BoardGameGeek will be flagged as Want To Play and Wishlist afterwards.</p>",
+      "Overwrite": "<p>Overwrites your Meeple Party collection with your BoardGameGeek collection.</p><p>Everything that is in your Meeple Party collection but not in your BoardGameGeek collection will be lost. Every state you set in Meeple Party but not on BoardGameGeek will be lost.</p>"
+    },
+    "Warnings": {
+      "PreorderedTwice": {
+        "Heading": "You have selected to import the BGG status Preordered twice.",
+        "Text": "This will set both Meeple Party status at once."
+      },
+      "NoStatusInMerge": {
+        "Heading": "You chose not to import any BGG status for one or more Meeple Party status in Merge mode.",
+        "Text": "While this will work the result may not be what you intended. That status <em>will</em> be imported but every game on BoardGameGeek will report this status as not set. So for games that are in both your collections that status will also be unset in Meeple Party."
+      },
+      "Overwrite": {
+        "Heading": "You chose Overwrite mode.",
+        "Text": "Every status you set in Meeple Party but did not replicate on BoardGameGeek will be lost."
+      },
+      "OverwriteAll": {
+        "Heading": "You chose Overwrite mode but not any status.",
+        "Text": "This will just delete your whole collection. If this is what you intended go on."
+      }
+    }
+  },
+  "Request": {
+    "Title": "Requesting your collection.",
+    "Text": "This may take a couple of minutes depending on BoardGameGeek workload. There's nothing you can do here. You can leave this page and come back later without losing progress."
+  },
+  "Import": {
+    "Update": "{{name}} updated in your collection.",
+    "Remove": "{{name}} removed from your collection.",
+    "Add": "{{name}} added to your collection."
+  },
+  "Errors": {
+    "NameWrongLength": "Name is too long or too short",
+    "NameInvalidCharacters": "Name contains invalid characters"
+  }
+}

@@ -1,4 +1,5 @@
 import { useUser } from "@/context/userContext";
+import { useTranslation } from "@/i18n/client";
 import { XMLParser } from "fast-xml-parser";
 import { useCallback, useEffect } from "react";
 
@@ -13,6 +14,7 @@ const xmlParser = new XMLParser({
 const Request: React.FC<RequestProps> = (props) => {
   const { onDone } = props;
   const { user, loading } = useUser();
+  const { t } = useTranslation("import");
 
   if (!user) {
     throw new Error("Request component can only be called with a valid user.");
@@ -56,12 +58,8 @@ const Request: React.FC<RequestProps> = (props) => {
 
   return (
     <>
-      <p className="lead">Requesting your collection.</p>
-      <p>
-        This may take a couple of minutes depending on BoardGameGeek workload.
-        There&apos;s nothing you can do here. You can leave this page and come
-        back later without losing progress.
-      </p>
+      <p className="lead">{t("Request.Title")}</p>
+      <p>{t("Request.Text")}</p>
     </>
   );
 };

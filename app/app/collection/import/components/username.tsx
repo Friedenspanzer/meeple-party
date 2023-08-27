@@ -1,5 +1,6 @@
 import Spinner from "@/components/Spinner/Spinner";
 import useUserProfile from "@/hooks/useUserProfile";
+import { useTranslation } from "@/i18n/client";
 import { useState, useEffect } from "react";
 import validator from "validator";
 
@@ -17,6 +18,9 @@ const Username: React.FC<UsernameProps> = (props) => {
   const [bggName, setBggName] = useState("");
   const [nameError, setNameError] = useState<string | false>(false);
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation("import");
+  const { t: dt } = useTranslation();
 
   const onReady = () => {
     const sanitizedName = sanitizeBggName(bggName!);
@@ -54,7 +58,7 @@ const Username: React.FC<UsernameProps> = (props) => {
       <form>
         <div className="row align-items-baseline g-4">
           <div className="col-md-auto">
-            <label>Your BoardGameGeek username</label>
+            <label>{t("Name.YourName")}</label>
           </div>
           <div className="col-md-4">
             <input
@@ -67,7 +71,7 @@ const Username: React.FC<UsernameProps> = (props) => {
             />
             {nameError && (
               <div id="bggNameHelp" className="form-text text-danger">
-                {nameError}
+                {t(nameError)}
               </div>
             )}
           </div>
@@ -78,7 +82,7 @@ const Username: React.FC<UsernameProps> = (props) => {
               onClick={onReady}
               disabled={loading}
             >
-              Next{" "}
+              {dt("Actions.Next")}{" "}
               {loading ? (
                 <Spinner size="small" />
               ) : (
@@ -96,10 +100,10 @@ export default Username;
 
 function validateBggName(name: string): string | false {
   if (!validator.isLength(name, { min: 1, max: 50 })) {
-    return "Name is too long or to short";
+    return "Errors.NameWrongLength";
   }
   if (!validator.isAlphanumeric(name)) {
-    return "Name contains invalid chars";
+    return "Errors.NameInvalidCharacters";
   }
   return false;
 }
