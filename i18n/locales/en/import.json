@@ -17,10 +17,10 @@
     "BggStatus": {
       "Owned": "Owned",
       "Preordered": "Preordered",
-      "WantToPlay": "WantToPlay",
-      "WantToBuy": "WantToBuy",
+      "WantToPlay": "Want To Play",
+      "WantToBuy": "Want To Buy",
       "Wishlist": "Wishlist",
-      "WantInTrade": "WantInTrade"
+      "WantInTrade": "Want In Trade"
     },
     "Explanations": {
       "Update": "<p>Adds everything from your BoardGameGeek collection to Meeple Party. Does not delete anything. Does not remove collection states from Meeple Party.</p><p>A game that is flagged as Own and Want To Play in Meeple Party and Want To Play and Wishlist on BoardGameGeek will be flagged as Own, Want To Play and Wishlist afterwards.</p>",
