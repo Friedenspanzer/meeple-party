@@ -1,17 +1,23 @@
 import CollectionChange from "@/components/CollectionChange/CollectionChange";
 import Person from "@/components/Person/Person";
 import { prisma } from "@/db";
+import { getTranslation } from "@/i18n";
 import { getFriends } from "@/selectors/relationships";
 import { getServerUser } from "@/utility/serverSession";
 import { Game, GameCollection, User } from "@prisma/client";
+import { Metadata } from "next";
 import Link from "next/link";
 import styles from "./friends.module.css";
 
-export const metadata = {
-  title: 'Friend activity',
+export async function generateMetadata(): Promise<Metadata> {
+  const { t } = await getTranslation("friends");
+  return {
+    title: t("Title"),
+  };
 }
 
 export default async function Friends() {
+  const { t } = await getTranslation("friends");
   const user = await getServerUser();
   const myFriends = await getFriends(user.id);
   const collectionUpdates = await prisma.gameCollection.findMany({
@@ -26,7 +32,7 @@ export default async function Friends() {
   let lastFriendId = "";
   return (
     <>
-      <h2>Your friend&apos;s collection updates</h2>
+      <h2>{t("Activity.Title")}</h2>
       <div className="container">
         {collectionUpdates.map((update) => {
           const ret = (
@@ -49,7 +55,10 @@ export default async function Friends() {
               <CollectionChange
                 image={update.game.image!}
                 operation="add"
-                text={generateText(update)}
+                text={t(`Activity.Changes.${getChangeTranslationKey(update)}`, {
+                  game: update.game.name,
+                  person: update.user.name,
+                })}
                 own={update.own}
                 wantToPlay={update.wantToPlay}
                 wishlist={update.wishlist}
@@ -62,7 +71,7 @@ export default async function Friends() {
           return ret;
         })}
       </div>
-      <h2>All your friends</h2>
+      <h2>{t("List.Title")}</h2>
       <div className={styles.friendContainer}>
         {myFriends.map((friend) => (
           <Link
@@ -83,30 +92,21 @@ export default async function Friends() {
   );
 }
 
-function generateText(
+function getChangeTranslationKey(
   update: GameCollection & {
     user: User;
     game: Game;
   }
 ): string {
-  const verbArray: string[] = [];
+  const keys: string[] = [];
   if (update.own) {
-    verbArray.push("owns");
+    keys.push("Own");
   }
   if (update.wantToPlay) {
-    verbArray.push("wants to play");
+    keys.push("Wtp");
   }
   if (update.wishlist) {
-    verbArray.push("wishes for");
+    keys.push("Wish");
   }
-  return `${update.user.name} now ${joinVerbs(verbArray)} ${update.game.name}`;
-}
-
-function joinVerbs(verbs: string[]): string {
-  if (verbs.length === 1) {
-    return verbs[0];
-  } else {
-    const last = verbs.pop();
-    return `${verbs.join(", ")} and ${last}`;
-  }
+  return keys.join("");
 }

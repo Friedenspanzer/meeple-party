@@ -4,13 +4,15 @@ import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequ
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
 import { RelationshipType } from "@/datatypes/relationship";
 import useRelationships from "@/hooks/useRelationships";
+import { useTranslation } from "@/i18n/client";
 
 const FriendRequests: React.FC = (props) => {
   const { relationships } = useRelationships();
+  const { t } = useTranslation("friends");
 
   return (
     <>
-      <h2>Incoming requests</h2>
+      <h2>{t("Requests.Incoming")}</h2>
       <div className="container-md">
         {relationships
           ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED)
@@ -18,7 +20,7 @@ const FriendRequests: React.FC = (props) => {
             <IncomingFriendRequest request={r} key={r.profile.id} />
           ))}
       </div>
-      <h2>Sent requests</h2>
+      <h2>{t("Requests.Outgoing")}</h2>
       <div className="container-md">
         {relationships
           ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_SENT)

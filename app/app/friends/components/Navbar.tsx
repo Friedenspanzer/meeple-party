@@ -3,13 +3,17 @@ import {
   NavigationItem,
 } from "@/components/NavigationBar/NavigationBar";
 import FriendRequestsBadge from "@/components/FriendRequestsBadge/FriendRequestsBadge";
+import { getTranslation } from "@/i18n";
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC = async () => {
+  const { t } = await getTranslation("friends");
   return (
     <NavigationBar>
-      <NavigationItem href="/app/friends">Activity</NavigationItem>
+      <NavigationItem href="/app/friends">
+        {t("Navbar.Activity")}
+      </NavigationItem>
       <NavigationItem href="/app/friends/requests">
-        Your requests &nbsp;
+        {t("Navbar.Requests")} &nbsp;
         <FriendRequestsBadge />
       </NavigationItem>
     </NavigationBar>
