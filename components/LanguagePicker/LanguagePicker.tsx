@@ -7,6 +7,7 @@ import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { language } from "gray-matter";
 import styles from "languagepicker.module.css";
+import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo, useState } from "react";
 
 type LanguagePickerType = "page" | "game";
@@ -21,6 +22,7 @@ const LanguagePicker: React.FC<LanguagePickerProps> = ({
   type,
 }) => {
   const { t } = useTranslation("languagepicker");
+  const router = useRouter();
   const {
     preferences,
     loading,
@@ -38,9 +40,9 @@ const LanguagePicker: React.FC<LanguagePickerProps> = ({
   const update = useCallback(
     (language: string) => {
       const mutator = getCurrentMutator(type);
-      updatePreferences(mutator(language));
+      updatePreferences(mutator(language)).then(() => router.refresh());
     },
-    [type, updatePreferences]
+    [router, type, updatePreferences]
   );
 
   return (
