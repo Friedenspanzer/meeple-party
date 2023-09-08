@@ -7,8 +7,8 @@ import {
   useTranslation as useTranslationOrg,
 } from "react-i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
-import { getOptions, languages } from "./settings";
-import getLanguage from "./detection";
+import { fallbackLng, getOptions, languages } from "./settings";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
 
 const runsOnServerSide = typeof window === "undefined";
 
@@ -28,8 +28,9 @@ i18next
 
 export function useTranslation(ns?: string, options?: any) {
   const ret = useTranslationOrg(ns, options);
+  const { preferences } = useUserPreferences();
+  const language = preferences?.pageLanguage || fallbackLng;
   const { i18n } = ret;
-  const language = getLanguage();
   if (runsOnServerSide && language && i18n.resolvedLanguage !== language) {
     i18n.changeLanguage(language);
   } else {
@@ -46,5 +47,6 @@ export function useTranslation(ns?: string, options?: any) {
       i18n.changeLanguage(language);
     }, [language, i18n]);
   }
+
   return ret;
 }
