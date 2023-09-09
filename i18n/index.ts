@@ -1,7 +1,7 @@
 import { createInstance } from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next/initReactI18next";
-import { getOptions } from "./settings";
+import { fallbackLng, getOptions } from "./settings";
 import { getServerUser } from "@/utility/serverSession";
 import { getUserPreferences } from "@/utility/userProfile";
 
@@ -33,7 +33,11 @@ export async function getTranslation(ns?: string, options: any = {}) {
 }
 
 async function getLanguage() {
-  const user = await getServerUser();
-  const preferences = getUserPreferences(user);
-  return preferences.pageLanguage as string;
+  try {
+    const user = await getServerUser();
+    const preferences = getUserPreferences(user);
+    return preferences.pageLanguage as string;
+  } catch {
+    return fallbackLng;
+  }
 }
