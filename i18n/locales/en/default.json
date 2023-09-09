@@ -3,6 +3,17 @@
     "GoToApp": "Go to app",
     "Logout": "Logout"
   },
+  "Navigation": {
+    "Pages": {
+      "Dashboard": "Dashboard",
+      "Collection": "Collection",
+      "Friends": "Friends"
+    },
+    "Menu": {
+      "Profile": "Your profile",
+      "Settings": "Settings"
+    }
+  },
   "Filters": {
     "Preset": {
       "GamesYouOwn": "Games you own",

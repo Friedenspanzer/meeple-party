@@ -10,11 +10,13 @@ import classNames from "classnames";
 import { signOut } from "next-auth/react";
 import { useCallback } from "react";
 import useUserProfile from "@/hooks/useUserProfile";
+import { useTranslation } from "@/i18n/client";
 
 export default function TopNav() {
   const pathname = usePathname();
   const { userProfile } = useUserProfile();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const logout = useCallback(() => {
     signOut({ redirect: false })
@@ -56,7 +58,7 @@ export default function TopNav() {
                 })}
               >
                 <Link href="/app" className="nav-link">
-                  Dashboard
+                  {t("Navigation.Pages.Dashboard")}
                 </Link>
               </li>
               <li
@@ -65,7 +67,7 @@ export default function TopNav() {
                 })}
               >
                 <Link href="/app/collection" className="nav-link">
-                  Collection
+                  {t("Navigation.Pages.Collection")}
                 </Link>
               </li>
               <li
@@ -74,7 +76,7 @@ export default function TopNav() {
                 })}
               >
                 <Link href="/app/friends" className="nav-link">
-                  Friends&nbsp; <FriendRequestsBadge />
+                  {t("Navigation.Pages.Friends")}&nbsp; <FriendRequestsBadge />
                 </Link>
               </li>
             </ul>
@@ -97,7 +99,7 @@ export default function TopNav() {
                       href={`/app/profile/${userProfile.id}`}
                       className="dropdown-item"
                     >
-                      Your profile
+                      {t("Navigation.Menu.Profile")}
                     </Link>
                   </li>
                   <li>
@@ -105,7 +107,7 @@ export default function TopNav() {
                       href={"/app/profile/edit/settings"}
                       className="dropdown-item"
                     >
-                      Settings
+                      {t("Navigation.Menu.Settings")}
                     </Link>
                   </li>
                   <li>
@@ -113,7 +115,7 @@ export default function TopNav() {
                   </li>
                   <li>
                     <button onClick={logout} className="dropdown-item">
-                      Logout
+                      {t("Login.Logout")}
                     </button>
                   </li>
                 </ul>
