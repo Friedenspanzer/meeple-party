@@ -50,7 +50,7 @@ const LanguagePicker: React.FC<LanguagePickerProps> = ({
       {availableLanguages.map((language) => (
         <button
           type="button"
-          className={classNames("btn me-3", {
+          className={classNames("btn me-3 mb-2", {
             ["btn-light"]: language !== current,
             ["btn-primary"]: language === current,
           })}
