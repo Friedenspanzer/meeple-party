@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
 import useUserProfile from "@/hooks/useUserProfile";
+import axios from "axios";
 
 export default function CompleteUserProfile() {
   const { isLoading, userProfile, invalidate } = useUserProfile();
@@ -21,12 +22,9 @@ export default function CompleteUserProfile() {
 
   const sendCurrentData = () => {
     setUpdating(true);
-    fetch("/api/user", {
-      method: "PATCH",
-      body: JSON.stringify({
-        name: username,
-        realName: realName,
-      }),
+    axios.patch("/api/user", {
+      name: username,
+      realName: realName,
     })
       .then(() => setUpdating(false))
       .then(() => invalidate());
