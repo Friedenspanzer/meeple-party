@@ -1,6 +1,7 @@
 import Spinner from "@/components/Spinner/Spinner";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import validator from "validator";
 
@@ -32,11 +33,8 @@ const Username: React.FC<UsernameProps> = (props) => {
       if (!userProfile) return;
 
       userProfile.bggName = sanitizeBggName(sanitizedName);
-      fetch("/api/user", {
-        method: "PATCH",
-        body: JSON.stringify({
-          bggName: sanitizeBggName(sanitizedName),
-        }),
+      axios.patch("/api/user", {
+        bggName: sanitizeBggName(sanitizedName),
       }).then(() => {
         setLoading(false);
         invalidate();
