@@ -26,7 +26,11 @@
       "Wishlist": "$t(States.Wishlist)",
       "FriendsOwn": "Friends own",
       "FriendsWantToPlay": "Friends want to play",
-      "FriendsWishlist": "Friends wish"
+      "FriendsWishlist": "Friends wish",
+      "GameAttributes": "Game attributes",
+      "YourCollection": "Your collection",
+      "CollectionStatus": "Collection status",
+      "YourFriends": "Your Friends"
     },
     "Values": {
       "Yes": "Yes",
@@ -36,7 +40,12 @@
       "WantToPlay": "Want to play",
       "NotWantToPlay": "Don't want to play",
       "Wishlist": "Wish",
-      "NotWishlist": "Don't wish"
+      "NotWishlist": "Don't wish",
+      "PlayerCount": {
+        "AtLeast": "> {{number}}",
+        "Exact": "= {{number}}",
+        "Supports": "supports {{number}}"
+      }
     },
     "Labels": {
       "Min": "Min",
@@ -45,6 +54,13 @@
         "Supports": "Supports",
         "AtLeast": "At least",
         "Exact": "Exact"
+      },
+      "Weight": {
+        "Light": "Light",
+        "MediumLight": "Medium Light",
+        "Medium": "Medium",
+        "MediumHeavy": "Medium Heavy",
+        "Heavy": "Heavy"
       }
     },
     "Preset": {

@@ -18,15 +18,19 @@
     "Presets": "Vorlagen",
     "GameName": "Name des Spiels",
     "Traits": {
-      "PlayerCount": "Player count",
-      "Weight": "Weight",
-      "PlayingTime": "Playing time",
+      "PlayerCount": "Spielendenzahl",
+      "Weight": "Komplexität",
+      "PlayingTime": "Dauer",
       "Own": "$t(States.Own)",
       "WantToPlay": "$t(States.WantToPlay)",
       "Wishlist": "$t(States.Wishlist)",
       "FriendsOwn": "Freunde besitzen",
       "FriendsWantToPlay": "Freunde wollen spielen",
-      "FriendsWishlist": "Freunde wünschen sich"
+      "FriendsWishlist": "Freunde wünschen sich",
+      "GameAttributes": "Spielattribute",
+      "YourCollection": "Deine Sammlung",
+      "CollectionStatus": "Sammlungsstatus",
+      "YourFriends": "Deine Freund*innen"
     },
     "Values": {
       "Yes": "Ja",
@@ -36,7 +40,12 @@
       "WantToPlay": "Will ich spielen",
       "NotWantToPlay": "Will ich nicht spielen",
       "Wishlist": "Gewünscht",
-      "NotWishlist": "Nicht gewünscht"
+      "NotWishlist": "Nicht gewünscht",
+      "PlayerCount": {
+        "AtLeast": "> {{number}}",
+        "Exact": "= {{number}}",
+        "Supports": "unterstützt {{number}}"
+      }
     },
     "Labels": {
       "Min": "Min",
@@ -45,6 +54,13 @@
         "Supports": "Unterstützt",
         "AtLeast": "Mindestes",
         "Exact": "Exakt"
+      },
+      "Weight": {
+        "Light": "Einfach",
+        "MediumLight": "Mittel-Einfach",
+        "Medium": "Mittel",
+        "MediumHeavy": "Mittel-Komplex",
+        "Heavy": "Komplex"
       }
     },
     "Preset": {

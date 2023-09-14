@@ -274,10 +274,10 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               />
             </div>
           </div>
-          <Group title="Game attributes">
+          <Group title={t("Filters.Traits.GameAttributes")}>
             <Section
-              title="Player count"
-              value={getPlayerCountValue(filter.playerCount)}
+              title={t("Filters.Traits.PlayerCount")}
+              value={filter.playerCount.count ? t(`Filters.Values.PlayerCount.${getPlayerCountTranslationKey(filter.playerCount.type)}`, { number: filter.playerCount.count }) : ""}
               active={!!filter.playerCount.count}
             >
               <PlayerCount
@@ -286,7 +286,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               />
             </Section>
             <Section
-              title="Weight"
+              title={t("Filters.Traits.Weight")}
               value={getMinMaxValue(filter.weight.min, filter.weight.max)}
               active={!!filter.weight.min || !!filter.weight.max}
             >
@@ -309,15 +309,15 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             <MinMaxSection
               minMax={filter.playingTime}
               changeFunction={changePlayingTime}
-              title="Playing time"
+              title={t("Filters.Traits.PlayingTime")}
               min={0}
               max={360}
               step={10}
             />
           </Group>
-          <Group title="Your collection">
+          <Group title={t("Filters.Traits.YourCollection")}>
             <Section
-              title="Collection status"
+              title={t("Filters.Traits.CollectionStatus")}
               value={getCombinedText(filter.collectionStatus, t)}
               active={
                 filter.collectionStatus.own !== undefined ||
@@ -331,23 +331,23 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               />
             </Section>
           </Group>
-          <Group title="Your friends">
+          <Group title={t("Filters.Traits.YourFriends")}>
             <MinMaxSection
               minMax={filter.friends.own}
               changeFunction={changeFriendsOwn}
-              title="Friends own"
+              title={t("Filters.Traits.FriendsOwn")}
               max={25}
             />
             <MinMaxSection
               minMax={filter.friends.wantToPlay}
               changeFunction={changeFriendsWantToPlay}
-              title="Friends want to play"
+              title={t("Filters.Traits.FriendsWantToPlay")}
               max={25}
             />
             <MinMaxSection
               minMax={filter.friends.wishlist}
               changeFunction={changeFriendsWishlist}
-              title="Friends wish"
+              title={t("Filters.Traits.FriendsWishlist")}
               max={25}
             />
           </Group>
@@ -396,6 +396,7 @@ function WeightPresets({
   weightFilter: MinMaxFilterOption;
   onChange: (weight: MinMaxFilterOption) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div
       className="btn-group btn-group-sm"
@@ -410,7 +411,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ max: 1.5, min: undefined })}
       >
-        Light
+        {t("Filters.Labels.Weight.Light")}
       </button>
       <button
         type="button"
@@ -420,7 +421,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 1.5, max: 2.5 })}
       >
-        Medium Light
+        {t("Filters.Labels.Weight.MediumLight")}
       </button>
       <button
         type="button"
@@ -430,7 +431,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 2.5, max: 3.5 })}
       >
-        Medium
+        {t("Filters.Labels.Weight.Medium")}
       </button>
       <button
         type="button"
@@ -440,7 +441,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 3.5, max: 4.5 })}
       >
-        Medium Heavy
+        {t("Filters.Labels.Weight.MediumHeavy")}
       </button>
       <button
         type="button"
@@ -450,7 +451,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 4.5, max: undefined })}
       >
-        Heavy
+        {t("Filters.Labels.Weight.Heavy")}
       </button>
     </div>
   );
@@ -505,17 +506,15 @@ export function getMinMaxValue(min?: number, max?: number) {
   }
 }
 
-export function getPlayerCountValue(
-  playerCount: PlayerCountFilterOption
+export function getPlayerCountTranslationKey(
+  type: "exact" | "supports" | "atleast",
 ): string {
-  if (!playerCount.count) {
-    return "";
-  } else if (playerCount.type === "atleast") {
-    return `> ${playerCount.count}`;
-  } else if (playerCount.type === "exact") {
-    return `= ${playerCount.count}`;
+  if (type === "atleast") {
+    return "AtLeast";
+  } else if (type === "exact") {
+    return "Exact";
   } else {
-    return `supports ${playerCount.count}`;
+    return "Supports";
   }
 }
 
