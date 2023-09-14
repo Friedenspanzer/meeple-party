@@ -1,8 +1,11 @@
+"use client";
+
 import classNames from "classnames";
 import { useCallback, useId } from "react";
 import validator from "validator";
 import { PlayerCountFilterOption } from "../GameCollectionFilter";
 import styles from "./playercount.module.css";
+import { useTranslation } from "@/i18n/client";
 
 export interface PlayerCountProps {
   filter: PlayerCountFilterOption;
@@ -10,6 +13,8 @@ export interface PlayerCountProps {
 }
 
 const PlayerCount: React.FC<PlayerCountProps> = ({ filter, onChange }) => {
+  const {t} = useTranslation();
+
   const setType = useCallback(
     (type: "exact" | "supports" | "atleast") => {
       onChange({ ...filter, type });
@@ -67,7 +72,7 @@ const PlayerCount: React.FC<PlayerCountProps> = ({ filter, onChange }) => {
               })}
               onClick={() => setType("supports")}
             >
-              Supports
+              {t("Filters.Labels.PlayerCount.Supports")}
             </button>
             <button
               type="button"
@@ -77,7 +82,7 @@ const PlayerCount: React.FC<PlayerCountProps> = ({ filter, onChange }) => {
               })}
               onClick={() => setType("atleast")}
             >
-              At least
+              {t("Filters.Labels.PlayerCount.AtLeast")}
             </button>
             <button
               type="button"
@@ -87,7 +92,7 @@ const PlayerCount: React.FC<PlayerCountProps> = ({ filter, onChange }) => {
               })}
               onClick={() => setType("exact")}
             >
-              Exact
+              {t("Filters.Labels.PlayerCount.Exact")}
             </button>
           </div>
         </div>

@@ -15,6 +15,38 @@
     }
   },
   "Filters": {
+    "Presets": "Vorlagen",
+    "GameName": "Name des Spiels",
+    "Traits": {
+      "PlayerCount": "Player count",
+      "Weight": "Weight",
+      "PlayingTime": "Playing time",
+      "Own": "$t(States.Own)",
+      "WantToPlay": "$t(States.WantToPlay)",
+      "Wishlist": "$t(States.Wishlist)",
+      "FriendsOwn": "Freunde besitzen",
+      "FriendsWantToPlay": "Freunde wollen spielen",
+      "FriendsWishlist": "Freunde wünschen sich"
+    },
+    "Values": {
+      "Yes": "Ja",
+      "No": "Nein",
+      "Own": "Im Besitz",
+      "NotOwn": "Nicht im Besitz",
+      "WantToPlay": "Will ich spielen",
+      "NotWantToPlay": "Will ich nicht spielen",
+      "Wishlist": "Gewünscht",
+      "NotWishlist": "Nicht gewünscht"
+    },
+    "Labels": {
+      "Min": "Min",
+      "Max": "Max",
+      "PlayerCount": {
+        "Supports": "Unterstützt",
+        "AtLeast": "Mindestes",
+        "Exact": "Exakt"
+      }
+    },
     "Preset": {
       "GamesYouOwn": "Im Besitz",
       "GamesYouDontOwn": "Nicht im Besitz",
@@ -23,6 +55,22 @@
       "GamesYouDontOwnNoSolo": "Nicht im Besitz, keine Solo-Spiele",
       "YourWishlist": "Dein Wunschzettel",
       "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele"
+    },
+    "SortOrder": {
+      "CollectionStatus": "Sammlungsstatus",
+      "FriendsOwn": "$t(Filters.Traits.FriendsOwn)",
+      "FriendsWantToPlay": "$t(Filters.Traits.FriendsWantToPlay)",
+      "FriendsWish": "$t(Filters.Traits.FriendsWishlist)",
+      "MaxPlayers": "Maximalspielendenzahl",
+      "MinPlayers": "Minimalspielendenzahl",
+      "Name": "Name",
+      "PlayingTime": "$t(Filters.Traits.PlayingTime)",
+      "Weight": "$t(Filters.Traits.Weight)"
+    }
+  },
+  "Collection": {
+    "Pagination": {
+      "of": "von"
     }
   },
   "States": {
