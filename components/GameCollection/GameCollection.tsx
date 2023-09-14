@@ -15,6 +15,7 @@ import GameCollectionFilter, {
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
 import { emptyFilter } from "@/utility/filter";
+import { useTranslation } from "@/i18n/client";
 
 type GameInfo = {
   game: Game;
@@ -48,6 +49,8 @@ const GameCollection: React.FC<GameCollectionProps> = ({
   children,
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const [page, setPage] = useState(0);
   const [inputPage, setInputPage] = useState("1");
   const [filter, setFilter] = useState<GameCollectionFilterOptions>();
@@ -138,7 +141,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
                 aria-label="Current page"
                 className={styles.page}
               />{" "}
-              of {totalNumberOfPages}
+              {t("Collection.Pagination.of")} {totalNumberOfPages}
             </div>
           </>
         )}

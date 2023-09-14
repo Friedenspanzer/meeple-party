@@ -12,6 +12,7 @@ import CollectionStatus, {
 import PlayerCount from "./components/PlayerCount";
 import Group from "./components/Group";
 import { emptyFilter } from "@/utility/filter";
+import { useTranslation } from "@/i18n/client";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -80,6 +81,8 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   defaultFilter,
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const offcanvasId = useId();
 
   const [filter, setFilter] = useState<GameCollectionFilterOptions>(
@@ -168,7 +171,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
                 ></button>
                 <ul className="dropdown-menu">
                   <li>
-                    <h6 className="dropdown-header">Filter presets</h6>
+                    <h6 className="dropdown-header">{t("Filters.Presets")}</h6>
                   </li>
                   {presets.map((p) => (
                     <li key={p.name}>
@@ -202,7 +205,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
           <input
             type="text"
             className="form-control"
-            placeholder="Game name"
+            placeholder={t("Filters.GameName")}
             value={filter.name}
             onChange={(e) => changeName(e.target.value)}
           />
@@ -225,7 +228,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               aria-expanded="false"
             >
               <i className="bi bi-sort-down-alt"></i>{" "}
-              {sortOrderDescription(filter.sort)}
+              {t(sortOrderTranslationKey(filter.sort))}
             </button>
             <ul className="dropdown-menu">
               {sortOrderOptions.map((option) => (
@@ -234,7 +237,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
                     className="dropdown-item"
                     onClick={() => changeSortOrder(option)}
                   >
-                    {sortOrderDescription(option)}
+                    {t(sortOrderTranslationKey(option))}
                   </button>
                 </li>
               ))}
@@ -315,7 +318,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
           <Group title="Your collection">
             <Section
               title="Collection status"
-              value={getCombinedText(filter.collectionStatus)}
+              value={getCombinedText(filter.collectionStatus, t)}
               active={
                 filter.collectionStatus.own !== undefined ||
                 filter.collectionStatus.wantToPlay !== undefined ||
@@ -546,26 +549,26 @@ function friendCollectionStatusActive(filter: FriendCollectionFilterOptions) {
   );
 }
 
-function sortOrderDescription(sortOrder: SortOrder): string {
+function sortOrderTranslationKey(sortOrder: SortOrder): string {
   switch (sortOrder) {
     case "collectionStatus":
-      return "Collection status";
+      return "Filters.SortOrder.CollectionStatus";
     case "friendsOwn":
-      return "Friends owning";
+      return "Filters.SortOrder.FriendsOwn";
     case "friendsWantToPlay":
-      return "Friends want to play";
+      return "Filters.SortOrder.FriendsWantToPlay";
     case "friendsWish":
-      return "Friends wish";
+      return "Filters.SortOrder.FriendsWish";
     case "maxPlayers":
-      return "Max players";
+      return "Filters.SortOrder.MaxPlayers";
     case "minPlayers":
-      return "Min players";
+      return "Filters.SortOrder.MinPlayers";
     case "name":
-      return "Name";
+      return "Filters.SortOrder.Name";
     case "playingTime":
-      return "Playing time";
+      return "Filters.SortOrder.PlayingTime";
     case "weight":
-      return "Weight";
+      return "Filters.SortOrder.Weight";
   }
 }
 
