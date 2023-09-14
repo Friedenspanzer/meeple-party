@@ -3,8 +3,10 @@
 import Spinner from "@/components/Spinner/Spinner";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import AutoUpdateToggle from "../AutoUpdateToggle";
+import { useTranslation } from "@/i18n/client";
 
 export default function ShowRealName() {
+  const { t } = useTranslation("settings");
   const { preferences, loading } = useUserPreferences();
   if (loading) {
     return <Spinner />;
@@ -13,13 +15,10 @@ export default function ShowRealName() {
       <AutoUpdateToggle
         value={preferences.showRealNameInProfile}
         onChange={(value) => ({ ...preferences, showRealNameInProfile: value })}
-        title="Public real name"
+        title={t("Privacy.ShowRealName.Title")}
       >
         <p>
-          When this flag is set your real name is visible to everybody. When
-          this flag is not set your real name is only visible to your friends.
-          If you don&apos;t want that either just don&apos;t set a real name and
-          ignore this flag.
+          {t("Privacy.ShowRealName.Description")}
         </p>
       </AutoUpdateToggle>
     );

@@ -13,5 +13,28 @@
     "Settings": "Einstellungen",
     "Avatar": "Avatar",
     "Privacy": "Datenschutz"
+  },
+  "Privacy": {
+    "Headings": {
+      "ProfileInformationVisibility": "Sichtbarkeit von Profilinformationen",
+      "Discoverability": "Auffindbarkeit",
+      "Tracking": "Datenerhebung"
+    },
+    "SearchByPlace": {
+      "Title": "Findbar durch deinen Ort",
+      "Description": "Ist diese Einstellung gesetzt können Leute dich finden indem sie nach deinem Ort suchen."
+    },
+    "SendAnalyticsData": {
+      "Title": "Analysedaten teilen",
+      "Description": "Hilf uns Meeple Party zu verbessern indem du uns erlaubst deine Nutzungsdaten zu sammeln. Wir sammeln nur sehr wenig und es ist vollständig anonymisiert. Die Daten werden von unserem Hostingdienstleister Vercel erhoben."
+    },
+    "ShowPlaceInProfile": {
+      "Title": "Ort öffentlich",
+      "Description": "Wenn diese Einstellung gesetzt ist wird der von dir eingegebene Ort allen Leuten auf deinem Profil angezeigt. Wenn sie nicht gesetzt ist können nur deine Freund*innen ihn sehen. Wenn du weder noch willst ignorier diese Einstellung und hinterlege in deinem Profil keinen Ort."
+    },
+    "ShowRealName": {
+      "Title": "Echter Name öffentlich",
+      "Description": "Wenn diese Einstellung gesetzt ist wird dein echter Name allen Leuten auf deinem Profil angezeigt. Wenn sie nicht gesetzt ist können nur deine Freund*innen ihn sehen. Wenn du weder noch willst ignorier diese Einstellung unter hinterlege in deinem Profil keinen echten Namen."
+    }
   }
 }
