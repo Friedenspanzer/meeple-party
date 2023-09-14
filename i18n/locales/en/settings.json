@@ -7,5 +7,11 @@
   "DangerZone": {
     "Title": "Danger Zone",
     "AccountDeletion": "Account deletion"
+  },
+  "Navigation": {
+    "Profile": "Profile",
+    "Settings": "Settings",
+    "Avatar": "Avatar",
+    "Privacy": "Privacy"
   }
 }

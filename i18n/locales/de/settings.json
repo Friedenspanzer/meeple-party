@@ -7,5 +7,11 @@
   "DangerZone": {
     "Title": "Gefahrenzone",
     "AccountDeletion": "Account löschen"
+  },
+  "Navigation": {
+    "Profile": "Profil",
+    "Settings": "Einstellungen",
+    "Avatar": "Avatar",
+    "Privacy": "Datenschutz"
   }
 }
