@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import Spinner from "../Spinner/Spinner";
 import styles from "./gamesearch.module.css";
+import { useTranslation } from "@/i18n/client";
 
 export interface GameSearchChildren {
   searchResult: ExtendedGameCollection[];
@@ -16,6 +17,7 @@ export interface GameSearchProps {
 }
 
 const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
+  const { t } = useTranslation();
   const [term, setTerm] = useState<string>("");
   const [result, setResult] = useState<ExtendedGameCollection[]>([]);
   const [dirty, setDirty] = useState(false);
@@ -65,7 +67,7 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
             { dirty: dirty },
           ])}
           id="profileName"
-          placeholder="Game name, BoardGameGeek ID, BoardGameGeek Link, ..."
+          placeholder={t("Search.Placeholder")}
           aria-describedby="profileNameHelp"
           value={term ?? ""}
           onChange={(e) => {
@@ -79,16 +81,14 @@ const GameSearch: React.FC<GameSearchProps> = ({ resultView }) => {
       {error && (
         <div className="alert alert-danger col-md-6" role="alert">
           <h4>
-            <i className="bi bi-exclamation-octagon-fill"></i> Error during game
-            search
+            <i className="bi bi-exclamation-octagon-fill"></i> {t("Search.Error.Title")}
           </h4>
-          Please try again later. If this persists please contact your
-          administrator.
+          {t("Search.Error.Text")}
         </div>
       )}
       {!dirty && !error && term.length > 0 && result.length === 0 && (
         <div className="alert alert-info col-md-6" role="alert">
-          <i className="bi bi-binoculars-fill"></i> No results found
+          <i className="bi bi-binoculars-fill"></i> {t("Search.NoResults")}
         </div>
       )}
     </>

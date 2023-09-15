@@ -97,5 +97,13 @@
   "Actions": {
     "SaveAndContinue": "Save and continue",
     "Next": "Next"
+  },
+  "Search": {
+    "Placeholder": "Game name, BoardGameGeek ID, BoardGameGeek Link, ...",
+    "NoResults": "No results found",
+    "Error": {
+      "Title": "Error during game search",
+      "Text": "Please try again later. If this persists please contact your administrator."
+    }
   }
 }
