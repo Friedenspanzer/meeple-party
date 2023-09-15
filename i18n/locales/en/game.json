@@ -1,0 +1,17 @@
+{
+    "Page": {
+        "Header": {
+            "Design": "Design",
+            "Art": "Art",
+            "Players": "players",
+            "Minutes": "minutes",
+            "Weight": "weight"
+        },
+        "Collections": {
+            "YourCollection": "Your collection",
+            "FriendsOwn": "Owned by",
+            "FriendsWantToPlay": "Want to play",
+            "FriendsWishlist": "Wishlist"
+        }
+    }
+}

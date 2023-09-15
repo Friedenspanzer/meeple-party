@@ -99,7 +99,7 @@
     "Next": "Next"
   },
   "Search": {
-    "Placeholder": "Game name, BoardGameGeek ID, BoardGameGeek Link, ...",
+    "Placeholder": "Game name, BoardGameGeek ID, BoardGameGeek Link, …",
     "NoResults": "No results found",
     "Error": {
       "Title": "Error during game search",
