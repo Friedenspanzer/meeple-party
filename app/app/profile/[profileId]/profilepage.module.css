@@ -14,6 +14,12 @@
   font-weight: lighter;
 }
 
-.moreHeader {
+.moreHeaders {
   font-weight: lighter;
+  list-style: none;
+  display: flex;
+}
+
+.moreHeaders li:not(:first-child)::before {
+  content: "\0000a0\002022\0000a0";
 }

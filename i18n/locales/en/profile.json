@@ -1,0 +1,17 @@
+{
+    "Badges": {
+        "You": "It's you!",
+        "Friend": "Friend",
+        "Admin": "Admin",
+        "FriendsFamily": "Friends & Family",
+        "Premium": "Premium",
+        "User": "User"
+    },
+    "Edit": "Edit your profile",
+    "FavoriteGames": "Favorite Games",
+    "UserCollection": "{{name}}'s collection",
+    "Header": {
+        "Place": "From {{place}}",
+        "BggName": "{{name}} on BoardGameGeek"
+    }
+}
