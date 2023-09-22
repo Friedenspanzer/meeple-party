@@ -107,5 +107,9 @@
       "Title": "Error during game search",
       "Text": "Please try again later. If this persists please contact your administrator."
     }
+  },
+  "Footer": {
+    "Issues": "Issues",
+    "LatestChanges": "Latest Changes"
   }
 }

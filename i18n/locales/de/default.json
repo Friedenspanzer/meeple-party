@@ -107,5 +107,9 @@
       "Title": "Fehler bei der Spielesuche",
       "Text": "Bitte versuche es später noch mal. Wenn der Fehler weiterhin auftritt kontaktiere bitte ein*e Administrator*in."
     }
+  },
+  "Footer": {
+    "Issues": "Issues",
+    "LatestChanges": "Neueste Änderungen"
   }
 }

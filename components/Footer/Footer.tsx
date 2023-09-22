@@ -1,7 +1,9 @@
+import { getTranslation } from "@/i18n";
 import Link from "next/link";
 import styles from "./footer.module.css";
 
-export default function Footer() {
+export default async function Footer() {
+  const { t } = await getTranslation();
   return (
     <div className={styles.container}>
       <div className={styles.stack}>
@@ -46,9 +48,9 @@ export default function Footer() {
           href="https://github.com/Friedenspanzer/meeple-party/issues"
           target="_blank"
         >
-          Issues
+          {t("Footer.Issues")}{" "}
         </Link>
-        <Link href="/changelog">Latest Changes</Link>
+        <Link href="/changelog">{t("Footer.LatestChanges")}</Link>
       </div>
     </div>
   );
