@@ -119,7 +119,10 @@ export default async function ProfilePage({
               )}
               {user.bggName && (
                 <li>
-                  <Link href={`https://boardgamegeek.com/user/${user.bggName}`}>
+                  <Link
+                    href={`https://boardgamegeek.com/user/${user.bggName}`}
+                    target="_blank"
+                  >
                     {t("Header.BggName", { name: user.bggName })}
                   </Link>
                 </li>
