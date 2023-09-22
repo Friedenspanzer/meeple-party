@@ -1,7 +1,8 @@
 {
   "Login": {
     "GoToApp": "Go to app",
-    "Logout": "Logout"
+    "Logout": "Logout",
+    "Register": "Login or Register"
   },
   "Navigation": {
     "Pages": {

@@ -31,7 +31,7 @@ const Login: React.FC = () => {
         {!loading && !user && (
           <>
             <a className="btn btn-primary" href="/api/auth/signin">
-              Login or Register
+              {t("Login.Register")}
             </a>
           </>
         )}
