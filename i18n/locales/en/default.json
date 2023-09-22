@@ -5,6 +5,7 @@
     "Register": "Login or Register"
   },
   "Navigation": {
+    "Toggle": "Toggle navigation",
     "Pages": {
       "Dashboard": "Dashboard",
       "Collection": "Collection",

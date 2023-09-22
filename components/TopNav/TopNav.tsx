@@ -1,16 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
-import styles from "./topnav.module.css";
-import Image from "next/image";
-import Person from "../Person/Person";
-import classNames from "classnames";
-import { signOut } from "next-auth/react";
-import { useCallback } from "react";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import classNames from "classnames";
+import { signOut } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback } from "react";
+import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
+import Person from "../Person/Person";
+import styles from "./topnav.module.css";
 
 export default function TopNav() {
   const pathname = usePathname();
@@ -46,7 +46,7 @@ export default function TopNav() {
             data-bs-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01"
             aria-expanded="false"
-            aria-label="Toggle navigation"
+            aria-label={t("Navigation.Toggle")}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
