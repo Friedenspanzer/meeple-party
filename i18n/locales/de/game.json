@@ -12,6 +12,7 @@
             "FriendsOwn": "Im Besitz",
             "FriendsWantToPlay": "Wollen spielen",
             "FriendsWishlist": "Wünschen sich"
-        }
+        },
+        "More": "… und {{count}} weitere"
     }
 }

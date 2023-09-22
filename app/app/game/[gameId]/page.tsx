@@ -1,28 +1,30 @@
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import styles from "./gamepage.module.css";
-import classNames from "classnames";
-import { getBggGame } from "@/utility/bgg";
-import BggRating from "@/components/BggRating/BggRating";
-import { getCollectionStatusOfFriends } from "@/selectors/collections";
-import { getServerUser } from "@/utility/serverSession";
 import Avatar from "@/components/Avatar/Avatar";
-import Link from "next/link";
+import BggRating from "@/components/BggRating/BggRating";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
-import { Metadata } from "next/types";
 import { getTranslation } from "@/i18n";
+import { getCollectionStatusOfFriends } from "@/selectors/collections";
+import { getBggGame } from "@/utility/bgg";
+import { getServerUser } from "@/utility/serverSession";
+import classNames from "classnames";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Metadata } from "next/types";
+import styles from "./gamepage.module.css";
 
-export async function generateMetadata(
-  { params }: { params: { gameId: string } }
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { gameId: string };
+}): Promise<Metadata> {
   const id = Number.parseInt(params.gameId);
   if (!Number.isInteger(id)) {
     notFound();
   }
   const game = await getBggGame(id);
   return {
-    title: game.name
-  }
+    title: game.name,
+  };
 }
 
 export default async function Game({ params }: { params: { gameId: string } }) {
@@ -39,16 +41,16 @@ export default async function Game({ params }: { params: { gameId: string } }) {
       game.designers.length <= 5
         ? game.designers
         : [
-          ...game.designers.slice(0, 5),
-          `... and ${game.designers.length - 5} more`,
-        ];
+            ...game.designers.slice(0, 5),
+            t("Page.More", { count: game.designers.length - 5 }),
+          ];
     const gameArtists =
       game.artists.length <= 5
         ? game.artists
         : [
-          ...game.artists.slice(0, 5),
-          `... and ${game.artists.length - 5} more`,
-        ];
+            ...game.artists.slice(0, 5),
+            t("Page.More", { count: game.artists.length - 5 }),
+          ];
 
     return (
       <div className={styles.container}>
