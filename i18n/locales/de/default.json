@@ -98,7 +98,10 @@
   },
   "Actions": {
     "SaveAndContinue": "Speichern und weiter",
-    "Next": "Weiter"
+    "Next": "Weiter",
+    "Accept": "Annehmen",
+    "Deny": "Ablehnen",
+    "Withdraw": "Withdraw"
   },
   "Search": {
     "Placeholder": "Name des Spiels, BoardGameGeek-ID, BoardGameGeek-Link, …",
