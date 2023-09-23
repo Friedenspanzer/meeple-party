@@ -1,4 +1,9 @@
 {
+    "Attributes": {
+        "Players": "Players",
+        "PlayingTime": "Playing Time",
+        "Weight": "Weight"
+    },
     "Page": {
         "Header": {
             "Design": "Design",
