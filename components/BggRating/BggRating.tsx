@@ -4,16 +4,23 @@ import styles from "./bggrating.module.css";
 export interface BggRatingProps extends React.HTMLAttributes<HTMLDivElement> {
   rating: number | null;
   rank: number | null;
+  size?: "md" | "sm";
 }
 
-export default function BggRating({ rating, rank, ...props }: BggRatingProps) {
+export default function BggRating({
+  rating,
+  rank,
+  size = "md",
+  ...props
+}: BggRatingProps) {
   return (
     <div
       {...props}
       className={classNames(
         styles.container,
         props.className,
-        getRankStyle(rank)
+        getRankStyle(rank),
+        { [styles.medium]: size === "md", [styles.small]: size === "sm" }
       )}
     >
       <div className={styles.hexTop}>&nbsp;</div>
