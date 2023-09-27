@@ -9,12 +9,12 @@
 
 .medium {
   --bgg-hex-size: var(--bgg-hex-size-md);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .small {
   --bgg-hex-size: var(--bgg-hex-size-sm);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .hexTop {
@@ -43,7 +43,7 @@
 
 .rating {
   font-weight: lighter;
-  font-size: 0.46em;
+  font-size: 0.6em;
 }
 
 .top10 {
