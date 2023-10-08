@@ -112,7 +112,7 @@ export default function GameBox({
           <div className={styles.infoBox}>
             <div className={styles.metric}>{gameData.playingTime}</div>
             <div className={styles.label}>
-              {t("Filters.Traits.PlayingTime")}
+              {t("Attributes.PlayingTime")}
             </div>
           </div>
           <div className={styles.infoBox}>
