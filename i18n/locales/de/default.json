@@ -19,6 +19,7 @@
   "Filters": {
     "Presets": "Vorlagen",
     "GameName": "Name des Spiels",
+    "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Traits": {
       "PlayerCount": "Spielendenzahl",
       "Weight": "Komplexität",
@@ -63,7 +64,8 @@
         "Medium": "Mittel",
         "MediumHeavy": "Mittel-Komplex",
         "Heavy": "Komplex"
-      }
+      },
+      "WeightPresets": "Komplexitätsvoreinstellungen"
     },
     "Preset": {
       "GamesYouOwn": "Im Besitz",
@@ -101,7 +103,8 @@
     "Next": "Weiter",
     "Accept": "Annehmen",
     "Deny": "Ablehnen",
-    "Withdraw": "Withdraw"
+    "Withdraw": "Withdraw",
+    "Close": "Schließen"
   },
   "Search": {
     "Placeholder": "Name des Spiels, BoardGameGeek-ID, BoardGameGeek-Link, …",

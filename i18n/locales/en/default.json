@@ -17,6 +17,7 @@
     }
   },
   "Filters": {
+    "Heading": "Filter games ({{current}}/{{total}})",
     "Presets": "Filter presets",
     "GameName": "Game name",
     "Traits": {
@@ -63,7 +64,8 @@
         "Medium": "Medium",
         "MediumHeavy": "Medium Heavy",
         "Heavy": "Heavy"
-      }
+      },
+      "WeightPresets": "Weight presets"
     },
     "Preset": {
       "GamesYouOwn": "Games you own",
@@ -101,7 +103,8 @@
     "Next": "Next",
     "Deny": "Deny",
     "Accept": "Accept",
-    "Withdraw": "Withdraw"
+    "Withdraw": "Withdraw",
+    "Close": "Close"
   },
   "Search": {
     "Placeholder": "Game name, BoardGameGeek ID, BoardGameGeek Link, …",
