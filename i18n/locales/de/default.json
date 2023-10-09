@@ -74,7 +74,9 @@
       "GamesYouOwnNoSolo": "Im Besitz, keine Solo-Spiele",
       "GamesYouDontOwnNoSolo": "Nicht im Besitz, keine Solo-Spiele",
       "YourWishlist": "Dein Wunschzettel",
-      "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele"
+      "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele",
+      "OwnAndWantToPlay": "Im Besitz und will ich spielen",
+      "WantToPlay": "Will ich spielen"
     },
     "SortOrder": {
       "CollectionStatus": "Sammlungsstatus",
@@ -117,5 +119,8 @@
   "Footer": {
     "Issues": "Tickets",
     "LatestChanges": "Neueste Änderungen"
+  },
+  "Pagination": {
+    "Current": "Aktuelle Seite"
   }
 }

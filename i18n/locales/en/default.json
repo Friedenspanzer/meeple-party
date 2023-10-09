@@ -74,7 +74,9 @@
       "GamesYouOwnNoSolo": "Games you own, no solo play",
       "GamesYouDontOwnNoSolo": "Games you don't own, no solo play",
       "YourWishlist": "Your wishlist",
-      "YourWishlistNoSolo": "Your wishlist, no solo play"
+      "YourWishlistNoSolo": "Your wishlist, no solo play",
+      "WantToPlay": "Games you want to play",
+      "OwnAndWantToPlay": "Games you own and want to play"
     },
     "SortOrder": {
       "CollectionStatus": "Collection status",
@@ -117,5 +119,8 @@
   "Footer": {
     "Issues": "Issues",
     "LatestChanges": "Latest Changes"
+  },
+  "Pagination": {
+    "Current": "Current page"
   }
 }

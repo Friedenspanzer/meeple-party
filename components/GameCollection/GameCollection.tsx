@@ -2,11 +2,13 @@
 
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
+import { useTranslation } from "@/i18n/client";
+import { emptyFilter } from "@/utility/filter";
 import classNames from "classnames";
+import Fuse from "fuse.js";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
-import Fuse from "fuse.js";
 import GameBox from "../GameBox/GameBox";
 import GameCollectionFilter, {
   FilterPreset,
@@ -14,8 +16,6 @@ import GameCollectionFilter, {
   SortOrder,
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
-import { emptyFilter } from "@/utility/filter";
-import { useTranslation } from "@/i18n/client";
 
 type GameInfo = {
   game: Game;
@@ -44,7 +44,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
   games,
   showFriendCollection = false,
   showFilter = true,
-  filterPresets = getDefaultFilterPresets(),
+  filterPresets,
   defaultFilter,
   children,
   ...props
@@ -110,7 +110,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
             onFilterChange={setFilter}
             totalCount={games.length}
             filteredCount={filteredGames.length}
-            presets={filterPresets}
+            presets={filterPresets || getDefaultFilterPresets(t)}
             defaultFilter={defaultFilter}
           />
         )}
@@ -138,7 +138,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
                 type="number"
                 value={inputPage}
                 onChange={(e) => setInputPage(e.currentTarget.value)}
-                aria-label="Current page"
+                aria-label={t("Pagination.Current")}
                 className={styles.page}
               />{" "}
               {t("Collection.Pagination.of")} {totalNumberOfPages}
@@ -204,22 +204,22 @@ function pageButtons(
   return pageElements;
 }
 
-function getDefaultFilterPresets(): FilterPreset[] {
+function getDefaultFilterPresets(t: (key: string) => string): FilterPreset[] {
   return [
     {
-      name: "Own",
+      name: t("Filters.Preset.GamesYouOwn"),
       filter: { ...emptyFilter, collectionStatus: { own: true } },
     },
     {
-      name: "Want to play",
+      name: t("Filters.Preset.WantToPlay"),
       filter: { ...emptyFilter, collectionStatus: { wantToPlay: true } },
     },
     {
-      name: "Wishlist",
+      name: t("Filters.Preset.YourWishlist"),
       filter: { ...emptyFilter, collectionStatus: { wishlist: true } },
     },
     {
-      name: "Own and want to play",
+      name: t("Filters.Preset.OwnAndWantToPlay"),
       filter: {
         ...emptyFilter,
         collectionStatus: { own: true, wantToPlay: true },
