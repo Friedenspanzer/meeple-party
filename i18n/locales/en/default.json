@@ -106,7 +106,11 @@
     "Deny": "Deny",
     "Accept": "Accept",
     "Withdraw": "Withdraw",
-    "Close": "Close"
+    "Close": "Close",
+    "Submit": "Submit"
+  },
+  "LoadingIndicators": {
+    "Sending": "Sending …"
   },
   "Search": {
     "Placeholder": "Game name, BoardGameGeek ID, BoardGameGeek Link, …",
