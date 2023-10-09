@@ -126,5 +126,8 @@
   },
   "Pagination": {
     "Current": "Current page"
+  },
+  "Objects": {
+    "Avatar": "User avatar"
   }
 }
