@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
