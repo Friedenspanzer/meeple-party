@@ -1,0 +1,62 @@
+{
+  "Steps": {
+    "Account": "BGG-Account",
+    "Configuration": "Einstellungen",
+    "Request": "Daten anfragen",
+    "Import": "Import"
+  },
+  "Name": {
+    "YourName": "Dein BoardGameGeek-Benutzername"
+  },
+  "Configuration": {
+    "Mode": "Importmodus",
+    "Update": "Update",
+    "Merge": "Zusammenführen",
+    "Overwrite": "Überschreiben",
+    "BggToMeepleParty": "Welcher BGG-Status soll welchem Meeple Party-Status zugeordnet werden",
+    "BggStatus": {
+      "Owned": "Owned",
+      "Preordered": "Preordered",
+      "WantToPlay": "Want To Play",
+      "WantToBuy": "Want To Buy",
+      "Wishlist": "Wishlist",
+      "WantInTrade": "Want In Trade"
+    },
+    "Explanations": {
+      "Update": "<p>Fügt alles aus deiner BoardGameGeek-Sammlung zu Meeple Party hinzu. Nichts wird gelöscht. Es wird kein Sammlungsstatus in Meeple Party entfernt.</p><p>Ein Spiel das auf Meeple Party als Im Besitz und Will ich spielen markiert ist und auf BoardGameGeek als Want To Play und Wishlist wird hinterher in Meeple Party als Im Besitz, Will ich spielen und Wunschzettel markiert sein.</p>",
+      "Merge": "<p>Spiele in deiner BoardGameGeek-Sammlung, die noch nicht in deiner Meeple Party-Sammlung sind, werden importiert. Spiele die in deiner Meeple Party-Sammlung aber nicht in deiner BoardGameGeek-Sammlung sind bleiben unangetastet.</p><p>Für alle Spiele in beiden Sammlungen wird der Status in Meeple Party entfernt und mit einem neuen Status aus BoardGameGeek überschrieben</p><p>Ein Spiel das auf Meeple Party als Im Besitz und Will ich spielen markiert ist und auf BoardGameGeek als Want To Play und Wishlist wird hinterher in Meeple Party als Will ich spielen und Wunschzettel markiert sein.</p>",
+      "Overwrite": "<p>Überschreibt deine Meeple Party-Sammlung mit deiner BoardGameGeek-Sammlung</p><p>Alles in deiner Meeple Party-Sammlung, was nicht auch in deiner BoardGameGeek-Sammlung ist, wird entfernt. Jeden Status den du auf Meeple Party gesetzt hast, aber nicht auf BoardGameGeekk, wird entfernt.</p>"
+    },
+    "Warnings": {
+      "PreorderedTwice": {
+        "Heading": "Du hast ausgewählt den BGG-Status Preorder zwei Mal zu importieren.",
+        "Text": "Das wird für deine vorbestellten Spiele beide Status-Felder in Meeple Party setzen."
+      },
+      "NoStatusInMerge": {
+        "Heading": "Du hast im Zusammenführen-Modus für einen Status auf Meeple Party keinen Status auf BoardGameGeek ausgewählt, der importiert werden soll.",
+        "Text": "Das wird funktionieren, macht aber möglicherweise nicht das, was du willst. Der Status <em>wird</em> importiert, aber jedes Spiel wird von BoardGameGeek als ohne diesen Status erkannt. Für Spiele die in beiden Sammlungen sind wird der Status auf Meeple Party also gelöscht."
+      },
+      "Overwrite": {
+        "Heading": "Du hast den Modus Überschreiben gewählt.",
+        "Text": "Jeder Status, den du auf Meeple Party gesetzt hast, aber nicht auf BoardGameGeek, wird gelöscht."
+      },
+      "OverwriteAll": {
+        "Heading": "Du hast den Modus Überschreiben und keinen Status ausgewählt.",
+        "Text": "Das wird einfach deine komplette Sammlung löschen. Wenn es das ist, was du tun willst, kannst du natürlich fortfahren."
+      }
+    }
+  },
+  "Request": {
+    "Title": "Deine Sammlung wird abgerufen.",
+    "Text": "Das kann ein paar Minuten dauern, je nach dem wie ausgelastet BoardGameGeek ist. Du kannst hier nichts tun. Du kannst die Seite verlassen und später wiederkommen, ohne Fortschritt zu verlieren."
+  },
+  "Import": {
+    "Update": "{{name}} wurde in deiner Sammlung geändert.",
+    "Remove": "{{name}} wurde aus deiner Sammlung entfernt.",
+    "Add": "{{name}} wurde deiner Sammlung hinzugefügt."
+  },
+  "Errors": {
+    "NameWrongLength": "Der Name ist zu kurz oder zu lang",
+    "NameInvalidCharacters": "Der Name enthält nicht erlaubte Zeichen"
+  }
+}

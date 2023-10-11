@@ -1,5 +1,6 @@
 import { Relationship } from "@/datatypes/relationship";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useData } from "@frdnspnzr/use-data";
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 interface Result {
@@ -11,26 +12,22 @@ interface Result {
 
 export default function useRelationship(userId: string): Result {
   const queryKey = ["relationship", userId];
-  const queryClient = useQueryClient();
-  const { isLoading, isError, data } = useQuery({
-    queryKey,
-    queryFn: () => {
-      return axios
-        .get<Relationship[]>(`/api/relationships/${userId}`)
-        .then((response) => response.data)
-        .then((relationships) => {
-          if (relationships.length === 1) {
-            return relationships[0];
-          } else {
-            return null;
-          }
-        });
-    },
+  const { data, loading } = useData(queryKey, () => {
+    return axios
+      .get<Relationship[]>(`/api/relationships/${userId}`)
+      .then((response) => response.data)
+      .then((relationships) => {
+        if (relationships.length === 1) {
+          return relationships[0];
+        } else {
+          return null;
+        }
+      });
   });
-
+  const queryClient = useQueryClient();
   return {
-    isLoading,
-    isError,
+    isLoading: loading,
+    isError: false,
     relationship: data,
     invalidate: () => {
       queryClient.invalidateQueries({ queryKey: ["relationships"] });

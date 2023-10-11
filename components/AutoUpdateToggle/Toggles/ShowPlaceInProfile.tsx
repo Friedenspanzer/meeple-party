@@ -3,8 +3,10 @@
 import Spinner from "@/components/Spinner/Spinner";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import AutoUpdateToggle from "../AutoUpdateToggle";
+import { useTranslation } from "@/i18n/client";
 
 export default function ShowPlaceInProfile() {
+  const { t } = useTranslation("settings");
   const { preferences, loading } = useUserPreferences();
   if (loading) {
     return <Spinner />;
@@ -13,13 +15,10 @@ export default function ShowPlaceInProfile() {
       <AutoUpdateToggle
         value={preferences.showPlaceInProfile}
         onChange={(value) => ({ ...preferences, showPlaceInProfile: value })}
-        title="Public place"
+        title={t("Privacy.ShowPlaceInProfile.Title")}
       >
         <p>
-          When this flag is set the place you provided is visibile to everybody.
-          When this flag is not set the palce you provided is only visible to
-          your friends. If you don&apos;t want that either just don&apos;t set a
-          place and ignore this flag.
+        {t("Privacy.ShowPlaceInProfile.Description")}
         </p>
       </AutoUpdateToggle>
     );

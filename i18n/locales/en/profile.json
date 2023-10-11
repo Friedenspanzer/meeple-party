@@ -1,0 +1,26 @@
+{
+  "Badges": {
+    "You": "It's you!",
+    "Friend": "Friend",
+    "Admin": "Admin",
+    "FriendsFamily": "Friends & Family",
+    "Premium": "Premium",
+    "User": "User"
+  },
+  "Edit": "Edit your profile",
+  "FavoriteGames": "Favorite Games",
+  "UserCollection": "{{name}}'s collection",
+  "Header": {
+    "Place": "From {{place}}",
+    "BggName": "{{name}} on BoardGameGeek"
+  },
+  "Complete": {
+    "Header": "Complete your user profile",
+    "Explanation": "Hi there! 👋 Sorry to interrupt, but we still need some information from you.",
+    "DisplayName": "Display name",
+    "DisplayNameExplanation": "What you will be publicly known as",
+    "RealName": "Real name (optional)",
+    "RealNameExplanation": "Only shown to your friends",
+    "EmailAddress": "E-Mail address"
+  }
+}

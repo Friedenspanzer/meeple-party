@@ -1,0 +1,26 @@
+{
+  "Title": "Aktivitäten deiner Freunde",
+  "Navbar": {
+    "Activity": "Aktivität",
+    "Requests": "Deine Anfragen"
+  },
+  "Activity": {
+    "Title": "Sammlungsänderungen deiner Freunde",
+    "Changes": {
+      "Own": "{{person}} hat {{game}}",
+      "OwnWtp": "{{person}} hat {{game}} und will es spielen",
+      "OwnWish": "{{person}} hat {{game}} und wünscht es sich ",
+      "OwnWtpWish": "{{person}} hat {{game}}, wünscht es sich und will es spielen",
+      "Wtp": "{{person}} will {{game}} spielen",
+      "WtpWish": "{{person}} wünscht sich {{game}} und will es spielen",
+      "Wish": "{{person}} wünscht sich {{game}}"
+    }
+  },
+  "List": {
+    "Title": "Deine Freunde"
+  },
+  "Requests": {
+    "Incoming": "Eingehende Anfragen",
+    "Outgoing": "Versendete Anfragen"
+  }
+}

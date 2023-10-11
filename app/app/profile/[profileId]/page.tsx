@@ -3,20 +3,20 @@ import GameBox from "@/components/GameBox/GameBox";
 import GameCollection from "@/components/GameCollection/GameCollection";
 import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
+import { getTranslation } from "@/i18n";
 import { cleanUserDetails } from "@/pages/api/user";
 import { getServerUser } from "@/utility/serverSession";
 import {
   Game,
+  GameCollection as PrismaGameCollection,
   Relationship,
   RelationshipType,
   User,
-  GameCollection as PrismaGameCollection,
 } from "@prisma/client";
 import classNames from "classnames";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import { cache } from "react";
 import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
 
@@ -44,6 +44,8 @@ export default async function ProfilePage({
 }: {
   params: { profileId: string };
 }) {
+  const { t } = await getTranslation("profile");
+
   const loggedInUser = await getServerUser();
   const isMe = loggedInUser.id === params.profileId;
 
@@ -81,12 +83,12 @@ export default async function ProfilePage({
           <Role role={user.role} />
           {isMe && (
             <span className="badge text-bg-light">
-              <i className="bi bi-person-circle"></i> It&apos;s you!
+              <i className="bi bi-person-circle"></i> {t("Badges.You")}
             </span>
           )}
           {isFriend && (
             <span className="badge text-bg-dark">
-              <i className="bi bi-person-fill"></i> Friend
+              <i className="bi bi-person-fill"></i> {t("Badges.Friend")}
             </span>
           )}
         </div>
@@ -99,7 +101,7 @@ export default async function ProfilePage({
                   href="/app/profile/edit"
                   role="button"
                 >
-                  Edit your profile
+                  {t("Edit")}
                 </Link>
               </div>
             )}
@@ -110,14 +112,23 @@ export default async function ProfilePage({
               )}
             </div>
           </div>
-          {moreHeaders && (
-            <div className={classNames("row pb-2")}>
-              <div
-                className={classNames(styles.moreHeader, "col-11")}
-                dangerouslySetInnerHTML={{ __html: moreHeaders }}
-              />
-            </div>
-          )}
+          <div className={classNames("row")}>
+            <ul className={styles.moreHeaders}>
+              {user.place && (
+                <li>{t("Header.Place", { place: user.place })}</li>
+              )}
+              {user.bggName && (
+                <li>
+                  <Link
+                    href={`https://boardgamegeek.com/user/${user.bggName}`}
+                    target="_blank"
+                  >
+                    {t("Header.BggName", { name: user.bggName })}
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
           {!isMe && !isFriend && (
             <div className={styles.action}>
               <ProfileRelationship targetUserId={user.id} />
@@ -135,7 +146,7 @@ export default async function ProfilePage({
         </div>
         {user.favorites.length > 0 && (
           <div className="col-md-3">
-            <h3>Favorite games</h3>
+            <h3>{t("FavoriteGames")}</h3>
             {user.favorites.slice(0, 6).map((g) => {
               const { updatedAt, ...cleanGame } = g;
               return (
@@ -160,7 +171,7 @@ export default async function ProfilePage({
               showFriendCollection={false}
               showFilter={false}
             >
-              <h3>{user.name}&#39;s collection</h3>
+              <h3>{t("UserCollection", { name: user.name })}</h3>
             </GameCollection>
           </div>
         </div>

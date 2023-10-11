@@ -1,7 +1,9 @@
 "use client";
 
+import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
+import { Trans } from "react-i18next";
 import { ImportConfiguration } from "../page";
 
 const LOCAL_STORAGE_KEY = "importConfiguration";
@@ -11,6 +13,9 @@ export interface ConfigurationProps {
 }
 
 const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
+  const { t } = useTranslation("import");
+  const { t: dt } = useTranslation();
+
   const [configuration, setConfiguration] = useState<ImportConfiguration>({
     mode: "update",
     markAsOwned: { owned: true, preordered: true },
@@ -38,7 +43,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
     <>
       <div className="row mb-2">
         <div className="col">
-          <h3>Import mode</h3>
+          <h3>{t("Configuration.Mode")}</h3>
         </div>
       </div>
       <div className="row g-2">
@@ -54,7 +59,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
                 setConfiguration({ ...configuration, mode: "update" })
               }
             >
-              <i className="bi bi-patch-plus"></i> Update
+              <i className="bi bi-patch-plus"></i> {t("Configuration.Update")}
             </button>
             <button
               type="button"
@@ -66,7 +71,8 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
                 setConfiguration({ ...configuration, mode: "merge" })
               }
             >
-              <i className="bi bi-box-arrow-in-left"></i> Merge
+              <i className="bi bi-box-arrow-in-left"></i>{" "}
+              {t("Configuration.Merge")}
             </button>
             <button
               type="button"
@@ -78,74 +84,47 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
                 setConfiguration({ ...configuration, mode: "overwrite" })
               }
             >
-              <i className="bi bi-eraser-fill"></i> Overwrite
+              <i className="bi bi-eraser-fill"></i>{" "}
+              {t("Configuration.Overwrite")}
             </button>
           </div>
         </div>
         {configuration.mode === "update" && (
           <div className="col-md-10">
             <h4>
-              <i className="bi bi-patch-plus"></i> Update
+              <i className="bi bi-patch-plus"></i> {t("Configuration.Update")}
             </h4>
-            <p>
-              Adds everything from your BoardGameGeek collection to Meeple
-              Party. Does not delete anything. Does not remove collection states
-              from Meeple Party.
-            </p>
-            <p>
-              A game that is flagged as Own and Want To Play in Meeple Party and
-              Want To Play and Wishlist on BoardGameGeek will be flagged as Own,
-              Want To Play and Wishlist afterwards.
-            </p>
+            <Trans i18nKey="Configuration.Explanations.Update" ns="import" />
           </div>
         )}
         {configuration.mode === "merge" && (
           <div className="col-md-10">
             <h4>
-              <i className="bi bi-box-arrow-in-left"></i> Merge
+              <i className="bi bi-box-arrow-in-left"></i>{" "}
+              {t("Configuration.Merge")}
             </h4>
-            <p>
-              Games in your BoardGameGeek collection but not your Meeple Party
-              collection will be imported. Games in your Meeple Party collection
-              but not in your BoardGameGeek collection will remain unchanged.
-            </p>
-            <p>
-              For all games in both collections the collection state from
-              BoardGameGeek will overwrite the collection state in Meeple Party.
-            </p>
-            <p>
-              A game that is flagged as Own and Want To Play in Meeple Party and
-              Want To Play and Wishlist on BoardGameGeek will be flagged as Want
-              To Play and Wishlist afterwards.
-            </p>
+            <Trans i18nKey="Configuration.Explanations.Merge" ns="import" />
           </div>
         )}
         {configuration.mode === "overwrite" && (
           <div className="col-md-10">
             <h4>
-              <i className="bi bi-eraser-fill"></i> Overwrite
+              <i className="bi bi-eraser-fill"></i>{" "}
+              {t("Configuration.Overwrite")}
             </h4>
-            <p>
-              Overwrites your Meeple Party collection with your BoardGameGeek
-              collection.
-            </p>
-            <p>
-              Everything that is in your Meeple Party collection but not in your
-              BoardGameGeek collection will be lost. Every state you set in
-              Meeple Party but not on BoardGameGeek will be lost.
-            </p>
+            <Trans i18nKey="Configuration.Explanations.Overwrite" ns="import" />
           </div>
         )}
       </div>
       <div className="row mb-2">
         <div className="col">
-          <h3>What BGG status to import to which Meeple Party status</h3>
+          <h3>{t("Configuration.BggToMeepleParty")}</h3>
         </div>
       </div>
       <div className="row mb-2 g-2">
         <div className="col-md-4">
           <h4>
-            <i className="bi bi-box-seam-fill"></i> Own
+            <i className="bi bi-box-seam-fill"></i> {dt("States.Own")}
           </h4>
           <div className="form-check form-switch">
             <input
@@ -165,7 +144,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
               }
             />
             <label className="form-check-label" htmlFor="flexSwitchCheckOwnOwn">
-              Owned
+              {t("Configuration.BggStatus.Owned")}
             </label>
           </div>
           <div className="form-check form-switch">
@@ -189,13 +168,13 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
               className="form-check-label"
               htmlFor="flexSwitchCheckOwnPreordered"
             >
-              Preordered
+              {t("Configuration.BggStatus.Preordered")}
             </label>
           </div>
         </div>
         <div className="col-md-4">
           <h4>
-            <i className="bi bi-dice-3-fill"></i> Want To Play
+            <i className="bi bi-dice-3-fill"></i> {dt("States.WantToPlay")}
           </h4>
           <div className="form-check form-switch">
             <input
@@ -218,13 +197,13 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
               className="form-check-label"
               htmlFor="flexSwitchCheckWantToPlay"
             >
-              Want to Play
+              {t("Configuration.BggStatus.WantToPlay")}
             </label>
           </div>
         </div>
         <div className="col-md-4">
           <h4>
-            <i className="bi bi-gift-fill"></i> Wishlist
+            <i className="bi bi-gift-fill"></i> {dt("States.Wishlist")}
           </h4>
           <div className="form-check form-switch">
             <input
@@ -247,7 +226,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
               className="form-check-label"
               htmlFor="flexSwitchCheckWishlistWantToBuy"
             >
-              Want to Buy
+              {t("Configuration.BggStatus.WantToBuy")}
             </label>
           </div>
           <div className="form-check form-switch">
@@ -271,7 +250,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
               className="form-check-label"
               htmlFor="flexSwitchCheckWishlistWishlist"
             >
-              Wishlist
+              {t("Configuration.BggStatus.Wishlist")}
             </label>
           </div>
           <div className="form-check form-switch">
@@ -295,7 +274,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
               className="form-check-label"
               htmlFor="flexSwitchCheckWishlistWantInTrade"
             >
-              Want in Trade
+              {t("Configuration.BggStatus.WantInTrade")}
             </label>
           </div>
           <div className="form-check form-switch">
@@ -319,7 +298,7 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
               className="form-check-label"
               htmlFor="flexSwitchCheckWishlistPreorder"
             >
-              Preorder
+              {t("Configuration.BggStatus.Preordered")}
             </label>
           </div>
         </div>
@@ -330,9 +309,12 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
             <div className="col alert alert-warning">
               <i className="bi bi-exclamation-octagon-fill"></i>{" "}
               <strong>
-                You have selected to import the BGG status Preordered twice.
+                {t("Configuration.Warnings.PreorderedTwice.Heading")}
               </strong>{" "}
-              This will set both Meeple Party status at once.
+              <Trans
+                i18nKey="Configuration.Warnings.PreorderedTwice.Text"
+                ns="import"
+              />
             </div>
           </div>
         )}
@@ -348,13 +330,12 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
             <div className="col alert alert-warning">
               <i className="bi bi-exclamation-octagon-fill"></i>{" "}
               <strong>
-                You chose not to import any BGG status for one or more Meeple
-                Party status in Merge mode.
+                {t("Configuration.Warnings.NoStatusInMerge.Heading")}
               </strong>{" "}
-              While this will work the result may not be what you intended. That
-              status <em>will</em> be imported but every game on BoardGameGeek
-              will report this status as not set. So for games that are in both
-              your collections that status will also be unset in Meeple Party.
+              <Trans
+                i18nKey="Configuration.Warnings.NoStatusInMerge.Text"
+                ns="import"
+              />
             </div>
           </div>
         )}
@@ -362,8 +343,11 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
         <div className="row mb-2">
           <div className="col alert alert-warning">
             <i className="bi bi-exclamation-octagon-fill"></i>{" "}
-            <strong>You chose Overwrite mode.</strong> Every status you set in
-            Meeple Party but did not replicate on BoardGameGeek will be lost.
+            <strong>{t("Configuration.Warnings.Overwrite.Heading")}</strong>{" "}
+            <Trans
+              i18nKey="Configuration.Warnings.Overwrite.Text"
+              ns="import"
+            />
           </div>
         </div>
       )}
@@ -378,9 +362,13 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
           <div className="row mb-2">
             <div className="col alert alert-danger">
               <i className="bi bi-exclamation-octagon-fill"></i>{" "}
-              <strong>You chose Overwrite mode but not any status.</strong> This
-              will just delete your whole collection. If this is what you&#39;d
-              like to do go on.
+              <strong>
+                {t("Configuration.Warnings.OverwriteAll.Heading")}
+              </strong>{" "}
+              <Trans
+                i18nKey="Configuration.Warnings.OverwriteAll.Text"
+                ns="import"
+              />
             </div>
           </div>
         )}
@@ -391,7 +379,8 @@ const Configuration: React.FC<ConfigurationProps> = ({ onDone }) => {
             className="btn btn-primary"
             onClick={(e) => onDone(configuration)}
           >
-            Save and continue <i className="bi bi-caret-right-square"></i>
+            {dt("Actions.SaveAndContinue")}{" "}
+            <i className="bi bi-caret-right-square"></i>
           </button>
         </div>
       </div>

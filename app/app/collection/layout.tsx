@@ -2,23 +2,26 @@ import {
   NavigationBar,
   NavigationItem,
 } from "@/components/NavigationBar/NavigationBar";
+import { getTranslation } from "@/i18n";
 
-interface CollectionLayoutProps {
-  children: React.ReactNode;
-}
-const CollectionLayout: React.FC<CollectionLayoutProps> = ({ children }) => {
+export default async function Layout({
+  children,
+}: React.PropsWithChildren<{}>) {
+  const { t } = await getTranslation("collection");
   return (
     <>
       <NavigationBar>
-        <NavigationItem href="/app/collection">Your collection</NavigationItem>
-        <NavigationItem href="/app/collection/search">Search</NavigationItem>
+        <NavigationItem href="/app/collection">
+          {t("Navbar.YourCollection")}
+        </NavigationItem>
+        <NavigationItem href="/app/collection/search">
+          {t("Navbar.Search")}
+        </NavigationItem>
         <NavigationItem href="/app/collection/import">
-          Import from BoardGameGeek
+          {t("Navbar.Import")}
         </NavigationItem>
       </NavigationBar>
       {children}
     </>
   );
-};
-
-export default CollectionLayout;
+}

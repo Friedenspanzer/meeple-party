@@ -1,5 +1,8 @@
+"use client";
+
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import useRelationship from "@/hooks/useRelationship";
+import { useTranslation } from "@/i18n/client";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import Spinner from "../Spinner/Spinner";
@@ -16,6 +19,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
 
   const [updating, setUpdating] = useState(false);
   const { invalidate } = useRelationship(request.profile.id);
+  const { t } = useTranslation();
 
   const withdrawRequest = useCallback(() => {
     setUpdating(true);
@@ -41,7 +45,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
           onClick={withdrawRequest}
           disabled={updating}
         >
-          <i className="bi bi-trash"></i> Withdraw
+          <i className="bi bi-trash"></i> {t("Actions.Withdraw")}
         </button>
       )}
     </GenericFriendRequest>

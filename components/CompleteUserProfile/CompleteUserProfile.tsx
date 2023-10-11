@@ -1,8 +1,10 @@
 "use client";
 
+import useUserProfile from "@/hooks/useUserProfile";
+import { useTranslation } from "@/i18n/client";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
-import useUserProfile from "@/hooks/useUserProfile";
 
 export default function CompleteUserProfile() {
   const { isLoading, userProfile, invalidate } = useUserProfile();
@@ -11,6 +13,9 @@ export default function CompleteUserProfile() {
   const [realName, setRealName] = useState("");
 
   const [updating, setUpdating] = useState(false);
+
+  const { t } = useTranslation("profile");
+  const { t: td } = useTranslation();
 
   useEffect(() => {
     if (userProfile) {
@@ -21,13 +26,11 @@ export default function CompleteUserProfile() {
 
   const sendCurrentData = () => {
     setUpdating(true);
-    fetch("/api/user", {
-      method: "PATCH",
-      body: JSON.stringify({
+    axios
+      .patch("/api/user", {
         name: username,
         realName: realName,
-      }),
-    })
+      })
       .then(() => setUpdating(false))
       .then(() => invalidate());
   };
@@ -40,46 +43,43 @@ export default function CompleteUserProfile() {
 
   return (
     <>
-      <h2>Complete your user profile</h2>
-      <p>
-        Hi there! 👋 Sorry to interrupt, but we still need some information from
-        you.
-      </p>
+      <h2>{t("Complete.Header")}</h2>
+      <p>{t("Complete.Explanation")}</p>
       <form className="container-sm row row-cols-3">
         <div className="col">
-          <label>Display name</label>
+          <label>{t("Complete.DisplayName")}</label>
           <input
             className="form-control"
             type="text"
-            placeholder="Display name"
+            placeholder={t("Complete.DisplayName")}
             value={username ?? ""}
             onChange={(e) => {
               setUserName(e.currentTarget.value);
             }}
             disabled={updating}
           />
-          <p className="text-muted">What you will be publicly known as</p>
+          <p className="text-muted">{t("Complete.DisplayNameExplanation")}</p>
         </div>
         <div className="col">
-          <label>Real name (optional)</label>
+          <label>{t("Complete.RealName")}</label>
           <input
             className="form-control"
             type="text"
-            placeholder="Display name"
+            placeholder={t("Complete.RealName")}
             value={!!realName ? realName : ""}
             onChange={(e) => {
               setRealName(e.currentTarget.value);
             }}
             disabled={updating}
           />
-          <p className="text-muted">Only shown to your friends</p>
+          <p className="text-muted">{t("Complete.RealNameExplanation")}</p>
         </div>
         <div className="col">
-          <label>E-Mail address</label>
+          <label>{t("Complete.EmailAddress")}</label>
           <input
             className="form-control"
             type="email"
-            placeholder="Enter email"
+            placeholder={t("Complete.EmailAddress")}
             disabled
             value={userProfile?.email ?? ""}
           />
@@ -94,10 +94,10 @@ export default function CompleteUserProfile() {
         {updating ? (
           <>
             <Spinner style={{ marginRight: "0.5rem" }} />
-            Sending ...
+            {td("LoadingIndicators.Sending")}
           </>
         ) : (
-          "Submit"
+          td("Actions.Submit")
         )}
       </button>
     </>

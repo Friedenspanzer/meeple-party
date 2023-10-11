@@ -6,6 +6,9 @@ import Username from "./components/username";
 import Configuration from "./components/configuration";
 import Request from "./components/request";
 import Import from "./components/import";
+import { getTranslation } from "@/i18n";
+import { useTranslation } from "@/i18n/client";
+import { TFunction } from "i18next";
 
 type Step = "username" | "type" | "request" | "import" | "done";
 
@@ -60,21 +63,32 @@ export default function CollectionSyncPage() {
   );
   return (
     <>
-      {progressBar(step)}
+      <ProgressBar active={step} />
       {stepComponent}
     </>
   );
 }
 
-function progressBar(active: Step) {
+const ProgressBar: React.FC<{ active: Step }> = ({
+  active,
+}: {
+  active: Step;
+}) => {
+  const { t } = useTranslation("import");
   return (
     <ul className={styles.progress}>
       <li className={active === "username" ? styles.active : ""}>
-        BGG Account
+        {t("Steps.Account")}
       </li>
-      <li className={active === "type" ? styles.active : ""}>Configuration</li>
-      <li className={active === "request" ? styles.active : ""}>Request</li>
-      <li className={active === "import" ? styles.active : ""}>Import</li>
+      <li className={active === "type" ? styles.active : ""}>
+        {t("Steps.Configuration")}
+      </li>
+      <li className={active === "request" ? styles.active : ""}>
+        {t("Steps.Request")}
+      </li>
+      <li className={active === "import" ? styles.active : ""}>
+        {t("Steps.Import")}
+      </li>
     </ul>
   );
-}
+};

@@ -11,16 +11,15 @@ import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
 import classNames from "classnames";
 import Link from "next/link";
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const EditProfile: React.FC = () => {
-  const { isLoading, userProfile, invalidate } = useUserProfile();
+  const {
+    isLoading,
+    userProfile,
+    invalidate,
+    update: updateUserProfile,
+  } = useUserProfile();
   const { preferences, loading: preferencesLoading } = useUserPreferences();
 
   if (!isLoading && !userProfile) {
@@ -76,26 +75,16 @@ const EditProfile: React.FC = () => {
 
   const updateUser = () => {
     setSending(true);
-    const newUserDetails = {
-      ...userProfile,
+    updateUserProfile({
       name: profileName,
       realName,
       place,
       about,
-      favorites: favorites ? favorites.map((f) => f.id) : [],
-    };
-    fetch("/api/user", {
-      method: "PATCH",
-      body: JSON.stringify(newUserDetails),
+      favorites: favorites ? favorites : [],
     })
-      .then((response) => {
-        if (response.ok) {
-          setSending(false);
-        } else {
-          throw Error(`${response.status} ${response.statusText}`);
-        }
+      .then(() => {
+        setSending(false);
       })
-      .then(invalidate)
       .catch((error) => {
         setApiError(`Error updating profile data.`);
         setApiErrorDetail(error);
@@ -182,8 +171,7 @@ const EditProfile: React.FC = () => {
                 "text-danger": profileNameError,
               })}
             >
-              {profileNameError ||
-                "Will be shown to everybody. Must be set."}
+              {profileNameError || "Will be shown to everybody. Must be set."}
             </div>
           </div>
 
@@ -238,7 +226,8 @@ const EditProfile: React.FC = () => {
                 "text-danger": placeError,
               })}
             >
-              {placeError || getPrivacyStatement(!preferences?.showPlaceInProfile)}
+              {placeError ||
+                getPrivacyStatement(!preferences?.showPlaceInProfile)}
             </div>
           </div>
         </div>

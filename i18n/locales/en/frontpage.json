@@ -1,0 +1,56 @@
+{
+  "Header": {
+    "Slogan": "Spend more time playing, less time browsing."
+  },
+  "Beta": {
+    "Heading": "Meeple Party is currently in beta!",
+    "Text": "I'm doing my best but I'm still doing my best as a hobby in my free time. Some parts are still a bit rough. Not everything may work as you expect or at all. You may lose data at some point. Things may take a little longer to fix then I'd like. If you notice something strange or broken please report it (see footer for various places to do so)."
+  },
+  "Features": {
+    "CollectionView": {
+      "Heading": "Combined collection views",
+      "Text": "See what your group of friends want to play at a glance."
+    },
+    "Filters": {
+      "Heading": "Exhaustive filtering",
+      "Text": "Filter on game attributes, your and your friend's collection status blazingly fast."
+    },
+    "Stream": {
+      "Heading": "Activity stream",
+      "Text": "Instantly see when your friends get a new game or want to play one of your's."
+    }
+  },
+  "Steps": {
+    "Fill": {
+      "Heading": "Fill your collection",
+      "Text": "Tell us what games you own. We know, for most people this is busywork. But trust us that it will be worth it. Or you can do it later, one game at a time. If you already maintain your collection on BoardGameGeek you can just import it."
+    },
+    "Friends": {
+      "Heading": "Find your friends and check out their games",
+      "Text_A": "Connect with the people you already know. Meeple Party is not a social network like the others, we don't even want you tobefriend people you haven't met. Just fill in the circle of friends and acquaintances you already play games with.",
+      "Text_B": "Then have a look at the games they own and mark every game you want to play. Meeple Party will do the rest for you and tell you exactly what game that somebody owns enough people in your circle of friends want to play."
+    },
+    "Play": {
+      "Heading": "Go play some games",
+      "Text": "Tell your friends you found some matches and fix a date for a game night. Everybody can just look up what games to bring."
+    }
+  },
+  "Statements": {
+    "Pricing": {
+      "Heading": "Pricing",
+      "Text": "Meeple Party is currently free and there will always be a free version available. We may however add a premium account system one day but we swear no features you currently have will be taken away from you in the process."
+    },
+    "Free": {
+      "Heading": "Free and open-source",
+      "Text": "Meeple party is free and open-source and will always remain so. Every new feature will always be added to the main project. There will be no closed-source additions and you will always be free to host your own version of Meeple Party with all the features without paying us a dime."
+    },
+    "Welcome": {
+      "Heading": "Everybody is welcome",
+      "Text": "Gaming is for everybody and Meeple Party is for everybody. We pledge to protect vulnerable and marginalized people as best as we can. We expect everybody to demonstrate empathy and kindness and will never tolerate harassment, insults, hate speech or behaviour that endangers others."
+    },
+    "Transparency": {
+      "Heading": "Transparency",
+      "Text": "We try to run and develop Meeple Party as openly as is feasible and include the community on every step of the way."
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "Language": {
+    "Title": "Language",
+    "Games": "Game names",
+    "Page": "Page"
+  },
+  "DangerZone": {
+    "Title": "Danger Zone",
+    "AccountDeletion": "Account deletion"
+  },
+  "Navigation": {
+    "Profile": "Profile",
+    "Settings": "Settings",
+    "Avatar": "Avatar",
+    "Privacy": "Privacy"
+  },
+  "Privacy": {
+    "Headings": {
+      "ProfileInformationVisibility": "Profile information visibility",
+      "Discoverability": "Discoverability",
+      "Tracking": "Tracking"
+    },
+    "SearchByPlace": {
+      "Title": "Allow search by place",
+      "Description": "When this flag is set people can find you by searching for your place."
+    },
+    "SendAnalyticsData": {
+      "Title": "Send analytics data",
+      "Description": "Help us improve Meeple Party by allowing us to collect usage data. Data is lightweight and fully anonymized. It's collected by our hosting provider Vercel."
+    },
+    "ShowPlaceInProfile": {
+      "Title": "Public place",
+      "Description": "When this flag is set the place you provided is visibile to everybody. When this flag is not set the palce you provided is only visible to your friends. If you don't want that either just don't set a place and ignore this flag."
+    },
+    "ShowRealName": {
+      "Title": "Public real name",
+      "Description": "When this flag is set your real name is visible to everybody. When this flag is not set your real name is only visible to your friends. If you don't want that either just don't set a real name and ignore this flag."
+    }
+  },
+  "Delete": {
+    "DeleteMyAccount": "Delete my account",
+    "Explanation": "<strong>This can not be undone.</strong> We will not retain any of your data. Everything you contributed to Meeple Party will be lost forever. Your friends will not be notified of this. Are you sure you want to do this?",
+    "TypeAccountName": "Please type your account name <strong>{{name}}</strong> to verify that you really mean it.",
+    "Progress": "Deleting your account. This may take a moment. After we're done you will be redirected to the front page. Bye!",
+    "Confirmation_1": "Yes, I'm sure",
+    "Confirmation_2": "Delete my account"
+  }
+}

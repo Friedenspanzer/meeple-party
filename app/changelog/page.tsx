@@ -1,8 +1,10 @@
-import Image from "next/image";
-import styles from "./changelog.module.css";
 import classNames from "classnames";
-import { getUpdateMetadata } from "./utils";
+import Image from "next/image";
 import Link from "next/link";
+import styles from "./changelog.module.css";
+import { getUpdateMetadata } from "./utils";
+
+export const dynamic = 'force-static'
 
 export default async function Changelog() {
   const postList = getUpdateMetadata();
