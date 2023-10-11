@@ -1,14 +1,14 @@
 "use client";
 
-import { useUserPreferences } from "@/hooks/useUserPreferences";
-import i18next from "i18next";
-import resourcesToBackend from "i18next-resources-to-backend";
 import { useEffect, useState } from "react";
+import i18next from "i18next";
 import {
   initReactI18next,
   useTranslation as useTranslationOrg,
 } from "react-i18next";
+import resourcesToBackend from "i18next-resources-to-backend";
 import { fallbackLng, getOptions, languages } from "./settings";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
 
 const runsOnServerSide = typeof window === "undefined";
 
@@ -31,15 +31,22 @@ export function useTranslation(ns?: string, options?: any) {
   const { preferences } = useUserPreferences();
   const language = preferences?.pageLanguage || fallbackLng;
   const { i18n } = ret;
-  const [activeLanguage, setActiveLanguage] = useState(i18n.resolvedLanguage);
-  useEffect(() => {
-    if (activeLanguage === i18n.resolvedLanguage) return;
-    setActiveLanguage(i18n.resolvedLanguage);
-  }, [activeLanguage, i18n.resolvedLanguage]);
-  useEffect(() => {
-    if (!language || i18n.resolvedLanguage === language) return;
+  if (runsOnServerSide && language && i18n.resolvedLanguage !== language) {
     i18n.changeLanguage(language);
-  }, [language, i18n]);
+  } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [activeLanguage, setActiveLanguage] = useState(i18n.resolvedLanguage);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      if (activeLanguage === i18n.resolvedLanguage) return;
+      setActiveLanguage(i18n.resolvedLanguage);
+    }, [activeLanguage, i18n.resolvedLanguage]);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      if (!language || i18n.resolvedLanguage === language) return;
+      i18n.changeLanguage(language);
+    }, [language, i18n]);
+  }
 
   return ret;
 }
