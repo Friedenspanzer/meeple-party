@@ -1,17 +1,15 @@
 "use client";
 
+import useUserProfile from "@/hooks/useUserProfile";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import classNames from "classnames";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
-import { useUser } from "@/context/userContext";
 import Link from "next/link";
 import CompleteUserProfile from "../CompleteUserProfile/CompleteUserProfile";
+import Spinner from "../Spinner/Spinner";
 import TopNav from "../TopNav/TopNav";
 import styles from "./appcontainer.module.css";
-import Spinner from "../Spinner/Spinner";
-import classNames from "classnames";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import useUserProfile from "@/hooks/useUserProfile";
 
 TimeAgo.addDefaultLocale(en);
 
