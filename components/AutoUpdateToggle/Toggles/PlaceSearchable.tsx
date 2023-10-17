@@ -3,8 +3,10 @@
 import Spinner from "@/components/Spinner/Spinner";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import AutoUpdateToggle from "../AutoUpdateToggle";
+import { useTranslation } from "@/i18n/client";
 
 export default function PlaceSearchable() {
+  const { t } = useTranslation("settings");
   const { preferences, loading } = useUserPreferences();
   if (loading) {
     return <Spinner />;
@@ -13,10 +15,10 @@ export default function PlaceSearchable() {
       <AutoUpdateToggle
         value={preferences.allowSearchByPlace}
         onChange={(value) => ({ ...preferences, allowSearchByPlace: value })}
-        title="Allow search by place"
+        title={t("Privacy.SearchByPlace.Title")}
       >
         <p>
-          When this flag is set people can find you by searching for your place.
+          {t("Privacy.SearchByPlace.Description")}
         </p>
       </AutoUpdateToggle>
     );

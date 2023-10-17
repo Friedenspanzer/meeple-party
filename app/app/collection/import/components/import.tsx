@@ -11,6 +11,7 @@ import { Game, GameCollection } from "@prisma/client";
 import styles from "./import.module.css";
 import CollectionChange from "@/components/CollectionChange/CollectionChange";
 import CriticalError from "@/components/CriticalError/CriticalError";
+import { useTranslation } from "@/i18n/client";
 
 export interface ImportProps {
   configuration: ImportConfiguration;
@@ -47,6 +48,8 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
 
   const [error, setError] = useState<string | false>(false);
   const [errorDetail, setErrorDetail] = useState<string>();
+
+  const { t } = useTranslation("import");
 
   useEffect(() => {
     async function readCollections() {
@@ -93,7 +96,7 @@ const Import: React.FC<ImportProps> = ({ configuration, bggObject }) => {
     ) {
       const [head, ...tail] = toImport;
       setItemsToImport(tail);
-      const importStep = await changeCollectionStatus(head, current);
+      const importStep = await changeCollectionStatus(head, current, t);
       if (importStep) {
         setImportSteps((i) => [...i, importStep]);
       }
@@ -151,7 +154,8 @@ export default Import;
 
 async function changeCollectionStatus(
   newStatus: GameCollectionStatus,
-  currentCollection: GameCollectionStatus[]
+  currentCollection: GameCollectionStatus[],
+  t: (key: string, { name }: { name: string }) => string
 ): Promise<ImportStepDefinition | undefined> {
   const result: CollectionUpdate = await fetch(
     `/api/collection/${newStatus.gameId}`,
@@ -173,12 +177,13 @@ async function changeCollectionStatus(
   if (!result.success) {
     return;
   }
-  return createImportStep(result, currentCollection);
+  return createImportStep(result, currentCollection, t);
 }
 
 function createImportStep(
   collectionUpdate: CollectionUpdate,
-  currentCollection: GameCollectionStatus[]
+  currentCollection: GameCollectionStatus[],
+  t: (key: string, { name }: { name: string }) => string
 ): ImportStepDefinition | undefined {
   const current = currentCollection.find(
     (c) => c.gameId === collectionUpdate.game.id
@@ -197,7 +202,7 @@ function createImportStep(
             !!collectionUpdate.status.wantToPlay && !current.wantToPlay,
           own: !!collectionUpdate.status.own && !current.own,
         },
-        text: `${collectionUpdate.game.name} updated in your collection.`,
+        text: t("Import.Update", { name: collectionUpdate.game.name }),
         image: collectionUpdate.game.thumbnail,
       };
     } else {
@@ -208,7 +213,7 @@ function createImportStep(
           wantToPlay: false,
           own: false,
         },
-        text: `${collectionUpdate.game.name} removed from your collection.`,
+        text: t("Import.Remove", { name: collectionUpdate.game.name }),
         image: collectionUpdate.game.thumbnail,
       };
     }
@@ -220,7 +225,7 @@ function createImportStep(
         wantToPlay: !!collectionUpdate.status.wantToPlay,
         own: !!collectionUpdate.status.own,
       },
-      text: `${collectionUpdate.game.name} added to your collection.`,
+      text: t("Import.Add", { name: collectionUpdate.game.name }),
       image: collectionUpdate.game.thumbnail,
     };
   }

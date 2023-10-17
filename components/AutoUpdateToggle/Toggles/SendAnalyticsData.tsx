@@ -3,8 +3,10 @@
 import Spinner from "@/components/Spinner/Spinner";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import AutoUpdateToggle from "../AutoUpdateToggle";
+import { useTranslation } from "@/i18n/client";
 
 export default function SendAnalyticsData() {
+  const { t } = useTranslation("settings");
   const { preferences, loading } = useUserPreferences();
   if (loading) {
     return <Spinner />;
@@ -13,12 +15,10 @@ export default function SendAnalyticsData() {
       <AutoUpdateToggle
         value={preferences.sendAnalyticsData}
         onChange={(value) => ({ ...preferences, sendAnalyticsData: value })}
-        title="Send analytics data"
+        title={t("Privacy.SendAnalyticsData.Title")}
       >
         <p>
-          Help us improve Meeple Party by allowing us to collect usage data.
-          Data is lightweight and fully anonymized. It&apos;s collected by our
-          hosting provider Vercel.
+          {t("Privacy.SendAnalyticsData.Description")}
         </p>
       </AutoUpdateToggle>
     );

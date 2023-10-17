@@ -10,6 +10,8 @@ export type UserPreferences = {
   showRealNameInProfile: boolean;
   showPlaceInProfile: boolean;
   allowSearchByPlace: boolean;
+  pageLanguage: string;
+  gameLanguage: string;
 };
 
 export const defaultUserPreferences: UserPreferences = {
@@ -17,4 +19,6 @@ export const defaultUserPreferences: UserPreferences = {
   showRealNameInProfile: false,
   showPlaceInProfile: false,
   allowSearchByPlace: false,
+  pageLanguage: "auto",
+  gameLanguage: "follow",
 };

@@ -1,11 +1,14 @@
+"use client";
+
 import classNames from "classnames";
 import {
   GameCollectionFilterOptions,
   getMinMaxValue,
-  getPlayerCountValue,
+  getPlayerCountTranslationKey,
   minOrMaxActive,
 } from "../GameCollectionFilter";
 import styles from "./filteroverview.module.css";
+import { useTranslation } from "@/i18n/client";
 
 interface FilterOverviewProps {
   filter: GameCollectionFilterOptions;
@@ -16,12 +19,13 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
   filter,
   onFilterChange,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       {!!filter.playerCount.count && (
         <FilterPill
-          filter="Player count"
-          value={getPlayerCountValue(filter.playerCount)}
+          filter={t("Filters.Traits.PlayerCount")}
+          value={filter.playerCount.count ? t(`Filters.Values.PlayerCount.${getPlayerCountTranslationKey(filter.playerCount.type)}`, { number: filter.playerCount.count }) : ""}
           onRemove={() => {
             onFilterChange({
               ...filter,
@@ -35,7 +39,7 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {minOrMaxActive(filter.weight) && (
         <FilterPill
-          filter="Weight"
+          filter={t("Filters.Traits.Weight")}
           value={getMinMaxValue(filter.weight.min, filter.weight.max) || ""}
           onRemove={() => {
             onFilterChange({
@@ -47,7 +51,7 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {minOrMaxActive(filter.playingTime) && (
         <FilterPill
-          filter="Playing time"
+          filter={t("Filters.Traits.PlayingTime")}
           value={
             getMinMaxValue(filter.playingTime.min, filter.playingTime.max) || ""
           }
@@ -61,8 +65,8 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {filter.collectionStatus.own !== undefined && (
         <FilterPill
-          filter="Own"
-          value={yesNo(filter.collectionStatus.own)}
+          filter={t("Filters.Traits.Own")}
+          value={t(`Filters.Values.${yesNo(filter.collectionStatus.own)}`)}
           onRemove={() => {
             onFilterChange({
               ...filter,
@@ -73,8 +77,10 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {filter.collectionStatus.wantToPlay !== undefined && (
         <FilterPill
-          filter="Want to play"
-          value={yesNo(filter.collectionStatus.wantToPlay)}
+          filter={t("Filters.Traits.WantToPlay")}
+          value={t(
+            `Filters.Values.${yesNo(filter.collectionStatus.wantToPlay)}`
+          )}
           onRemove={() => {
             onFilterChange({
               ...filter,
@@ -88,8 +94,8 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {filter.collectionStatus.wishlist !== undefined && (
         <FilterPill
-          filter="Wishlist"
-          value={yesNo(filter.collectionStatus.wishlist)}
+          filter={t("Filters.Traits.Wishlist")}
+          value={t(`Filters.Values.${yesNo(filter.collectionStatus.wishlist)}`)}
           onRemove={() => {
             onFilterChange({
               ...filter,
@@ -103,7 +109,7 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {minOrMaxActive(filter.friends.own) && (
         <FilterPill
-          filter="Friends own"
+          filter={t("Filters.Traits.FriendsOwn")}
           value={
             getMinMaxValue(filter.friends.own.min, filter.friends.own.max) || ""
           }
@@ -120,7 +126,7 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {minOrMaxActive(filter.friends.wantToPlay) && (
         <FilterPill
-          filter="Friends want to play"
+          filter={t("Filters.Traits.FriendsWantToPlay")}
           value={
             getMinMaxValue(
               filter.friends.wantToPlay.min,
@@ -140,7 +146,7 @@ const FilterOverview: React.FC<FilterOverviewProps> = ({
       )}
       {minOrMaxActive(filter.friends.wishlist) && (
         <FilterPill
-          filter="Friends wish"
+          filter={t("Filters.Traits.FriendsWishlist")}
           value={
             getMinMaxValue(
               filter.friends.wishlist.min,

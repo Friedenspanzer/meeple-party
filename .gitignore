@@ -43,3 +43,4 @@ convex/README.md
 
 # dev database
 prisma/*.db
+database/

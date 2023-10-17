@@ -1,7 +1,10 @@
+"use client";
+
 import classNames from "classnames";
 import React, { useCallback } from "react";
 import { CollectionStatusFilterOption } from "../GameCollectionFilter";
 import styles from "./collectionstatus.module.css";
+import { useTranslation } from "@/i18n/client";
 
 interface CollectionStatusProps {
   filter: CollectionStatusFilterOption;
@@ -12,6 +15,8 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({
   filter,
   onChange,
 }) => {
+  const { t } = useTranslation();
+
   const cycleOwn = useCallback(() => {
     if (filter.own === undefined) {
       onChange({ ...filter, own: true });
@@ -86,58 +91,70 @@ const CollectionStatus: React.FC<CollectionStatusProps> = ({
         </div>
       </div>
       <div className={classNames("row text-center", styles.textual)}>
-        <div className="col-4">{getOwnText(filter)}</div>
-        <div className="col-4">{getWantToPlayText(filter)}</div>
-        <div className="col-4">{getWishlistText(filter)}</div>
+        <div className="col-4">{getOwnText(filter, t)}</div>
+        <div className="col-4">{getWantToPlayText(filter, t)}</div>
+        <div className="col-4">{getWishlistText(filter, t)}</div>
       </div>
     </>
   );
 };
 
-export function getCombinedText(filter: CollectionStatusFilterOption) {
+export function getCombinedText(
+  filter: CollectionStatusFilterOption,
+  t: (key: string) => string
+) {
   const texts: string[] = [];
   if (filter.own !== undefined) {
-    texts.push(getOwnText(filter)!.toLowerCase());
+    texts.push(getOwnText(filter, t)!);
   }
   if (filter.wantToPlay !== undefined) {
-    texts.push(getWantToPlayText(filter)!.toLowerCase());
+    texts.push(getWantToPlayText(filter, t)!);
   }
   if (filter.wishlist !== undefined) {
-    texts.push(getWishlistText(filter)!.toLowerCase());
+    texts.push(getWishlistText(filter, t)!);
   }
   if (texts.length === 0) {
     return undefined;
   }
-  return `You ${texts.join(", ")}`;
+  return texts.join(", ");
 }
 
-function getOwnText(filter: CollectionStatusFilterOption) {
+function getOwnText(
+  filter: CollectionStatusFilterOption,
+  t: (key: string) => string
+) {
   if (filter.own === undefined) {
     return undefined;
   } else if (filter.own) {
-    return "Own";
+    return t("Filters.Values.Own");
   } else {
-    return "Don't own";
+    return t("Filters.Values.NotOwn");
   }
 }
 
-function getWantToPlayText(filter: CollectionStatusFilterOption) {
+function getWantToPlayText(
+  filter: CollectionStatusFilterOption,
+  t: (key: string) => string
+) {
   if (filter.wantToPlay === undefined) {
     return undefined;
   } else if (filter.wantToPlay) {
-    return "Want to play";
+    return t("Filters.Values.WantToPlay");
   } else {
-    return "Don't want to play";
+    return t("Filters.Values.NotWantToPlay");
   }
 }
 
-function getWishlistText(filter: CollectionStatusFilterOption) {
+function getWishlistText(
+  filter: CollectionStatusFilterOption,
+  t: (key: string) => string
+) {
   if (filter.wishlist === undefined) {
     return undefined;
   } else if (filter.wishlist) {
-    return "Wish";
+    return t("Filters.Values.Wishlist");
   } else {
-    return "Don't wish";
+    return t("Filters.Values.NotWishlist");
   }
 }
 

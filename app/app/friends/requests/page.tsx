@@ -2,20 +2,17 @@
 
 import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequest";
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
-import Spinner from "@/components/Spinner/Spinner";
 import { RelationshipType } from "@/datatypes/relationship";
 import useRelationships from "@/hooks/api/useRelationships";
+import { useTranslation } from "@/i18n/client";
 
 const FriendRequests: React.FC = () => {
   const { isLoading, data: relationships } = useRelationships();
-
-  if (isLoading) {
-    return <Spinner />;
-  }
+  const { t } = useTranslation("friends");
 
   return (
     <>
-      <h2>Incoming requests</h2>
+      <h2>{t("Requests.Incoming")}</h2>
       <div className="container-md">
         {relationships
           ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_RECEIVED)
@@ -23,7 +20,7 @@ const FriendRequests: React.FC = () => {
             <IncomingFriendRequest request={r} key={r.profile.id} />
           ))}
       </div>
-      <h2>Sent requests</h2>
+      <h2>{t("Requests.Outgoing")}</h2>
       <div className="container-md">
         {relationships
           ?.filter((r) => r.type === RelationshipType.FRIEND_REQUEST_SENT)

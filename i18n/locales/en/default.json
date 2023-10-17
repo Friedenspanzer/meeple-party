@@ -1,0 +1,133 @@
+{
+  "Login": {
+    "GoToApp": "Go to app",
+    "Logout": "Logout",
+    "Register": "Login or Register"
+  },
+  "Navigation": {
+    "Toggle": "Toggle navigation",
+    "Pages": {
+      "Dashboard": "Dashboard",
+      "Collection": "Collection",
+      "Friends": "Friends"
+    },
+    "Menu": {
+      "Profile": "Your profile",
+      "Settings": "Settings"
+    }
+  },
+  "Filters": {
+    "Heading": "Filter games ({{current}}/{{total}})",
+    "Presets": "Filter presets",
+    "GameName": "Game name",
+    "Traits": {
+      "PlayerCount": "Player count",
+      "Weight": "Weight",
+      "PlayingTime": "Playing time",
+      "Own": "$t(States.Own)",
+      "WantToPlay": "$t(States.WantToPlay)",
+      "Wishlist": "$t(States.Wishlist)",
+      "FriendsOwn": "Friends own",
+      "FriendsWantToPlay": "Friends want to play",
+      "FriendsWishlist": "Friends wish",
+      "GameAttributes": "Game attributes",
+      "YourCollection": "Your collection",
+      "CollectionStatus": "Collection status",
+      "YourFriends": "Your Friends"
+    },
+    "Values": {
+      "Yes": "Yes",
+      "No": "No",
+      "Own": "Own",
+      "NotOwn": "Don't own",
+      "WantToPlay": "Want to play",
+      "NotWantToPlay": "Don't want to play",
+      "Wishlist": "Wish",
+      "NotWishlist": "Don't wish",
+      "PlayerCount": {
+        "AtLeast": "> {{number}}",
+        "Exact": "= {{number}}",
+        "Supports": "supports {{number}}"
+      }
+    },
+    "Labels": {
+      "Min": "Min",
+      "Max": "Max",
+      "PlayerCount": {
+        "Supports": "Supports",
+        "AtLeast": "At least",
+        "Exact": "Exact"
+      },
+      "Weight": {
+        "Light": "Light",
+        "MediumLight": "Medium Light",
+        "Medium": "Medium",
+        "MediumHeavy": "Medium Heavy",
+        "Heavy": "Heavy"
+      },
+      "WeightPresets": "Weight presets"
+    },
+    "Preset": {
+      "GamesYouOwn": "Games you own",
+      "GamesYouDontOwn": "Games you don't own",
+      "NoSolo": "No solo play",
+      "GamesYouOwnNoSolo": "Games you own, no solo play",
+      "GamesYouDontOwnNoSolo": "Games you don't own, no solo play",
+      "YourWishlist": "Your wishlist",
+      "YourWishlistNoSolo": "Your wishlist, no solo play",
+      "WantToPlay": "Games you want to play",
+      "OwnAndWantToPlay": "Games you own and want to play"
+    },
+    "SortOrder": {
+      "CollectionStatus": "Collection status",
+      "FriendsOwn": "$t(Filters.Traits.FriendsOwn)",
+      "FriendsWantToPlay": "$t(Filters.Traits.FriendsWantToPlay)",
+      "FriendsWish": "$t(Filters.Traits.FriendsWishlist)",
+      "MaxPlayers": "Max players",
+      "MinPlayers": "Min players",
+      "Name": "Name",
+      "PlayingTime": "$t(Filters.Traits.PlayingTime)",
+      "Weight": "$t(Filters.Traits.Weight)"
+    }
+  },
+  "Collection": {
+    "Pagination": {
+      "of": "of"
+    }
+  },
+  "States": {
+    "Own": "Own",
+    "WantToPlay": "Want To Play",
+    "Wishlist": "Wishlist"
+  },
+  "Actions": {
+    "SaveAndContinue": "Save and continue",
+    "Next": "Next",
+    "Deny": "Deny",
+    "Accept": "Accept",
+    "Withdraw": "Withdraw",
+    "Close": "Close",
+    "Submit": "Submit"
+  },
+  "LoadingIndicators": {
+    "Sending": "Sending …"
+  },
+  "Search": {
+    "Placeholder": "Game name, BoardGameGeek ID, BoardGameGeek Link, …",
+    "NoResults": "No results found",
+    "Error": {
+      "Title": "Error during game search",
+      "Text": "Please try again later. If this persists please contact your administrator."
+    }
+  },
+  "Footer": {
+    "Issues": "Issues",
+    "LatestChanges": "Latest Changes"
+  },
+  "Pagination": {
+    "Current": "Current page"
+  },
+  "Objects": {
+    "Avatar": "User avatar"
+  }
+}

@@ -1,10 +1,12 @@
+import classNames from "classnames";
 import { marked } from "marked";
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getUpdateMetadata, parseFile } from "../utils";
-import Image from "next/image";
-import classNames from "classnames";
 import styles from "./update.module.css";
-import Link from "next/link";
+
+export const dynamic = 'force-static'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;

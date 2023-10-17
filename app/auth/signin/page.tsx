@@ -4,9 +4,11 @@ import { redirect } from "next/navigation";
 import ProviderButton from "./ProviderButton/ProviderButton";
 import Link from "next/link";
 import EmailLogin from "./EmailLogin/EmailLogin";
+import { getTranslation } from "@/i18n";
 
 export default async function SignIn() {
   const session = await getServerSession();
+  const { t } = await getTranslation("auth");
 
   if (session) {
     redirect("/app");
@@ -18,13 +20,13 @@ export default async function SignIn() {
     <>
       <div className="row justify-content-center">
         <div className="col-md-6 text-center">
-          <h1>Log in to Meeple Party</h1>
+          <h1>{t("Title")}</h1>
         </div>
       </div>
 
       <div className="row mt-5 justify-content-center">
         <div className="col-md-6 text-center">
-          <h4>Using your email address</h4>
+          <h4>{t("UsingEmail")}</h4>
         </div>
       </div>
 
@@ -32,7 +34,7 @@ export default async function SignIn() {
 
       <div className="row mt-5 justify-content-center">
         <div className="col-md-6 text-center">
-          <h4>Using social login</h4>
+          <h4>{t("UsingSocial")}</h4>
         </div>
       </div>
 
@@ -45,7 +47,7 @@ export default async function SignIn() {
       <div className="row mt-5 justify-content-center">
         <div className="col-md-2 d-grid">
           <Link className="btn btn-secondary" href="/">
-            <i className="bi bi-arrow-left"></i> Go back
+            <i className="bi bi-arrow-left"></i> {t("Back")}
           </Link>
         </div>
       </div>

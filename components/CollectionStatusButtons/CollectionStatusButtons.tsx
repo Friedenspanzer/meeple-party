@@ -6,6 +6,7 @@ import styles from "./collectionstatusbuttons.module.css";
 import Spinner from "../Spinner/Spinner";
 import classNames from "classnames";
 import CriticalError from "../CriticalError/CriticalError";
+import { useTranslation } from "@/i18n/client";
 
 export interface CollectionStatusButtonProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,6 +19,7 @@ export default function CollectionStatusButtons({
   status,
   ...props
 }: CollectionStatusButtonProps) {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [collectionStatus, setCollectionStatus] = useState<CollectionStatus>({
     own: false,
@@ -94,6 +96,7 @@ export default function CollectionStatusButtons({
                 own: !collectionStatus.own,
               })
             }
+            title={t("States.Own")}
           >
             <i className="bi bi-box-seam-fill"></i>
           </button>
@@ -109,6 +112,7 @@ export default function CollectionStatusButtons({
                 wantToPlay: !collectionStatus.wantToPlay,
               })
             }
+            title={t("States.WantToPlay")}
           >
             <i className="bi bi-dice-3-fill"></i>
           </button>
@@ -124,6 +128,7 @@ export default function CollectionStatusButtons({
                 wishlist: !collectionStatus.wishlist,
               })
             }
+            title={t("States.Wishlist")}
           >
             <i className="bi bi-gift-fill"></i>
           </button>{" "}

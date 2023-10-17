@@ -5,6 +5,7 @@ import { useCallback, useId } from "react";
 import validator from "validator";
 import { MinMaxFilterOption } from "../GameCollectionFilter";
 import styles from "./minmaxsliders.module.css";
+import { useTranslation } from "@/i18n/client";
 
 interface MinMaxSlidersProps {
   onChange: (values: MinMaxFilterOption) => void;
@@ -23,6 +24,8 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
 }) => {
   const minId = useId();
   const maxId = useId();
+
+  const {t} = useTranslation();
 
   const changeMinValue = useCallback(
     (newValue: string) => {
@@ -95,7 +98,7 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
             })}
             onClick={() => onChange({ ...value, min: undefined })}
           >
-            Min {value.min && <i className="bi bi-x-circle"></i>}
+            {t("Filters.Labels.Min")} {value.min && <i className="bi bi-x-circle"></i>}
           </label>
         </div>
         <div className="col-6">
@@ -106,7 +109,7 @@ const MinMaxSliders: React.FC<MinMaxSlidersProps> = ({
             })}
             onClick={() => onChange({ ...value, max: undefined })}
           >
-            Max {value.max && <i className="bi bi-x-circle"></i>}
+            {t("Filters.Labels.Max")} {value.max && <i className="bi bi-x-circle"></i>}
           </label>
         </div>
       </div>

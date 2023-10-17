@@ -1,20 +1,22 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
-import styles from "./topnav.module.css";
-import Image from "next/image";
-import Person from "../Person/Person";
+import useUserProfile from "@/hooks/useUserProfile";
+import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
-import useUserProfile from "@/hooks/useUserProfile";
+import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
+import Person from "../Person/Person";
+import styles from "./topnav.module.css";
 
 export default function TopNav() {
   const pathname = usePathname();
   const { userProfile } = useUserProfile();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const logout = useCallback(() => {
     signOut({ redirect: false })
@@ -44,7 +46,7 @@ export default function TopNav() {
             data-bs-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01"
             aria-expanded="false"
-            aria-label="Toggle navigation"
+            aria-label={t("Navigation.Toggle")}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -56,7 +58,7 @@ export default function TopNav() {
                 })}
               >
                 <Link href="/app" className="nav-link">
-                  Dashboard
+                  {t("Navigation.Pages.Dashboard")}
                 </Link>
               </li>
               <li
@@ -65,7 +67,7 @@ export default function TopNav() {
                 })}
               >
                 <Link href="/app/collection" className="nav-link">
-                  Collection
+                  {t("Navigation.Pages.Collection")}
                 </Link>
               </li>
               <li
@@ -74,7 +76,7 @@ export default function TopNav() {
                 })}
               >
                 <Link href="/app/friends" className="nav-link">
-                  Friends&nbsp; <FriendRequestsBadge />
+                  {t("Navigation.Pages.Friends")}&nbsp; <FriendRequestsBadge />
                 </Link>
               </li>
             </ul>
@@ -97,7 +99,7 @@ export default function TopNav() {
                       href={`/app/profile/${userProfile.id}`}
                       className="dropdown-item"
                     >
-                      Your profile
+                      {t("Navigation.Menu.Profile")}
                     </Link>
                   </li>
                   <li>
@@ -105,7 +107,7 @@ export default function TopNav() {
                       href={"/app/profile/edit/settings"}
                       className="dropdown-item"
                     >
-                      Settings
+                      {t("Navigation.Menu.Settings")}
                     </Link>
                   </li>
                   <li>
@@ -113,7 +115,7 @@ export default function TopNav() {
                   </li>
                   <li>
                     <button onClick={logout} className="dropdown-item">
-                      Logout
+                      {t("Login.Logout")}
                     </button>
                   </li>
                 </ul>

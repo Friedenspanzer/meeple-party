@@ -1,17 +1,18 @@
 "use client";
 
+import { useTranslation } from "@/i18n/client";
+import { emptyFilter } from "@/utility/filter";
 import classNames from "classnames";
 import { useCallback, useEffect, useId, useState } from "react";
-import styles from "./gamecollectionfilter.module.css";
-import MinMaxSliders from "./components/MinMaxSlider";
-import Section from "./components/Section";
-import FilterOverview from "./components/FilterOverview";
 import CollectionStatus, {
   getCombinedText,
 } from "./components/CollectionStatus";
-import PlayerCount from "./components/PlayerCount";
+import FilterOverview from "./components/FilterOverview";
 import Group from "./components/Group";
-import { emptyFilter } from "@/utility/filter";
+import MinMaxSliders from "./components/MinMaxSlider";
+import PlayerCount from "./components/PlayerCount";
+import Section from "./components/Section";
+import styles from "./gamecollectionfilter.module.css";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -80,6 +81,8 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
   defaultFilter,
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const offcanvasId = useId();
 
   const [filter, setFilter] = useState<GameCollectionFilterOptions>(
@@ -168,7 +171,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
                 ></button>
                 <ul className="dropdown-menu">
                   <li>
-                    <h6 className="dropdown-header">Filter presets</h6>
+                    <h6 className="dropdown-header">{t("Filters.Presets")}</h6>
                   </li>
                   {presets.map((p) => (
                     <li key={p.name}>
@@ -202,7 +205,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
           <input
             type="text"
             className="form-control"
-            placeholder="Game name"
+            placeholder={t("Filters.GameName")}
             value={filter.name}
             onChange={(e) => changeName(e.target.value)}
           />
@@ -225,7 +228,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               aria-expanded="false"
             >
               <i className="bi bi-sort-down-alt"></i>{" "}
-              {sortOrderDescription(filter.sort)}
+              {t(sortOrderTranslationKey(filter.sort))}
             </button>
             <ul className="dropdown-menu">
               {sortOrderOptions.map((option) => (
@@ -234,7 +237,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
                     className="dropdown-item"
                     onClick={() => changeSortOrder(option)}
                   >
-                    {sortOrderDescription(option)}
+                    {t(sortOrderTranslationKey(option))}
                   </button>
                 </li>
               ))}
@@ -250,13 +253,16 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
       >
         <div className={classNames("offcanvas-header", styles.offcanvasHeader)}>
           <h5 className="offcanvas-title" id="filterOffcanvasLabel">
-            Filter games ({filteredCount}/{totalCount})
+            {t("Filters.Heading", {
+              current: filteredCount,
+              total: totalCount,
+            })}
           </h5>
           <button
             type="button"
             className={classNames("btn-close", styles.buttonClose)}
             data-bs-dismiss="offcanvas"
-            aria-label="Close"
+            aria-label={t("Actions.Close")}
           ></button>
         </div>
         <div className={classNames("offcanvas-body", styles.offcanvasBody)}>
@@ -265,16 +271,25 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               <input
                 type="text"
                 className="form-control"
-                placeholder="Game name"
+                placeholder={t("Filters.GameName")}
                 value={filter.name}
                 onChange={(e) => changeName(e.target.value)}
               />
             </div>
           </div>
-          <Group title="Game attributes">
+          <Group title={t("Filters.Traits.GameAttributes")}>
             <Section
-              title="Player count"
-              value={getPlayerCountValue(filter.playerCount)}
+              title={t("Filters.Traits.PlayerCount")}
+              value={
+                filter.playerCount.count
+                  ? t(
+                      `Filters.Values.PlayerCount.${getPlayerCountTranslationKey(
+                        filter.playerCount.type
+                      )}`,
+                      { number: filter.playerCount.count }
+                    )
+                  : ""
+              }
               active={!!filter.playerCount.count}
             >
               <PlayerCount
@@ -283,7 +298,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               />
             </Section>
             <Section
-              title="Weight"
+              title={t("Filters.Traits.Weight")}
               value={getMinMaxValue(filter.weight.min, filter.weight.max)}
               active={!!filter.weight.min || !!filter.weight.max}
             >
@@ -306,16 +321,16 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
             <MinMaxSection
               minMax={filter.playingTime}
               changeFunction={changePlayingTime}
-              title="Playing time"
+              title={t("Filters.Traits.PlayingTime")}
               min={0}
               max={360}
               step={10}
             />
           </Group>
-          <Group title="Your collection">
+          <Group title={t("Filters.Traits.YourCollection")}>
             <Section
-              title="Collection status"
-              value={getCombinedText(filter.collectionStatus)}
+              title={t("Filters.Traits.CollectionStatus")}
+              value={getCombinedText(filter.collectionStatus, t)}
               active={
                 filter.collectionStatus.own !== undefined ||
                 filter.collectionStatus.wantToPlay !== undefined ||
@@ -328,23 +343,23 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               />
             </Section>
           </Group>
-          <Group title="Your friends">
+          <Group title={t("Filters.Traits.YourFriends")}>
             <MinMaxSection
               minMax={filter.friends.own}
               changeFunction={changeFriendsOwn}
-              title="Friends own"
+              title={t("Filters.Traits.FriendsOwn")}
               max={25}
             />
             <MinMaxSection
               minMax={filter.friends.wantToPlay}
               changeFunction={changeFriendsWantToPlay}
-              title="Friends want to play"
+              title={t("Filters.Traits.FriendsWantToPlay")}
               max={25}
             />
             <MinMaxSection
               minMax={filter.friends.wishlist}
               changeFunction={changeFriendsWishlist}
-              title="Friends wish"
+              title={t("Filters.Traits.FriendsWishlist")}
               max={25}
             />
           </Group>
@@ -393,11 +408,12 @@ function WeightPresets({
   weightFilter: MinMaxFilterOption;
   onChange: (weight: MinMaxFilterOption) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div
       className="btn-group btn-group-sm"
       role="group"
-      aria-label="Basic example"
+      aria-label={t("Filters.Labels.WeightPresets")}
     >
       <button
         type="button"
@@ -407,7 +423,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ max: 1.5, min: undefined })}
       >
-        Light
+        {t("Filters.Labels.Weight.Light")}
       </button>
       <button
         type="button"
@@ -417,7 +433,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 1.5, max: 2.5 })}
       >
-        Medium Light
+        {t("Filters.Labels.Weight.MediumLight")}
       </button>
       <button
         type="button"
@@ -427,7 +443,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 2.5, max: 3.5 })}
       >
-        Medium
+        {t("Filters.Labels.Weight.Medium")}
       </button>
       <button
         type="button"
@@ -437,7 +453,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 3.5, max: 4.5 })}
       >
-        Medium Heavy
+        {t("Filters.Labels.Weight.MediumHeavy")}
       </button>
       <button
         type="button"
@@ -447,7 +463,7 @@ function WeightPresets({
         })}
         onClick={() => onChange({ min: 4.5, max: undefined })}
       >
-        Heavy
+        {t("Filters.Labels.Weight.Heavy")}
       </button>
     </div>
   );
@@ -502,17 +518,15 @@ export function getMinMaxValue(min?: number, max?: number) {
   }
 }
 
-export function getPlayerCountValue(
-  playerCount: PlayerCountFilterOption
+export function getPlayerCountTranslationKey(
+  type: "exact" | "supports" | "atleast"
 ): string {
-  if (!playerCount.count) {
-    return "";
-  } else if (playerCount.type === "atleast") {
-    return `> ${playerCount.count}`;
-  } else if (playerCount.type === "exact") {
-    return `= ${playerCount.count}`;
+  if (type === "atleast") {
+    return "AtLeast";
+  } else if (type === "exact") {
+    return "Exact";
   } else {
-    return `supports ${playerCount.count}`;
+    return "Supports";
   }
 }
 
@@ -546,26 +560,26 @@ function friendCollectionStatusActive(filter: FriendCollectionFilterOptions) {
   );
 }
 
-function sortOrderDescription(sortOrder: SortOrder): string {
+function sortOrderTranslationKey(sortOrder: SortOrder): string {
   switch (sortOrder) {
     case "collectionStatus":
-      return "Collection status";
+      return "Filters.SortOrder.CollectionStatus";
     case "friendsOwn":
-      return "Friends owning";
+      return "Filters.SortOrder.FriendsOwn";
     case "friendsWantToPlay":
-      return "Friends want to play";
+      return "Filters.SortOrder.FriendsWantToPlay";
     case "friendsWish":
-      return "Friends wish";
+      return "Filters.SortOrder.FriendsWish";
     case "maxPlayers":
-      return "Max players";
+      return "Filters.SortOrder.MaxPlayers";
     case "minPlayers":
-      return "Min players";
+      return "Filters.SortOrder.MinPlayers";
     case "name":
-      return "Name";
+      return "Filters.SortOrder.Name";
     case "playingTime":
-      return "Playing time";
+      return "Filters.SortOrder.PlayingTime";
     case "weight":
-      return "Weight";
+      return "Filters.SortOrder.Weight";
   }
 }
 

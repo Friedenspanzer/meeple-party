@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { useCallback, useId, useState } from "react";
 import Spinner from "../Spinner/Spinner";
 import styles from "./autoupdatetoggle.module.css";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
 
 export interface AutoUpdateToggleProps {
   value: boolean;
@@ -26,7 +27,7 @@ const AutoUpdateToggle: React.FC<AutoUpdateToggleProps> = ({
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const { update: updateUser } = useUser();
+  const { update: updatePreferences } = useUserPreferences();
 
   const updateValue = useCallback(
     (newValue: boolean) => {
@@ -35,26 +36,19 @@ const AutoUpdateToggle: React.FC<AutoUpdateToggleProps> = ({
       setDirty(true);
       setChecked(newValue);
       const preferences = onChange(newValue);
-      fetch("/api/user", {
-        method: "PATCH",
-        body: JSON.stringify({ preferences }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            setSuccess(true);
-            setDirty(false);
-            updateUser();
-          } else {
-            throw Error(`${response.status} ${response.statusText}`);
-          }
+      updatePreferences(onChange(newValue))
+        .then(() => {
+          setSuccess(true);
         })
         .catch(() => {
           setChecked(!newValue);
-          setDirty(false);
           setError(true);
+        })
+        .finally(() => {
+          setDirty(false);
         });
     },
-    [onChange, updateUser]
+    [onChange, updatePreferences]
   );
 
   return (

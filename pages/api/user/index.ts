@@ -21,7 +21,7 @@ export default withUser(async function handle(
         res.status(404).send({});
       }
     } else if (req.method === "PATCH") {
-      const newUserDetails = updatedUserDetails(user, JSON.parse(req.body));
+      const newUserDetails = updatedUserDetails(user, req.body);
       await prisma.user.update({
         where: { id: user.id },
         data: {

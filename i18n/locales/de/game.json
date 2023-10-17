@@ -1,0 +1,23 @@
+{
+  "Page": {
+    "Header": {
+      "Design": "Design",
+      "Art": "Illustration",
+      "Players": "Spielende",
+      "Minutes": "Minuten",
+      "Weight": "Komplexität"
+    },
+    "Collections": {
+      "YourCollection": "Deine Sammlung",
+      "FriendsOwn": "Im Besitz",
+      "FriendsWantToPlay": "Wollen spielen",
+      "FriendsWishlist": "Wünschen sich"
+    },
+    "More": "… und {{count}} weitere"
+  },
+  "Attributes": {
+    "Players": "Spielende",
+    "PlayingTime": "Dauer",
+    "Weight": "Komplexität"
+  }
+}

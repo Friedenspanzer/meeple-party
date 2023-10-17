@@ -1,5 +1,8 @@
+"use client";
+
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import useRelationship from "@/hooks/api/useRelationship";
+import { useTranslation } from "@/i18n/client";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import Spinner from "../Spinner/Spinner";
@@ -17,6 +20,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
   }
   const [updating, setUpdating] = useState(false);
   const { invalidate } = useRelationship(request.profile.id);
+  const { t } = useTranslation();
 
   const denyRequest = useCallback(() => {
     setUpdating(true);
@@ -58,7 +62,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
             onClick={(_) => denyRequest()}
             disabled={updating}
           >
-            <i className="bi bi-dash-circle"></i> Deny
+            <i className="bi bi-dash-circle"></i> {t("Actions.Deny")}
           </button>
           <button
             type="button"
@@ -66,7 +70,7 @@ const IncomingFriendRequest: React.FC<IncomingFriendRequestProps> = ({
             onClick={(_) => acceptRequest()}
             disabled={updating}
           >
-            <i className="bi bi-check2"></i> Accept
+            <i className="bi bi-check2"></i> {t("Actions.Accept")}
           </button>
         </div>
       )}

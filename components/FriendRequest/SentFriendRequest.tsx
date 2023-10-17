@@ -1,5 +1,8 @@
+"use client";
+
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import useRelationship from "@/hooks/api/useRelationship";
+import { useTranslation } from "@/i18n/client";
 import Spinner from "../Spinner/Spinner";
 import GenericFriendRequest from "./GenericFriendRequest";
 
@@ -13,6 +16,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
   }
 
   const { deleteFunction, isLoading } = useRelationship(request.profile.id);
+  const { t } = useTranslation();
 
   return (
     <GenericFriendRequest request={request}>
@@ -25,7 +29,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
           onClick={deleteFunction}
           disabled={isLoading}
         >
-          <i className="bi bi-trash"></i> Withdraw
+          <i className="bi bi-trash"></i> {t("Actions.Withdraw")}
         </button>
       )}
     </GenericFriendRequest>

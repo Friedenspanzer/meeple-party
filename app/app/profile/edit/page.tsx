@@ -16,7 +16,12 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 const EditProfile: React.FC = () => {
-  const { isLoading, userProfile, invalidate } = useUserProfile();
+  const {
+    isLoading,
+    userProfile,
+    invalidate,
+    update: updateUserProfile,
+  } = useUserProfile();
   const { preferences, loading: preferencesLoading } = useUserPreferences();
 
   if (!isLoading && !userProfile) {
@@ -67,26 +72,16 @@ const EditProfile: React.FC = () => {
 
   const updateUser = () => {
     setSending(true);
-    const newUserDetails = {
-      ...userProfile,
+    updateUserProfile({
       name: profileName,
       realName,
       place,
       about,
-      favorites: favorites ? favorites.map((f) => f.id) : [],
-    };
-    fetch("/api/user", {
-      method: "PATCH",
-      body: JSON.stringify(newUserDetails),
+      favorites: favorites ? favorites : [],
     })
-      .then((response) => {
-        if (response.ok) {
-          setSending(false);
-        } else {
-          throw Error(`${response.status} ${response.statusText}`);
-        }
+      .then(() => {
+        setSending(false);
       })
-      .then(invalidate)
       .catch((error) => {
         setApiError(`Error updating profile data.`);
         setApiErrorDetail(error);
