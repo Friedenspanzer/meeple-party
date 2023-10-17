@@ -1,0 +1,64 @@
+.card {
+  width: 600px;
+  height: 252px;
+  display: grid;
+  background-color: var(--bs-gray-100);
+  grid-template-columns: 250px 60px 290px;
+  grid-template-rows: 4rem auto;
+  grid-template-areas:
+    "image info title"
+    "image info status";
+}
+
+.image {
+  width: 250px;
+  height: 250px;
+  grid-area: image;
+  background-color: var(--bs-gray-dark);
+  object-fit: contain;
+}
+
+.name {
+  grid-area: title;
+  padding: 0.5rem;
+}
+
+.name h2 {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  max-height: 3rem;
+  overflow: hidden;
+  font-weight: bold;
+  margin: 0;
+}
+
+.info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-right: 1px solid var(--bs-border-color);
+}
+
+.metricDivider {
+  width: 80%;
+  margin: 0;
+}
+
+.metricTitle {
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.metricLabel {
+  font-size: 0.6rem;
+  text-align: center;
+  color: var(--bs-light-text);
+}
+
+.status {
+  grid-area: status;
+  background-color: grey;
+}

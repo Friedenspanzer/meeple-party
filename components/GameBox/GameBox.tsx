@@ -2,7 +2,7 @@ import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
-import GameBoxMedium from "./components/GameBoxMedium/GameBoxMedium";
+import GameBoxBig from "./components/GameBoxBig/GameBoxBig";
 
 export interface GameBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   game: Game | number;
@@ -64,7 +64,7 @@ export default function GameBox({
 
   if (gameData) {
     return (
-      <GameBoxMedium
+      <GameBoxBig
         game={gameData}
         status={status}
         friendCollection={friendCollections}
