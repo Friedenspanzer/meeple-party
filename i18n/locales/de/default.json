@@ -20,7 +20,7 @@
     "Presets": "Vorlagen",
     "GameName": "Name des Spiels",
     "Traits": {
-      "PlayerCount": "Spielendenzahl",
+      "PlayerCount": "Personen",
       "Weight": "Komplexität",
       "PlayingTime": "Dauer",
       "Own": "$t(States.Own)",
@@ -79,8 +79,8 @@
       "FriendsOwn": "$t(Filters.Traits.FriendsOwn)",
       "FriendsWantToPlay": "$t(Filters.Traits.FriendsWantToPlay)",
       "FriendsWish": "$t(Filters.Traits.FriendsWishlist)",
-      "MaxPlayers": "Maximalspielendenzahl",
-      "MinPlayers": "Minimalspielendenzahl",
+      "MaxPlayers": "Personen bis",
+      "MinPlayers": "Personen ab",
       "Name": "Name",
       "PlayingTime": "$t(Filters.Traits.PlayingTime)",
       "Weight": "$t(Filters.Traits.Weight)"
