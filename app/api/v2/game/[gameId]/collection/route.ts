@@ -84,8 +84,8 @@ export async function PATCH(
       }
     }
   } catch (e) {
-    return new Response("Error", { status: 400 });
     console.error(e);
+    return new Response("Error", { status: 400 });
   }
   return new Response("Error", { status: 500 });
 }
