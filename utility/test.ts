@@ -86,9 +86,9 @@ export function generateCollectionEntry(
   return {
     userId,
     gameId,
-    own: Math.random() > 0.5,
-    wantToPlay: Math.random() > 0.5,
-    wishlist: Math.random() > 0.5,
+    own: generateBoolean(),
+    wantToPlay: generateBoolean(),
+    wishlist: generateBoolean(),
     updatedAt: new Date(),
   };
 }
