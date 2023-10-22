@@ -1,12 +1,11 @@
 "use client";
 
-import { CollectionStatus } from "@/pages/api/collection/[gameId]";
-import { useCallback, useEffect, useState } from "react";
-import styles from "./collectionstatusbuttons.module.css";
-import Spinner from "../Spinner/Spinner";
-import classNames from "classnames";
-import CriticalError from "../CriticalError/CriticalError";
+import useGameCollection from "@/hooks/api/useGameCollection";
 import { useTranslation } from "@/i18n/client";
+import { CollectionStatus } from "@/pages/api/collection/[gameId]";
+import classNames from "classnames";
+import Spinner from "../Spinner/Spinner";
+import styles from "./collectionstatusbuttons.module.css";
 
 export interface CollectionStatusButtonProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -20,82 +19,25 @@ export default function CollectionStatusButtons({
   ...props
 }: CollectionStatusButtonProps) {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [collectionStatus, setCollectionStatus] = useState<CollectionStatus>({
-    own: false,
-    wantToPlay: false,
-    wishlist: false,
-  });
-  const [error, setError] = useState<string | false>(false);
-  const [errorDetail, setErrorDetail] = useState<string>();
-
-  const setStatus = useCallback(
-    (status: CollectionStatus) => {
-      setLoading(true);
-      fetch(`/api/collection/${gameId}`, {
-        method: "POST",
-        body: JSON.stringify(status),
-      })
-        .then((response) => {
-          if (response.ok) {
-            setCollectionStatus(status);
-          } else {
-            setError(`Error writing collection status for game ${gameId}`);
-            setErrorDetail(`${response.status} ${response.statusText}`);
-          }
-        })
-        .then(() => setLoading(false));
-    },
-    [gameId]
-  );
-
-  useEffect(() => {
-    if (status) {
-      setCollectionStatus(status);
-    } else {
-      setLoading(true);
-      fetch(`/api/collection/${gameId}`)
-        .then((response) => response.json())
-        .then((json) => JSON.parse(json))
-        .then((status: CollectionStatus) => {
-          setCollectionStatus({
-            own: status.own || false,
-            wantToPlay: status.wantToPlay || false,
-            wishlist: status.wishlist || false,
-          });
-        })
-        .then(() => setLoading(false));
-    }
-  }, [status, gameId]);
-
-  if (error) {
-    return <CriticalError message={error} details={errorDetail} />;
-  }
+  const { data, isLoading, mutate } = useGameCollection(gameId);
 
   return (
     <div
       className={classNames(styles.collectionStatus, props.className)}
       {...props}
     >
-      {loading && (
+      {isLoading && (
         <div className={styles.spinner}>
           <Spinner />
         </div>
       )}
-      {!loading && (
+      {!isLoading && data && (
         <>
           <button
             className={
-              styles.collectionStatusButton +
-              " " +
-              (collectionStatus.own && styles.own)
+              styles.collectionStatusButton + " " + (data.own && styles.own)
             }
-            onClick={() =>
-              setStatus({
-                ...collectionStatus,
-                own: !collectionStatus.own,
-              })
-            }
+            onClick={() => mutate({ ...data, own: !data.own })}
             title={t("States.Own")}
           >
             <i className="bi bi-box-seam-fill"></i>
@@ -104,14 +46,9 @@ export default function CollectionStatusButtons({
             className={
               styles.collectionStatusButton +
               " " +
-              (collectionStatus.wantToPlay && styles.wantToPlay)
+              (data.wantToPlay && styles.wantToPlay)
             }
-            onClick={() =>
-              setStatus({
-                ...collectionStatus,
-                wantToPlay: !collectionStatus.wantToPlay,
-              })
-            }
+            onClick={() => mutate({ ...data, wantToPlay: !data.wantToPlay })}
             title={t("States.WantToPlay")}
           >
             <i className="bi bi-dice-3-fill"></i>
@@ -120,14 +57,9 @@ export default function CollectionStatusButtons({
             className={
               styles.collectionStatusButton +
               " " +
-              (collectionStatus.wishlist && styles.wishlist)
+              (data.wishlist && styles.wishlist)
             }
-            onClick={() =>
-              setStatus({
-                ...collectionStatus,
-                wishlist: !collectionStatus.wishlist,
-              })
-            }
+            onClick={() => mutate({ ...data, wishlist: !data.wishlist })}
             title={t("States.Wishlist")}
           >
             <i className="bi bi-gift-fill"></i>

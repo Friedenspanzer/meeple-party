@@ -31,8 +31,9 @@ export default function GameBox({
 }: GameBoxProps) {
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
   const { t } = useTranslation("game");
+  const gameId = getGameId(game)
 
-  const { data: gameData, isLoading } = useGame(getGameId(game));
+  const { data: gameData, isLoading } = useGame(gameId);
 
   useEffect(() => {
     if (showFriendCollection) {
