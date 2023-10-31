@@ -1,4 +1,5 @@
 import GameCollection from "@/components/GameCollection/GameCollection";
+import PrefetchedGameCollection from "@/components/Prefetches/PrefetchedGameCollection";
 import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import { Game } from "@/datatypes/game";
 import { prisma } from "@/db";
@@ -33,15 +34,22 @@ export default async function Collection() {
 
   return (
     <PrefetchedGameData data={games}>
-      <GameCollection
-        games={gameCollection.map(({ gameId, own, wantToPlay, wishlist }) => ({
-          game: getGame(games, gameId),
-          status: { own, wantToPlay, wishlist },
-          friendCollections: findFriendCollection(gameId, friendCollections),
-        }))}
-        defaultFilter={{ ...emptyFilter, collectionStatus: { own: true } }}
-        showFriendCollection={true}
-      />
+      <PrefetchedGameCollection data={gameCollection}>
+        <GameCollection
+          games={gameCollection.map(
+            ({ gameId, own, wantToPlay, wishlist }) => ({
+              game: getGame(games, gameId),
+              status: { own, wantToPlay, wishlist },
+              friendCollections: findFriendCollection(
+                gameId,
+                friendCollections
+              ),
+            })
+          )}
+          defaultFilter={{ ...emptyFilter, collectionStatus: { own: true } }}
+          showFriendCollection={true}
+        />
+      </PrefetchedGameCollection>
     </PrefetchedGameData>
   );
 }
