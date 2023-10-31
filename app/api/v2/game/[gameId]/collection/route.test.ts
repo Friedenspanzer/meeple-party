@@ -232,8 +232,15 @@ describe("PATCH game/[gameId]/collection", () => {
       params: { gameId: gameId.toString() },
     });
 
+    const value = await result.json();
+
     expect(result.status).toBe(200);
     expect(prismaMock.gameCollection.upsert).toBeCalledTimes(0);
+    expect(value.userId).toBe(myUser.id);
+    expect(value.gameId).toBe(gameId);
+    expect(value.own).toBe(false);
+    expect(value.wantToPlay).toBe(false);
+    expect(value.wishlist).toBe(false);
   });
   it("fails for malformed data", async () => {
     const gameId = generateNumber(1, 9999999);

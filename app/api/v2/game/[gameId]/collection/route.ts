@@ -71,7 +71,13 @@ export async function PATCH(
       await prisma.gameCollection.delete({
         where: { userId_gameId: { userId, gameId } },
       });
-      return new Response("Success", { status: 200 });
+      return NextResponse.json({
+        userId,
+        gameId,
+        own: false,
+        wantToPlay: false,
+        wishlist: false,
+      } as GameCollection);
     } else {
       const upsertedData = await prisma.gameCollection.upsert({
         where: { userId_gameId: { gameId, userId } },
