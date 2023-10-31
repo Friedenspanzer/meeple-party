@@ -170,7 +170,7 @@ describe("PATCH game/[gameId]/collection", () => {
     }
 
     if (
-      Object.keys(sentCollectionData).some(
+      !Object.keys(sentCollectionData).some(
         (key) => sentCollectionData[key] === true
       )
     ) {
