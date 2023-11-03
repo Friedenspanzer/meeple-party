@@ -1,6 +1,6 @@
 "use client";
 
-import useGameCollection from "@/hooks/api/useGameCollection";
+import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import classNames from "classnames";
@@ -19,7 +19,7 @@ export default function CollectionStatusButtons({
   ...props
 }: CollectionStatusButtonProps) {
   const { t } = useTranslation();
-  const { data, isLoading, mutate } = useGameCollection(gameId);
+  const { data, isLoading, mutate } = useCollectionStatus(gameId);
 
   return (
     <div

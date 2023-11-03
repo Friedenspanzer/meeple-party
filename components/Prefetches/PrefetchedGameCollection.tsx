@@ -1,4 +1,4 @@
-import { useGameCollectionQueryKey } from "@/hooks/api/useGameCollection";
+import { useCollectionStatusQueryKey } from "@/hooks/api/useCollectionStatus";
 import getQueryClient from "@/utility/queryClient";
 import { Game, GameCollection } from "@prisma/client";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ type Props = PropsWithChildren<{
 
 const PrefetchedGameCollection: React.FC<Props> = ({ data, children }) => {
   const queryClient = getQueryClient();
-  const key = useGameCollectionQueryKey();
+  const key = useCollectionStatusQueryKey();
   data.forEach((c) => {
     queryClient.setQueryData(key(c.game.id), c);
   });

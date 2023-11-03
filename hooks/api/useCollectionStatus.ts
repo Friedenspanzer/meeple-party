@@ -5,21 +5,21 @@ import { MutableResult } from "./types";
 
 const twoWeeksInMilliSeconds = 1000 * 60 * 60 * 24 * 14;
 
-type GameCollectionUpdate = Partial<
+type CollectionStatusUpdate = Partial<
   Omit<GameCollection, "userId" | "gameId" | "updatedAt">
 >;
 
-function getGameCollection(gameId: number) {
+function getCollectionStatus(gameId: number) {
   console.log("Loading game collection", gameId);
   return axios
     .get<GameCollection>(`/api/v2/game/${gameId}/collection`)
     .then((response) => response.data);
 }
 
-export default function useGameCollection(
+export default function useCollectionStatus(
   gameId: number
 ): MutableResult<GameCollection> {
-  const queryKey = useGameCollectionQueryKey();
+  const queryKey = useCollectionStatusQueryKey();
   const queryClient = useQueryClient();
   const {
     isLoading: queryLoading,
@@ -27,7 +27,7 @@ export default function useGameCollection(
     data: queryData,
   } = useQuery({
     queryKey: queryKey(gameId),
-    queryFn: () => getGameCollection(gameId),
+    queryFn: () => getCollectionStatus(gameId),
     refetchOnWindowFocus: false,
     staleTime: twoWeeksInMilliSeconds,
   });
@@ -38,9 +38,12 @@ export default function useGameCollection(
     mutate: mutationFunction,
   } = useMutation({
     mutationKey: queryKey(gameId),
-    mutationFn: (data: GameCollectionUpdate) => {
+    mutationFn: (data: CollectionStatusUpdate) => {
       return axios
-        .patch<GameCollectionUpdate>(`/api/v2/game/${gameId}/collection`, data)
+        .patch<CollectionStatusUpdate>(
+          `/api/v2/game/${gameId}/collection`,
+          data
+        )
         .then((response) => response.data);
     },
     onSuccess: (data) => {
@@ -59,6 +62,6 @@ export default function useGameCollection(
   };
 }
 
-export function useGameCollectionQueryKey(): (gameId: number) => any[] {
-  return (gameId) => ["gamecollection", gameId];
+export function useCollectionStatusQueryKey(): (gameId: number) => any[] {
+  return (gameId) => ["collectionstatus", gameId];
 }
