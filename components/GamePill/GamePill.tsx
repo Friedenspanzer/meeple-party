@@ -1,11 +1,8 @@
 "use client";
 
-import { Game } from "@/datatypes/game";
-import useGame, { useGameQuery } from "@/hooks/api/useGame";
+import useGame from "@/hooks/api/useGame";
 import classNames from "classnames";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import CriticalError from "../CriticalError/CriticalError";
 import styles from "./gamepill.module.css";
 
 type DefaultProperties = Omit<React.HTMLAttributes<HTMLDivElement>, "onClick">;
@@ -42,6 +39,11 @@ const GamePill: React.FC<GamePillProps> = ({
       ])}
       onClick={(e) => {
         if (action) {
+          action(data.id);
+        }
+      }}
+      onKeyUp={(e) => {
+        if (action && e.key === "Enter") {
           action(data.id);
         }
       }}

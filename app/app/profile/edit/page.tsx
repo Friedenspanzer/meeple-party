@@ -8,7 +8,7 @@ import GameSearch, {
 import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
-import { useGameQuery, useGameQueryKey } from "@/hooks/api/useGame";
+import { useGameQuery } from "@/hooks/api/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
 import classNames from "classnames";
@@ -272,6 +272,15 @@ const EditProfile: React.FC = () => {
                       onClick={(_) =>
                         setFavorites(favorites.filter((g) => g.id !== f.id))
                       }
+                      onKeyDown={
+                        (event) => {
+                          if (event.key === "Delete") {
+                            setFavorites(
+                              favorites.filter((g) => g.id !== f.id)
+                            );
+                          }
+                        }
+                      }
                     ></i>
                   </GamePill>
                 ))}
@@ -346,6 +355,11 @@ function bindFavoriteGameResult(
               className="bi bi-plus"
               style={{ cursor: "pointer" }}
               onClick={(_) => addToFavorites(game.id)}
+              onKeyUp={(event) => {
+                if (event.key === "Enter") {
+                  addToFavorites(game.id);
+                }
+              }}
             ></i>
           </GamePill>
         ))}
