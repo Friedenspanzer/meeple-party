@@ -19,14 +19,13 @@ function getCollectionStatus(gameId: number) {
 export default function useCollectionStatus(
   gameId: number
 ): MutableResult<GameCollection> {
-  const queryKey = useCollectionStatusQueryKey();
   const queryClient = useQueryClient();
   const {
     isLoading: queryLoading,
     isError: queryError,
     data: queryData,
   } = useQuery({
-    queryKey: queryKey(gameId),
+    queryKey: getCollectionStatusQueryKey(gameId),
     queryFn: () => getCollectionStatus(gameId),
     refetchOnWindowFocus: false,
     staleTime: twoWeeksInMilliSeconds,
@@ -37,7 +36,7 @@ export default function useCollectionStatus(
     isError: mutationError,
     mutate: mutationFunction,
   } = useMutation({
-    mutationKey: queryKey(gameId),
+    mutationKey: getCollectionStatusQueryKey(gameId),
     mutationFn: (data: CollectionStatusUpdate) => {
       return axios
         .patch<CollectionStatusUpdate>(
@@ -47,7 +46,10 @@ export default function useCollectionStatus(
         .then((response) => response.data);
     },
     onSuccess: (data) => {
-      queryClient.setQueryData(queryKey(gameId), { ...queryData, ...data });
+      queryClient.setQueryData(getCollectionStatusQueryKey(gameId), {
+        ...queryData,
+        ...data,
+      });
     },
   });
 
@@ -56,12 +58,14 @@ export default function useCollectionStatus(
     isError: queryError || mutationError,
     data: queryData,
     invalidate: () => {
-      queryClient.invalidateQueries({ queryKey: queryKey(gameId) });
+      queryClient.invalidateQueries({
+        queryKey: getCollectionStatusQueryKey(gameId),
+      });
     },
     mutate: (data, configuration) => mutationFunction(data),
   };
 }
 
-export function useCollectionStatusQueryKey(): (gameId: number) => any[] {
-  return (gameId) => ["collectionstatus", gameId];
+export function getCollectionStatusQueryKey(gameId: number): any[] {
+  return ["collectionstatus", gameId];
 }
