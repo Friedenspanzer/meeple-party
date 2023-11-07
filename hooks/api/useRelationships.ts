@@ -1,24 +1,20 @@
+import { RelationshipsGetResult } from "@/app/api/v2/relationships/route";
 import { Relationship } from "@/datatypes/relationship";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
+import { Result } from "./types";
 
-interface Result {
-  isLoading: boolean;
-  isError: boolean;
-  relationships: Relationship[] | undefined;
-  invalidate: () => void;
-}
-
-export default function useRelationships(): Result {
+export default function useRelationships(): Result<Relationship[]> {
   const queryKey = ["relationships"];
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey,
     queryFn: () => {
       return axios
-        .get<Relationship[]>("/api/relationships")
-        .then((response) => response.data);
+        .get<RelationshipsGetResult>("/api/v2/relationships")
+        .then((response) => response.data)
+        .then((result) => result.normalizedRelationships);
     },
   });
 
@@ -33,7 +29,7 @@ export default function useRelationships(): Result {
   return {
     isLoading,
     isError,
-    relationships: data,
+    data,
     invalidate: () => queryClient.invalidateQueries({ queryKey }),
   };
 }

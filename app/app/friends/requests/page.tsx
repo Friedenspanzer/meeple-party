@@ -3,11 +3,11 @@
 import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequest";
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
 import { RelationshipType } from "@/datatypes/relationship";
-import useRelationships from "@/hooks/useRelationships";
+import useRelationships from "@/hooks/api/useRelationships";
 import { useTranslation } from "@/i18n/client";
 
-const FriendRequests: React.FC = (props) => {
-  const { relationships } = useRelationships();
+const FriendRequests: React.FC = () => {
+  const { isLoading, data: relationships } = useRelationships();
   const { t } = useTranslation("friends");
 
   return (

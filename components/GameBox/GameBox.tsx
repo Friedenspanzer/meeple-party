@@ -3,6 +3,7 @@
 import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
+import useGame from "@/hooks/api/useGame";
 import { useTranslation } from "@/i18n/client";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import classNames from "classnames";
@@ -28,9 +29,11 @@ export default function GameBox({
   className,
   ...props
 }: GameBoxProps) {
-  const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
   const { t } = useTranslation("game");
+  const gameId = getGameId(game)
+
+  const { data: gameData, isLoading } = useGame(gameId);
 
   useEffect(() => {
     if (showFriendCollection) {
@@ -55,26 +58,11 @@ export default function GameBox({
     }
   }, [game, friendCollection, showFriendCollection]);
 
-  useEffect(() => {
-    if (typeof game === "number") {
-      fetch(`/api/games/${game}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw Error(`${response.status} ${response.statusText}`);
-          }
-        })
-        .then(setGameData)
-        .catch((reason) => {
-          throw Error(`Error loading data for game ${game}. Reason: ${reason}`);
-        });
-    } else {
-      setGameData(game);
-    }
-  }, [game]);
+  if (isLoading || !gameData) {
+    return <div className={classNames(styles.gamebox, "shimmer")} />;
+  }
 
-  return gameData ? (
+  return (
     <div className={classNames(styles.container, className)} {...props}>
       <div className={styles.gamebox}>
         <Link href={`/app/game/${gameData.id}`}>
@@ -111,9 +99,7 @@ export default function GameBox({
           </div>
           <div className={styles.infoBox}>
             <div className={styles.metric}>{gameData.playingTime}</div>
-            <div className={styles.label}>
-              {t("Attributes.PlayingTime")}
-            </div>
+            <div className={styles.label}>{t("Attributes.PlayingTime")}</div>
           </div>
           <div className={styles.infoBox}>
             <div className={styles.metric}>{round(gameData.weight)}</div>
@@ -140,8 +126,6 @@ export default function GameBox({
         </Link>
       )}
     </div>
-  ) : (
-    <div className={classNames(styles.gamebox, "shimmer")} />
   );
 }
 

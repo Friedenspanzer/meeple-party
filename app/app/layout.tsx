@@ -1,6 +1,6 @@
 import AppContainer from "@/components/AppContainer/AppContainer";
 import DataContainer from "@/components/DataContainer/DataContainer";
-import { useFeatureFlagServer } from "@/utility/featureFlag";
+import { getFeatureFlagServer } from "@/utility/featureFlag";
 import { notFound } from "next/navigation";
 
 export default async function AppLayout({
@@ -9,7 +9,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   try {
-    const showApp = await useFeatureFlagServer("show_app");
+    const showApp = await getFeatureFlagServer("show_app");
     return (
       <>
         <DataContainer>
