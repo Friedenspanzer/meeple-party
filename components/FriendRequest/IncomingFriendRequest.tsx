@@ -1,7 +1,7 @@
 "use client";
 
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import useRelationship from "@/hooks/useRelationship";
+import useRelationship from "@/hooks/api/useRelationship";
 import { useTranslation } from "@/i18n/client";
 import axios from "axios";
 import { useCallback, useState } from "react";

@@ -17,6 +17,7 @@
     }
   },
   "Filters": {
+    "Heading": "Filter games ({{current}}/{{total}})",
     "Presets": "Filter presets",
     "GameName": "Game name",
     "Traits": {
@@ -63,7 +64,8 @@
         "Medium": "Medium",
         "MediumHeavy": "Medium Heavy",
         "Heavy": "Heavy"
-      }
+      },
+      "WeightPresets": "Weight presets"
     },
     "Preset": {
       "GamesYouOwn": "Games you own",
@@ -72,7 +74,9 @@
       "GamesYouOwnNoSolo": "Games you own, no solo play",
       "GamesYouDontOwnNoSolo": "Games you don't own, no solo play",
       "YourWishlist": "Your wishlist",
-      "YourWishlistNoSolo": "Your wishlist, no solo play"
+      "YourWishlistNoSolo": "Your wishlist, no solo play",
+      "WantToPlay": "Games you want to play",
+      "OwnAndWantToPlay": "Games you own and want to play"
     },
     "SortOrder": {
       "CollectionStatus": "Collection status",
@@ -101,7 +105,12 @@
     "Next": "Next",
     "Deny": "Deny",
     "Accept": "Accept",
-    "Withdraw": "Withdraw"
+    "Withdraw": "Withdraw",
+    "Close": "Close",
+    "Submit": "Submit"
+  },
+  "LoadingIndicators": {
+    "Sending": "Sending …"
   },
   "Search": {
     "Placeholder": "Game name, BoardGameGeek ID, BoardGameGeek Link, …",
@@ -114,5 +123,11 @@
   "Footer": {
     "Issues": "Issues",
     "LatestChanges": "Latest Changes"
+  },
+  "Pagination": {
+    "Current": "Current page"
+  },
+  "Objects": {
+    "Avatar": "User avatar"
   }
 }

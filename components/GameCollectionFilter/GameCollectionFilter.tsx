@@ -1,18 +1,18 @@
 "use client";
 
+import { useTranslation } from "@/i18n/client";
+import { emptyFilter } from "@/utility/filter";
 import classNames from "classnames";
 import { useCallback, useEffect, useId, useState } from "react";
-import styles from "./gamecollectionfilter.module.css";
-import MinMaxSliders from "./components/MinMaxSlider";
-import Section from "./components/Section";
-import FilterOverview from "./components/FilterOverview";
 import CollectionStatus, {
   getCombinedText,
 } from "./components/CollectionStatus";
-import PlayerCount from "./components/PlayerCount";
+import FilterOverview from "./components/FilterOverview";
 import Group from "./components/Group";
-import { emptyFilter } from "@/utility/filter";
-import { useTranslation } from "@/i18n/client";
+import MinMaxSliders from "./components/MinMaxSlider";
+import PlayerCount from "./components/PlayerCount";
+import Section from "./components/Section";
+import styles from "./gamecollectionfilter.module.css";
 
 export interface GameCollectionFilterProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -253,13 +253,16 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
       >
         <div className={classNames("offcanvas-header", styles.offcanvasHeader)}>
           <h5 className="offcanvas-title" id="filterOffcanvasLabel">
-            Filter games ({filteredCount}/{totalCount})
+            {t("Filters.Heading", {
+              current: filteredCount,
+              total: totalCount,
+            })}
           </h5>
           <button
             type="button"
             className={classNames("btn-close", styles.buttonClose)}
             data-bs-dismiss="offcanvas"
-            aria-label="Close"
+            aria-label={t("Actions.Close")}
           ></button>
         </div>
         <div className={classNames("offcanvas-body", styles.offcanvasBody)}>
@@ -268,7 +271,7 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
               <input
                 type="text"
                 className="form-control"
-                placeholder="Game name"
+                placeholder={t("Filters.GameName")}
                 value={filter.name}
                 onChange={(e) => changeName(e.target.value)}
               />
@@ -277,7 +280,16 @@ const GameCollectionFilter: React.FC<GameCollectionFilterProps> = ({
           <Group title={t("Filters.Traits.GameAttributes")}>
             <Section
               title={t("Filters.Traits.PlayerCount")}
-              value={filter.playerCount.count ? t(`Filters.Values.PlayerCount.${getPlayerCountTranslationKey(filter.playerCount.type)}`, { number: filter.playerCount.count }) : ""}
+              value={
+                filter.playerCount.count
+                  ? t(
+                      `Filters.Values.PlayerCount.${getPlayerCountTranslationKey(
+                        filter.playerCount.type
+                      )}`,
+                      { number: filter.playerCount.count }
+                    )
+                  : ""
+              }
               active={!!filter.playerCount.count}
             >
               <PlayerCount
@@ -401,7 +413,7 @@ function WeightPresets({
     <div
       className="btn-group btn-group-sm"
       role="group"
-      aria-label="Basic example"
+      aria-label={t("Filters.Labels.WeightPresets")}
     >
       <button
         type="button"
@@ -507,7 +519,7 @@ export function getMinMaxValue(min?: number, max?: number) {
 }
 
 export function getPlayerCountTranslationKey(
-  type: "exact" | "supports" | "atleast",
+  type: "exact" | "supports" | "atleast"
 ): string {
   if (type === "atleast") {
     return "AtLeast";

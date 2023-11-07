@@ -19,8 +19,9 @@
   "Filters": {
     "Presets": "Vorlagen",
     "GameName": "Name des Spiels",
+    "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Traits": {
-      "PlayerCount": "Personen",
+      "PlayerCount": "Spielendenzahl",
       "Weight": "Komplexität",
       "PlayingTime": "Dauer",
       "Own": "$t(States.Own)",
@@ -63,7 +64,8 @@
         "Medium": "Mittel",
         "MediumHeavy": "Mittel-Komplex",
         "Heavy": "Komplex"
-      }
+      },
+      "WeightPresets": "Komplexitätsvoreinstellungen"
     },
     "Preset": {
       "GamesYouOwn": "Im Besitz",
@@ -72,15 +74,17 @@
       "GamesYouOwnNoSolo": "Im Besitz, keine Solo-Spiele",
       "GamesYouDontOwnNoSolo": "Nicht im Besitz, keine Solo-Spiele",
       "YourWishlist": "Dein Wunschzettel",
-      "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele"
+      "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele",
+      "OwnAndWantToPlay": "Im Besitz und will ich spielen",
+      "WantToPlay": "Will ich spielen"
     },
     "SortOrder": {
       "CollectionStatus": "Sammlungsstatus",
       "FriendsOwn": "$t(Filters.Traits.FriendsOwn)",
       "FriendsWantToPlay": "$t(Filters.Traits.FriendsWantToPlay)",
       "FriendsWish": "$t(Filters.Traits.FriendsWishlist)",
-      "MaxPlayers": "Personen bis",
-      "MinPlayers": "Personen ab",
+      "MaxPlayers": "Maximalspielendenzahl",
+      "MinPlayers": "Minimalspielendenzahl",
       "Name": "Name",
       "PlayingTime": "$t(Filters.Traits.PlayingTime)",
       "Weight": "$t(Filters.Traits.Weight)"
@@ -101,7 +105,12 @@
     "Next": "Weiter",
     "Accept": "Annehmen",
     "Deny": "Ablehnen",
-    "Withdraw": "Withdraw"
+    "Withdraw": "Withdraw",
+    "Close": "Schließen",
+    "Submit": "Absenden"
+  },
+  "LoadingIndicators": {
+    "Sending": "Sende …"
   },
   "Search": {
     "Placeholder": "Name des Spiels, BoardGameGeek-ID, BoardGameGeek-Link, …",
@@ -114,5 +123,11 @@
   "Footer": {
     "Issues": "Tickets",
     "LatestChanges": "Neueste Änderungen"
+  },
+  "Pagination": {
+    "Current": "Aktuelle Seite"
+  },
+  "Objects": {
+    "Avatar": "Avatar"
   }
 }

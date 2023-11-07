@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
 import { CSSProperties } from "react";
@@ -14,13 +17,14 @@ export default function Avatar({
   className?: string;
   style?: CSSProperties;
 }) {
+  const { t } = useTranslation();
   if (image) {
     return (
       <Image
         src={image}
         width="40"
         height="40"
-        alt={name || "User avatar"}
+        alt={name || t("Objects.Avatar")}
         className={classNames([styles.image, className])}
         style={style}
         unoptimized

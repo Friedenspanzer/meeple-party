@@ -1,17 +1,26 @@
 {
-    "Badges": {
-        "You": "Das bist du!",
-        "Friend": "Freund*in",
-        "Admin": "Admin",
-        "FriendsFamily": "Friends & Family",
-        "Premium": "Premium",
-        "User": "Benutzer*in"
-    },
-    "Edit": "Dein Profil bearbeiten",
-    "FavoriteGames": "Lieblingsspiele",
-    "UserCollection": "Sammlung von {{name}}",
-    "Header": {
-        "Place": "Aus {{place}}",
-        "BggName": "{{name}} auf BoardGameGeek"
-    }
+  "Badges": {
+    "You": "Das bist du!",
+    "Friend": "Freund*in",
+    "Admin": "Admin",
+    "FriendsFamily": "Friends & Family",
+    "Premium": "Premium",
+    "User": "Benutzer*in"
+  },
+  "Edit": "Dein Profil bearbeiten",
+  "FavoriteGames": "Lieblingsspiele",
+  "UserCollection": "Sammlung von {{name}}",
+  "Header": {
+    "Place": "Aus {{place}}",
+    "BggName": "{{name}} auf BoardGameGeek"
+  },
+  "Complete": {
+    "DisplayName": "Anzeigename",
+    "DisplayNameExplanation": "Wie du öffentlich genannt werden willst",
+    "EmailAddress": "E-Mail-Adresse",
+    "Explanation": "Hallo! 👋 Tut uns leid dich unterbrechen zu müssen, aber wir brauchen noch ein paar Daten von dir.",
+    "Header": "Profil vervollständigen",
+    "RealName": "Echter Name (optional)",
+    "RealNameExplanation": "Wird nur deinen Freund*innen angezeigt"
+  }
 }
