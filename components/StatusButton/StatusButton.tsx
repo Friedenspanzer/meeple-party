@@ -1,9 +1,11 @@
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import classNames from "classnames";
 import { useCallback, useMemo } from "react";
 import Spinner from "../Spinner/Spinner";
 import IconCollectionOwn from "../icons/CollectionOwn";
 import IconCollectionWantToPlay from "../icons/CollectionWantToPlay";
 import IconCollectionWishlist from "../icons/CollectionWishlist";
+import styles from "./statusbutton.module.css";
 
 interface StatusButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   gameId: number;
@@ -58,13 +60,22 @@ export default function StatusButton({
   }, [status, mutate, data]);
 
   if (isLoading) {
-    return <Spinner {...props} />;
+    return (
+      <Spinner
+        {...props}
+        className={classNames(styles.spinner, props.className)}
+      />
+    );
   } else {
     return (
       <div
         {...props}
         onClick={onClick}
-        style={{ ...props.style, color: active ? activeColor : "unset" }}
+        className={classNames(styles.button, props.className)}
+        style={{
+          ...props.style,
+          color: active ? activeColor : "unset",
+        }}
       >
         {icon}
       </div>
