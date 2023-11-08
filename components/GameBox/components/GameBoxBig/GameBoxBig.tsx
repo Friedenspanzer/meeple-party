@@ -4,6 +4,7 @@ import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
+import { useMemo } from "react";
 import { GameBoxProps } from "../GameBoxMedium/GameBoxMedium";
 import styles from "./gameboxbig.module.css";
 
@@ -75,43 +76,71 @@ function Metric({ text, label }: { text: string; label: string }) {
 }
 
 function StatusList({ gameId }: { gameId: number }) {
-  const { data, isLoading } = useCollectionStatus(gameId);
-  const { t } = useTranslation("default");
   return (
     <div className={styles.statusList}>
-      <div className={styles.status}>
-        <StatusButton
-          status="own"
-          gameId={gameId}
-          className={styles.statusButton}
-        />
-        <div className={styles.statusText}>
-          {!isLoading && data?.own ? t("States.Own") : t("States.NotOwn")}
-        </div>
-      </div>
-      <div className={styles.status}>
-        <StatusButton
-          status="wanttoplay"
-          gameId={gameId}
-          className={styles.statusButton}
-        />
-        <div className={styles.statusText}>
-          {!isLoading && data?.wantToPlay
-            ? t("States.WantToPlay")
-            : t("States.NotWantToPlay")}
-        </div>
-      </div>
-      <div className={styles.status}>
-        <StatusButton
-          status="wishlist"
-          gameId={gameId}
-          className={styles.statusButton}
-        />
-        <div className={styles.statusText}>
-          {!isLoading && data?.wishlist
-            ? t("States.Wishlist")
-            : t("States.NotWishlist")}
-        </div>
+      <Status
+        gameId={gameId}
+        status="own"
+        friendCollection={friendCollection}
+      />
+      <Status
+        gameId={gameId}
+        status="wanttoplay"
+        friendCollection={friendCollection}
+      />
+      <Status
+        gameId={gameId}
+        status="wishlist"
+        friendCollection={friendCollection}
+      />
+    </div>
+  );
+}
+
+function Status({
+  gameId,
+  friendCollection,
+  status,
+}: {
+  gameId: number;
+  friendCollection?: StatusByUser;
+  status: "own" | "wishlist" | "wanttoplay";
+}) {
+  const { t } = useTranslation("default");
+  const { data, isLoading } = useCollectionStatus(gameId);
+  const state = useMemo(() => {
+    if (!data) {
+      return false;
+    } else if (status === "own") {
+      return data.own;
+    } else if (status === "wanttoplay") {
+      return data.wantToPlay;
+    } else if (status === "wishlist") {
+      return data.wishlist;
+    }
+  }, [data, status]);
+
+  const translationBaseKey = useMemo(() => {
+    if (status === "own") {
+      return "Own";
+    } else if (status === "wanttoplay") {
+      return "WantToPlay";
+    } else if (status === "wishlist") {
+      return "Wishlist";
+    }
+  }, [status]);
+
+  return (
+    <div className={styles.status}>
+      <StatusButton
+        status={status}
+        gameId={gameId}
+        className={styles.statusButton}
+      />
+      <div className={styles.statusText}>
+        {state
+          ? t(`States.${translationBaseKey}`)
+          : t(`States.Not${translationBaseKey}`)}
       </div>
     </div>
   );
