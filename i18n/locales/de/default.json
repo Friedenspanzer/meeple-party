@@ -38,12 +38,12 @@
     "Values": {
       "Yes": "Ja",
       "No": "Nein",
-      "Own": "Im Besitz",
-      "NotOwn": "Nicht im Besitz",
-      "WantToPlay": "Will ich spielen",
-      "NotWantToPlay": "Will ich nicht spielen",
-      "Wishlist": "Gewünscht",
-      "NotWishlist": "Nicht gewünscht",
+      "Own": "$t(States.Own)",
+      "NotOwn": "$t(States.NotOwn)",
+      "WantToPlay": "$t(States.WantToPlay)",
+      "NotWantToPlay": "$t(States.NotWantToPlay)",
+      "Wishlist": "$t(States.Wishlist)",
+      "NotWishlist": "$t(States.NotWishlist)",
       "PlayerCount": {
         "AtLeast": "> {{number}}",
         "Exact": "= {{number}}",
@@ -98,7 +98,10 @@
   "States": {
     "Own": "Im Besitz",
     "WantToPlay": "Will ich spielen",
-    "Wishlist": "Wunschliste"
+    "Wishlist": "Wunschliste",
+    "NotOwn": "Nicht im Besitz",
+    "NotWantToPlay": "Will ich nicht spielen",
+    "NotWishlist": "Nicht gewünscht"
   },
   "Actions": {
     "SaveAndContinue": "Speichern und weiter",
