@@ -99,9 +99,9 @@
     "Own": "Own",
     "WantToPlay": "Want To Play",
     "Wishlist": "Wishlist",
-    "NotOwn": "Nicht im Besitz",
-    "NotWantToPlay": "Will ich nicht spielen",
-    "NotWishlist": "Nicht gewünscht"
+    "NotOwn": "Don't own",
+    "NotWantToPlay": "Don't want to play",
+    "NotWishlist": "Don't wish"
   },
   "Actions": {
     "SaveAndContinue": "Save and continue",
