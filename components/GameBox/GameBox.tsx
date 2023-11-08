@@ -1,3 +1,5 @@
+"use client";
+
 import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";

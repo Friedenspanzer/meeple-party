@@ -14,8 +14,7 @@
   width: 250px;
   height: 250px;
   grid-area: image;
-  background-color: var(--bs-gray-dark);
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .name {
@@ -58,7 +57,33 @@
   color: var(--bs-light-text);
 }
 
-.status {
+.statusBox {
   grid-area: status;
-  background-color: grey;
+  background-color: lightgray;
+}
+
+.statusList {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.status {
+  display: grid;
+  grid-template-rows: 2fr 32px 3fr;
+  grid-template-areas:
+    "icon"
+    "text"
+    "friends";
+}
+
+.statusButton {
+  font-size: 1.75rem;
+  place-self: center stretch;
+}
+
+.statusText {
+  font-size: 0.7rem;
+  text-align: center;
+  font-weight: lighter;
 }

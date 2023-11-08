@@ -1,4 +1,6 @@
+import StatusButton from "@/components/StatusButton/StatusButton";
 import { Game } from "@/datatypes/game";
+import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
@@ -7,7 +9,6 @@ import styles from "./gameboxbig.module.css";
 
 export default function GameBoxBig({
   game,
-  status,
   friendCollection,
   showFriendCollection = false,
 }: GameBoxProps) {
@@ -31,7 +32,9 @@ export default function GameBoxBig({
       <div className={styles.name}>
         <h2>{game.name}</h2>
       </div>
-      <div className={styles.status}>Status</div>
+      <div className={styles.statusBox}>
+        <StatusList gameId={game.id} />
+      </div>
     </div>
   );
 }
@@ -67,6 +70,49 @@ function Metric({ text, label }: { text: string; label: string }) {
     <div className={styles.metric}>
       <div className={styles.metricTitle}>{text}</div>
       <div className={styles.metricLabel}>{label}</div>
+    </div>
+  );
+}
+
+function StatusList({ gameId }: { gameId: number }) {
+  const { data, isLoading } = useCollectionStatus(gameId);
+  const { t } = useTranslation("default");
+  return (
+    <div className={styles.statusList}>
+      <div className={styles.status}>
+        <StatusButton
+          status="own"
+          gameId={gameId}
+          className={styles.statusButton}
+        />
+        <div className={styles.statusText}>
+          {!isLoading && data?.own ? t("States.Own") : t("States.NotOwn")}
+        </div>
+      </div>
+      <div className={styles.status}>
+        <StatusButton
+          status="wanttoplay"
+          gameId={gameId}
+          className={styles.statusButton}
+        />
+        <div className={styles.statusText}>
+          {!isLoading && data?.wantToPlay
+            ? t("States.WantToPlay")
+            : t("States.NotWantToPlay")}
+        </div>
+      </div>
+      <div className={styles.status}>
+        <StatusButton
+          status="wishlist"
+          gameId={gameId}
+          className={styles.statusButton}
+        />
+        <div className={styles.statusText}>
+          {!isLoading && data?.wishlist
+            ? t("States.Wishlist")
+            : t("States.NotWishlist")}
+        </div>
+      </div>
     </div>
   );
 }
