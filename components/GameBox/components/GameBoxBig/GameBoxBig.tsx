@@ -1,5 +1,7 @@
 import StatusButton from "@/components/StatusButton/StatusButton";
+import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
+import { UserProfile } from "@/datatypes/userProfile";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
@@ -30,9 +32,7 @@ export default function GameBoxBig({
       <div className={styles.info}>
         <MetricList game={game} />
       </div>
-      <div className={styles.name}>
-        <h2>{game.name}</h2>
-      </div>
+      <h2 className={styles.name}>{game.name}</h2>
       <div className={styles.statusBox}>
         <StatusList gameId={game.id} />
       </div>
@@ -75,23 +75,29 @@ function Metric({ text, label }: { text: string; label: string }) {
   );
 }
 
-function StatusList({ gameId }: { gameId: number }) {
+function StatusList({
+  gameId,
+  friendCollection,
+}: {
+  gameId: number;
+  friendCollection?: StatusByUser;
+}) {
   return (
     <div className={styles.statusList}>
       <Status
         gameId={gameId}
         status="own"
-        friendCollection={friendCollection}
+        friends={friendCollection ? friendCollection.own : []}
       />
       <Status
         gameId={gameId}
         status="wanttoplay"
-        friendCollection={friendCollection}
+        friends={friendCollection ? friendCollection.wantToPlay : []}
       />
       <Status
         gameId={gameId}
         status="wishlist"
-        friendCollection={friendCollection}
+        friends={friendCollection ? friendCollection.wishlist : []}
       />
     </div>
   );
@@ -99,11 +105,11 @@ function StatusList({ gameId }: { gameId: number }) {
 
 function Status({
   gameId,
-  friendCollection,
+  friends,
   status,
 }: {
   gameId: number;
-  friendCollection?: StatusByUser;
+  friends: UserProfile[];
   status: "own" | "wishlist" | "wanttoplay";
 }) {
   const { t } = useTranslation("default");
@@ -142,6 +148,7 @@ function Status({
           ? t(`States.${translationBaseKey}`)
           : t(`States.Not${translationBaseKey}`)}
       </div>
+      <div className={styles.statusFriends}>{friends.length} Freunde</div>
     </div>
   );
 }
