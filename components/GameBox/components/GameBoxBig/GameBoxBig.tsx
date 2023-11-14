@@ -1,3 +1,4 @@
+import AvatarStack from "@/components/AvatarStack/AvatarStack";
 import StatusButton from "@/components/StatusButton/StatusButton";
 import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
@@ -34,7 +35,7 @@ export default function GameBoxBig({
       </div>
       <h2 className={styles.name}>{game.name}</h2>
       <div className={styles.statusBox}>
-        <StatusList gameId={game.id} />
+        <StatusList gameId={game.id} friendCollection={friendCollection} />
       </div>
     </div>
   );
@@ -148,7 +149,17 @@ function Status({
           ? t(`States.${translationBaseKey}`)
           : t(`States.Not${translationBaseKey}`)}
       </div>
-      <div className={styles.statusFriends}>{friends.length} Freunde</div>
+      {friends.length > 0 && (
+        <AvatarStack
+          max={4}
+          distance="sm"
+          avatars={friends.map((f) => ({
+            id: f.id,
+            name: f.name || "",
+            image: f.image,
+          }))}
+        />
+      )}
     </div>
   );
 }
