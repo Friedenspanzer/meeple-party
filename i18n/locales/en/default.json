@@ -103,6 +103,14 @@
     "NotWantToPlay": "Don't want to play",
     "NotWishlist": "Don't wish"
   },
+  "FriendStates": {
+    "Own_one": "{{count}} friend owns",
+    "Own_other": "{{count}} friends own",
+    "Wishlist_one": "{{count}} friend wishes",
+    "Wishlist_other": "{{count}} friends wish",
+    "WantToPlay_one": "{{count}} friend wants to play",
+    "WantToPlay_other": "{{count}} friends want to play"
+  },
   "Actions": {
     "SaveAndContinue": "Save and continue",
     "Next": "Next",

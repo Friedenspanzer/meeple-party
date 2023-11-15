@@ -86,7 +86,12 @@
   font-size: 0.7rem;
   text-align: center;
   font-weight: lighter;
+  height: 32px;
 }
 
 .statusFriends {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }

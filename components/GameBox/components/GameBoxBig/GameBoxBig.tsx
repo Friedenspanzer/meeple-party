@@ -150,15 +150,20 @@ function Status({
           : t(`States.Not${translationBaseKey}`)}
       </div>
       {friends.length > 0 && (
-        <AvatarStack
-          max={4}
-          distance="sm"
-          avatars={friends.map((f) => ({
-            id: f.id,
-            name: f.name || "",
-            image: f.image,
-          }))}
-        />
+        <div className={styles.statusFriends}>
+          <AvatarStack
+            max={4}
+            distance="sm"
+            avatars={friends.map((f) => ({
+              id: f.id,
+              name: f.name || "",
+              image: f.image,
+            }))}
+          />
+          <div className={styles.statusText}>
+            {t(`FriendStates.${translationBaseKey}`, { count: friends.length })}
+          </div>
+        </div>
       )}
     </div>
   );

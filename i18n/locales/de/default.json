@@ -103,6 +103,14 @@
     "NotWantToPlay": "Will ich nicht spielen",
     "NotWishlist": "Nicht gewünscht"
   },
+  "FriendStates": {
+    "Own_one": "{{count}} Freund*in besitzt",
+    "Own_other": "{{count}} Freunde*innen besitzen",
+    "Wishlist_one": "{{count}} Freund*in wünscht sich",
+    "Wishlist_other": "{{count}} Freund*innen wünschen sich",
+    "WantToPlay_one": "{{count}} Freund*in will spielen",
+    "WantToPlay_other": "{{count}} Freund*innen wollen spielen"
+  },
   "Actions": {
     "SaveAndContinue": "Speichern und weiter",
     "Next": "Weiter",
