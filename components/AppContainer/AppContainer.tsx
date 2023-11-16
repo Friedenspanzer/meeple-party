@@ -1,5 +1,6 @@
 "use client";
 
+import ModalProvider from "@/context/modalContext";
 import useUserProfile from "@/hooks/useUserProfile";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import classNames from "classnames";
@@ -40,7 +41,7 @@ const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
     );
   } else {
     return (
-      <>
+      <ModalProvider>
         <ReactQueryDevtools initialIsOpen={false} />
         <TopNav />
         {!userProfile.profileComplete ? (
@@ -51,7 +52,7 @@ const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
             <div className="clearfix"></div>
           </div>
         )}
-      </>
+      </ModalProvider>
     );
   }
 };

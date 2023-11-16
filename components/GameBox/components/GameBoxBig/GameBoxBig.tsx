@@ -1,5 +1,6 @@
 import AvatarStack from "@/components/AvatarStack/AvatarStack";
 import StatusButton from "@/components/StatusButton/StatusButton";
+import { useModal } from "@/context/modalContext";
 import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
@@ -115,6 +116,7 @@ function Status({
 }) {
   const { t } = useTranslation("default");
   const { data, isLoading } = useCollectionStatus(gameId);
+  const { open: openModal } = useModal();
   const state = useMemo(() => {
     if (!data) {
       return false;
@@ -150,7 +152,10 @@ function Status({
           : t(`States.Not${translationBaseKey}`)}
       </div>
       {friends.length > 0 && (
-        <div className={styles.statusFriends}>
+        <div
+          className={styles.statusFriends}
+          onClick={() => openModal({ title: "Foo", content: <>bar</> })}
+        >
           <AvatarStack
             max={4}
             distance="sm"
