@@ -1,12 +1,13 @@
-import "@/theme/theme.scss";
-import "bootstrap-icons/font/bootstrap-icons.css";
-
-import AuthProvider from "@/context/authContext";
-import UserProvider from "@/context/userContext";
-import Script from "next/script";
 import Analytics from "@/components/Analytics/Analytics";
 import Footer from "@/components/Footer/Footer";
+import AuthProvider from "@/context/authContext";
+import UserProvider from "@/context/userContext";
+import "@/theme/theme.scss";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { dir } from "i18next";
+import Script from "next/script";
 
 import styles from "./page.module.css";
 
@@ -24,12 +25,16 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="de" dir={dir("de")}>
-      <head />
+      <head>
+        <ColorSchemeScript forceColorScheme="light" />
+      </head>
       <body>
         <Script src="/bootstrap.bundle.min.js" />
         <AuthProvider>
           <UserProvider>
-            <div className={styles.container}>{children}</div>
+            <MantineProvider forceColorScheme="light">
+              <div className={styles.container}>{children}</div>
+            </MantineProvider>
             <Analytics />
           </UserProvider>
         </AuthProvider>
