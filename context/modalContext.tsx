@@ -10,7 +10,7 @@ interface ModalProviderProps {
 
 interface ModalConfiguration {
   title: string;
-  content: React.ReactNode;
+  content: JSX.Element;
 }
 
 interface ModalContext {
@@ -30,11 +30,17 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
       value={{
         open: (configuration) => {
           setTitle(configuration.title);
+          setContent(configuration.content);
           open();
         },
       }}
     >
-      <Modal opened={opened} onClose={close} title={title}>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={title}
+        transitionProps={{ transition: "slide-down" }}
+      >
         {content}
       </Modal>
       {children}

@@ -1,11 +1,14 @@
 import AvatarStack from "@/components/AvatarStack/AvatarStack";
+import Person from "@/components/Person/Person";
 import StatusButton from "@/components/StatusButton/StatusButton";
 import { useModal } from "@/context/modalContext";
 import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useGame from "@/hooks/api/useGame";
 import { useTranslation } from "@/i18n/client";
+import { Stack } from "@mantine/core";
 import classNames from "classnames";
 import Image from "next/image";
 import { useMemo } from "react";
@@ -115,7 +118,9 @@ function Status({
   status: "own" | "wishlist" | "wanttoplay";
 }) {
   const { t } = useTranslation("default");
+  const { t: ct } = useTranslation("collection");
   const { data, isLoading } = useCollectionStatus(gameId);
+  const { data: gameData } = useGame(gameId);
   const { open: openModal } = useModal();
   const state = useMemo(() => {
     if (!data) {
@@ -154,7 +159,20 @@ function Status({
       {friends.length > 0 && (
         <div
           className={styles.statusFriends}
-          onClick={() => openModal({ title: "Foo", content: <>bar</> })}
+          onClick={() =>
+            openModal({
+              title: ct(`FriendCollections.${translationBaseKey}`, {
+                game: gameData?.name,
+              }),
+              content: (
+                <Stack>
+                  {friends.map((f) => (
+                    <Person name={f.name || ""} key={f.id} />
+                  ))}
+                </Stack>
+              ),
+            })
+          }
         >
           <AvatarStack
             max={4}

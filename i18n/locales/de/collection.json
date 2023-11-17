@@ -4,5 +4,10 @@
     "YourCollection": "Deine Sammlung",
     "Search": "Suche",
     "Import": "Importieren von BoardGameGeek"
+  },
+  "FriendCollections": {
+    "Own": "Freund*innen die {{game}} besitzen",
+    "WantToPlay": "Freund*innen die {{game}} spielen wollen",
+    "Wishlist": "Freund*innen die sich {{game}} wünschen"
   }
 }
