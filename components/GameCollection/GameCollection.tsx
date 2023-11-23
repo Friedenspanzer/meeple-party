@@ -2,6 +2,7 @@
 
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
+import useGameBoxSize from "@/hooks/useGameBoxSize";
 import { useTranslation } from "@/i18n/client";
 import { emptyFilter } from "@/utility/filter";
 import classNames from "classnames";
@@ -39,8 +40,6 @@ type FilterFunction = (
   games: GameInfo[]
 ) => GameInfo[];
 
-const ITEMS_PER_PAGE = 15;
-
 const GameCollection: React.FC<GameCollectionProps> = ({
   games,
   showFriendCollection = false,
@@ -58,6 +57,10 @@ const GameCollection: React.FC<GameCollectionProps> = ({
 
   const [debouncedInputPage] = useDebounce(inputPage, 1000);
 
+  const [gameBoxSize] = useGameBoxSize();
+
+  const itemsPerPage = gameBoxSize === "xl" ? 10 : 15;
+
   const filteredGames = useMemo(() => {
     if (!filter) {
       return games;
@@ -67,12 +70,12 @@ const GameCollection: React.FC<GameCollectionProps> = ({
   }, [filter, games]);
 
   const totalNumberOfPages = useMemo(() => {
-    return Math.ceil(filteredGames.length / ITEMS_PER_PAGE);
-  }, [filteredGames]);
+    return Math.ceil(filteredGames.length / itemsPerPage);
+  }, [filteredGames, itemsPerPage]);
 
   const getOffset = useCallback(() => {
-    return page * ITEMS_PER_PAGE;
-  }, [page]);
+    return page * itemsPerPage;
+  }, [page, itemsPerPage]);
 
   useEffect(() => {
     setInputPage(`${page + 1}`);
@@ -121,7 +124,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
         </div>
         <div className={styles.games}>
           {filteredGames
-            .slice(getOffset(), getOffset() + ITEMS_PER_PAGE)
+            .slice(getOffset(), getOffset() + itemsPerPage)
             .map(({ game, status, friendCollections }) => (
               <GameBox
                 game={game}
