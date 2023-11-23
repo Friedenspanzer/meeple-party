@@ -18,7 +18,7 @@ import styles from "./gameboxbig.module.css";
 export default function GameBoxBig({
   game,
   friendCollection,
-  showFriendCollection = false,
+  showFriendCollection = true,
 }: GameBoxProps) {
   const { t } = useTranslation("game");
   return (
@@ -34,13 +34,9 @@ export default function GameBoxBig({
       ) : (
         <div className={classNames(styles.image, "rounded-start")} />
       )}
-      <div className={styles.info}>
-        <MetricList game={game} />
-      </div>
+      <MetricList game={game} />
       <h2 className={styles.name}>{game.name}</h2>
-      <div className={styles.statusBox}>
-        <StatusList gameId={game.id} friendCollection={friendCollection} />
-      </div>
+      <StatusList gameId={game.id} friendCollection={friendCollection} />
     </div>
   );
 }
@@ -48,7 +44,7 @@ export default function GameBoxBig({
 function MetricList({ game }: { game: Game }) {
   const { t } = useTranslation("game");
   return (
-    <>
+    <div className={styles.info}>
       <Metric
         text={round(game.weight).toString()}
         label={t("Attributes.Weight")}
@@ -67,7 +63,7 @@ function MetricList({ game }: { game: Game }) {
         }
         label={t("Attributes.Players")}
       />
-    </>
+    </div>
   );
 }
 
@@ -88,7 +84,7 @@ function StatusList({
   friendCollection?: StatusByUser;
 }) {
   return (
-    <div className={styles.statusList}>
+    <>
       <Status
         gameId={gameId}
         status="own"
@@ -104,7 +100,7 @@ function StatusList({
         status="wishlist"
         friends={friendCollection ? friendCollection.wishlist : []}
       />
-    </div>
+    </>
   );
 }
 
@@ -145,20 +141,32 @@ function Status({
   }, [status]);
 
   return (
-    <div className={styles.status}>
-      <StatusButton
-        status={status}
-        gameId={gameId}
-        className={styles.statusButton}
-      />
-      <div className={styles.statusText}>
-        {state
-          ? t(`States.${translationBaseKey}`)
-          : t(`States.Not${translationBaseKey}`)}
+    <>
+      <div
+        className={classNames({
+          [styles.myStatusOwn]: status === "own",
+          [styles.myStatusWantToPlay]: status === "wanttoplay",
+          [styles.myStatusWishlist]: status === "wishlist",
+        })}
+      >
+        <StatusButton
+          status={status}
+          gameId={gameId}
+          className={styles.statusButton}
+        />
+        <div className={styles.statusText}>
+          {state
+            ? t(`States.${translationBaseKey}`)
+            : t(`States.Not${translationBaseKey}`)}
+        </div>
       </div>
       {friends.length > 0 && (
         <div
-          className={styles.statusFriends}
+          className={classNames({
+            [styles.friendStatusOwn]: status === "own",
+            [styles.friendStatusWantToPlay]: status === "wanttoplay",
+            [styles.friendStatusWishlist]: status === "wishlist",
+          })}
           onClick={() =>
             openModal({
               title: ct(`FriendCollections.${translationBaseKey}`, {
@@ -188,7 +196,7 @@ function Status({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
