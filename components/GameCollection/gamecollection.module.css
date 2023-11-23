@@ -19,3 +19,12 @@
 .page {
   width: 2.5rem;
 }
+
+.filterline {
+  display: flex;
+  width: 100%;
+}
+
+.filter {
+  flex-grow: 999;
+}

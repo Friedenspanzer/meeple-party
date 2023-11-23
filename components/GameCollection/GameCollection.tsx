@@ -10,6 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
 import GameBox from "../GameBox/GameBox";
+import GameBoxSizePicker from "../GameBoxSizePicker/GameBoxSizePicker";
 import GameCollectionFilter, {
   FilterPreset,
   GameCollectionFilterOptions,
@@ -105,15 +106,19 @@ const GameCollection: React.FC<GameCollectionProps> = ({
     <div {...props}>
       {children}
       <div className={styles.container}>
-        {showFilter && (
-          <GameCollectionFilter
-            onFilterChange={setFilter}
-            totalCount={games.length}
-            filteredCount={filteredGames.length}
-            presets={filterPresets || getDefaultFilterPresets(t)}
-            defaultFilter={defaultFilter}
-          />
-        )}
+        <div className={styles.filterline}>
+          {showFilter && (
+            <GameCollectionFilter
+              className={styles.filter}
+              onFilterChange={setFilter}
+              totalCount={games.length}
+              filteredCount={filteredGames.length}
+              presets={filterPresets || getDefaultFilterPresets(t)}
+              defaultFilter={defaultFilter}
+            />
+          )}
+          <GameBoxSizePicker />
+        </div>
         <div className={styles.games}>
           {filteredGames
             .slice(getOffset(), getOffset() + ITEMS_PER_PAGE)
