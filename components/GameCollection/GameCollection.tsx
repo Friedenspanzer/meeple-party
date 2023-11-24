@@ -120,7 +120,7 @@ const GameCollection: React.FC<GameCollectionProps> = ({
               defaultFilter={defaultFilter}
             />
           )}
-          <GameBoxSizePicker />
+          <GameBoxSizePicker className={styles.sizePicker} />
         </div>
         <div className={styles.games}>
           {filteredGames
