@@ -1,5 +1,5 @@
 import AvatarStack from "@/components/AvatarStack/AvatarStack";
-import Person from "@/components/Person/Person";
+import PersonList from "@/components/PersonList/PersonList";
 import StatusButton from "@/components/StatusButton/StatusButton";
 import { useModal } from "@/context/modalContext";
 import { StatusByUser } from "@/datatypes/collection";
@@ -8,7 +8,6 @@ import { UserProfile } from "@/datatypes/userProfile";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGame from "@/hooks/api/useGame";
 import { useTranslation } from "@/i18n/client";
-import { Stack } from "@mantine/core";
 import classNames from "classnames";
 import Image from "next/image";
 import { useMemo } from "react";
@@ -115,7 +114,7 @@ function Status({
 }) {
   const { t } = useTranslation("default");
   const { t: ct } = useTranslation("collection");
-  const { data, isLoading } = useCollectionStatus(gameId);
+  const { data } = useCollectionStatus(gameId);
   const { data: gameData } = useGame(gameId);
   const { open: openModal } = useModal();
   const state = useMemo(() => {
@@ -172,13 +171,7 @@ function Status({
               title: ct(`FriendCollections.${translationBaseKey}`, {
                 game: gameData?.name,
               }),
-              content: (
-                <Stack>
-                  {friends.map((f) => (
-                    <Person name={f.name || ""} key={f.id} />
-                  ))}
-                </Stack>
-              ),
+              content: <PersonList persons={friends} />,
             })
           }
         >
