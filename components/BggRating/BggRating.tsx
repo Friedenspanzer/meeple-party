@@ -12,7 +12,7 @@ export default function BggRating({
   rank,
   size = "md",
   ...props
-}: BggRatingProps) {
+}: Readonly<BggRatingProps>) {
   return (
     <div
       {...props}

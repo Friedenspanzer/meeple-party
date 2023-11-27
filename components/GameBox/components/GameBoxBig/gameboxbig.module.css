@@ -113,11 +113,6 @@
   grid-area: status-wishlist;
 }
 
-.friendStatusOwn,
-.friendStatusWantToPlay,
-.friendStatusWishlist {
-}
-
 .friendStatusOwn {
   grid-area: friends-own;
 }

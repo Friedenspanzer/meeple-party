@@ -2,7 +2,7 @@
 
 import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 interface ModalProviderProps {
   children?: React.ReactNode;
@@ -25,16 +25,18 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState(<></>);
+  const value = useMemo<ModalContext>(
+    () => ({
+      open: (configuration) => {
+        setTitle(configuration.title);
+        setContent(configuration.content);
+        open();
+      },
+    }),
+    [open]
+  );
   return (
-    <ModalContext.Provider
-      value={{
-        open: (configuration) => {
-          setTitle(configuration.title);
-          setContent(configuration.content);
-          open();
-        },
-      }}
-    >
+    <ModalContext.Provider value={value}>
       <Modal
         opened={opened}
         onClose={close}

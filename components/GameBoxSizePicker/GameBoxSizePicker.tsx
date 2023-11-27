@@ -5,9 +5,9 @@ import IconGameBoxMedium from "../icons/GameboxMedium";
 
 export default function GameBoxSizePicker({
   className,
-}: {
+}: Readonly<{
   className?: string;
-}) {
+}>) {
   const [size, setSize] = useGameBoxSize();
   return (
     <SegmentedControl

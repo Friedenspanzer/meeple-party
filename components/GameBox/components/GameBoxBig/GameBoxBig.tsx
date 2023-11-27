@@ -17,9 +17,7 @@ import styles from "./gameboxbig.module.css";
 export default function GameBoxBig({
   game,
   friendCollection,
-  showFriendCollection = true,
-}: GameBoxProps) {
-  const { t } = useTranslation("game");
+}: Readonly<GameBoxProps>) {
   return (
     <div className={classNames("card", styles.card)}>
       {game.image ? (
@@ -40,7 +38,7 @@ export default function GameBoxBig({
   );
 }
 
-function MetricList({ game }: { game: Game }) {
+function MetricList({ game }: Readonly<{ game: Game }>) {
   const { t } = useTranslation("game");
   return (
     <div className={styles.info}>
@@ -66,7 +64,7 @@ function MetricList({ game }: { game: Game }) {
   );
 }
 
-function Metric({ text, label }: { text: string; label: string }) {
+function Metric({ text, label }: Readonly<{ text: string; label: string }>) {
   return (
     <div className={styles.metric}>
       <div className={styles.metricTitle}>{text}</div>
@@ -78,10 +76,10 @@ function Metric({ text, label }: { text: string; label: string }) {
 function StatusList({
   gameId,
   friendCollection,
-}: {
+}: Readonly<{
   gameId: number;
   friendCollection?: StatusByUser;
-}) {
+}>) {
   return (
     <>
       <Status
@@ -107,11 +105,11 @@ function Status({
   gameId,
   friends,
   status,
-}: {
+}: Readonly<{
   gameId: number;
   friends: UserProfile[];
   status: "own" | "wishlist" | "wanttoplay";
-}) {
+}>) {
   const { t } = useTranslation("default");
   const { t: ct } = useTranslation("collection");
   const { data } = useCollectionStatus(gameId);

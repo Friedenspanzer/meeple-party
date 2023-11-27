@@ -16,7 +16,7 @@ export default function StatusButton({
   status,
   gameId,
   ...props
-}: StatusButtonProps) {
+}: Readonly<StatusButtonProps>) {
   const { data, isLoading, mutate } = useCollectionStatus(gameId);
   const icon = useMemo(() => {
     if (status === "own") {

@@ -13,7 +13,7 @@ export default function AvatarStack({
   max,
   orientation = "horizontal",
   distance = "md",
-}: AvatarStackProps) {
+}: Readonly<AvatarStackProps>) {
   const effectiveMax = max ?? avatars.length;
   const additional = avatars.length - effectiveMax;
   return (

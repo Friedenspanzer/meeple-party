@@ -8,7 +8,7 @@ interface Props {
   persons: UserProfile[];
 }
 
-export default function PersonList({ persons }: Props) {
+export default function PersonList({ persons }: Readonly<Props>) {
   return (
     <Stack>
       {persons.map((f) => (

@@ -24,7 +24,7 @@ export default function GameBoxMedium({
   status,
   friendCollection,
   showFriendCollection = false,
-}: GameBoxProps) {
+}: Readonly<GameBoxProps>) {
   const { t } = useTranslation("game");
 
   return (
@@ -100,11 +100,11 @@ function round(x: number): number {
   return Math.round(x * 10) / 10;
 }
 
-function UserList({ users }: { users: UserProfile[] }) {
+function UserList({ users }: Readonly<{ users: UserProfile[] }>) {
   return (
     <>
       {users.map((u, i) => (
-        <CollectionAvatar user={u} index={i} key={i} />
+        <CollectionAvatar user={u} index={i} key={u.id} />
       ))}
     </>
   );
@@ -113,10 +113,10 @@ function UserList({ users }: { users: UserProfile[] }) {
 function CollectionAvatar({
   user,
   index,
-}: {
+}: Readonly<{
   user: UserProfile;
   index: number;
-}) {
+}>) {
   return (
     <Avatar
       name={user.name || ""}
