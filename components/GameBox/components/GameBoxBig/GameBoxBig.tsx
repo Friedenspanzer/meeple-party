@@ -26,6 +26,7 @@ export default function GameBoxBig({
           alt={game.name}
           width={250}
           height={250}
+          unoptimized
           className={classNames(styles.image, "rounded-start")}
         />
       ) : (
