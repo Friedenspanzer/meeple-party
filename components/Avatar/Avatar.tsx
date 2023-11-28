@@ -6,17 +6,14 @@ import Image from "next/image";
 import { CSSProperties } from "react";
 import styles from "./avatar.module.css";
 
-export default function Avatar({
-  image,
-  name,
-  className,
-  style,
-}: {
+export interface AvatarProps {
   image?: string | null;
   name: string;
   className?: string;
   style?: CSSProperties;
-}) {
+}
+
+export default function Avatar({ image, name, className, style }: AvatarProps) {
   const { t } = useTranslation();
   if (image) {
     return (
