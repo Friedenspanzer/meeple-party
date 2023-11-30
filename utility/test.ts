@@ -8,6 +8,7 @@ import {
   User,
 } from "@prisma/client";
 import { Matcher, MatcherCreator } from "jest-mock-extended";
+import { CSSProperties } from "react";
 
 export function getRandomEntry<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -108,6 +109,46 @@ export function generateGame(gameId: number): Game {
     year: generateNumber(),
     updatedAt: new Date(),
   };
+}
+
+export function generateCssProperties(): CSSProperties {
+  const css: CSSProperties = {};
+
+  css.fontWeight = `${generateNumber(100, 900)}`;
+
+  if (generateBoolean()) {
+    css.backgroundColor = generateRgbColor();
+  }
+  if (generateBoolean()) {
+    css.fontFamily = generateString();
+  }
+  if (generateBoolean()) {
+    css.left = `${generateNumber()}px`;
+  }
+  if (generateBoolean()) {
+    css.right = `${generateNumber()}px`;
+  }
+  if (generateBoolean()) {
+    css.display = generateBoolean() ? "flex" : "grid";
+  }
+
+  return css;
+}
+
+export function generateRgbColor() {
+  return `rgb(${generateNumber(0, 255)}, ${generateNumber(
+    0,
+    255
+  )}, ${generateNumber(0, 255)})`;
+}
+
+export function generateHexColor() {
+  const allowed = "1234567890ABCDEF";
+  const color = ["#"];
+  for (let i = 0; i < 6; i++) {
+    color.push(allowed.charAt(generateNumber(0, allowed.length - 1)));
+  }
+  return color.join("");
 }
 
 export const objectMatcher: MatcherCreator<any> = (expected) =>
