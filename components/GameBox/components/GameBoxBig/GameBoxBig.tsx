@@ -6,7 +6,6 @@ import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
-import useGame from "@/hooks/api/useGame";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
@@ -34,7 +33,7 @@ export default function GameBoxBig({
       )}
       <MetricList game={game} />
       <h2 className={styles.name}>{game.name}</h2>
-      <StatusList gameId={game.id} friendCollection={friendCollection} />
+      <StatusList game={game} friendCollection={friendCollection} />
     </div>
   );
 }
@@ -75,26 +74,26 @@ function Metric({ text, label }: Readonly<{ text: string; label: string }>) {
 }
 
 function StatusList({
-  gameId,
+  game,
   friendCollection,
 }: Readonly<{
-  gameId: number;
+  game: Game;
   friendCollection?: StatusByUser;
 }>) {
   return (
     <>
       <Status
-        gameId={gameId}
+        game={game}
         status="own"
         friends={friendCollection ? friendCollection.own : []}
       />
       <Status
-        gameId={gameId}
+        game={game}
         status="wanttoplay"
         friends={friendCollection ? friendCollection.wantToPlay : []}
       />
       <Status
-        gameId={gameId}
+        game={game}
         status="wishlist"
         friends={friendCollection ? friendCollection.wishlist : []}
       />
@@ -103,18 +102,17 @@ function StatusList({
 }
 
 function Status({
-  gameId,
+  game,
   friends,
   status,
 }: Readonly<{
-  gameId: number;
+  game: Game;
   friends: UserProfile[];
   status: "own" | "wishlist" | "wanttoplay";
 }>) {
   const { t } = useTranslation("default");
   const { t: ct } = useTranslation("collection");
-  const { data } = useCollectionStatus(gameId);
-  const { data: gameData } = useGame(gameId);
+  const { data } = useCollectionStatus(game.id);
   const { open: openModal } = useModal();
   const state = useMemo(() => {
     if (!data) {
@@ -149,7 +147,7 @@ function Status({
       >
         <StatusButton
           status={status}
-          gameId={gameId}
+          gameId={game.id}
           className={styles.statusButton}
         />
         <div className={styles.statusText}>
@@ -168,7 +166,7 @@ function Status({
           onClick={() =>
             openModal({
               title: ct(`FriendCollections.${translationBaseKey}`, {
-                game: gameData?.name,
+                game: game.name,
               }),
               content: <PersonList persons={friends} />,
             })
