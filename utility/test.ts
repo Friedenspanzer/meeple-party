@@ -47,7 +47,7 @@ export function generatePrismaUser(): User {
     email: generateString(25),
     profileComplete: true,
     role: Role.USER,
-    emailVerified: new Date(),
+    emailVerified: generateDate(),
     about: generateString(1000),
     bggName: generateString(15),
     image: null,
@@ -75,8 +75,8 @@ export function generateFullPrismaRelationship(
     type: type,
     sender: userA,
     recipient: userB,
-    updatedAt: new Date(),
-    cratedAt: new Date(),
+    updatedAt: generateDate(),
+    cratedAt: generateDate(),
   };
 }
 
@@ -90,7 +90,7 @@ export function generateCollectionEntry(
     own: generateBoolean(),
     wantToPlay: generateBoolean(),
     wishlist: generateBoolean(),
-    updatedAt: new Date(),
+    updatedAt: generateDate(),
   };
 }
 
@@ -107,8 +107,17 @@ export function generateGame(gameId: number): Game {
     thumbnail: generateString(),
     weight: generateNumber(),
     year: generateNumber(),
-    updatedAt: new Date(),
+    updatedAt: generateDate(),
   };
+}
+
+const MAX_DATE_OFFSET = 1000 * 60 * 60 * 24 * 1000;
+
+export function generateDate(): Date {
+  const offset = generateNumber(0, MAX_DATE_OFFSET);
+  const date = new Date();
+  date.setTime(date.getTime() - offset);
+  return date;
 }
 
 export function generateCssProperties(): CSSProperties {
