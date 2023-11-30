@@ -2,22 +2,13 @@
 
 import Avatar from "@/components/Avatar/Avatar";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
-import { StatusByUser } from "@/datatypes/collection";
-import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
 import { useTranslation } from "@/i18n/client";
-import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
+import { GameBoxProps } from "../../GameBox";
 import styles from "./gameboxmedium.module.css";
-
-export interface GameBoxProps {
-  game: Game;
-  status?: CollectionStatus;
-  friendCollection?: StatusByUser;
-  showFriendCollection: boolean;
-}
 
 export default function GameBoxMedium({
   game,

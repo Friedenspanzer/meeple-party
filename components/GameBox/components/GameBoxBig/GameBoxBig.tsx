@@ -1,3 +1,5 @@
+"use client";
+
 import AvatarStack from "@/components/AvatarStack/AvatarStack";
 import PersonList from "@/components/PersonList/PersonList";
 import StatusButton from "@/components/StatusButton/StatusButton";
@@ -10,7 +12,7 @@ import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
 import { useMemo } from "react";
-import { GameBoxProps } from "../GameBoxMedium/GameBoxMedium";
+import { GameBoxProps } from "../../GameBox";
 import styles from "./gameboxbig.module.css";
 
 export default function GameBoxBig({

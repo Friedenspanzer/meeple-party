@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 import GameBoxBig from "./components/GameBoxBig/GameBoxBig";
 import GameBoxMedium from "./components/GameBoxMedium/GameBoxMedium";
 
-export interface GameBoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  game: Game | number;
+export interface GameBoxProps {
+  game: Game;
   status?: CollectionStatus;
   friendCollection?: StatusByUser;
   showFriendCollection: boolean;
@@ -20,7 +20,7 @@ export default function GameBox({
   status,
   friendCollection,
   showFriendCollection = false,
-}: GameBoxProps) {
+}: Readonly<GameBoxProps & React.HTMLAttributes<HTMLDivElement>>) {
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
   const [gameBoxSize] = useGameBoxSize();
