@@ -15,6 +15,8 @@ jest.mock("next/image", () => ({
   default: jest.fn(),
 }));
 
+jest.mock("@/i18n/client");
+
 const ImageMock = ({ ...props }: ImageProps) => {
   return (
     <span
@@ -29,6 +31,13 @@ const ImageMock = ({ ...props }: ImageProps) => {
 describe("Component: Avatar", () => {
   beforeAll(() => {
     jest.mocked(Image).mockImplementation(ImageMock);
+  });
+  it("matches the snapshot for avatar with image", async () => {
+    const image = "testimage";
+    const name = "testname";
+    const { container } = render(<Avatar name={name} image={image} />);
+
+    expect(container).toMatchSnapshot("");
   });
   it("renders the image when available", async () => {
     const image = generateString();
@@ -75,6 +84,12 @@ describe("Component: Avatar", () => {
 
     expect(placeholder).toBeDefined();
     expect(placeholder.length).toBe(1);
+  });
+  it("matches the snapshot for avatar without image", async () => {
+    const name = "testname";
+    const { container } = render(<Avatar name={name} />);
+
+    expect(container).toMatchSnapshot("");
   });
   it("works with an empty name", async () => {
     render(<Avatar name={""} />);
