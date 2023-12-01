@@ -18,6 +18,16 @@ describe("Component: Person", () => {
   beforeAll(() => {
     jest.mocked(Avatar).mockImplementation(AvatarMock);
   });
+  it("matches the snapshot for full data", async () => {
+    const {container} = render(<Person name="Display Name" realName="Real name" image="image" />);
+
+    expect(container).toMatchSnapshot()
+  })
+  it("matches the snapshot for minimal data", async () => {
+    const {container} = render(<Person name="Display Name" />);
+
+    expect(container).toMatchSnapshot()
+  })
   it("renders with minimal data", async () => {
     const name = generateString();
     render(<Person name={name} />);
