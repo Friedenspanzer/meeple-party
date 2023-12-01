@@ -1,0 +1,501 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameBoxBig Matches snapshot 1`] = `
+<div>
+  <div
+    class="card card"
+  >
+    <img
+      alt="Test game"
+      class="image rounded-start"
+      data-nimg="1"
+      decoding="async"
+      height="250"
+      loading="lazy"
+      src="testimage"
+      style="color: transparent;"
+      width="250"
+    />
+    <div
+      class="info"
+    >
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          3.8
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Weight
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          120
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.PlayingTime
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          1-5
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Players
+        </div>
+      </div>
+    </div>
+    <h2
+      class="name"
+    >
+      Test game
+    </h2>
+    <div
+      class="myStatusOwn"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-box-seam-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.Own
+      </div>
+    </div>
+    <div
+      class="myStatusWantToPlay"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-dice-3-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.WantToPlay
+      </div>
+    </div>
+    <div
+      class="myStatusWishlist"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-gift-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.Wishlist
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
+<div>
+  <div
+    class="card card"
+  >
+    <img
+      alt="Test game"
+      class="image rounded-start"
+      data-nimg="1"
+      decoding="async"
+      height="250"
+      loading="lazy"
+      src="testimage"
+      style="color: transparent;"
+      width="250"
+    />
+    <div
+      class="info"
+    >
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          3.1
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Weight
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          120
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.PlayingTime
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          1-5
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Players
+        </div>
+      </div>
+    </div>
+    <h2
+      class="name"
+    >
+      Test game
+    </h2>
+    <div
+      class="myStatusOwn"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-box-seam-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.NotOwn
+      </div>
+    </div>
+    <div
+      class="myStatusWantToPlay"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-dice-3-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.NotWantToPlay
+      </div>
+    </div>
+    <div
+      class="myStatusWishlist"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-gift-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.NotWishlist
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = `
+<div>
+  <div
+    class="card card"
+  >
+    <img
+      alt="Test game"
+      class="image rounded-start"
+      data-nimg="1"
+      decoding="async"
+      height="250"
+      loading="lazy"
+      src="testimage"
+      style="color: transparent;"
+      width="250"
+    />
+    <div
+      class="info"
+    >
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          3.8
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Weight
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          120
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.PlayingTime
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          1-5
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Players
+        </div>
+      </div>
+    </div>
+    <h2
+      class="name"
+    >
+      Test game
+    </h2>
+    <div
+      class="myStatusOwn"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-box-seam-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.NotOwn
+      </div>
+    </div>
+    <div
+      class="myStatusWantToPlay"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-dice-3-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.NotWantToPlay
+      </div>
+    </div>
+    <div
+      class="myStatusWishlist"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-gift-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.NotWishlist
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GameBoxBig Matches snapshot without friend collection: default game 1`] = `
+<div>
+  <div
+    class="card card"
+  >
+    <img
+      alt="Test game"
+      class="image rounded-start"
+      data-nimg="1"
+      decoding="async"
+      height="250"
+      loading="lazy"
+      src="testimage"
+      style="color: transparent;"
+      width="250"
+    />
+    <div
+      class="info"
+    >
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          3.8
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Weight
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          120
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.PlayingTime
+        </div>
+      </div>
+      <hr
+        class="metricDivider"
+      />
+      <div
+        class="metric"
+      >
+        <div
+          class="metricTitle"
+        >
+          1-5
+        </div>
+        <div
+          class="metricLabel"
+        >
+          Attributes.Players
+        </div>
+      </div>
+    </div>
+    <h2
+      class="name"
+    >
+      Test game
+    </h2>
+    <div
+      class="myStatusOwn"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-box-seam-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.Own
+      </div>
+    </div>
+    <div
+      class="myStatusWantToPlay"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-dice-3-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.WantToPlay
+      </div>
+    </div>
+    <div
+      class="myStatusWishlist"
+    >
+      <div
+        class="button statusButton"
+      >
+        <i
+          class="bi bi-gift-fill"
+        />
+      </div>
+      <div
+        class="statusText"
+      >
+        States.Wishlist
+      </div>
+    </div>
+  </div>
+</div>
+`;
