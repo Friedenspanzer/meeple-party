@@ -47,7 +47,7 @@ export default function StatusButton({
       return data.wantToPlay;
     }
   }, [data, status]);
-  const onClick = useCallback(() => {
+  const updateStatus = useCallback(() => {
     if (!data) {
       return;
     } else if (status === "own") {
@@ -70,12 +70,19 @@ export default function StatusButton({
     return (
       <div
         {...props}
-        onClick={onClick}
+        onClick={updateStatus}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            updateStatus();
+          }
+        }}
+        tabIndex={0}
         className={classNames(styles.button, props.className)}
         style={{
           ...props.style,
           color: active ? activeColor : "unset",
         }}
+        role="button"
       >
         {icon}
       </div>

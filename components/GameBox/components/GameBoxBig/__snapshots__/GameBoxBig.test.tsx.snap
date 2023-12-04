@@ -78,6 +78,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-box-seam-fill"
@@ -94,6 +96,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-dice-3-fill"
@@ -110,6 +114,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-gift-fill"
@@ -203,6 +209,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-box-seam-fill"
@@ -219,6 +227,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-dice-3-fill"
@@ -235,6 +245,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-gift-fill"
@@ -328,6 +340,8 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-box-seam-fill"
@@ -344,6 +358,8 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-dice-3-fill"
@@ -360,6 +376,8 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-gift-fill"
@@ -453,6 +471,8 @@ exports[`GameBoxBig Matches snapshot without friend collection: default game 1`]
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-box-seam-fill"
@@ -469,6 +489,8 @@ exports[`GameBoxBig Matches snapshot without friend collection: default game 1`]
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-dice-3-fill"
@@ -485,6 +507,8 @@ exports[`GameBoxBig Matches snapshot without friend collection: default game 1`]
     >
       <div
         class="button statusButton"
+        role="button"
+        tabindex="0"
       >
         <i
           class="bi bi-gift-fill"
