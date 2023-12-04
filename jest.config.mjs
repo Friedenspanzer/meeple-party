@@ -17,6 +17,12 @@ const config = {
   },
   testRegex: "^(.*)/(.*)\\.(test)\\.[jt]sx?$",
   collectCoverage: true,
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**",
+    "!**/.next/**",
+    "!next.config.js",
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
