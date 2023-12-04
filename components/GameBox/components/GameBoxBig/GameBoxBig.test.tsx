@@ -1,3 +1,4 @@
+import Avatar from "@/components/Avatar/Avatar";
 import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { generateArray, generatePrismaUser } from "@/utility/test";
@@ -7,6 +8,11 @@ import GameBoxBig from "./GameBoxBig";
 
 jest.mock("@/i18n/client");
 jest.mock("@/hooks/api/useCollectionStatus");
+jest.mock("@/components/Avatar/Avatar", () => ({
+  __esModule: true,
+  namedExport: jest.fn(),
+  default: jest.fn(),
+}));
 
 const game: Game = {
   id: 123,
@@ -23,6 +29,9 @@ const game: Game = {
 };
 
 describe("GameBoxBig", () => {
+  beforeAll(() => {
+    jest.mocked(Avatar).mockImplementation(() => <>Avatar</>);
+  });
   it("Matches snapshot", async () => {
     jest.mocked(useCollectionStatus).mockReturnValue({
       invalidate: () => {},
@@ -50,7 +59,7 @@ describe("GameBoxBig", () => {
         showFriendCollection
       />
     );
-    expect(rendered).toMatchSnapshot("");
+    expect(rendered).toMatchSnapshot();
   });
   it("Matches snapshot without friend collection", async () => {
     jest.mocked(useCollectionStatus).mockReturnValue({
@@ -79,7 +88,7 @@ describe("GameBoxBig", () => {
         showFriendCollection={false}
       />
     );
-    expect(rendered).toMatchSnapshot("default game");
+    expect(rendered).toMatchSnapshot();
   });
   it("Matches snapshot when not in collection", async () => {
     jest.mocked(useCollectionStatus).mockReturnValue({
