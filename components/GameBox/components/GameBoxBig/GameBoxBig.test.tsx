@@ -1,6 +1,8 @@
 import { Game } from "@/datatypes/game";
+import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import { generateArray, generatePrismaUser } from "@/utility/test";
 import { render } from "@testing-library/react";
-import useCollectionStatus from "../../../../hooks/api/useCollectionStatus";
+import { StatusByUser } from "../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
 
 jest.mock("@/i18n/client");
@@ -36,8 +38,17 @@ describe("GameBoxBig", () => {
         updatedAt: null,
       },
     });
+    const friendCollection: StatusByUser = {
+      own: generateArray(generatePrismaUser),
+      wantToPlay: generateArray(generatePrismaUser),
+      wishlist: generateArray(generatePrismaUser),
+    };
     const { container: rendered } = render(
-      <GameBoxBig game={game} showFriendCollection />
+      <GameBoxBig
+        game={game}
+        friendCollection={friendCollection}
+        showFriendCollection
+      />
     );
     expect(rendered).toMatchSnapshot("");
   });
@@ -56,8 +67,17 @@ describe("GameBoxBig", () => {
         updatedAt: null,
       },
     });
+    const friendCollection: StatusByUser = {
+      own: generateArray(generatePrismaUser),
+      wantToPlay: generateArray(generatePrismaUser),
+      wishlist: generateArray(generatePrismaUser),
+    };
     const { container: rendered } = render(
-      <GameBoxBig game={game} showFriendCollection={false} />
+      <GameBoxBig
+        game={game}
+        friendCollection={friendCollection}
+        showFriendCollection={false}
+      />
     );
     expect(rendered).toMatchSnapshot("default game");
   });

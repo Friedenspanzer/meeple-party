@@ -92,6 +92,50 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       </div>
     </div>
     <div
+      class="friendStatusOwn"
+      tabindex="0"
+    >
+      <div
+        class="container sm"
+      >
+        <div
+          class="additional"
+        >
+          +
+          6
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(10, 200, 128);"
+        >
+          T
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(64, 178, 239);"
+        >
+          B
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(184, 28, 197);"
+        >
+          M
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(67, 24, 96);"
+        >
+          M
+        </div>
+      </div>
+      <div
+        class="statusText"
+      >
+        FriendStates.Own
+      </div>
+    </div>
+    <div
       class="myStatusWantToPlay"
     >
       <div
@@ -110,6 +154,50 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       </div>
     </div>
     <div
+      class="friendStatusWantToPlay"
+      tabindex="0"
+    >
+      <div
+        class="container sm"
+      >
+        <div
+          class="additional"
+        >
+          +
+          6
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(149, 93, 222);"
+        >
+          C
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(220, 14, 100);"
+        >
+          J
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(108, 59, 31);"
+        >
+          C
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(75, 225, 169);"
+        >
+          B
+        </div>
+      </div>
+      <div
+        class="statusText"
+      >
+        FriendStates.WantToPlay
+      </div>
+    </div>
+    <div
       class="myStatusWishlist"
     >
       <div
@@ -125,6 +213,50 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         class="statusText"
       >
         States.Wishlist
+      </div>
+    </div>
+    <div
+      class="friendStatusWishlist"
+      tabindex="0"
+    >
+      <div
+        class="container sm"
+      >
+        <div
+          class="additional"
+        >
+          +
+          6
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(184, 233, 64);"
+        >
+          H
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(143, 96, 67);"
+        >
+          S
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(121, 207, 74);"
+        >
+          6
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(173, 84, 72);"
+        >
+          I
+        </div>
+      </div>
+      <div
+        class="statusText"
+      >
+        FriendStates.Wishlist
       </div>
     </div>
   </div>
@@ -485,6 +617,50 @@ exports[`GameBoxBig Matches snapshot without friend collection: default game 1`]
       </div>
     </div>
     <div
+      class="friendStatusOwn"
+      tabindex="0"
+    >
+      <div
+        class="container sm"
+      >
+        <div
+          class="additional"
+        >
+          +
+          6
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(124, 52, 187);"
+        >
+          H
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(59, 232, 13);"
+        >
+          Q
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(95, 115, 111);"
+        >
+          D
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(189, 180, 34);"
+        >
+          G
+        </div>
+      </div>
+      <div
+        class="statusText"
+      >
+        FriendStates.Own
+      </div>
+    </div>
+    <div
       class="myStatusWantToPlay"
     >
       <div
@@ -503,6 +679,50 @@ exports[`GameBoxBig Matches snapshot without friend collection: default game 1`]
       </div>
     </div>
     <div
+      class="friendStatusWantToPlay"
+      tabindex="0"
+    >
+      <div
+        class="container sm"
+      >
+        <div
+          class="additional"
+        >
+          +
+          6
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(254, 0, 208);"
+        >
+          Z
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(219, 65, 233);"
+        >
+          Y
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(173, 186, 134);"
+        >
+          F
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(204, 20, 200);"
+        >
+          N
+        </div>
+      </div>
+      <div
+        class="statusText"
+      >
+        FriendStates.WantToPlay
+      </div>
+    </div>
+    <div
       class="myStatusWishlist"
     >
       <div
@@ -518,6 +738,50 @@ exports[`GameBoxBig Matches snapshot without friend collection: default game 1`]
         class="statusText"
       >
         States.Wishlist
+      </div>
+    </div>
+    <div
+      class="friendStatusWishlist"
+      tabindex="0"
+    >
+      <div
+        class="container sm"
+      >
+        <div
+          class="additional"
+        >
+          +
+          6
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(207, 70, 180);"
+        >
+          S
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(37, 138, 153);"
+        >
+          D
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(211, 69, 27);"
+        >
+          T
+        </div>
+        <div
+          class="dummy avatar"
+          style="background-color: rgb(107, 110, 164);"
+        >
+          P
+        </div>
+      </div>
+      <div
+        class="statusText"
+      >
+        FriendStates.Wishlist
       </div>
     </div>
   </div>
