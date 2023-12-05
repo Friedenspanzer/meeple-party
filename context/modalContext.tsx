@@ -8,7 +8,7 @@ interface ModalProviderProps {
   children?: React.ReactNode;
 }
 
-interface ModalConfiguration {
+export interface ModalConfiguration {
   title: string;
   content: JSX.Element;
 }

@@ -4,11 +4,11 @@ import { Stack } from "@mantine/core";
 import Link from "next/link";
 import styles from "./personlist.module.css";
 
-interface Props {
+export interface PersonListProps {
   persons: UserProfile[];
 }
 
-export default function PersonList({ persons }: Readonly<Props>) {
+export default function PersonList({ persons }: Readonly<PersonListProps>) {
   return (
     <Stack>
       {persons.map((f) => (

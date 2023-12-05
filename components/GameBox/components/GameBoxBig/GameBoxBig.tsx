@@ -11,7 +11,7 @@ import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { GameBoxProps } from "../../GameBox";
 import styles from "./gameboxbig.module.css";
 
@@ -138,6 +138,15 @@ function Status({
     }
   }, [status]);
 
+  const showFriends = useCallback(() => {
+    openModal({
+      title: ct(`FriendCollections.${translationBaseKey}`, {
+        game: game.name,
+      }),
+      content: <PersonList persons={friends} />,
+    });
+  }, [friends, game.name, ct, openModal, translationBaseKey]);
+
   return (
     <>
       <div
@@ -165,14 +174,14 @@ function Status({
             [styles.friendStatusWantToPlay]: status === "wanttoplay",
             [styles.friendStatusWishlist]: status === "wishlist",
           })}
-          onClick={() =>
-            openModal({
-              title: ct(`FriendCollections.${translationBaseKey}`, {
-                game: game.name,
-              }),
-              content: <PersonList persons={friends} />,
-            })
-          }
+          onClick={showFriends}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              showFriends();
+            }
+          }}
+          tabIndex={0}
+          data-testid={`friends-${translationBaseKey}`}
         >
           <AvatarStack
             max={4}

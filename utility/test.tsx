@@ -1,5 +1,6 @@
 import { FullPrismaRelationship } from "@/app/api/v2/utility";
-import { defaultUserPreferences } from "@/datatypes/userProfile";
+import { UserProfile, defaultUserPreferences } from "@/datatypes/userProfile";
+import { MantineProvider } from "@mantine/core";
 import {
   Game,
   GameCollection,
@@ -7,6 +8,7 @@ import {
   Role,
   User,
 } from "@prisma/client";
+import { render as testingLibraryRender } from "@testing-library/react";
 import { Matcher, MatcherCreator } from "jest-mock-extended";
 import { CSSProperties } from "react";
 
@@ -42,18 +44,37 @@ export function generateArray<T>(generator: () => T, length = 10): T[] {
 
 export function generatePrismaUser(): User {
   return {
-    id: generateString(25),
-    name: generateString(25),
+    ...generateUserProfile(),
     email: generateString(25),
     profileComplete: true,
-    role: Role.USER,
     emailVerified: generateDate(),
+    preferences: defaultUserPreferences,
+  };
+}
+
+export function generateUserProfile(): UserProfile {
+  return {
+    id: generateString(25),
+    name: generateString(25),
     about: generateString(1000),
     bggName: generateString(15),
-    image: null,
+    image: generateString(50),
     place: generateString(15),
     realName: generateString(25),
-    preferences: defaultUserPreferences,
+    role: Role.USER,
+  };
+}
+
+export function getUserProfile(index: number): UserProfile {
+  return {
+    id: `static-profile-${index}`,
+    name: `name-${index}`,
+    about: `about-${index}`,
+    bggName: `bggName-${index}`,
+    image: `image-${index}`,
+    place: `place-${index}`,
+    realName: `realName-${index}`,
+    role: Role.USER,
   };
 }
 
@@ -165,3 +186,11 @@ export const objectMatcher: MatcherCreator<any> = (expected) =>
     (actual) => JSON.stringify(actual) === JSON.stringify(expected),
     "deep comparison"
   );
+
+export function render(ui: React.ReactNode) {
+  return testingLibraryRender(<>{ui}</>, {
+    wrapper: ({ children }: { children: React.ReactNode }) => (
+      <MantineProvider>{children}</MantineProvider>
+    ),
+  });
+}

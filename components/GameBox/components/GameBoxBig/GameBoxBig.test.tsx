@@ -1,8 +1,15 @@
 import Avatar from "@/components/Avatar/Avatar";
+import { ModalConfiguration, useModal } from "@/context/modalContext";
 import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
-import { generateArray, generatePrismaUser } from "@/utility/test";
-import { render } from "@testing-library/react";
+import {
+  generateArray,
+  generateUserProfile,
+  getUserProfile,
+  render,
+} from "@/utility/test";
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { StatusByUser } from "../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
 
@@ -13,6 +20,15 @@ jest.mock("@/components/Avatar/Avatar", () => ({
   namedExport: jest.fn(),
   default: jest.fn(),
 }));
+jest.mock("@/context/modalContext");
+
+const friends = [
+  getUserProfile(0),
+  getUserProfile(1),
+  getUserProfile(2),
+  getUserProfile(3),
+  getUserProfile(4),
+];
 
 const game: Game = {
   id: 123,
@@ -30,7 +46,25 @@ const game: Game = {
 
 describe("GameBoxBig", () => {
   beforeAll(() => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
     jest.mocked(Avatar).mockImplementation(() => <>Avatar</>);
+  });
+  beforeEach(() => {
+    jest.mocked(useModal).mockImplementation(() => ({
+      open: () => {},
+    }));
   });
   it("Matches snapshot", async () => {
     jest.mocked(useCollectionStatus).mockReturnValue({
@@ -48,9 +82,9 @@ describe("GameBoxBig", () => {
       },
     });
     const friendCollection: StatusByUser = {
-      own: generateArray(generatePrismaUser),
-      wantToPlay: generateArray(generatePrismaUser),
-      wishlist: generateArray(generatePrismaUser),
+      own: generateArray(generateUserProfile),
+      wantToPlay: generateArray(generateUserProfile),
+      wishlist: generateArray(generateUserProfile),
     };
     const { container: rendered } = render(
       <GameBoxBig
@@ -77,9 +111,9 @@ describe("GameBoxBig", () => {
       },
     });
     const friendCollection: StatusByUser = {
-      own: generateArray(generatePrismaUser),
-      wantToPlay: generateArray(generatePrismaUser),
-      wishlist: generateArray(generatePrismaUser),
+      own: generateArray(generateUserProfile),
+      wantToPlay: generateArray(generateUserProfile),
+      wishlist: generateArray(generateUserProfile),
     };
     const { container: rendered } = render(
       <GameBoxBig
