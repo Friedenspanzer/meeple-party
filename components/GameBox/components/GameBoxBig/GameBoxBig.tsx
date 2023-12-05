@@ -23,7 +23,7 @@ export default function GameBoxBig({
   return (
     <div className={classNames("card", styles.card)}>
       {game.image ? (
-        <Link href={`/app/game/${game.id}`}>
+        <Link href={`/app/game/${game.id}`} className={styles.imagePosition}>
           <Image
             src={game.image}
             alt={game.name}

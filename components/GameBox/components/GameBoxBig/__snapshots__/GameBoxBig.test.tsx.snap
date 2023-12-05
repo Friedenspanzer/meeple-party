@@ -11,6 +11,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     class="card card"
   >
     <a
+      class="imagePosition"
       href="/app/game/123"
     >
       <img
@@ -230,6 +231,7 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     class="card card"
   >
     <a
+      class="imagePosition"
       href="/app/game/123"
     >
       <img
@@ -374,6 +376,7 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     class="card card"
   >
     <a
+      class="imagePosition"
       href="/app/game/123"
     >
       <img
@@ -518,6 +521,7 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
     class="card card"
   >
     <a
+      class="imagePosition"
       href="/app/game/123"
     >
       <img
