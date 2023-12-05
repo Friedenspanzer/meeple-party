@@ -105,7 +105,7 @@
   },
   "FriendStates": {
     "Own_one": "{{count}} Freund*in besitzt",
-    "Own_other": "{{count}} Freunde*innen besitzen",
+    "Own_other": "{{count}} Freund*innen besitzen",
     "Wishlist_one": "{{count}} Freund*in wünscht sich",
     "Wishlist_other": "{{count}} Freund*innen wünschen sich",
     "WantToPlay_one": "{{count}} Freund*in will spielen",
