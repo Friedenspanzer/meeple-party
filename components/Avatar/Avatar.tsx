@@ -13,7 +13,12 @@ export interface AvatarProps {
   style?: CSSProperties;
 }
 
-export default function Avatar({ image, name, className, style }: AvatarProps) {
+export default function Avatar({
+  image,
+  name,
+  className,
+  style,
+}: Readonly<AvatarProps>) {
   const { t } = useTranslation();
   if (image) {
     return (
@@ -35,7 +40,7 @@ export default function Avatar({ image, name, className, style }: AvatarProps) {
         className={classNames(styles.dummy, className)}
         style={{
           ...style,
-          backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`
+          backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
         }}
       >
         {name ? name[0].toUpperCase() : "?"}

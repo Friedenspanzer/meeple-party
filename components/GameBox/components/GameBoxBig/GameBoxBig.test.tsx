@@ -1,5 +1,5 @@
 import Avatar from "@/components/Avatar/Avatar";
-import { ModalConfiguration, useModal } from "@/context/modalContext";
+import { useModal } from "@/context/modalContext";
 import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import {
@@ -8,8 +8,6 @@ import {
   getUserProfile,
   render,
 } from "@/utility/test";
-import { screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { StatusByUser } from "../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
 

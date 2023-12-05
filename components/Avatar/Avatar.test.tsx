@@ -187,9 +187,9 @@ function getColorsFromDivs(container: HTMLElement): Color[] {
   const colors: string[] = [];
   placeholders.forEach((p) => colors.push(p.style.backgroundColor));
   return colors.map((c) => {
-    const match = c.match(/rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/);
+    const match = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/.exec(c);
     if (!match || match.length < 4) {
-      throw "Wrong color format";
+      throw new Error("Wrong color format");
     }
     return {
       r: Number.parseInt(match[1]),
