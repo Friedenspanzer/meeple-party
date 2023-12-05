@@ -21,7 +21,7 @@
     "GameName": "Name des Spiels",
     "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Traits": {
-      "PlayerCount": "Spielendenzahl",
+      "PlayerCount": "Personen",
       "Weight": "Komplexität",
       "PlayingTime": "Dauer",
       "Own": "$t(States.Own)",
@@ -83,8 +83,8 @@
       "FriendsOwn": "$t(Filters.Traits.FriendsOwn)",
       "FriendsWantToPlay": "$t(Filters.Traits.FriendsWantToPlay)",
       "FriendsWish": "$t(Filters.Traits.FriendsWishlist)",
-      "MaxPlayers": "Maximalspielendenzahl",
-      "MinPlayers": "Minimalspielendenzahl",
+      "MaxPlayers": "Personen (höchstens)",
+      "MinPlayers": "Personen (mindestens)",
       "Name": "Name",
       "PlayingTime": "$t(Filters.Traits.PlayingTime)",
       "Weight": "$t(Filters.Traits.Weight)"

@@ -3,7 +3,7 @@
     "Header": {
       "Design": "Design",
       "Art": "Illustration",
-      "Players": "Spielende",
+      "Players": "Personen",
       "Minutes": "Minuten",
       "Weight": "Komplexität"
     },
@@ -16,7 +16,7 @@
     "More": "… und {{count}} weitere"
   },
   "Attributes": {
-    "Players": "Spielende",
+    "Players": "Personen",
     "PlayingTime": "Dauer",
     "Weight": "Komplexität"
   }
