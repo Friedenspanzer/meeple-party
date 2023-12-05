@@ -10,17 +10,21 @@ exports[`GameBoxBig Matches snapshot 1`] = `
   <div
     class="card card"
   >
-    <img
-      alt="Test game"
-      class="image rounded-start"
-      data-nimg="1"
-      decoding="async"
-      height="250"
-      loading="lazy"
-      src="testimage"
-      style="color: transparent;"
-      width="250"
-    />
+    <a
+      href="/app/game/123"
+    >
+      <img
+        alt="Test game"
+        class="image rounded-start"
+        data-nimg="1"
+        decoding="async"
+        height="250"
+        loading="lazy"
+        src="testimage"
+        style="color: transparent;"
+        width="250"
+      />
+    </a>
     <div
       class="info"
     >
@@ -76,7 +80,11 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <h2
       class="name"
     >
-      Test game
+      <a
+        href="/app/game/123"
+      >
+        Test game
+      </a>
     </h2>
     <div
       class="myStatusOwn"
@@ -221,17 +229,21 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
   <div
     class="card card"
   >
-    <img
-      alt="Test game"
-      class="image rounded-start"
-      data-nimg="1"
-      decoding="async"
-      height="250"
-      loading="lazy"
-      src="testimage"
-      style="color: transparent;"
-      width="250"
-    />
+    <a
+      href="/app/game/123"
+    >
+      <img
+        alt="Test game"
+        class="image rounded-start"
+        data-nimg="1"
+        decoding="async"
+        height="250"
+        loading="lazy"
+        src="testimage"
+        style="color: transparent;"
+        width="250"
+      />
+    </a>
     <div
       class="info"
     >
@@ -287,7 +299,11 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <h2
       class="name"
     >
-      Test game
+      <a
+        href="/app/game/123"
+      >
+        Test game
+      </a>
     </h2>
     <div
       class="myStatusOwn"
@@ -357,17 +373,21 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
   <div
     class="card card"
   >
-    <img
-      alt="Test game"
-      class="image rounded-start"
-      data-nimg="1"
-      decoding="async"
-      height="250"
-      loading="lazy"
-      src="testimage"
-      style="color: transparent;"
-      width="250"
-    />
+    <a
+      href="/app/game/123"
+    >
+      <img
+        alt="Test game"
+        class="image rounded-start"
+        data-nimg="1"
+        decoding="async"
+        height="250"
+        loading="lazy"
+        src="testimage"
+        style="color: transparent;"
+        width="250"
+      />
+    </a>
     <div
       class="info"
     >
@@ -423,7 +443,11 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     <h2
       class="name"
     >
-      Test game
+      <a
+        href="/app/game/123"
+      >
+        Test game
+      </a>
     </h2>
     <div
       class="myStatusOwn"
@@ -493,17 +517,21 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
   <div
     class="card card"
   >
-    <img
-      alt="Test game"
-      class="image rounded-start"
-      data-nimg="1"
-      decoding="async"
-      height="250"
-      loading="lazy"
-      src="testimage"
-      style="color: transparent;"
-      width="250"
-    />
+    <a
+      href="/app/game/123"
+    >
+      <img
+        alt="Test game"
+        class="image rounded-start"
+        data-nimg="1"
+        decoding="async"
+        height="250"
+        loading="lazy"
+        src="testimage"
+        style="color: transparent;"
+        width="250"
+      />
+    </a>
     <div
       class="info"
     >
@@ -559,7 +587,11 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
     <h2
       class="name"
     >
-      Test game
+      <a
+        href="/app/game/123"
+      >
+        Test game
+      </a>
     </h2>
     <div
       class="myStatusOwn"

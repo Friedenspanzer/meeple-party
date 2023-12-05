@@ -57,6 +57,11 @@
   }
 }
 
+.name a {
+  color: var(--bs-text);
+  text-decoration: none;
+}
+
 .info {
   grid-area: info;
   display: flex;

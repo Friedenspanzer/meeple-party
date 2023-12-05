@@ -11,6 +11,7 @@ import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useMemo } from "react";
 import { GameBoxProps } from "../../GameBox";
 import styles from "./gameboxbig.module.css";
@@ -22,19 +23,25 @@ export default function GameBoxBig({
   return (
     <div className={classNames("card", styles.card)}>
       {game.image ? (
-        <Image
-          src={game.image}
-          alt={game.name}
-          width={250}
-          height={250}
-          unoptimized
-          className={classNames(styles.image, "rounded-start")}
-        />
+        <Link href={`/app/game/${game.id}`}>
+          <Image
+            src={game.image}
+            alt={game.name}
+            width={250}
+            height={250}
+            unoptimized
+            className={classNames(styles.image, "rounded-start")}
+          />
+        </Link>
       ) : (
         <div className={classNames(styles.image, "rounded-start")} />
       )}
       <MetricList game={game} />
-      <h2 className={styles.name}>{game.name}</h2>
+
+      <h2 className={styles.name}>
+        <Link href={`/app/game/${game.id}`}>{game.name}</Link>
+      </h2>
+
       <StatusList game={game} friendCollection={friendCollection} />
     </div>
   );
