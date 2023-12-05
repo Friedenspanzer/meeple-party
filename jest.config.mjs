@@ -23,6 +23,7 @@ const config = {
     "!**/.next/**",
     "!next.config.js",
   ],
+  coverageReporters: ["clover", "json", "lcov", "text-summary"],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
