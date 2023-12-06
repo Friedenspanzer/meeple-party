@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Person matches the snapshot for full data 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="avatar"
+    >
+      <span
+        data-image="image"
+        data-name="Display Name"
+        data-testid="avatarmock"
+      />
+    </div>
+    <span
+      class="name"
+    >
+      Display Name
+    </span>
+    <span
+      class="realName"
+    >
+      Real name
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Component: Person matches the snapshot for minimal data 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="avatar"
+    >
+      <span
+        data-name="Display Name"
+        data-testid="avatarmock"
+      />
+    </div>
+    <span
+      class="name"
+    >
+      Display Name
+    </span>
+    <span
+      class="realName"
+    />
+  </div>
+</div>
+`;

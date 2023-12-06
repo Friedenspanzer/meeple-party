@@ -21,7 +21,7 @@
     "GameName": "Name des Spiels",
     "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Traits": {
-      "PlayerCount": "Spielendenzahl",
+      "PlayerCount": "Personen",
       "Weight": "Komplexität",
       "PlayingTime": "Dauer",
       "Own": "$t(States.Own)",
@@ -38,12 +38,12 @@
     "Values": {
       "Yes": "Ja",
       "No": "Nein",
-      "Own": "Im Besitz",
-      "NotOwn": "Nicht im Besitz",
-      "WantToPlay": "Will ich spielen",
-      "NotWantToPlay": "Will ich nicht spielen",
-      "Wishlist": "Gewünscht",
-      "NotWishlist": "Nicht gewünscht",
+      "Own": "$t(States.Own)",
+      "NotOwn": "$t(States.NotOwn)",
+      "WantToPlay": "$t(States.WantToPlay)",
+      "NotWantToPlay": "$t(States.NotWantToPlay)",
+      "Wishlist": "$t(States.Wishlist)",
+      "NotWishlist": "$t(States.NotWishlist)",
       "PlayerCount": {
         "AtLeast": "> {{number}}",
         "Exact": "= {{number}}",
@@ -83,8 +83,8 @@
       "FriendsOwn": "$t(Filters.Traits.FriendsOwn)",
       "FriendsWantToPlay": "$t(Filters.Traits.FriendsWantToPlay)",
       "FriendsWish": "$t(Filters.Traits.FriendsWishlist)",
-      "MaxPlayers": "Maximalspielendenzahl",
-      "MinPlayers": "Minimalspielendenzahl",
+      "MaxPlayers": "Personen (höchstens)",
+      "MinPlayers": "Personen (mindestens)",
       "Name": "Name",
       "PlayingTime": "$t(Filters.Traits.PlayingTime)",
       "Weight": "$t(Filters.Traits.Weight)"
@@ -98,7 +98,18 @@
   "States": {
     "Own": "Im Besitz",
     "WantToPlay": "Will ich spielen",
-    "Wishlist": "Wunschliste"
+    "Wishlist": "Wunschliste",
+    "NotOwn": "Nicht im Besitz",
+    "NotWantToPlay": "Will ich nicht spielen",
+    "NotWishlist": "Nicht gewünscht"
+  },
+  "FriendStates": {
+    "Own_one": "{{count}} Freund*in besitzt",
+    "Own_other": "{{count}} Freund*innen besitzen",
+    "Wishlist_one": "{{count}} Freund*in wünscht sich",
+    "Wishlist_other": "{{count}} Freund*innen wünschen sich",
+    "WantToPlay_one": "{{count}} Freund*in will spielen",
+    "WantToPlay_other": "{{count}} Freund*innen wollen spielen"
   },
   "Actions": {
     "SaveAndContinue": "Speichern und weiter",

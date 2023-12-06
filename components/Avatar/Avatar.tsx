@@ -6,17 +6,19 @@ import Image from "next/image";
 import { CSSProperties } from "react";
 import styles from "./avatar.module.css";
 
+export interface AvatarProps {
+  image?: string | null;
+  name: string;
+  className?: string;
+  style?: CSSProperties;
+}
+
 export default function Avatar({
   image,
   name,
   className,
   style,
-}: {
-  image?: string | null;
-  name: string;
-  className?: string;
-  style?: CSSProperties;
-}) {
+}: Readonly<AvatarProps>) {
   const { t } = useTranslation();
   if (image) {
     return (
@@ -35,7 +37,7 @@ export default function Avatar({
     const color = getColor(name || "");
     return (
       <div
-        className={classNames([styles.dummy, className])}
+        className={classNames(styles.dummy, className)}
         style={{
           ...style,
           backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,

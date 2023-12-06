@@ -6,6 +6,7 @@ import {
   generateArray,
   generateBoolean,
   generateCollectionEntry,
+  generateGame,
   generateNumber,
   generatePrismaUser,
   generateString,
@@ -50,7 +51,11 @@ describe("GET game/[gameId]/collection", () => {
       objectMatcher({
         where: { id: userId },
         include: {
-          games: true,
+          games: {
+            include: {
+              game: true,
+            },
+          },
           receivedRelationships: true,
           sentRelationships: true,
         },
@@ -61,13 +66,16 @@ describe("GET game/[gameId]/collection", () => {
     const result = await GET(requestMock, { params: { userId } });
 
     expect(result.status).toBe(404);
-    expect(queryMock).toBeCalledTimes(1);
+    expect(queryMock).toHaveBeenCalledTimes(1);
   });
   it("returns returns 403 for strangers", async () => {
     const user = generatePrismaUser();
     const userCollection = generateArray(() =>
-      generateCollectionEntry(user.id, generateNumber())
-    );
+      generateCollectionEntry(myUser.id, generateNumber())
+    ).map((c) => ({
+      ...c,
+      game: generateGame(c.gameId),
+    }));
     const actualResult: UserWithCollectionAndRelationships = {
       ...user,
       games: userCollection,
@@ -79,7 +87,11 @@ describe("GET game/[gameId]/collection", () => {
       objectMatcher({
         where: { id: user.id },
         include: {
-          games: true,
+          games: {
+            include: {
+              game: true,
+            },
+          },
           receivedRelationships: true,
           sentRelationships: true,
         },
@@ -90,12 +102,15 @@ describe("GET game/[gameId]/collection", () => {
     const result = await GET(requestMock, { params: { userId: user.id } });
 
     expect(result.status).toBe(403);
-    expect(queryMock).toBeCalledTimes(1);
+    expect(queryMock).toHaveBeenCalledTimes(1);
   });
   it("returns collection for myself", async () => {
     const userCollection = generateArray(() =>
       generateCollectionEntry(myUser.id, generateNumber())
-    );
+    ).map((c) => ({
+      ...c,
+      game: generateGame(c.gameId),
+    }));
     const queryResult: UserWithCollectionAndRelationships = {
       ...myUser,
       games: userCollection,
@@ -107,7 +122,11 @@ describe("GET game/[gameId]/collection", () => {
       objectMatcher({
         where: { id: myUser.id },
         include: {
-          games: true,
+          games: {
+            include: {
+              game: true,
+            },
+          },
           receivedRelationships: true,
           sentRelationships: true,
         },
@@ -121,22 +140,25 @@ describe("GET game/[gameId]/collection", () => {
     const expectedResult = {
       userId: myUser.id,
       collection: userCollection.map((c) => ({
-        gameId: c.gameId,
+        game: c.game,
         own: c.own,
         wantToPlay: c.wantToPlay,
         wishlist: c.wishlist,
       })),
-    } as GameCollectionResult;
+    };
 
     expect(result.status).toBe(200);
-    expect(queryMock).toBeCalledTimes(1);
-    expect(actualResult).toEqual(expectedResult);
+    expect(queryMock).toHaveBeenCalledTimes(1);
+    expect(actualResult).toEqual(JSON.parse(JSON.stringify(expectedResult)));
   });
   it("returns collection for friends", async () => {
     const user = generatePrismaUser();
     const userCollection = generateArray(() =>
-      generateCollectionEntry(user.id, generateNumber())
-    );
+      generateCollectionEntry(myUser.id, generateNumber())
+    ).map((c) => ({
+      ...c,
+      game: generateGame(c.gameId),
+    }));
     const queryResult: UserWithCollectionAndRelationships = {
       ...user,
       games: userCollection,
@@ -166,7 +188,11 @@ describe("GET game/[gameId]/collection", () => {
       objectMatcher({
         where: { id: user.id },
         include: {
-          games: true,
+          games: {
+            include: {
+              game: true,
+            },
+          },
           receivedRelationships: true,
           sentRelationships: true,
         },
@@ -180,15 +206,15 @@ describe("GET game/[gameId]/collection", () => {
     const expectedResult = {
       userId: user.id,
       collection: userCollection.map((c) => ({
-        gameId: c.gameId,
+        game: c.game,
         own: c.own,
         wantToPlay: c.wantToPlay,
         wishlist: c.wishlist,
       })),
-    } as GameCollectionResult;
+    };
 
     expect(result.status).toBe(200);
-    expect(queryMock).toBeCalledTimes(1);
-    expect(actualResult).toEqual(expectedResult);
+    expect(queryMock).toHaveBeenCalledTimes(1);
+    expect(actualResult).toEqual(JSON.parse(JSON.stringify(expectedResult)));
   });
 });

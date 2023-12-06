@@ -7,10 +7,21 @@
   background-color: var(--bgg-ranking-color);
 }
 
+.medium {
+  --bgg-hex-size: var(--bgg-hex-size-md);
+  font-size: 1.3rem;
+}
+
+.small {
+  --bgg-hex-size: var(--bgg-hex-size-sm);
+  font-size: 1rem;
+}
+
 .hexTop {
   width: 0;
   height: calc(var(--bgg-hex-size) * 30 / 104);
-  border-bottom: calc(var(--bgg-hex-size) * 30 / 104) solid var(--bgg-ranking-color);
+  border-bottom: calc(var(--bgg-hex-size) * 30 / 104) solid
+    var(--bgg-ranking-color);
   border-left: calc(var(--bgg-hex-size) / 2) solid transparent;
   border-right: calc(var(--bgg-hex-size) / 2) solid transparent;
 }
@@ -18,20 +29,21 @@
 .hexBottom {
   width: 0;
   height: calc(var(--bgg-hex-size) * 30 / 104);
-  border-top: calc(var(--bgg-hex-size) * 30 / 104) solid var(--bgg-ranking-color);
+  border-top: calc(var(--bgg-hex-size) * 30 / 104) solid
+    var(--bgg-ranking-color);
   border-left: calc(var(--bgg-hex-size) / 2) solid transparent;
   border-right: calc(var(--bgg-hex-size) / 2) solid transparent;
 }
 
 .rank {
   font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 1.5rem;
+  font-size: 1em;
+  line-height: 1em;
 }
 
 .rating {
   font-weight: lighter;
-  font-size: 0.7rem;
+  font-size: 0.6em;
 }
 
 .top10 {

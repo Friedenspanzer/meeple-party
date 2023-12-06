@@ -3,5 +3,9 @@
   --footer-min-height: 82px;
   --avatar-size: 40px;
   --content-padding-top: 1rem;
-  --bgg-hex-size: 56px;
+  --bgg-hex-size-md: 56px;
+  --bgg-hex-size-sm: 42px;
+  --color-collection-own: var(--bs-green);
+  --color-collection-wishlist: var(--bs-red);
+  --color-collection-want-to-play: var(--bs-blue);
 }

@@ -1,5 +1,5 @@
 import { prisma } from "@/db";
-import { Relationship, RelationshipType, User } from "@prisma/client";
+import { Game, Relationship, RelationshipType, User } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { getUser } from "../../../authentication";
 
@@ -12,7 +12,11 @@ export async function GET(
   const result = await prisma.user.findUnique({
     where: { id: params.userId },
     include: {
-      games: true,
+      games: {
+        include: {
+          game: true,
+        },
+      },
       receivedRelationships: true,
       sentRelationships: true,
     },
@@ -24,7 +28,7 @@ export async function GET(
     const value: GameCollectionResult = {
       userId: result.id,
       collection: result.games.map((c) => ({
-        gameId: c.gameId,
+        game: c.game,
         own: c.own,
         wantToPlay: c.wantToPlay,
         wishlist: c.wishlist,
@@ -60,7 +64,7 @@ function myFriend(
 export interface GameCollectionResult {
   userId: string;
   collection: {
-    gameId: number;
+    game: Game;
     own: boolean;
     wantToPlay: boolean;
     wishlist: boolean;

@@ -1,5 +1,5 @@
 import Avatar from "@/components/Avatar/Avatar";
-import GameBox from "@/components/GameBox/GameBox";
+import GameBoxMedium from "@/components/GameBox/components/GameBoxMedium/GameBoxMedium";
 import GameCollection from "@/components/GameCollection/GameCollection";
 import Role from "@/components/Role/Role";
 import { prisma } from "@/db";
@@ -63,8 +63,6 @@ export default async function ProfilePage({
       gameId: { in: user.games.map((g) => g.gameId) },
     },
   });
-
-  const moreHeaders = getMoreHeaders(user);
 
   return (
     <div className="container-md">
@@ -150,7 +148,7 @@ export default async function ProfilePage({
             {user.favorites.slice(0, 6).map((g) => {
               const { updatedAt, ...cleanGame } = g;
               return (
-                <GameBox
+                <GameBoxMedium
                   game={cleanGame}
                   key={g.id}
                   showFriendCollection={false}
@@ -201,20 +199,6 @@ function getAllFriendIds(user: UserWithRelationships): string[] {
     .filter((r) => r.type === RelationshipType.FRIENDSHIP)
     .map((r) => r.senderId);
   return [...sentFriendships, ...receivedFriendships];
-}
-
-function getMoreHeaders(user: User): string | undefined {
-  if (!user.place && !user.bggName) {
-    return;
-  }
-  const headers = [];
-  if (user.place) {
-    headers.push(`From <strong>${user.place}</strong>`);
-  }
-  if (user.bggName) {
-    headers.push(`<strong>${user.bggName}</strong> on BoardGameGeek`);
-  }
-  return headers.join(" &bullet; ");
 }
 
 function cleanGame(game: Game) {

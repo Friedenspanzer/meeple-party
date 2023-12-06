@@ -14,8 +14,8 @@ const Person: React.FC<PersonProps> = ({ name, realName, image, ...props }) => {
       <div className={styles.avatar}>
         <Avatar name={name} image={image} />
       </div>
-      <div className={styles.name}>{name}</div>
-      <div className={styles.realName}>{realName}</div>
+      <span className={styles.name}>{name}</span>
+      <span className={styles.realName}>{realName}</span>
     </div>
   );
 };

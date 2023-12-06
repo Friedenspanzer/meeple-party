@@ -9,7 +9,6 @@ import { findFriendCollection } from "@/utility/collections";
 import { emptyFilter } from "@/utility/filter";
 import { fetchGames } from "@/utility/games";
 import { getServerUser } from "@/utility/serverSession";
-
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

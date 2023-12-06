@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  --distance: calc(var(--avatar-size) / -2);
+  padding: 0 0.25rem;
+  justify-content: center;
+}
+
+.container.vertical {
+  flex-direction: column-reverse;
+}
+
+.container.sm {
+  --distance: calc(var(--avatar-size) / 4 * -3);
+}
+
+.avatar:not(:last-child) {
+  margin-left: var(--distance);
+}
+
+.avatar:not(:last-child).vertical {
+  margin-left: unset;
+  margin-top: var(--distance);
+}
+
+.additional {
+  font-size: 0.75rem;
+  font-weight: lighter;
+  margin-left: 0.25rem;
+}

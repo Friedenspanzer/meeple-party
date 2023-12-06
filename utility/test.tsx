@@ -1,5 +1,6 @@
 import { FullPrismaRelationship } from "@/app/api/v2/utility";
-import { defaultUserPreferences } from "@/datatypes/userProfile";
+import { UserProfile, defaultUserPreferences } from "@/datatypes/userProfile";
+import { MantineProvider } from "@mantine/core";
 import {
   Game,
   GameCollection,
@@ -7,7 +8,9 @@ import {
   Role,
   User,
 } from "@prisma/client";
+import { render as testingLibraryRender } from "@testing-library/react";
 import { Matcher, MatcherCreator } from "jest-mock-extended";
+import { CSSProperties } from "react";
 
 export function getRandomEntry<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -41,18 +44,37 @@ export function generateArray<T>(generator: () => T, length = 10): T[] {
 
 export function generatePrismaUser(): User {
   return {
-    id: generateString(25),
-    name: generateString(25),
+    ...generateUserProfile(),
     email: generateString(25),
     profileComplete: true,
-    role: Role.USER,
-    emailVerified: new Date(),
+    emailVerified: generateDate(),
+    preferences: defaultUserPreferences,
+  };
+}
+
+export function generateUserProfile(): UserProfile {
+  return {
+    id: generateString(25),
+    name: generateString(25),
     about: generateString(1000),
     bggName: generateString(15),
-    image: null,
+    image: generateString(50),
     place: generateString(15),
     realName: generateString(25),
-    preferences: defaultUserPreferences,
+    role: Role.USER,
+  };
+}
+
+export function getUserProfile(index: number): UserProfile {
+  return {
+    id: `static-profile-${index}`,
+    name: `name-${index}`,
+    about: `about-${index}`,
+    bggName: `bggName-${index}`,
+    image: `image-${index}`,
+    place: `place-${index}`,
+    realName: `realName-${index}`,
+    role: Role.USER,
   };
 }
 
@@ -74,8 +96,8 @@ export function generateFullPrismaRelationship(
     type: type,
     sender: userA,
     recipient: userB,
-    updatedAt: new Date(),
-    cratedAt: new Date(),
+    updatedAt: generateDate(),
+    cratedAt: generateDate(),
   };
 }
 
@@ -89,7 +111,7 @@ export function generateCollectionEntry(
     own: generateBoolean(),
     wantToPlay: generateBoolean(),
     wishlist: generateBoolean(),
-    updatedAt: new Date(),
+    updatedAt: generateDate(),
   };
 }
 
@@ -106,8 +128,57 @@ export function generateGame(gameId: number): Game {
     thumbnail: generateString(),
     weight: generateNumber(),
     year: generateNumber(),
-    updatedAt: new Date(),
+    updatedAt: generateDate(),
   };
+}
+
+const MAX_DATE_OFFSET = 1000 * 60 * 60 * 24 * 1000;
+
+export function generateDate(): Date {
+  const offset = generateNumber(0, MAX_DATE_OFFSET);
+  const date = new Date();
+  date.setTime(date.getTime() - offset);
+  return date;
+}
+
+export function generateCssProperties(): CSSProperties {
+  const css: CSSProperties = {};
+
+  css.fontWeight = `${generateNumber(100, 900)}`;
+
+  if (generateBoolean()) {
+    css.backgroundColor = generateRgbColor();
+  }
+  if (generateBoolean()) {
+    css.fontFamily = generateString();
+  }
+  if (generateBoolean()) {
+    css.left = `${generateNumber()}px`;
+  }
+  if (generateBoolean()) {
+    css.right = `${generateNumber()}px`;
+  }
+  if (generateBoolean()) {
+    css.display = generateBoolean() ? "flex" : "grid";
+  }
+
+  return css;
+}
+
+export function generateRgbColor() {
+  return `rgb(${generateNumber(0, 255)}, ${generateNumber(
+    0,
+    255
+  )}, ${generateNumber(0, 255)})`;
+}
+
+export function generateHexColor() {
+  const allowed = "1234567890ABCDEF";
+  const color = ["#"];
+  for (let i = 0; i < 6; i++) {
+    color.push(allowed.charAt(generateNumber(0, allowed.length - 1)));
+  }
+  return color.join("");
 }
 
 export const objectMatcher: MatcherCreator<any> = (expected) =>
@@ -115,3 +186,11 @@ export const objectMatcher: MatcherCreator<any> = (expected) =>
     (actual) => JSON.stringify(actual) === JSON.stringify(expected),
     "deep comparison"
   );
+
+export function render(ui: React.ReactNode) {
+  return testingLibraryRender(<>{ui}</>, {
+    wrapper: ({ children }: { children: React.ReactNode }) => (
+      <MantineProvider>{children}</MantineProvider>
+    ),
+  });
+}

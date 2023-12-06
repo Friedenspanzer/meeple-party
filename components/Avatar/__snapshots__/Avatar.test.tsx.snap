@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Avatar matches the snapshot for avatar with image 1`] = `
+<div>
+  <span
+    alt="testname"
+    class="image"
+    data-optimized="no"
+    data-testid="imagemock"
+    height="40"
+    referrerpolicy="no-referrer"
+    src="testimage"
+    width="40"
+  />
+</div>
+`;
+
+exports[`Component: Avatar matches the snapshot for avatar without image 1`] = `
+<div>
+  <div
+    class="dummy"
+    style="background-color: rgb(117, 208, 225);"
+  >
+    T
+  </div>
+</div>
+`;

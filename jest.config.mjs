@@ -16,6 +16,14 @@ const config = {
     "^@/(.*)$": "<rootDir>/$1",
   },
   testRegex: "^(.*)/(.*)\\.(test)\\.[jt]sx?$",
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**",
+    "!**/.next/**",
+    "!next.config.js",
+  ],
+  coverageReporters: ["clover", "json", "lcov", "text-summary"],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
