@@ -2,6 +2,7 @@ import Avatar from "@/components/Avatar/Avatar";
 import GameBoxMedium from "@/components/GameBox/components/GameBoxMedium/GameBoxMedium";
 import GameCollection from "@/components/GameCollection/GameCollection";
 import Role from "@/components/Role/Role";
+import ShareProfile from "@/components/ShareProfile/ShareProfile";
 import { prisma } from "@/db";
 import { getTranslation } from "@/i18n";
 import { cleanUserDetails } from "@/pages/api/user";
@@ -94,6 +95,7 @@ export default async function ProfilePage({
           <div className="row mt-1">
             {isMe && (
               <div className="col-md-2 order-md-2">
+                <ShareProfile profileId={user.id} />
                 <Link
                   className="btn btn-primary"
                   href="/app/profile/edit"
