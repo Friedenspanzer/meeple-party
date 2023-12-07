@@ -1,5 +1,6 @@
 "use client";
 
+import { Button, Group } from "@mantine/core";
 import { useCallback } from "react";
 
 export interface ShareProfileProps {
@@ -15,8 +16,10 @@ export default function ShareProfile({ profileId }: ShareProfileProps) {
     }
   }, [profileId]);
   return (
-    <button type="button" className="btn btn-primary" onClick={share}>
-      <i className="bi bi-share"></i>&nbsp;Share profile
-    </button>
+    <Group>
+      <Button variant="filled" onClick={share}>
+        Button
+      </Button>
+    </Group>
   );
 }
