@@ -64,6 +64,7 @@
     "@storybook/addon-interactions": "^7.6.3",
     "@storybook/addon-links": "^7.6.3",
     "@storybook/addon-onboarding": "^1.0.9",
+    "@storybook/addon-styling-webpack": "^0.0.5",
     "@storybook/blocks": "^7.6.3",
     "@storybook/nextjs": "^7.6.3",
     "@storybook/react": "^7.6.3",
@@ -87,6 +88,7 @@
     "postcss-simple-vars": "^7.0.1",
     "prisma": "^4.11.0",
     "storybook": "^7.6.3",
+    "storybook-dark-mode": "^3.0.3",
     "whatwg-fetch": "^3.6.17"
   }
 }
