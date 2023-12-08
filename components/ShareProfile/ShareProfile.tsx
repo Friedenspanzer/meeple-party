@@ -1,7 +1,14 @@
 "use client";
 
 import { useTranslation } from "@/i18n/client";
-import { ActionIcon, Button, Group, TextInput, Tooltip } from "@mantine/core";
+import {
+  ActionIcon,
+  Button,
+  Group,
+  TextInput,
+  Tooltip,
+  Transition,
+} from "@mantine/core";
 import { IconCheck, IconCopy, IconShare2 } from "@tabler/icons-react";
 import { useCallback, useRef, useState } from "react";
 
@@ -37,31 +44,42 @@ export default function ShareProfile({
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-        setLinkOpen(false);
       }, 800);
     }
   }, [inputRef]);
   return (
     <Group>
       {!linkOpen && (
-        <Button variant="filled" onClick={share} leftSection={<IconShare2 />}>
+        <Button
+          variant="filled"
+          onClick={share}
+          leftSection={<IconShare2 />}
+        >
           {t("Share")}
         </Button>
       )}
-      {linkOpen && (
-        <TextInput
-          styles={{ input: { width: "35ch" } }}
-          value={url}
-          ref={inputRef}
-          rightSection={
-            <Tooltip label={success ? "Copied" : "Click to copy"}>
-              <ActionIcon radius="xs" size="lg" variant="subtle" onClick={copy}>
-                {success ? <IconCheck /> : <IconCopy />}
-              </ActionIcon>
-            </Tooltip>
-          }
-        />
-      )}
+      <Transition mounted={linkOpen} transition="slide-right">
+        {(style) => (
+          <TextInput
+            style={style}
+            styles={{ input: { width: "35ch" } }}
+            value={url}
+            ref={inputRef}
+            rightSection={
+              <Tooltip label={success ? "Copied" : "Click to copy"}>
+                <ActionIcon
+                  radius="xs"
+                  size="lg"
+                  variant="subtle"
+                  onClick={copy}
+                >
+                  {success ? <IconCheck /> : <IconCopy />}
+                </ActionIcon>
+              </Tooltip>
+            }
+          />
+        )}
+      </Transition>
     </Group>
   );
 }

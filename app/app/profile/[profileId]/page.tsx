@@ -95,7 +95,7 @@ export default async function ProfilePage({
           <div className="row mt-1">
             {isMe && (
               <div className="col-md-2 order-md-2">
-                <ShareProfile profileId={user.id} />
+                <ShareProfile profileId={user.id} disableNative />
                 <Link
                   className="btn btn-primary"
                   href="/app/profile/edit"
