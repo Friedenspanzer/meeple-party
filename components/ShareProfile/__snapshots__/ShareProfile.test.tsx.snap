@@ -144,7 +144,7 @@ exports[`Share Profile matches snapshot without native sharing after clicking sh
           aria-invalid="false"
           class="m-8fb7ebe7 mantine-Input-input mantine-TextInput-input"
           data-variant="default"
-          id="mantine-n5u7tf7v7"
+          id="mantine-i"
           style="width: 35ch;"
           value="undefined/app/profile/abc"
         />

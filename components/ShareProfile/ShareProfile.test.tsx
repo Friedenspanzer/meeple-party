@@ -7,6 +7,9 @@ jest.mock("@/i18n/client");
 
 describe("Share Profile", () => {
   beforeAll(() => {
+    Math.random = () => 0.5;
+  });
+  beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
       value: jest.fn().mockImplementation((query) => ({
