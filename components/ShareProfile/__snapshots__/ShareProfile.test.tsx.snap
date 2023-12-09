@@ -15,7 +15,6 @@ exports[`Share Profile matches snapshot 1`] = `
       class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
       data-variant="filled"
       data-with-left-section="true"
-      role="button"
       style="--button-bg: var(--mantine-color-blue-filled); --button-hover: var(--mantine-color-blue-filled-hover); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
       type="button"
     >
@@ -75,7 +74,6 @@ exports[`Share Profile matches snapshot without native sharing 1`] = `
       class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
       data-variant="filled"
       data-with-left-section="true"
-      role="button"
       style="--button-bg: var(--mantine-color-blue-filled); --button-hover: var(--mantine-color-blue-filled-hover); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
       type="button"
     >

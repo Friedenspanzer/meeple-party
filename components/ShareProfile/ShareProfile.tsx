@@ -20,7 +20,7 @@ export interface ShareProfileProps {
 export default function ShareProfile({
   profileId,
   disableNative = false,
-}: ShareProfileProps) {
+}: Readonly<ShareProfileProps>) {
   const { t } = useTranslation("profile");
   const [linkOpen, setLinkOpen] = useState(false);
   const url = `${process.env.BASE_URL}/app/profile/${profileId}`;
@@ -54,7 +54,6 @@ export default function ShareProfile({
           variant="filled"
           onClick={share}
           leftSection={<IconShare2 />}
-          role="button"
         >
           {t("Share")}
         </Button>
