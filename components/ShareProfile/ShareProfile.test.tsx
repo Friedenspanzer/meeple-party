@@ -1,4 +1,4 @@
-import { render } from "@/utility/test";
+import { generateString, render } from "@/utility/test";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ShareProfile from "./ShareProfile";
@@ -6,11 +6,10 @@ import ShareProfile from "./ShareProfile";
 jest.mock("@/i18n/client");
 
 describe("Share Profile", () => {
-  beforeAll(() => {
-    jest.spyOn(Math, "random").mockImplementation(() => 0.5);
-  });
+  const env = process.env;
   afterAll(() => {
     jest.restoreAllMocks();
+    process.env = env;
   });
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
@@ -38,6 +37,7 @@ describe("Share Profile", () => {
     expect(container).toMatchSnapshot();
   });
   it("matches snapshot without native sharing after clicking share button", async () => {
+    jest.spyOn(Math, "random").mockImplementation(() => 0.5);
     const user = userEvent.setup();
     const { container } = render(
       <ShareProfile profileId="abc" disableNative />
@@ -45,5 +45,38 @@ describe("Share Profile", () => {
     const button = screen.getByRole("button");
     await user.click(button);
     expect(container).toMatchSnapshot();
+  });
+  it("shares using native sharing", async () => {
+    const user = userEvent.setup();
+
+    const baseUrl = generateString();
+    const profileId = generateString();
+
+    process.env.BASE_URL = baseUrl;
+
+    const expectedShareData: ShareData = {
+      url: `${baseUrl}/app/profile/${profileId}`,
+    };
+
+    const canShareMock = jest.fn();
+    canShareMock.mockReturnValue(true);
+
+    const shareMock = jest.fn();
+
+    jest
+      .spyOn(global, "navigator", "get")
+      .mockImplementation(
+        () => ({ canShare: canShareMock, share: shareMock } as any)
+      );
+
+    render(<ShareProfile profileId={profileId} />);
+
+    const button = screen.getByRole("button");
+    await user.click(button);
+
+    expect(canShareMock).toHaveBeenCalledTimes(1);
+    expect(canShareMock.mock.calls[0][0]).toEqual(expectedShareData);
+    expect(shareMock).toHaveBeenCalledTimes(1);
+    expect(shareMock.mock.calls[0][0]).toEqual(expectedShareData);
   });
 });
