@@ -1,4 +1,5 @@
 import { generateString, render } from "@/utility/test";
+import "@testing-library/jest-dom/extend-expect";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ShareProfile from "./ShareProfile";
@@ -7,7 +8,7 @@ jest.mock("@/i18n/client");
 
 describe("Share Profile", () => {
   const env = process.env;
-  afterAll(() => {
+  afterEach(() => {
     jest.restoreAllMocks();
     process.env = env;
   });
@@ -78,5 +79,66 @@ describe("Share Profile", () => {
     expect(canShareMock.mock.calls[0][0]).toEqual(expectedShareData);
     expect(shareMock).toHaveBeenCalledTimes(1);
     expect(shareMock.mock.calls[0][0]).toEqual(expectedShareData);
+  });
+  it("shows the url when native sharing is disabled", async () => {
+    const user = userEvent.setup();
+
+    const baseUrl = generateString();
+    const profileId = generateString();
+
+    process.env.BASE_URL = baseUrl;
+
+    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+
+    render(<ShareProfile profileId={profileId} disableNative />);
+
+    await user.click(screen.getByRole("button"));
+
+    const input = screen.getByRole("textbox");
+
+    expect(input).toHaveValue(expectedUrl);
+  });
+  it("shows the url when native sharing is not available", async () => {
+    const user = userEvent.setup();
+
+    const baseUrl = generateString();
+    const profileId = generateString();
+
+    process.env.BASE_URL = baseUrl;
+
+    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+
+    const canShareMock = jest.fn();
+    canShareMock.mockReturnValue(false);
+
+    jest
+      .spyOn(global, "navigator", "get")
+      .mockImplementation(() => ({ canShare: canShareMock } as any));
+
+    render(<ShareProfile profileId={profileId} />);
+
+    await user.click(screen.getByRole("button"));
+
+    const input = screen.getByRole("textbox");
+
+    expect(input).toHaveValue(expectedUrl);
+  });
+  it("copies url to clipboard when native sharing is disabled", async () => {
+    const user = userEvent.setup();
+
+    const baseUrl = generateString();
+    const profileId = generateString();
+
+    process.env.BASE_URL = baseUrl;
+
+    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+
+    render(<ShareProfile profileId={profileId} disableNative />);
+
+    await user.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button"));
+    const clipboardText = await navigator.clipboard.readText();
+
+    expect(clipboardText).toBe(expectedUrl);
   });
 });
