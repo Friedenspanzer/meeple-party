@@ -1,5 +1,6 @@
 "use client";
 
+import useBasePath from "@/hooks/useBasePath";
 import { useTranslation } from "@/i18n/client";
 import {
   ActionIcon,
@@ -21,9 +22,10 @@ export default function ShareProfile({
   profileId,
   disableNative = false,
 }: Readonly<ShareProfileProps>) {
+  const basePath = useBasePath();
   const { t } = useTranslation("profile");
   const [linkOpen, setLinkOpen] = useState(false);
-  const url = `${process.env.BASE_URL}/app/profile/${profileId}`;
+  const url = `${basePath}/app/profile/${profileId}`;
   const inputRef = useRef<HTMLInputElement>(null);
   const [success, setSuccess] = useState(false);
   const share = useCallback(() => {
@@ -50,11 +52,7 @@ export default function ShareProfile({
   return (
     <Group>
       {!linkOpen && (
-        <Button
-          variant="filled"
-          onClick={share}
-          leftSection={<IconShare2 />}
-        >
+        <Button variant="filled" onClick={share} leftSection={<IconShare2 />}>
           {t("Share")}
         </Button>
       )}

@@ -1,3 +1,4 @@
+import useBasePath from "@/hooks/useBasePath";
 import { generateString, render } from "@/utility/test";
 import "@testing-library/jest-dom/extend-expect";
 import { screen } from "@testing-library/react";
@@ -5,12 +6,11 @@ import userEvent from "@testing-library/user-event";
 import ShareProfile from "./ShareProfile";
 
 jest.mock("@/i18n/client");
+jest.mock("@/hooks/useBasePath");
 
 describe("Share Profile", () => {
-  const env = process.env;
   afterEach(() => {
     jest.restoreAllMocks();
-    process.env = env;
   });
   beforeAll(() => {
     Object.defineProperty(window, "matchMedia", {
@@ -53,7 +53,7 @@ describe("Share Profile", () => {
     const baseUrl = generateString();
     const profileId = generateString();
 
-    process.env.BASE_URL = baseUrl;
+    jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
     const expectedShareData: ShareData = {
       url: `${baseUrl}/app/profile/${profileId}`,
@@ -86,7 +86,7 @@ describe("Share Profile", () => {
     const baseUrl = generateString();
     const profileId = generateString();
 
-    process.env.BASE_URL = baseUrl;
+    jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
     const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
 
@@ -104,7 +104,7 @@ describe("Share Profile", () => {
     const baseUrl = generateString();
     const profileId = generateString();
 
-    process.env.BASE_URL = baseUrl;
+    jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
     const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
 
@@ -129,7 +129,7 @@ describe("Share Profile", () => {
     const baseUrl = generateString();
     const profileId = generateString();
 
-    process.env.BASE_URL = baseUrl;
+    jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
     const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
 
