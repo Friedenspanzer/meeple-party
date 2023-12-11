@@ -9,6 +9,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { dir } from "i18next";
 import Script from "next/script";
 
+import { theme } from "@/theme/mantine";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -32,7 +33,7 @@ export default async function RootLayout({
         <Script src="/bootstrap.bundle.min.js" />
         <AuthProvider>
           <UserProvider>
-            <MantineProvider forceColorScheme="light">
+            <MantineProvider forceColorScheme="light" theme={theme}>
               <div className={styles.container}>{children}</div>
             </MantineProvider>
             <Analytics />

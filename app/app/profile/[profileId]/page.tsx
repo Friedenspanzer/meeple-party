@@ -1,7 +1,6 @@
-import Avatar from "@/components/Avatar/Avatar";
 import GameBoxMedium from "@/components/GameBox/components/GameBoxMedium/GameBoxMedium";
 import GameCollection from "@/components/GameCollection/GameCollection";
-import Role from "@/components/Role/Role";
+import ProfileHeader from "@/components/ProfileHeader/ProfileHeader";
 import { prisma } from "@/db";
 import { getTranslation } from "@/i18n";
 import { cleanUserDetails } from "@/pages/api/user";
@@ -14,10 +13,8 @@ import {
   User,
 } from "@prisma/client";
 import classNames from "classnames";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import ProfileRelationship from "./components/relationship";
 import styles from "./profilepage.module.css";
 
 export async function generateMetadata({
@@ -66,73 +63,8 @@ export default async function ProfilePage({
 
   return (
     <div className="container-md">
-      <div className={classNames("row align-items-center pt-2", styles.header)}>
-        <div
-          className={classNames(
-            "col-md-2 pt-2 ml-2 d-flex flex-md-column align-items-center",
-            styles.avatar
-          )}
-        >
-          <Avatar
-            image={user.image}
-            name={user.name || ""}
-            className={styles.avatar}
-          />
-          <Role role={user.role} />
-          {isMe && (
-            <span className="badge text-bg-light">
-              <i className="bi bi-person-circle"></i> {t("Badges.You")}
-            </span>
-          )}
-          {isFriend && (
-            <span className="badge text-bg-dark">
-              <i className="bi bi-person-fill"></i> {t("Badges.Friend")}
-            </span>
-          )}
-        </div>
-        <div className="col">
-          <div className="row mt-1">
-            {isMe && (
-              <div className="col-md-2 order-md-2">
-                <Link
-                  className="btn btn-primary"
-                  href="/app/profile/edit"
-                  role="button"
-                >
-                  {t("Edit")}
-                </Link>
-              </div>
-            )}
-            <div className="col order-md-1">
-              <h1 className={styles.name}>{user.name}</h1>
-              {user.realName && (
-                <h2 className={styles.realName}>{user.realName}</h2>
-              )}
-            </div>
-          </div>
-          <div className={classNames("row")}>
-            <ul className={styles.moreHeaders}>
-              {user.place && (
-                <li>{t("Header.Place", { place: user.place })}</li>
-              )}
-              {user.bggName && (
-                <li>
-                  <Link
-                    href={`https://boardgamegeek.com/user/${user.bggName}`}
-                    target="_blank"
-                  >
-                    {t("Header.BggName", { name: user.bggName })}
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </div>
-          {!isMe && !isFriend && (
-            <div className={styles.action}>
-              <ProfileRelationship targetUserId={user.id} />
-            </div>
-          )}
-        </div>
+      <div className={classNames("row", styles.header)}>
+        <ProfileHeader user={user} myself={isMe} friend={isFriend}/>
       </div>
       <div className="row py-2">
         <div className="col-md-9">

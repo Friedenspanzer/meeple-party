@@ -5,8 +5,7 @@ import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import {
   generateArray,
   generateUserProfile,
-  getUserProfile,
-  render,
+  render
 } from "@/utility/test";
 import { StatusByUser } from "../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
@@ -19,14 +18,6 @@ jest.mock("@/components/Avatar/Avatar", () => ({
   default: jest.fn(),
 }));
 jest.mock("@/context/modalContext");
-
-const friends = [
-  getUserProfile(0),
-  getUserProfile(1),
-  getUserProfile(2),
-  getUserProfile(3),
-  getUserProfile(4),
-];
 
 const game: Game = {
   id: 123,
