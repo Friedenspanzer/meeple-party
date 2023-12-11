@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import ShareProfile from "./ShareProfile";
 
 const meta = {
-  title: "Share Profile",
+  title: "Parts/Share Profile",
   component: ShareProfile,
   parameters: {
     layout: "centered",
