@@ -123,6 +123,28 @@ describe("Share Profile", () => {
 
     expect(input).toHaveValue(expectedUrl);
   });
+  it("shows the url when native sharing can not be checked", async () => {
+    const user = userEvent.setup();
+
+    const baseUrl = generateString();
+    const profileId = generateString();
+
+    jest.mocked(useBasePath).mockReturnValue(baseUrl);
+
+    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+
+    jest
+      .spyOn(global, "navigator", "get")
+      .mockImplementation(() => ({ canShare: undefined } as any));
+
+    render(<ShareProfile profileId={profileId} />);
+
+    await user.click(screen.getByRole("button"));
+
+    const input = screen.getByRole("textbox");
+
+    expect(input).toHaveValue(expectedUrl);
+  });
   it("copies url to clipboard when native sharing is disabled", async () => {
     const user = userEvent.setup();
 

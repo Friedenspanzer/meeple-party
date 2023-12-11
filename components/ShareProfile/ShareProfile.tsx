@@ -32,7 +32,7 @@ export default function ShareProfile({
     const shareData: ShareData = {
       url,
     };
-    if (!disableNative && navigator.canShare(shareData)) {
+    if (!disableNative && navigator.canShare && navigator.canShare(shareData)) {
       navigator.share(shareData);
     } else {
       setLinkOpen(true);
