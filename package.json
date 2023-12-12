@@ -59,7 +59,7 @@
     "sass": "^1.58.3",
     "server-only": "^0.0.1",
     "typescript": "^5.2.2",
-    "use-debounce": "^9.0.3",
+    "use-debounce": "^10.0.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {
