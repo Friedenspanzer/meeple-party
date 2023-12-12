@@ -1,6 +1,6 @@
 import useBasePath from "@/hooks/useBasePath";
 import { generateString, render } from "@/utility/test";
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ShareProfile from "./ShareProfile";
