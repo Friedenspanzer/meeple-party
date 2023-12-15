@@ -14,6 +14,15 @@ exports[`Link button matches snapshot for complex links 1`] = `
     style="--button-bg: mink; --button-hover: rgba(0, 0, 0, 1); --button-color: var(--mantine-color-white); --button-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
   >
     <span
+      aria-hidden="true"
+      class="m-a25b86ee mantine-Button-loader"
+    >
+      <span
+        class="m-b34414df m-5ae2e3c mantine-Loader-root"
+        style="--loader-size: calc(var(--button-height) / 1.8); --loader-color: var(--button-color);"
+      />
+    </span>
+    <span
       class="m-80f1301b mantine-Button-inner"
     >
       <span
@@ -43,6 +52,15 @@ exports[`Link button matches snapshot for simple links 1`] = `
     class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
     href="Test Link"
   >
+    <span
+      aria-hidden="true"
+      class="m-a25b86ee mantine-Button-loader"
+    >
+      <span
+        class="m-b34414df m-5ae2e3c mantine-Loader-root"
+        style="--loader-size: calc(var(--button-height) / 1.8); --loader-color: var(--button-color);"
+      />
+    </span>
     <span
       class="m-80f1301b mantine-Button-inner"
     >

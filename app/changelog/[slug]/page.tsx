@@ -18,11 +18,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   try {
     const update = parseFile(fileName);
 
-    const content = marked(update.content, {
-      mangle: false,
-      headerIds: undefined,
-      headerPrefix: undefined,
-    });
+    const content = marked(update.content);
 
     return (
       <>
