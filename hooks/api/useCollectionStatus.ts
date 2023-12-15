@@ -32,7 +32,7 @@ export default function useCollectionStatus(
   });
 
   const {
-    isLoading: mutationLoading,
+    isPending: mutationLoading,
     isError: mutationError,
     mutate: mutationFunction,
   } = useMutation({

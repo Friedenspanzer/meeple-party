@@ -1,5 +1,6 @@
 import { GameCollectionResult } from "@/app/api/v2/user/[userId]/collection/route";
 import { useUser } from "@/context/userContext";
+import { Game } from "@/datatypes/game";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useMemo } from "react";
@@ -28,7 +29,7 @@ export function useMyGameCollection(): Result<MyGameCollection[]> {
             data.collection
               .map((c) => c.game)
               .forEach((game) =>
-                queryClient.setQueryData(gameQueryKey(game.id), game)
+                queryClient.setQueryData<Game>(gameQueryKey(game.id), game)
               );
             return data.collection.map((c) => ({
               gameId: c.game.id,

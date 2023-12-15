@@ -7,7 +7,6 @@
     "@tanstack/query"
   ],
   "rules": {
-    "@tanstack/query/exhaustive-deps": "warn",
-    "@tanstack/query/prefer-query-object-syntax": "warn"
+    "@tanstack/query/exhaustive-deps": "warn"
   }
 }

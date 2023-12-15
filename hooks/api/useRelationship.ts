@@ -39,7 +39,7 @@ export default function useRelationship(
   });
 
   const {
-    isLoading: mutationLoading,
+    isPending: mutationLoading,
     isError: mutationError,
     mutate: deleteFunction,
   } = useMutation({

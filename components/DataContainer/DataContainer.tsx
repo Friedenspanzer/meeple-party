@@ -1,17 +1,19 @@
 "use client";
 
-import { UseDataContextProvider } from "@frdnspnzr/use-data";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
+const ONE_MINUTE = 1000 * 60;
+
 const DataContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: { queries: { staleTime: ONE_MINUTE } },
+      })
+  );
   return (
-    <QueryClientProvider client={queryClient}>
-      <UseDataContextProvider client={queryClient}>
-        {children}
-      </UseDataContextProvider>
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

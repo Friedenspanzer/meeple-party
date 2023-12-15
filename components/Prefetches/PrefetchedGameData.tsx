@@ -1,6 +1,6 @@
 import { Game } from "@/datatypes/game";
 import getQueryClient from "@/utility/queryClient";
-import { dehydrate, Hydrate } from "@tanstack/react-query";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<{ data: Game[] }>;
@@ -12,7 +12,9 @@ const PrefetchedGameData: React.FC<Props> = ({ data, children }) => {
   });
   const dehydratedState = dehydrate(queryClient);
   queryClient.clear();
-  return <Hydrate state={dehydratedState}>{children}</Hydrate>;
+  return (
+    <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
+  );
 };
 
 export default PrefetchedGameData;

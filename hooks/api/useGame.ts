@@ -36,9 +36,7 @@ export function useGameQuery(): (gameId: number) => Promise<Game> {
   const queryClient = useQueryClient();
   const getKey = useGameQueryKey();
   return (gameId) => {
-    const cached = queryClient.getQueryData<Game>(getKey(gameId), {
-      stale: false,
-    });
+    const cached = queryClient.getQueryData<Game>(getKey(gameId));
     if (cached) {
       return Promise.resolve(cached);
     }

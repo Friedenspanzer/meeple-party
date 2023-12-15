@@ -1,7 +1,7 @@
 import { getCollectionStatusQueryKey } from "@/hooks/api/useCollectionStatus";
 import getQueryClient from "@/utility/queryClient";
 import { GameCollection } from "@prisma/client";
-import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<{
@@ -15,7 +15,9 @@ const PrefetchedGameCollection: React.FC<Props> = ({ data, children }) => {
   });
   const dehydratedState = dehydrate(queryClient);
   queryClient.clear();
-  return <Hydrate state={dehydratedState}>{children}</Hydrate>;
+  return (
+    <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
+  );
 };
 
 export default PrefetchedGameCollection;
