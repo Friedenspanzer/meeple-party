@@ -9,7 +9,7 @@ exports[`Profile header matches snapshot for friend profile 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -135,7 +135,7 @@ exports[`Profile header matches snapshot for full user details 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -230,7 +230,7 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -317,7 +317,7 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
   </style>
   <div
     class="m-6d731127 mantine-Stack-root"
-    style="--stack-gap: var(--mantine-spacing-md); --stack-align: center; --stack-justify: flex-start;"
+    style="--stack-gap: var(--mantine-spacing-md); --stack-align: center; --stack-justify: flex-start; background-color: rgb(165, 216, 255);"
   >
     <div
       class="dummy"
@@ -478,7 +478,7 @@ exports[`Profile header matches snapshot for own profile 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"

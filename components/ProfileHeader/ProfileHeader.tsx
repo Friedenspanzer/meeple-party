@@ -3,7 +3,7 @@
 import { UserProfile } from "@/datatypes/userProfile";
 import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
-import { Group, Stack, Text, Title } from "@mantine/core";
+import { Group, MantineTheme, Stack, Text, Title } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
 import LinkButton from "../LinkButton/LinkButton";
@@ -23,9 +23,12 @@ export default function ProfileHeader({
   friend = false,
 }: Readonly<ProfileHeaderProps>) {
   const { isMobile } = useLayout();
+  const containerStyle = (theme: MantineTheme) => ({
+    backgroundColor: theme.colors[theme.primaryColor][2],
+  });
   if (isMobile) {
     return (
-      <Stack align="center">
+      <Stack align="center" style={containerStyle} p="md">
         <AvatarBlock user={user} myself={myself} friend={friend} />
         <NameBlock user={user} />
         <ButtonBlock user={user} />
@@ -33,7 +36,7 @@ export default function ProfileHeader({
     );
   } else {
     return (
-      <Group justify="space-between">
+      <Group justify="space-between" style={containerStyle} p="md">
         <Group gap="xl">
           <Stack gap="xs" align="center">
             <AvatarBlock user={user} myself={myself} friend={friend} />
