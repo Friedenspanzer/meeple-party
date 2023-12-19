@@ -1,0 +1,11 @@
+{
+  "Heading": "Page not found",
+  "Explanation": "We scoured the rulebook but we couldn't figure out how we should handle this. Here's what may have happened:",
+  "NotLoggedIn": {
+    "Start": "You are not logged in and trying to view a restricted page. You can solve this by ",
+    "Link": "going to the login page",
+    "End": " and logging into your account or creating a new one."
+  },
+  "InvalidLink": "Somebody sent you an invalid link. Tell them that is against the rules!",
+  "Broken": "Something is broken. Please let us know what happened. See below for multiple ways to reach out to us."
+}
