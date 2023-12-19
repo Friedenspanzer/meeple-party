@@ -297,11 +297,6 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
           data-order="3"
           style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
         />
-        <p
-          class="mantine-focus-auto subline m-b6d8b162 mantine-Text-root"
-        >
-          Header.BggName
-        </p>
       </div>
     </div>
   </div>

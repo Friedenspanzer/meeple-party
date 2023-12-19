@@ -76,9 +76,11 @@ function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
       <Title order={3} className={styles.realName}>
         {user.realName}
       </Title>
-      <Text className={styles.subline}>
-        {t("Header.BggName", { name: user.bggName })}
-      </Text>
+      {user.bggName && (
+        <Text className={styles.subline}>
+          {t("Header.BggName", { name: user.bggName })}
+        </Text>
+      )}
     </>
   );
 }
