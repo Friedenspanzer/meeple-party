@@ -19,7 +19,7 @@ import GameCollectionFilter, {
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
 
-type GameInfo = {
+export type GameInfo = {
   game: Game;
   status?: GameCollectionStatus;
   friendCollections?: StatusByUser;

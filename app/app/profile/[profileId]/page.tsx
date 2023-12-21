@@ -1,6 +1,4 @@
-import GameBoxMedium from "@/components/GameBox/components/GameBoxMedium/GameBoxMedium";
-import GameCollection from "@/components/GameCollection/GameCollection";
-import ProfileHeader from "@/components/ProfileHeader/ProfileHeader";
+import UserProfilePage from "@/components/pages/profile/UserProfilePage";
 import { prisma } from "@/db";
 import { getTranslation } from "@/i18n";
 import { cleanUserDetails } from "@/pages/api/user";
@@ -12,10 +10,8 @@ import {
   RelationshipType,
   User,
 } from "@prisma/client";
-import classNames from "classnames";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
-import styles from "./profilepage.module.css";
 
 export async function generateMetadata({
   params,
@@ -62,51 +58,16 @@ export default async function ProfilePage({
   });
 
   return (
-    <div className="container-md">
-      <div className={classNames("row", styles.header)}>
-        <ProfileHeader user={user} myself={isMe} friend={isFriend}/>
-      </div>
-      <div className="row py-2">
-        <div className="col-md-9">
-          {!!user.about && (
-            <>
-              <p>{user.about}</p>
-            </>
-          )}
-        </div>
-        {user.favorites.length > 0 && (
-          <div className="col-md-3">
-            <h3>{t("FavoriteGames")}</h3>
-            {user.favorites.slice(0, 6).map((g) => {
-              const { updatedAt, ...cleanGame } = g;
-              return (
-                <GameBoxMedium
-                  game={cleanGame}
-                  key={g.id}
-                  showFriendCollection={false}
-                />
-              );
-            })}
-          </div>
-        )}
-      </div>
-      {(isFriend || isMe) && (
-        <div className="row py2">
-          <div className="col">
-            <GameCollection
-              games={user.games.map(({ game }) => ({
-                game: cleanGame(game),
-                status: getStatus(game.id, myCollectionStatus),
-              }))}
-              showFriendCollection={false}
-              showFilter={false}
-            >
-              <h3>{t("UserCollection", { name: user.name })}</h3>
-            </GameCollection>
-          </div>
-        </div>
-      )}
-    </div>
+    <UserProfilePage
+      user={user}
+      isFriend={isFriend}
+      isMe={isMe}
+      favorites={user.favorites}
+      collection={user.games.map(({ game }) => ({
+        game: cleanGame(game),
+        status: getStatus(game.id, myCollectionStatus),
+      }))}
+    />
   );
 }
 

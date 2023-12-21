@@ -9,6 +9,7 @@
   },
   "Edit": "Dein Profil bearbeiten",
   "Share": "Dein Profil teilen",
+  "About": "Über {{name}}",
   "FavoriteGames": "Lieblingsspiele",
   "UserCollection": "Sammlung von {{name}}",
   "Header": {
