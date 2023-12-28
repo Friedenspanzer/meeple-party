@@ -1,4 +1,3 @@
-import PublicUserProfilePage from "@/components/pages/profile/PublicUserProfilePage";
 import UserProfilePage from "@/components/pages/profile/UserProfilePage";
 import { prisma } from "@/db";
 import { cleanUserDetails } from "@/pages/api/user";
@@ -37,18 +36,10 @@ export default async function ProfilePage({
 }: {
   params: { profileId: string };
 }) {
-  try {
-    return await renderPageForLoggedInUsers(params.profileId);
-  } catch {
-    return await renderPublicPage(params.profileId);
-  }
-}
-
-async function renderPageForLoggedInUsers(profileId: string) {
   const loggedInUser = await getServerUser();
-  const isMe = loggedInUser.id === profileId;
+  const isMe = loggedInUser.id === params.profileId;
 
-  const user = await getUser(profileId, loggedInUser.id);
+  const user = await getUser(params.profileId, loggedInUser.id);
   if (!user || !user.profileComplete) {
     notFound();
   }
@@ -75,14 +66,6 @@ async function renderPageForLoggedInUsers(profileId: string) {
       }))}
     />
   );
-}
-
-async function renderPublicPage(profileId: string) {
-  const user = await getUser(profileId);
-  if (!user || !user.profileComplete) {
-    notFound();
-  }
-  return <PublicUserProfilePage user={user} />;
 }
 
 function getStatus(gameId: number, myCollection: PrismaGameCollection[]) {
