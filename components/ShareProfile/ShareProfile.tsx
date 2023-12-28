@@ -25,7 +25,7 @@ export default function ShareProfile({
   const basePath = useBasePath();
   const { t } = useTranslation("profile");
   const [linkOpen, setLinkOpen] = useState(false);
-  const url = `${basePath}/app/profile/${profileId}`;
+  const url = `${basePath}/profile/${profileId}`;
   const inputRef = useRef<HTMLInputElement>(null);
   const [success, setSuccess] = useState(false);
   const share = useCallback(() => {

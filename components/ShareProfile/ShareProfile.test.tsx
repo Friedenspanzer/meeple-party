@@ -56,7 +56,7 @@ describe("Share Profile", () => {
     jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
     const expectedShareData: ShareData = {
-      url: `${baseUrl}/app/profile/${profileId}`,
+      url: `${baseUrl}/profile/${profileId}`,
     };
 
     const canShareMock = jest.fn();
@@ -88,7 +88,7 @@ describe("Share Profile", () => {
 
     jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
-    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+    const expectedUrl = `${baseUrl}/profile/${profileId}`;
 
     render(<ShareProfile profileId={profileId} disableNative />);
 
@@ -106,7 +106,7 @@ describe("Share Profile", () => {
 
     jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
-    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+    const expectedUrl = `${baseUrl}/profile/${profileId}`;
 
     const canShareMock = jest.fn();
     canShareMock.mockReturnValue(false);
@@ -131,7 +131,7 @@ describe("Share Profile", () => {
 
     jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
-    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+    const expectedUrl = `${baseUrl}/profile/${profileId}`;
 
     jest
       .spyOn(global, "navigator", "get")
@@ -153,7 +153,7 @@ describe("Share Profile", () => {
 
     jest.mocked(useBasePath).mockReturnValue(baseUrl);
 
-    const expectedUrl = `${baseUrl}/app/profile/${profileId}`;
+    const expectedUrl = `${baseUrl}/profile/${profileId}`;
 
     render(<ShareProfile profileId={profileId} disableNative />);
 
