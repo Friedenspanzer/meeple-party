@@ -22,7 +22,7 @@ export default async function UserProfilePage({
   isFriend = false,
   favorites = [],
   collection = [],
-}: UserProfilePageProps) {
+}: Readonly<UserProfilePageProps>) {
   const { t } = await getTranslation("profile");
   return (
     <Grid>

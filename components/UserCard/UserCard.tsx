@@ -11,7 +11,7 @@ export interface UserCardProps {
   user: UserProfile;
 }
 
-export default function UserCard({ user }: UserCardProps) {
+export default function UserCard({ user }: Readonly<UserCardProps>) {
   const { t } = useTranslation("profile");
   return (
     <Stack

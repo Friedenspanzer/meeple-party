@@ -27,14 +27,14 @@ type UserWithRelationships = User & {
 
 export default async function ProfilePage({
   params,
-}: {
+}: Readonly<{
   params: { profileId: string };
-}) {
+}>) {
   if (await isLoggedIn()) {
     redirect(`/app/profile/${params.profileId}`);
   } else {
     const user = await getUser(params.profileId);
-    if (!user || !user.profileComplete) {
+    if (!user?.profileComplete) {
       notFound();
     }
     return <PublicUserProfilePage user={user} />;

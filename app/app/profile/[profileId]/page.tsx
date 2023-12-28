@@ -33,14 +33,14 @@ type UserWithRelationships = User & {
 
 export default async function ProfilePage({
   params,
-}: {
+}: Readonly<{
   params: { profileId: string };
-}) {
+}>) {
   const loggedInUser = await getServerUser();
   const isMe = loggedInUser.id === params.profileId;
 
   const user = await getUser(params.profileId, loggedInUser.id);
-  if (!user || !user.profileComplete) {
+  if (!user?.profileComplete) {
     notFound();
   }
 
