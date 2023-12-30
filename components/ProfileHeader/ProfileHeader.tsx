@@ -7,6 +7,7 @@ import { Group, MantineTheme, Stack, Text, Title } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
 import LinkButton from "../LinkButton/LinkButton";
+import ProfileUsername from "../Profile/Username/ProfileUsername";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 import ShareProfile from "../ShareProfile/ShareProfile";
 import styles from "./ProfileHeader.module.css";
@@ -70,9 +71,7 @@ function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
   const { t } = useTranslation("profile");
   return (
     <>
-      <Title order={2} className={styles.name}>
-        {user.name}
-      </Title>
+      <ProfileUsername>{user.name}</ProfileUsername>
       <Title order={3} className={styles.realName}>
         {user.realName}
       </Title>

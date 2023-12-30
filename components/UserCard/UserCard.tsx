@@ -5,6 +5,7 @@ import { useTranslation } from "@/i18n/client";
 import { MantineTheme, Stack, Text, Title } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
+import ProfileUsername from "../Profile/Username/ProfileUsername";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 
 export interface UserCardProps {
@@ -25,9 +26,7 @@ export default function UserCard({ user }: Readonly<UserCardProps>) {
     >
       <Avatar image={user.image} name={user.name || ""} />
       {getRoleBadge(user.role)}
-      <Title order={2} style={{ fontWeight: 500 }}>
-        {user.name}
-      </Title>
+      <ProfileUsername>{user.name}</ProfileUsername>
       {user.realName && (
         <Title order={3} style={{ fontWeight: 200 }}>
           {user.realName}

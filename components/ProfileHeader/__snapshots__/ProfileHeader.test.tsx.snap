@@ -102,9 +102,9 @@ exports[`Profile header matches snapshot for friend profile 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
@@ -197,9 +197,9 @@ exports[`Profile header matches snapshot for full user details 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
@@ -286,9 +286,9 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
@@ -361,9 +361,9 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
       </span>
     </div>
     <h2
-      class="name m-8a5d1357 mantine-Title-root"
+      class="m-8a5d1357 mantine-Title-root"
       data-order="2"
-      style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+      style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
     >
       Frdnspnzr
     </h2>
@@ -563,9 +563,9 @@ exports[`Profile header matches snapshot for own profile 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
