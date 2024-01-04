@@ -1,3 +1,4 @@
+import { generateMetadata as appGenerateMetaData } from "@/app/app/profile/[profileId]/page";
 import PublicUserProfilePage from "@/components/pages/profile/PublicUserProfilePage";
 import { prisma } from "@/db";
 import { cleanUserDetails } from "@/pages/api/user";
@@ -6,18 +7,10 @@ import { Relationship, User } from "@prisma/client";
 import { notFound, redirect } from "next/navigation";
 import { Metadata } from "next/types";
 
-export async function generateMetadata({
-  params,
-}: {
+export async function generateMetadata(params: {
   params: { profileId: string };
 }): Promise<Metadata> {
-  const user = await getUser(params.profileId);
-  if (!user || !user.profileComplete) {
-    notFound();
-  }
-  return {
-    title: user.name,
-  };
+  return appGenerateMetaData(params);
 }
 
 type UserWithRelationships = User & {
