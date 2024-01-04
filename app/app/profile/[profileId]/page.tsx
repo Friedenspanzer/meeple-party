@@ -18,7 +18,7 @@ export async function generateMetadata({
   params: { profileId: string };
 }): Promise<Metadata> {
   const user = await getUser(params.profileId);
-  if (!user || !user.profileComplete) {
+  if (!user?.profileComplete) {
     notFound();
   }
   return {
