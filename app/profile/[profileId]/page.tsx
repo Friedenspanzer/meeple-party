@@ -3,7 +3,6 @@ import PublicUserProfilePage from "@/components/pages/profile/PublicUserProfileP
 import { prisma } from "@/db";
 import { cleanUserDetails } from "@/pages/api/user";
 import { isLoggedIn } from "@/utility/serverSession";
-import { Relationship, User } from "@prisma/client";
 import { notFound, redirect } from "next/navigation";
 import { Metadata } from "next/types";
 
@@ -12,11 +11,6 @@ export async function generateMetadata(params: {
 }): Promise<Metadata> {
   return appGenerateMetaData(params);
 }
-
-type UserWithRelationships = User & {
-  sentRelationships: Relationship[];
-  receivedRelationships: Relationship[];
-};
 
 export default async function ProfilePage({
   params,
