@@ -1,24 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ProfileUsername from "./ProfileUsername";
+import ProfileRealName from "./ProfileRealName";
 
 const meta = {
-  title: "Parts/Profile/Username",
-  component: ProfileUsername,
+  title: "Parts/Profile/Real name",
+  component: ProfileRealName,
   tags: ["autodocs"],
-} satisfies Meta<typeof ProfileUsername>;
+} satisfies Meta<typeof ProfileRealName>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const SimpleName: Story = {
   args: {
-    children: "Frdnspnzr",
-  },
-};
-
-export const NameWithBlanks: Story = {
-  args: {
-    children: "This is a name with blanks",
+    children: "Pascal Greilach",
   },
 };
 
@@ -27,3 +21,4 @@ export const NameWithTwoByteCharacters: Story = {
     children: "사회과학원 어학연구소",
   },
 };
+

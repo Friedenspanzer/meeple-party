@@ -2,9 +2,10 @@
 
 import { UserProfile } from "@/datatypes/userProfile";
 import { useTranslation } from "@/i18n/client";
-import { MantineTheme, Stack, Text, Title } from "@mantine/core";
+import { MantineTheme, Stack, Text } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
+import ProfileRealName from "../Profile/RealName/ProfileRealName";
 import ProfileUsername from "../Profile/Username/ProfileUsername";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 
@@ -27,11 +28,7 @@ export default function UserCard({ user }: Readonly<UserCardProps>) {
       <Avatar image={user.image} name={user.name || ""} />
       {getRoleBadge(user.role)}
       <ProfileUsername>{user.name}</ProfileUsername>
-      {user.realName && (
-        <Title order={3} style={{ fontWeight: 200 }}>
-          {user.realName}
-        </Title>
-      )}
+      {user.realName && <ProfileRealName>{user.realName}</ProfileRealName>}
       {user.bggName && (
         <Text style={{ fontWeight: 200 }}>
           {t("Header.BggName", { name: user.bggName })}

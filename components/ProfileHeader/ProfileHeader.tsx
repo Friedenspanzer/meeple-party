@@ -3,10 +3,11 @@
 import { UserProfile } from "@/datatypes/userProfile";
 import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
-import { Group, MantineTheme, Stack, Text, Title } from "@mantine/core";
+import { Group, MantineTheme, Stack, Text } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
 import LinkButton from "../LinkButton/LinkButton";
+import ProfileRealName from "../Profile/RealName/ProfileRealName";
 import ProfileUsername from "../Profile/Username/ProfileUsername";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 import ShareProfile from "../ShareProfile/ShareProfile";
@@ -72,9 +73,7 @@ function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
   return (
     <>
       <ProfileUsername>{user.name}</ProfileUsername>
-      <Title order={3} className={styles.realName}>
-        {user.realName}
-      </Title>
+      {user.realName && <ProfileRealName>{user.realName}</ProfileRealName>}
       {user.bggName && (
         <Text className={styles.subline}>
           {t("Header.BggName", { name: user.bggName })}

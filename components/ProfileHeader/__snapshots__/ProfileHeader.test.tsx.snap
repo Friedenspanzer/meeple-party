@@ -109,9 +109,9 @@ exports[`Profile header matches snapshot for friend profile 1`] = `
           Frdnspnzr
         </h2>
         <h3
-          class="realName m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
         >
           Pascal Greilach
         </h3>
@@ -204,9 +204,9 @@ exports[`Profile header matches snapshot for full user details 1`] = `
           Frdnspnzr
         </h2>
         <h3
-          class="realName m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
         >
           Pascal Greilach
         </h3>
@@ -292,11 +292,6 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
         >
           Frdnspnzr
         </h2>
-        <h3
-          class="realName m-8a5d1357 mantine-Title-root"
-          data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
-        />
       </div>
     </div>
   </div>
@@ -368,9 +363,9 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
       Frdnspnzr
     </h2>
     <h3
-      class="realName m-8a5d1357 mantine-Title-root"
+      class="m-8a5d1357 mantine-Title-root"
       data-order="3"
-      style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+      style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
     >
       Pascal Greilach
     </h3>
@@ -440,6 +435,7 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
     <a
       class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
       href="/app/profile/edit"
+      style="--button-color: var(--mantine-color-white);"
     >
       <span
         aria-hidden="true"
@@ -570,9 +566,9 @@ exports[`Profile header matches snapshot for own profile 1`] = `
           Frdnspnzr
         </h2>
         <h3
-          class="realName m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
         >
           Pascal Greilach
         </h3>
@@ -648,6 +644,7 @@ exports[`Profile header matches snapshot for own profile 1`] = `
       <a
         class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
         href="/app/profile/edit"
+        style="--button-color: var(--mantine-color-white);"
       >
         <span
           aria-hidden="true"
