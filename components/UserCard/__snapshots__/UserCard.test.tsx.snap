@@ -129,12 +129,6 @@ exports[`Profile header matches snapshot for full user details 1`] = `
         </p>
       </div>
     </div>
-    <p
-      class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
-      style="font-weight: 200;"
-    >
-      Header.Place
-    </p>
   </div>
 </div>
 `;
@@ -149,10 +143,10 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
   <style
     data-mantine-styles="inline"
   >
-    .__m__-ra{width:95vw;}@media(min-width: 62em){.__m__-ra{width:calc(18.75rem * var(--mantine-scale));}}
+    .__m__-r9{width:95vw;}@media(min-width: 62em){.__m__-r9{width:calc(18.75rem * var(--mantine-scale));}}
   </style>
   <div
-    class="m-6d731127 mantine-Stack-root __m__-ra"
+    class="m-6d731127 mantine-Stack-root __m__-r9"
     style="--stack-gap: var(--mantine-spacing-sm); --stack-align: center; --stack-justify: flex-start; background-color: rgb(165, 216, 255);"
   >
     <div
@@ -203,7 +197,7 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
       Frdnspnzr
     </h2>
     <div
-      class="m-8bffd616 mantine-Flex-root __m__-rd"
+      class="m-8bffd616 mantine-Flex-root __m__-rc"
       style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
     />
   </div>

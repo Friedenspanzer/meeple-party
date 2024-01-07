@@ -2,7 +2,7 @@
 
 import { UserProfile } from "@/datatypes/userProfile";
 import { useTranslation } from "@/i18n/client";
-import { MantineTheme, Stack, Text } from "@mantine/core";
+import { MantineTheme, Stack } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
 import { ProfileAdditionalInformation } from "../Profile/AdditionalInformation/ProfileAdditionalInformation";
@@ -32,11 +32,6 @@ export default function UserCard({ user }: Readonly<UserCardProps>) {
         place={user.place || undefined}
         bggName={user.bggName || undefined}
       />
-      {user.place && (
-        <Text style={{ fontWeight: 200 }}>
-          {t("Header.Place", { place: user.place })}
-        </Text>
-      )}
     </Stack>
   );
 }
