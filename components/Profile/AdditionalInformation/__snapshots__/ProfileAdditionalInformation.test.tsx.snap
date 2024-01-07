@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile additional information matches snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m-8bffd616 mantine-Flex-root __m__-r0"
+    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+  >
+    <div
+      class="m-4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+    >
+      <svg
+        class="tabler-icon tabler-icon-home"
+        fill="none"
+        height="calc(1rem * var(--mantine-scale))"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="calc(1rem * var(--mantine-scale))"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5 12l-2 0l9 -9l9 9l-2 0"
+        />
+        <path
+          d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+        />
+        <path
+          d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+        />
+      </svg>
+      <p
+        class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+      >
+        place
+      </p>
+    </div>
+    <div
+      class="m-4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+    >
+      <svg
+        height="calc(1rem * var(--mantine-scale))"
+        style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+        version="1.1"
+        viewBox="0 0 1607 2400"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+          fill="#FF5100"
+          style="fill-rule: nonzero;"
+        />
+      </svg>
+      <p
+        class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+      >
+        bgg name
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Profile additional information matches snapshot with no parameters 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m-8bffd616 mantine-Flex-root __m__-re"
+    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+  />
+</div>
+`;
+
+exports[`Profile additional information matches snapshot with only bgg name 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m-8bffd616 mantine-Flex-root __m__-r6"
+    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+  >
+    <div
+      class="m-4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+    >
+      <svg
+        height="calc(1rem * var(--mantine-scale))"
+        style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+        version="1.1"
+        viewBox="0 0 1607 2400"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+          fill="#FF5100"
+          style="fill-rule: nonzero;"
+        />
+      </svg>
+      <p
+        class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+      >
+        bgg name
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Profile additional information matches snapshot with only place 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <div
+    class="m-8bffd616 mantine-Flex-root __m__-ra"
+    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+  >
+    <div
+      class="m-4081bf90 mantine-Group-root"
+      style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+    >
+      <svg
+        class="tabler-icon tabler-icon-home"
+        fill="none"
+        height="calc(1rem * var(--mantine-scale))"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        width="calc(1rem * var(--mantine-scale))"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5 12l-2 0l9 -9l9 9l-2 0"
+        />
+        <path
+          d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+        />
+        <path
+          d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+        />
+      </svg>
+      <p
+        class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+      >
+        place
+      </p>
+    </div>
+  </div>
+</div>
+`;
