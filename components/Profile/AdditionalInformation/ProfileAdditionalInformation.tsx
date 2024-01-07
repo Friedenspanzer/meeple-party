@@ -10,7 +10,7 @@ export interface ProfileAdditionalInformationProps {
 export function ProfileAdditionalInformation({
   bggName,
   place,
-}: ProfileAdditionalInformationProps) {
+}: Readonly<ProfileAdditionalInformationProps>) {
   const theme = useMantineTheme();
   return (
     <Flex wrap="wrap" gap="md" justify="center">

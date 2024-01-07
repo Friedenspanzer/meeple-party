@@ -7,7 +7,7 @@ export default function IconBoardGameGeek({
   height = 24,
   color = "#FF5100",
   paddingInline = "0.25rem",
-}: IconBoardGameGeekProps) {
+}: Readonly<IconBoardGameGeekProps>) {
   return (
     <svg
       height={height}

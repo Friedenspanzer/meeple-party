@@ -1,7 +1,6 @@
 "use client";
 
 import { UserProfile } from "@/datatypes/userProfile";
-import { useTranslation } from "@/i18n/client";
 import { MantineTheme, Stack } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
@@ -14,7 +13,6 @@ export interface UserCardProps {
 }
 
 export default function UserCard({ user }: Readonly<UserCardProps>) {
-  const { t } = useTranslation("profile");
   return (
     <Stack
       p="md"

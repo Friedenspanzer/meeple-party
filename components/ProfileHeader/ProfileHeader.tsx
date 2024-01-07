@@ -69,7 +69,6 @@ function AvatarBlock({ user, myself, friend }: Readonly<ProfileHeaderProps>) {
 }
 
 function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
-  const { t } = useTranslation("profile");
   return (
     <>
       <ProfileUsername>{user.name}</ProfileUsername>
