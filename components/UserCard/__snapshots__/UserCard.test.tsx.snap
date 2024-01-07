@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile header matches snapshot for full user details 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <style
+    data-mantine-styles="inline"
+  >
+    .__m__-r0{width:95vw;}@media(min-width: 62em){.__m__-r0{width:calc(18.75rem * var(--mantine-scale));}}
+  </style>
+  <div
+    class="m-6d731127 mantine-Stack-root __m__-r0"
+    style="--stack-gap: var(--mantine-spacing-sm); --stack-align: center; --stack-justify: flex-start; background-color: rgb(165, 216, 255);"
+  >
+    <div
+      class="dummy"
+      style="background-color: rgb(50, 82, 71);"
+    >
+      F
+    </div>
+    <div
+      class="m-347db0ec mantine-Badge-root"
+      style="--badge-radius: var(--mantine-radius-sm); --badge-bg: murple; --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
+    >
+      <span
+        class="m-91fdda9b mantine-Badge-section"
+        data-position="left"
+      >
+        <svg
+          class="tabler-icon tabler-icon-code-circle-2"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.5 13.5l-1.5 -1.5l1.5 -1.5"
+          />
+          <path
+            d="M15.5 10.5l1.5 1.5l-1.5 1.5"
+          />
+          <path
+            d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"
+          />
+          <path
+            d="M13 9.5l-2 5.5"
+          />
+        </svg>
+      </span>
+      <span
+        class="m-5add502a mantine-Badge-label"
+      >
+        Badges.Admin
+      </span>
+    </div>
+    <h2
+      class="m-8a5d1357 mantine-Title-root"
+      data-order="2"
+      style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
+    >
+      Frdnspnzr
+    </h2>
+    <div
+      class="m-8bffd616 mantine-Flex-root __m__-r3"
+      style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
+    >
+      <div
+        class="m-4081bf90 mantine-Group-root"
+        style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+      >
+        <svg
+          class="tabler-icon tabler-icon-home"
+          fill="none"
+          height="calc(1rem * var(--mantine-scale))"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="calc(1rem * var(--mantine-scale))"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5 12l-2 0l9 -9l9 9l-2 0"
+          />
+          <path
+            d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+          />
+          <path
+            d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+          />
+        </svg>
+        <p
+          class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+        >
+          Kaiserslautern
+        </p>
+      </div>
+      <div
+        class="m-4081bf90 mantine-Group-root"
+        style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+      >
+        <svg
+          height="calc(1rem * var(--mantine-scale))"
+          style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+          version="1.1"
+          viewBox="0 0 1607 2400"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+            fill="#FF5100"
+            style="fill-rule: nonzero;"
+          />
+        </svg>
+        <p
+          class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+        >
+          Friedenspanzer
+        </p>
+      </div>
+    </div>
+    <p
+      class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+      style="font-weight: 200;"
+    >
+      Header.Place
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Profile header matches snapshot for minimal user details 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <style
+    data-mantine-styles="inline"
+  >
+    .__m__-ra{width:95vw;}@media(min-width: 62em){.__m__-ra{width:calc(18.75rem * var(--mantine-scale));}}
+  </style>
+  <div
+    class="m-6d731127 mantine-Stack-root __m__-ra"
+    style="--stack-gap: var(--mantine-spacing-sm); --stack-align: center; --stack-justify: flex-start; background-color: rgb(165, 216, 255);"
+  >
+    <div
+      class="dummy"
+      style="background-color: rgb(50, 82, 71);"
+    >
+      F
+    </div>
+    <div
+      class="m-347db0ec mantine-Badge-root"
+      style="--badge-radius: var(--mantine-radius-sm); --badge-bg: darkgray; --badge-color: var(--mantine-color-white); --badge-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
+    >
+      <span
+        class="m-91fdda9b mantine-Badge-section"
+        data-position="left"
+      >
+        <svg
+          class="tabler-icon tabler-icon-user"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"
+          />
+          <path
+            d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
+          />
+        </svg>
+      </span>
+      <span
+        class="m-5add502a mantine-Badge-label"
+      >
+        Badges.User
+      </span>
+    </div>
+    <h2
+      class="m-8a5d1357 mantine-Title-root"
+      data-order="2"
+      style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
+    >
+      Frdnspnzr
+    </h2>
+    <div
+      class="m-8bffd616 mantine-Flex-root __m__-rd"
+      style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
+    />
+  </div>
+</div>
+`;
