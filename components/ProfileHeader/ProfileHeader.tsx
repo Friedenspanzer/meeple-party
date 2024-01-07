@@ -3,15 +3,15 @@
 import { UserProfile } from "@/datatypes/userProfile";
 import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
-import { Group, MantineTheme, Stack, Text } from "@mantine/core";
+import { Group, MantineTheme, Stack } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
 import LinkButton from "../LinkButton/LinkButton";
+import { ProfileAdditionalInformation } from "../Profile/AdditionalInformation/ProfileAdditionalInformation";
 import ProfileRealName from "../Profile/RealName/ProfileRealName";
 import ProfileUsername from "../Profile/Username/ProfileUsername";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 import ShareProfile from "../ShareProfile/ShareProfile";
-import styles from "./ProfileHeader.module.css";
 
 export interface ProfileHeaderProps {
   user: UserProfile;
@@ -74,11 +74,10 @@ function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
     <>
       <ProfileUsername>{user.name}</ProfileUsername>
       {user.realName && <ProfileRealName>{user.realName}</ProfileRealName>}
-      {user.bggName && (
-        <Text className={styles.subline}>
-          {t("Header.BggName", { name: user.bggName })}
-        </Text>
-      )}
+      <ProfileAdditionalInformation
+        place={user.place || undefined}
+        bggName={user.bggName || undefined}
+      />
     </>
   );
 }

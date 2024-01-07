@@ -9,7 +9,7 @@ exports[`Profile additional information matches snapshot 1`] = `
   </style>
   <div
     class="m-8bffd616 mantine-Flex-root __m__-r0"
-    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+    style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -79,7 +79,7 @@ exports[`Profile additional information matches snapshot with no parameters 1`] 
   </style>
   <div
     class="m-8bffd616 mantine-Flex-root __m__-re"
-    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+    style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
   />
 </div>
 `;
@@ -93,7 +93,7 @@ exports[`Profile additional information matches snapshot with only bgg name 1`] 
   </style>
   <div
     class="m-8bffd616 mantine-Flex-root __m__-r6"
-    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+    style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -131,7 +131,7 @@ exports[`Profile additional information matches snapshot with only place 1`] = `
   </style>
   <div
     class="m-8bffd616 mantine-Flex-root __m__-ra"
-    style="gap: var(--mantine-spacing-md); flex-wrap: wrap;"
+    style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
   >
     <div
       class="m-4081bf90 mantine-Group-root"

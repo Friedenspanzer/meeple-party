@@ -13,7 +13,7 @@ export function ProfileAdditionalInformation({
 }: ProfileAdditionalInformationProps) {
   const theme = useMantineTheme();
   return (
-    <Flex wrap="wrap" gap="md">
+    <Flex wrap="wrap" gap="md" justify="center">
       {place && (
         <Group gap="xs">
           <IconHome size={theme.fontSizes.md} />
