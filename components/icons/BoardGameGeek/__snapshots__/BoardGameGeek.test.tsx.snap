@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoardGameGeek Icon matches snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <svg
+    height="24"
+    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+    version="1.1"
+    viewBox="0 0 1607 2400"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+      fill="#FF5100"
+      style="fill-rule: nonzero;"
+    />
+  </svg>
+</div>
+`;
+
+exports[`BoardGameGeek Icon matches snapshot with all parameters 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <svg
+    height="123"
+    style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 2rem;"
+    version="1.1"
+    viewBox="0 0 1607 2400"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+      fill="#c80815"
+      style="fill-rule: nonzero;"
+    />
+  </svg>
+</div>
+`;
