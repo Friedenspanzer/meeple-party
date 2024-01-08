@@ -24,5 +24,10 @@
     "Header": "Profil vervollständigen",
     "RealName": "Echter Name (optional)",
     "RealNameExplanation": "Wird nur deinen Freund*innen angezeigt"
+  },
+  "Public": {
+    "IsOn": "ist auf",
+    "CallToAction": "Logge dich ein oder registriere dich um das vollständige Profil zu sehen oder erfahre um was es hier eigentlich geht!",
+    "KnowMore": "Erfahre mehr"
   }
 }

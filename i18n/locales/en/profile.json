@@ -24,5 +24,10 @@
     "RealName": "Real name (optional)",
     "RealNameExplanation": "Only shown to your friends",
     "EmailAddress": "E-Mail address"
+  },
+  "Public": {
+    "IsOn": "is on",
+    "CallToAction": "Log in or register now to see their whole profile or see what this is all about!",
+    "KnowMore": "Find out more"
   }
 }
