@@ -1,9 +1,10 @@
 import Login from "@/app/components/Login/Login";
+import Logo from "@/components/Logo/Logo";
+import { getTranslation } from "@/i18n";
 import classNames from "classnames";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import styles from "./page.module.css";
-import { getTranslation } from "@/i18n";
 
 export default async function Home() {
   const { t } = await getTranslation("frontpage");
@@ -12,13 +13,7 @@ export default async function Home() {
       <div className={classNames("container-fluid", styles.highlight)}>
         <div className="row align-items-center g-5 p-5">
           <div className="col-md-3">
-            <Image
-              src="/logo.svg"
-              width={400}
-              height={300}
-              alt="Meeple Party"
-              className={styles.image}
-            />
+            <Logo size="lg" />
           </div>
           <div className="col-md-6">
             <h1 className="display-1">Meeple Party</h1>
