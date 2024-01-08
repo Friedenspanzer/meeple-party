@@ -1,4 +1,4 @@
-import Login from "@/app/components/Login/Login";
+import Login from "@/components/Auth/Login/Login";
 import Logo from "@/components/Logo/Logo";
 import { getTranslation } from "@/i18n";
 import classNames from "classnames";
