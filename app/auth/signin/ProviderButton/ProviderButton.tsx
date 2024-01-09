@@ -2,6 +2,7 @@
 
 import classNames from "classnames";
 import { ClientSafeProvider, signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import styles from "./providerbutton.module.css";
 
@@ -10,9 +11,10 @@ interface ProviderButtonProps {
 }
 
 const ProviderButton: React.FC<ProviderButtonProps> = ({ provider }) => {
+  const callbackUrl = useCallbackUrl();
   const login = useCallback(() => {
-    signIn(provider.id).catch((error) => console.error(error));
-  }, [provider]);
+    signIn(provider.id, { callbackUrl }).catch((error) => console.error(error));
+  }, [provider, callbackUrl]);
 
   return (
     <div className="row mb-2 justify-content-center">
@@ -50,5 +52,14 @@ function getIcon(id: string) {
       return <i className="bi bi-twitch"></i>;
     default:
       return <></>;
+  }
+}
+
+function useCallbackUrl() {
+  const params = useSearchParams();
+  if (!params?.has("callbackUrl") || !params.get("callbackUrl")) {
+    return undefined;
+  } else {
+    return params.get("callbackUrl") || "";
   }
 }

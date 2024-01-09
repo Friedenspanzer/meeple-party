@@ -1,0 +1,11 @@
+{
+  "Heading": "Seite nicht gefunden",
+  "Explanation": "Wir haben die ganzen Regeln abgesucht, aber konnten nicht entscheiden wie wir hier weitermachen sollten. Das ist was passiert sein könnte:",
+  "NotLoggedIn": {
+    "Start": "Du bist nicht eingeloggt und versuchst eine eingeschränkte Seite zu betrachten. Das Problem kannst du lösen indem du ",
+    "Link": "zur Login-Seite gehst",
+    "End": " und dich in deinen Account einloggst oder einen neuen erstellst."
+  },
+  "InvalidLink": "Jemand hat dir einen ungültigen Link geschickt. Sag ihnen das ist gegen die Regeln!",
+  "Broken": "Es ist was kaputt. Bitte lass uns das wissen; weiter unten findest du einige Wege uns zu erreichen."
+}

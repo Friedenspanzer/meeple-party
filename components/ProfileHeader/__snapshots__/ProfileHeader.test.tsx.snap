@@ -9,7 +9,7 @@ exports[`Profile header matches snapshot for friend profile 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -102,24 +102,79 @@ exports[`Profile header matches snapshot for friend profile 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
         <h3
-          class="realName m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
         >
           Pascal Greilach
         </h3>
-        <p
-          class="mantine-focus-auto subline m-b6d8b162 mantine-Text-root"
+        <div
+          class="m-8bffd616 mantine-Flex-root __m__-rt"
+          style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
         >
-          Header.BggName
-        </p>
+          <div
+            class="m-4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+          >
+            <svg
+              class="tabler-icon tabler-icon-home"
+              fill="none"
+              height="calc(1rem * var(--mantine-scale))"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="calc(1rem * var(--mantine-scale))"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12l-2 0l9 -9l9 9l-2 0"
+              />
+              <path
+                d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+              />
+              <path
+                d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+              />
+            </svg>
+            <p
+              class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+            >
+              Kaiserslautern
+            </p>
+          </div>
+          <div
+            class="m-4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+          >
+            <svg
+              height="calc(1rem * var(--mantine-scale))"
+              style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+              version="1.1"
+              viewBox="0 0 1607 2400"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+                fill="#FF5100"
+                style="fill-rule: nonzero;"
+              />
+            </svg>
+            <p
+              class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+            >
+              Friedenspanzer
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -135,7 +190,7 @@ exports[`Profile header matches snapshot for full user details 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -197,24 +252,79 @@ exports[`Profile header matches snapshot for full user details 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
         <h3
-          class="realName m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
         >
           Pascal Greilach
         </h3>
-        <p
-          class="mantine-focus-auto subline m-b6d8b162 mantine-Text-root"
+        <div
+          class="m-8bffd616 mantine-Flex-root __m__-r7"
+          style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
         >
-          Header.BggName
-        </p>
+          <div
+            class="m-4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+          >
+            <svg
+              class="tabler-icon tabler-icon-home"
+              fill="none"
+              height="calc(1rem * var(--mantine-scale))"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="calc(1rem * var(--mantine-scale))"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12l-2 0l9 -9l9 9l-2 0"
+              />
+              <path
+                d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+              />
+              <path
+                d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+              />
+            </svg>
+            <p
+              class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+            >
+              Kaiserslautern
+            </p>
+          </div>
+          <div
+            class="m-4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+          >
+            <svg
+              height="calc(1rem * var(--mantine-scale))"
+              style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+              version="1.1"
+              viewBox="0 0 1607 2400"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+                fill="#FF5100"
+                style="fill-rule: nonzero;"
+              />
+            </svg>
+            <p
+              class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+            >
+              Friedenspanzer
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -230,7 +340,7 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -286,22 +396,16 @@ exports[`Profile header matches snapshot for minimal user details 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
-        <h3
-          class="realName m-8a5d1357 mantine-Title-root"
-          data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+        <div
+          class="m-8bffd616 mantine-Flex-root __m__-rj"
+          style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
         />
-        <p
-          class="mantine-focus-auto subline m-b6d8b162 mantine-Text-root"
-        >
-          Header.BggName
-        </p>
       </div>
     </div>
   </div>
@@ -317,7 +421,7 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
   </style>
   <div
     class="m-6d731127 mantine-Stack-root"
-    style="--stack-gap: var(--mantine-spacing-md); --stack-align: center; --stack-justify: flex-start;"
+    style="--stack-gap: var(--mantine-spacing-md); --stack-align: center; --stack-justify: flex-start; background-color: rgb(165, 216, 255);"
   >
     <div
       class="dummy"
@@ -366,24 +470,79 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
       </span>
     </div>
     <h2
-      class="name m-8a5d1357 mantine-Title-root"
+      class="m-8a5d1357 mantine-Title-root"
       data-order="2"
-      style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+      style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
     >
       Frdnspnzr
     </h2>
     <h3
-      class="realName m-8a5d1357 mantine-Title-root"
+      class="m-8a5d1357 mantine-Title-root"
       data-order="3"
-      style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+      style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
     >
       Pascal Greilach
     </h3>
-    <p
-      class="mantine-focus-auto subline m-b6d8b162 mantine-Text-root"
+    <div
+      class="m-8bffd616 mantine-Flex-root __m__-r22"
+      style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
     >
-      Header.BggName
-    </p>
+      <div
+        class="m-4081bf90 mantine-Group-root"
+        style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+      >
+        <svg
+          class="tabler-icon tabler-icon-home"
+          fill="none"
+          height="calc(1rem * var(--mantine-scale))"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="calc(1rem * var(--mantine-scale))"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5 12l-2 0l9 -9l9 9l-2 0"
+          />
+          <path
+            d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+          />
+          <path
+            d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+          />
+        </svg>
+        <p
+          class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+        >
+          Kaiserslautern
+        </p>
+      </div>
+      <div
+        class="m-4081bf90 mantine-Group-root"
+        style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+      >
+        <svg
+          height="calc(1rem * var(--mantine-scale))"
+          style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+          version="1.1"
+          viewBox="0 0 1607 2400"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+            fill="#FF5100"
+            style="fill-rule: nonzero;"
+          />
+        </svg>
+        <p
+          class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+        >
+          Friedenspanzer
+        </p>
+      </div>
+    </div>
     <div
       class="m-4081bf90 mantine-Group-root"
       style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
@@ -445,6 +604,7 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
     <a
       class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
       href="/app/profile/edit"
+      style="--button-color: var(--mantine-color-white);"
     >
       <span
         aria-hidden="true"
@@ -478,7 +638,7 @@ exports[`Profile header matches snapshot for own profile 1`] = `
   </style>
   <div
     class="m-4081bf90 mantine-Group-root"
-    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap;"
+    style="--group-gap: var(--mantine-spacing-md); --group-align: center; --group-justify: space-between; --group-wrap: wrap; background-color: rgb(165, 216, 255);"
   >
     <div
       class="m-4081bf90 mantine-Group-root"
@@ -568,24 +728,79 @@ exports[`Profile header matches snapshot for own profile 1`] = `
         style="--stack-gap: var(--mantine-spacing-xs); --stack-align: stretch; --stack-justify: flex-start;"
       >
         <h2
-          class="name m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="2"
-          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size);"
+          style="--title-fw: var(--mantine-h2-font-weight); --title-lh: var(--mantine-h2-line-height); --title-fz: var(--mantine-h2-font-size); font-weight: 500;"
         >
           Frdnspnzr
         </h2>
         <h3
-          class="realName m-8a5d1357 mantine-Title-root"
+          class="m-8a5d1357 mantine-Title-root"
           data-order="3"
-          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size);"
+          style="--title-fw: var(--mantine-h3-font-weight); --title-lh: var(--mantine-h3-line-height); --title-fz: var(--mantine-h3-font-size); font-weight: 200;"
         >
           Pascal Greilach
         </h3>
-        <p
-          class="mantine-focus-auto subline m-b6d8b162 mantine-Text-root"
+        <div
+          class="m-8bffd616 mantine-Flex-root __m__-r1b"
+          style="gap: var(--mantine-spacing-md); justify-content: center; flex-wrap: wrap;"
         >
-          Header.BggName
-        </p>
+          <div
+            class="m-4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+          >
+            <svg
+              class="tabler-icon tabler-icon-home"
+              fill="none"
+              height="calc(1rem * var(--mantine-scale))"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="calc(1rem * var(--mantine-scale))"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12l-2 0l9 -9l9 9l-2 0"
+              />
+              <path
+                d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"
+              />
+              <path
+                d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"
+              />
+            </svg>
+            <p
+              class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+            >
+              Kaiserslautern
+            </p>
+          </div>
+          <div
+            class="m-4081bf90 mantine-Group-root"
+            style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
+          >
+            <svg
+              height="calc(1rem * var(--mantine-scale))"
+              style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
+              version="1.1"
+              viewBox="0 0 1607 2400"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M437.589,2400l-434.954,-1038.25l157.57,-145.835l-93.012,-665.215l1477.05,-548.411l-186.941,503.89l224.091,-64.13l-103.065,771.487l128.669,126.583l-280.732,719.587l-888.679,340.29Z"
+                fill="#FF5100"
+                style="fill-rule: nonzero;"
+              />
+            </svg>
+            <p
+              class="mantine-focus-auto m-b6d8b162 mantine-Text-root"
+            >
+              Friedenspanzer
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -653,6 +868,7 @@ exports[`Profile header matches snapshot for own profile 1`] = `
       <a
         class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
         href="/app/profile/edit"
+        style="--button-color: var(--mantine-color-white);"
       >
         <span
           aria-hidden="true"

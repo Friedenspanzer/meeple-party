@@ -3,28 +3,33 @@
 import Spinner from "@/components/Spinner/Spinner";
 import classNames from "classnames";
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import validator from "validator";
 
 const EmailLogin: React.FC = () => {
+  const callbackUrl = useCallbackUrl();
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
 
-  const tryLogin = useCallback((address: string) => {
-    if (validator.isEmail(address)) {
-      setLoading(true);
-      signIn("email", { email: address })
-        .then((result) => {
-          if (!result?.ok) {
-            throw new Error(`Error logging you in: ${result?.error}`);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, []);
+  const tryLogin = useCallback(
+    (address: string) => {
+      if (validator.isEmail(address)) {
+        setLoading(true);
+        signIn("email", { email: address, callbackUrl })
+          .then((result) => {
+            if (!result?.ok) {
+              throw new Error(`Error logging you in: ${result?.error}`);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    },
+    [callbackUrl]
+  );
 
   useEffect(() => {
     setValid(validator.isEmail(address));
@@ -65,3 +70,12 @@ const EmailLogin: React.FC = () => {
 };
 
 export default EmailLogin;
+
+function useCallbackUrl() {
+  const params = useSearchParams();
+  if (!params?.has("callbackUrl") || !params.get("callbackUrl")) {
+    return undefined;
+  } else {
+    return params.get("callbackUrl") || "";
+  }
+}

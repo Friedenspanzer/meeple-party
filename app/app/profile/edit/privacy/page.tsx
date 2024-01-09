@@ -1,3 +1,4 @@
+import HideProfile from "@/components/AutoUpdateToggle/Toggles/HideProfile/HideProfile";
 import PlaceSearchable from "@/components/AutoUpdateToggle/Toggles/PlaceSearchable";
 import SendAnalyticsData from "@/components/AutoUpdateToggle/Toggles/SendAnalyticsData";
 import ShowPlaceInProfile from "@/components/AutoUpdateToggle/Toggles/ShowPlaceInProfile";
@@ -9,7 +10,7 @@ export const metadata = {
 };
 
 export default async function Privacy() {
-  const {t} = await getTranslation("settings");
+  const { t } = await getTranslation("settings");
   return (
     <>
       <div className="row">
@@ -27,6 +28,7 @@ export default async function Privacy() {
         </div>
       </div>
 
+      <HideProfile />
       <PlaceSearchable />
 
       <div className="row">

@@ -1,0 +1,265 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile badge size lg matches snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="300"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=828&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=640&q=75 1x, /_next/image?url=%2Fimg.jpg&w=828&q=75 2x"
+    style="color: transparent; height: 18rem; width: 100%;"
+    width="400"
+  />
+</div>
+`;
+
+exports[`Profile badge size lg matches snapshot with additional class names 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class="test class name"
+    data-nimg="1"
+    decoding="async"
+    height="300"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=828&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=640&q=75 1x, /_next/image?url=%2Fimg.jpg&w=828&q=75 2x"
+    style="color: transparent; height: 18rem; width: 100%;"
+    width="400"
+  />
+</div>
+`;
+
+exports[`Profile badge size lg matches unstyled snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="300"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=828&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=640&q=75 1x, /_next/image?url=%2Fimg.jpg&w=828&q=75 2x"
+    style="color: transparent;"
+    width="400"
+  />
+</div>
+`;
+
+exports[`Profile badge size md matches snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="72"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=256&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=96&q=75 1x, /_next/image?url=%2Fimg.jpg&w=256&q=75 2x"
+    style="color: transparent; height: 6rem; width: 100%;"
+    width="96"
+  />
+</div>
+`;
+
+exports[`Profile badge size md matches snapshot with additional class names 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class="test class name"
+    data-nimg="1"
+    decoding="async"
+    height="72"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=256&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=96&q=75 1x, /_next/image?url=%2Fimg.jpg&w=256&q=75 2x"
+    style="color: transparent; height: 6rem; width: 100%;"
+    width="96"
+  />
+</div>
+`;
+
+exports[`Profile badge size md matches unstyled snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="72"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=256&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=96&q=75 1x, /_next/image?url=%2Fimg.jpg&w=256&q=75 2x"
+    style="color: transparent;"
+    width="96"
+  />
+</div>
+`;
+
+exports[`Profile badge size sm matches snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="18"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+    style="color: transparent; height: 3rem; width: 100%;"
+    width="24"
+  />
+</div>
+`;
+
+exports[`Profile badge size sm matches snapshot with additional class names 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class="test class name"
+    data-nimg="1"
+    decoding="async"
+    height="18"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+    style="color: transparent; height: 3rem; width: 100%;"
+    width="24"
+  />
+</div>
+`;
+
+exports[`Profile badge size sm matches unstyled snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="18"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+    style="color: transparent;"
+    width="24"
+  />
+</div>
+`;
+
+exports[`Profile badge size xs matches snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="12"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=32&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=16&q=75 1x, /_next/image?url=%2Fimg.jpg&w=32&q=75 2x"
+    style="color: transparent; height: 2ex; width: 100%;"
+    width="16"
+  />
+</div>
+`;
+
+exports[`Profile badge size xs matches snapshot with additional class names 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class="test class name"
+    data-nimg="1"
+    decoding="async"
+    height="12"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=32&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=16&q=75 1x, /_next/image?url=%2Fimg.jpg&w=32&q=75 2x"
+    style="color: transparent; height: 2ex; width: 100%;"
+    width="16"
+  />
+</div>
+`;
+
+exports[`Profile badge size xs matches unstyled snapshot 1`] = `
+<div>
+  <style
+    data-mantine-styles="classes"
+  >
+    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
+  </style>
+  <img
+    alt="Meeple Party"
+    class=""
+    data-nimg="1"
+    decoding="async"
+    height="12"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=32&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=16&q=75 1x, /_next/image?url=%2Fimg.jpg&w=32&q=75 2x"
+    style="color: transparent;"
+    width="16"
+  />
+</div>
+`;

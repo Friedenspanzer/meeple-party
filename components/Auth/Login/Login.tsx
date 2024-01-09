@@ -7,6 +7,7 @@ import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Link from "next/link";
 import Spinner from "../../../components/Spinner/Spinner";
+import LoginButton from "../LoginButton/LoginButton";
 import styles from "./login.module.css";
 
 const Login: React.FC = () => {
@@ -28,13 +29,7 @@ const Login: React.FC = () => {
             </a>
           </>
         )}
-        {!loading && !user && (
-          <>
-            <a className="btn btn-primary" href="/api/auth/signin">
-              {t("Login.Register")}
-            </a>
-          </>
-        )}
+        {!loading && !user && <LoginButton />}
         {loading && <Spinner />}
       </div>
     </div>

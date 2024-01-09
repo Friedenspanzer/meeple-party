@@ -30,11 +30,15 @@
     },
     "ShowPlaceInProfile": {
       "Title": "Public place",
-      "Description": "When this flag is set the place you provided is visibile to everybody. When this flag is not set the palce you provided is only visible to your friends. If you don't want that either just don't set a place and ignore this flag."
+      "Description": "When this flag is set the place you provided is visibile to everybody. When this flag is not set the place you provided is only visible to your friends. If you don't want that either just don't set a place and ignore this flag."
     },
     "ShowRealName": {
       "Title": "Public real name",
       "Description": "When this flag is set your real name is visible to everybody. When this flag is not set your real name is only visible to your friends. If you don't want that either just don't set a real name and ignore this flag."
+    },
+    "HideProfile": {
+      "Title": "Hide your profile",
+      "Description": "When this flag is set Meeple Party will not disclose the existence of your profile to users that are not logged in. Anonoymous users will be shown a generic Page not found error when opening your profile. For users that are logged in your profile is shown using your other privacy settings."
     }
   },
   "Delete": {

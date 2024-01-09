@@ -1,7 +1,7 @@
-import styles from "./changelog.module.css";
-import Image from "next/image";
-import Link from "next/link";
+import Logo from "@/components/Logo/Logo";
 import { getTranslation } from "@/i18n";
+import Link from "next/link";
+import styles from "./changelog.module.css";
 
 export const metadata = {
   title: "Changelog",
@@ -17,7 +17,7 @@ export default async function Layout({
     <div className="container mb-5">
       <div className="row align-items-center">
         <div className="col-2">
-          <Image src="/logo.svg" width={100} height={100} alt="Meeple Party" />
+          <Logo size="md" />
         </div>
         <div className="col">
           <h1 className="display-2">{t("Title")}</h1>

@@ -162,7 +162,7 @@ exports[`Share Profile matches snapshot without native sharing after clicking sh
           data-variant="default"
           id="mantine-i"
           style="width: 35ch;"
-          value="undefined/app/profile/abc"
+          value="undefined/profile/abc"
         />
         <div
           class="m-82577fc2 mantine-Input-section mantine-TextInput-section"

@@ -3,13 +3,15 @@
 import { UserProfile } from "@/datatypes/userProfile";
 import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
-import { Group, Stack, Text, Title } from "@mantine/core";
+import { Group, MantineTheme, Stack } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../Avatar/Avatar";
 import LinkButton from "../LinkButton/LinkButton";
+import { ProfileAdditionalInformation } from "../Profile/AdditionalInformation/ProfileAdditionalInformation";
+import ProfileRealName from "../Profile/RealName/ProfileRealName";
+import ProfileUsername from "../Profile/Username/ProfileUsername";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 import ShareProfile from "../ShareProfile/ShareProfile";
-import styles from "./ProfileHeader.module.css";
 
 export interface ProfileHeaderProps {
   user: UserProfile;
@@ -23,9 +25,12 @@ export default function ProfileHeader({
   friend = false,
 }: Readonly<ProfileHeaderProps>) {
   const { isMobile } = useLayout();
+  const containerStyle = (theme: MantineTheme) => ({
+    backgroundColor: theme.colors[theme.primaryColor][2],
+  });
   if (isMobile) {
     return (
-      <Stack align="center">
+      <Stack align="center" style={containerStyle} p="md">
         <AvatarBlock user={user} myself={myself} friend={friend} />
         <NameBlock user={user} />
         <ButtonBlock user={user} />
@@ -33,7 +38,7 @@ export default function ProfileHeader({
     );
   } else {
     return (
-      <Group justify="space-between">
+      <Group justify="space-between" style={containerStyle} p="md">
         <Group gap="xl">
           <Stack gap="xs" align="center">
             <AvatarBlock user={user} myself={myself} friend={friend} />
@@ -64,18 +69,14 @@ function AvatarBlock({ user, myself, friend }: Readonly<ProfileHeaderProps>) {
 }
 
 function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
-  const { t } = useTranslation("profile");
   return (
     <>
-      <Title order={2} className={styles.name}>
-        {user.name}
-      </Title>
-      <Title order={3} className={styles.realName}>
-        {user.realName}
-      </Title>
-      <Text className={styles.subline}>
-        {t("Header.BggName", { name: user.bggName })}
-      </Text>
+      <ProfileUsername>{user.name}</ProfileUsername>
+      {user.realName && <ProfileRealName>{user.realName}</ProfileRealName>}
+      <ProfileAdditionalInformation
+        place={user.place || undefined}
+        bggName={user.bggName || undefined}
+      />
     </>
   );
 }

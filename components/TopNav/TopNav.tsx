@@ -4,11 +4,11 @@ import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import FriendRequestsBadge from "../FriendRequestsBadge/FriendRequestsBadge";
+import Logo from "../Logo/Logo";
 import Person from "../Person/Person";
 import styles from "./topnav.module.css";
 
@@ -32,13 +32,7 @@ export default function TopNav() {
     return (
       <nav className="navbar navbar-expand-md bg-primary-subtle shadow-sm">
         <div className="container-fluid">
-          <Image
-            src="/logo.svg"
-            width={100}
-            height={100}
-            alt="Meeple Party"
-            className="navbar-brand"
-          />
+          <Logo size="md" unstyled className="navbar-brand" />
           <button
             className="navbar-toggler"
             type="button"
