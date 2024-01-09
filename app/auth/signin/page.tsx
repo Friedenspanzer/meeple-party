@@ -1,10 +1,10 @@
+import { getTranslation } from "@/i18n";
 import { getServerSession } from "@/utility/serverSession";
 import { getProviders } from "next-auth/react";
-import { redirect } from "next/navigation";
-import ProviderButton from "./ProviderButton/ProviderButton";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import EmailLogin from "./EmailLogin/EmailLogin";
-import { getTranslation } from "@/i18n";
+import ProviderButton from "./ProviderButton/ProviderButton";
 
 export default async function SignIn() {
   const session = await getServerSession();
