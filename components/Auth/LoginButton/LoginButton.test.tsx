@@ -23,4 +23,8 @@ describe("Link button", () => {
     const { container } = render(<LoginButton />);
     expect(container).toMatchSnapshot();
   });
+  it("matches snapshot with redirect property defined", () => {
+    const { container } = render(<LoginButton redirectUrl="https://example.com/url-to-redirect-to"/>);
+    expect(container).toMatchSnapshot();
+  });
 });

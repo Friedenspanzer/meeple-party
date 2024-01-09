@@ -1,9 +1,20 @@
 "use client";
 
-import LinkButton from "@/components/LinkButton/LinkButton";
 import { useTranslation } from "@/i18n/client";
+import { Button } from "@mantine/core";
+import { signIn } from "next-auth/react";
 
-export default function LoginButton() {
+export interface LoginButtonProps {
+  redirectUrl?: string;
+}
+
+export default function LoginButton({
+  redirectUrl = "/app",
+}: Readonly<LoginButtonProps>) {
   const { t } = useTranslation();
-  return <LinkButton href="/api/auth/signin">{t("Login.Register")}</LinkButton>;
+  return (
+    <Button onClick={() => signIn(undefined, { callbackUrl: redirectUrl })}>
+      {t("Login.Register")}
+    </Button>
+  );
 }

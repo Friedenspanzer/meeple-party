@@ -38,7 +38,7 @@ export default async function PublicUserProfilePage({
         <UserCard user={user} />
         <Text>{t("Public.CallToAction")}</Text>
         <Group>
-          <LoginButton />
+          <LoginButton redirectUrl={`/app/profile/${user.id}`} />
           <LinkButton href="/" variant="light">
             {t("Public.KnowMore")}
           </LinkButton>
