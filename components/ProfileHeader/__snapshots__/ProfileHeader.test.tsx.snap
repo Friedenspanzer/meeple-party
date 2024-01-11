@@ -445,6 +445,7 @@ exports[`Profile header matches snapshot for mobile layout 1`] = `
     <a
       class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
       href="/app/profile/edit"
+      style="--button-color: var(--mantine-color-white);"
     >
       <span
         aria-hidden="true"
@@ -653,6 +654,7 @@ exports[`Profile header matches snapshot for own profile 1`] = `
       <a
         class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
         href="/app/profile/edit"
+        style="--button-color: var(--mantine-color-white);"
       >
         <span
           aria-hidden="true"
