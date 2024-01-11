@@ -1,6 +1,6 @@
 "use client";
 
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/hooks/data/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import classNames from "classnames";

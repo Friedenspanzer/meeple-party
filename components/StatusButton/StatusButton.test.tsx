@@ -1,11 +1,11 @@
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/hooks/data/useCollectionStatus";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { generateBoolean } from "../../utility/test";
 import StatusButton from "./StatusButton";
 
 jest.mock("@/i18n/client");
-jest.mock("@/hooks/api/useCollectionStatus");
+jest.mock("@/hooks/data/useCollectionStatus");
 
 describe("Status Button", () => {
   test.each(["own", "wanttoplay", "wishlist"])(

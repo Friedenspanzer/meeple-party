@@ -8,7 +8,7 @@ import GameSearch, {
 import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
-import { useGameQuery } from "@/hooks/api/useGame";
+import { useGameQuery } from "@/hooks/data/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
 import classNames from "classnames";

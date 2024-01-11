@@ -1,7 +1,7 @@
 "use client";
 
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
-import useRelationship from "@/hooks/api/useRelationship";
+import useRelationship from "@/hooks/data/useRelationship";
 import { useTranslation } from "@/i18n/client";
 import Spinner from "../Spinner/Spinner";
 import GenericFriendRequest from "./GenericFriendRequest";

@@ -1,7 +1,7 @@
 "use client";
 
 import { RelationshipType } from "@/datatypes/relationship";
-import useRelationships from "@/hooks/api/useRelationships";
+import useRelationships from "@/hooks/data/useRelationships";
 import { useEffect, useState } from "react";
 
 const FriendRequestsBadge: React.FC = () => {

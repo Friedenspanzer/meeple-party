@@ -7,7 +7,7 @@ import { useModal } from "@/context/modalContext";
 import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/hooks/data/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";

@@ -1,4 +1,4 @@
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/hooks/data/useCollectionStatus";
 import classNames from "classnames";
 import { useCallback, useMemo } from "react";
 import Spinner from "../Spinner/Spinner";

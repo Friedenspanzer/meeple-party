@@ -1,7 +1,7 @@
 import Avatar from "@/components/Avatar/Avatar";
 import { useModal } from "@/context/modalContext";
 import { Game } from "@/datatypes/game";
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/hooks/data/useCollectionStatus";
 import {
   generateArray,
   generateUserProfile,
@@ -11,7 +11,7 @@ import { StatusByUser } from "../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
 
 jest.mock("@/i18n/client");
-jest.mock("@/hooks/api/useCollectionStatus");
+jest.mock("@/hooks/data/useCollectionStatus");
 jest.mock("@/components/Avatar/Avatar", () => ({
   __esModule: true,
   namedExport: jest.fn(),

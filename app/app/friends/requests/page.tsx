@@ -3,7 +3,7 @@
 import IncomingFriendRequest from "@/components/FriendRequest/IncomingFriendRequest";
 import SentFriendRequest from "@/components/FriendRequest/SentFriendRequest";
 import { RelationshipType } from "@/datatypes/relationship";
-import useRelationships from "@/hooks/api/useRelationships";
+import useRelationships from "@/hooks/data/useRelationships";
 import { useTranslation } from "@/i18n/client";
 
 const FriendRequests: React.FC = () => {

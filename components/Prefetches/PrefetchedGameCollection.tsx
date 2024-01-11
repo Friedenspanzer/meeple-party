@@ -1,4 +1,4 @@
-import { getCollectionStatusQueryKey } from "@/hooks/api/useCollectionStatus";
+import { getCollectionStatusQueryKey } from "@/hooks/data/useCollectionStatus";
 import getQueryClient from "@/utility/queryClient";
 import { GameCollection } from "@prisma/client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
