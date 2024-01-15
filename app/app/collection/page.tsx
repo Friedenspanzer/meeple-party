@@ -31,7 +31,15 @@ export default async function Collection() {
   const games = await fetchGames(gameCollection.map((c) => c.gameId));
 
   return (
-    <PrefetchedGameData data={games}>
+    <PrefetchedGameData
+      data={games.map((g) => ({
+        ...g,
+        thumbnail: g.thumbnail || undefined,
+        image: g.image || undefined,
+        BGGRank: g.BGGRank || undefined,
+        BGGRating: g.BGGRating || undefined,
+      }))}
+    >
       <PrefetchedGameCollection data={gameCollection}>
         <GameCollection
           games={gameCollection.map(

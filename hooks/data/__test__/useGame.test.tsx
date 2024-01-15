@@ -1,7 +1,6 @@
-import { Game } from "@/datatypes/client/game";
+import { convertGame } from "@/datatypes/client/game";
 import { getGame } from "@/lib/data/getGame";
 import { generateGame, generateNumber, render } from "@/utility/test";
-import { Game as PrismaGame } from "@prisma/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@testing-library/jest-dom";
 import { screen, waitFor } from "@testing-library/react";
@@ -60,7 +59,7 @@ describe("useGame hook", () => {
       expect(screen.getByTestId("isLoading").innerHTML).toBe("false")
     );
     const actualGame = JSON.parse(screen.getByTestId("data").innerHTML);
-    expect(actualGame).toEqual(cleanGame(game));
+    expect(actualGame).toEqual(convertGame(game));
   });
   it("returns isLoading during load", async () => {
     const queryClient = new QueryClient();
@@ -85,7 +84,7 @@ describe("useGame hook", () => {
 
     const gameId = generateNumber();
     const serverGame = generateGame(gameId);
-    const cachedGame = cleanGame(generateGame(gameId));
+    const cachedGame = convertGame(generateGame(gameId));
     const getQueryKey = useGameQueryKey();
 
     const getGameMock = jest.mocked(getGame);
@@ -126,22 +125,6 @@ describe("useGame hook", () => {
       expect(screen.getByTestId("isLoading").innerHTML).toBe("false")
     );
     const cachedGame = queryClient.getQueryData(getQueryKey(gameId));
-    expect(cachedGame).toEqual(cleanGame(serverGame));
+    expect(cachedGame).toEqual(convertGame(serverGame));
   });
 });
-
-function cleanGame(game: PrismaGame): Game {
-  return {
-    id: game.id,
-    maxPlayers: game.maxPlayers,
-    minPlayers: game.minPlayers,
-    name: game.name,
-    playingTime: game.playingTime,
-    weight: game.weight,
-    year: game.year,
-    BGGRank: game.BGGRank || undefined,
-    BGGRating: game.BGGRating || undefined,
-    image: game.image || undefined,
-    thumbnail: game.thumbnail || undefined,
-  };
-}

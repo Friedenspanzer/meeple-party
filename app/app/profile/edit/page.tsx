@@ -7,7 +7,7 @@ import GameSearch, {
 } from "@/components/GameSearch/GameSearch";
 import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import Spinner from "@/components/Spinner/Spinner";
-import { Game } from "@/datatypes/game";
+import { Game } from "@/datatypes/client/game";
 import { useGameQuery } from "@/hooks/data/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
@@ -272,15 +272,11 @@ const EditProfile: React.FC = () => {
                       onClick={(_) =>
                         setFavorites(favorites.filter((g) => g.id !== f.id))
                       }
-                      onKeyDown={
-                        (event) => {
-                          if (event.key === "Delete") {
-                            setFavorites(
-                              favorites.filter((g) => g.id !== f.id)
-                            );
-                          }
+                      onKeyDown={(event) => {
+                        if (event.key === "Delete") {
+                          setFavorites(favorites.filter((g) => g.id !== f.id));
                         }
-                      }
+                      }}
                     ></i>
                   </GamePill>
                 ))}
@@ -347,7 +343,17 @@ function bindFavoriteGameResult(
     searchResult,
   }) => {
     return (
-      <PrefetchedGameData data={searchResult.map((c) => c.game)}>
+      <PrefetchedGameData
+        data={searchResult
+          .map((c) => c.game)
+          .map((g) => ({
+            ...g,
+            thumbnail: g.thumbnail || undefined,
+            image: g.image || undefined,
+            BGGRank: g.BGGRank || undefined,
+            BGGRating: g.BGGRating || undefined,
+          }))}
+      >
         {searchResult.map(({ game }) => (
           <GamePill gameId={game.id} key={game.id}>
             &nbsp;

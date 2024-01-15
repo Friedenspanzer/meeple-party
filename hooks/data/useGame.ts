@@ -1,6 +1,5 @@
-import { Game } from "@/datatypes/client/game";
+import { Game, convertGame } from "@/datatypes/client/game";
 import { getGame } from "@/lib/data/getGame";
-import { Game as ServerGame } from "@prisma/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Result } from "./types";
 
@@ -11,7 +10,7 @@ export default function useGame(gameId: number): Result<Game> {
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey: queryKey(gameId),
-    queryFn: async () => convertServerResult(await getGame(gameId)),
+    queryFn: async () => convertGame(await getGame(gameId)),
     refetchOnWindowFocus: false,
     staleTime: twoWeeksInMilliSeconds,
   });
@@ -35,7 +34,7 @@ export function useGameQuery(): (gameId: number) => Promise<Game> {
       return Promise.resolve(cached);
     }
     return getGame(gameId)
-      .then(convertServerResult)
+      .then(convertGame)
       .then((game) => {
         queryClient.setQueryData(getKey(gameId), game);
         return game;
@@ -45,20 +44,4 @@ export function useGameQuery(): (gameId: number) => Promise<Game> {
 
 export function useGameQueryKey(): (gameId: number) => any[] {
   return (gameId) => ["game", gameId];
-}
-
-function convertServerResult(result: ServerGame): Game {
-  return {
-    id: result.id,
-    maxPlayers: result.maxPlayers,
-    minPlayers: result.minPlayers,
-    name: result.name,
-    playingTime: result.playingTime,
-    weight: result.weight,
-    year: result.year,
-    BGGRank: result.BGGRank || undefined,
-    BGGRating: result.BGGRating || undefined,
-    image: result.image || undefined,
-    thumbnail: result.thumbnail || undefined,
-  };
 }
