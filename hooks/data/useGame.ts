@@ -1,37 +1,25 @@
-import { GameGetResult } from "@/app/api/v2/game/[gameId]/route";
 import { Game } from "@/datatypes/client/game";
+import { getGame } from "@/lib/data/getGame";
 import { Game as ServerGame } from "@prisma/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useMemo } from "react";
 import { Result } from "./types";
 
 const twoWeeksInMilliSeconds = 1000 * 60 * 60 * 24 * 14;
-
-function getGame(gameId: number): Promise<ServerGame> {
-  return axios
-    .get<GameGetResult>(`/api/v2/game/${gameId}`)
-    .then((response) => response.data.game);
-}
 
 export default function useGame(gameId: number): Result<Game> {
   const queryKey = useGameQueryKey();
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey: queryKey(gameId),
-    queryFn: () => getGame(gameId),
+    queryFn: async () => convertServerResult(await getGame(gameId)),
     refetchOnWindowFocus: false,
     staleTime: twoWeeksInMilliSeconds,
   });
-  const convertedData = useMemo(
-    () => (data ? convertServerResult(data) : undefined),
-    [data]
-  );
 
   return {
     isLoading,
     isError,
-    data: convertedData,
+    data,
     invalidate: () => {
       queryClient.invalidateQueries({ queryKey: queryKey(gameId) });
     },
