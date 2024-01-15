@@ -1,7 +1,7 @@
 "use client";
 
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
@@ -14,7 +14,7 @@ import styles from "./topnav.module.css";
 
 export default function TopNav() {
   const pathname = usePathname();
-  const { userProfile } = useUserProfile();
+  const { userProfile } = useMyUserProfile();
   const router = useRouter();
   const { t } = useTranslation();
 

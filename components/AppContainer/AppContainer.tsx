@@ -1,7 +1,7 @@
 "use client";
 
 import ModalProvider from "@/context/modalContext";
-import useUserProfile from "@/hooks/useUserProfile";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import classNames from "classnames";
 import TimeAgo from "javascript-time-ago";
@@ -19,7 +19,7 @@ export interface AppContainerProps {
 }
 
 const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
-  const { isLoading, userProfile } = useUserProfile();
+  const { isLoading, userProfile } = useMyUserProfile();
 
   if (isLoading) {
     return (

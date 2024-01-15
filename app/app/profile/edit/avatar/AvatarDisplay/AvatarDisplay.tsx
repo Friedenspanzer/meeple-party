@@ -2,11 +2,11 @@
 
 import Avatar from "@/components/Avatar/Avatar";
 import Spinner from "@/components/Spinner/Spinner";
-import useUserProfile from "@/hooks/useUserProfile";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import { useCallback, useState } from "react";
 
 const AvatarDisplay: React.FC = () => {
-  const { isLoading, userProfile, invalidate } = useUserProfile();
+  const { isLoading, userProfile, invalidate } = useMyUserProfile();
   const [loading, setLoading] = useState(false);
 
   const removeAvatar = useCallback(() => {

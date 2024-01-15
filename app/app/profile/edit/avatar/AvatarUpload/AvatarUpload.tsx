@@ -5,12 +5,12 @@ import {
   AVATAR_ALLOWED_FILE_SIZE,
   AVATAR_ALLOWED_FILE_TYPES,
 } from "@/constants/avatar";
-import useUserProfile from "@/hooks/useUserProfile";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import { useCallback, useId, useState } from "react";
 
 const AvatarUpload: React.FC = () => {
   const fileUploadId = useId();
-  const { invalidate } = useUserProfile();
+  const { invalidate } = useMyUserProfile();
   const [error, setError] = useState<false | string>(false);
   const [progress, setProgress] = useState<"waiting" | "uploading" | "done">(
     "waiting"

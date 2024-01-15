@@ -1,7 +1,7 @@
 "use client";
 
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import axios from "axios";
 import { useState } from "react";
 import { Trans } from "react-i18next";
@@ -12,7 +12,7 @@ type Step = "Button" | "Confirmation" | "Input" | "Deleting";
 const DeleteAccount: React.FC = () => {
   const [step, setStep] = useState<Step>("Button");
   const [confirmation, setConfirmation] = useState("");
-  const { userProfile } = useUserProfile();
+  const { userProfile } = useMyUserProfile();
   const { t } = useTranslation("settings");
 
   const deleteAccount = () => {

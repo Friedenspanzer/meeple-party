@@ -10,7 +10,7 @@ import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/client/game";
 import { useGameQuery } from "@/hooks/data/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
-import useUserProfile from "@/hooks/useUserProfile";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import classNames from "classnames";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -21,7 +21,7 @@ const EditProfile: React.FC = () => {
     userProfile,
     invalidate,
     update: updateUserProfile,
-  } = useUserProfile();
+  } = useMyUserProfile();
   const { preferences, loading: preferencesLoading } = useUserPreferences();
 
   if (!isLoading && !userProfile) {

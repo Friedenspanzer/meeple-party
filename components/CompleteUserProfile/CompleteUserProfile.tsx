@@ -1,13 +1,13 @@
 "use client";
 
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
 
 export default function CompleteUserProfile() {
-  const { isLoading, userProfile, invalidate } = useUserProfile();
+  const { isLoading, userProfile, invalidate } = useMyUserProfile();
 
   const [username, setUserName] = useState("");
   const [realName, setRealName] = useState("");

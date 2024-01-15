@@ -1,8 +1,8 @@
 import Spinner from "@/components/Spinner/Spinner";
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import validator from "validator";
 
 export interface UsernameProps {
@@ -10,7 +10,7 @@ export interface UsernameProps {
 }
 
 const Username: React.FC<UsernameProps> = (props) => {
-  const { isLoading, userProfile, invalidate } = useUserProfile();
+  const { isLoading, userProfile, invalidate } = useMyUserProfile();
 
   if (!isLoading && !userProfile) {
     throw new Error("Username component can only be called with a valid user.");

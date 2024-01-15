@@ -1,39 +1,28 @@
-import { Game } from "@/datatypes/client/game";
-import { User } from "@prisma/client";
+import { getMyUserProfile } from "@/lib/data/getUserProfile";
+import { MyUserProfile } from "@/lib/datatypes/client/userProfile";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useCallback } from "react";
 
-type ExtendedUser = Omit<
-  User & {
-    favorites: Game[];
-  },
-  "preferences"
->;
-
 interface Result {
   isLoading: boolean;
   isError: boolean;
-  userProfile: ExtendedUser | undefined;
+  userProfile: MyUserProfile | undefined;
   invalidate: () => void;
-  update: (user: Partial<ExtendedUser>) => Promise<ExtendedUser>;
+  update: (user: Partial<MyUserProfile>) => Promise<MyUserProfile>;
 }
 
-export default function useUserProfile(): Result {
+export default function useMyUserProfile(): Result {
   const queryKey = ["user"];
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
     queryKey,
-    queryFn: () => {
-      return axios
-        .get<ExtendedUser>("/api/user")
-        .then((response) => response.data);
-    },
+    queryFn: getMyUserProfile,
   });
 
   const update = useCallback(
-    (user: Partial<ExtendedUser>) => {
-      const newData = { ...data, ...user } as ExtendedUser;
+    (user: Partial<MyUserProfile>) => {
+      const newData = { ...data, ...user } as MyUserProfile;
       return axios
         .patch("/api/user", {
           ...newData,
