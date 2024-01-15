@@ -1,5 +1,5 @@
-import { convertGame } from "@/datatypes/client/game";
 import { getGame } from "@/lib/data/getGame";
+import { convertGame } from "@/lib/datatypes/client/game";
 import { generateGame, generateNumber, render } from "@/utility/test";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@testing-library/jest-dom";

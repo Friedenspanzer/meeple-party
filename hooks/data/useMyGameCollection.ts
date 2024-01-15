@@ -1,11 +1,11 @@
 import { GameCollectionResult } from "@/app/api/v2/user/[userId]/collection/route";
 import { useUser } from "@/context/userContext";
 import { Game } from "@/datatypes/game";
+import { useGameQueryKey } from "@/lib/hooks/data/useGame";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useMemo } from "react";
 import { Result } from "./types";
-import { useGameQueryKey } from "./useGame";
 
 interface MyGameCollection {
   gameId: number;

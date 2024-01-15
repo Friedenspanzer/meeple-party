@@ -1,4 +1,4 @@
-import { Game } from "@/datatypes/client/game";
+import { Game } from "@/lib/datatypes/client/game";
 import getQueryClient from "@/utility/queryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";

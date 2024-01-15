@@ -1,4 +1,4 @@
-import { Game } from "@/datatypes/client/game";
+import { Game } from "@/lib/datatypes/client/game";
 
 export enum UserRole {
   USER,

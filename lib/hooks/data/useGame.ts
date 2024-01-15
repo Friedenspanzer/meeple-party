@@ -1,7 +1,7 @@
-import { Game, convertGame } from "@/datatypes/client/game";
 import { getGame } from "@/lib/data/getGame";
+import { Game, convertGame } from "@/lib/datatypes/client/game";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Result } from "./types";
+import { Result } from "../../../hooks/data/types";
 
 const twoWeeksInMilliSeconds = 1000 * 60 * 60 * 24 * 14;
 

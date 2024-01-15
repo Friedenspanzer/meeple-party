@@ -7,9 +7,9 @@ import GameSearch, {
 } from "@/components/GameSearch/GameSearch";
 import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import Spinner from "@/components/Spinner/Spinner";
-import { Game } from "@/datatypes/client/game";
-import { useGameQuery } from "@/hooks/data/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { Game } from "@/lib/datatypes/client/game";
+import { useGameQuery } from "@/lib/hooks/data/useGame";
 import useMyUserProfile from "@/lib/hooks/data/useMyUserProfile";
 import classNames from "classnames";
 import Link from "next/link";
