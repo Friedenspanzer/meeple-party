@@ -1,7 +1,11 @@
 import { FullPrismaRelationship } from "@/app/api/v2/utility";
 import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { Game } from "@/lib/datatypes/client/game";
-import { UserProfile, UserRole } from "@/lib/datatypes/client/userProfile";
+import {
+  MyUserProfile,
+  UserProfile,
+  UserRole,
+} from "@/lib/datatypes/client/userProfile";
 import { MantineProvider } from "@mantine/core";
 import {
   GameCollection,
@@ -72,6 +76,14 @@ export function generateUserProfile(): UserProfile {
     realName: generateString(25),
     role: getRandomEnumValue(UserRole),
     favorites: generateArray(generateGame),
+  };
+}
+
+export function generateMyUserProfile(): MyUserProfile {
+  return {
+    ...generateUserProfile(),
+    email: generateString(),
+    profileComplete: true,
   };
 }
 

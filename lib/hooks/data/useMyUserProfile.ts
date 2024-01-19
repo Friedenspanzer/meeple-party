@@ -1,4 +1,4 @@
-import { getMyUserProfile } from "@/lib/data/getUserProfile";
+import { getMyUserProfile } from "@/lib/dataAccess/userProfile";
 import { MyUserProfile } from "@/lib/datatypes/client/userProfile";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -12,12 +12,15 @@ interface Result {
   update: (user: Partial<MyUserProfile>) => Promise<MyUserProfile>;
 }
 
+export const MY_USER_PROFILE_QUERY_KEY = ["user"];
+
 export default function useMyUserProfile(): Result {
-  const queryKey = ["user"];
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
-    queryKey,
+    queryKey: MY_USER_PROFILE_QUERY_KEY,
     queryFn: getMyUserProfile,
+    refetchOnWindowFocus: true,
+    staleTime: Infinity,
   });
 
   const update = useCallback(
@@ -42,7 +45,8 @@ export default function useMyUserProfile(): Result {
     isLoading,
     isError,
     userProfile: data,
-    invalidate: () => queryClient.invalidateQueries({ queryKey }),
+    invalidate: () =>
+      queryClient.invalidateQueries({ queryKey: MY_USER_PROFILE_QUERY_KEY }),
     update,
   };
 }
