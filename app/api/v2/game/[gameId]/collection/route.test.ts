@@ -5,8 +5,8 @@ import { prismaMock } from "@/utility/prismaMock";
 import {
   generateBoolean,
   generateCollectionEntry,
-  generateGame,
   generateNumber,
+  generatePrismaGame,
   generatePrismaUser,
   generateString,
   getRandomEntry,
@@ -136,7 +136,7 @@ describe("PATCH game/[gameId]/collection", () => {
         })
       )
       .mockResolvedValue(returnedCollection);
-    prismaMock.game.findUnique.mockResolvedValue(generateGame(gameId));
+    prismaMock.game.findUnique.mockResolvedValue(generatePrismaGame(gameId));
 
     requestMock.json.mockResolvedValue(sentCollectionData);
     const result = await PATCH(requestMock, {
@@ -192,7 +192,7 @@ describe("PATCH game/[gameId]/collection", () => {
         })
       )
       .mockResolvedValue(returnedCollection);
-    prismaMock.game.findUnique.mockResolvedValue(generateGame(gameId));
+    prismaMock.game.findUnique.mockResolvedValue(generatePrismaGame(gameId));
 
     requestMock.json.mockResolvedValue(sentCollectionData);
     const result = await PATCH(requestMock, {
@@ -225,7 +225,7 @@ describe("PATCH game/[gameId]/collection", () => {
         })
       )
       .mockResolvedValue(returnedCollection);
-    prismaMock.game.findUnique.mockResolvedValue(generateGame(gameId));
+    prismaMock.game.findUnique.mockResolvedValue(generatePrismaGame(gameId));
 
     requestMock.json.mockResolvedValue(sentCollectionData);
     const result = await PATCH(requestMock, {
@@ -250,7 +250,7 @@ describe("PATCH game/[gameId]/collection", () => {
       sentCollectionData[generateString()] = generateBoolean();
     }
 
-    prismaMock.game.findUnique.mockResolvedValue(generateGame(gameId));
+    prismaMock.game.findUnique.mockResolvedValue(generatePrismaGame(gameId));
 
     const result = await PATCH(requestMock, {
       params: { gameId: gameId.toString() },

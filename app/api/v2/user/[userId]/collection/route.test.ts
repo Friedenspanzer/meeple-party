@@ -6,8 +6,8 @@ import {
   generateArray,
   generateBoolean,
   generateCollectionEntry,
-  generateGame,
   generateNumber,
+  generatePrismaGame,
   generatePrismaUser,
   generateString,
   objectMatcher,
@@ -74,7 +74,7 @@ describe("GET game/[gameId]/collection", () => {
       generateCollectionEntry(myUser.id, generateNumber())
     ).map((c) => ({
       ...c,
-      game: generateGame(c.gameId),
+      game: generatePrismaGame(c.gameId),
     }));
     const actualResult: UserWithCollectionAndRelationships = {
       ...user,
@@ -109,7 +109,7 @@ describe("GET game/[gameId]/collection", () => {
       generateCollectionEntry(myUser.id, generateNumber())
     ).map((c) => ({
       ...c,
-      game: generateGame(c.gameId),
+      game: generatePrismaGame(c.gameId),
     }));
     const queryResult: UserWithCollectionAndRelationships = {
       ...myUser,
@@ -157,7 +157,7 @@ describe("GET game/[gameId]/collection", () => {
       generateCollectionEntry(myUser.id, generateNumber())
     ).map((c) => ({
       ...c,
-      game: generateGame(c.gameId),
+      game: generatePrismaGame(c.gameId),
     }));
     const queryResult: UserWithCollectionAndRelationships = {
       ...user,

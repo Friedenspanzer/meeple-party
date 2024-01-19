@@ -1,9 +1,11 @@
 import { FullPrismaRelationship } from "@/app/api/v2/utility";
-import { UserProfile, defaultUserPreferences } from "@/datatypes/userProfile";
+import { defaultUserPreferences } from "@/datatypes/userProfile";
+import { Game } from "@/lib/datatypes/client/game";
+import { UserProfile, UserRole } from "@/lib/datatypes/client/userProfile";
 import { MantineProvider } from "@mantine/core";
 import {
-  Game,
   GameCollection,
+  Game as PrismaGame,
   RelationshipType,
   Role,
   User,
@@ -44,7 +46,14 @@ export function generateArray<T>(generator: () => T, length = 10): T[] {
 
 export function generatePrismaUser(): User {
   return {
-    ...generateUserProfile(),
+    id: generateString(25),
+    name: generateString(25),
+    about: generateString(1000),
+    bggName: generateString(15),
+    image: generateString(50),
+    place: generateString(15),
+    realName: generateString(25),
+    role: getRandomEnumValue(Role),
     email: generateString(25),
     profileComplete: true,
     emailVerified: generateDate(),
@@ -61,11 +70,12 @@ export function generateUserProfile(): UserProfile {
     image: generateString(50),
     place: generateString(15),
     realName: generateString(25),
-    role: Role.USER,
+    role: getRandomEnumValue(UserRole),
+    favorites: generateArray(generateGame),
   };
 }
 
-export function getUserProfile(index: number): UserProfile {
+export function getStaticUserProfile(index: number): UserProfile {
   return {
     id: `static-profile-${index}`,
     name: `name-${index}`,
@@ -74,7 +84,8 @@ export function getUserProfile(index: number): UserProfile {
     image: `image-${index}`,
     place: `place-${index}`,
     realName: `realName-${index}`,
-    role: Role.USER,
+    role: UserRole.USER,
+    favorites: [],
   };
 }
 
@@ -115,7 +126,7 @@ export function generateCollectionEntry(
   };
 }
 
-export function generateGame(gameId: number): Game {
+export function generatePrismaGame(gameId: number): PrismaGame {
   return {
     id: gameId,
     name: generateString(),
@@ -129,6 +140,22 @@ export function generateGame(gameId: number): Game {
     weight: generateNumber(),
     year: generateNumber(),
     updatedAt: generateDate(),
+  };
+}
+
+export function generateGame(): Game {
+  return {
+    id: generateNumber(),
+    name: generateString(),
+    BGGRank: generateNumber(),
+    BGGRating: generateNumber(),
+    image: generateString(),
+    maxPlayers: generateNumber(),
+    minPlayers: generateNumber(),
+    playingTime: generateNumber(),
+    thumbnail: generateString(),
+    weight: generateNumber(),
+    year: generateNumber(),
   };
 }
 
@@ -179,6 +206,12 @@ export function generateHexColor() {
     color.push(allowed.charAt(generateNumber(0, allowed.length - 1)));
   }
   return color.join("");
+}
+
+function getRandomEnumValue<T extends object>(obj: T): T[keyof T] {
+  const values = Object.values(obj);
+  const index = Math.floor(Math.random() * values.length);
+  return values[index];
 }
 
 export const objectMatcher: MatcherCreator<any> = (expected) =>

@@ -1,9 +1,9 @@
-import { generateGame, generateNumber } from "@/utility/test";
+import { generateNumber, generatePrismaGame } from "@/utility/test";
 import { convertGame } from "../game";
 
 describe("Game", () => {
   it("converts a server game", () => {
-    const serverGame = generateGame(generateNumber());
+    const serverGame = generatePrismaGame(generateNumber());
     const clientGame = {
       id: serverGame.id,
       maxPlayers: serverGame.maxPlayers,
@@ -22,7 +22,7 @@ describe("Game", () => {
   });
   it("replaces null with undefined", () => {
     const serverGame = {
-      ...generateGame(generateNumber()),
+      ...generatePrismaGame(generateNumber()),
       BGGRank: null,
       BGGRating: null,
       image: null,

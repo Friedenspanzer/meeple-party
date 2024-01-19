@@ -1,6 +1,5 @@
-import { getGame } from "@/lib/data/getGame";
-import { convertGame } from "@/lib/datatypes/client/game";
-import { generateGame, generateNumber, render } from "@/utility/test";
+import { getGame } from "@/lib/dataAccess/game";
+import { generateGame, render } from "@/utility/test";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@testing-library/jest-dom";
 import { screen, waitFor } from "@testing-library/react";
@@ -19,7 +18,7 @@ function TestComponent({ gameId }: { gameId: number }) {
   );
 }
 
-jest.mock("@/lib/data/getGame");
+jest.mock("@/lib/dataAccess/game");
 
 describe("useGame hook", () => {
   beforeAll(() => {
@@ -43,15 +42,14 @@ describe("useGame hook", () => {
   it("returns queried data", async () => {
     const queryClient = new QueryClient();
 
-    const gameId = generateNumber();
-    const game = generateGame(gameId);
+    const game = generateGame();
 
     const getGameMock = jest.mocked(getGame);
     getGameMock.mockResolvedValue(game);
 
     render(
       <QueryClientProvider client={queryClient}>
-        <TestComponent gameId={gameId} />
+        <TestComponent gameId={game.id} />
       </QueryClientProvider>
     );
 
@@ -59,20 +57,19 @@ describe("useGame hook", () => {
       expect(screen.getByTestId("isLoading").innerHTML).toBe("false")
     );
     const actualGame = JSON.parse(screen.getByTestId("data").innerHTML);
-    expect(actualGame).toEqual(convertGame(game));
+    expect(actualGame).toEqual(game);
   });
   it("returns isLoading during load", async () => {
     const queryClient = new QueryClient();
 
-    const gameId = generateNumber();
-    const game = generateGame(gameId);
+    const game = generateGame();
 
     const getGameMock = jest.mocked(getGame);
     getGameMock.mockResolvedValue(game);
 
     render(
       <QueryClientProvider client={queryClient}>
-        <TestComponent gameId={gameId} />
+        <TestComponent gameId={game.id} />
       </QueryClientProvider>
     );
 
@@ -82,19 +79,19 @@ describe("useGame hook", () => {
   it("returns cached data", async () => {
     const queryClient = new QueryClient();
 
-    const gameId = generateNumber();
-    const serverGame = generateGame(gameId);
-    const cachedGame = convertGame(generateGame(gameId));
+    const serverGame = generateGame();
+    const cachedGame = generateGame();
+    cachedGame.id = serverGame.id;
     const getQueryKey = useGameQueryKey();
 
     const getGameMock = jest.mocked(getGame);
     getGameMock.mockResolvedValue(serverGame);
 
-    queryClient.setQueryData(getQueryKey(gameId), cachedGame);
+    queryClient.setQueryData(getQueryKey(cachedGame.id), cachedGame);
 
     render(
       <QueryClientProvider client={queryClient}>
-        <TestComponent gameId={gameId} />
+        <TestComponent gameId={cachedGame.id} />
       </QueryClientProvider>
     );
 
@@ -108,8 +105,7 @@ describe("useGame hook", () => {
   it("caches data", async () => {
     const queryClient = new QueryClient();
 
-    const gameId = generateNumber();
-    const serverGame = generateGame(gameId);
+    const serverGame = generateGame();
     const getQueryKey = useGameQueryKey();
 
     const getGameMock = jest.mocked(getGame);
@@ -117,14 +113,14 @@ describe("useGame hook", () => {
 
     render(
       <QueryClientProvider client={queryClient}>
-        <TestComponent gameId={gameId} />
+        <TestComponent gameId={serverGame.id} />
       </QueryClientProvider>
     );
 
     await waitFor(() =>
       expect(screen.getByTestId("isLoading").innerHTML).toBe("false")
     );
-    const cachedGame = queryClient.getQueryData(getQueryKey(gameId));
-    expect(cachedGame).toEqual(convertGame(serverGame));
+    const cachedGame = queryClient.getQueryData(getQueryKey(serverGame.id));
+    expect(cachedGame).toEqual(serverGame);
   });
 });
