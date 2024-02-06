@@ -145,6 +145,34 @@ describe("useCollection hook", () => {
     const cachedCollection = queryClient.getQueryData(["collection", user.id]);
     expect(cachedCollection).toEqual(collection);
   });
+
+  it("caches game data", async () => {
+    const queryClient = new QueryClient();
+
+    const user = generateUserProfile();
+
+    const { collection, games } = generateCollection(user.id);
+
+    const getCollectionMock = jest.mocked(getCollection);
+    getCollectionMock.mockResolvedValue(
+      convertCollection(collection, games, user.id)
+    );
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <TestComponent userId={user.id} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() =>
+      expect(screen.getByTestId("isLoading").innerHTML).toBe("false")
+    );
+
+    games.forEach((game) => {
+      const cachedGame = queryClient.getQueryData(["game", game.id]);
+      expect(cachedGame).toEqual(game);
+    });
+  });
 });
 
 function convertCollection(
