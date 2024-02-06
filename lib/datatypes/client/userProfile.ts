@@ -7,8 +7,10 @@ export enum UserRole {
   ADMIN,
 }
 
+export type UserId = string;
+
 export interface UserProfile {
-  id: string;
+  id: UserId;
   name: string;
   role: UserRole;
   realName?: string;
