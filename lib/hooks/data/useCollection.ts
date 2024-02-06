@@ -8,7 +8,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 const thirtySecondsInMilliseconds = 1000 * 30;
 
 export default function useCollection(userId: UserId): Result<Collection> {
-  //TODO implement
+  //TODO Cache game data
   const queryKey = ["collection", userId];
   const queryClient = useQueryClient();
 
