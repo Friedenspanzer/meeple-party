@@ -1,5 +1,7 @@
+export type GameId = number;
+
 export interface Game {
-  id: number;
+  id: GameId;
   name: string;
   thumbnail?: string;
   image?: string;
