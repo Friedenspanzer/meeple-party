@@ -1,4 +1,5 @@
 import { getGame } from "@/lib/dataAccess/game";
+import { ObjectData } from "@/lib/util/test";
 import { generateGame, render } from "@/utility/test";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "@testing-library/jest-dom";
@@ -7,15 +8,7 @@ import useGame, { useGameQueryKey } from "../useGame";
 
 function TestComponent({ gameId }: { gameId: number }) {
   const game = useGame(gameId);
-  return (
-    <>
-      {Object.entries(game).map(([key, value]) => (
-        <div data-testid={key} key={key}>
-          {JSON.stringify(value)}
-        </div>
-      ))}
-    </>
-  );
+  return <ObjectData object={game} />;
 }
 
 jest.mock("@/lib/dataAccess/game");
