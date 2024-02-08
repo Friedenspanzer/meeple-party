@@ -1,7 +1,8 @@
-name: Jest
+name: Test
 on: [pull_request, workflow_dispatch]
 jobs:
   test:
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,7 +25,25 @@ jobs:
         run: npm install
       - name: Run the tests
         run: npm test
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
       - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  upload:
+    name: Upload coverage report
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+      - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
