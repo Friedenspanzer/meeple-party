@@ -133,7 +133,12 @@
   },
   "Footer": {
     "Issues": "Issues",
-    "LatestChanges": "Latest Changes"
+    "LatestChanges": "Latest Changes",
+    "Community": {
+      "Mastodon": "Follow on Mastodon",
+      "Discord": "Join Discord",
+      "Github": "Contribute on Github"
+    }
   },
   "Pagination": {
     "Current": "Current page"

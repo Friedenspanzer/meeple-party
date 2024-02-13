@@ -133,7 +133,12 @@
   },
   "Footer": {
     "Issues": "Tickets",
-    "LatestChanges": "Neueste Änderungen"
+    "LatestChanges": "Neueste Änderungen",
+    "Community": {
+      "Mastodon": "Folge auf Mastodon",
+      "Discord": "Tritt Discord bei",
+      "Github": "Beteilige dich auf Github"
+    }
   },
   "Pagination": {
     "Current": "Aktuelle Seite"
