@@ -122,7 +122,7 @@ function Status({
   const { t } = useTranslation("default");
   const { t: ct } = useTranslation("collection");
   const { data } = useCollectionStatus(game.id);
-  const { open: openModal } = useModal();
+  const { open: openModal, close: closeModal } = useModal();
   const state = useMemo(() => {
     if (!data) {
       return false;
@@ -150,9 +150,9 @@ function Status({
       title: ct(`FriendCollections.${translationBaseKey}`, {
         game: game.name,
       }),
-      content: <PersonList persons={friends} />,
+      content: <PersonList persons={friends} onClick={closeModal} />,
     });
-  }, [friends, game.name, ct, openModal, translationBaseKey]);
+  }, [friends, game.name, ct, openModal, closeModal, translationBaseKey]);
 
   return (
     <>
