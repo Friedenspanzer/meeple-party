@@ -29,5 +29,32 @@
     "IsOn": "is on",
     "CallToAction": "Log in or register now to see their whole profile or see what this is all about!",
     "KnowMore": "Find out more"
+  },
+  "EditScreen": {
+    "Header": "Edit your profile",
+    "ProfileName": "Profile name",
+    "RealName": "Real name",
+    "Place": "Place",
+    "PlacePlaceholder": "Where you live",
+    "Mandatory": "Must be set.",
+    "Visibility": {
+      "Everybody": "Will be shown to everybody.",
+      "Friends": "Will be shown to your friends.",
+      "Edit": "Change"
+    },
+    "About": "Your profile",
+    "AboutPlaceholder": "Write something to spice up your profile page.",
+    "Favorites": "Your favorite games",
+    "AddGames": "Add games",
+    "Save": "Save",
+    "ChangeInformation": "For some things you can change what's shown to everybody in your <1>privacy settings</1>.",
+    "Errors": {
+      "GameData": "Error fetching game data for game {{gameId}}.",
+      "ProfileNameMandatory": "You must enter a profile name.",
+      "ProfileNameLength": "Your profile name must not exceed 30 characters.",
+      "RealNameLength": "The name given to us must not exceed 60 characters",
+      "PlaceLength": "The place given to us must not exceed 30 characters.",
+      "AboutLength": "The text must not exceed 3000 characters."
+    }
   }
 }
