@@ -81,6 +81,7 @@ const EditProfile: React.FC = () => {
     })
       .then(() => {
         setSending(false);
+        invalidate();
       })
       .catch((error) => {
         setApiError(`Error updating profile data.`);
@@ -272,15 +273,11 @@ const EditProfile: React.FC = () => {
                       onClick={(_) =>
                         setFavorites(favorites.filter((g) => g.id !== f.id))
                       }
-                      onKeyDown={
-                        (event) => {
-                          if (event.key === "Delete") {
-                            setFavorites(
-                              favorites.filter((g) => g.id !== f.id)
-                            );
-                          }
+                      onKeyDown={(event) => {
+                        if (event.key === "Delete") {
+                          setFavorites(favorites.filter((g) => g.id !== f.id));
                         }
-                      }
+                      }}
                     ></i>
                   </GamePill>
                 ))}
