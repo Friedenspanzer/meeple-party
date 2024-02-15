@@ -132,13 +132,18 @@
     }
   },
   "Footer": {
-    "Issues": "Issues",
-    "LatestChanges": "Latest Changes",
     "Community": {
       "Mastodon": "Follow on Mastodon",
       "Discord": "Join Discord",
-      "Github": "Contribute on Github"
-    }
+      "Github": "Contribute on Github",
+      "Header": "Community"
+    },
+    "Development": {
+      "Header": "Development",
+      "Issues": "Issues",
+      "LatestChanges": "Latest Changes"
+    },
+    "Data": "All data provided by"
   },
   "Pagination": {
     "Current": "Current page"

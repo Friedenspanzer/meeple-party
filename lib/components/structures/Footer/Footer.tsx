@@ -34,23 +34,25 @@ export default function Footer() {
               </Text>
             </Group>
             <Text size="xs">
-              All data provided by <IconBoardGameGeek height={16} />
+              {t("Footer.Data")} <IconBoardGameGeek height={16} />
               BoardGameGeek.
             </Text>
           </Stack>
           <Group gap="xl" align="flex-start">
             <Stack className={styles.links}>
-              <Title order={4}>Development</Title>
+              <Title order={4}>{t("Footer.Development.Header")}</Title>
               <Link
                 href="https://github.com/Friedenspanzer/meeple-party/issues"
                 target="_blank"
               >
-                {t("Footer.Issues")}
+                {t("Footer.Development.Issues")}
               </Link>
-              <Link href="/changelog">{t("Footer.LatestChanges")}</Link>
+              <Link href="/changelog">
+                {t("Footer.Development.LatestChanges")}
+              </Link>
             </Stack>
             <Stack className={styles.links}>
-              <Title order={4}>Community</Title>
+              <Title order={4}>{t("Footer.Community.Header")}</Title>
               <Link
                 href="https://brettspiel.space/@meepleparty"
                 title="Mastodon"
