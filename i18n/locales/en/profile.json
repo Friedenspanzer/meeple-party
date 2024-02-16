@@ -56,5 +56,20 @@
       "PlaceLength": "The place given to us must not exceed 30 characters.",
       "AboutLength": "The text must not exceed 3000 characters."
     }
+  },
+  "Avatar": {
+    "Header": "Your current avatar",
+    "Upload": "Upload new avatar",
+    "Restrictions": "Only file types allowed are JPG and PNG. Files may not exceed 1MB.",
+    "Remove": "Remove avatar",
+    "Choose": "Choose an image file",
+    "Success": "Successfully uploaded your avatar!",
+    "Errors": {
+      "NoFile": "No file selected.",
+      "MultipleFiles": "Multiple files selected.",
+      "FileSize": "File is bigger than 1MB.",
+      "FileType": "File type not allowed.",
+      "Upload": "Error uploading file."
+    }
   }
 }

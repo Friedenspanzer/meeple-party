@@ -56,5 +56,20 @@
       "PlaceLength": "Der Ort den du hier angibst darf höchstens 30 Zeichen lang sein.",
       "AboutLength": "Der Text darf höchstens 3000 Zeichen lang sein."
     }
+  },
+  "Avatar": {
+    "Header": "Dein aktueller Avatar",
+    "Upload": "Einen neuen Avatar hochladen",
+    "Restrictions": "Als Dateitypen sind nur JPG und PNG erlaubt. Dateien dürfen nicht größer als 1MB sein.",
+    "Remove": "Avatar entfernen",
+    "Choose": "Wähle eine Bilddatei",
+    "Success": "Avatar erfolgreich hochgeladen!",
+    "Errors": {
+      "NoFile": "Keine Datei ausgewählt.",
+      "MultipleFiles": "Mehrere Dateien ausgewählt.",
+      "FileSize": "Datei ist größer als 1MB.",
+      "FileType": "Der Dateityp ist nicht erlaubt.",
+      "Upload": "Fehler beim Hochladen."
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { getTranslation } from "@/i18n";
 import AvatarDisplay from "./AvatarDisplay/AvatarDisplay";
 import AvatarUpload from "./AvatarUpload/AvatarUpload";
 
@@ -6,15 +7,16 @@ export const metadata = {
 };
 
 export default async function AvatarPage() {
+  const { t } = await getTranslation("profile");
   return (
     <>
       <div className="row">
         <div className="col-6">
-          <h2>Your current avatar</h2>
+          <h2>{t("Avatar.Header")}</h2>
           <AvatarDisplay />
         </div>
         <div className="col-6">
-          <h2>Upload new avatar</h2>
+          <h2>{t("Avatar.Upload")}</h2>
           <AvatarUpload />
         </div>
       </div>
@@ -22,8 +24,7 @@ export default async function AvatarPage() {
         <div className="col-6"></div>
         <div className="col-6 mt-2">
           <div className="alert alert-info" role="alert">
-            <i className="bi bi-info-circle"></i> Only file types allowed are
-            JPG and PNG. Files may not exceed 1MB.
+            <i className="bi bi-info-circle"></i> {t("Avatar.Restrictions")}
           </div>
         </div>
       </div>
