@@ -1,7 +1,7 @@
 import Analytics from "@/components/Analytics/Analytics";
-import Footer from "@/components/Footer/Footer";
 import AuthProvider from "@/context/authContext";
 import UserProvider from "@/context/userContext";
+import Footer from "@/lib/components/structures/Footer/Footer";
 import "@/theme/theme.scss";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -29,18 +29,18 @@ export default async function RootLayout({
       <head>
         <ColorSchemeScript forceColorScheme="light" />
       </head>
-      <body>
-        <Script src="/bootstrap.bundle.min.js" />
-        <AuthProvider>
-          <UserProvider>
-            <MantineProvider forceColorScheme="light" theme={theme}>
+      <MantineProvider forceColorScheme="light" theme={theme}>
+        <body>
+          <Script src="/bootstrap.bundle.min.js" />
+          <AuthProvider>
+            <UserProvider>
               <div className={styles.container}>{children}</div>
-            </MantineProvider>
-            <Analytics />
-          </UserProvider>
-        </AuthProvider>
-        <Footer />
-      </body>
+              <Analytics />
+            </UserProvider>
+          </AuthProvider>
+          <Footer />
+        </body>
+      </MantineProvider>
       <Script src="/bootstrap.bundle.min.js" />
     </html>
   );

@@ -33,7 +33,7 @@ export default function ProfileHeader({
       <Stack align="center" style={containerStyle} p="md">
         <AvatarBlock user={user} myself={myself} friend={friend} />
         <NameBlock user={user} />
-        <ButtonBlock user={user} />
+        <ButtonBlock user={user} myself={myself} />
       </Stack>
     );
   } else {
@@ -47,11 +47,9 @@ export default function ProfileHeader({
             <NameBlock user={user} />
           </Stack>
         </Group>
-        {myself && (
-          <Stack>
-            <ButtonBlock user={user} />
-          </Stack>
-        )}
+        <Stack>
+          <ButtonBlock user={user} myself={myself} />
+        </Stack>
       </Group>
     );
   }
@@ -81,14 +79,18 @@ function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
   );
 }
 
-function ButtonBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
+function ButtonBlock({ user, myself }: Readonly<ProfileHeaderProps>) {
   const { t } = useTranslation("profile");
-  return (
-    <>
-      <ShareProfile profileId={user.id} />
-      <LinkButton href="/app/profile/edit">{t("Edit")}</LinkButton>
-    </>
-  );
+  if (myself) {
+    return (
+      <>
+        <ShareProfile profileId={user.id} />
+        <LinkButton href="/app/profile/edit">{t("Edit")}</LinkButton>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 function getRoleBadge(role: Role) {

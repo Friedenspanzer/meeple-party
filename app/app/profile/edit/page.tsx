@@ -11,11 +11,15 @@ import { Game } from "@/datatypes/game";
 import { useGameQuery } from "@/hooks/api/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
+import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { Trans } from "react-i18next";
 
 const EditProfile: React.FC = () => {
+  const { t } = useTranslation("profile");
+
   const {
     isLoading,
     userProfile,
@@ -58,7 +62,7 @@ const EditProfile: React.FC = () => {
           setFavorites(favorites ? [...favorites, game] : [game]);
         })
         .catch((error) => {
-          setApiError(`Error fetching game data for game ${gameId}.`);
+          setApiError(t("EditScreen.Errors.GameData", { gameId }));
           setApiErrorDetail(error);
         });
     },
@@ -81,6 +85,7 @@ const EditProfile: React.FC = () => {
     })
       .then(() => {
         setSending(false);
+        invalidate();
       })
       .catch((error) => {
         setApiError(`Error updating profile data.`);
@@ -90,9 +95,9 @@ const EditProfile: React.FC = () => {
 
   useEffect(() => {
     if (!profileName || profileName.length === 0) {
-      setProfileNameError("You must enter a profile name.");
+      setProfileNameError(t("EditScreen.Errors.ProfileNameMandatory"));
     } else if (profileName.length > 30) {
-      setProfileNameError("Your profile name must not exceed 30 characters.");
+      setProfileNameError(t("EditScreen.Errors.ProfileNameLength"));
     } else {
       setProfileNameError(false);
     }
@@ -100,7 +105,7 @@ const EditProfile: React.FC = () => {
 
   useEffect(() => {
     if (realName.length > 60) {
-      setRealNameError("The name given to us must not exceed 60 characters.");
+      setRealNameError(t("EditScreen.Errors.RealNameLength"));
     } else {
       setRealNameError(false);
     }
@@ -108,7 +113,7 @@ const EditProfile: React.FC = () => {
 
   useEffect(() => {
     if (place.length > 30) {
-      setPlaceError("The place given to us must not exceed 30 characters.");
+      setPlaceError(t("EditScreen.Errors.PlaceLength"));
     } else {
       setPlaceError(false);
     }
@@ -116,7 +121,7 @@ const EditProfile: React.FC = () => {
 
   useEffect(() => {
     if (about.length > 3000) {
-      setAboutError("The text must not exceed 3000 characters.");
+      setAboutError(t("EditScreen.Errors.AboutLength"));
     } else {
       setAboutError(false);
     }
@@ -140,14 +145,14 @@ const EditProfile: React.FC = () => {
       <form className="grid gap-3" noValidate>
         <div className="row">
           <div className="col-12">
-            <h1>Edit your profile</h1>
+            <h1>{t("EditScreen.Header")}</h1>
           </div>
         </div>
 
         <div className="row mb-4">
           <div className="col-md-4">
             <label htmlFor="profileName" className="form-label">
-              Profile name
+              {t("EditScreen.ProfileName")}
             </label>
             <input
               type="text"
@@ -156,7 +161,7 @@ const EditProfile: React.FC = () => {
                 "border-danger": !!profileNameError,
               })}
               id="profileName"
-              placeholder="Profile name"
+              placeholder={t("EditScreen.ProfileName")}
               aria-describedby="profileNameHelp"
               value={profileName}
               onChange={(e) => setProfileName(e.currentTarget.value)}
@@ -168,13 +173,16 @@ const EditProfile: React.FC = () => {
                 "text-danger": profileNameError,
               })}
             >
-              {profileNameError || "Will be shown to everybody. Must be set."}
+              {profileNameError ||
+                `${t("EditScreen.Visibility.Everybody")} ${t(
+                  "EditScreen.Mandatory"
+                )}`}
             </div>
           </div>
 
           <div className="col-md-4">
             <label htmlFor="realName" className="form-label">
-              Real name
+              {t("EditScreen.RealName")}
             </label>
             <input
               type="text"
@@ -183,7 +191,7 @@ const EditProfile: React.FC = () => {
                 "border-danger": !!realNameError,
               })}
               id="realName"
-              placeholder="Real name"
+              placeholder={t("EditScreen.RealName")}
               aria-describedby="realNameHelp"
               value={realName}
               onChange={(e) => setRealName(e.currentTarget.value)}
@@ -202,7 +210,7 @@ const EditProfile: React.FC = () => {
 
           <div className="col-md-4">
             <label htmlFor="place" className="form-label">
-              Place
+              {t("EditScreen.Place")}
             </label>
             <input
               type="text"
@@ -211,7 +219,7 @@ const EditProfile: React.FC = () => {
                 "border-danger": !!placeError,
               })}
               id="place"
-              placeholder="Where you live"
+              placeholder={t("EditScreen.PlacePlaceholder")}
               aria-describedby="placeHelp"
               value={place}
               onChange={(e) => setPlace(e.currentTarget.value)}
@@ -232,7 +240,7 @@ const EditProfile: React.FC = () => {
         <div className="row mb-4">
           <div className="col-md-6">
             <label htmlFor="place" className="form-label">
-              Your profile
+              {t("EditScreen.About")}
             </label>
             <textarea
               className={classNames({
@@ -243,7 +251,7 @@ const EditProfile: React.FC = () => {
               rows={10}
               value={about}
               onChange={(e) => setAbout(e.currentTarget.value)}
-              placeholder="Write something to spice up your profile page."
+              placeholder={t("AboutPlaceholder")}
             ></textarea>
             <div
               id="profileNameHelp"
@@ -252,14 +260,14 @@ const EditProfile: React.FC = () => {
                 "text-danger": aboutError,
               })}
             >
-              {aboutError || "Will be publicly shown to everybody."}
+              {aboutError || t("EditScreen.Visibility.Everybody")}
             </div>
           </div>
         </div>
 
         <div className="row mb-4">
           <div className="col-12">
-            <label className="form-label">Your favorite games</label>
+            <label className="form-label">{t("EditScreen.Favorites")}</label>
             <br />
             {favorites ? (
               <PrefetchedGameData data={favorites}>
@@ -272,15 +280,11 @@ const EditProfile: React.FC = () => {
                       onClick={(_) =>
                         setFavorites(favorites.filter((g) => g.id !== f.id))
                       }
-                      onKeyDown={
-                        (event) => {
-                          if (event.key === "Delete") {
-                            setFavorites(
-                              favorites.filter((g) => g.id !== f.id)
-                            );
-                          }
+                      onKeyDown={(event) => {
+                        if (event.key === "Delete") {
+                          setFavorites(favorites.filter((g) => g.id !== f.id));
                         }
-                      }
+                      }}
                     ></i>
                   </GamePill>
                 ))}
@@ -294,7 +298,7 @@ const EditProfile: React.FC = () => {
                   aria-expanded="false"
                   aria-controls="collapseGameSearch"
                 >
-                  Add games
+                  {t("EditScreen.AddGames")}
                 </button>
                 <div className="collapse" id="collapseGameSearch">
                   <GameSearch resultView={FavoriteGameResult} />
@@ -308,9 +312,11 @@ const EditProfile: React.FC = () => {
 
         <div className="row mb-4">
           <div className="alert alert-info col-md-8 order-md-2" role="alert">
-            <i className="bi bi-info-circle"></i> For some things you can change
-            what&apos;s shown to everybody in your{" "}
-            <Link href="/app/profile/edit/privacy">privacy settings</Link>.
+            <i className="bi bi-info-circle"></i>{" "}
+            <Trans i18nKey="EditScreen.ChangeInformation" ns="profile">
+              For some things you can change what&apos;s shown to everybody in
+              your <a href="/app/profile/edit/privacy">privacy settings</a>.
+            </Trans>
           </div>
           <div className="col-4">
             <button
@@ -331,7 +337,7 @@ const EditProfile: React.FC = () => {
                   &nbsp;
                 </>
               )}
-              Save
+              {t("EditScreen.Save")}
             </button>
           </div>
         </div>
@@ -378,19 +384,25 @@ function getPrivacyStatement(privateInformation: boolean) {
 }
 
 const PrivacyStatementPrivate: React.FC = () => {
+  const { t } = useTranslation("profile");
   return (
     <>
-      Will only be shown to your friends.{" "}
-      <Link href="/app/profile/edit/privacy">Change</Link>
+      {t("EditScreen.Visibility.Friends")}{" "}
+      <Link href="/app/profile/edit/privacy">
+        {t("EditScreen.Visibility.Change")}
+      </Link>
     </>
   );
 };
 
 const PrivacyStatementPublic: React.FC = () => {
+  const { t } = useTranslation("profile");
   return (
     <>
-      Will be shown to everybody.{" "}
-      <Link href="/app/profile/edit/privacy">Change</Link>
+      {t("EditScreen.Visibility.Everybody")}{" "}
+      <Link href="/app/profile/edit/privacy">
+        {t("EditScreen.Visibility.Change")}
+      </Link>
     </>
   );
 };

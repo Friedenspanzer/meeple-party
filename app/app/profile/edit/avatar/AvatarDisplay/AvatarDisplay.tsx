@@ -3,9 +3,11 @@
 import Avatar from "@/components/Avatar/Avatar";
 import Spinner from "@/components/Spinner/Spinner";
 import useUserProfile from "@/hooks/useUserProfile";
+import { useTranslation } from "@/i18n/client";
 import { useCallback, useState } from "react";
 
 const AvatarDisplay: React.FC = () => {
+  const { t } = useTranslation("profile");
   const { isLoading, userProfile, invalidate } = useUserProfile();
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +43,7 @@ const AvatarDisplay: React.FC = () => {
             onClick={removeAvatar}
             disabled={loading}
           >
-            Remove avatar
+            {t("Avatar.Remove")}
           </button>
         )}
       </div>

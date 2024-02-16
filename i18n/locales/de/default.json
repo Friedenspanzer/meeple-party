@@ -132,8 +132,18 @@
     }
   },
   "Footer": {
-    "Issues": "Tickets",
-    "LatestChanges": "Neueste Änderungen"
+    "Community": {
+      "Mastodon": "Folge auf Mastodon",
+      "Discord": "Tritt Discord bei",
+      "Github": "Beteilige dich auf Github",
+      "Header": "Community"
+    },
+    "Development": {
+      "Header": "Entwicklung",
+      "Issues": "Tickets",
+      "LatestChanges": "Neueste Änderungen"
+    },
+    "Data": "Daten zur Verfügung gestellt von"
   },
   "Pagination": {
     "Current": "Aktuelle Seite"

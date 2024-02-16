@@ -6,9 +6,11 @@ import {
   AVATAR_ALLOWED_FILE_TYPES,
 } from "@/constants/avatar";
 import useUserProfile from "@/hooks/useUserProfile";
+import { useTranslation } from "@/i18n/client";
 import { useCallback, useId, useState } from "react";
 
 const AvatarUpload: React.FC = () => {
+  const { t } = useTranslation("profile");
   const fileUploadId = useId();
   const { invalidate } = useUserProfile();
   const [error, setError] = useState<false | string>(false);
@@ -19,13 +21,13 @@ const AvatarUpload: React.FC = () => {
   const onFileSelect = useCallback(
     (files: FileList | null) => {
       if (!files) {
-        setError("No files selected.");
+        setError(t("Avatar.Errors.NoFile"));
       } else if (files.length > 1) {
-        setError("Multiple files selected.");
+        setError(t("Avatar.Errors.MultipleFiles"));
       } else if (files[0].size > AVATAR_ALLOWED_FILE_SIZE) {
-        setError("File is bigger than 1MB.");
+        setError(t("Avatar.Errors.FileSize"));
       } else if (!AVATAR_ALLOWED_FILE_TYPES.includes(files[0].type)) {
-        setError("File type not allowed.");
+        setError(t("Avatar.Errors.FileType"));
       } else {
         setError(false);
         setProgress("uploading");
@@ -42,12 +44,12 @@ const AvatarUpload: React.FC = () => {
           })
           .catch((error) => {
             setProgress("waiting");
-            setError("Error uploading file.");
+            setError(t("Avatar.Errors.Upload"));
             console.error(error);
           });
       }
     },
-    [invalidate]
+    [invalidate, t]
   );
 
   return (
@@ -55,7 +57,7 @@ const AvatarUpload: React.FC = () => {
       <div className="row mt-4">
         <div className="col-12">
           <label htmlFor={fileUploadId} className="form-label">
-            Choose an image file
+            {t("Avatar.Choose")}
           </label>
           <input
             className="form-control"
@@ -75,8 +77,7 @@ const AvatarUpload: React.FC = () => {
           {progress === "uploading" && <Spinner />}
           {progress === "done" && (
             <div className="alert alert-success" role="alert">
-              <i className="bi bi-check-circle-fill"></i> Successfully uploaded
-              your avatar!
+              <i className="bi bi-check-circle-fill"></i> {t("Avatar.Success")}
             </div>
           )}
         </div>

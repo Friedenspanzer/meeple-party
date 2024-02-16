@@ -2,11 +2,7 @@ import Avatar from "@/components/Avatar/Avatar";
 import { useModal } from "@/context/modalContext";
 import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
-import {
-  generateArray,
-  generateUserProfile,
-  render
-} from "@/utility/test";
+import { generateArray, generateUserProfile, render } from "@/utility/test";
 import { StatusByUser } from "../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
 
@@ -53,6 +49,7 @@ describe("GameBoxBig", () => {
   beforeEach(() => {
     jest.mocked(useModal).mockImplementation(() => ({
       open: () => {},
+      close: () => {},
     }));
   });
   it("Matches snapshot", async () => {

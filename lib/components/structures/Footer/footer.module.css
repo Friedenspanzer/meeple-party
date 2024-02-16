@@ -1,0 +1,35 @@
+.container {
+  width: 100%;
+  background-color: var(--bs-primary-bg-subtle);
+  min-height: var(--footer-min-height);
+  padding: 0.5rem;
+}
+
+.stack {
+  max-width: 80%;
+  margin: auto;
+}
+
+.social {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+  font-size: 2rem;
+  align-items: center;
+}
+
+.links {
+  --stack-gap: 0.25rem !important;
+
+  h4 {
+    font-size: var(--matine-font-size-md);
+  }
+
+  a {
+    font-size: var(--mantine-font-size-sm);
+    text-decoration: none;
+    color: var(--mantine-color-dimmed);
+  }
+}

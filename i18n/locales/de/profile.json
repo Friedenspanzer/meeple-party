@@ -29,5 +29,47 @@
     "IsOn": "ist auf",
     "CallToAction": "Logge dich ein oder registriere dich um das vollständige Profil zu sehen oder erfahre um was es hier eigentlich geht!",
     "KnowMore": "Erfahre mehr"
+  },
+  "EditScreen": {
+    "Header": "Dein Profil bearbeiten",
+    "ProfileName": "Spitzname",
+    "RealName": "Echter Name",
+    "Place": "Ort",
+    "PlacePlaceholder": "Wo du wohnst",
+    "Mandatory": "Muss gesetzt sein.",
+    "Visibility": {
+      "Everybody": "Wird allen angezeigt.",
+      "Friends": "Wird deinen Freund*innen angezeigt.",
+      "Edit": "Ändern"
+    },
+    "About": "Dein Profil",
+    "AboutPlaceholder": "Schreib etwas um deine Profilseite aufzupeppen.",
+    "Favorites": "Deine Lieblingsspiele",
+    "AddGames": "Spiele hinzufügen",
+    "Save": "Speichern",
+    "ChangeInformation": "Für einige Sachen kannst du in deinen <1>Datenschutzeinstellungen</1> ändern was angezeigt wird.",
+    "Errors": {
+      "GameData": "Fehler beim Laden der Daten von Spiel {{gameId}}.",
+      "ProfileNameMandatory": "Du musst einen Spitznamen angeben.",
+      "ProfileNameLength": "Dein Spitzname darf höchstens 30 Zeichen lang sein.",
+      "RealNameLength": "Der Name den du hier angibst darf höchstens 60 Zeichen lang sein.",
+      "PlaceLength": "Der Ort den du hier angibst darf höchstens 30 Zeichen lang sein.",
+      "AboutLength": "Der Text darf höchstens 3000 Zeichen lang sein."
+    }
+  },
+  "Avatar": {
+    "Header": "Dein aktueller Avatar",
+    "Upload": "Einen neuen Avatar hochladen",
+    "Restrictions": "Als Dateitypen sind nur JPG und PNG erlaubt. Dateien dürfen nicht größer als 1MB sein.",
+    "Remove": "Avatar entfernen",
+    "Choose": "Wähle eine Bilddatei",
+    "Success": "Avatar erfolgreich hochgeladen!",
+    "Errors": {
+      "NoFile": "Keine Datei ausgewählt.",
+      "MultipleFiles": "Mehrere Dateien ausgewählt.",
+      "FileSize": "Datei ist größer als 1MB.",
+      "FileType": "Der Dateityp ist nicht erlaubt.",
+      "Upload": "Fehler beim Hochladen."
+    }
   }
 }

@@ -15,10 +15,12 @@ export interface ModalConfiguration {
 
 interface ModalContext {
   open: (configuration: ModalConfiguration) => void;
+  close: () => void;
 }
 
 const ModalContext = createContext<ModalContext>({
   open: (_) => {},
+  close: () => {},
 });
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
@@ -32,8 +34,9 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
         setContent(configuration.content);
         open();
       },
+      close,
     }),
-    [open]
+    [open, close]
   );
   return (
     <ModalContext.Provider value={value}>
