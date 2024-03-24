@@ -51,7 +51,6 @@ exports[`Link button matches snapshot for simple links 1`] = `
   <a
     class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
     href="Test Link"
-    style="--button-color: var(--mantine-color-white);"
   >
     <span
       aria-hidden="true"
