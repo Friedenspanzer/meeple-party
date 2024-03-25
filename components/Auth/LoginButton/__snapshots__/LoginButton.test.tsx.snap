@@ -9,6 +9,7 @@ exports[`Link button matches snapshot 1`] = `
   </style>
   <button
     class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
+    style="--button-color: var(--mantine-color-white);"
     type="button"
   >
     <span
@@ -42,6 +43,7 @@ exports[`Link button matches snapshot with redirect property defined 1`] = `
   </style>
   <button
     class="mantine-focus-auto mantine-active m-77c9d27d mantine-Button-root m-87cf2631 mantine-UnstyledButton-root"
+    style="--button-color: var(--mantine-color-white);"
     type="button"
   >
     <span

@@ -87,7 +87,7 @@ exports[`Status Button matches snapshot for wishlist on true 1`] = `
 exports[`Status Button matches snapshot when loading 1`] = `
 <div>
   <div
-    class="spinner spinner-border"
+    class="spinner spinner-border spinner-border-sm"
   />
 </div>
 `;
