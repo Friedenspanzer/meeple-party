@@ -56,6 +56,6 @@ function testUser(index: number) {
     about: null,
     place: null,
     bggName: null,
-    image: "https://placehold.co/400",
+    image: index % 3 === 0 ? null : "https://placehold.co/400",
   };
 }
