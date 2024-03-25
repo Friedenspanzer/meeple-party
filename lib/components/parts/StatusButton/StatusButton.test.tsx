@@ -69,4 +69,27 @@ describe("Status Button", () => {
     await user.keyboard("[Enter]");
     expect(called).toBeTruthy();
   });
+  it("calls original event handler on clicking button", async () => {
+    const user = userEvent.setup();
+    let called = false;
+    const callback = () => {
+      called = true;
+    };
+    render(<StatusButton status="own" active={false} onClick={callback} />);
+    const button = screen.getByRole("button");
+    await user.click(button);
+    expect(called).toBeTruthy();
+  });
+  it("calls original event handler on key press", async () => {
+    const user = userEvent.setup();
+    let called = false;
+    const callback = () => {
+      called = true;
+    };
+    render(<StatusButton status="own" active={false} onKeyDown={callback} />);
+    const button = screen.getByRole("button");
+    button.focus();
+    await user.keyboard("[Enter]");
+    expect(called).toBeTruthy();
+  });
 });

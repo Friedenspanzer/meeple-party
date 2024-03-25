@@ -53,13 +53,13 @@ export default function StatusButton({
         {...props}
         onClick={(e) => {
           if (props.onClick) {
-            props.onClick(e); //TODO Test this logic
+            props.onClick(e);
           }
           toggle();
         }}
         onKeyDown={(e) => {
           if (props.onKeyDown) {
-            props.onKeyDown(e); //TODO Test this logic
+            props.onKeyDown(e);
           }
           if (e.key === "Enter") {
             toggle();
