@@ -52,7 +52,7 @@ describe("Status Button", () => {
     const callback = () => {
       called = true;
     };
-    render(<StatusButton status="own" active={false} clicked={callback} />);
+    render(<StatusButton status="own" active={false} toggle={callback} />);
     const button = screen.getByRole("button");
     await user.click(button);
     expect(called).toBeTruthy();
@@ -63,7 +63,7 @@ describe("Status Button", () => {
     const callback = () => {
       called = true;
     };
-    render(<StatusButton status="own" active={false} clicked={callback} />);
+    render(<StatusButton status="own" active={false} toggle={callback} />);
     const button = screen.getByRole("button");
     button.focus();
     await user.keyboard("[Enter]");

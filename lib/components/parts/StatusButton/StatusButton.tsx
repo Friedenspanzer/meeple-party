@@ -10,14 +10,14 @@ interface StatusButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   status: "own" | "wanttoplay" | "wishlist";
   loading?: boolean;
   active: boolean;
-  clicked?: () => void;
+  toggle?: () => void;
 }
 
 export default function StatusButton({
   status,
   loading = false,
   active,
-  clicked = () => {},
+  toggle = () => {},
   ...props
 }: Readonly<StatusButtonProps>) {
   const icon = useMemo(() => {
@@ -55,14 +55,14 @@ export default function StatusButton({
           if (props.onClick) {
             props.onClick(e); //TODO Test this logic
           }
-          clicked();
+          toggle();
         }}
         onKeyDown={(e) => {
           if (props.onKeyDown) {
             props.onKeyDown(e); //TODO Test this logic
           }
           if (e.key === "Enter") {
-            clicked();
+            toggle();
           }
         }}
         tabIndex={0}

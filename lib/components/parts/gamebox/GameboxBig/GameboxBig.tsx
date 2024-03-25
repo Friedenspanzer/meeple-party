@@ -175,7 +175,7 @@ function Status({
           status={status}
           className={styles.statusButton}
           active={state || false}
-          clicked={() => {}} //TODO Implement
+          toggle={() => {}} //TODO Implement
         />
         <div className={styles.statusText}>
           {state

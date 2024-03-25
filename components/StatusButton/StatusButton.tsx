@@ -41,7 +41,7 @@ export default function StatusButton({
       active={active || false}
       loading={isLoading}
       status={status}
-      clicked={updateStatus}
+      toggle={updateStatus}
       {...props}
     />
   );
