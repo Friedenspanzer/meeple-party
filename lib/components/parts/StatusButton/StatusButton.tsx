@@ -2,11 +2,12 @@ import Spinner from "@/components/Spinner/Spinner";
 import IconCollectionOwn from "@/components/icons/CollectionOwn";
 import IconCollectionWantToPlay from "@/components/icons/CollectionWantToPlay";
 import IconCollectionWishlist from "@/components/icons/CollectionWishlist";
+import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { useMemo } from "react";
 import styles from "./statusbutton.module.css";
 
-interface StatusButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+interface StatusButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   status: "own" | "wanttoplay" | "wishlist";
   loading?: boolean;
   active: boolean;
@@ -20,6 +21,7 @@ export default function StatusButton({
   toggle = () => {},
   ...props
 }: Readonly<StatusButtonProps>) {
+  const { t } = useTranslation();
   const icon = useMemo(() => {
     if (status === "own") {
       return <IconCollectionOwn />;
@@ -38,18 +40,27 @@ export default function StatusButton({
       return "var(--color-collection-wishlist)";
     }
   }, [status]);
+  const label = useMemo(() => {
+    if (status === "own") {
+      return t("States.Own");
+    } else if (status === "wanttoplay") {
+      return t("States.WantToPlay");
+    } else if (status === "wishlist") {
+      return t("States.Wishlist");
+    }
+  }, [status]);
 
   if (loading) {
     return (
       <Spinner
-        {...props}
+        // {...props}
         size="small"
         className={classNames(styles.spinner, props.className)}
       />
     );
   } else {
     return (
-      <div
+      <button
         {...props}
         onClick={(e) => {
           if (props.onClick) {
@@ -72,9 +83,10 @@ export default function StatusButton({
           color: active ? activeColor : "unset",
         }}
         role="button"
+        aria-label={label}
       >
         {icon}
-      </div>
+      </button>
     );
   }
 }

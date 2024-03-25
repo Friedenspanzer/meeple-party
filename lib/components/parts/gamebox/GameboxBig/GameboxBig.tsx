@@ -19,6 +19,7 @@ export default function GameboxBig({
   game,
   friendCollections,
   myCollection,
+  updateStatus,
 }: Readonly<GameboxProps>) {
   return (
     <div className={classNames("card", styles.card)}>
@@ -46,6 +47,7 @@ export default function GameboxBig({
         game={game}
         friendCollection={friendCollections}
         myCollection={myCollection}
+        updateStatus={updateStatus}
       />
     </div>
   );
@@ -90,10 +92,12 @@ function StatusList({
   game,
   friendCollection,
   myCollection,
+  updateStatus,
 }: Readonly<{
   game: Game;
   friendCollection?: StatusByUser;
   myCollection: GameCollectionStatus;
+  updateStatus?: (status: Partial<GameCollectionStatus>) => void;
 }>) {
   return (
     <>
@@ -102,18 +106,21 @@ function StatusList({
         status="own"
         friends={friendCollection ? friendCollection.own : []}
         myCollection={myCollection}
+        updateStatus={updateStatus}
       />
       <Status
         game={game}
         status="wanttoplay"
         friends={friendCollection ? friendCollection.wantToPlay : []}
         myCollection={myCollection}
+        updateStatus={updateStatus}
       />
       <Status
         game={game}
         status="wishlist"
         friends={friendCollection ? friendCollection.wishlist : []}
         myCollection={myCollection}
+        updateStatus={updateStatus}
       />
     </>
   );
@@ -124,11 +131,13 @@ function Status({
   friends,
   status,
   myCollection,
+  updateStatus,
 }: Readonly<{
   game: Game;
   friends: UserProfile[];
   myCollection: GameCollectionStatus;
   status: "own" | "wishlist" | "wanttoplay";
+  updateStatus?: (status: Partial<GameCollectionStatus>) => void;
 }>) {
   const { t } = useTranslation("default");
   const { t: ct } = useTranslation("collection");
@@ -153,6 +162,17 @@ function Status({
     }
   }, [status]);
 
+  const toggle = useCallback(() => {
+    if (!updateStatus) return;
+    if (status === "own") {
+      updateStatus({ own: !myCollection.own });
+    } else if (status === "wanttoplay") {
+      updateStatus({ wantToPlay: !myCollection.wantToPlay });
+    } else if (status === "wishlist") {
+      updateStatus({ wishlist: !myCollection.wishlist });
+    }
+  }, [myCollection, myCollection, myCollection, status, updateStatus]);
+
   const showFriends = useCallback(() => {
     openModal({
       title: ct(`FriendCollections.${translationBaseKey}`, {
@@ -175,7 +195,7 @@ function Status({
           status={status}
           className={styles.statusButton}
           active={state || false}
-          toggle={() => {}} //TODO Implement
+          toggle={toggle}
         />
         <div className={styles.statusText}>
           {state

@@ -2,7 +2,8 @@
 
 exports[`Status Button matches snapshot for own when active 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.Own"
     class="button"
     role="button"
     tabindex="0"
@@ -10,13 +11,14 @@ exports[`Status Button matches snapshot for own when active 1`] = `
     <i
       class="bi bi-box-seam-fill"
     />
-  </div>
+  </button>
 </div>
 `;
 
 exports[`Status Button matches snapshot for own when not active 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.Own"
     class="button"
     role="button"
     tabindex="0"
@@ -24,13 +26,14 @@ exports[`Status Button matches snapshot for own when not active 1`] = `
     <i
       class="bi bi-box-seam-fill"
     />
-  </div>
+  </button>
 </div>
 `;
 
 exports[`Status Button matches snapshot for wanttoplay when active 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.WantToPlay"
     class="button"
     role="button"
     tabindex="0"
@@ -38,13 +41,14 @@ exports[`Status Button matches snapshot for wanttoplay when active 1`] = `
     <i
       class="bi bi-dice-3-fill"
     />
-  </div>
+  </button>
 </div>
 `;
 
 exports[`Status Button matches snapshot for wanttoplay when not active 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.WantToPlay"
     class="button"
     role="button"
     tabindex="0"
@@ -52,13 +56,14 @@ exports[`Status Button matches snapshot for wanttoplay when not active 1`] = `
     <i
       class="bi bi-dice-3-fill"
     />
-  </div>
+  </button>
 </div>
 `;
 
 exports[`Status Button matches snapshot for wishlist when active 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.Wishlist"
     class="button"
     role="button"
     tabindex="0"
@@ -66,13 +71,14 @@ exports[`Status Button matches snapshot for wishlist when active 1`] = `
     <i
       class="bi bi-gift-fill"
     />
-  </div>
+  </button>
 </div>
 `;
 
 exports[`Status Button matches snapshot for wishlist when not active 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.Wishlist"
     class="button"
     role="button"
     tabindex="0"
@@ -80,7 +86,7 @@ exports[`Status Button matches snapshot for wishlist when not active 1`] = `
     <i
       class="bi bi-gift-fill"
     />
-  </div>
+  </button>
 </div>
 `;
 
@@ -94,7 +100,8 @@ exports[`Status Button matches snapshot when loading 1`] = `
 
 exports[`Status Button passes class names to container 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.Own"
     class="button passed class names"
     role="button"
     tabindex="0"
@@ -102,13 +109,14 @@ exports[`Status Button passes class names to container 1`] = `
     <i
       class="bi bi-box-seam-fill"
     />
-  </div>
+  </button>
 </div>
 `;
 
 exports[`Status Button passes styles to container 1`] = `
 <div>
-  <div
+  <button
+    aria-label="States.Own"
     class="button"
     role="button"
     style="width: 100%; align-self: end; margin-block-start: 1em;"
@@ -117,6 +125,6 @@ exports[`Status Button passes styles to container 1`] = `
     <i
       class="bi bi-box-seam-fill"
     />
-  </div>
+  </button>
 </div>
 `;

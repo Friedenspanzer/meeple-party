@@ -90,7 +90,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <div
       class="myStatusOwn"
     >
-      <div
+      <button
+        aria-label="States.Own"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -98,7 +99,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         <i
           class="bi bi-box-seam-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
@@ -133,7 +134,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <div
       class="myStatusWantToPlay"
     >
-      <div
+      <button
+        aria-label="States.WantToPlay"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -141,7 +143,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         <i
           class="bi bi-dice-3-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
@@ -176,7 +178,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <div
       class="myStatusWishlist"
     >
-      <div
+      <button
+        aria-label="States.Wishlist"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -184,7 +187,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         <i
           class="bi bi-gift-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
@@ -310,7 +313,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <div
       class="myStatusOwn"
     >
-      <div
+      <button
+        aria-label="States.Own"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -318,7 +322,7 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
         <i
           class="bi bi-box-seam-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
@@ -353,7 +357,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <div
       class="myStatusWantToPlay"
     >
-      <div
+      <button
+        aria-label="States.WantToPlay"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -361,7 +366,7 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
         <i
           class="bi bi-dice-3-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
@@ -396,7 +401,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <div
       class="myStatusWishlist"
     >
-      <div
+      <button
+        aria-label="States.Wishlist"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -404,7 +410,7 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
         <i
           class="bi bi-gift-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >

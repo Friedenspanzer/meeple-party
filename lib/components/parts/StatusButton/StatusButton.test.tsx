@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import StatusButton from "./StatusButton";
@@ -46,17 +47,29 @@ describe("Status Button", () => {
     );
     expect(container).toMatchSnapshot();
   });
-  it("calls callback on clicking button", async () => {
-    const user = userEvent.setup();
-    let called = false;
-    const callback = () => {
-      called = true;
-    };
-    render(<StatusButton status="own" active={false} toggle={callback} />);
-    const button = screen.getByRole("button");
-    await user.click(button);
-    expect(called).toBeTruthy();
-  });
+  test.each(["own", "wanttoplay", "wishlist"])(
+    "calls callback on clicking button for state %s",
+    async (status) => {
+      const user = userEvent.setup();
+      let called = false;
+      const callback = () => {
+        called = true;
+      };
+      render(
+        <StatusButton status={status as any} active={false} toggle={callback} />
+      );
+      const button = screen.getByRole("button");
+      await user.click(button);
+      expect(called).toBeTruthy();
+      expect(button).toHaveAccessibleName(
+        status === "own"
+          ? "States.Own"
+          : status === "wanttoplay"
+            ? "States.WantToPlay"
+            : "States.Wishlist"
+      );
+    }
+  );
   it("calls callback on key press", async () => {
     const user = userEvent.setup();
     let called = false;
