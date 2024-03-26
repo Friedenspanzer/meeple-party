@@ -2,10 +2,12 @@
 
 import { StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
+import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
+import useUserProfile from "@/hooks/useUserProfile";
+import GameboxBig from "@/lib/components/parts/gamebox/GameboxBig/GameboxBig";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
-import GameBoxBig from "./components/GameBoxBig/GameBoxBig";
 import GameBoxMedium from "./components/GameBoxMedium/GameBoxMedium";
 
 export interface GameBoxProps {
@@ -24,6 +26,8 @@ export default function GameBox({
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
   const [gameBoxSize] = useGameBoxSize();
+  const { data, isLoading, mutate } = useCollectionStatus(getGameId(game));
+  const { userProfile } = useUserProfile();
 
   useEffect(() => {
     if (showFriendCollection) {
@@ -79,11 +83,23 @@ export default function GameBox({
       );
     } else if (gameBoxSize === "xl") {
       return (
-        <GameBoxBig
+        <GameboxBig
           game={gameData}
-          status={status}
-          friendCollection={friendCollections}
-          showFriendCollection={showFriendCollection}
+          friendCollections={
+            friendCollections || { own: [], wantToPlay: [], wishlist: [] }
+          }
+          myCollection={{
+            own: !!data?.own,
+            wantToPlay: !!data?.wantToPlay,
+            wishlist: !!data?.wishlist,
+          }}
+          updateStatus={(status) => {
+            mutate({
+              gameId: getGameId(game),
+              userId: userProfile?.id,
+              ...status,
+            });
+          }}
         />
       );
     }

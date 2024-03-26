@@ -165,13 +165,25 @@ function Status({
   const toggle = useCallback(() => {
     if (!updateStatus) return;
     if (status === "own") {
-      updateStatus({ own: !myCollection.own });
+      updateStatus({
+        own: !myCollection.own,
+        wantToPlay: myCollection.wantToPlay,
+        wishlist: myCollection.wishlist,
+      });
     } else if (status === "wanttoplay") {
-      updateStatus({ wantToPlay: !myCollection.wantToPlay });
+      updateStatus({
+        own: myCollection.own,
+        wantToPlay: !myCollection.wantToPlay,
+        wishlist: myCollection.wishlist,
+      });
     } else if (status === "wishlist") {
-      updateStatus({ wishlist: !myCollection.wishlist });
+      updateStatus({
+        own: myCollection.own,
+        wantToPlay: myCollection.wantToPlay,
+        wishlist: !myCollection.wishlist,
+      });
     }
-  }, [myCollection, myCollection, myCollection, status, updateStatus]);
+  }, [myCollection, status, updateStatus]);
 
   const showFriends = useCallback(() => {
     openModal({
