@@ -1,11 +1,11 @@
 import { Role } from "@prisma/client";
 import type { Meta, StoryObj } from "@storybook/react";
-import GameboxBig from "./GameboxBig";
+import GameboxMedium from "./GameboxMedium";
 
 const meta = {
-  title: "Parts/Gamebox/Big",
-  component: GameboxBig,
-} satisfies Meta<typeof GameboxBig>;
+  title: "Parts/Gamebox/Medium",
+  component: GameboxMedium,
+} satisfies Meta<typeof GameboxMedium>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

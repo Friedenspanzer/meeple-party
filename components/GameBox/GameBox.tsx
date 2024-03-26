@@ -26,7 +26,7 @@ export default function GameBox({
   const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
   const [gameBoxSize] = useGameBoxSize();
-  const { data, isLoading, mutate } = useCollectionStatus(getGameId(game));
+  const { data, mutate } = useCollectionStatus(getGameId(game));
   const { userProfile } = useUserProfile();
 
   useEffect(() => {
