@@ -1,14 +1,14 @@
 "use client";
 
-import { StatusByUser } from "@/datatypes/collection";
+import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
+import GameboxMedium from "@/lib/components/parts/gamebox/GameBoxMedium/GameboxMedium";
 import GameboxBig from "@/lib/components/parts/gamebox/GameboxBig/GameboxBig";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
-import GameBoxMedium from "./components/GameBoxMedium/GameBoxMedium";
 
 export interface GameBoxProps {
   game: Game;
@@ -72,34 +72,39 @@ export default function GameBox({
   }, [game]);
 
   if (gameData) {
+    const friends = friendCollections || {
+      own: [],
+      wantToPlay: [],
+      wishlist: [],
+    };
+    const my = {
+      own: !!data?.own,
+      wantToPlay: !!data?.wantToPlay,
+      wishlist: !!data?.wishlist,
+    };
+    const update = (status: Partial<GameCollectionStatus>) => {
+      mutate({
+        gameId: getGameId(game),
+        userId: userProfile?.id,
+        ...status,
+      });
+    };
     if (gameBoxSize === "md") {
       return (
-        <GameBoxMedium
+        <GameboxMedium
           game={gameData}
-          status={status}
-          friendCollection={friendCollections}
-          showFriendCollection={showFriendCollection}
+          friendCollections={friends}
+          myCollection={my}
+          updateStatus={update}
         />
       );
     } else if (gameBoxSize === "xl") {
       return (
         <GameboxBig
           game={gameData}
-          friendCollections={
-            friendCollections || { own: [], wantToPlay: [], wishlist: [] }
-          }
-          myCollection={{
-            own: !!data?.own,
-            wantToPlay: !!data?.wantToPlay,
-            wishlist: !!data?.wishlist,
-          }}
-          updateStatus={(status) => {
-            mutate({
-              gameId: getGameId(game),
-              userId: userProfile?.id,
-              ...status,
-            });
-          }}
+          friendCollections={friends}
+          myCollection={my}
+          updateStatus={update}
         />
       );
     }
