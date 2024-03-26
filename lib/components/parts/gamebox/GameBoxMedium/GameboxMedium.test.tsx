@@ -4,9 +4,12 @@ import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import {
   generateArray,
+  generateBoolean,
   generateUserProfile,
-  render
+  render,
 } from "@/utility/test";
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import GameboxMedium from "./GameboxMedium";
 
 jest.mock("@/i18n/client");
@@ -85,47 +88,47 @@ describe("GameboxMedium", () => {
     );
     expect(rendered).toMatchSnapshot("default game");
   });
-  // test.each(["own", "wanttoplay", "wishlist"])(
-  //   "calls update callback when status button for %s is clicked",
-  //   async (status) => {
-  //     const user = userEvent.setup();
-  //     let actualStatus = null;
-  //     const callback = (status: Partial<GameCollectionStatus>) => {
-  //       actualStatus = status;
-  //     };
-  //     const randomCollection = {
-  //       own: generateBoolean(),
-  //       wantToPlay: generateBoolean(),
-  //       wishlist: generateBoolean(),
-  //     };
+  test.each(["own", "wanttoplay", "wishlist"])(
+    "calls update callback when status button for %s is clicked",
+    async (status) => {
+      const user = userEvent.setup();
+      let actualStatus = null;
+      const callback = (status: Partial<GameCollectionStatus>) => {
+        actualStatus = status;
+      };
+      const randomCollection = {
+        own: generateBoolean(),
+        wantToPlay: generateBoolean(),
+        wishlist: generateBoolean(),
+      };
 
-  //     render(
-  //       <GameboxMedium
-  //         game={game}
-  //         friendCollections={friendCollections}
-  //         myCollection={randomCollection}
-  //         updateStatus={callback}
-  //       />
-  //     );
-  //     const button = screen.getByRole("button", {
-  //       name:
-  //         status === "own"
-  //           ? "States.Own"
-  //           : status === "wanttoplay"
-  //             ? "States.WantToPlay"
-  //             : "States.Wishlist",
-  //     });
-  //     await user.click(button);
+      render(
+        <GameboxMedium
+          game={game}
+          friendCollections={friendCollections}
+          myCollection={randomCollection}
+          updateStatus={callback}
+        />
+      );
+      const button = screen.getByRole("button", {
+        name:
+          status === "own"
+            ? "States.Own"
+            : status === "wanttoplay"
+              ? "States.WantToPlay"
+              : "States.Wishlist",
+      });
+      await user.click(button);
 
-  //     expect(actualStatus).not.toBeNull();
+      expect(actualStatus).not.toBeNull();
 
-  //     if (status === "own") {
-  //       expect(actualStatus!.own).toBe(!randomCollection.own);
-  //     } else if (status === "wanttoplay") {
-  //       expect(actualStatus!.wantToPlay).toBe(!randomCollection.wantToPlay);
-  //     } else if (status === "wishlist") {
-  //       expect(actualStatus!.wishlist).toBe(!randomCollection.wishlist);
-  //     }
-  //   }
-  // );
+      if (status === "own") {
+        expect(actualStatus!.own).toBe(!randomCollection.own);
+      } else if (status === "wanttoplay") {
+        expect(actualStatus!.wantToPlay).toBe(!randomCollection.wantToPlay);
+      } else if (status === "wishlist") {
+        expect(actualStatus!.wishlist).toBe(!randomCollection.wishlist);
+      }
+    }
+  );
 });

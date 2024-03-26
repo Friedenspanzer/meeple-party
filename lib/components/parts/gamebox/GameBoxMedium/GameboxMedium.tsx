@@ -1,11 +1,13 @@
 "use client";
 
 import Avatar from "@/components/Avatar/Avatar";
+import { GameCollectionStatus } from "@/datatypes/collection";
 import { UserProfile } from "@/datatypes/userProfile";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
+import StatusButton from "../../StatusButton/StatusButton";
 import GameboxProps from "../interface";
 import styles from "./gameboxmedium.module.css";
 
@@ -16,6 +18,12 @@ export default function GameboxMedium({
   updateStatus,
 }: Readonly<GameboxProps>) {
   const { t } = useTranslation("game");
+
+  const update = (status: Partial<GameCollectionStatus>) => {
+    if (updateStatus) {
+      updateStatus(status);
+    }
+  };
 
   return (
     <div className={classNames(styles.container)}>
@@ -63,11 +71,44 @@ export default function GameboxMedium({
             <div className={styles.label}>{t("Attributes.Weight")}</div>
           </div>
         </div>
-        {/* <CollectionStatusButtons
-          gameId={game.id}
-          status={status}
-          className={styles.collectionbuttons}
-        /> */}
+        <div className={styles.collectionbuttons}>
+          <StatusButton
+            status={"own"}
+            className={styles.statusButton}
+            active={myCollection.own}
+            toggle={() =>
+              update({
+                own: !myCollection.own,
+                wantToPlay: myCollection.wantToPlay,
+                wishlist: myCollection.wishlist,
+              })
+            }
+          />
+          <StatusButton
+            status={"wanttoplay"}
+            className={styles.statusButton}
+            active={myCollection.wantToPlay}
+            toggle={() =>
+              update({
+                own: myCollection.own,
+                wantToPlay: !myCollection.wantToPlay,
+                wishlist: myCollection.wishlist,
+              })
+            }
+          />
+          <StatusButton
+            status={"wishlist"}
+            className={styles.statusButton}
+            active={myCollection.wishlist}
+            toggle={() =>
+              update({
+                own: myCollection.own,
+                wantToPlay: myCollection.wantToPlay,
+                wishlist: !myCollection.wishlist,
+              })
+            }
+          />
+        </div>
       </div>
       <Link href={`/app/game/${game.id}`} className={styles.friends}>
         <div className={styles.collection}>
