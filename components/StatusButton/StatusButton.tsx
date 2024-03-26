@@ -2,7 +2,7 @@ import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import StatusButtonStatic from "@/lib/components/parts/StatusButton/StatusButton";
 import { useCallback, useMemo } from "react";
 
-interface StatusButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+interface StatusButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   gameId: number;
   status: "own" | "wanttoplay" | "wishlist";
 }
