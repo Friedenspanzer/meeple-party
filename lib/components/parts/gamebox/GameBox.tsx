@@ -3,6 +3,7 @@
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useGame from "@/hooks/api/useGame";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
 import GameboxBig from "@/lib/components/parts/gamebox/GameboxBig/GameboxBig";
@@ -21,11 +22,23 @@ export default function GameBox({
   showFriendCollection = false,
 }: Readonly<GameBoxProps & React.HTMLAttributes<HTMLDivElement>>) {
   const gameId = getGameId(game);
-  const [gameData, setGameData] = useState<Game>();
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
   const [gameBoxSize] = useGameBoxSize();
-  const { data, mutate } = useCollectionStatus(gameId);
+  const {
+    data: collectionStatus,
+    mutate: updateCollectionStatus,
+    isLoading: collectionStatusIsLoading,
+    isError: collectionStatusIsError,
+  } = useCollectionStatus(gameId);
   const { userProfile } = useUserProfile();
+  const {
+    data: gameData,
+    isLoading: gameIsLoading,
+    isError: gameIsError,
+  } = useGame(gameId);
+
+  const isLoading = collectionStatusIsLoading || gameIsLoading;
+  const isError = collectionStatusIsError || gameIsError;
 
   useEffect(() => {
     if (showFriendCollection) {
@@ -50,25 +63,6 @@ export default function GameBox({
     }
   }, [game, friendCollection, showFriendCollection]);
 
-  useEffect(() => {
-    if (typeof game === "number") {
-      fetch(`/api/games/${game}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw Error(`${response.status} ${response.statusText}`);
-          }
-        })
-        .then(setGameData)
-        .catch((reason) => {
-          throw Error(`Error loading data for game ${game}. Reason: ${reason}`);
-        });
-    } else {
-      setGameData(game);
-    }
-  }, [game]);
-
   if (gameData) {
     const friends = friendCollections || {
       own: [],
@@ -76,12 +70,12 @@ export default function GameBox({
       wishlist: [],
     };
     const my = {
-      own: !!data?.own,
-      wantToPlay: !!data?.wantToPlay,
-      wishlist: !!data?.wishlist,
+      own: !!collectionStatus?.own,
+      wantToPlay: !!collectionStatus?.wantToPlay,
+      wishlist: !!collectionStatus?.wishlist,
     };
     const update = (status: Partial<GameCollectionStatus>) => {
-      mutate({
+      updateCollectionStatus({
         gameId: getGameId(game),
         userId: userProfile?.id,
         ...status,
