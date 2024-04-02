@@ -128,7 +128,6 @@ const GameCollection: React.FC<GameCollectionProps> = ({
             .map(({ game, status, friendCollections }) => (
               <GameBox
                 game={game}
-                status={status}
                 key={getGameId(game)}
                 showFriendCollection={showFriendCollection}
                 friendCollection={friendCollections}
