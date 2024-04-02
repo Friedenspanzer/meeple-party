@@ -10,7 +10,7 @@ import Fuse from "fuse.js";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
-import GameBox from "../GameBox/GameBox";
+import GameBox from "../../lib/components/parts/gamebox/GameBox";
 import GameBoxSizePicker from "../GameBoxSizePicker/GameBoxSizePicker";
 import GameCollectionFilter, {
   FilterPreset,
