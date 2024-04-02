@@ -162,6 +162,16 @@ function Status({
     }
   }, [status]);
 
+  const label = useMemo(() => {
+    if (status === "own") {
+      return ct("FriendCollections.Own");
+    } else if (status === "wanttoplay") {
+      return ct("FriendCollections.WantToPlay");
+    } else if (status === "wishlist") {
+      return ct("FriendCollections.Wishlist");
+    }
+  }, [status, ct]);
+
   const toggle = useCallback(() => {
     if (!updateStatus) return;
     if (status === "own") {
@@ -216,8 +226,8 @@ function Status({
         </div>
       </div>
       {friends.length > 0 && (
-        <div
-          className={classNames({
+        <button
+          className={classNames(styles.friendStatus, {
             [styles.friendStatusOwn]: status === "own",
             [styles.friendStatusWantToPlay]: status === "wanttoplay",
             [styles.friendStatusWishlist]: status === "wishlist",
@@ -230,6 +240,7 @@ function Status({
           }}
           tabIndex={0}
           data-testid={`friends-${translationBaseKey}`}
+          aria-label={label}
         >
           <AvatarStack
             max={4}
@@ -243,7 +254,7 @@ function Status({
           <div className={styles.statusText}>
             {t(`FriendStates.${translationBaseKey}`, { count: friends.length })}
           </div>
-        </div>
+        </button>
       )}
     </>
   );

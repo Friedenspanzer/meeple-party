@@ -1,5 +1,5 @@
 import Avatar from "@/components/Avatar/Avatar";
-import { useModal } from "@/context/modalContext";
+import { ModalConfiguration, useModal } from "@/context/modalContext";
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import {
@@ -68,6 +68,9 @@ describe("GameBoxBig", () => {
       close: () => {},
     }));
   });
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
   it("Matches snapshot", async () => {
     const { container: rendered } = render(
       <GameboxBig
@@ -88,6 +91,54 @@ describe("GameBoxBig", () => {
     );
     expect(rendered).toMatchSnapshot("default game");
   });
+  test.each(["own", "wanttoplay", "wishlist"])(
+    "opens modal when clicking friends list for %s status",
+    async () => {
+      const user = userEvent.setup();
+      const translationKey =
+        status === "own"
+          ? "Own"
+          : status === "wanttoplay"
+            ? "WantToPlay"
+            : "Wishlist";
+      const expectedFriends =
+        status === "own"
+          ? friendCollections.own
+          : status === "wanttoplay"
+            ? friendCollections.wantToPlay
+            : friendCollections.wishlist;
+      let actualConfiguration: ModalConfiguration | null = null;
+      const useModalMock = jest.mocked(useModal);
+      useModalMock.mockImplementation(() => ({
+        open: (configuration) => {
+          actualConfiguration = configuration;
+        },
+        close: () => {},
+      }));
+      render(
+        <GameboxBig
+          game={game}
+          friendCollections={friendCollections}
+          myCollection={myCollection}
+        />
+      );
+      const button = screen.getByRole("button", {
+        name: `FriendCollections.${translationKey}`,
+      });
+      await user.click(button);
+
+      expect(useModalMock).toHaveBeenCalledTimes(3);
+      expect(actualConfiguration).not.toBeNull();
+      expect(actualConfiguration!.title).toBe(
+        `FriendCollections.${translationKey}`
+      );
+      render(actualConfiguration!.content);
+      expectedFriends.forEach((friend) => {
+        const link = screen.getByText(friend.name!);
+        expect(link).not.toBeNull();
+      });
+    }
+  );
   test.each(["own", "wanttoplay", "wishlist"])(
     "calls update callback when status button for %s is clicked",
     async (status) => {

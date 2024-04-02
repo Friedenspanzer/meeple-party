@@ -48,7 +48,7 @@ export default function StatusButton({
     } else if (status === "wishlist") {
       return t("States.Wishlist");
     }
-  }, [status]);
+  }, [status, t]);
 
   if (loading) {
     return (

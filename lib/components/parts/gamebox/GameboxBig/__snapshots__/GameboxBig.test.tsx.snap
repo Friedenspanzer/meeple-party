@@ -106,8 +106,9 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         States.Own
       </div>
     </div>
-    <div
-      class="friendStatusOwn"
+    <button
+      aria-label="FriendCollections.Own"
+      class="friendStatus friendStatusOwn"
       data-testid="friends-Own"
       tabindex="0"
     >
@@ -130,7 +131,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       >
         FriendStates.Own
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWantToPlay"
     >
@@ -150,8 +151,9 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         States.NotWantToPlay
       </div>
     </div>
-    <div
-      class="friendStatusWantToPlay"
+    <button
+      aria-label="FriendCollections.WantToPlay"
+      class="friendStatus friendStatusWantToPlay"
       data-testid="friends-WantToPlay"
       tabindex="0"
     >
@@ -174,7 +176,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       >
         FriendStates.WantToPlay
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWishlist"
     >
@@ -194,8 +196,9 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         States.Wishlist
       </div>
     </div>
-    <div
-      class="friendStatusWishlist"
+    <button
+      aria-label="FriendCollections.Wishlist"
+      class="friendStatus friendStatusWishlist"
       data-testid="friends-Wishlist"
       tabindex="0"
     >
@@ -218,7 +221,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       >
         FriendStates.Wishlist
       </div>
-    </div>
+    </button>
   </div>
 </div>
 `;
@@ -329,8 +332,9 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
         States.Own
       </div>
     </div>
-    <div
-      class="friendStatusOwn"
+    <button
+      aria-label="FriendCollections.Own"
+      class="friendStatus friendStatusOwn"
       data-testid="friends-Own"
       tabindex="0"
     >
@@ -343,17 +347,13 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
           +
           6
         </div>
-        Avatar
-        Avatar
-        Avatar
-        Avatar
       </div>
       <div
         class="statusText"
       >
         FriendStates.Own
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWantToPlay"
     >
@@ -373,8 +373,9 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
         States.NotWantToPlay
       </div>
     </div>
-    <div
-      class="friendStatusWantToPlay"
+    <button
+      aria-label="FriendCollections.WantToPlay"
+      class="friendStatus friendStatusWantToPlay"
       data-testid="friends-WantToPlay"
       tabindex="0"
     >
@@ -387,17 +388,13 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
           +
           6
         </div>
-        Avatar
-        Avatar
-        Avatar
-        Avatar
       </div>
       <div
         class="statusText"
       >
         FriendStates.WantToPlay
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWishlist"
     >
@@ -417,8 +414,9 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
         States.Wishlist
       </div>
     </div>
-    <div
-      class="friendStatusWishlist"
+    <button
+      aria-label="FriendCollections.Wishlist"
+      class="friendStatus friendStatusWishlist"
       data-testid="friends-Wishlist"
       tabindex="0"
     >
@@ -431,17 +429,13 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
           +
           6
         </div>
-        Avatar
-        Avatar
-        Avatar
-        Avatar
       </div>
       <div
         class="statusText"
       >
         FriendStates.Wishlist
       </div>
-    </div>
+    </button>
   </div>
 </div>
 `;
