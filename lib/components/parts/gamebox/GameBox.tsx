@@ -1,7 +1,6 @@
 "use client";
 
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
-import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGame from "@/hooks/api/useGame";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
@@ -11,17 +10,16 @@ import GameboxMedium from "@/lib/components/parts/gamebox/GameboxMedium/GameboxM
 import { useEffect, useState } from "react";
 
 export interface GameBoxProps {
-  game: Game;
+  gameId: number;
   friendCollection?: StatusByUser;
   showFriendCollection: boolean;
 }
 
 export default function GameBox({
-  game,
+  gameId,
   friendCollection,
   showFriendCollection = false,
 }: Readonly<GameBoxProps & React.HTMLAttributes<HTMLDivElement>>) {
-  const gameId = getGameId(game);
   const [friendCollections, setFriendCollections] = useState<StatusByUser>();
   const [gameBoxSize] = useGameBoxSize();
   const {
@@ -43,7 +41,7 @@ export default function GameBox({
   useEffect(() => {
     if (showFriendCollection) {
       if (!friendCollection) {
-        fetch(`/api/collection/friends/byGame/${getGameId(game)}`)
+        fetch(`/api/collection/friends/byGame/${gameId}`)
           .then((response) => {
             if (response.ok) {
               return response.json();
@@ -54,14 +52,14 @@ export default function GameBox({
           .then(setFriendCollections)
           .catch((reason) => {
             throw Error(
-              `Error loading friend collection data for game ${game}. Reason: ${reason}`
+              `Error loading friend collection data for game ${gameId}. Reason: ${reason}`
             );
           });
       } else {
         setFriendCollections(friendCollection);
       }
     }
-  }, [game, friendCollection, showFriendCollection]);
+  }, [gameId, friendCollection, showFriendCollection]);
 
   if (gameData) {
     const friends = friendCollections || {
@@ -76,7 +74,7 @@ export default function GameBox({
     };
     const update = (status: Partial<GameCollectionStatus>) => {
       updateCollectionStatus({
-        gameId: getGameId(game),
+        gameId,
         userId: userProfile?.id,
         ...status,
       });
@@ -103,11 +101,4 @@ export default function GameBox({
   } else {
     return <>…</>;
   }
-}
-
-function getGameId(game: Game | number) {
-  if (typeof game === "number") {
-    return game;
-  }
-  return game.id;
 }

@@ -125,9 +125,9 @@ const GameCollection: React.FC<GameCollectionProps> = ({
         <div className={styles.games}>
           {filteredGames
             .slice(getOffset(), getOffset() + itemsPerPage)
-            .map(({ game, status, friendCollections }) => (
+            .map(({ game, friendCollections }) => (
               <GameBox
-                game={game}
+                gameId={game.id}
                 key={getGameId(game)}
                 showFriendCollection={showFriendCollection}
                 friendCollection={friendCollections}
