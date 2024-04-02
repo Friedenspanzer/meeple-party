@@ -5,7 +5,7 @@ import { Game } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
-import GameboxMedium from "@/lib/components/parts/gamebox/GameBoxMedium/GameboxMedium";
+import GameboxMedium from "@/lib/components/parts/gamebox/GameboxMedium/GameboxMedium";
 import GameboxBig from "@/lib/components/parts/gamebox/GameboxBig/GameboxBig";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
