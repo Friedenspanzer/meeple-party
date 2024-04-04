@@ -11,7 +11,8 @@ import {
   generateFullPrismaRelationship,
   generateNumber,
   generatePrismaUser,
-  objectMatcher
+  generateString,
+  objectMatcher,
 } from "@/utility/test";
 import { RelationshipType } from "@prisma/client";
 import { mock, mockReset } from "jest-mock-extended";
@@ -35,6 +36,24 @@ describe("GET game/[gameId]/friends", () => {
     mockReset(getUserMock);
 
     getUserMock.mockResolvedValue(myUser);
+  });
+  it("rejects non-numeric game id", async () => {
+    relationshipMock.mockResolvedValue([]);
+    collectionMock.mockResolvedValue([]);
+    const { response } = await get(requestMock, generateString());
+    expect(response.status).toBe(400);
+  });
+  it("rejects negative game id", async () => {
+    relationshipMock.mockResolvedValue([]);
+    collectionMock.mockResolvedValue([]);
+    const { response } = await get(requestMock, generateNumber(-9999999, -1));
+    expect(response.status).toBe(400);
+  });
+  it("rejects big game id", async () => {
+    relationshipMock.mockResolvedValue([]);
+    collectionMock.mockResolvedValue([]);
+    const { response } = await get(requestMock, 1000000000);
+    expect(response.status).toBe(400);
   });
   it("returns empty lists when I have no friends", async () => {
     relationshipMock.mockResolvedValue([]);
@@ -111,9 +130,9 @@ describe("GET game/[gameId]/friends", () => {
 
 async function get(
   request: Request,
-  gameId: number
+  gameId: number | string
 ): Promise<{ response: Response; data: FriendCollectionGetResult }> {
-  const response = await GET(request, { params: { gameId } });
+  const response = await GET(request, { params: { gameId: `${gameId}` } });
   const data = await response.json();
   return { response, data };
 }
