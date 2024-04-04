@@ -4,7 +4,7 @@ import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import { useTranslation } from "@/i18n/client";
-import Gamebox from "@/lib/components/parts/gamebox/GameBox";
+import Gamebox from "@/lib/components/parts/gamebox/Gamebox";
 import { emptyFilter } from "@/utility/filter";
 import classNames from "classnames";
 import Fuse from "fuse.js";
