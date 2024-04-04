@@ -5,9 +5,9 @@ import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGame from "@/hooks/api/useGame";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
-import GameboxBig from "@/lib/components/parts/gamebox/GameboxBig/GameboxBig";
-import GameboxMedium from "@/lib/components/parts/gamebox/GameboxMedium/GameboxMedium";
 import useFriendCollectionStatus from "@/lib/hooks/useFriendCollectionStatus";
+import GameboxBig from "./GameboxBig/GameboxBig";
+import GameboxMedium from "./GameboxMedium/GameboxMedium";
 
 export interface GameboxProps {
   gameId: number;
