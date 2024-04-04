@@ -1,26 +1,26 @@
 "use client";
 
-import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
+import { GameCollectionStatus } from "@/datatypes/collection";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGame from "@/hooks/api/useGame";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
 import GameboxBig from "@/lib/components/parts/gamebox/GameboxBig/GameboxBig";
 import GameboxMedium from "@/lib/components/parts/gamebox/GameboxMedium/GameboxMedium";
-import { useEffect, useState } from "react";
+import useFriendCollectionStatus from "@/lib/hooks/useFriendCollectionStatus";
 
-export interface GameBoxProps {
+export interface GameboxProps {
   gameId: number;
-  friendCollection?: StatusByUser;
-  showFriendCollection: boolean;
 }
 
-export default function GameBox({
+export default function Gamebox({
   gameId,
-  friendCollection,
-  showFriendCollection = false,
-}: Readonly<GameBoxProps & React.HTMLAttributes<HTMLDivElement>>) {
-  const [friendCollections, setFriendCollections] = useState<StatusByUser>();
+}: Readonly<GameboxProps & React.HTMLAttributes<HTMLDivElement>>) {
+  const {
+    data: friendCollections,
+    isLoading: friendCollectionLoading,
+    isError: friendCollectionError,
+  } = useFriendCollectionStatus(gameId);
   const [gameBoxSize] = useGameBoxSize();
   const {
     data: collectionStatus,
@@ -35,31 +35,10 @@ export default function GameBox({
     isError: gameIsError,
   } = useGame(gameId);
 
-  const isLoading = collectionStatusIsLoading || gameIsLoading;
-  const isError = collectionStatusIsError || gameIsError;
-
-  useEffect(() => {
-    if (showFriendCollection) {
-      if (!friendCollection) {
-        fetch(`/api/collection/friends/byGame/${gameId}`)
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw Error(`${response.status} ${response.statusText}`);
-            }
-          })
-          .then(setFriendCollections)
-          .catch((reason) => {
-            throw Error(
-              `Error loading friend collection data for game ${gameId}. Reason: ${reason}`
-            );
-          });
-      } else {
-        setFriendCollections(friendCollection);
-      }
-    }
-  }, [gameId, friendCollection, showFriendCollection]);
+  const isLoading =
+    collectionStatusIsLoading || gameIsLoading || friendCollectionLoading;
+  const isError =
+    collectionStatusIsError || gameIsError || friendCollectionError;
 
   if (gameData) {
     const friends = friendCollections || {
