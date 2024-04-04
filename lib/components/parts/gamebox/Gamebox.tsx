@@ -7,7 +7,7 @@ import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
 import useFriendCollectionStatus from "@/lib/hooks/useFriendCollectionStatus";
 import GameboxBig from "./GameboxBig/GameboxBig";
-import GameboxMedium from "./GameboxMedium/GameboxMedium";
+import GameboxMedium from "./GameboxMedium/_GameboxMedium";
 
 export interface GameboxProps {
   gameId: number;
