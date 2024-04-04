@@ -1,6 +1,6 @@
 import { Role } from "@prisma/client";
 import type { Meta, StoryObj } from "@storybook/react";
-import GameboxMedium from "./_GameboxMedium";
+import GameboxMedium from "./GameboxMedium";
 
 const meta = {
   title: "Parts/Gamebox/Medium",

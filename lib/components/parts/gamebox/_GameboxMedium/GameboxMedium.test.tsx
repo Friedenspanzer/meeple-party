@@ -10,7 +10,7 @@ import {
 } from "@/utility/test";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import GameboxMedium from "./_GameboxMedium";
+import GameboxMedium from "./GameboxMedium";
 
 jest.mock("@/i18n/client");
 jest.mock("@/hooks/api/useCollectionStatus");
