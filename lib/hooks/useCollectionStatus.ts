@@ -10,7 +10,6 @@ type CollectionStatusUpdate = Partial<
 >;
 
 function getCollectionStatus(gameId: number) {
-  console.log("Loading game collection", gameId);
   return axios
     .get<GameCollection>(`/api/v2/game/${gameId}/collection`)
     .then((response) => response.data);
