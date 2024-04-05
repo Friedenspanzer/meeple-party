@@ -1,10 +1,10 @@
 "use client";
 
 import { GameCollectionStatus } from "@/datatypes/collection";
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import useGame from "@/hooks/api/useGame";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
+import useCollectionStatus from "@/lib/hooks/useCollectionStatus";
 import useFriendCollectionStatus from "@/lib/hooks/useFriendCollectionStatus";
 import GameboxBig from "./GameboxBig/GameboxBig";
 import GameboxMedium from "./GameboxMedium/GameboxMedium";

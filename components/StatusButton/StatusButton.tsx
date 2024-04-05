@@ -1,5 +1,5 @@
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import StatusButtonStatic from "@/lib/components/parts/StatusButton/StatusButton";
+import useCollectionStatus from "@/lib/hooks/useCollectionStatus";
 import { useCallback, useMemo } from "react";
 
 interface StatusButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
