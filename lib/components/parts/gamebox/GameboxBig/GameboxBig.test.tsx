@@ -13,7 +13,7 @@ import userEvent from "@testing-library/user-event";
 import GameboxBig from "./GameboxBig";
 
 jest.mock("@/i18n/client");
-jest.mock("@/hooks/api/useCollectionStatus");
+jest.mock("@/lib/hooks/useCollectionStatus");
 jest.mock("@/components/Avatar/Avatar", () => ({
   __esModule: true,
   namedExport: jest.fn(),
