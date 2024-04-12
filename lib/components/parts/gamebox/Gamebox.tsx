@@ -1,6 +1,5 @@
 "use client";
 
-import { GameCollectionStatus } from "@/datatypes/collection";
 import useGame from "@/hooks/api/useGame";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import useUserProfile from "@/hooks/useUserProfile";
@@ -51,20 +50,13 @@ export default function Gamebox({
       wantToPlay: !!collectionStatus?.wantToPlay,
       wishlist: !!collectionStatus?.wishlist,
     };
-    const update = (status: Partial<GameCollectionStatus>) => {
-      updateCollectionStatus({
-        gameId,
-        userId: userProfile?.id,
-        ...status,
-      });
-    };
     if (gameBoxSize === "md") {
       return (
         <GameboxMedium
           game={gameData}
           friendCollections={friends}
           myCollection={my}
-          updateStatus={update}
+          updateStatus={updateCollectionStatus}
         />
       );
     } else if (gameBoxSize === "xl") {
@@ -73,7 +65,7 @@ export default function Gamebox({
           game={gameData}
           friendCollections={friends}
           myCollection={my}
-          updateStatus={update}
+          updateStatus={updateCollectionStatus}
         />
       );
     }
