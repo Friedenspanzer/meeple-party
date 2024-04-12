@@ -17,12 +17,9 @@ describe("Status Button", () => {
         isLoading: false,
         mutate: () => {},
         data: {
-          gameId: 123,
           own: true,
-          userId: "abc123",
           wantToPlay: true,
           wishlist: true,
-          updatedAt: null,
         },
       });
       const { container } = render(
@@ -40,12 +37,10 @@ describe("Status Button", () => {
         isLoading: false,
         mutate: () => {},
         data: {
-          gameId: 123,
           own: false,
-          userId: "abc123",
+
           wantToPlay: false,
           wishlist: false,
-          updatedAt: null,
         },
       });
       const { container } = render(
@@ -61,12 +56,9 @@ describe("Status Button", () => {
       isLoading: true,
       mutate: () => {},
       data: {
-        gameId: 123,
         own: false,
-        userId: "abc123",
         wantToPlay: false,
         wishlist: false,
-        updatedAt: null,
       },
     });
     const { container } = render(<StatusButton gameId={123} status="own" />);
@@ -79,12 +71,9 @@ describe("Status Button", () => {
       isLoading: false,
       mutate: () => {},
       data: {
-        gameId: 123,
         own: false,
-        userId: "abc123",
         wantToPlay: false,
         wishlist: false,
-        updatedAt: null,
       },
     });
     const { container } = render(
@@ -99,12 +88,9 @@ describe("Status Button", () => {
       isLoading: false,
       mutate: () => {},
       data: {
-        gameId: 123,
         own: false,
-        userId: "abc123",
         wantToPlay: false,
         wishlist: false,
-        updatedAt: null,
       },
     });
     const { container } = render(
@@ -128,12 +114,9 @@ describe("Status Button", () => {
         actualStatus = data.own;
       },
       data: {
-        gameId: 123,
         own: !expectedStatus,
-        userId: "abc123",
         wantToPlay: generateBoolean(),
         wishlist: generateBoolean(),
-        updatedAt: null,
       },
     });
     render(<StatusButton gameId={123} status="own" />);
@@ -153,12 +136,9 @@ describe("Status Button", () => {
         actualStatus = data.wantToPlay;
       },
       data: {
-        gameId: 123,
         own: generateBoolean(),
-        userId: "abc123",
         wantToPlay: !expectedStatus,
         wishlist: generateBoolean(),
-        updatedAt: null,
       },
     });
     render(<StatusButton gameId={123} status="wanttoplay" />);
@@ -178,12 +158,9 @@ describe("Status Button", () => {
         actualStatus = data.wishlist;
       },
       data: {
-        gameId: 123,
         own: generateBoolean(),
-        userId: "abc123",
         wantToPlay: generateBoolean(),
         wishlist: !expectedStatus,
-        updatedAt: null,
       },
     });
     render(<StatusButton gameId={123} status="wishlist" />);
@@ -203,12 +180,9 @@ describe("Status Button", () => {
         actualStatus = data.wishlist;
       },
       data: {
-        gameId: 123,
         own: generateBoolean(),
-        userId: "abc123",
         wantToPlay: generateBoolean(),
         wishlist: !expectedStatus,
-        updatedAt: null,
       },
     });
     render(<StatusButton gameId={123} status="wishlist" />);
