@@ -1,0 +1,75 @@
+{
+  "Badges": {
+    "You": "It's you!",
+    "Friend": "Friend",
+    "Admin": "Admin",
+    "FriendsFamily": "Friends & Family",
+    "Premium": "Premium",
+    "User": "User"
+  },
+  "Edit": "Edit your profile",
+  "Share": "Share your profile",
+  "About": "About {{name}}",
+  "FavoriteGames": "Favorite Games",
+  "UserCollection": "{{name}}'s collection",
+  "Header": {
+    "Place": "From {{place}}",
+    "BggName": "{{name}} on BoardGameGeek"
+  },
+  "Complete": {
+    "Header": "Complete your user profile",
+    "Explanation": "Hi there! 👋 Sorry to interrupt, but we still need some information from you.",
+    "DisplayName": "Display name",
+    "DisplayNameExplanation": "What you will be publicly known as",
+    "RealName": "Real name (optional)",
+    "RealNameExplanation": "Only shown to your friends",
+    "EmailAddress": "E-Mail address"
+  },
+  "Public": {
+    "IsOn": "is on",
+    "CallToAction": "Log in or register now to see their whole profile or see what this is all about!",
+    "KnowMore": "Find out more"
+  },
+  "EditScreen": {
+    "Header": "Edit your profile",
+    "ProfileName": "Profile name",
+    "RealName": "Real name",
+    "Place": "Place",
+    "PlacePlaceholder": "Where you live",
+    "Mandatory": "Must be set.",
+    "Visibility": {
+      "Everybody": "Will be shown to everybody.",
+      "Friends": "Will be shown to your friends.",
+      "Edit": "Change"
+    },
+    "About": "Your profile",
+    "AboutPlaceholder": "Write something to spice up your profile page.",
+    "Favorites": "Your favorite games",
+    "AddGames": "Add games",
+    "Save": "Save",
+    "ChangeInformation": "For some things you can change what's shown to everybody in your <1>privacy settings</1>.",
+    "Errors": {
+      "GameData": "Error fetching game data for game {{gameId}}.",
+      "ProfileNameMandatory": "You must enter a profile name.",
+      "ProfileNameLength": "Your profile name must not exceed 30 characters.",
+      "RealNameLength": "The name given to us must not exceed 60 characters",
+      "PlaceLength": "The place given to us must not exceed 30 characters.",
+      "AboutLength": "The text must not exceed 3000 characters."
+    }
+  },
+  "Avatar": {
+    "Header": "Your current avatar",
+    "Upload": "Upload new avatar",
+    "Restrictions": "Only file types allowed are JPG and PNG. Files may not exceed 1MB.",
+    "Remove": "Remove avatar",
+    "Choose": "Choose an image file",
+    "Success": "Successfully uploaded your avatar!",
+    "Errors": {
+      "NoFile": "No file selected.",
+      "MultipleFiles": "Multiple files selected.",
+      "FileSize": "File is bigger than 1MB.",
+      "FileType": "File type not allowed.",
+      "Upload": "Error uploading file."
+    }
+  }
+}
