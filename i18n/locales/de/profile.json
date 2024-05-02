@@ -52,8 +52,8 @@
       "GameData": "Fehler beim Laden der Daten von Spiel {{gameId}}.",
       "ProfileNameMandatory": "Du musst einen Spitznamen angeben.",
       "ProfileNameLength": "Dein Spitzname darf höchstens 30 Zeichen lang sein.",
-      "RealNameLength": "Der Name den du hier angibst darf höchstens 60 Zeichen lang sein.",
-      "PlaceLength": "Der Ort den du hier angibst darf höchstens 30 Zeichen lang sein.",
+      "RealNameLength": "Der Name, den du hier angibst, darf höchstens 60 Zeichen lang sein",
+      "PlaceLength": "Der Ort, den du hier angibst, darf höchstens 30 Zeichen lang sein.",
       "AboutLength": "Der Text darf höchstens 3000 Zeichen lang sein."
     }
   },
