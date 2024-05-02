@@ -46,7 +46,7 @@
     "Explanation": "<strong>Das kann nicht rückgängig gemacht werden.</strong> Wir behalten keine Daten von dir. Alle Daten die du in Meeple Party eingegeben hast werden für immer verloren sein. Deine Freund*innen werden nicht darüber informiert. Bist du dir sicher dass du das tun willst?",
     "TypeAccountName": "Bitte gib deinen Accountnamen <strong>{{name}}</strong> ein um zu bestätigen dass du es ernst meinst.",
     "Progress": "Dein Account wird gelöscht. Dass kann einen Moment dauern. Wenn wir fertig sind wirst du zur Startseite weitergeleitet. Tschüss.",
-    "Confirmation_1": "Ja, ich bin sicher",
-    "Confirmation_2": "Meinen Account löschen"
+    "Confirmation_A": "Ja, ich bin sicher",
+    "Confirmation_B": "Meinen Account löschen"
   }
 }

@@ -45,7 +45,7 @@ const DeleteAccount: React.FC = () => {
           </p>
           <button onClick={() => setStep("Input")} className="btn btn-danger">
             <i className="bi bi-hand-thumbs-up-fill"></i>{" "}
-            {t("Delete.Confirmation_1")}
+            {t("Delete.Confirmation_A")}
           </button>
         </>
       );
@@ -70,7 +70,7 @@ const DeleteAccount: React.FC = () => {
             className="btn btn-danger mt-3"
             disabled={confirmation !== userProfile?.name}
           >
-            <i className="bi bi-trash3-fill"></i> {t("Delete.Confirmation_2")}
+            <i className="bi bi-trash3-fill"></i> {t("Delete.Confirmation_B")}
           </button>
         </>
       );
