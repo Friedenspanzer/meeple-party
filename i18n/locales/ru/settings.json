@@ -46,9 +46,7 @@
     "Explanation": "<strong>This can not be undone.</strong> We will not retain any of your data. Everything you contributed to Meeple Party will be lost forever. Your friends will not be notified of this. Are you sure you want to do this?",
     "TypeAccountName": "Please type your account name <strong>{{name}}</strong> to verify that you really mean it.",
     "Progress": "Deleting your account. This may take a moment. After we're done you will be redirected to the front page. Bye!",
-    "Confirmation_0": "Yes, I'm sure",
-    "Confirmation_1": "Yes, I'm sure",
-    "Confirmation_3": "Yes, I'm sure",
-    "Confirmation_2": "Yes, I'm sure"
+    "Confirmation_A": "Yes, I'm sure",
+    "Confirmation_B": "Delete my account"
   }
 }
