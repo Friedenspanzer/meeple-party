@@ -1,23 +1,23 @@
 {
-  "Page": {
-    "Header": {
-      "Design": "Design",
-      "Art": "Illustration",
-      "Players": "Personen",
-      "Minutes": "Minuten",
-      "Weight": "Komplexität"
+    "Attributes": {
+        "Players": "Personen",
+        "PlayingTime": "Dauer",
+        "Weight": "Komplexität"
     },
-    "Collections": {
-      "YourCollection": "Deine Sammlung",
-      "FriendsOwn": "Im Besitz",
-      "FriendsWantToPlay": "Wollen spielen",
-      "FriendsWishlist": "Wünschen sich"
-    },
-    "More": "… und {{count}} weitere"
-  },
-  "Attributes": {
-    "Players": "Personen",
-    "PlayingTime": "Dauer",
-    "Weight": "Komplexität"
-  }
+    "Page": {
+        "Header": {
+            "Design": "Design",
+            "Art": "Illustration",
+            "Players": "Personen",
+            "Minutes": "Minuten",
+            "Weight": "Komplexität"
+        },
+        "Collections": {
+            "YourCollection": "Deine Sammlung",
+            "FriendsOwn": "Im Besitz",
+            "FriendsWantToPlay": "Wollen spielen",
+            "FriendsWishlist": "Wünschen sich"
+        },
+        "More": "… und {{count}} weitere"
+    }
 }
