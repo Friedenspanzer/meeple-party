@@ -3,14 +3,14 @@
     "Account": "BGG-Account",
     "Configuration": "Einstellungen",
     "Request": "Daten anfragen",
-    "Import": "Import"
+    "Import": "Importieren"
   },
   "Name": {
     "YourName": "Dein BoardGameGeek-Benutzername"
   },
   "Configuration": {
     "Mode": "Importmodus",
-    "Update": "Update",
+    "Update": "Aktualisieren",
     "Merge": "Zusammenführen",
     "Overwrite": "Überschreiben",
     "BggToMeepleParty": "Welcher BGG-Status soll welchem Meeple Party-Status zugeordnet werden",
@@ -29,12 +29,12 @@
     },
     "Warnings": {
       "PreorderedTwice": {
-        "Heading": "Du hast ausgewählt den BGG-Status Preorder zwei Mal zu importieren.",
+        "Heading": "Du hast ausgewählt den BGG-Status Preorder zweimal zu importieren.",
         "Text": "Das wird für deine vorbestellten Spiele beide Status-Felder in Meeple Party setzen."
       },
       "NoStatusInMerge": {
         "Heading": "Du hast im Zusammenführen-Modus für einen Status auf Meeple Party keinen Status auf BoardGameGeek ausgewählt, der importiert werden soll.",
-        "Text": "Das wird funktionieren, macht aber möglicherweise nicht das, was du willst. Der Status <em>wird</em> importiert, aber jedes Spiel wird von BoardGameGeek als ohne diesen Status erkannt. Für Spiele die in beiden Sammlungen sind wird der Status auf Meeple Party also gelöscht."
+        "Text": "Das wird funktionieren, macht aber möglicherweise nicht das, was du willst. Der Status <em>wird</em> importiert, aber jedes Spiel wird von BoardGameGeek als ohne diesen Status erkannt. Für Spiele, die in beiden Sammlungen sind, wird der Status auf Meeple Party also gelöscht."
       },
       "Overwrite": {
         "Heading": "Du hast den Modus Überschreiben gewählt.",
@@ -48,7 +48,7 @@
   },
   "Request": {
     "Title": "Deine Sammlung wird abgerufen.",
-    "Text": "Das kann ein paar Minuten dauern, je nach dem wie ausgelastet BoardGameGeek ist. Du kannst hier nichts tun. Du kannst die Seite verlassen und später wiederkommen, ohne Fortschritt zu verlieren."
+    "Text": "Das kann ein paar Minuten dauern, je nachdem wie ausgelastet BoardGameGeek ist. Du kannst hier nichts tun. Du kannst die Seite verlassen und später wiederkommen, ohne Fortschritt zu verlieren."
   },
   "Import": {
     "Update": "{{name}} wurde in deiner Sammlung geändert.",

@@ -1,0 +1,23 @@
+{
+    "Attributes": {
+        "Players": "Players",
+        "PlayingTime": "Playing Time",
+        "Weight": "Weight"
+    },
+    "Page": {
+        "Header": {
+            "Design": "Design",
+            "Art": "Art",
+            "Players": "players",
+            "Minutes": "minutes",
+            "Weight": "weight"
+        },
+        "Collections": {
+            "YourCollection": "Your collection",
+            "FriendsOwn": "Owned by",
+            "FriendsWantToPlay": "Want to play",
+            "FriendsWishlist": "Wishlist"
+        },
+        "More": "… and {{count}} more"
+    }
+}

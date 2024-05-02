@@ -17,7 +17,7 @@
     },
     "Stream": {
       "Heading": "Aktivitätsverlauf",
-      "Text": "Sieh sofort wenn deine Freund*innen ein neues Spiel haben oder eines spielen wollen."
+      "Text": "Sieh sofort, wenn deine Freund*innen ein neues Spiel haben oder eines spielen wollen."
     }
   },
   "Steps": {
@@ -27,12 +27,12 @@
     },
     "Friends": {
       "Heading": "Finde deine Freunde und stöbere in ihren Spielen",
-      "Text_A": "Finde die Leute, die du schon kennst. Meeple Party ist kein soziales Netzwerk wie die anderen, wir wollen nciht mal dass du Leute anfreundest die du kaum kennst. Trag einfach deine Freund*innen und Bekannte ein die du schon hast und mit denen du schon Spiele spielst.",
+      "Text_A": "Finde die Leute, die du schon kennst. Meeple Party ist kein soziales Netzwerk wie die anderen, wir wollen nicht mal, dass du Leute anfreundest, die du kaum kennst. Trag einfach deine Freund*innen und Bekannte ein, die du schon hast und mit denen du schon Spiele spielst.",
       "Text_B": "Dann kannst du loslegen und dir ihre Spiele ansehen. Markiere alle, die du spielen möchtest. Meeple Party erledigt für euch dann den Rest und sagt euch welches eurer Spiele ihr sofort spielen könntet."
     },
     "Play": {
       "Heading": "Geh Spiele spielen",
-      "Text": "Sag deinen Freund*innen dass es ein paar Treffer gab und macht einen Termin für euren Spieleabend aus. Alle können einfach nachsehen, welche Spiele sie mitbringen sollen."
+      "Text": "Sag deinen Freund*innen, dass es ein paar Treffer gab und macht einen Termin für euren Spieleabend aus. Alle können einfach nachsehen, welche Spiele sie mitbringen sollen."
     }
   },
   "Statements": {
@@ -42,7 +42,7 @@
     },
     "Free": {
       "Heading": "Frei und Open Source",
-      "Text": "Meeple party ist frei und Open Source und wird das für immer bleiben. Jedes neue Feature wird immer in das Haupt-Projekt hinzugefügt werden. Es wird keine geheimen Ergänzungen geben und du wirst immer die Möglichkeit haben dein eigenes, kleines Meeple Party zu betreiben. Mit allen Funktionen, ohne uns einen Cent dafür zu bezahlen."
+      "Text": "Meeple Party ist frei und Open Source und wird das für immer bleiben. Jedes neue Feature wird immer in das Haupt-Projekt hinzugefügt werden. Es wird keine geheimen Ergänzungen geben und du wirst immer die Möglichkeit haben dein eigenes, kleines Meeple Party zu betreiben. Mit allen Funktionen, ohne uns einen Cent dafür zu bezahlen."
     },
     "Welcome": {
       "Heading": "Alle sind willkommen",
