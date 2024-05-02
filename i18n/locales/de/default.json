@@ -17,9 +17,9 @@
     }
   },
   "Filters": {
+    "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Presets": "Vorlagen",
     "GameName": "Name des Spiels",
-    "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Traits": {
       "PlayerCount": "Personen",
       "Weight": "Komplexität",
@@ -75,8 +75,8 @@
       "GamesYouDontOwnNoSolo": "Nicht im Besitz, keine Solo-Spiele",
       "YourWishlist": "Dein Wunschzettel",
       "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele",
-      "OwnAndWantToPlay": "Im Besitz und will ich spielen",
-      "WantToPlay": "Will ich spielen"
+      "WantToPlay": "Will ich spielen",
+      "OwnAndWantToPlay": "Im Besitz und will ich spielen"
     },
     "SortOrder": {
       "CollectionStatus": "Sammlungsstatus",
@@ -114,8 +114,8 @@
   "Actions": {
     "SaveAndContinue": "Speichern und weiter",
     "Next": "Weiter",
-    "Accept": "Annehmen",
     "Deny": "Ablehnen",
+    "Accept": "Annehmen",
     "Withdraw": "Withdraw",
     "Close": "Schließen",
     "Submit": "Absenden"
