@@ -17,13 +17,13 @@
     "BggName": "{{name}} auf BoardGameGeek"
   },
   "Complete": {
+    "Header": "Profil vervollständigen",
+    "Explanation": "Hallo! 👋 Tut uns leid dich unterbrechen zu müssen, aber wir brauchen noch ein paar Daten von dir.",
     "DisplayName": "Anzeigename",
     "DisplayNameExplanation": "Wie du öffentlich genannt werden willst",
-    "EmailAddress": "E-Mail-Adresse",
-    "Explanation": "Hallo! 👋 Tut uns leid dich unterbrechen zu müssen, aber wir brauchen noch ein paar Daten von dir.",
-    "Header": "Profil vervollständigen",
     "RealName": "Echter Name (optional)",
-    "RealNameExplanation": "Wird nur deinen Freund*innen angezeigt"
+    "RealNameExplanation": "Wird nur deinen Freund*innen angezeigt",
+    "EmailAddress": "E-Mail-Adresse"
   },
   "Public": {
     "IsOn": "ist auf",
