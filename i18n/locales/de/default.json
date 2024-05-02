@@ -17,9 +17,9 @@
     }
   },
   "Filters": {
+    "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Presets": "Vorlagen",
     "GameName": "Name des Spiels",
-    "Heading": "Spiele filtern ({{current}}/{{total}})",
     "Traits": {
       "PlayerCount": "Personen",
       "Weight": "Komplexität",
@@ -55,7 +55,7 @@
       "Max": "Max",
       "PlayerCount": {
         "Supports": "Unterstützt",
-        "AtLeast": "Mindestes",
+        "AtLeast": "Mindestens",
         "Exact": "Exakt"
       },
       "Weight": {
@@ -75,8 +75,8 @@
       "GamesYouDontOwnNoSolo": "Nicht im Besitz, keine Solo-Spiele",
       "YourWishlist": "Dein Wunschzettel",
       "YourWishlistNoSolo": "Dein Wunschzettel, keine Solo-Spiele",
-      "OwnAndWantToPlay": "Im Besitz und will ich spielen",
-      "WantToPlay": "Will ich spielen"
+      "WantToPlay": "Will ich spielen",
+      "OwnAndWantToPlay": "Im Besitz und will ich spielen"
     },
     "SortOrder": {
       "CollectionStatus": "Sammlungsstatus",
@@ -114,9 +114,9 @@
   "Actions": {
     "SaveAndContinue": "Speichern und weiter",
     "Next": "Weiter",
-    "Accept": "Annehmen",
     "Deny": "Ablehnen",
-    "Withdraw": "Withdraw",
+    "Accept": "Annehmen",
+    "Withdraw": "Zurücknehmen",
     "Close": "Schließen",
     "Submit": "Absenden"
   },
@@ -128,7 +128,7 @@
     "NoResults": "Keine Ergebnisse gefunden",
     "Error": {
       "Title": "Fehler bei der Spielesuche",
-      "Text": "Bitte versuche es später noch mal. Wenn der Fehler weiterhin auftritt kontaktiere bitte ein*e Administrator*in."
+      "Text": "Bitte versuche es später noch mal. Falls der Fehler weiterhin auftritt, kontaktiere bitte ein*e Administrator*in."
     }
   },
   "Footer": {

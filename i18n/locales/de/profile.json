@@ -17,13 +17,13 @@
     "BggName": "{{name}} auf BoardGameGeek"
   },
   "Complete": {
+    "Header": "Profil vervollständigen",
+    "Explanation": "Hallo! 👋 Tut uns leid dich unterbrechen zu müssen, aber wir brauchen noch ein paar Daten von dir.",
     "DisplayName": "Anzeigename",
     "DisplayNameExplanation": "Wie du öffentlich genannt werden willst",
-    "EmailAddress": "E-Mail-Adresse",
-    "Explanation": "Hallo! 👋 Tut uns leid dich unterbrechen zu müssen, aber wir brauchen noch ein paar Daten von dir.",
-    "Header": "Profil vervollständigen",
     "RealName": "Echter Name (optional)",
-    "RealNameExplanation": "Wird nur deinen Freund*innen angezeigt"
+    "RealNameExplanation": "Wird nur deinen Freund*innen angezeigt",
+    "EmailAddress": "E-Mail-Adresse"
   },
   "Public": {
     "IsOn": "ist auf",
@@ -52,8 +52,8 @@
       "GameData": "Fehler beim Laden der Daten von Spiel {{gameId}}.",
       "ProfileNameMandatory": "Du musst einen Spitznamen angeben.",
       "ProfileNameLength": "Dein Spitzname darf höchstens 30 Zeichen lang sein.",
-      "RealNameLength": "Der Name den du hier angibst darf höchstens 60 Zeichen lang sein.",
-      "PlaceLength": "Der Ort den du hier angibst darf höchstens 30 Zeichen lang sein.",
+      "RealNameLength": "Der Name, den du hier angibst, darf höchstens 60 Zeichen lang sein",
+      "PlaceLength": "Der Ort, den du hier angibst, darf höchstens 30 Zeichen lang sein.",
       "AboutLength": "Der Text darf höchstens 3000 Zeichen lang sein."
     }
   },

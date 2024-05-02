@@ -1,0 +1,26 @@
+{
+  "Title": "Friend activity",
+  "Navbar": {
+    "Activity": "Activity",
+    "Requests": "Your requests"
+  },
+  "Activity": {
+    "Title": "Your friend's collection updates",
+    "Changes": {
+      "Own": "{{person}} now owns {{game}}",
+      "OwnWtp": "{{person}} now owns and wants to play {{game}}",
+      "OwnWish": "{{person}} now owns and wishes {{game}}",
+      "OwnWtpWish": "{{person}} now owns, wants to play and wishes {{game}}",
+      "Wtp": "{{person}} now wants to play {{game}}",
+      "WtpWish": "{{person}} now wants to play and wishes {{game}}",
+      "Wish": "{{person}} now wishes {{game}}"
+    }
+  },
+  "List": {
+    "Title": "All your friends"
+  },
+  "Requests": {
+    "Incoming": "Incoming requests",
+    "Outgoing": "Sent requests"
+  }
+}
