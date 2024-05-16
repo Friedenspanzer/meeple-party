@@ -4,13 +4,13 @@ import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { Game } from "@/datatypes/game";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import { useTranslation } from "@/i18n/client";
+import Gamebox from "@/lib/components/parts/gamebox/Gamebox";
 import { emptyFilter } from "@/utility/filter";
 import classNames from "classnames";
 import Fuse from "fuse.js";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
-import GameBox from "../GameBox/GameBox";
 import GameBoxSizePicker from "../GameBoxSizePicker/GameBoxSizePicker";
 import GameCollectionFilter, {
   FilterPreset,
@@ -125,13 +125,10 @@ const GameCollection: React.FC<GameCollectionProps> = ({
         <div className={styles.games}>
           {filteredGames
             .slice(getOffset(), getOffset() + itemsPerPage)
-            .map(({ game, status, friendCollections }) => (
-              <GameBox
-                game={game}
-                status={status}
+            .map(({ game }) => (
+              <Gamebox
+                gameId={game.id}
                 key={getGameId(game)}
-                showFriendCollection={showFriendCollection}
-                friendCollection={friendCollections}
                 className={styles.gameBox}
               />
             ))}

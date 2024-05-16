@@ -90,7 +90,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <div
       class="myStatusOwn"
     >
-      <div
+      <button
+        aria-label="States.Own"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -98,15 +99,16 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         <i
           class="bi bi-box-seam-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
         States.Own
       </div>
     </div>
-    <div
-      class="friendStatusOwn"
+    <button
+      aria-label="FriendCollections.Own"
+      class="friendStatus friendStatusOwn"
       data-testid="friends-Own"
       tabindex="0"
     >
@@ -129,11 +131,12 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       >
         FriendStates.Own
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWantToPlay"
     >
-      <div
+      <button
+        aria-label="States.WantToPlay"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -141,15 +144,16 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         <i
           class="bi bi-dice-3-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
-        States.WantToPlay
+        States.NotWantToPlay
       </div>
     </div>
-    <div
-      class="friendStatusWantToPlay"
+    <button
+      aria-label="FriendCollections.WantToPlay"
+      class="friendStatus friendStatusWantToPlay"
       data-testid="friends-WantToPlay"
       tabindex="0"
     >
@@ -172,11 +176,12 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       >
         FriendStates.WantToPlay
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWishlist"
     >
-      <div
+      <button
+        aria-label="States.Wishlist"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -184,15 +189,16 @@ exports[`GameBoxBig Matches snapshot 1`] = `
         <i
           class="bi bi-gift-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
         States.Wishlist
       </div>
     </div>
-    <div
-      class="friendStatusWishlist"
+    <button
+      aria-label="FriendCollections.Wishlist"
+      class="friendStatus friendStatusWishlist"
       data-testid="friends-Wishlist"
       tabindex="0"
     >
@@ -215,7 +221,7 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       >
         FriendStates.Wishlist
       </div>
-    </div>
+    </button>
   </div>
 </div>
 `;
@@ -310,7 +316,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <div
       class="myStatusOwn"
     >
-      <div
+      <button
+        aria-label="States.Own"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -318,305 +325,16 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
         <i
           class="bi bi-box-seam-fill"
         />
-      </div>
-      <div
-        class="statusText"
-      >
-        States.NotOwn
-      </div>
-    </div>
-    <div
-      class="myStatusWantToPlay"
-    >
-      <div
-        class="button statusButton"
-        role="button"
-        tabindex="0"
-      >
-        <i
-          class="bi bi-dice-3-fill"
-        />
-      </div>
-      <div
-        class="statusText"
-      >
-        States.NotWantToPlay
-      </div>
-    </div>
-    <div
-      class="myStatusWishlist"
-    >
-      <div
-        class="button statusButton"
-        role="button"
-        tabindex="0"
-      >
-        <i
-          class="bi bi-gift-fill"
-        />
-      </div>
-      <div
-        class="statusText"
-      >
-        States.NotWishlist
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = `
-<div>
-  <style
-    data-mantine-styles="classes"
-  >
-    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
-  </style>
-  <div
-    class="card card"
-  >
-    <a
-      class="imagePosition"
-      href="/app/game/123"
-    >
-      <img
-        alt="Test game"
-        class="image rounded-start"
-        data-nimg="1"
-        decoding="async"
-        height="250"
-        loading="lazy"
-        src="testimage"
-        style="color: transparent;"
-        width="250"
-      />
-    </a>
-    <div
-      class="info"
-    >
-      <div
-        class="metric"
-      >
-        <div
-          class="metricTitle"
-        >
-          3.8
-        </div>
-        <div
-          class="metricLabel"
-        >
-          Attributes.Weight
-        </div>
-      </div>
-      <hr
-        class="metricDivider"
-      />
-      <div
-        class="metric"
-      >
-        <div
-          class="metricTitle"
-        >
-          120
-        </div>
-        <div
-          class="metricLabel"
-        >
-          Attributes.PlayingTime
-        </div>
-      </div>
-      <hr
-        class="metricDivider"
-      />
-      <div
-        class="metric"
-      >
-        <div
-          class="metricTitle"
-        >
-          1-5
-        </div>
-        <div
-          class="metricLabel"
-        >
-          Attributes.Players
-        </div>
-      </div>
-    </div>
-    <h2
-      class="name"
-    >
-      <a
-        href="/app/game/123"
-      >
-        Test game
-      </a>
-    </h2>
-    <div
-      class="myStatusOwn"
-    >
-      <div
-        class="button statusButton"
-        role="button"
-        tabindex="0"
-      >
-        <i
-          class="bi bi-box-seam-fill"
-        />
-      </div>
-      <div
-        class="statusText"
-      >
-        States.NotOwn
-      </div>
-    </div>
-    <div
-      class="myStatusWantToPlay"
-    >
-      <div
-        class="button statusButton"
-        role="button"
-        tabindex="0"
-      >
-        <i
-          class="bi bi-dice-3-fill"
-        />
-      </div>
-      <div
-        class="statusText"
-      >
-        States.NotWantToPlay
-      </div>
-    </div>
-    <div
-      class="myStatusWishlist"
-    >
-      <div
-        class="button statusButton"
-        role="button"
-        tabindex="0"
-      >
-        <i
-          class="bi bi-gift-fill"
-        />
-      </div>
-      <div
-        class="statusText"
-      >
-        States.NotWishlist
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
-<div>
-  <style
-    data-mantine-styles="classes"
-  >
-    @media (max-width: 35.99375em) {.mantine-visible-from-xs {display: none !important;}}@media (min-width: 36em) {.mantine-hidden-from-xs {display: none !important;}}@media (max-width: 47.99375em) {.mantine-visible-from-sm {display: none !important;}}@media (min-width: 48em) {.mantine-hidden-from-sm {display: none !important;}}@media (max-width: 61.99375em) {.mantine-visible-from-md {display: none !important;}}@media (min-width: 62em) {.mantine-hidden-from-md {display: none !important;}}@media (max-width: 74.99375em) {.mantine-visible-from-lg {display: none !important;}}@media (min-width: 75em) {.mantine-hidden-from-lg {display: none !important;}}@media (max-width: 87.99375em) {.mantine-visible-from-xl {display: none !important;}}@media (min-width: 88em) {.mantine-hidden-from-xl {display: none !important;}}
-  </style>
-  <div
-    class="card card"
-  >
-    <a
-      class="imagePosition"
-      href="/app/game/123"
-    >
-      <img
-        alt="Test game"
-        class="image rounded-start"
-        data-nimg="1"
-        decoding="async"
-        height="250"
-        loading="lazy"
-        src="testimage"
-        style="color: transparent;"
-        width="250"
-      />
-    </a>
-    <div
-      class="info"
-    >
-      <div
-        class="metric"
-      >
-        <div
-          class="metricTitle"
-        >
-          3.8
-        </div>
-        <div
-          class="metricLabel"
-        >
-          Attributes.Weight
-        </div>
-      </div>
-      <hr
-        class="metricDivider"
-      />
-      <div
-        class="metric"
-      >
-        <div
-          class="metricTitle"
-        >
-          120
-        </div>
-        <div
-          class="metricLabel"
-        >
-          Attributes.PlayingTime
-        </div>
-      </div>
-      <hr
-        class="metricDivider"
-      />
-      <div
-        class="metric"
-      >
-        <div
-          class="metricTitle"
-        >
-          1-5
-        </div>
-        <div
-          class="metricLabel"
-        >
-          Attributes.Players
-        </div>
-      </div>
-    </div>
-    <h2
-      class="name"
-    >
-      <a
-        href="/app/game/123"
-      >
-        Test game
-      </a>
-    </h2>
-    <div
-      class="myStatusOwn"
-    >
-      <div
-        class="button statusButton"
-        role="button"
-        tabindex="0"
-      >
-        <i
-          class="bi bi-box-seam-fill"
-        />
-      </div>
+      </button>
       <div
         class="statusText"
       >
         States.Own
       </div>
     </div>
-    <div
-      class="friendStatusOwn"
+    <button
+      aria-label="FriendCollections.Own"
+      class="friendStatus friendStatusOwn"
       data-testid="friends-Own"
       tabindex="0"
     >
@@ -629,21 +347,18 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
           +
           6
         </div>
-        Avatar
-        Avatar
-        Avatar
-        Avatar
       </div>
       <div
         class="statusText"
       >
         FriendStates.Own
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWantToPlay"
     >
-      <div
+      <button
+        aria-label="States.WantToPlay"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -651,15 +366,16 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
         <i
           class="bi bi-dice-3-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
-        States.WantToPlay
+        States.NotWantToPlay
       </div>
     </div>
-    <div
-      class="friendStatusWantToPlay"
+    <button
+      aria-label="FriendCollections.WantToPlay"
+      class="friendStatus friendStatusWantToPlay"
       data-testid="friends-WantToPlay"
       tabindex="0"
     >
@@ -672,21 +388,18 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
           +
           6
         </div>
-        Avatar
-        Avatar
-        Avatar
-        Avatar
       </div>
       <div
         class="statusText"
       >
         FriendStates.WantToPlay
       </div>
-    </div>
+    </button>
     <div
       class="myStatusWishlist"
     >
-      <div
+      <button
+        aria-label="States.Wishlist"
         class="button statusButton"
         role="button"
         tabindex="0"
@@ -694,15 +407,16 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
         <i
           class="bi bi-gift-fill"
         />
-      </div>
+      </button>
       <div
         class="statusText"
       >
         States.Wishlist
       </div>
     </div>
-    <div
-      class="friendStatusWishlist"
+    <button
+      aria-label="FriendCollections.Wishlist"
+      class="friendStatus friendStatusWishlist"
       data-testid="friends-Wishlist"
       tabindex="0"
     >
@@ -715,17 +429,13 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
           +
           6
         </div>
-        Avatar
-        Avatar
-        Avatar
-        Avatar
       </div>
       <div
         class="statusText"
       >
         FriendStates.Wishlist
       </div>
-    </div>
+    </button>
   </div>
 </div>
 `;

@@ -1,7 +1,7 @@
 "use client";
 
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
+import useCollectionStatus from "@/lib/hooks/useCollectionStatus";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import classNames from "classnames";
 import Spinner from "../Spinner/Spinner";
