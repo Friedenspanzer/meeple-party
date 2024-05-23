@@ -1,5 +1,5 @@
 import { BggGame, Game } from "@/datatypes/game";
-import { PrismaClient } from "@prisma/client";
+import { AlternateGameName, PrismaClient } from "@prisma/client";
 import { getBggGames } from "./bgg";
 import { getWikidataInfo } from "./wikidata";
 
@@ -9,11 +9,16 @@ const DEV = process.env.NODE_ENV === "development";
 
 const MONTHLY = 30 * 24 * 60 * 60;
 
-export async function fetchGames(gameIds: number[]): Promise<Game[]> {
+export type GameWithNames = Game & { names: Omit<AlternateGameName, "gameId">[] };
+
+export async function fetchGames(gameIds: number[]): Promise<GameWithNames[]> {
   //TODO Add tests
   const gamesFromDatabase = await prisma.game.findMany({
     where: {
       id: { in: gameIds },
+    },
+    include: {
+      alternateNames: true,
     },
   });
 
@@ -36,7 +41,7 @@ export async function fetchGames(gameIds: number[]): Promise<Game[]> {
     (g) => !staleGames.find((s) => s.id === g.id)
   );
 
-  let updatedGames: Game[] = [];
+  let updatedGames: GameWithNames[] = [];
 
   if (missingGames && missingGames.length > 0) {
     if (DEV) {
@@ -57,10 +62,13 @@ export async function fetchGames(gameIds: number[]): Promise<Game[]> {
     updatedGames = [...updatedGames, ...(await updateInDatabase(staleGames))];
   }
 
-  return [...freshGames, ...updatedGames];
+  return [
+    ...freshGames.map((f) => ({ ...f, names: f.alternateNames })),
+    ...updatedGames,
+  ];
 }
 
-async function addToDatabase(games: BggGame[]): Promise<Game[]> {
+async function addToDatabase(games: BggGame[]): Promise<GameWithNames[]> {
   const converted = games.map(convertForDataBase);
   const wikidata = await getWikidataInfo(converted);
   for (let game of converted) {
@@ -80,10 +88,11 @@ async function addToDatabase(games: BggGame[]): Promise<Game[]> {
       },
     });
   }
-  return converted;
+
+  return converted.map((c) => enrichData(c, wikidata));
 }
 
-async function updateInDatabase(games: BggGame[]): Promise<Game[]> {
+async function updateInDatabase(games: BggGame[]): Promise<GameWithNames[]> {
   const updated = games.map(convertForDataBase);
   const wikidata = await getWikidataInfo(updated);
   for (let game of updated) {
@@ -107,7 +116,19 @@ async function updateInDatabase(games: BggGame[]): Promise<Game[]> {
       where: { id: game.id },
     });
   }
-  return updated;
+  return updated.map((u) => enrichData(u, wikidata));
+}
+
+function enrichData(
+  game: Game,
+  wikidata: Awaited<ReturnType<typeof getWikidataInfo>>
+): GameWithNames {
+  const entry = wikidata.find((w) => w.gameId === game.id);
+  return {
+    ...game,
+    wikidataId: entry?.wikidataId || null,
+    names: entry?.names || [],
+  };
 }
 
 function convertForDataBase(game: BggGame): Game {

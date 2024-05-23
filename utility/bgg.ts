@@ -1,7 +1,7 @@
 import { BggGame } from "@/datatypes/game";
+import { decodeHTML } from "entities";
 import { XMLParser } from "fast-xml-parser";
 import validator from "validator";
-import { decodeHTML } from "entities";
 
 const parser = new XMLParser({ ignoreAttributes: false });
 
