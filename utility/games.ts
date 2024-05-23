@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 
 const DEV = process.env.NODE_ENV === "development";
 
-const MONTHLY = 30 * 24 * 60 * 60;
+const DAILY = 24 * 60 * 60;
 
 /**
  * Gets complete data for all requested games. Handles updating of stale data.
@@ -154,6 +154,6 @@ function getUpdateInterval() {
   if (process.env.BGG_UPDATE_INTERVAL) {
     return Number.parseInt(process.env.BGG_UPDATE_INTERVAL);
   } else {
-    return MONTHLY;
+    return DAILY;
   }
 }
