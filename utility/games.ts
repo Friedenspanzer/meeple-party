@@ -1,11 +1,9 @@
 import { ExpandedGame, Game, GameId } from "@/datatypes/game";
+import { prisma } from "@/db";
 import * as client from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
 import { partition } from "./array";
 import { getBggGames } from "./bgg";
 import { getWikidataInfo } from "./wikidata";
-
-const prisma = new PrismaClient();
 
 const DEV = process.env.NODE_ENV === "development";
 
