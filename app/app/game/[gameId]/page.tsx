@@ -1,10 +1,11 @@
 import Avatar from "@/components/Avatar/Avatar";
 import BggRating from "@/components/BggRating/BggRating";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
+import { ExpandedGame } from "@/datatypes/game";
 import { getLanguage, getTranslation } from "@/i18n";
 import { getCollectionStatusOfFriends } from "@/selectors/collections";
 import { getBggGame } from "@/utility/bgg";
-import { GameWithNames, fetchGames } from "@/utility/games";
+import { getGameData } from "@/utility/games";
 import { getServerUser } from "@/utility/serverSession";
 import classNames from "classnames";
 import Image from "next/image";
@@ -37,7 +38,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
   try {
     const user = await getServerUser();
     const bggGame = await getBggGame(id);
-    const game = (await fetchGames([id]))[0];
+    const game = (await getGameData([id]))[0];
     const language = await getLanguage();
     const friendCollections = await getCollectionStatusOfFriends(id, user.id);
     const gameDesigners =
@@ -206,7 +207,7 @@ function round(i: number): number {
   return Math.round(i * 10) / 10;
 }
 
-function getName(game: GameWithNames, language: string): string {
+function getName(game: ExpandedGame, language: string): string {
   const name = game.names.find((n) => n.language === language);
   if (name) {
     return name.name;

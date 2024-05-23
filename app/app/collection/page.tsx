@@ -7,7 +7,7 @@ import { getTranslation } from "@/i18n";
 import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
 import { findFriendCollection } from "@/utility/collections";
 import { emptyFilter } from "@/utility/filter";
-import { fetchGames } from "@/utility/games";
+import { getGameData } from "@/utility/games";
 import { getServerUser } from "@/utility/serverSession";
 import { Metadata } from "next";
 
@@ -28,7 +28,7 @@ export default async function Collection() {
     user.id
   );
 
-  const games = await fetchGames(gameCollection.map((c) => c.gameId));
+  const games = await getGameData(gameCollection.map((c) => c.gameId));
 
   return (
     <PrefetchedGameData data={games}>

@@ -1,5 +1,7 @@
-import { BggGame, Game } from "@/datatypes/game";
-import { AlternateGameName, PrismaClient } from "@prisma/client";
+import { ExpandedGame, Game, GameId } from "@/datatypes/game";
+import * as client from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { partition } from "./array";
 import { getBggGames } from "./bgg";
 import { getWikidataInfo } from "./wikidata";
 
@@ -9,11 +11,55 @@ const DEV = process.env.NODE_ENV === "development";
 
 const MONTHLY = 30 * 24 * 60 * 60;
 
-export type GameWithNames = Game & { names: Omit<AlternateGameName, "gameId">[] };
+/**
+ * Gets complete data for all requested games. Handles updating of stale data.
+ *
+ * @param gameIds List of IDs of the games to fetch data for.
+ * @returns Complete data of all games that are found. Non-existant IDs will be discarded silently.
+ */
+export async function getGameData(gameIds: GameId[]): Promise<ExpandedGame[]> {
+  const gamesFromDatabase = await getFromDatabase(gameIds);
 
-export async function fetchGames(gameIds: number[]): Promise<GameWithNames[]> {
-  //TODO Add tests
-  const gamesFromDatabase = await prisma.game.findMany({
+  const [fresh, stale] = partition(gamesFromDatabase, isFresh);
+  const missingIds = gameIds.filter(
+    (id) => !gamesFromDatabase.find((g) => g.id === id)
+  );
+
+  const freshFromDatabase = convertGamesFromDatabase(fresh);
+  const freshData = await getFreshData([
+    ...stale.map((s) => s.id),
+    ...missingIds,
+  ]);
+  const [newData, updatedData] = partition(freshData, (d) =>
+    missingIds.includes(d.id)
+  );
+
+  await updateInDatabase(updatedData);
+  await addToDatabase(newData);
+
+  if (DEV && updatedData.length > 0) {
+    console.log(
+      "Updated stale games",
+      updatedData.map((g) => ({ id: g.id, name: g.name }))
+    );
+  }
+
+  if (DEV && newData.length > 0) {
+    console.log(
+      "Saved new game data",
+      newData.map((g) => ({ id: g.id, name: g.name }))
+    );
+  }
+
+  return [...freshFromDatabase, ...updatedData, ...newData];
+}
+
+type PrismaResult = client.Game & {
+  alternateNames: client.AlternateGameName[];
+};
+
+async function getFromDatabase(gameIds: GameId[]): Promise<PrismaResult[]> {
+  const result = await prisma.game.findMany({
     where: {
       id: { in: gameIds },
     },
@@ -21,130 +67,86 @@ export async function fetchGames(gameIds: number[]): Promise<GameWithNames[]> {
       alternateNames: true,
     },
   });
-
-  const staleIds = gamesFromDatabase
-    .filter(
-      (g) =>
-        !g.updatedAt ||
-        (Date.now().valueOf() - g.updatedAt.valueOf()) / 1000 >
-          getUpdateInterval()
-    )
-    .map((g) => g.id);
-
-  const missingIds = gameIds.filter(
-    (gameId) => !gamesFromDatabase.find((g) => g.id === gameId)
-  );
-
-  const missingGames = await getBggGames(missingIds);
-  const staleGames = await getBggGames(staleIds);
-  const freshGames = gamesFromDatabase.filter(
-    (g) => !staleGames.find((s) => s.id === g.id)
-  );
-
-  let updatedGames: GameWithNames[] = [];
-
-  if (missingGames && missingGames.length > 0) {
-    if (DEV) {
-      console.log(
-        "Inserting missing games",
-        missingGames.map((g) => `${[g.id]} ${g.name}}`)
-      );
-    }
-    updatedGames = [...updatedGames, ...(await addToDatabase(missingGames))];
-  }
-  if (staleGames && staleGames.length > 0) {
-    if (DEV) {
-      console.log(
-        "Updating stale games",
-        staleGames.map((g) => `${[g.id]} ${g.name}`)
-      );
-    }
-    updatedGames = [...updatedGames, ...(await updateInDatabase(staleGames))];
-  }
-
-  return [
-    ...freshGames.map((f) => ({ ...f, names: f.alternateNames })),
-    ...updatedGames,
-  ];
+  return result;
 }
 
-async function addToDatabase(games: BggGame[]): Promise<GameWithNames[]> {
-  const converted = games.map(convertForDataBase);
-  const wikidata = await getWikidataInfo(converted);
-  for (let game of converted) {
-    const w = wikidata.find((w) => w.gameId === game.id);
-    await prisma.game.create({
-      data: {
-        ...game,
-        wikidataId: w?.wikidataId,
-        alternateNames: {
-          connectOrCreate: w?.names?.map((n) => ({
-            where: {
-              gameId_language: { gameId: game.id, language: n.language },
-            },
-            create: { language: n.language, name: n.name },
-          })),
-        },
-      },
-    });
-  }
-
-  return converted.map((c) => enrichData(c, wikidata));
+function convertGamesFromDatabase(database: PrismaResult[]): ExpandedGame[] {
+  return database.map((d) => ({ ...d, names: d.alternateNames }));
 }
 
-async function updateInDatabase(games: BggGame[]): Promise<GameWithNames[]> {
-  const updated = games.map(convertForDataBase);
-  const wikidata = await getWikidataInfo(updated);
-  for (let game of updated) {
-    const w = wikidata.find((w) => w.gameId === game.id);
+function isFresh(game: PrismaResult) {
+  return (
+    !!game.updatedAt &&
+    (Date.now().valueOf() - game.updatedAt.valueOf()) / 1000 >
+      getUpdateInterval()
+  );
+}
+
+async function getFreshData(gameIds: GameId[]): Promise<ExpandedGame[]> {
+  const [bggData, wikidataData] = await Promise.all([
+    getBggGames(gameIds),
+    getWikidataInfo(gameIds),
+  ]);
+
+  return bggData.map((game) => {
+    const wikidata = wikidataData.find((d) => d.gameId === game.id);
+    return {
+      ...game,
+      wikidataId: wikidata?.wikidataId || null,
+      names: wikidata?.names || [],
+    };
+  });
+}
+
+async function updateInDatabase(games: ExpandedGame[]) {
+  for (let game of games) {
     await prisma.game.update({
-      data: {
-        ...game,
-        wikidataId: w?.wikidataId,
-        alternateNames: {
-          connectOrCreate: w?.names?.map((n) => ({
-            where: {
-              gameId_language: { gameId: game.id, language: n.language },
-            },
-            create: { language: n.language, name: n.name },
-          })),
-        },
-      },
+      data: createPrismaQueryData(game),
       include: {
         alternateNames: true,
       },
       where: { id: game.id },
     });
   }
-  return updated.map((u) => enrichData(u, wikidata));
 }
 
-function enrichData(
-  game: Game,
-  wikidata: Awaited<ReturnType<typeof getWikidataInfo>>
-): GameWithNames {
-  const entry = wikidata.find((w) => w.gameId === game.id);
+async function addToDatabase(games: ExpandedGame[]) {
+  for (let game of games) {
+    await prisma.game.create({
+      data: createPrismaQueryData(game),
+    });
+  }
+}
+
+function createPrismaQueryData(game: ExpandedGame) {
+  const cleaned = cleanForDatabase(game);
   return {
-    ...game,
-    wikidataId: entry?.wikidataId || null,
-    names: entry?.names || [],
+    ...cleaned,
+    alternateNames: {
+      connectOrCreate: game.names?.map((name) => ({
+        where: {
+          gameId_language: { gameId: game.id, language: name.language },
+        },
+        create: { language: name.language, name: name.name },
+      })),
+    },
   };
 }
 
-function convertForDataBase(game: BggGame): Game {
+function cleanForDatabase(game: ExpandedGame): Game {
   return {
-    id: game.id,
-    name: game.name,
-    thumbnail: game.thumbnail,
-    image: game.image,
-    year: game.year,
-    playingTime: game.playingTime,
-    minPlayers: game.minPlayers,
-    maxPlayers: game.maxPlayers,
-    weight: game.weight,
-    BGGRating: game.BGGRating,
     BGGRank: game.BGGRank,
-    wikidataId: null,
+    BGGRating: game.BGGRating,
+    id: game.id,
+    image: game.image,
+    maxPlayers: game.maxPlayers,
+    minPlayers: game.minPlayers,
+    name: game.name,
+    playingTime: game.playingTime,
+    thumbnail: game.thumbnail,
+    weight: game.weight,
+    wikidataId: game.wikidataId,
+    year: game.year,
   };
 }
 

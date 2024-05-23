@@ -1,7 +1,35 @@
-import { Game } from "@/datatypes/game";
+import { GameId } from "@/datatypes/game";
+import { AlternateGameName } from "@prisma/client";
 import axios from "axios";
 
 const endpointBase = "https://query.wikidata.org/sparql?format=json&query=";
+
+interface WikiDataInfo {
+  gameId: GameId;
+  wikidataId?: string;
+  names: Omit<AlternateGameName, "gameId">[];
+}
+
+/**
+ * Gets game information from WikiData.
+ *
+ * @param gameIds List of IDs of the games to fetch data for
+ * @returns List with all gameIds, available alternate names with languages (may be empty) and, if available, a wikidata ID
+ */
+export async function getWikidataInfo(
+  gameIds: GameId[]
+): Promise<WikiDataInfo[]> {
+  return await Promise.all(
+    gameIds.map(async (id) => {
+      const translations = await getTranslatedGameNames(id);
+      return {
+        gameId: id,
+        wikidataId: translations?.wikidataId,
+        names: translations?.names || [],
+      };
+    })
+  );
+}
 
 type Result = {
   wikidataId: string;
@@ -10,16 +38,7 @@ type Result = {
 
 type Name = { name: string; language: string };
 
-export async function getWikidataInfo(games: Game[]) {
-  const result = [];
-  for (let game of games) {
-    const data = await getTranslatedGameNames(game.id);
-    result.push({ gameId: game.id, ...data });
-  }
-  return result;
-}
-
-export async function getTranslatedGameNames(
+async function getTranslatedGameNames(
   bggId: number
 ): Promise<Result | undefined> {
   //TODO Add tests

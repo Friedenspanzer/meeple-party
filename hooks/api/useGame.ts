@@ -1,5 +1,5 @@
 import { GameGetResult } from "@/app/api/v2/game/[gameId]/route";
-import { Game } from "@prisma/client";
+import { Game } from "@/datatypes/game";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Result } from "./types";
