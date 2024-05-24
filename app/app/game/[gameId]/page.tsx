@@ -2,7 +2,7 @@ import Avatar from "@/components/Avatar/Avatar";
 import BggRating from "@/components/BggRating/BggRating";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
 import { ExpandedGame } from "@/datatypes/game";
-import { getLanguage, getTranslation } from "@/i18n";
+import { getGameLanguage, getTranslation } from "@/i18n";
 import { getCollectionStatusOfFriends } from "@/selectors/collections";
 import { getBggGame } from "@/utility/bgg";
 import { getGameData } from "@/utility/games";
@@ -39,7 +39,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
     const user = await getServerUser();
     const bggGame = await getBggGame(id);
     const game = (await getGameData([id]))[0];
-    const language = await getLanguage();
+    const language = await getGameLanguage();
     const friendCollections = await getCollectionStatusOfFriends(id, user.id);
     const gameDesigners =
       bggGame.designers.length <= 5

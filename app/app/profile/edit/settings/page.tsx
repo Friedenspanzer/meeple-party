@@ -3,6 +3,8 @@ import LanguagePicker from "@/components/LanguagePicker/LanguagePicker";
 import { getTranslation } from "@/i18n";
 import { PropsWithChildren } from "react";
 
+const supportedTranslations = ["en", "de"];
+
 export default async function Page() {
   const { t } = await getTranslation("settings");
 
@@ -13,12 +15,15 @@ export default async function Page() {
       </Row>
       <Row>
         <h3>{t("Language.Page")}</h3>
-        <LanguagePicker availableLanguages={["auto", "en", "de"]} type="page" />
+        <LanguagePicker
+          availableLanguages={["auto", ...supportedTranslations]}
+          type="page"
+        />
       </Row>
       <Row>
         <h3>{t("Language.Games")}</h3>
         <LanguagePicker
-          availableLanguages={["follow", "auto", "en"]}
+          availableLanguages={["follow", "auto", ...supportedTranslations]}
           type="game"
         />
       </Row>

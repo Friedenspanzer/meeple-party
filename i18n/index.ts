@@ -32,11 +32,32 @@ export async function getTranslation(ns?: string, options: any = {}) {
   };
 }
 
+//TODO Add tests for language fetching methods
 export async function getLanguage() {
   try {
     const user = await getServerUser();
     const preferences = getUserPreferences(user);
-    return preferences.pageLanguage as string;
+    if (preferences.pageLanguage === "auto") {
+      return fallbackLng;
+    } else {
+      return preferences.pageLanguage;
+    }
+  } catch {
+    return fallbackLng;
+  }
+}
+
+export async function getGameLanguage() {
+  try {
+    const user = await getServerUser();
+    const preferences = getUserPreferences(user);
+    if (preferences.gameLanguage === "auto") {
+      return fallbackLng;
+    } else if (preferences.gameLanguage === "follow") {
+      return getLanguage();
+    } else {
+      return preferences.gameLanguage;
+    }
   } catch {
     return fallbackLng;
   }
