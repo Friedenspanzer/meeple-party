@@ -4,7 +4,7 @@ import axios from "axios";
 
 const endpointBase = "https://query.wikidata.org/sparql?format=json&query=";
 
-interface WikiDataInfo {
+export interface WikiDataInfo {
   gameId: GameId;
   wikidataId?: string;
   names: Omit<AlternateGameName, "gameId">[];
@@ -19,6 +19,10 @@ interface WikiDataInfo {
 export async function getWikidataInfo(
   gameIds: GameId[]
 ): Promise<WikiDataInfo[]> {
+  if (gameIds.length === 0) {
+    return [];
+  }
+
   return await Promise.all(
     gameIds.map(async (id) => {
       const translations = await getTranslatedGameNames(id);

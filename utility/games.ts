@@ -1,4 +1,4 @@
-import { ExpandedGame, Game, GameId } from "@/datatypes/game";
+import { BggGame, ExpandedGame, Game, GameId } from "@/datatypes/game";
 import { prisma } from "@/db";
 import * as client from "@prisma/client";
 import { partition } from "./array";
@@ -69,13 +69,27 @@ async function getFromDatabase(gameIds: GameId[]): Promise<PrismaResult[]> {
 }
 
 function convertGamesFromDatabase(database: PrismaResult[]): ExpandedGame[] {
-  return database.map((d) => ({ ...d, names: d.alternateNames }));
+  return database.map((d) => ({
+    BGGRank: d.BGGRank,
+    BGGRating: d.BGGRating,
+    id: d.id,
+    image: d.image,
+    maxPlayers: d.maxPlayers,
+    minPlayers: d.minPlayers,
+    name: d.name,
+    playingTime: d.playingTime,
+    thumbnail: d.thumbnail,
+    weight: d.weight,
+    wikidataId: d.wikidataId,
+    year: d.year,
+    names: d.alternateNames,
+  }));
 }
 
 function isFresh(game: PrismaResult) {
   return (
     !!game.updatedAt &&
-    (Date.now().valueOf() - game.updatedAt.valueOf()) / 1000 >
+    (Date.now().valueOf() - game.updatedAt.valueOf()) / 1000 <
       getUpdateInterval()
   );
 }
@@ -89,11 +103,30 @@ async function getFreshData(gameIds: GameId[]): Promise<ExpandedGame[]> {
   return bggData.map((game) => {
     const wikidata = wikidataData.find((d) => d.gameId === game.id);
     return {
-      ...game,
+      ...cleanFromBgg(game),
       wikidataId: wikidata?.wikidataId || null,
       names: wikidata?.names || [],
     };
   });
+}
+
+function cleanFromBgg(game: BggGame): ExpandedGame {
+  //TODO Move all conversion functions to a central place
+  return {
+    id: game.id,
+    BGGRank: game.BGGRank,
+    BGGRating: game.BGGRating,
+    image: game.image,
+    maxPlayers: game.maxPlayers,
+    minPlayers: game.minPlayers,
+    name: game.name,
+    names: [],
+    playingTime: game.playingTime,
+    thumbnail: game.thumbnail,
+    weight: game.weight,
+    wikidataId: null,
+    year: game.year,
+  };
 }
 
 async function updateInDatabase(games: ExpandedGame[]) {
