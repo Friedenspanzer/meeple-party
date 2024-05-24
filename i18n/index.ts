@@ -32,7 +32,10 @@ export async function getTranslation(ns?: string, options: any = {}) {
   };
 }
 
-//TODO Add tests for language fetching methods
+/**
+ * Reads the current users prefered page language.
+ * @returns The two-letter language code of the selected language.
+ */
 export async function getLanguage() {
   try {
     const user = await getServerUser();
@@ -47,6 +50,10 @@ export async function getLanguage() {
   }
 }
 
+/**
+ * Reads the current users prefered language for game names.
+ * @returns The two-letter language code of the selected language.
+ */
 export async function getGameLanguage() {
   try {
     const user = await getServerUser();
