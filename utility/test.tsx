@@ -42,7 +42,10 @@ export function generateArray<T>(generator: () => T, length = 10): T[] {
   return ret;
 }
 
-export function generateArrayWithIndex<T>(generator: (index: number) => T, length = 10): T[] {
+export function generateArrayWithIndex<T>(
+  generator: (index: number) => T,
+  length = 10
+): T[] {
   const ret: T[] = [];
   for (let i = 0; i < length; i++) {
     ret.push(generator(i));
@@ -136,6 +139,7 @@ export function generateGame(gameId: number): Game {
     thumbnail: generateString(),
     weight: generateNumber(),
     year: generateNumber(),
+    wikidataId: generateString(),
     updatedAt: generateDate(),
   };
 }
