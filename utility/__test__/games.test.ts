@@ -1,6 +1,13 @@
-import { BggGame, ExpandedGame, Game, GameId } from "@/datatypes/game";
+import {
+  BggGame,
+  ExpandedGame,
+  GameId,
+  PrismaGameWithNames,
+  expandedGameToBggGame,
+  expandedGameToGame,
+  prismaGameToExpandedGame,
+} from "@/datatypes/game";
 import { prismaMock } from "@/utility/prismaMock";
-import * as client from "@prisma/client";
 import { partition } from "../array";
 import { getBggGames } from "../bgg";
 import { getGameData } from "../games";
@@ -25,7 +32,7 @@ describe("getGameData", () => {
     const ids = generateArray(generateNumber);
     const gamesInDatabase = generateGamesWithName(ids);
     gamesInDatabase.forEach((g) => (g.updatedAt = new Date(9999, 1, 1)));
-    const expected = convertGamesFromDatabase(gamesInDatabase);
+    const expected = gamesInDatabase.map(prismaGameToExpandedGame);
 
     const searchMock = prismaMock.game.findMany
       .calledWith(
@@ -59,9 +66,9 @@ describe("getGameData", () => {
     );
     staleGamesInDatabase.forEach((g) => (g.updatedAt = new Date(1990, 1, 1)));
     freshGamesInDatabase.forEach((g) => (g.updatedAt = new Date(9999, 1, 1)));
-    const updatedStaleGames = convertGamesFromDatabase(
-      generateGamesWithName(staleGamesInDatabase.map((g) => g.id))
-    );
+    const updatedStaleGames = generateGamesWithName(
+      staleGamesInDatabase.map((g) => g.id)
+    ).map(prismaGameToExpandedGame);
 
     console.log(
       "Fresh IDs",
@@ -93,7 +100,7 @@ describe("getGameData", () => {
 
     const bggMock = jest
       .mocked(getBggGames)
-      .mockResolvedValue(covertToBgg(updatedStaleGames));
+      .mockResolvedValue(convertToBgg(updatedStaleGames));
 
     const result = await getGameData(ids);
 
@@ -115,43 +122,21 @@ describe("getGameData", () => {
     );
 
     expect(result).toEqual([
-      ...convertGamesFromDatabase(freshGamesInDatabase),
+      ...freshGamesInDatabase.map(prismaGameToExpandedGame),
       ...updatedStaleGames,
     ]);
   });
 });
 
-type PrismaResult = client.Game & {
-  alternateNames: client.AlternateGameName[];
-};
-
-function generateGamesWithName(gameIds: GameId[]): PrismaResult[] {
+function generateGamesWithName(gameIds: GameId[]): PrismaGameWithNames[] {
   return gameIds.map(generateGame).map((g) => ({
     ...g,
     alternateNames: generateNameList(g.id),
   }));
 }
 
-function convertGamesFromDatabase(database: PrismaResult[]): ExpandedGame[] {
-  return database.map((d) => ({
-    BGGRank: d.BGGRank,
-    BGGRating: d.BGGRating,
-    id: d.id,
-    image: d.image,
-    maxPlayers: d.maxPlayers,
-    minPlayers: d.minPlayers,
-    name: d.name,
-    playingTime: d.playingTime,
-    thumbnail: d.thumbnail,
-    weight: d.weight,
-    wikidataId: d.wikidataId,
-    year: d.year,
-    names: d.alternateNames,
-  }));
-}
-
 function createPrismaQueryData(game: ExpandedGame) {
-  const cleaned = cleanForDatabase(game);
+  const cleaned = expandedGameToGame(game);
   return {
     ...cleaned,
     alternateNames: {
@@ -165,23 +150,6 @@ function createPrismaQueryData(game: ExpandedGame) {
   };
 }
 
-function cleanForDatabase(game: ExpandedGame): Game {
-  return {
-    BGGRank: game.BGGRank,
-    BGGRating: game.BGGRating,
-    id: game.id,
-    image: game.image,
-    maxPlayers: game.maxPlayers,
-    minPlayers: game.minPlayers,
-    name: game.name,
-    playingTime: game.playingTime,
-    thumbnail: game.thumbnail,
-    weight: game.weight,
-    wikidataId: game.wikidataId,
-    year: game.year,
-  };
-}
-
 function convertToWikiData(games: ExpandedGame[]): WikiDataInfo[] {
   return games.map((g) => ({
     gameId: g.id,
@@ -189,9 +157,10 @@ function convertToWikiData(games: ExpandedGame[]): WikiDataInfo[] {
     names: g.names,
   }));
 }
-function covertToBgg(games: ExpandedGame[]): BggGame[] {
+
+function convertToBgg(games: ExpandedGame[]): BggGame[] {
   return games.map((g) => ({
-    ...g,
+    ...expandedGameToBggGame(g),
     description: generateString(),
     artists: generateArray(generateString),
     designers: generateArray(generateString),
