@@ -1,14 +1,11 @@
 "use client";
 
-import { useUser } from "@/context/userContext";
 import { UserPreferences } from "@/datatypes/userProfile";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { useTranslation } from "@/i18n/client";
-import classNames from "classnames";
-import { language } from "gray-matter";
-import styles from "languagepicker.module.css";
+import { Alert, Button, Group, Stack } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 
 type LanguagePickerType = "page" | "game";
 
@@ -45,22 +42,32 @@ const LanguagePicker: React.FC<LanguagePickerProps> = ({
     [router, type, updatePreferences]
   );
 
+  const icon = <i className="bi bi-emoji-frown-fill"></i>;
+
   return (
-    <>
-      {availableLanguages.map((language) => (
-        <button
-          type="button"
-          className={classNames("btn me-3 mb-2", {
-            ["btn-light"]: language !== current,
-            ["btn-primary"]: language === current,
-          })}
-          key={language}
-          onClick={() => update(language)}
+    <Stack>
+      <Group>
+        {availableLanguages.map((language) => (
+          <Button
+            variant={language === current ? "filled" : "default"}
+            key={language}
+            onClick={() => update(language)}
+          >
+            {t(`Languages.${language}`)}
+          </Button>
+        ))}
+      </Group>
+      {current === "auto" && (
+        <Alert
+          title={t("NotWorkingWarning.NotWorking")}
+          variant="light"
+          color="red"
+          icon={icon}
         >
-          {t(`Languages.${language}`)}
-        </button>
-      ))}
-    </>
+          {t("NotWorkingWarning.Text")}
+        </Alert>
+      )}
+    </Stack>
   );
 };
 
