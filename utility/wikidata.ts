@@ -52,7 +52,13 @@ async function getTranslatedGameNames(
     .get(uri)
     .then((response) => response.data)
     .then(parseData)
-    .then(filterData);
+    .then(filterData)
+    .catch((error) => {
+      if (!error.response || error.response.status !== 429) {
+        console.error(error);
+      }
+      return undefined;
+    });
 }
 
 function filterData(result: Result | undefined): Result | undefined {
