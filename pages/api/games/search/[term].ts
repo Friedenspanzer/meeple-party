@@ -1,8 +1,8 @@
 import {
   ExtendedGameCollection,
-  GameCollectionStatus
+  GameCollectionStatus,
 } from "@/datatypes/collection";
-import { Game } from "@/datatypes/game";
+import { ExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
 import { withUser } from "@/utility/apiAuth";
 import { searchBggGames } from "@/utility/bgg";
@@ -38,7 +38,7 @@ export default withUser(async function handle(
 });
 
 async function enrichGameData(
-  games: Game[],
+  games: ExpandedGame[],
   userId: string
 ): Promise<ExtendedGameCollection[]> {
   const gameIds = games.map((g) => g.id);
