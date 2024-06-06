@@ -1,7 +1,7 @@
 import GameCollection from "@/components/GameCollection/GameCollection";
 import PrefetchedGameCollection from "@/components/Prefetches/PrefetchedGameCollection";
 import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
-import { Game } from "@/datatypes/game";
+import { ExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
 import { getTranslation } from "@/i18n";
 import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
@@ -52,7 +52,7 @@ export default async function Collection() {
   );
 }
 
-function getGame(games: Game[], gameId: number) {
+function getGame(games: ExpandedGame[], gameId: number) {
   const game = games.find((g) => g.id === gameId);
   if (!game) {
     throw new Error(

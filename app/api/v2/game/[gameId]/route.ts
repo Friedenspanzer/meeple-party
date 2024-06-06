@@ -1,10 +1,10 @@
-import { Game } from "@/datatypes/game";
+import { ExpandedGame } from "@/datatypes/game";
 import { getGameData } from "@/utility/games";
 import { NextResponse } from "next/server";
 import validator from "validator";
 
 export interface GameGetResult {
-  game: Game;
+  game: ExpandedGame;
 }
 
 export async function GET(
