@@ -18,13 +18,13 @@ exports[`Profile additional information matches snapshot 1`] = `
       <svg
         class="tabler-icon tabler-icon-home"
         fill="none"
-        height="calc(1rem * var(--mantine-scale))"
+        height="24"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
         viewBox="0 0 24 24"
-        width="calc(1rem * var(--mantine-scale))"
+        width="24"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
@@ -48,7 +48,7 @@ exports[`Profile additional information matches snapshot 1`] = `
       style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
     >
       <svg
-        height="calc(1rem * var(--mantine-scale))"
+        height="24"
         style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
         version="1.1"
         viewBox="0 0 1607 2400"
@@ -100,7 +100,7 @@ exports[`Profile additional information matches snapshot with only bgg name 1`] 
       style="--group-gap: var(--mantine-spacing-xs); --group-align: center; --group-justify: flex-start; --group-wrap: wrap;"
     >
       <svg
-        height="calc(1rem * var(--mantine-scale))"
+        height="24"
         style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2; padding-inline: 0.25rem;"
         version="1.1"
         viewBox="0 0 1607 2400"
@@ -140,13 +140,13 @@ exports[`Profile additional information matches snapshot with only place 1`] = `
       <svg
         class="tabler-icon tabler-icon-home"
         fill="none"
-        height="calc(1rem * var(--mantine-scale))"
+        height="24"
         stroke="currentColor"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="2"
         viewBox="0 0 24 24"
-        width="calc(1rem * var(--mantine-scale))"
+        width="24"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
