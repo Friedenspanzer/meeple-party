@@ -89,7 +89,7 @@ function isFresh(game: PrismaGameWithNames) {
 async function getFreshData(gameIds: GameId[]): Promise<ExpandedGame[]> {
   const [bggData, wikidataData] = await Promise.all([
     getBggGames(gameIds),
-    getWikidataInfo(gameIds),
+    getWikidataInfo(gameIds.slice(0, 5)),
   ]);
 
   return bggData.map((game) => {

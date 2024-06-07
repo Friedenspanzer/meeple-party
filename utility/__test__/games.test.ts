@@ -59,7 +59,7 @@ describe("getGameData", () => {
     expect(prismaMock.game.create).toHaveBeenCalledTimes(0);
   });
   it("returns stale games", async () => {
-    const ids = generateArray(generateNumber);
+    const ids = generateArray(generateNumber, 50);
     const [freshGamesInDatabase, staleGamesInDatabase] = partition(
       generateGamesWithName(ids),
       () => generateBoolean()
@@ -105,7 +105,7 @@ describe("getGameData", () => {
     const result = await getGameData(ids);
 
     expect(wikidataMock).toHaveBeenCalledWith(
-      staleGamesInDatabase.map((g) => g.id)
+      staleGamesInDatabase.slice(0, 5).map((g) => g.id)
     );
     expect(bggMock).toHaveBeenCalledWith(staleGamesInDatabase.map((g) => g.id));
 
