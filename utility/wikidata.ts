@@ -1,8 +1,9 @@
 import { GameId } from "@/datatypes/game";
 import { AlternateGameName } from "@prisma/client";
 import axios from "axios";
+import { distinct } from "./array";
 
-const endpointBase = "https://query.wikidata.org/sparql?format=json&query=";
+const ENDPOINT_BASE = "https://query.wikidata.org/sparql?format=json&query=";
 
 export interface WikiDataInfo {
   gameId: GameId;
@@ -23,77 +24,64 @@ export async function getWikidataInfo(
     return [];
   }
 
-  return await Promise.all(
-    gameIds.map(async (id) => {
-      const translations = await getTranslatedGameNames(id);
-      return {
-        gameId: id,
-        wikidataId: translations?.wikidataId,
-        names: translations?.names || [],
-      };
-    })
-  );
-}
-
-type Result = {
-  wikidataId: string;
-  names: Name[];
-};
-
-type Name = { name: string; language: string };
-
-async function getTranslatedGameNames(
-  bggId: number
-): Promise<Result | undefined> {
   //TODO Add tests
-  const query = getQuery(bggId);
-  const uri = endpointBase + encodeURI(query);
+  const query = getQuery(gameIds);
+  console.log("WikiData query", query);
+  const uri = ENDPOINT_BASE + encodeURI(query);
   return axios
     .get(uri)
     .then((response) => response.data)
-    .then(parseData)
-    .then(filterData)
+    .then(parseResult)
+    .then(consolidateData)
     .catch((error) => {
       if (!error.response || error.response.status !== 429) {
-        console.error(error);
+        console.error("Error fetching WikiData data", error);
       }
-      return undefined;
+      return [];
     });
 }
 
-function filterData(result: Result | undefined): Result | undefined {
-  if (!result) {
-    return result;
-  }
-  return {
-    wikidataId: result.wikidataId,
-    names: result.names.filter((n) => n.language.length === 2),
-  };
+type ParsedResult = {bggId: number, wikidataId: string, language: string, name: string};
+
+function consolidateData(data: ParsedResult[]): WikiDataInfo[] {
+  const gameIds = distinct(data.map(d => d.bggId));
+  return gameIds.map(id => ({
+    gameId: id,
+    wikidataId: data.find(d => d.bggId === id)?.wikidataId,
+    names: data.filter(d => d.bggId === id).map(d => ({language: d.language, name: d.name}))}));
 }
 
-function parseData(data: any): Result | undefined {
+function parseResult(data: any): ParsedResult[] {
   if (data?.results?.bindings && Array.isArray(data.results.bindings)) {
     if (data.results.bindings.length === 0) {
-      return undefined;
+      return [];
     }
-    const wikidataId = data.results.bindings[0].game.value;
-    const names = data.results.bindings.map(parseResult);
-    return { wikidataId, names };
+    return data.results.bindings.map(parseLine).filter((d: ParsedResult | undefined) => d !== undefined);
   } else {
     console.warn(
       "Wrong format encountered when parsing WikiData response.",
       data
     );
+    return [];
   }
 }
 
-function parseResult(data: any): Name {
+function parseLine(data: any): ParsedResult | undefined {
+  if (!data.game?.value || !data.id?.value || !data.name?.value || !data.language?.value) {
+    console.warn(
+      "Wrong format encountered when parsing WikiData response.",
+      data
+    );
+    return undefined;
+  }
   return {
+    bggId: Number.parseInt(data.id.value), //TODO This conversion to number is important at runtime and needs to be testet
     language: data.language.value,
     name: data.name.value,
-  };
+    wikidataId: data.game.value
+  }
 }
 
-function getQuery(bggId: number): string {
-  return `SELECT ?game ?name (lang(?name) as ?language) WHERE { ?game wdt:P31 wd:Q131436 ; rdfs:label ?name ; wdt:P2339 "${bggId}" . }`;
+function getQuery(bggIds: number[]): string {
+  return `SELECT ?game ?id ?name (lang(?name) as ?language) WHERE { ?game wdt:P31 wd:Q131436 ; rdfs:label ?name ; wdt:P2339 ?id. FILTER (?id IN (${bggIds.map(id => `"${id}"`).join(",")}))}`
 }

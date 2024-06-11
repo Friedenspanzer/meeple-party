@@ -15,3 +15,16 @@ export function partition<T>(
     [[] as T[], [] as T[]]
   );
 }
+
+/**
+ * Gets all distinct elements in an array.
+ *
+ * @param array Array to search.
+ * @returns Array that contains all values of the input array, but duplicates are elimated.
+ */
+export function distinct<T>(array: T[]): T[] {
+  return array.reduce(
+    (current, next) => (current.includes(next) ? current : [...current, next]),
+    [] as T[]
+  );
+}

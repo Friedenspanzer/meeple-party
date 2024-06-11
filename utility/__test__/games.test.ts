@@ -105,7 +105,7 @@ describe("getGameData", () => {
     const result = await getGameData(ids);
 
     expect(wikidataMock).toHaveBeenCalledWith(
-      staleGamesInDatabase.slice(0, 5).map((g) => g.id)
+      staleGamesInDatabase.map((g) => g.id)
     );
     expect(bggMock).toHaveBeenCalledWith(staleGamesInDatabase.map((g) => g.id));
 

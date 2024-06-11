@@ -1,4 +1,4 @@
-import { partition } from "../array";
+import { distinct, partition } from "../array";
 import { generateArray, generateNumber } from "../test";
 
 describe("partition", () => {
@@ -28,5 +28,26 @@ describe("partition", () => {
     const [pass, fail] = partition(input, () => false);
     expect(pass).toEqual([]);
     expect(fail).toEqual(input);
+  });
+});
+
+describe("distinct", () => {
+  it("filters duplicate elements", () => {
+    const input = [1, 1, 1, 2, 3, 4, 5, 2, 6, 7, 2, 8, 8, 9];
+    const result = distinct(input);
+    expect(result).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  });
+  it("returns empty when input array is empty", () => {
+    const input = [] as any[];
+    const result = distinct(input);
+    expect(result).toEqual([]);
+  });
+  it("works for complex types", () => {
+    const a = { foo: 1 };
+    const b = { bar: 2 };
+    const c = { foo: 1, bar: 2 };
+    const input = [a, c, a, b];
+    const result = distinct(input);
+    expect(result).toEqual([a, c, b]);
   });
 });
