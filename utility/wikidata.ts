@@ -41,14 +41,22 @@ export async function getWikidataInfo(
     });
 }
 
-type ParsedResult = {bggId: number, wikidataId: string, language: string, name: string};
+type ParsedResult = {
+  bggId: number;
+  wikidataId: string;
+  language: string;
+  name: string;
+};
 
 function consolidateData(data: ParsedResult[]): WikiDataInfo[] {
-  const gameIds = distinct(data.map(d => d.bggId));
-  return gameIds.map(id => ({
+  const gameIds = distinct(data.map((d) => d.bggId));
+  return gameIds.map((id) => ({
     gameId: id,
-    wikidataId: data.find(d => d.bggId === id)?.wikidataId,
-    names: data.filter(d => d.bggId === id).map(d => ({language: d.language, name: d.name}))}));
+    wikidataId: data.find((d) => d.bggId === id)?.wikidataId,
+    names: data
+      .filter((d) => d.bggId === id)
+      .map((d) => ({ language: d.language, name: d.name })),
+  }));
 }
 
 function parseResult(data: any): ParsedResult[] {
@@ -56,7 +64,9 @@ function parseResult(data: any): ParsedResult[] {
     if (data.results.bindings.length === 0) {
       return [];
     }
-    return data.results.bindings.map(parseLine).filter((d: ParsedResult | undefined) => d !== undefined);
+    return data.results.bindings
+      .map(parseLine)
+      .filter((d: ParsedResult | undefined) => d !== undefined);
   } else {
     console.warn(
       "Wrong format encountered when parsing WikiData response.",
@@ -67,7 +77,12 @@ function parseResult(data: any): ParsedResult[] {
 }
 
 function parseLine(data: any): ParsedResult | undefined {
-  if (!data.game?.value || !data.id?.value || !data.name?.value || !data.language?.value) {
+  if (
+    !data.game?.value ||
+    !data.id?.value ||
+    !data.name?.value ||
+    !data.language?.value
+  ) {
     console.warn(
       "Wrong format encountered when parsing WikiData response.",
       data
@@ -78,10 +93,10 @@ function parseLine(data: any): ParsedResult | undefined {
     bggId: Number.parseInt(data.id.value), //TODO This conversion to number is important at runtime and needs to be testet
     language: data.language.value,
     name: data.name.value,
-    wikidataId: data.game.value
-  }
+    wikidataId: data.game.value,
+  };
 }
 
 function getQuery(bggIds: number[]): string {
-  return `SELECT ?game ?id ?name (lang(?name) as ?language) WHERE { ?game wdt:P31 wd:Q131436 ; rdfs:label ?name ; wdt:P2339 ?id. FILTER (?id IN (${bggIds.map(id => `"${id}"`).join(",")}))}`
+  return `SELECT ?game ?id ?name (lang(?name) as ?language) WHERE { ?game wdt:P31 wd:Q131436 ; rdfs:label ?name ; wdt:P2339 ?id. FILTER (?id IN (${bggIds.map((id) => `"${id}"`).join(",")}))}`;
 }
