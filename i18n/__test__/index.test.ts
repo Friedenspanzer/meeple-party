@@ -3,7 +3,12 @@
  */
 import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { getServerUser } from "@/utility/serverSession";
-import { generatePrismaUser, generateString } from "@/utility/test";
+import {
+  generatePrismaUser,
+  getRandomGameLanguage,
+  getRandomPageLanguage,
+  getRandomRealLanguage,
+} from "@/utility/test";
 import { getUserPreferences } from "@/utility/userProfile";
 import { mockReset } from "jest-mock-extended";
 import { getGameLanguage, getLanguage } from "..";
@@ -24,7 +29,7 @@ describe("language settinges", () => {
   });
   describe("getLanguage", () => {
     it("returns the current selected language", async () => {
-      const language = generateString(2);
+      const language = getRandomRealLanguage();
       userPreferencesMock.mockReturnValue({
         ...defaultUserPreferences,
         pageLanguage: language,
@@ -44,7 +49,7 @@ describe("language settinges", () => {
     it("returns English when there is an error", async () => {
       userPreferencesMock.mockReturnValue({
         ...defaultUserPreferences,
-        pageLanguage: generateString(2),
+        pageLanguage: getRandomPageLanguage(),
       });
       getUserMock.mockRejectedValue({});
       const result = await getLanguage();
@@ -54,7 +59,7 @@ describe("language settinges", () => {
 
   describe("getGameLanguage", () => {
     it("returns the current selected language", async () => {
-      const language = generateString(2);
+      const language = getRandomRealLanguage();
       userPreferencesMock.mockReturnValue({
         ...defaultUserPreferences,
         gameLanguage: language,
@@ -63,7 +68,7 @@ describe("language settinges", () => {
       expect(result).toBe(language);
     });
     it("returns the page language when set to follow", async () => {
-      const language = generateString(2);
+      const language = getRandomRealLanguage();
       userPreferencesMock.mockReturnValue({
         ...defaultUserPreferences,
         gameLanguage: "follow",
@@ -84,7 +89,7 @@ describe("language settinges", () => {
     it("returns English when there is an error", async () => {
       userPreferencesMock.mockReturnValue({
         ...defaultUserPreferences,
-        gameLanguage: generateString(2),
+        gameLanguage: getRandomGameLanguage(),
       });
       getUserMock.mockRejectedValue({});
       const result = await getGameLanguage();

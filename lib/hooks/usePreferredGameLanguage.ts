@@ -12,11 +12,11 @@ export default function usePreferredGameLanguage() {
       preferredGameLanguage: fallbackLng,
     };
   } else {
-    const preferredGameLanguage = determineGameLanguage({
-      gameLanguage: preferences.gameLanguage,
-      pageLanguage: preferences.pageLanguage,
-      fallbackLanguage: fallbackLng,
-    });
+    const preferredGameLanguage = determineGameLanguage(
+      preferences.gameLanguage,
+      preferences.pageLanguage,
+      fallbackLng
+    );
     return {
       loading,
       preferredGameLanguage,

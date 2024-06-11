@@ -1,5 +1,6 @@
 import { FullPrismaRelationship } from "@/app/api/v2/utility";
 import { UserProfile, defaultUserPreferences } from "@/datatypes/userProfile";
+import { GameLanguage, PageLanguage, RealLanguage } from "@/i18n/types";
 import { MantineProvider } from "@mantine/core";
 import {
   Game,
@@ -205,4 +206,16 @@ export function render(ui: React.ReactNode) {
       <MantineProvider>{children}</MantineProvider>
     ),
   });
+}
+
+export function getRandomPageLanguage(): PageLanguage {
+  return getRandomEntry(["de", "en", "auto"]);
+}
+
+export function getRandomGameLanguage(): GameLanguage {
+  return getRandomEntry(["de", "en", "auto", "follow"]);
+}
+
+export function getRandomRealLanguage(): RealLanguage {
+  return getRandomEntry(["de", "en"]);
 }

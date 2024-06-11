@@ -1,9 +1,10 @@
 import DeleteAccount from "@/components/DeleteAccount/DeleteAccount";
 import LanguagePicker from "@/components/LanguagePicker/LanguagePicker";
 import { getTranslation } from "@/i18n";
+import { Language } from "@/i18n/types";
 import { PropsWithChildren } from "react";
 
-const supportedTranslations = ["en", "de"];
+const supportedTranslations: Language[] = ["en", "de"];
 
 export default async function Page() {
   const { t } = await getTranslation("settings");

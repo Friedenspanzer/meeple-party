@@ -3,6 +3,7 @@
 import { UserPreferences } from "@/datatypes/userProfile";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { useTranslation } from "@/i18n/client";
+import { GameLanguage, Language, PageLanguage } from "@/i18n/types";
 import { Alert, Button, Group, Stack } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";
@@ -10,7 +11,7 @@ import React, { useCallback, useMemo } from "react";
 type LanguagePickerType = "page" | "game";
 
 interface LanguagePickerProps {
-  availableLanguages: string[];
+  availableLanguages: Language[];
   type: LanguagePickerType;
 }
 
@@ -35,9 +36,10 @@ const LanguagePicker: React.FC<LanguagePickerProps> = ({
   }, [loading, type, preferences]);
 
   const update = useCallback(
-    (language: string) => {
+    (language: Language) => {
       const mutator = getCurrentMutator(type);
-      updatePreferences(mutator(language)).then(() => router.refresh());
+      //TODO See if I can solve this more elegantly
+      updatePreferences(mutator(language as any)).then(() => router.refresh());
     },
     [router, type, updatePreferences]
   );
@@ -81,11 +83,13 @@ function getCurrentSelector(type: LanguagePickerType) {
 
 function getCurrentMutator(
   type: LanguagePickerType
-): (language: string) => Partial<UserPreferences> {
+):
+  | ((language: GameLanguage) => Partial<UserPreferences>)
+  | ((language: PageLanguage) => Partial<UserPreferences>) {
   if (type === "game") {
-    return (language) => ({ gameLanguage: language });
+    return (language: GameLanguage) => ({ gameLanguage: language });
   } else {
-    return (language) => ({ pageLanguage: language });
+    return (language: PageLanguage) => ({ pageLanguage: language });
   }
 }
 

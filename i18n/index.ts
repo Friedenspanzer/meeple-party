@@ -41,10 +41,7 @@ export async function getLanguage() {
   try {
     const user = await getServerUser();
     const preferences = getUserPreferences(user);
-    return determineLanguage({
-      pageLanguage: preferences.pageLanguage,
-      fallbackLanguage: fallbackLng,
-    });
+    return determineLanguage(preferences.pageLanguage, fallbackLng);
   } catch {
     return fallbackLng;
   }
@@ -58,11 +55,11 @@ export async function getGameLanguage() {
   try {
     const user = await getServerUser();
     const preferences = getUserPreferences(user);
-    return determineGameLanguage({
-      gameLanguage: preferences.gameLanguage,
-      pageLanguage: preferences.pageLanguage,
-      fallbackLanguage: fallbackLng,
-    });
+    return determineGameLanguage(
+      preferences.gameLanguage,
+      preferences.pageLanguage,
+      fallbackLng
+    );
   } catch {
     return fallbackLng;
   }
