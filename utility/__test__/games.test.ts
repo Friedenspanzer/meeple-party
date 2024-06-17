@@ -126,6 +126,104 @@ describe("getGameData", () => {
       ...updatedStaleGames,
     ]);
   });
+  it("doesn't update when update is set to never", async () => {
+    const ids = generateArray(generateNumber, 50);
+    const [freshGamesInDatabase, staleGamesInDatabase] = partition(
+      generateGamesWithName(ids),
+      () => generateBoolean()
+    );
+    staleGamesInDatabase.forEach((g) => (g.updatedAt = new Date(1990, 1, 1)));
+    freshGamesInDatabase.forEach((g) => (g.updatedAt = new Date(9999, 1, 1)));
+
+    prismaMock.game.findMany
+      .calledWith(
+        objectMatcher({
+          where: {
+            id: { in: ids },
+          },
+          include: {
+            alternateNames: true,
+          },
+        })
+      )
+      .mockResolvedValue([...freshGamesInDatabase, ...staleGamesInDatabase]);
+
+    const wikidataMock = jest.mocked(getWikidataInfo);
+    const bggMock = jest.mocked(getBggGames);
+
+    const result = await getGameData(ids, "never");
+
+    expect(wikidataMock).toHaveBeenCalledTimes(0);
+    expect(bggMock).toHaveBeenCalledTimes(0);
+    expect(prismaMock.game.create).toHaveBeenCalledTimes(0);
+    expect(prismaMock.game.update).toHaveBeenCalledTimes(0);
+
+    expect(result).toEqual([
+      ...freshGamesInDatabase.map(prismaGameToExpandedGame),
+      ...staleGamesInDatabase.map(prismaGameToExpandedGame),
+    ]);
+  });
+  it("updates all games when update is set to always", async () => {
+    const ids = generateArray(generateNumber, 50);
+    const [freshGamesInDatabase, staleGamesInDatabase] = partition(
+      generateGamesWithName(ids),
+      () => generateBoolean()
+    );
+    staleGamesInDatabase.forEach((g) => (g.updatedAt = new Date(1990, 1, 1)));
+    freshGamesInDatabase.forEach((g) => (g.updatedAt = new Date(9999, 1, 1)));
+    const allGamesInDatabase = [
+      ...staleGamesInDatabase,
+      ...freshGamesInDatabase,
+    ];
+
+    const updatedGames = generateGamesWithName(
+      [...staleGamesInDatabase, ...freshGamesInDatabase].map((g) => g.id)
+    ).map(prismaGameToExpandedGame);
+
+    const searchMock = prismaMock.game.findMany
+      .calledWith(
+        objectMatcher({
+          where: {
+            id: { in: ids },
+          },
+          include: {
+            alternateNames: true,
+          },
+        })
+      )
+      .mockResolvedValue(allGamesInDatabase);
+
+    prismaMock.game.update.mockResolvedValue({} as any);
+
+    const wikidataMock = jest
+      .mocked(getWikidataInfo)
+      .mockResolvedValue(convertToWikiData(updatedGames));
+
+    const bggMock = jest
+      .mocked(getBggGames)
+      .mockResolvedValue(convertToBgg(updatedGames));
+
+    const result = await getGameData(ids, "always");
+
+    expect(wikidataMock).toHaveBeenCalledWith(
+      allGamesInDatabase.map((g) => g.id)
+    );
+    expect(bggMock).toHaveBeenCalledWith(allGamesInDatabase.map((g) => g.id));
+
+    expect(searchMock).toHaveBeenCalledTimes(1);
+    expect(prismaMock.game.create).toHaveBeenCalledTimes(0);
+    updatedGames.forEach((g) =>
+      expect(prismaMock.game.update).toHaveBeenCalledWith({
+        data: createPrismaQueryData(g),
+        include: {
+          alternateNames: true,
+        },
+        where: { id: g.id },
+      })
+    );
+
+    expect(result).toEqual(updatedGames);
+  });
 });
 
 function generateGamesWithName(gameIds: GameId[]): PrismaGameWithNames[] {

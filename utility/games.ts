@@ -4,7 +4,7 @@ import {
   PrismaGameWithNames,
   bggGameToExpandedGame,
   expandedGameToGame,
-  prismaGameToExpandedGame
+  prismaGameToExpandedGame,
 } from "@/datatypes/game";
 import { prisma } from "@/db";
 import { partition } from "./array";
@@ -13,18 +13,29 @@ import { getWikidataInfo } from "./wikidata";
 
 const DEV = process.env.NODE_ENV === "development";
 
-const DAILY = 24 * 60 * 60;
+const WEEKLY = 7 * 24 * 60 * 60;
 
 /**
  * Gets complete data for all requested games. Handles updating of stale data.
  *
  * @param gameIds List of IDs of the games to fetch data for.
+ * @param update Indicates if the method should update data. "never" doesn't do any updates, "stale" updates all games that haven't been updated in a while (indicated by the environment variable BGG_UPDATE_INTERVAL), "always" updates all games.
  * @returns Complete data of all games that are found. Non-existant IDs will be discarded silently.
  */
-export async function getGameData(gameIds: GameId[]): Promise<ExpandedGame[]> {
+export async function getGameData(
+  gameIds: GameId[],
+  update: "always" | "stale" | "never" = "stale"
+): Promise<ExpandedGame[]> {
   const gamesFromDatabase = await getFromDatabase(gameIds);
 
-  const [fresh, stale] = partition(gamesFromDatabase, isFresh);
+  if (update === "never") {
+    return convertGamesFromDatabase(gamesFromDatabase);
+  }
+
+  const [fresh, stale] =
+    update === "always"
+      ? [[], gamesFromDatabase]
+      : partition(gamesFromDatabase, isFresh);
   const missingIds = gameIds.filter(
     (id) => !gamesFromDatabase.find((g) => g.id === id)
   );
@@ -141,6 +152,6 @@ function getUpdateInterval() {
   if (process.env.BGG_UPDATE_INTERVAL) {
     return Number.parseInt(process.env.BGG_UPDATE_INTERVAL);
   } else {
-    return DAILY;
+    return WEEKLY;
   }
 }
