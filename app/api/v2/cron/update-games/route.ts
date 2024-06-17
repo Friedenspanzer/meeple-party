@@ -5,6 +5,7 @@ import { getCronAuthToken } from "../../utility";
 
 interface UpdateGamesResult {
   success: boolean;
+  games: { id: number; name: string }[];
 }
 
 const AUTHENTICATION_HEADER_NAME = "CronAuth";
@@ -17,7 +18,7 @@ export async function PATCH(request: Request) {
       !request.headers.has(AUTHENTICATION_HEADER_NAME) ||
       request.headers.get(AUTHENTICATION_HEADER_NAME) !== token
     ) {
-      throw `Wrong authentication header. Expected "${token}" but got "${request.headers.get(AUTHENTICATION_HEADER_NAME)}".`;
+      throw "Wrong authentication header.";
     }
   } catch (error) {
     console.error(error);
@@ -34,10 +35,16 @@ export async function PATCH(request: Request) {
       take: 10,
     });
 
-    await getGameData(gamesToUpdate.map((g) => g.id));
+    const games = await getGameData(gamesToUpdate.map((g) => g.id));
 
-    return NextResponse.json({ success: true } as UpdateGamesResult);
+    return NextResponse.json({
+      success: true,
+      games: games.map((g) => ({ id: g.id, name: g.name })),
+    } as UpdateGamesResult);
   } catch (error) {
-    return NextResponse.json({ success: false } as UpdateGamesResult);
+    return NextResponse.json({
+      success: false,
+      games: [],
+    } as UpdateGamesResult);
   }
 }
