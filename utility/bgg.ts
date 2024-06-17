@@ -169,9 +169,6 @@ function splitBggObject(bggObject: any): any[] {
 }
 
 function checkData(bggObject: any) {
-  if (!bggObject?.boardgame?.boardgame) {
-    return;
-  }
   if (bggObject.boardgames.boardgame.error) {
     throw Error(`BGG API error: ${bggObject.boardgame.error["@_message"]}`);
   }

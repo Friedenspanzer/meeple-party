@@ -41,6 +41,7 @@ export async function getGameData(
   );
 
   const freshFromDatabase = convertGamesFromDatabase(fresh);
+  //TODO It's possible to receive less fresh data than expected (eg. when BGG decides to move games to another ID). This needs to be handled somewhoe.
   const freshData = await getFreshData([
     ...stale.map((s) => s.id),
     ...missingIds,
