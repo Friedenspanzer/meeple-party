@@ -36,7 +36,6 @@ export async function PATCH(request: Request) {
 
   try {
     const gamesToUpdate = await prisma.game.findMany({
-      where: { updatedAt: { lte: new Date() } },
       select: { id: true },
       orderBy: { updatedAt: "asc" },
       take: 10,
