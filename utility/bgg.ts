@@ -170,7 +170,7 @@ function splitBggObject(bggObject: any): any[] {
 
 function checkData(bggObject: any) {
   if (bggObject.boardgames.boardgame.error) {
-    throw Error(`BGG API error: ${bggObject.boardgame.error["@_message"]}`);
+    throw Error(`BGG API error: ${bggObject.boardgames.boardgame.error["@_message"]}`);
   }
   if (bggObject.boardgames.boardgame["@_subtypemismatch"]) {
     throw Error(
