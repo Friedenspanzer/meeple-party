@@ -41,17 +41,20 @@ export async function getGameData(
   );
 
   const freshFromDatabase = convertGamesFromDatabase(fresh);
-  //TODO It's possible to receive less fresh data than expected (eg. when BGG decides to move games to another ID). This needs to be handled somewhoe.
   const freshData = await getFreshData([
     ...stale.map((s) => s.id),
     ...missingIds,
   ]);
+  const missingDataIds = gameIds
+    .filter((id) => stale.find((g) => g.id === id))
+    .filter((id) => !freshData.find((d) => d.id === id));
   const [newData, updatedData] = partition(freshData, (d) =>
     missingIds.includes(d.id)
   );
 
   await updateInDatabase(updatedData);
   await addToDatabase(newData);
+  await removeFromDatabase(missingDataIds);
 
   if (DEV && updatedData.length > 0) {
     console.log(
@@ -115,6 +118,7 @@ async function getFreshData(gameIds: GameId[]): Promise<ExpandedGame[]> {
 }
 
 async function updateInDatabase(games: ExpandedGame[]) {
+  if (games.length === 0) return;
   for (let game of games) {
     await prisma.game.update({
       data: createPrismaQueryData(game),
@@ -127,11 +131,17 @@ async function updateInDatabase(games: ExpandedGame[]) {
 }
 
 async function addToDatabase(games: ExpandedGame[]) {
+  if (games.length === 0) return;
   for (let game of games) {
     await prisma.game.create({
       data: createPrismaQueryData(game),
     });
   }
+}
+
+async function removeFromDatabase(gameIds: GameId[]) {
+  if (gameIds.length === 0) return;
+  await prisma.game.deleteMany({ where: { id: { in: gameIds } } });
 }
 
 function createPrismaQueryData(game: ExpandedGame) {

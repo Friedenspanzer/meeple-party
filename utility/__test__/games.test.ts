@@ -224,6 +224,71 @@ describe("getGameData", () => {
 
     expect(result).toEqual(updatedGames);
   });
+  it("removes stale games that can not be updated", async () => {
+    const ids = generateArray(generateNumber, 50);
+    const [freshGamesInDatabase, staleGamesInDatabase] = partition(
+      generateGamesWithName(ids),
+      () => generateBoolean()
+    );
+    staleGamesInDatabase.forEach((g) => (g.updatedAt = new Date(1990, 1, 1)));
+    freshGamesInDatabase.forEach((g) => (g.updatedAt = new Date(9999, 1, 1)));
+    const [existingStaleGames, missingStaleGames] = partition(
+      generateGamesWithName(staleGamesInDatabase.map((g) => g.id)).map(
+        prismaGameToExpandedGame
+      ),
+      () => generateBoolean()
+    );
+
+    const searchMock = prismaMock.game.findMany
+      .calledWith(
+        objectMatcher({
+          where: {
+            id: { in: ids },
+          },
+          include: {
+            alternateNames: true,
+          },
+        })
+      )
+      .mockResolvedValue([...freshGamesInDatabase, ...staleGamesInDatabase]);
+
+    prismaMock.game.update.mockResolvedValue({} as any);
+
+    const wikidataMock = jest
+      .mocked(getWikidataInfo)
+      .mockResolvedValue(convertToWikiData(existingStaleGames));
+
+    const bggMock = jest
+      .mocked(getBggGames)
+      .mockResolvedValue(convertToBgg(existingStaleGames));
+
+    const result = await getGameData(ids);
+
+    expect(wikidataMock).toHaveBeenCalledWith(
+      staleGamesInDatabase.map((g) => g.id)
+    );
+    expect(bggMock).toHaveBeenCalledWith(staleGamesInDatabase.map((g) => g.id));
+
+    expect(searchMock).toHaveBeenCalledTimes(1);
+    expect(prismaMock.game.create).toHaveBeenCalledTimes(0);
+    existingStaleGames.forEach((g) =>
+      expect(prismaMock.game.update).toHaveBeenCalledWith({
+        data: createPrismaQueryData(g),
+        include: {
+          alternateNames: true,
+        },
+        where: { id: g.id },
+      })
+    );
+    expect(prismaMock.game.deleteMany).toHaveBeenCalledWith({
+      where: { id: { in: missingStaleGames.map((g) => g.id) } },
+    });
+
+    expect(result).toEqual([
+      ...freshGamesInDatabase.map(prismaGameToExpandedGame),
+      ...existingStaleGames,
+    ]);
+  });
 });
 
 function generateGamesWithName(gameIds: GameId[]): PrismaGameWithNames[] {
