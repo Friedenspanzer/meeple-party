@@ -70,6 +70,9 @@ describe("PATCH cron/update-games", () => {
     expect(result.status).toBe(200);
     expect(value.success).toBeTruthy();
     expect(value.games).toEqual(games.map((g) => ({ id: g.id, name: g.name })));
-    expect(gameDataMock).toHaveBeenCalledWith(games.map((g) => g.id));
+    expect(gameDataMock).toHaveBeenCalledWith(
+      games.map((g) => g.id),
+      "always"
+    );
   });
 });

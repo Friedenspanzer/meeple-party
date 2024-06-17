@@ -41,7 +41,10 @@ export async function PATCH(request: Request) {
       take: 10,
     });
 
-    const games = await getGameData(gamesToUpdate.map((g) => g.id));
+    const games = await getGameData(
+      gamesToUpdate.map((g) => g.id),
+      "always"
+    );
 
     return NextResponse.json({
       success: true,
