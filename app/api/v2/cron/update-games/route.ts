@@ -10,7 +10,11 @@ interface UpdateGamesResult {
 
 const AUTHENTICATION_HEADER_NAME = "CronAuth";
 
-//TODO Test, document
+/**
+ * Updates the games that haven't been updated for the longest. *
+ * @param request HTTP request data
+ * @returns Wether the update was a success or not and, if successful, what games were updated.
+ */
 export async function PATCH(request: Request) {
   try {
     const token = getCronAuthToken();
@@ -22,9 +26,12 @@ export async function PATCH(request: Request) {
     }
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ success: false } as UpdateGamesResult, {
-      status: 403,
-    });
+    return NextResponse.json(
+      { success: false, games: [] } as UpdateGamesResult,
+      {
+        status: 403,
+      }
+    );
   }
 
   try {
