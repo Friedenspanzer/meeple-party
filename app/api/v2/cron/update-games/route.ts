@@ -17,7 +17,7 @@ export async function PATCH(request: Request) {
       !request.headers.has(AUTHENTICATION_HEADER_NAME) ||
       request.headers.get(AUTHENTICATION_HEADER_NAME) !== token
     ) {
-      throw "Wrong authentication header";
+      throw `Wrong authentication header. Expected "${token}" but got "${request.headers.get(AUTHENTICATION_HEADER_NAME)}".`;
     }
   } catch (error) {
     console.error(error);
