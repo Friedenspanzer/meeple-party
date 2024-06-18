@@ -51,9 +51,13 @@ export async function PATCH(request: Request) {
       games: games.map((g) => ({ id: g.id, name: g.name })),
     } as UpdateGamesResult);
   } catch (error) {
-    return NextResponse.json({
-      success: false,
-      games: [],
-    } as UpdateGamesResult);
+    console.error(error);
+    return NextResponse.json(
+      {
+        success: false,
+        games: [],
+      } as UpdateGamesResult,
+      { status: 500 }
+    );
   }
 }
