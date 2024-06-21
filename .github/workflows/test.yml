@@ -97,7 +97,7 @@ jobs:
       - name: Write Playwright binaries to cache
         uses: actions/cache/save@v3
         id: playwright-cache-save
-        if: steps.playwright-cache-restore.outputs.cache-hit != 'true'
+        if: ${{ always() && steps.playwright-cache-restore.outputs.cache-hit != 'true' }}
         with:
           path: ~/.cache/ms-playwright
           key: ${{ steps.playwright-cache-restore.outputs.cache-primary-key }}
