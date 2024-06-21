@@ -60,22 +60,10 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - name: Get installed Playwright version
-        id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').packages['node_modules/@playwright/test'].version)")" >> $GITHUB_ENV
-      - name: Read Playwright binaries from cache
-        uses: actions/cache/restore@v3
-        id: playwright-cache-restore
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
       - name: Install dependencies
         run: npm install
-      - name: Install Playwright system dependencies
-        run: npx playwright install-deps
       - name: Install Playwright browsers
-        run: npx playwright install
-        if: steps.playwright-cache-restore.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
       - name: Load build
         uses: actions/download-artifact@v4
         with:
@@ -96,13 +84,6 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-      - name: Write Playwright binaries to cache
-        uses: actions/cache/save@v3
-        id: playwright-cache-save
-        if: ${{ always() && steps.playwright-cache-restore.outputs.cache-hit != 'true' }}
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ steps.playwright-cache-restore.outputs.cache-primary-key }}
 
   unittest:
     runs-on: ubuntu-latest
