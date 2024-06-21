@@ -80,7 +80,7 @@ jobs:
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --max-failures=10
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
           NEXT_PUBLIC_SECRET: Testrunner
