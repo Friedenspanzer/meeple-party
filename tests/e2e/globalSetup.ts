@@ -1,5 +1,7 @@
+import { prisma } from "@/db";
 import { getGameData } from "@/utility/games";
 import { FullConfig } from "@playwright/test";
+import { Role } from "@prisma/client";
 
 export const AVAILABLE_GAMES = [
   224517, 161936, 174430, 342942, 233078, 316554, 167791, 115746, 187645,
@@ -12,9 +14,25 @@ export const AVAILABLE_GAMES = [
 ];
 
 export default async function globalSetup(config: FullConfig) {
-  await createGames();
+  await Promise.all([createGames(), setFeatureFlags()]);
 }
 
 async function createGames() {
   await getGameData(AVAILABLE_GAMES);
+}
+
+async function setFeatureFlags() {
+  const current = await prisma.featureFlag.findFirst({
+    where: { name: "show_app" },
+  });
+  if (!current) {
+    await prisma.featureFlag.create({
+      data: {
+        name: "show_app",
+        roles: {
+          set: [Role.USER, Role.ADMIN, Role.FRIENDS_FAMILY, Role.PREMIUM],
+        },
+      },
+    });
+  }
 }
