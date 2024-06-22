@@ -70,7 +70,7 @@ export async function logInAsNewUser(
     {
       name: "next-auth.session-token",
       value: session.sessionToken,
-      url: "https://127.0.0.1:3000",
+      url: "http://127.0.0.1:3000",
       httpOnly: true,
     },
   ]);
