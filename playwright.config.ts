@@ -4,7 +4,7 @@ import { defineConfig, devices } from "@playwright/test";
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();
+const CI = !!process.env.CI;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -12,13 +12,14 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  retries: !!process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 1 : "50%",
+  forbidOnly: CI,
+  retries: CI ? 1 : 0,
+  workers: CI ? 1 : "50%",
   reporter: "html",
   use: {
     baseURL: "http://127.0.0.1:3000",
     trace: "on-first-retry",
+    video: CI ? "off" : "retain-on-failure",
   },
   snapshotPathTemplate:
     "./tests/e2e/snapshots/{projectName}/{testFilePath}/{arg}{ext}",
@@ -41,7 +42,7 @@ export default defineConfig({
   webServer: {
     command: "npm run start",
     url: "http://127.0.0.1:3000",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !CI,
   },
   globalSetup: require.resolve("./tests/e2e/globalSetup"),
   globalTeardown: require.resolve("./tests/e2e/globalTeardown"),
