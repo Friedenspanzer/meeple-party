@@ -2,9 +2,12 @@ import { expect, test } from "@playwright/test";
 import { Role, User } from "@prisma/client";
 import { deleteUser, logInAsNewUser } from "./utility";
 
-test.describe("Login for logged out user", () => {
+test.describe("Logged out user", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/");
+  });
+  test("visual test", async ({ page }) => {
+    await expect(page).toHaveScreenshot();
   });
   test("has login button", async ({ page }) => {
     await expect(
@@ -21,7 +24,7 @@ test.describe("Login for logged out user", () => {
 
 let user: User | undefined;
 
-test.describe("Login for logged in user", () => {
+test.describe("Logged in user", () => {
   test.beforeEach(async ({ page }) => {
     user = await logInAsNewUser(page.context(), Role.ADMIN);
     await page.goto("/");

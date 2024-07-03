@@ -20,6 +20,8 @@ export default defineConfig({
     baseURL: "http://127.0.0.1:3000",
     trace: "on-first-retry",
   },
+  snapshotPathTemplate:
+    "./tests/e2e/snapshots/{projectName}/{testFilePath}/{arg}{ext}",
 
   /* Configure projects for major browsers */
   projects: [
