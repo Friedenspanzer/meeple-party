@@ -75,6 +75,10 @@ jobs:
       - name: Update snapshots
         if: ${{steps.snapshots_cache.outputs.cache-hit != 'true' || inputs.update-snapshots == 'true'}}
         run: npx playwright test --update-snapshots
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
+          NEXT_PUBLIC_SECRET: Testrunner
+          NEXTAUTH_URL: http://127.0.0.1:3000
       - name: Generate database bindings
         run: npm run "prisma generate"
       - name: Generate database tables
