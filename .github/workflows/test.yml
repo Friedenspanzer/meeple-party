@@ -72,6 +72,12 @@ jobs:
         with:
           name: build
           path: .next
+      - name: Generate database bindings
+        run: npm run "prisma generate"
+      - name: Generate database tables
+        run: npm run "prisma deploy"
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
       - name: Set up snapshot cache
         id: snapshots_cache
         uses: actions/cache@v4
@@ -86,12 +92,6 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
           NEXT_PUBLIC_SECRET: Testrunner
           NEXTAUTH_URL: http://127.0.0.1:3000
-      - name: Generate database bindings
-        run: npm run "prisma generate"
-      - name: Generate database tables
-        run: npm run "prisma deploy"
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
       - name: Run Playwright tests
         run: npx playwright test --max-failures=10
         env:
