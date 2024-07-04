@@ -26,53 +26,64 @@ export async function getGameData(
   gameIds: GameId[],
   update: "always" | "stale" | "never" = "stale"
 ): Promise<ExpandedGame[]> {
-  const gamesFromDatabase = await getFromDatabase(gameIds);
+  try {
+    const gamesFromDatabase = await getFromDatabase(gameIds);
 
-  if (update === "never") {
-    return convertGamesFromDatabase(gamesFromDatabase);
-  }
+    if (update === "never") {
+      return convertGamesFromDatabase(gamesFromDatabase);
+    }
 
-  const [fresh, stale] =
-    update === "always"
-      ? [[], gamesFromDatabase]
-      : partition(gamesFromDatabase, isFresh);
-  const missingIds = gameIds.filter(
-    (id) => !gamesFromDatabase.find((g) => g.id === id)
-  );
-
-  const freshFromDatabase = convertGamesFromDatabase(fresh);
-  const freshData = await getFreshData([
-    ...stale.map((s) => s.id),
-    ...missingIds,
-  ]);
-  const missingDataIds = gameIds
-    .filter((id) => stale.find((g) => g.id === id))
-    .filter((id) => !freshData.find((d) => d.id === id));
-  const [newData, updatedData] = partition(freshData, (d) =>
-    missingIds.includes(d.id)
-  );
-
-  await updateInDatabase(updatedData);
-  await addToDatabase(newData);
-  await removeFromDatabase(missingDataIds);
-
-  if (DEV && updatedData.length > 0) {
-    console.log(
-      "Updated stale games",
-      updatedData.map((g) => ({ id: g.id, name: g.name }))
+    const [fresh, stale] =
+      update === "always"
+        ? [[], gamesFromDatabase]
+        : partition(gamesFromDatabase, isFresh);
+    const missingIds = gameIds.filter(
+      (id) => !gamesFromDatabase.find((g) => g.id === id)
     );
-  }
 
-  if (DEV && newData.length > 0) {
-    console.log(
-      "Saved new game data",
-      newData.map((g) => ({ id: g.id, name: g.name }))
+    const freshFromDatabase = convertGamesFromDatabase(fresh);
+    const freshData = await getFreshData([
+      ...stale.map((s) => s.id),
+      ...missingIds,
+    ]);
+    const missingDataIds = gameIds
+      .filter((id) => stale.find((g) => g.id === id))
+      .filter((id) => !freshData.find((d) => d.id === id));
+    const [newData, updatedData] = partition(freshData, (d) =>
+      missingIds.includes(d.id)
     );
-  }
 
-  return [...freshFromDatabase, ...updatedData, ...newData];
+    await updateInDatabase(updatedData);
+    await addToDatabase(newData);
+    await removeFromDatabase(missingDataIds);
+
+    if (DEV && updatedData.length > 0) {
+      console.log(
+        "Updated stale games",
+        updatedData.map((g) => ({ id: g.id, name: g.name }))
+      );
+    }
+
+    if (DEV && newData.length > 0) {
+      console.log(
+        "Saved new game data",
+        newData.map((g) => ({ id: g.id, name: g.name }))
+      );
+    }
+
+    return [...freshFromDatabase, ...updatedData, ...newData];
+  } catch (e) {
+    console.error(
+      "Error fetching game data for games",
+      gameIds,
+      "with update mode",
+      update,
+      "Error:",
+      e
+    );
+    throw e;
+  }
 }
-
 async function getFromDatabase(
   gameIds: GameId[]
 ): Promise<PrismaGameWithNames[]> {
