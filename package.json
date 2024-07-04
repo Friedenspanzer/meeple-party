@@ -14,6 +14,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "coverage": "jest --collect-coverage",
+    "e2e": "playwright test",
     "update-snapshots": "jest --updateSnapshot",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
