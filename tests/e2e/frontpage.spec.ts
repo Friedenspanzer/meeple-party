@@ -7,6 +7,9 @@ test.describe("Logged out user", () => {
     await page.goto("/");
   });
   test("visual test", async ({ page }) => {
+    await expect(
+      page.getByRole("button", { name: "Login or Register" })
+    ).toBeVisible();
     await expect(page).toHaveScreenshot();
   });
   test("has login button", async ({ page }) => {
