@@ -1,5 +1,13 @@
 name: Test
-on: [pull_request, workflow_dispatch]
+on:
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch:
+    inputs:
+      update-snapshots:
+        description: "Update snapshots?"
+        type: boolean
 permissions:
   contents: read
   pages: write
@@ -57,6 +65,16 @@ jobs:
         with:
           name: build
           path: .next
+      - name: Set up snapshot cache
+        id: snapshots_cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-snapshots-${{github.ref}}
+          restore-keys: ${{ runner.os }}-snapshots-refs/heads/main
+          path: ./tests/e2e/snapshots/**
+      - name: Update snapshots
+        if: ${{steps.snapshots_cache.outputs.cache-hit != 'true' || inputs.update-snapshots == 'true'}}
+        run: npx playwright test --update-snapshots
       - name: Generate database bindings
         run: npm run "prisma generate"
       - name: Generate database tables
