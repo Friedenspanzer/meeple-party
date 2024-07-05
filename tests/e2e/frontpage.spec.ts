@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { Role, User } from "@prisma/client";
-import { deleteUser, logInAsNewUser } from "./utility";
+import { logInAsNewUser } from "./utility";
 
 test.describe("Logged out user", () => {
   test.beforeEach(async ({ page }) => {
@@ -31,11 +31,6 @@ test.describe("Logged in user", () => {
   test.beforeEach(async ({ page }) => {
     user = await logInAsNewUser(page.context(), Role.ADMIN);
     await page.goto("/");
-  });
-  test.afterEach(async () => {
-    if (user) {
-      deleteUser(user.id);
-    }
   });
   test("has expected ui", async ({ page }) => {
     await expect(page.getByRole("button", { name: "Logout " })).toBeVisible();

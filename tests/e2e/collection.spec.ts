@@ -1,25 +1,16 @@
 import { expect, test } from "@playwright/test";
-import { User } from "@prisma/client";
 import { AVAILABLE_GAMES } from "./globalSetup";
 import {
   addGamesToCollection,
   clearCollection,
-  deleteUser,
-  logInAsNewUser,
+  logInAsNewUser
 } from "./utility";
-
-let user: User | undefined;
 
 test.describe("Pagination", () => {
   test.beforeEach(async ({ page }) => {
-    user = await logInAsNewUser(page.context());
+    const user = await logInAsNewUser(page.context());
     await clearCollection(user.id);
     await addGamesToCollection(user.id, AVAILABLE_GAMES);
-  });
-  test.afterEach(async () => {
-    if (user) {
-      deleteUser(user.id);
-    }
   });
   test("has expected pages with small gamebox", async ({ page }) => {
     await page.goto("/app/collection");

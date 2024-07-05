@@ -5,6 +5,8 @@ import { faker } from "@faker-js/faker";
 import { BrowserContext } from "@playwright/test";
 import { Role, User } from "@prisma/client";
 
+export const PLAYWRIGHT_TEST_USER_PLACE = "Playwright test user";
+
 export async function addGamesToCollection(userId: string, gameIds: GameId[]) {
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {
@@ -53,7 +55,7 @@ export async function logInAsNewUser(
       email: faker.internet.email(),
       emailVerified: new Date(),
       name: faker.internet.displayName(),
-      place: faker.location.city(),
+      place: PLAYWRIGHT_TEST_USER_PLACE,
       realName: faker.person.fullName(),
       profileComplete: true,
       role,
@@ -75,8 +77,4 @@ export async function logInAsNewUser(
     },
   ]);
   return user;
-}
-
-export async function deleteUser(id: string) {
-  await prisma.user.delete({ where: { id } });
 }
