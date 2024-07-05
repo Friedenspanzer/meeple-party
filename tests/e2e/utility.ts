@@ -3,7 +3,7 @@ import { prisma } from "@/db";
 import { generateString } from "@/utility/test";
 import { faker } from "@faker-js/faker";
 import { BrowserContext } from "@playwright/test";
-import { Role, User } from "@prisma/client";
+import { RelationshipType, Role, User } from "@prisma/client";
 
 export const PLAYWRIGHT_TEST_USER_PLACE = "Playwright test user";
 
@@ -46,11 +46,8 @@ export async function clearCollection(userId: string) {
   });
 }
 
-export async function logInAsNewUser(
-  context: BrowserContext,
-  role: Role = Role.USER
-): Promise<User> {
-  const user = await prisma.user.create({
+export async function createUser(role: Role = Role.USER) {
+  return await prisma.user.create({
     data: {
       email: faker.internet.email(),
       emailVerified: new Date(),
@@ -61,6 +58,23 @@ export async function logInAsNewUser(
       role,
     },
   });
+}
+
+export async function befriendUser(myUserId: string, friendUserId: string) {
+  return await prisma.relationship.create({
+    data: {
+      senderId: myUserId,
+      recipientId: friendUserId,
+      type: RelationshipType.FRIENDSHIP,
+    },
+  });
+}
+
+export async function logInAsNewUser(
+  context: BrowserContext,
+  role: Role = Role.USER
+): Promise<User> {
+  const user = await createUser(role);
   const session = await prisma.session.create({
     data: {
       userId: user.id,
