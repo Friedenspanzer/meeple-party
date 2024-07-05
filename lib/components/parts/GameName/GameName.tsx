@@ -7,7 +7,12 @@ interface GameNameProps {
   game: ExpandedGame;
 }
 
-//TODO Test, document
+/**
+ * Shows a games name in the language the user selected in their preferences. Will render only the game name as a string without any tags surrounding it.
+ *
+ * @example
+ * return <GameName game={game} />
+ */
 export default function GameName({ game }: GameNameProps) {
   const { loading, preferredGameLanguage } = usePreferredGameLanguage();
 
