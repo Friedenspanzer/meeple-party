@@ -18,7 +18,12 @@ export default async function globalSetup(config: FullConfig) {
 }
 
 async function createGames() {
-  await getGameData(AVAILABLE_GAMES);
+  const toFetch = [...AVAILABLE_GAMES];
+  const promises = [];
+  while (toFetch.length > 0) {
+    promises.push(getGameData(toFetch.splice(0, 5)));
+  }
+  await Promise.all(promises);
 }
 
 async function setFeatureFlags() {
