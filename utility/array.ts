@@ -28,3 +28,20 @@ export function distinct<T>(array: T[]): T[] {
     [] as T[]
   );
 }
+
+/**
+ * Splits an array into multiple smaller batches containing all the elements. The batches are all of the same size, but the last batch may contain less elements.
+ * @param array Array to split
+ * @param size Size of the batches
+ */
+export function batch<T>(array: T[], size: number): T[][] {
+  if (size <= 0) {
+    return [array];
+  }
+  const toSplit = [...array];
+  const result = [];
+  while (toSplit.length > 0) {
+    result.push(toSplit.splice(0, size));
+  }
+  return result;
+}

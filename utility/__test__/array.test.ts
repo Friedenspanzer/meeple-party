@@ -1,4 +1,4 @@
-import { distinct, partition } from "../array";
+import { batch, distinct, partition } from "../array";
 import { generateArray, generateNumber } from "../test";
 
 describe("partition", () => {
@@ -49,5 +49,39 @@ describe("distinct", () => {
     const input = [a, c, a, b];
     const result = distinct(input);
     expect(result).toEqual([a, c, b]);
+  });
+});
+
+describe("batch", () => {
+  it("creates array batches", () => {
+    const input = [1, 2, 3, 4, 5, 6, 7, 8];
+    const result = batch(input, 4);
+    expect(result).toStrictEqual([
+      [1, 2, 3, 4],
+      [5, 6, 7, 8],
+    ]);
+  });
+  it("creates small remainder array", () => {
+    const input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const result = batch(input, 4);
+    expect(result).toStrictEqual([
+      [1, 2, 3, 4],
+      [5, 6, 7, 8],
+      [9, 10],
+    ]);
+  });
+  it("returns empty array for empty input", () => {
+    const result = batch([], 4);
+    expect(result).toStrictEqual([]);
+  });
+  it("returns complete array for big batch size", () => {
+    const input = generateArray(generateNumber, 50);
+    const result = batch(input, input.length);
+    expect(result).toStrictEqual([input]);
+  });
+  it("returns complete array for invalid batch size", () => {
+    const input = generateArray(generateNumber, 50);
+    const result = batch(input, 0);
+    expect(result).toStrictEqual([input]);
   });
 });
