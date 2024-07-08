@@ -351,7 +351,10 @@ const nameFilter: FilterFunction = (filter, games) => {
   if (!filter.name) {
     return games;
   }
-  const fuse = new Fuse(games, { keys: ["game.name"], threshold: 0.34 });
+  const fuse = new Fuse(games, {
+    keys: ["game.name", "game.names.name"],
+    threshold: 0.34,
+  });
   return [...fuse.search(filter.name)].map((g) => g.item);
 };
 

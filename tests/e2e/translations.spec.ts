@@ -50,6 +50,11 @@ test.describe("Game name translations", () => {
       page.getByText(`${friend.name} hat Flügelschlag`, { exact: true })
     ).toBeVisible();
   });
+  test("collection filter searches for all translations", async ({ page }) => {
+    await page.goto("/app/collection");
+    await page.getByRole("textbox").fill("Flügelschlag");
+    await expect(page.getByText("Wingspan", { exact: true })).toBeVisible();
+  });
 });
 
 async function setPageToGerman(page: Page) {
