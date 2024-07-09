@@ -5,10 +5,9 @@ import IconBoardGameGeek from "@/components/icons/BoardGameGeek/BoardGameGeek";
 import { useTranslation } from "@/i18n/client";
 import { Divider, Group, Stack, Text, Title } from "@mantine/core";
 import {
-  IconBrandDiscord,
   IconBrandGithub,
   IconBrandMastodon,
-  IconMail,
+  IconMail
 } from "@tabler/icons-react";
 import Link from "next/link";
 import styles from "./footer.module.css";
@@ -66,9 +65,6 @@ export default function Footer() {
               >
                 {t("Footer.Community.Github")}
               </Link>
-              <Link href="https://discord.gg/x9R46w4SME" title="Discord">
-                {t("Footer.Community.Discord")}
-              </Link>
             </Stack>
           </Group>
         </Group>
@@ -99,11 +95,6 @@ export default function Footer() {
                   title="Github"
                 >
                   <IconBrandGithub size={ICON_SIZE} />
-                </Link>
-              </li>
-              <li>
-                <Link href="https://discord.gg/x9R46w4SME" title="Discord">
-                  <IconBrandDiscord size={ICON_SIZE} />
                 </Link>
               </li>
             </ul>
