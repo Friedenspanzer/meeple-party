@@ -96,7 +96,11 @@ function getProfile(
   return convertToUserProfile(profile, relationship.type === "FRIENDSHIP");
 }
 
-//TODO Document, test
+/**
+ * Reads the authentication token for cronjobs from the environment variable `CRON_AUTH_TOKEN`. Throws when that variable is not set.
+ * @returns Authentication token.
+ * @throws Throws when no token is configured.
+ */
 export function getCronAuthToken() {
   if (!process.env.CRON_AUTH_TOKEN) {
     throw "No cron auth token configured for current environment";

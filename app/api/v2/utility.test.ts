@@ -3,8 +3,8 @@ import {
   UserPreferences,
   UserProfile,
 } from "@/datatypes/userProfile";
-import { generatePrismaUser } from "@/utility/test";
-import { convertToUserProfile } from "./utility";
+import { generatePrismaUser, generateString } from "@/utility/test";
+import { convertToUserProfile, getCronAuthToken } from "./utility";
 
 describe("convertToUserProfile", () => {
   it("returns a full profile for friends", () => {
@@ -66,5 +66,23 @@ describe("convertToUserProfile", () => {
     };
 
     expect(result).toEqual(expected);
+  });
+});
+
+describe("getCronAuthToken", () => {
+  const env = process.env;
+  afterEach(() => {
+    jest.restoreAllMocks();
+    process.env = env;
+  });
+  it("throws exception when no token is configured", () => {
+    delete process.env.CRON_AUTH_TOKEN;
+    expect(getCronAuthToken).toThrow();
+  });
+  it("returns token from environment variables", () => {
+    const token = generateString();
+    process.env.CRON_AUTH_TOKEN = token;
+    const result = getCronAuthToken();
+    expect(result).toBe(token);
   });
 });
