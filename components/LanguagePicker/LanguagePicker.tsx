@@ -35,16 +35,16 @@ const LanguagePicker: React.FC<LanguagePickerProps> = ({
     }
   }, [loading, type, preferences]);
 
+  const mutator = useCallback(getCurrentMutator(type), [type]);
+
   const update = useCallback(
     (language: Language) => {
-      const mutator = getCurrentMutator(type);
-      //TODO See if I can solve this more elegantly
       updatePreferences(mutator(language as any)).then(() => router.refresh());
     },
-    [router, type, updatePreferences]
+    [router, updatePreferences]
   );
 
-  const icon = <i className="bi bi-emoji-frown-fill"></i>;
+  const icon = useMemo(() => <i className="bi bi-emoji-frown-fill"></i>, []);
 
   return (
     <Stack>
