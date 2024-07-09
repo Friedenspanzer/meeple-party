@@ -103,7 +103,7 @@ function getProfile(
  */
 export function getCronAuthToken() {
   if (!process.env.CRON_AUTH_TOKEN) {
-    throw "No cron auth token configured for current environment";
+    throw new Error("No cron auth token configured for current environment");
   }
   return process.env.CRON_AUTH_TOKEN;
 }

@@ -122,7 +122,7 @@ async function getFreshData(gameIds: GameId[]): Promise<ExpandedGame[]> {
     const wikidata = wikidataData.find((d) => d.gameId === game.id);
     return {
       ...bggGameToExpandedGame(game),
-      wikidataId: wikidata?.wikidataId || null,
+      wikidataId: wikidata?.wikidataId ?? null,
       names: wikidata?.names || [],
     };
   });

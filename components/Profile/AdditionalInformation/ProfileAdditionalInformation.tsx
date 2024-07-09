@@ -1,5 +1,5 @@
 import IconBoardGameGeek from "@/components/icons/BoardGameGeek/BoardGameGeek";
-import { Flex, Group, Text, useMantineTheme } from "@mantine/core";
+import { Flex, Group, Text } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
 
 export interface ProfileAdditionalInformationProps {
@@ -11,7 +11,6 @@ export function ProfileAdditionalInformation({
   bggName,
   place,
 }: Readonly<ProfileAdditionalInformationProps>) {
-  const theme = useMantineTheme();
   return (
     <Flex wrap="wrap" gap="md" justify="center">
       {place && (

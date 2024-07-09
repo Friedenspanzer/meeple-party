@@ -13,7 +13,7 @@ interface GameNameProps {
  * @example
  * return <GameName game={game} />
  */
-export default function GameName({ game }: GameNameProps) {
+export default function GameName({ game }: Readonly<GameNameProps>) {
   const { loading, preferredGameLanguage } = usePreferredGameLanguage();
 
   const translatedName = game.names.find(

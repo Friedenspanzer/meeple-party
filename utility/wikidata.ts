@@ -24,7 +24,6 @@ export async function getWikidataInfo(
     return [];
   }
 
-  //TODO Add tests
   const query = getQuery(gameIds);
   console.log("WikiData query", query);
   const uri = ENDPOINT_BASE + encodeURI(query);
@@ -90,7 +89,7 @@ function parseLine(data: any): ParsedResult | undefined {
     return undefined;
   }
   return {
-    bggId: Number.parseInt(data.id.value), //TODO This conversion to number is important at runtime and needs to be testet
+    bggId: Number.parseInt(data.id.value),
     language: data.language.value,
     name: data.name.value,
     wikidataId: data.game.value,
@@ -98,5 +97,6 @@ function parseLine(data: any): ParsedResult | undefined {
 }
 
 function getQuery(bggIds: number[]): string {
-  return `SELECT ?game ?id ?name (lang(?name) as ?language) WHERE { ?game wdt:P31 wd:Q131436 ; rdfs:label ?name ; wdt:P2339 ?id. FILTER (?id IN (${bggIds.map((id) => `"${id}"`).join(",")}))}`;
+  const filter = bggIds.map((id) => `"${id}"`).join(",");
+  return `SELECT ?game ?id ?name (lang(?name) as ?language) WHERE { ?game wdt:P31 wd:Q131436 ; rdfs:label ?name ; wdt:P2339 ?id. FILTER (?id IN (${filter}))}`;
 }

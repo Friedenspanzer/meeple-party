@@ -22,7 +22,7 @@ export async function PATCH(request: Request) {
       !request.headers.has(AUTHENTICATION_HEADER_NAME) ||
       request.headers.get(AUTHENTICATION_HEADER_NAME) !== token
     ) {
-      throw "Wrong authentication header.";
+      throw new Error("Wrong authentication header.");
     }
   } catch (error) {
     console.error(error);
