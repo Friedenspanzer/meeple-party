@@ -1,6 +1,7 @@
 import BggRating from "@/components/BggRating/BggRating";
 import { ExpandedGame } from "@/datatypes/game";
 import { getGameLanguage, getTranslation } from "@/i18n";
+import Metric from "@/lib/components/parts/Metric/Metric";
 import { getBggGame } from "@/utility/bgg";
 import classNames from "classnames";
 import Image from "next/image";
@@ -97,20 +98,23 @@ export default async function GamePageHeader({
             )}
           </div>
           <div className={styles.metrics}>
-            <div>
-              {bggGame.maxPlayers === bggGame.minPlayers
-                ? bggGame.maxPlayers
-                : `${bggGame.minPlayers}-${bggGame.maxPlayers}`}
-              <small>{t("Page.Header.Players")}</small>
-            </div>
-            <div>
-              {bggGame.playingTime}
-              <small>{t("Page.Header.Minutes")}</small>
-            </div>
-            <div>
-              {round(bggGame.weight)}
-              <small>{t("Page.Header.Weight")}</small>
-            </div>
+            <Metric
+              value={
+                bggGame.maxPlayers === bggGame.minPlayers
+                  ? bggGame.maxPlayers
+                  : `${bggGame.minPlayers}-${bggGame.maxPlayers}`
+              }
+              label={t("Page.Header.Players")}
+            />
+            <Metric
+              value={bggGame.playingTime}
+              label={t("Page.Header.Minutes")}
+            />
+            <Metric
+              value={bggGame.weight}
+              precision={1}
+              label={t("Page.Header.Weight")}
+            />
           </div>
         </div>
       </div>
