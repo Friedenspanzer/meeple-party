@@ -17,6 +17,7 @@ export default async function GamePageHeader({
   const { t } = await getTranslation("game");
   const language = await getGameLanguage();
   const bggGame = await getBggGame(game.id);
+  const noimage = !bggGame.image;
   const gameDesigners =
     bggGame.designers.length <= 5
       ? bggGame.designers
@@ -35,7 +36,7 @@ export default async function GamePageHeader({
     <div
       {...props}
       className={classNames(props.className, styles.header, {
-        [styles.noImage]: !bggGame.image,
+        [styles.noImage]: noimage,
       })}
     >
       {bggGame.image && (
@@ -50,7 +51,7 @@ export default async function GamePageHeader({
       )}
       <div
         className={classNames(styles.headerContent, {
-          [styles.noImage]: !bggGame.image,
+          [styles.noImage]: noimage,
         })}
       >
         {bggGame.image && (
@@ -69,45 +70,47 @@ export default async function GamePageHeader({
             rank={bggGame.BGGRank}
             className={styles.rating}
           />
-          <h2 className={styles.gameName}>{getName(game, language)}</h2>
-          <span className={styles.gameYear}>{bggGame.year}</span>
-          {gameDesigners.length > 0 && (
-            <div className={classNames(styles.staff, styles.design)}>
-              <h3>{t("Page.Header.Design")}</h3>
-              <ul>
-                {[...gameDesigners].reverse().map((d) => (
-                  <li key={d}>{d}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {gameArtists.length > 0 && (
-            <div className={classNames(styles.staff, styles.art)}>
-              <h3>{t("Page.Header.Art")}</h3>
-              <ul>
-                {[...gameArtists].reverse().map((d) => (
-                  <li key={d}>{d}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <div
-            className={classNames(styles.playerCount, styles.additionalInfo)}
-          >
-            {bggGame.maxPlayers === bggGame.minPlayers
-              ? bggGame.maxPlayers
-              : `${bggGame.minPlayers}-${bggGame.maxPlayers}`}
-            <small>{t("Page.Header.Players")}</small>
+          <div className={styles.headerMain}>
+            <h2 className={styles.gameName}>{getName(game, language)}</h2>
+            <span className={styles.gameYear}>{bggGame.year}</span>
           </div>
-          <div
-            className={classNames(styles.playingTime, styles.additionalInfo)}
-          >
-            {bggGame.playingTime}
-            <small>{t("Page.Header.Minutes")}</small>
+          <div className={styles.personnel}>
+            {gameDesigners.length > 0 && (
+              <div className={classNames(styles.staff)}>
+                <h3>{t("Page.Header.Design")}</h3>
+                <ul>
+                  {[...gameDesigners].reverse().map((d) => (
+                    <li key={d}>{d}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {gameArtists.length > 0 && (
+              <div className={classNames(styles.staff)}>
+                <h3>{t("Page.Header.Art")}</h3>
+                <ul>
+                  {[...gameArtists].reverse().map((d) => (
+                    <li key={d}>{d}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
-          <div className={classNames(styles.weight, styles.additionalInfo)}>
-            {round(bggGame.weight)}
-            <small>{t("Page.Header.Weight")}</small>
+          <div className={styles.metrics}>
+            <div>
+              {bggGame.maxPlayers === bggGame.minPlayers
+                ? bggGame.maxPlayers
+                : `${bggGame.minPlayers}-${bggGame.maxPlayers}`}
+              <small>{t("Page.Header.Players")}</small>
+            </div>
+            <div>
+              {bggGame.playingTime}
+              <small>{t("Page.Header.Minutes")}</small>
+            </div>
+            <div>
+              {round(bggGame.weight)}
+              <small>{t("Page.Header.Weight")}</small>
+            </div>
           </div>
         </div>
       </div>
