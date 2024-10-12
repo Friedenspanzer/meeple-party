@@ -5,13 +5,13 @@ import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
 import { Group, MantineTheme, Stack } from "@mantine/core";
 import { Role } from "@prisma/client";
-import Avatar from "../Avatar/Avatar";
-import LinkButton from "../LinkButton/LinkButton";
-import { ProfileAdditionalInformation } from "../Profile/AdditionalInformation/ProfileAdditionalInformation";
-import ProfileRealName from "../Profile/RealName/ProfileRealName";
-import ProfileUsername from "../Profile/Username/ProfileUsername";
+import Avatar from "../../Avatar/Avatar";
+import LinkButton from "../../LinkButton/LinkButton";
+import { ProfileAdditionalInformation } from "../AdditionalInformation/ProfileAdditionalInformation";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
+import ProfileRealName from "../RealName/ProfileRealName";
 import ShareProfile from "../ShareProfile/ShareProfile";
+import ProfileUsername from "../Username/ProfileUsername";
 
 export interface ProfileHeaderProps {
   user: UserProfile;
