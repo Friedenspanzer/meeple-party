@@ -15,7 +15,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
     throw new Error("Wrong type for component SentFriendRequest");
   }
 
-  const { deleteFunction, isLoading } = useRelationship(request.profile.id);
+  const { deleteMutation, isLoading } = useRelationship(request.profile.id);
   const { t } = useTranslation();
 
   return (
@@ -26,7 +26,7 @@ const SentFriendRequest: React.FC<SentFriendRequestProps> = ({ request }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={deleteFunction}
+          onClick={() => deleteMutation.mutate()}
           disabled={isLoading}
         >
           <i className="bi bi-trash"></i> {t("Actions.Withdraw")}
