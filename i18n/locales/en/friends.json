@@ -22,5 +22,13 @@
   "Requests": {
     "Incoming": "Incoming requests",
     "Outgoing": "Sent requests"
+  },
+  "Status": {
+    "Pending": "Friend requst pending"
+  },
+  "Actions": {
+    "Send": "Send friend request",
+    "Cancel": "End friendship",
+    "Withdraw": "Withdraw your friend request"
   }
 }

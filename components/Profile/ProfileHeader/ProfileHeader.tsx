@@ -1,5 +1,6 @@
 "use client";
 
+import FriendRequestStatus from "@/components/FriendRequests/FriendRequestStatus/FriendRequestStatus";
 import { UserProfile } from "@/datatypes/userProfile";
 import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
@@ -89,7 +90,7 @@ function ButtonBlock({ user, myself }: Readonly<ProfileHeaderProps>) {
       </>
     );
   } else {
-    return <></>;
+    return <FriendRequestStatus userId={user.id} />;
   }
 }
 
