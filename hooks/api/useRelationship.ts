@@ -13,6 +13,7 @@ import {
 } from "@tanstack/react-query";
 import axios from "axios";
 import { DeleteableResult } from "./types";
+import useRelationships from "./useRelationships";
 
 interface Result<T> extends DeleteableResult<T> {
   acceptMutation: UseMutationResult<T, Error, void, unknown>;
@@ -20,6 +21,7 @@ interface Result<T> extends DeleteableResult<T> {
 }
 
 export default function useRelationship(userId: string): Result<Relationship> {
+  const { invalidate: invalidateRelationships } = useRelationships();
   const queryKey = ["relationship", userId];
   const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery({
@@ -50,6 +52,7 @@ export default function useRelationship(userId: string): Result<Relationship> {
     },
     onSettled: () => {
       queryClient.removeQueries({ queryKey });
+      invalidateRelationships();
     },
   });
 
@@ -62,6 +65,7 @@ export default function useRelationship(userId: string): Result<Relationship> {
     },
     onSettled: (data) => {
       queryClient.setQueryData(queryKey, data);
+      invalidateRelationships();
     },
   });
 
@@ -74,6 +78,7 @@ export default function useRelationship(userId: string): Result<Relationship> {
     },
     onSettled: (data) => {
       queryClient.setQueryData(queryKey, data);
+      invalidateRelationships();
     },
   });
 

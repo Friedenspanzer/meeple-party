@@ -17,9 +17,8 @@ export default function FriendRequest({ friendRequest }: Props) {
       radius="sm"
       padding="lg"
       withBorder
-      style={{ width: "max-content" }}
     >
-      <Group gap="xl">
+      <Group justify="space-between">
         <Group>
           <Avatar
             name={friendRequest.profile.name || ""}

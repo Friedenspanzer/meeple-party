@@ -4,7 +4,7 @@ import FriendRequest from "@/components/FriendRequests/FriendRequest/FriendReque
 import { RelationshipType } from "@/datatypes/relationship";
 import useRelationships from "@/hooks/api/useRelationships";
 import { useTranslation } from "@/i18n/client";
-import { Stack, Title } from "@mantine/core";
+import { Container, Stack, Title } from "@mantine/core";
 
 const FriendRequests: React.FC = () => {
   const { isLoading, data: relationships } = useRelationships();
@@ -20,24 +20,26 @@ const FriendRequests: React.FC = () => {
     ) || [];
 
   return (
-    <Stack>
-      {incoming.length > 0 && (
-        <Stack>
-          <Title order={2}>{t("Requests.Incoming")}</Title>
-          {incoming.map((r) => (
-            <FriendRequest friendRequest={r} key={r.profile.id} />
-          ))}
-        </Stack>
-      )}
-      {sent.length > 0 && (
-        <Stack>
-          <Title order={2}>{t("Requests.Outgoing")}</Title>
-          {sent.map((r) => (
-            <FriendRequest friendRequest={r} key={r.profile.id} />
-          ))}
-        </Stack>
-      )}
-    </Stack>
+    <Container size="sm">
+      <Stack>
+        {incoming.length > 0 && (
+          <Stack>
+            <Title order={2}>{t("Requests.Incoming")}</Title>
+            {incoming.map((r) => (
+              <FriendRequest friendRequest={r} key={r.profile.id} />
+            ))}
+          </Stack>
+        )}
+        {sent.length > 0 && (
+          <Stack>
+            <Title order={2}>{t("Requests.Outgoing")}</Title>
+            {sent.map((r) => (
+              <FriendRequest friendRequest={r} key={r.profile.id} />
+            ))}
+          </Stack>
+        )}
+      </Stack>
+    </Container>
   );
 };
 
