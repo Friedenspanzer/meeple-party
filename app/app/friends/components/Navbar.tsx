@@ -1,7 +1,7 @@
-import FriendRequestsBadge from "@/components/FriendRequestsBadge/FriendRequestsBadge";
+import FriendRequestsBadge from "@/components/FriendRequests/FriendRequestsBadge/FriendRequestsBadge";
 import {
-  NavigationBar,
-  NavigationItem,
+    NavigationBar,
+    NavigationItem,
 } from "@/components/NavigationBar/NavigationBar";
 import { getTranslation } from "@/i18n";
 
