@@ -21,7 +21,8 @@
   },
   "Requests": {
     "Incoming": "Incoming requests",
-    "Outgoing": "Sent requests"
+    "Outgoing": "Sent requests",
+    "SentYouARequest": "{{person}} sent you a friend request."
   },
   "Status": {
     "Pending": "Friend requst pending"

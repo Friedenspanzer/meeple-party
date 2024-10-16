@@ -1,10 +1,12 @@
 "use client";
 
 import FriendRequestStatus from "@/components/FriendRequests/FriendRequestStatus/FriendRequestStatus";
+import { RelationshipType } from "@/datatypes/relationship";
 import { UserProfile } from "@/datatypes/userProfile";
+import useRelationship from "@/hooks/api/useRelationship";
 import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
-import { Group, MantineTheme, Stack } from "@mantine/core";
+import { Group, MantineTheme, Stack, Text } from "@mantine/core";
 import { Role } from "@prisma/client";
 import Avatar from "../../Avatar/Avatar";
 import LinkButton from "../../LinkButton/LinkButton";
@@ -81,7 +83,9 @@ function NameBlock({ user }: Readonly<Pick<ProfileHeaderProps, "user">>) {
 }
 
 function ButtonBlock({ user, myself }: Readonly<ProfileHeaderProps>) {
+  const { data } = useRelationship(user.id);
   const { t } = useTranslation("profile");
+  const { t: ft } = useTranslation("friends");
   if (myself) {
     return (
       <>
@@ -90,7 +94,14 @@ function ButtonBlock({ user, myself }: Readonly<ProfileHeaderProps>) {
       </>
     );
   } else {
-    return <FriendRequestStatus userId={user.id} />;
+    return (
+      <Stack align="flex-end">
+        {data?.type === RelationshipType.FRIEND_REQUEST_RECEIVED && (
+          <Text>{ft("Requests.SentYouARequest", { person: user.name })}</Text>
+        )}
+        <FriendRequestStatus userId={user.id} />
+      </Stack>
+    );
   }
 }
 
