@@ -6,7 +6,11 @@ interface MetricProps {
   label: string;
 }
 
-export default function Metric({ value, precision, label }: MetricProps) {
+export default function Metric({
+  value,
+  precision,
+  label,
+}: Readonly<MetricProps>) {
   return (
     <div className={styles.container}>
       <h3 className={styles.value}>{getValue(value, precision)}</h3>

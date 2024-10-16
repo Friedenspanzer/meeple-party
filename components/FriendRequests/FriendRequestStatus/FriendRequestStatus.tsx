@@ -9,7 +9,7 @@ interface Props {
   userId: string;
 }
 
-export default function FriendRequestStatus({ userId }: Props) {
+export default function FriendRequestStatus({ userId }: Readonly<Props>) {
   const { t } = useTranslation();
   const { t: ft } = useTranslation("friends");
   const {

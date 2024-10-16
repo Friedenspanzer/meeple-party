@@ -10,14 +10,9 @@ interface Props {
   friendRequest: Relationship;
 }
 
-export default function FriendRequest({ friendRequest }: Props) {
+export default function FriendRequest({ friendRequest }: Readonly<Props>) {
   return (
-    <Card
-      shadow="md"
-      radius="sm"
-      padding="lg"
-      withBorder
-    >
+    <Card shadow="md" radius="sm" padding="lg" withBorder>
       <Group justify="space-between">
         <Group>
           <Avatar

@@ -14,7 +14,7 @@ interface GamePageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 export default async function GamePageHeader({
   game,
   ...props
-}: GamePageHeaderProps) {
+}: Readonly<GamePageHeaderProps>) {
   const { t } = await getTranslation("game");
   const language = await getGameLanguage();
   const bggGame = await getBggGame(game.id);

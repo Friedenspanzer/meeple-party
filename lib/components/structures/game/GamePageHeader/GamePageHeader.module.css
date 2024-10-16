@@ -16,11 +16,6 @@
   align-items: end;
 }
 
-/* .noImage {
-  min-height: unset !important;
-  position: unset !important;
-} */
-
 .headerImage {
   position: absolute;
   top: 0;

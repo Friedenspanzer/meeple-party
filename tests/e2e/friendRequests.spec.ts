@@ -8,7 +8,7 @@ import {
 
 test.describe("Friend requests on profile page", () => {
   test("can send friend request", async ({ page }) => {
-    const myself = await logInAsNewUser(page.context());
+    await logInAsNewUser(page.context());
     const otherUser = await createUser();
 
     page.goto(`/app/profile/${otherUser.id}`);
@@ -69,7 +69,7 @@ test.describe("Friend requests on profile page", () => {
   });
   test.describe("changes immediately visible in friend request overview", () => {
     test("sent request", async ({ page }) => {
-      const myself = await logInAsNewUser(page.context());
+      await logInAsNewUser(page.context());
       const otherUser = await createUser();
 
       page.goto(`/app/profile/${otherUser.id}`);

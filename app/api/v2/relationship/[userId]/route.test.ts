@@ -497,7 +497,6 @@ describe("PATCH relationship/[userId]", () => {
       otherUser,
       myUser
     );
-    const newRelationship = generateFullPrismaRelationship();
 
     prismaMock.relationship.findMany.mockResolvedValue([relationship]);
     prismaMock.relationship.update.mockResolvedValue(relationship);
