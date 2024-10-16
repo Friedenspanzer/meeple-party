@@ -40,6 +40,7 @@ jobs:
         with:
           name: build
           path: .next
+          if-no-files-found: error
 
   e2e:
     timeout-minutes: 60
