@@ -2,8 +2,7 @@ import Avatar from "@/components/Avatar/Avatar";
 import ProfileRealName from "@/components/Profile/RealName/ProfileRealName";
 import ProfileUsername from "@/components/Profile/Username/ProfileUsername";
 import { Relationship } from "@/datatypes/relationship";
-import { Card, Group, Stack, Text } from "@mantine/core";
-import ReactTimeAgo from "react-time-ago";
+import { Card, Group, Stack } from "@mantine/core";
 import FriendRequestStatus from "../FriendRequestStatus/FriendRequestStatus";
 
 interface Props {
@@ -26,9 +25,6 @@ export default function FriendRequest({ friendRequest }: Readonly<Props>) {
                 {friendRequest.profile.realName}
               </ProfileRealName>
             )}
-            <Text c="dimmed">
-              <ReactTimeAgo date={friendRequest.lastUpdate} />
-            </Text>
           </Stack>
         </Group>
         <FriendRequestStatus userId={friendRequest.profile.id} />
