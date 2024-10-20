@@ -11,7 +11,7 @@ test.describe("Friend requests on profile page", () => {
     await logInAsNewUser(page.context());
     const otherUser = await createUser();
 
-    page.goto(`/app/profile/${otherUser.id}`);
+    await page.goto(`/app/profile/${otherUser.id}`);
     await page.getByRole("button", { name: "Send friend request" }).click();
     await expect(
       page.getByRole("button", { name: "Withdraw your friend request" })
@@ -23,7 +23,7 @@ test.describe("Friend requests on profile page", () => {
 
     await sendFriendRequest(myself.id, otherUser.id);
 
-    page.goto(`/app/profile/${otherUser.id}`);
+    await page.goto(`/app/profile/${otherUser.id}`);
     await page
       .getByRole("button", { name: "Withdraw your friend request" })
       .click();
@@ -37,7 +37,7 @@ test.describe("Friend requests on profile page", () => {
 
     await befriendUser(myself.id, otherUser.id);
 
-    page.goto(`/app/profile/${otherUser.id}`);
+    await page.goto(`/app/profile/${otherUser.id}`);
     await page.getByRole("button", { name: "End friendship" }).click();
     await expect(
       page.getByRole("button", { name: "Send friend request" })
@@ -49,7 +49,7 @@ test.describe("Friend requests on profile page", () => {
 
     await sendFriendRequest(otherUser.id, myself.id);
 
-    page.goto(`/app/profile/${otherUser.id}`);
+    await page.goto(`/app/profile/${otherUser.id}`);
     await page.getByRole("button", { name: "Accept" }).click();
     await expect(
       page.getByRole("button", { name: "End friendship" })
@@ -61,7 +61,7 @@ test.describe("Friend requests on profile page", () => {
 
     await sendFriendRequest(otherUser.id, myself.id);
 
-    page.goto(`/app/profile/${otherUser.id}`);
+    await page.goto(`/app/profile/${otherUser.id}`);
     await page.getByRole("button", { name: "Deny" }).click();
     await expect(
       page.getByRole("button", { name: "Send friend request" })
@@ -72,10 +72,10 @@ test.describe("Friend requests on profile page", () => {
       await logInAsNewUser(page.context());
       const otherUser = await createUser();
 
-      page.goto(`/app/profile/${otherUser.id}`);
+      await page.goto(`/app/profile/${otherUser.id}`);
       await page.getByRole("button", { name: "Send friend request" }).click();
 
-      page.goto("/app/friends/requests");
+      await page.goto("/app/friends/requests");
       await expect(page.getByText(otherUser.name || "")).toBeVisible();
       await expect(
         page.getByRole("button", { name: "Withdraw your friend request" })
@@ -87,7 +87,7 @@ test.describe("Friend requests on profile page", () => {
 
       await sendFriendRequest(myself.id, otherUser.id);
 
-      page.goto("/app/friends/requests");
+      await page.goto("/app/friends/requests");
       await expect(page.getByText(otherUser.name || "")).not.toBeVisible();
     });
     test("accepted friend request", async ({ page }) => {
@@ -96,11 +96,13 @@ test.describe("Friend requests on profile page", () => {
 
       await sendFriendRequest(otherUser.id, myself.id);
 
-      page.goto(`/app/profile/${otherUser.id}`);
+      await page.goto(`/app/profile/${otherUser.id}`);
       await page.getByRole("button", { name: "Accept" }).click();
 
-      page.goto("/app/friends/requests");
-      await expect(page.getByText(otherUser.name || "")).not.toBeVisible();
+      await page.goto("/app/friends/requests");
+      await expect(
+        page.getByRole("button", { name: otherUser.name || "" })
+      ).not.toBeVisible();
     });
   });
 });
@@ -112,7 +114,7 @@ test.describe("Friend requests on overview page", () => {
 
     await sendFriendRequest(myself.id, otherUser.id);
 
-    page.goto("/app/friends/requests");
+    await page.goto("/app/friends/requests");
     await page
       .getByRole("button", { name: "Withdraw your friend request" })
       .click();
@@ -124,7 +126,7 @@ test.describe("Friend requests on overview page", () => {
 
     await sendFriendRequest(otherUser.id, myself.id);
 
-    page.goto("/app/friends/requests");
+    await page.goto("/app/friends/requests");
     await page.getByRole("button", { name: "Accept" }).click();
     await expect(page.getByText(otherUser.name || "")).not.toBeVisible();
   });
@@ -134,7 +136,7 @@ test.describe("Friend requests on overview page", () => {
 
     await sendFriendRequest(otherUser.id, myself.id);
 
-    page.goto("/app/friends/requests");
+    await page.goto("/app/friends/requests");
     await page.getByRole("button", { name: "Deny" }).click();
     await expect(page.getByText(otherUser.name || "")).not.toBeVisible();
   });
@@ -146,12 +148,12 @@ test.describe("Friend requests on overview page", () => {
 
       await sendFriendRequest(myself.id, otherUser.id);
 
-      page.goto("/app/friends/requests");
+      await page.goto("/app/friends/requests");
       await page
         .getByRole("button", { name: "Withdraw your friend request" })
         .click();
 
-      page.goto(`/app/profile/${otherUser.id}`);
+      await page.goto(`/app/profile/${otherUser.id}`);
       await expect(
         page.getByRole("button", { name: "Send friend request" })
       ).toBeVisible();
@@ -162,10 +164,10 @@ test.describe("Friend requests on overview page", () => {
 
       await sendFriendRequest(otherUser.id, myself.id);
 
-      page.goto("/app/friends/requests");
+      await page.goto("/app/friends/requests");
       await page.getByRole("button", { name: "Accept" }).click();
 
-      page.goto(`/app/profile/${otherUser.id}`);
+      await page.goto(`/app/profile/${otherUser.id}`);
       await expect(
         page.getByRole("button", { name: "End friendship" })
       ).toBeVisible();
