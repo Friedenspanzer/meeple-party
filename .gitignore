@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/tests/e2e/snapshots
 
 # next.js
 /.next/
@@ -45,3 +46,7 @@ convex/README.md
 # dev database
 prisma/*.db
 database/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

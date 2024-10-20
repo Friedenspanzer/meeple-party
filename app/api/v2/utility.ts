@@ -1,8 +1,8 @@
 import { Relationship, RelationshipType } from "@/datatypes/relationship";
 import {
-  defaultUserPreferences,
   UserPreferences,
   UserProfile,
+  defaultUserPreferences,
 } from "@/datatypes/userProfile";
 import {
   Prisma,
@@ -27,7 +27,7 @@ export function convertToUserProfile(
     realName: allowRealName(user, friend) ? user.realName : null,
     about: user.about,
     place: allowPlace(user, friend) ? user.place : null,
-    bggName: allowBggName(user, friend) ? user.bggName : null
+    bggName: allowBggName(user, friend) ? user.bggName : null,
   };
 }
 
@@ -94,4 +94,16 @@ function getProfile(
       ? relationship.sender
       : relationship.recipient;
   return convertToUserProfile(profile, relationship.type === "FRIENDSHIP");
+}
+
+/**
+ * Reads the authentication token for cronjobs from the environment variable `CRON_AUTH_TOKEN`. Throws when that variable is not set.
+ * @returns Authentication token.
+ * @throws Throws when no token is configured.
+ */
+export function getCronAuthToken() {
+  if (!process.env.CRON_AUTH_TOKEN) {
+    throw new Error("No cron auth token configured for current environment");
+  }
+  return process.env.CRON_AUTH_TOKEN;
 }

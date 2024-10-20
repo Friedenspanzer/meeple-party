@@ -9,6 +9,8 @@ import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
+import GameName from "@/lib/components/parts/GameName/GameName";
+import Metric from "@/lib/components/parts/Metric/Metric";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,7 +41,9 @@ export default function GameBoxBig({
       <MetricList game={game} />
 
       <h2 className={styles.name}>
-        <Link href={`/app/game/${game.id}`}>{game.name}</Link>
+        <Link href={`/app/game/${game.id}`}>
+          <GameName game={game} />
+        </Link>
       </h2>
 
       <StatusList game={game} friendCollection={friendCollection} />
@@ -52,32 +56,24 @@ function MetricList({ game }: Readonly<{ game: Game }>) {
   return (
     <div className={styles.info}>
       <Metric
-        text={round(game.weight).toString()}
+        value={game.weight}
+        precision={1}
         label={t("Attributes.Weight")}
       />
       <hr className={styles.metricDivider} />
       <Metric
-        text={game.playingTime.toString()}
+        value={game.playingTime}
         label={t("Attributes.PlayingTime")}
       />
       <hr className={styles.metricDivider} />
       <Metric
-        text={
+        value={
           game.minPlayers === game.maxPlayers
             ? game.minPlayers.toString()
             : `${game.minPlayers}-${game.maxPlayers}`
         }
         label={t("Attributes.Players")}
       />
-    </div>
-  );
-}
-
-function Metric({ text, label }: Readonly<{ text: string; label: string }>) {
-  return (
-    <div className={styles.metric}>
-      <div className={styles.metricTitle}>{text}</div>
-      <div className={styles.metricLabel}>{label}</div>
     </div>
   );
 }
@@ -206,8 +202,4 @@ function Status({
       )}
     </>
   );
-}
-
-function round(x: number): number {
-  return Math.round(x * 10) / 10;
 }

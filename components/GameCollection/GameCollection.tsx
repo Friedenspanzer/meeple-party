@@ -1,7 +1,7 @@
 "use client";
 
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
-import { Game } from "@/datatypes/game";
+import { ExpandedGame, Game } from "@/datatypes/game";
 import useGameBoxSize from "@/hooks/useGameBoxSize";
 import { useTranslation } from "@/i18n/client";
 import { emptyFilter } from "@/utility/filter";
@@ -20,7 +20,7 @@ import GameCollectionFilter, {
 import styles from "./gamecollection.module.css";
 
 export type GameInfo = {
-  game: Game;
+  game: ExpandedGame;
   status?: GameCollectionStatus;
   friendCollections?: StatusByUser;
 };
@@ -351,7 +351,10 @@ const nameFilter: FilterFunction = (filter, games) => {
   if (!filter.name) {
     return games;
   }
-  const fuse = new Fuse(games, { keys: ["game.name"], threshold: 0.34 });
+  const fuse = new Fuse(games, {
+    keys: ["game.name", "game.names.name"],
+    threshold: 0.34,
+  });
   return [...fuse.search(filter.name)].map((g) => g.item);
 };
 

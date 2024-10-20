@@ -1,12 +1,11 @@
 import Avatar from "@/components/Avatar/Avatar";
-import BggRating from "@/components/BggRating/BggRating";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
 import { getTranslation } from "@/i18n";
+import GamePageHeader from "@/lib/components/structures/game/GamePageHeader/GamePageHeader";
 import { getCollectionStatusOfFriends } from "@/selectors/collections";
 import { getBggGame } from "@/utility/bgg";
+import { getGameData } from "@/utility/games";
 import { getServerUser } from "@/utility/serverSession";
-import classNames from "classnames";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
@@ -35,118 +34,21 @@ export default async function Game({ params }: { params: { gameId: string } }) {
   }
   try {
     const user = await getServerUser();
-    const game = await getBggGame(id);
+    const bggGame = await getBggGame(id);
+    const game = (await getGameData([id]))[0];
     const friendCollections = await getCollectionStatusOfFriends(id, user.id);
-    const gameDesigners =
-      game.designers.length <= 5
-        ? game.designers
-        : [
-            ...game.designers.slice(0, 5),
-            t("Page.More", { count: game.designers.length - 5 }),
-          ];
-    const gameArtists =
-      game.artists.length <= 5
-        ? game.artists
-        : [
-            ...game.artists.slice(0, 5),
-            t("Page.More", { count: game.artists.length - 5 }),
-          ];
 
     return (
       <div className={styles.container}>
-        <div
-          className={classNames(styles.header, {
-            [styles.noImage]: !game.image,
-          })}
-        >
-          {game.image && (
-            <Image
-              src={game.image}
-              width={600}
-              height={200}
-              alt={game.name}
-              className={styles.headerImage}
-              unoptimized
-            />
-          )}
-          <div
-            className={classNames(styles.headerContent, {
-              [styles.noImage]: !game.image,
-            })}
-          >
-            {game.image && (
-              <Image
-                src={game.image || ""}
-                width={200}
-                height={200}
-                alt={game.name}
-                className={styles.titleImage}
-                unoptimized
-              />
-            )}
-            <div className={styles.headerInformation}>
-              <BggRating
-                rating={game.BGGRating}
-                rank={game.BGGRank}
-                className={styles.rating}
-              />
-              <h2 className={styles.gameName}>{game.name}</h2>
-              <span className={styles.gameYear}>{game.year}</span>
-              {gameDesigners.length > 0 && (
-                <div className={classNames(styles.staff, styles.design)}>
-                  <h3>{t("Page.Header.Design")}</h3>
-                  <ul>
-                    {[...gameDesigners].reverse().map((d) => (
-                      <li key={d}>{d}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {gameArtists.length > 0 && (
-                <div className={classNames(styles.staff, styles.art)}>
-                  <h3>{t("Page.Header.Art")}</h3>
-                  <ul>
-                    {[...gameArtists].reverse().map((d) => (
-                      <li key={d}>{d}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <div
-                className={classNames(
-                  styles.playerCount,
-                  styles.additionalInfo
-                )}
-              >
-                {game.maxPlayers === game.minPlayers
-                  ? game.maxPlayers
-                  : `${game.minPlayers}-${game.maxPlayers}`}
-                <small>{t("Page.Header.Players")}</small>
-              </div>
-              <div
-                className={classNames(
-                  styles.playingTime,
-                  styles.additionalInfo
-                )}
-              >
-                {game.playingTime}
-                <small>{t("Page.Header.Minutes")}</small>
-              </div>
-              <div className={classNames(styles.weight, styles.additionalInfo)}>
-                {round(game.weight)}
-                <small>{t("Page.Header.Weight")}</small>
-              </div>
-            </div>
-          </div>
-        </div>
+        <GamePageHeader game={game} className={styles.header} />
         <div
           className={styles.description}
-          dangerouslySetInnerHTML={{ __html: game.description }}
+          dangerouslySetInnerHTML={{ __html: bggGame.description }}
         ></div>
         <div className={styles.meta}>
           <h3>{t("Page.Collections.YourCollection")}</h3>
           <div className={styles.group}>
-            <CollectionStatusButtons gameId={game.id} />
+            <CollectionStatusButtons gameId={bggGame.id} />
           </div>
           {friendCollections.own.length > 0 && (
             <div className={styles.group}>
@@ -197,8 +99,4 @@ export default async function Game({ params }: { params: { gameId: string } }) {
     console.error("Error fetching game data", e);
     notFound();
   }
-}
-
-function round(i: number): number {
-  return Math.round(i * 10) / 10;
 }
