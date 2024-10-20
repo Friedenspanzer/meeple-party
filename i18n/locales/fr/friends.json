@@ -25,7 +25,7 @@
     "SentYouARequest": "{{person}} sent you a friend request."
   },
   "Status": {
-    "Pending": "Friend requst pending"
+    "Pending": "Friend request pending"
   },
   "Actions": {
     "Send": "Send friend request",
