@@ -21,6 +21,15 @@
   },
   "Requests": {
     "Incoming": "Eingehende Anfragen",
-    "Outgoing": "Versendete Anfragen"
+    "Outgoing": "Versendete Anfragen",
+    "SentYouARequest": "{{person}} hat dir eine Freundschaftsanfrage geschickt"
+  },
+  "Status": {
+    "Pending": "Freundschaftsanfrage steht aus"
+  },
+  "Actions": {
+    "Send": "Freundschaftsanfrage senden",
+    "Cancel": "Freundschaft beenden",
+    "Withdraw": "Freundschaftsanfrage zurückziehen"
   }
 }
