@@ -1,9 +1,9 @@
 import { RelationshipsGetResult } from "@/app/api/v2/relationships/route";
 import { Relationship } from "@/datatypes/relationship";
+import { Result } from "@/hooks/api/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
-import { Result } from "./types";
 
 export default function useRelationships(): Result<Relationship[]> {
   const queryKey = ["relationships"];

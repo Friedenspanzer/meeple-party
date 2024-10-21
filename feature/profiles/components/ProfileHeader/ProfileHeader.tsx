@@ -1,10 +1,10 @@
 "use client";
 
-import FriendRequestStatus from "@/components/FriendRequests/FriendRequestStatus/FriendRequestStatus";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import { RelationshipType } from "@/datatypes/relationship";
 import { UserProfile } from "@/datatypes/userProfile";
-import useRelationship from "@/hooks/api/useRelationship";
+import FriendRequestStatus from "@/feature/relationships/components/FriendRequestStatus/FriendRequestStatus";
+import useRelationship from "@/feature/relationships/hooks/useRelationship";
 import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
 import { Group, MantineTheme, Stack, Text } from "@mantine/core";

@@ -12,7 +12,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
-import { DeleteableResult } from "./types";
+import { DeleteableResult } from "../../../hooks/api/types";
 import useRelationships from "./useRelationships";
 
 interface Result<T> extends DeleteableResult<T> {

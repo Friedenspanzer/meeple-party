@@ -1,6 +1,7 @@
 "use client";
 
 import Person from "@/feature/profiles/components/Person/Person";
+import FriendRequestsBadge from "@/feature/relationships/components/FriendRequestsBadge/FriendRequestsBadge";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
@@ -8,7 +9,6 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
-import FriendRequestsBadge from "../FriendRequests/FriendRequestsBadge/FriendRequestsBadge";
 import Logo from "../Logo/Logo";
 import styles from "./topnav.module.css";
 
