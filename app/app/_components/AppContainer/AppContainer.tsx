@@ -1,7 +1,7 @@
 "use client";
 
-import ModalProvider from "@/context/modalContext";
 import CompleteUserProfile from "@/feature/profiles/components/CompleteUserProfile/CompleteUserProfile";
+import ModalProvider from "@/lib/contexts/modalContext";
 import useUserProfile from "@/lib/hooks/useUserProfile";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import classNames from "classnames";

@@ -1,6 +1,6 @@
-import { useModal } from "@/context/modalContext";
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import Avatar from "@/feature/profiles/components/Avatar/Avatar";
+import { useModal } from "@/lib/contexts/modalContext";
 import { ExpandedGame } from "@/lib/types/game";
 import { generateArray, generateUserProfile, render } from "@/lib/utility/test";
 import { StatusByUser } from "../../../../../../lib/types/collection";
@@ -13,7 +13,7 @@ jest.mock("@/feature/profiles/components/Avatar/Avatar", () => ({
   namedExport: jest.fn(),
   default: jest.fn(),
 }));
-jest.mock("@/context/modalContext");
+jest.mock("@/lib/contexts/modalContext");
 
 const game: ExpandedGame = {
   id: 123,

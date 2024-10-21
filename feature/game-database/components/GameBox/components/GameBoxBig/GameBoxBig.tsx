@@ -1,6 +1,5 @@
 "use client";
 
-import { useModal } from "@/context/modalContext";
 import StatusButton from "@/feature/game-collection/components/StatusButton/StatusButton";
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import GameName from "@/feature/game-database/components/GameName/GameName";
@@ -8,6 +7,7 @@ import Metric from "@/feature/game-database/components/Metric/Metric";
 import AvatarStack from "@/feature/profiles/components/AvatarStack/AvatarStack";
 import PersonList from "@/feature/profiles/components/PersonList/PersonList";
 import { useTranslation } from "@/i18n/client";
+import { useModal } from "@/lib/contexts/modalContext";
 import { StatusByUser } from "@/lib/types/collection";
 import { Game } from "@/lib/types/game";
 import { UserProfile } from "@/lib/types/userProfile";
