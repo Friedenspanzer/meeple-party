@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
-import { useUser } from "@/context/userContext";
+import { useUser } from "@/feature/authentication/context/userContext";
 import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import Spinner from "../../../components/Spinner/Spinner";
+import Spinner from "../../../../components/Spinner/Spinner";
 import LoginButton from "../LoginButton/LoginButton";
 import styles from "./login.module.css";
 

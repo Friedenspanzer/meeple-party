@@ -1,12 +1,11 @@
 "use client";
 
-import { useUser } from "@/context/userContext";
 import { UserPreferences } from "@/datatypes/userProfile";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
 import classNames from "classnames";
 import { useCallback, useId, useState } from "react";
 import Spinner from "../Spinner/Spinner";
 import styles from "./autoupdatetoggle.module.css";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
 
 export interface AutoUpdateToggleProps {
   value: boolean;

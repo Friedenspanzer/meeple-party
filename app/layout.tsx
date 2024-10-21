@@ -1,7 +1,7 @@
-import Analytics from "@/components/Analytics/Analytics";
-import AuthProvider from "@/context/authContext";
-import UserProvider from "@/context/userContext";
 import Footer from "@/app/_components/Footer/Footer";
+import Analytics from "@/components/Analytics/Analytics";
+import AuthProvider from "@/feature/authentication/context/authContext";
+import UserProvider from "@/feature/authentication/context/userContext";
 import "@/theme/theme.scss";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";

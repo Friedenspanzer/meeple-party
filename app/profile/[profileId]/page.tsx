@@ -1,8 +1,8 @@
 import { generateMetadata as appGenerateMetaData } from "@/app/app/profile/[profileId]/page";
-import LoginButton from "@/components/Auth/LoginButton/LoginButton";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import Logo from "@/components/Logo/Logo";
 import { prisma } from "@/db";
+import LoginButton from "@/feature/authentication/components/LoginButton/LoginButton";
 import UserCard from "@/feature/profiles/components/UserCard/UserCard";
 import { getTranslation } from "@/i18n";
 import { cleanUserDetails } from "@/pages/api/user";

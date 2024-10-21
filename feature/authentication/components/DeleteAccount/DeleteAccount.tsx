@@ -5,7 +5,7 @@ import { useTranslation } from "@/i18n/client";
 import axios from "axios";
 import { useState } from "react";
 import { Trans } from "react-i18next";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../../../components/Spinner/Spinner";
 
 type Step = "Button" | "Confirmation" | "Input" | "Deleting";
 

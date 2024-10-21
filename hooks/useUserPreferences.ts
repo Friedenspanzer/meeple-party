@@ -1,14 +1,13 @@
 "use client";
 
-import { useUser } from "@/context/userContext";
 import {
   defaultUserPreferences,
   UserPreferences,
 } from "@/datatypes/userProfile";
+import { useUser } from "@/feature/authentication/context/userContext";
 import { getUserPreferences } from "@/utility/userProfile";
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 
 type UseUserPreferencesResult =
   | {
