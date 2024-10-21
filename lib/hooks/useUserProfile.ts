@@ -1,4 +1,4 @@
-import { Game } from "@/datatypes/game";
+import { Game } from "@/lib/types/game";
 import { User } from "@prisma/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";

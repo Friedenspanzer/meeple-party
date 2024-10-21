@@ -1,11 +1,11 @@
-import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { determineGameLanguage } from "@/i18n/lib";
 import { fallbackLng } from "@/i18n/settings";
+import { defaultUserPreferences } from "@/lib/types/userProfile";
 import {
   getRandomGameLanguage,
   getRandomPageLanguage,
   getRandomRealLanguage,
-} from "@/utility/test";
+} from "@/lib/utility/test";
 import usePreferredGameLanguage from "../usePreferredGameLanguage";
 import { useUserPreferences } from "../useUserPreferences";
 

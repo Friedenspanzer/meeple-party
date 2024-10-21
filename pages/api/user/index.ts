@@ -1,6 +1,6 @@
-import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
-import { withUser } from "@/utility/apiAuth";
+import { defaultUserPreferences } from "@/lib/types/userProfile";
+import { withUser } from "@/lib/utility/apiAuth";
 import { Prisma, User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 

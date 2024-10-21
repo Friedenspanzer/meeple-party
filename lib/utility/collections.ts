@@ -1,4 +1,4 @@
-import { StatusByUser } from "@/datatypes/collection";
+import { StatusByUser } from "@/lib/types/collection";
 import { GameCollection, User } from "@prisma/client";
 
 export function findFriendCollection(

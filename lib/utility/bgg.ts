@@ -1,4 +1,4 @@
-import { BggGame } from "@/datatypes/game";
+import { BggGame } from "@/lib/types/game";
 import { decodeHTML } from "entities";
 import { XMLParser } from "fast-xml-parser";
 import validator from "validator";

@@ -1,3 +1,4 @@
+import { prisma } from "@/db";
 import {
   ExpandedGame,
   GameId,
@@ -5,8 +6,7 @@ import {
   bggGameToExpandedGame,
   expandedGameToGame,
   prismaGameToExpandedGame,
-} from "@/datatypes/game";
-import { prisma } from "@/db";
+} from "@/lib/types/game";
 import { partition } from "./array";
 import { getBggGames } from "./bgg";
 import { getWikidataInfo } from "./wikidata";

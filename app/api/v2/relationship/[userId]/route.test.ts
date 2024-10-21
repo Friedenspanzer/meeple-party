@@ -2,26 +2,26 @@
  * @jest-environment node
  */
 
-import { RelationshipType } from "@/datatypes/relationship";
-import { UserProfile } from "@/datatypes/userProfile";
-import { prismaMock } from "@/utility/prismaMock";
+import { RelationshipType } from "@/lib/types/relationship";
+import { UserProfile } from "@/lib/types/userProfile";
+import { prismaMock } from "@/lib/utility/prismaMock";
 import {
-  generateFullPrismaRelationship,
-  generatePrismaUser,
-  generateString,
-} from "@/utility/test";
+    generateFullPrismaRelationship,
+    generatePrismaUser,
+    generateString,
+} from "@/lib/utility/test";
 import { RelationshipType as PrismaRelationshipType } from "@prisma/client";
 import { mock, mockReset } from "jest-mock-extended";
 import "whatwg-fetch";
 import { getUser } from "../../authentication";
 import { convertToUserProfile } from "../../utility";
 import {
-  DELETE,
-  GET,
-  PATCH,
-  PUT,
-  RelationshipGetResult,
-  RelationshipPatchResult,
+    DELETE,
+    GET,
+    PATCH,
+    PUT,
+    RelationshipGetResult,
+    RelationshipPatchResult,
 } from "./route";
 
 jest.mock("../../authentication");

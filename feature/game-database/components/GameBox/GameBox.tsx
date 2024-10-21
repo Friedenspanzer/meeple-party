@@ -1,8 +1,8 @@
 "use client";
 
-import { StatusByUser } from "@/datatypes/collection";
-import { ExpandedGame, Game } from "@/datatypes/game";
 import useGameBoxSize from "@/lib/hooks/useGameBoxSize";
+import { StatusByUser } from "@/lib/types/collection";
+import { ExpandedGame, Game } from "@/lib/types/game";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
 import GameBoxBig from "./components/GameBoxBig/GameBoxBig";

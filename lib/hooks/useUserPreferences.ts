@@ -1,11 +1,11 @@
 "use client";
 
+import { useUser } from "@/feature/authentication/context/userContext";
 import {
   defaultUserPreferences,
   UserPreferences,
-} from "@/datatypes/userProfile";
-import { useUser } from "@/feature/authentication/context/userContext";
-import { getUserPreferences } from "@/utility/userProfile";
+} from "@/lib/types/userProfile";
+import { getUserPreferences } from "@/lib/utility/userProfile";
 import axios from "axios";
 import { useCallback } from "react";
 

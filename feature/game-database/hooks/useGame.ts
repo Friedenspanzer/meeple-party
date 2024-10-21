@@ -1,5 +1,5 @@
 import { GameGetResult } from "@/app/api/v2/game/[gameId]/route";
-import { ExpandedGame, Game } from "@/datatypes/game";
+import { ExpandedGame, Game } from "@/lib/types/game";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Result } from "../../../lib/types/apiHooks";

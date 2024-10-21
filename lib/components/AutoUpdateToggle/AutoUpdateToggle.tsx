@@ -1,7 +1,7 @@
 "use client";
 
-import { UserPreferences } from "@/datatypes/userProfile";
 import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
+import { UserPreferences } from "@/lib/types/userProfile";
 import classNames from "classnames";
 import { useCallback, useId, useState } from "react";
 import Spinner from "../Spinner/Spinner";

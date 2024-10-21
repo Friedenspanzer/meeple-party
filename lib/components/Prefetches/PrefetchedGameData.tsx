@@ -1,5 +1,5 @@
-import { ExpandedGame } from "@/datatypes/game";
-import getQueryClient from "@/utility/queryClient";
+import { ExpandedGame } from "@/lib/types/game";
+import getQueryClient from "@/lib/utility/queryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
 

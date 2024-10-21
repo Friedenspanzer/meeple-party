@@ -1,9 +1,9 @@
 "use client";
 
-import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
-import { ExpandedGame, Game } from "@/datatypes/game";
 import { useTranslation } from "@/i18n/client";
-import { emptyFilter } from "@/utility/filter";
+import { GameCollectionStatus, StatusByUser } from "@/lib/types/collection";
+import { ExpandedGame, Game } from "@/lib/types/game";
+import { emptyFilter } from "@/lib/utility/filter";
 import classNames from "classnames";
 import Fuse from "fuse.js";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -14,9 +14,9 @@ import useGameBoxSize from "@/lib/hooks/useGameBoxSize";
 import GameBox from "../../../game-database/components/GameBox/GameBox";
 import GameBoxSizePicker from "../GameBoxSizePicker/GameBoxSizePicker";
 import GameCollectionFilter, {
-  FilterPreset,
-  GameCollectionFilterOptions,
-  SortOrder,
+    FilterPreset,
+    GameCollectionFilterOptions,
+    SortOrder,
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
 

@@ -45,7 +45,7 @@ convex/README.md
 
 # dev database
 prisma/*.db
-database/
+/database/
 /test-results/
 /playwright-report/
 /blob-report/

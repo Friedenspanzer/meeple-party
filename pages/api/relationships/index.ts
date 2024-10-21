@@ -1,6 +1,6 @@
 import { prisma } from "@/db";
+import { withUser } from "@/lib/utility/apiAuth";
 import { normalizeRelationship } from "@/selectors/relationships";
-import { withUser } from "@/utility/apiAuth";
 import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 

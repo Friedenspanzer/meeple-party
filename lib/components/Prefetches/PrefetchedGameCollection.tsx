@@ -1,5 +1,5 @@
 import { getCollectionStatusQueryKey } from "@/feature/game-collection/hooks/useCollectionStatus";
-import getQueryClient from "@/utility/queryClient";
+import getQueryClient from "@/lib/utility/queryClient";
 import { GameCollection } from "@prisma/client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";

@@ -1,4 +1,4 @@
-import { GameId } from "@/datatypes/game";
+import { GameId } from "@/lib/types/game";
 import { AlternateGameName } from "@prisma/client";
 import axios from "axios";
 import { distinct } from "./array";

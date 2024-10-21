@@ -3,7 +3,7 @@ import {
   generateDate,
   generateNumber,
   generateString,
-} from "@/utility/test";
+} from "@/lib/utility/test";
 import {
   BggGame,
   ExpandedGame,

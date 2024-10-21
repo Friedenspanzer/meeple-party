@@ -1,7 +1,7 @@
 "use client";
 
-import { ExtendedGameCollection } from "@/datatypes/collection";
 import { useTranslation } from "@/i18n/client";
+import { ExtendedGameCollection } from "@/lib/types/collection";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";

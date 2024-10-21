@@ -1,7 +1,7 @@
 import {
   defaultUserPreferences,
   UserPreferences,
-} from "@/datatypes/userProfile";
+} from "@/lib/types/userProfile";
 import { Prisma, User } from "@prisma/client";
 
 export function getUserPreferences(user: User): UserPreferences {

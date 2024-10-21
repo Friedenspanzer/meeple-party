@@ -1,5 +1,5 @@
 import Avatar, { AvatarProps } from "@/feature/profiles/components/Avatar/Avatar";
-import { generateString } from "@/utility/test";
+import { generateString } from "@/lib/utility/test";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Person from "./Person";

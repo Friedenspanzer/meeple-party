@@ -1,6 +1,6 @@
-import { gameToExpandedGame } from "@/datatypes/game";
 import usePreferredGameLanguage from "@/lib/hooks/usePreferredGameLanguage";
-import { generateGame } from "@/utility/test";
+import { gameToExpandedGame } from "@/lib/types/game";
+import { generateGame } from "@/lib/utility/test";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import GameName from "./GameName";

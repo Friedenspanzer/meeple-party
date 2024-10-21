@@ -1,15 +1,15 @@
 import {
-  RelationshipDeleteResult,
-  RelationshipGetResult,
-  RelationshipPatchResult,
-  RelationshipPutResult,
+    RelationshipDeleteResult,
+    RelationshipGetResult,
+    RelationshipPatchResult,
+    RelationshipPutResult,
 } from "@/app/api/v2/relationship/[userId]/route";
-import { Relationship } from "@/datatypes/relationship";
+import { Relationship } from "@/lib/types/relationship";
 import {
-  UseMutationResult,
-  useMutation,
-  useQuery,
-  useQueryClient,
+    UseMutationResult,
+    useMutation,
+    useQuery,
+    useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
 import { DeleteableResult } from "../../../lib/types/apiHooks";

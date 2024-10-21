@@ -1,5 +1,5 @@
 import { prisma } from "@/db";
-import { getGameData } from "@/utility/games";
+import { getGameData } from "@/lib/utility/games";
 import { FullConfig } from "@playwright/test";
 import { Role } from "@prisma/client";
 

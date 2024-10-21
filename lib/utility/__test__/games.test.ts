@@ -6,8 +6,8 @@ import {
   expandedGameToBggGame,
   expandedGameToGame,
   prismaGameToExpandedGame,
-} from "@/datatypes/game";
-import { prismaMock } from "@/utility/prismaMock";
+} from "@/lib/types/game";
+import { prismaMock } from "@/lib/utility/prismaMock";
 import { partition } from "../array";
 import { getBggGames } from "../bgg";
 import { getGameData } from "../games";

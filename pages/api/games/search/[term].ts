@@ -1,13 +1,13 @@
-import {
-  ExtendedGameCollection,
-  GameCollectionStatus,
-} from "@/datatypes/collection";
-import { ExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
-import { withUser } from "@/utility/apiAuth";
-import { searchBggGames } from "@/utility/bgg";
-import { findFriendCollection } from "@/utility/collections";
-import { getGameData } from "@/utility/games";
+import {
+    ExtendedGameCollection,
+    GameCollectionStatus,
+} from "@/lib/types/collection";
+import { ExpandedGame } from "@/lib/types/game";
+import { withUser } from "@/lib/utility/apiAuth";
+import { searchBggGames } from "@/lib/utility/bgg";
+import { findFriendCollection } from "@/lib/utility/collections";
+import { getGameData } from "@/lib/utility/games";
 import { GameCollection, RelationshipType, User } from "@prisma/client";
 import { XMLParser } from "fast-xml-parser";
 import { NextApiRequest, NextApiResponse } from "next";

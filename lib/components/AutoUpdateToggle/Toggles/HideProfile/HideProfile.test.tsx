@@ -1,6 +1,6 @@
-import { defaultUserPreferences } from "@/datatypes/userProfile";
 import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
-import { generateBoolean, render } from "@/utility/test";
+import { defaultUserPreferences } from "@/lib/types/userProfile";
+import { generateBoolean, render } from "@/lib/utility/test";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HideProfile from "./HideProfile";

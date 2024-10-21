@@ -1,8 +1,8 @@
 import { GameCollectionResult } from "@/app/api/v2/user/[userId]/collection/route";
-import { Game } from "@/datatypes/game";
 import { useUser } from "@/feature/authentication/context/userContext";
 import { useGameQueryKey } from "@/feature/game-database/hooks/useGame";
 import { Result } from "@/lib/types/apiHooks";
+import { Game } from "@/lib/types/game";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useMemo } from "react";

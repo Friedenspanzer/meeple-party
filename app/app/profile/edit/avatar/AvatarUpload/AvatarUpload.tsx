@@ -1,11 +1,11 @@
 "use client";
 
+import { useTranslation } from "@/i18n/client";
+import Spinner from "@/lib/components/Spinner/Spinner";
 import {
   AVATAR_ALLOWED_FILE_SIZE,
   AVATAR_ALLOWED_FILE_TYPES,
-} from "@/constants/avatar";
-import { useTranslation } from "@/i18n/client";
-import Spinner from "@/lib/components/Spinner/Spinner";
+} from "@/lib/constants/avatar";
 import useUserProfile from "@/lib/hooks/useUserProfile";
 import { useCallback, useId, useState } from "react";
 

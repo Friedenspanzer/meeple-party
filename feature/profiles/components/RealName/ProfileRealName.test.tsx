@@ -1,4 +1,4 @@
-import { render } from "@/utility/test";
+import { render } from "@/lib/utility/test";
 import ProfileRealName from "./ProfileRealName";
 jest.mock("@/i18n/client");
 

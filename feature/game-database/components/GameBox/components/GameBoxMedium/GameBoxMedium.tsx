@@ -1,10 +1,10 @@
 "use client";
 
-import { UserProfile } from "@/datatypes/userProfile";
 import CollectionStatusButtons from "@/feature/game-collection/components/CollectionStatusButtons/CollectionStatusButtons";
 import GameName from "@/feature/game-database/components/GameName/GameName";
 import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import { useTranslation } from "@/i18n/client";
+import { UserProfile } from "@/lib/types/userProfile";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,9 +1,9 @@
 "use client";
 
-import { RelationshipType } from "@/datatypes/relationship";
 import FriendRequest from "@/feature/relationships/components/FriendRequest/FriendRequest";
 import useRelationships from "@/feature/relationships/hooks/useRelationships";
 import { useTranslation } from "@/i18n/client";
+import { RelationshipType } from "@/lib/types/relationship";
 import { Container, Stack, Title } from "@mantine/core";
 
 const FriendRequests: React.FC = () => {

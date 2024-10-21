@@ -1,4 +1,4 @@
-import { UserProfile } from "@/datatypes/userProfile";
+import { UserProfile } from "@/lib/types/userProfile";
 import { Stack } from "@mantine/core";
 import Link from "next/link";
 import Person from "../Person/Person";

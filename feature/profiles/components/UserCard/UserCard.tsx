@@ -1,6 +1,6 @@
 "use client";
 
-import { UserProfile } from "@/datatypes/userProfile";
+import { UserProfile } from "@/lib/types/userProfile";
 import { MantineTheme, Stack } from "@mantine/core";
 import { Role } from "@prisma/client";
 import { ProfileAdditionalInformation } from "../AdditionalInformation/ProfileAdditionalInformation";

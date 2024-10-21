@@ -1,10 +1,10 @@
-import { RelationshipType } from "@/datatypes/relationship";
 import { prisma } from "@/db";
+import { RelationshipType } from "@/lib/types/relationship";
+import { withUser } from "@/lib/utility/apiAuth";
 import { normalizeRelationship } from "@/selectors/relationships";
-import { withUser } from "@/utility/apiAuth";
 import {
-  RelationshipType as PrismaRelationshipType,
-  User,
+    RelationshipType as PrismaRelationshipType,
+    User,
 } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 

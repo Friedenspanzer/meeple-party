@@ -1,9 +1,9 @@
 "use client";
 
-import { UserPreferences } from "@/datatypes/userProfile";
 import { useTranslation } from "@/i18n/client";
 import { GameLanguage, Language, PageLanguage } from "@/i18n/types";
 import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
+import { UserPreferences } from "@/lib/types/userProfile";
 import { Alert, Button, Group, Stack } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useMemo } from "react";

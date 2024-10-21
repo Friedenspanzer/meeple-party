@@ -1,11 +1,11 @@
 "use client";
 
 import { useTranslation } from "@/i18n/client";
-import { emptyFilter } from "@/utility/filter";
+import { emptyFilter } from "@/lib/utility/filter";
 import classNames from "classnames";
 import { useCallback, useEffect, useId, useState } from "react";
 import CollectionStatus, {
-  getCombinedText,
+    getCombinedText,
 } from "./components/CollectionStatus";
 import FilterOverview from "./components/FilterOverview";
 import Group from "./components/Group";

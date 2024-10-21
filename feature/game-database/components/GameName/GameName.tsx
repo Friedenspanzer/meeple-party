@@ -1,7 +1,7 @@
 "use client";
 
-import { ExpandedGame } from "@/datatypes/game";
 import usePreferredGameLanguage from "@/lib/hooks/usePreferredGameLanguage";
+import { ExpandedGame } from "@/lib/types/game";
 
 interface GameNameProps {
   game: ExpandedGame;

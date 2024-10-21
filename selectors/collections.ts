@@ -1,16 +1,16 @@
-import {
-  GameCollection,
-  StatusByUser,
-  UserGameCollection,
-} from "@/datatypes/collection";
-import { Game as CleanGame, prismaGameToExpandedGame } from "@/datatypes/game";
-import { UserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
 import {
-  Game,
-  GameCollection as PrismaGameCollection,
-  RelationshipType,
-  User,
+    GameCollection,
+    StatusByUser,
+    UserGameCollection,
+} from "@/lib/types/collection";
+import { Game as CleanGame, prismaGameToExpandedGame } from "@/lib/types/game";
+import { UserProfile } from "@/lib/types/userProfile";
+import {
+    Game,
+    GameCollection as PrismaGameCollection,
+    RelationshipType,
+    User,
 } from "@prisma/client";
 
 export async function getCollection(userId: string): Promise<GameCollection[]> {

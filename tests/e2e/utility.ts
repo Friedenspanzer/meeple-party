@@ -1,6 +1,6 @@
-import { GameId } from "@/datatypes/game";
 import { prisma } from "@/db";
-import { generateString } from "@/utility/test";
+import { GameId } from "@/lib/types/game";
+import { generateString } from "@/lib/utility/test";
 import { faker } from "@faker-js/faker";
 import { BrowserContext } from "@playwright/test";
 import { RelationshipType, Role, User } from "@prisma/client";

@@ -1,4 +1,4 @@
-import { render } from "@/utility/test";
+import { render } from "@/lib/utility/test";
 import LinkButton from "./LinkButton";
 
 jest.mock("@/i18n/client");

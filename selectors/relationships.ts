@@ -1,12 +1,12 @@
-import { UserProfile } from "@/datatypes/userProfile";
 import { prisma } from "@/db";
-import {
-  Relationship as PrismaRelationship,
-  RelationshipType as PrismaRelationshipType,
-  User,
-} from "@prisma/client";
-import { Relationship, RelationshipType } from "@/datatypes/relationship";
+import { Relationship, RelationshipType } from "@/lib/types/relationship";
+import { UserProfile } from "@/lib/types/userProfile";
 import { cleanUserDetails } from "@/pages/api/user";
+import {
+    Relationship as PrismaRelationship,
+    RelationshipType as PrismaRelationshipType,
+    User,
+} from "@prisma/client";
 
 /**
  * @deprecated This method should be replaced by the API V2 version.

@@ -1,5 +1,5 @@
-import { Relationship } from "@/datatypes/relationship";
 import { prisma } from "@/db";
+import { Relationship } from "@/lib/types/relationship";
 import { RelationshipType } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { getUser } from "../../authentication";

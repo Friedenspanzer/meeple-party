@@ -1,17 +1,17 @@
-import { prismaGameToExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
 import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
 import GamePill from "@/feature/game-database/components/GamePill/GamePill";
 import ProfileHeader from "@/feature/profiles/components/ProfileHeader/ProfileHeader";
 import { getTranslation } from "@/i18n";
+import { prismaGameToExpandedGame } from "@/lib/types/game";
+import { getServerUser } from "@/lib/utility/serverSession";
 import { cleanUserDetails } from "@/pages/api/user";
-import { getServerUser } from "@/utility/serverSession";
 import { Grid, GridCol, Stack, Text, Title } from "@mantine/core";
 import {
-  GameCollection as PrismaGameCollection,
-  Relationship,
-  RelationshipType,
-  User,
+    GameCollection as PrismaGameCollection,
+    Relationship,
+    RelationshipType,
+    User,
 } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";

@@ -1,4 +1,4 @@
-import { render } from "@/utility/test";
+import { render } from "@/lib/utility/test";
 import Metric from "./Metric";
 
 describe("Metric", () => {

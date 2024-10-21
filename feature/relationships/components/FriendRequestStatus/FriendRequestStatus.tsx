@@ -1,8 +1,8 @@
 "use client";
 
-import { RelationshipType } from "@/datatypes/relationship";
 import useRelationship from "@/feature/relationships/hooks/useRelationship";
 import { useTranslation } from "@/i18n/client";
+import { RelationshipType } from "@/lib/types/relationship";
 import { Button, Group, Stack } from "@mantine/core";
 
 interface Props {

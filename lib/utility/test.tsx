@@ -1,5 +1,4 @@
 import { FullPrismaRelationship } from "@/app/api/v2/utility";
-import { UserProfile, defaultUserPreferences } from "@/datatypes/userProfile";
 import { GameLanguage, PageLanguage, RealLanguage } from "@/i18n/types";
 import { MantineProvider } from "@mantine/core";
 import {
@@ -12,6 +11,7 @@ import {
 import { render as testingLibraryRender } from "@testing-library/react";
 import { Matcher, MatcherCreator } from "jest-mock-extended";
 import { CSSProperties } from "react";
+import { UserProfile, defaultUserPreferences } from "../types/userProfile";
 
 export function getRandomEntry<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];

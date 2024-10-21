@@ -1,10 +1,10 @@
 import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import {
-  generateArray,
-  generateCssProperties,
-  generateRgbColor,
-  generateString,
-} from "@/utility/test";
+    generateArray,
+    generateCssProperties,
+    generateRgbColor,
+    generateString,
+} from "@/lib/utility/test";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Image, { ImageProps } from "next/image";

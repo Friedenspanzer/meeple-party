@@ -1,6 +1,6 @@
 "use client";
 
-import { RelationshipType } from "@/datatypes/relationship";
+import { RelationshipType } from "@/lib/types/relationship";
 import { useEffect, useState } from "react";
 import useRelationships from "../../hooks/useRelationships";
 

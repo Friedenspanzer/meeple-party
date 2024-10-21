@@ -1,12 +1,12 @@
-import { UserProfile } from "@/datatypes/userProfile";
+import { UserProfile } from "@/lib/types/userProfile";
 import {
-  generateArray,
-  generateArrayWithIndex,
-  generateNumber,
-  generateUserProfile,
-  getUserProfile,
-  render,
-} from "@/utility/test";
+    generateArray,
+    generateArrayWithIndex,
+    generateNumber,
+    generateUserProfile,
+    getUserProfile,
+    render,
+} from "@/lib/utility/test";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import PersonList from "./PersonList";

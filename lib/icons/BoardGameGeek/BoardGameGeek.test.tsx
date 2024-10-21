@@ -1,4 +1,4 @@
-import { render } from "@/utility/test";
+import { render } from "@/lib/utility/test";
 import IconBoardGameGeek from "./BoardGameGeek";
 
 describe("BoardGameGeek Icon", () => {

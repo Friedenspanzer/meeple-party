@@ -1,4 +1,4 @@
-import { generateString } from "@/utility/test";
+import { generateString } from "@/lib/utility/test";
 import useBasePath from "../useBasePath";
 
 describe("useBasePath", () => {
