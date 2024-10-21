@@ -1,6 +1,6 @@
 import { RelationshipsGetResult } from "@/app/api/v2/relationships/route";
 import { Relationship } from "@/datatypes/relationship";
-import { Result } from "@/hooks/api/types";
+import { Result } from "@/lib/types/apiHooks";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";

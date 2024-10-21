@@ -2,7 +2,7 @@
 
 import { StatusByUser } from "@/datatypes/collection";
 import { ExpandedGame, Game } from "@/datatypes/game";
-import useGameBoxSize from "@/hooks/useGameBoxSize";
+import useGameBoxSize from "@/lib/hooks/useGameBoxSize";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import { useEffect, useState } from "react";
 import GameBoxBig from "./components/GameBoxBig/GameBoxBig";

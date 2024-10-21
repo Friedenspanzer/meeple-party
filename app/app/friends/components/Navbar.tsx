@@ -1,9 +1,9 @@
+import FriendRequestsBadge from "@/feature/relationships/components/FriendRequestsBadge/FriendRequestsBadge";
+import { getTranslation } from "@/i18n";
 import {
   NavigationBar,
   NavigationItem,
-} from "@/components/NavigationBar/NavigationBar";
-import FriendRequestsBadge from "@/feature/relationships/components/FriendRequestsBadge/FriendRequestsBadge";
-import { getTranslation } from "@/i18n";
+} from "@/lib/components/NavigationBar/NavigationBar";
 
 const Navbar: React.FC = async () => {
   const { t } = await getTranslation("friends");

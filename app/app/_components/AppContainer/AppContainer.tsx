@@ -2,13 +2,13 @@
 
 import ModalProvider from "@/context/modalContext";
 import CompleteUserProfile from "@/feature/profiles/components/CompleteUserProfile/CompleteUserProfile";
-import useUserProfile from "@/hooks/useUserProfile";
+import useUserProfile from "@/lib/hooks/useUserProfile";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import classNames from "classnames";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import Link from "next/link";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../../../lib/components/Spinner/Spinner";
 import TopNav from "../TopNav/TopNav";
 import styles from "./appcontainer.module.css";
 

@@ -1,8 +1,8 @@
 "use client";
 
-import Logo from "@/components/Logo/Logo";
-import IconBoardGameGeek from "@/components/icons/BoardGameGeek/BoardGameGeek";
 import { useTranslation } from "@/i18n/client";
+import Logo from "@/lib/components/Logo/Logo";
+import IconBoardGameGeek from "@/lib/icons/BoardGameGeek/BoardGameGeek";
 import { Divider, Group, Stack, Text, Title } from "@mantine/core";
 import {
   IconBrandGithub,

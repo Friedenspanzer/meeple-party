@@ -1,8 +1,8 @@
 "use client";
 
-import Spinner from "@/components/Spinner/Spinner";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { useTranslation } from "@/i18n/client";
+import Spinner from "@/lib/components/Spinner/Spinner";
+import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
 import AutoUpdateToggle from "../../AutoUpdateToggle";
 
 export default function HideProfile() {

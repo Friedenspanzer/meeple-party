@@ -1,11 +1,11 @@
 "use client";
 
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import useUserProfile from "@/lib/hooks/useUserProfile";
 import axios from "axios";
 import { useState } from "react";
 import { Trans } from "react-i18next";
-import Spinner from "../../../../components/Spinner/Spinner";
+import Spinner from "../../../../lib/components/Spinner/Spinner";
 
 type Step = "Button" | "Confirmation" | "Input" | "Deleting";
 

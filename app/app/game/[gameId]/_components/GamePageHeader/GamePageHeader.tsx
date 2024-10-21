@@ -1,7 +1,7 @@
-import BggRating from "@/feature/game-database/components/BggRating/BggRating";
 import { ExpandedGame } from "@/datatypes/game";
+import BggRating from "@/feature/game-database/components/BggRating/BggRating";
+import Metric from "@/feature/game-database/components/Metric/Metric";
 import { getGameLanguage, getTranslation } from "@/i18n";
-import Metric from "@/lib/components/parts/Metric/Metric";
 import { getBggGame } from "@/utility/bgg";
 import classNames from "classnames";
 import Image from "next/image";

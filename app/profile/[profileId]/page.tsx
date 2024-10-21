@@ -1,10 +1,10 @@
 import { generateMetadata as appGenerateMetaData } from "@/app/app/profile/[profileId]/page";
-import LinkButton from "@/components/LinkButton/LinkButton";
-import Logo from "@/components/Logo/Logo";
 import { prisma } from "@/db";
 import LoginButton from "@/feature/authentication/components/LoginButton/LoginButton";
 import UserCard from "@/feature/profiles/components/UserCard/UserCard";
 import { getTranslation } from "@/i18n";
+import LinkButton from "@/lib/components/LinkButton/LinkButton";
+import Logo from "@/lib/components/Logo/Logo";
 import { cleanUserDetails } from "@/pages/api/user";
 import { isLoggedIn } from "@/utility/serverSession";
 import { Center, Group, Stack, Text, Title } from "@mantine/core";

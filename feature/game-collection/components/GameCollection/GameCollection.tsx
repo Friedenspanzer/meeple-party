@@ -2,7 +2,6 @@
 
 import { GameCollectionStatus, StatusByUser } from "@/datatypes/collection";
 import { ExpandedGame, Game } from "@/datatypes/game";
-import useGameBoxSize from "@/hooks/useGameBoxSize";
 import { useTranslation } from "@/i18n/client";
 import { emptyFilter } from "@/utility/filter";
 import classNames from "classnames";
@@ -11,6 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
 
+import useGameBoxSize from "@/lib/hooks/useGameBoxSize";
 import GameBox from "../../../game-database/components/GameBox/GameBox";
 import GameBoxSizePicker from "../GameBoxSizePicker/GameBoxSizePicker";
 import GameCollectionFilter, {

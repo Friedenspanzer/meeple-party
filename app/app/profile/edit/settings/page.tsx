@@ -1,4 +1,4 @@
-import LanguagePicker from "@/components/LanguagePicker/LanguagePicker";
+import LanguagePicker from "@/app/app/profile/edit/settings/_components/LanguagePicker/LanguagePicker";
 import DeleteAccount from "@/feature/authentication/components/DeleteAccount/DeleteAccount";
 import { getTranslation } from "@/i18n";
 import { Language } from "@/i18n/types";

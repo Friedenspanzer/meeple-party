@@ -1,4 +1,4 @@
-import IconBoardGameGeek from "@/components/icons/BoardGameGeek/BoardGameGeek";
+import IconBoardGameGeek from "@/lib/icons/BoardGameGeek/BoardGameGeek";
 import { Flex, Group, Text } from "@mantine/core";
 import { IconHome } from "@tabler/icons-react";
 

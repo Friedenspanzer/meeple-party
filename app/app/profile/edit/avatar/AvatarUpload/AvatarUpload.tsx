@@ -1,12 +1,12 @@
 "use client";
 
-import Spinner from "@/components/Spinner/Spinner";
 import {
   AVATAR_ALLOWED_FILE_SIZE,
   AVATAR_ALLOWED_FILE_TYPES,
 } from "@/constants/avatar";
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import Spinner from "@/lib/components/Spinner/Spinner";
+import useUserProfile from "@/lib/hooks/useUserProfile";
 import { useCallback, useId, useState } from "react";
 
 const AvatarUpload: React.FC = () => {

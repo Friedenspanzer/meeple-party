@@ -1,6 +1,6 @@
 "use client";
 
-import Spinner from "@/components/Spinner/Spinner";
+import Spinner from "@/lib/components/Spinner/Spinner";
 import classNames from "classnames";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";

@@ -5,7 +5,7 @@ import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import Spinner from "../../../../components/Spinner/Spinner";
+import Spinner from "../../../../lib/components/Spinner/Spinner";
 import styles from "./gamesearch.module.css";
 
 export interface GameSearchChildren {

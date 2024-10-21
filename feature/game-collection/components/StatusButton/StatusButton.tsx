@@ -1,10 +1,10 @@
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import classNames from "classnames";
 import { useCallback, useMemo } from "react";
-import Spinner from "../Spinner/Spinner";
-import IconCollectionOwn from "../icons/CollectionOwn";
-import IconCollectionWantToPlay from "../icons/CollectionWantToPlay";
-import IconCollectionWishlist from "../icons/CollectionWishlist";
+import Spinner from "../../../../lib/components/Spinner/Spinner";
+import IconCollectionOwn from "../../../../lib/icons/CollectionOwn";
+import IconCollectionWantToPlay from "../../../../lib/icons/CollectionWantToPlay";
+import IconCollectionWishlist from "../../../../lib/icons/CollectionWishlist";
 import styles from "./statusbutton.module.css";
 
 interface StatusButtonProps extends React.HTMLAttributes<HTMLDivElement> {

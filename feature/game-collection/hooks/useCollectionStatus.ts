@@ -1,7 +1,7 @@
 import { GameCollection } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { MutableResult } from "../../../hooks/api/types";
+import { MutableResult } from "../../../lib/types/apiHooks";
 
 const twoWeeksInMilliSeconds = 1000 * 60 * 60 * 24 * 14;
 

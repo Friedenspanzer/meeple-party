@@ -1,9 +1,9 @@
 "use client";
 
-import Spinner from "@/components/Spinner/Spinner";
 import Avatar from "@/feature/profiles/components/Avatar/Avatar";
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import Spinner from "@/lib/components/Spinner/Spinner";
+import useUserProfile from "@/lib/hooks/useUserProfile";
 import { useCallback, useState } from "react";
 
 const AvatarDisplay: React.FC = () => {

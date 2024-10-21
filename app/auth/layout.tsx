@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo/Logo";
+import Logo from "@/lib/components/Logo/Logo";
 import { PropsWithChildren } from "react";
 
 const AuthLayout: React.FC<PropsWithChildren> = ({ children }) => {

@@ -1,7 +1,7 @@
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { generateBoolean } from "../../utility/test";
+import { generateBoolean } from "../../../../utility/test";
 import StatusButton from "./StatusButton";
 
 jest.mock("@/i18n/client");

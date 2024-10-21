@@ -1,9 +1,9 @@
 "use client";
 
-import Spinner from "@/components/Spinner/Spinner";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
-import AutoUpdateToggle from "../AutoUpdateToggle";
 import { useTranslation } from "@/i18n/client";
+import Spinner from "@/lib/components/Spinner/Spinner";
+import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
+import AutoUpdateToggle from "../AutoUpdateToggle";
 
 export default function SendAnalyticsData() {
   const { t } = useTranslation("settings");
@@ -17,9 +17,7 @@ export default function SendAnalyticsData() {
         onChange={(value) => ({ ...preferences, sendAnalyticsData: value })}
         title={t("Privacy.SendAnalyticsData.Title")}
       >
-        <p>
-          {t("Privacy.SendAnalyticsData.Description")}
-        </p>
+        <p>{t("Privacy.SendAnalyticsData.Description")}</p>
       </AutoUpdateToggle>
     );
   }

@@ -1,5 +1,6 @@
 "use client";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
+
+import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { useCallback } from "react";
 

@@ -2,14 +2,14 @@
 
 import Person from "@/feature/profiles/components/Person/Person";
 import FriendRequestsBadge from "@/feature/relationships/components/FriendRequestsBadge/FriendRequestsBadge";
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import useUserProfile from "@/lib/hooks/useUserProfile";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
-import Logo from "../Logo/Logo";
+import Logo from "../../../../lib/components/Logo/Logo";
 import styles from "./topnav.module.css";
 
 export default function TopNav() {

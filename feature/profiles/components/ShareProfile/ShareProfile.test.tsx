@@ -1,4 +1,4 @@
-import useBasePath from "@/hooks/useBasePath";
+import useBasePath from "@/lib/hooks/useBasePath";
 import { generateString, render } from "@/utility/test";
 import "@testing-library/jest-dom";
 import { screen, waitFor } from "@testing-library/react";

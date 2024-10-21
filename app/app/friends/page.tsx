@@ -1,6 +1,6 @@
-import CollectionChange from "@/components/CollectionChange/CollectionChange";
 import { ExpandedGame, prismaGameToExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
+import CollectionChange from "@/feature/game-collection/components/CollectionChange/CollectionChange";
 import Person from "@/feature/profiles/components/Person/Person";
 import { getGameLanguage, getTranslation } from "@/i18n";
 import { getFriends } from "@/selectors/relationships";

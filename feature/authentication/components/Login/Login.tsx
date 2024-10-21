@@ -7,7 +7,7 @@ import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import Spinner from "../../../../components/Spinner/Spinner";
+import Spinner from "../../../../lib/components/Spinner/Spinner";
 import LoginButton from "../LoginButton/LoginButton";
 import styles from "./login.module.css";
 

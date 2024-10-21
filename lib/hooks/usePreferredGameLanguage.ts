@@ -1,7 +1,7 @@
-import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { determineGameLanguage } from "@/i18n/lib";
 import { fallbackLng } from "@/i18n/settings";
 import { GameLanguage } from "@/i18n/types";
+import { useUserPreferences } from "./useUserPreferences";
 
 interface UsePreferredGameLanguageResult {
   /** Wether results are still loading. */

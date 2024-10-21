@@ -1,5 +1,5 @@
 import Footer from "@/app/_components/Footer/Footer";
-import Analytics from "@/components/Analytics/Analytics";
+import Analytics from "@/app/_components/Analytics/Analytics";
 import AuthProvider from "@/feature/authentication/context/authContext";
 import UserProvider from "@/feature/authentication/context/userContext";
 import "@/theme/theme.scss";

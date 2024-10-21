@@ -1,8 +1,8 @@
 "use client";
 
-import Spinner from "@/components/Spinner/Spinner";
-import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
+import Spinner from "@/lib/components/Spinner/Spinner";
+import useUserProfile from "@/lib/hooks/useUserProfile";
 import axios from "axios";
 import { useEffect, useState } from "react";
 

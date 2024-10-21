@@ -1,14 +1,14 @@
 "use client";
 
-import useBasePath from "@/hooks/useBasePath";
 import { useTranslation } from "@/i18n/client";
+import useBasePath from "@/lib/hooks/useBasePath";
 import {
-  ActionIcon,
-  Button,
-  Group,
-  TextInput,
-  Tooltip,
-  Transition,
+    ActionIcon,
+    Button,
+    Group,
+    TextInput,
+    Tooltip,
+    Transition,
 } from "@mantine/core";
 import { IconCheck, IconCopy, IconShare2 } from "@tabler/icons-react";
 import { useCallback, useRef, useState } from "react";
