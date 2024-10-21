@@ -1,7 +1,7 @@
-import Avatar from "@/components/Avatar/Avatar";
-import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
-import { getTranslation } from "@/i18n";
 import GamePageHeader from "@/app/app/game/[gameId]/_components/GamePageHeader/GamePageHeader";
+import Avatar from "@/components/Avatar/Avatar";
+import CollectionStatusButtons from "@/feature/game-collection/components/CollectionStatusButtons/CollectionStatusButtons";
+import { getTranslation } from "@/i18n";
 import { getCollectionStatusOfFriends } from "@/selectors/collections";
 import { getBggGame } from "@/utility/bgg";
 import { getGameData } from "@/utility/games";

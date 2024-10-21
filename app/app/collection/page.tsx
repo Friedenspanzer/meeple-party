@@ -1,8 +1,8 @@
-import GameCollection from "@/components/GameCollection/GameCollection";
 import PrefetchedGameCollection from "@/components/Prefetches/PrefetchedGameCollection";
 import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
 import { ExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
+import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
 import { getTranslation } from "@/i18n";
 import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
 import { findFriendCollection } from "@/utility/collections";

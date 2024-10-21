@@ -1,4 +1,4 @@
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { generateBoolean } from "../../utility/test";

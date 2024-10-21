@@ -1,8 +1,8 @@
 "use client";
 
 import Avatar from "@/components/Avatar/Avatar";
-import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
 import { UserProfile } from "@/datatypes/userProfile";
+import CollectionStatusButtons from "@/feature/game-collection/components/CollectionStatusButtons/CollectionStatusButtons";
 import GameName from "@/feature/game-database/components/GameName/GameName";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";

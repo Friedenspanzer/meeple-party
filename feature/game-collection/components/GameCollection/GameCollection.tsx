@@ -10,12 +10,13 @@ import Fuse from "fuse.js";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebounce } from "use-debounce";
 import validator from "validator";
-import GameBox from "../../feature/game-database/components/GameBox/GameBox";
+
+import GameBox from "../../../game-database/components/GameBox/GameBox";
 import GameBoxSizePicker from "../GameBoxSizePicker/GameBoxSizePicker";
 import GameCollectionFilter, {
-    FilterPreset,
-    GameCollectionFilterOptions,
-    SortOrder,
+  FilterPreset,
+  GameCollectionFilterOptions,
+  SortOrder,
 } from "../GameCollectionFilter/GameCollectionFilter";
 import styles from "./gamecollection.module.css";
 

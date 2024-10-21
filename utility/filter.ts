@@ -1,4 +1,4 @@
-import { GameCollectionFilterOptions } from "@/components/GameCollectionFilter/GameCollectionFilter";
+import { GameCollectionFilterOptions } from "@/feature/game-collection/components/GameCollectionFilter/GameCollectionFilter";
 
 export const emptyFilter: GameCollectionFilterOptions = {
   name: undefined,

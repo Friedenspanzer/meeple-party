@@ -1,7 +1,7 @@
 import useGameBoxSize, { GameBoxSize } from "@/hooks/useGameBoxSize";
 import { SegmentedControl } from "@mantine/core";
-import IconGameBoxBig from "../icons/GameboxBig";
-import IconGameBoxMedium from "../icons/GameboxMedium";
+import IconGameBoxBig from "../../../../components/icons/GameboxBig";
+import IconGameBoxMedium from "../../../../components/icons/GameboxMedium";
 
 export default function GameBoxSizePicker({
   className,

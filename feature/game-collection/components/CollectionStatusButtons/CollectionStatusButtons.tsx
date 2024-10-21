@@ -1,10 +1,10 @@
 "use client";
 
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
 import classNames from "classnames";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../../../components/Spinner/Spinner";
 import styles from "./collectionstatusbuttons.module.css";
 
 export interface CollectionStatusButtonProps

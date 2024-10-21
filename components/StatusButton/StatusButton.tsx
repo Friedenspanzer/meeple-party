@@ -1,4 +1,4 @@
-import useCollectionStatus from "@/hooks/api/useCollectionStatus";
+import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import classNames from "classnames";
 import { useCallback, useMemo } from "react";
 import Spinner from "../Spinner/Spinner";

@@ -1,4 +1,3 @@
-import GameCollection from "@/components/GameCollection/GameCollection";
 import {
   GameCollectionStatus,
   GameCollection as GameCollectionType,
@@ -7,6 +6,7 @@ import {
 } from "@/datatypes/collection";
 import { ExpandedGame } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
+import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
 import { getTranslation } from "@/i18n";
 import { getAllGamesOfFriends, getCollection } from "@/selectors/collections";
 import { emptyFilter } from "@/utility/filter";

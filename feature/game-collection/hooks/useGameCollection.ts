@@ -1,8 +1,8 @@
 import { GameCollectionResult } from "@/app/api/v2/user/[userId]/collection/route";
+import { Result } from "@/hooks/api/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useMemo } from "react";
-import { Result } from "./types";
 
 export function useGameCollection(userId: string): Result<GameCollectionResult> {
   const queryKey = useGameCollectionQueryKey();
