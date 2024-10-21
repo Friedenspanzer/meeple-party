@@ -3,12 +3,12 @@ import GameCollection from "@/feature/game-collection/components/GameCollection/
 import { getTranslation } from "@/i18n";
 import PrefetchedGameCollection from "@/lib/components/Prefetches/PrefetchedGameCollection";
 import PrefetchedGameData from "@/lib/components/Prefetches/PrefetchedGameData";
+import { getMultipleCollectionStatusOfFriends } from "@/lib/selectors/collections";
 import { ExpandedGame } from "@/lib/types/game";
 import { findFriendCollection } from "@/lib/utility/collections";
 import { emptyFilter } from "@/lib/utility/filter";
 import { getGameData } from "@/lib/utility/games";
 import { getServerUser } from "@/lib/utility/serverSession";
-import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

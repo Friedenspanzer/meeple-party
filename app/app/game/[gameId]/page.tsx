@@ -2,10 +2,10 @@ import GamePageHeader from "@/app/app/game/[gameId]/_components/GamePageHeader/G
 import CollectionStatusButtons from "@/feature/game-collection/components/CollectionStatusButtons/CollectionStatusButtons";
 import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import { getTranslation } from "@/i18n";
+import { getCollectionStatusOfFriends } from "@/lib/selectors/collections";
 import { getBggGame } from "@/lib/utility/bgg";
 import { getGameData } from "@/lib/utility/games";
 import { getServerUser } from "@/lib/utility/serverSession";
-import { getCollectionStatusOfFriends } from "@/selectors/collections";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
