@@ -1,12 +1,12 @@
 import { defaultUserPreferences } from "@/datatypes/userProfile";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
 import { generateBoolean, render } from "@/utility/test";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HideProfile from "./HideProfile";
 
 jest.mock("@/i18n/client");
-jest.mock("@/hooks/useUserPreferences");
+jest.mock("@/lib/hooks/useUserPreferences");
 
 describe("Hide profile settings toggle", () => {
   afterEach(() => {

@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 import ShareProfile from "./ShareProfile";
 
 jest.mock("@/i18n/client");
-jest.mock("@/hooks/useBasePath");
+jest.mock("@/lib/hooks/useBasePath");
 
 describe("Share Profile", () => {
   afterEach(() => {

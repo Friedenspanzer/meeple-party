@@ -5,7 +5,7 @@ import { generateBoolean } from "../../../../utility/test";
 import StatusButton from "./StatusButton";
 
 jest.mock("@/i18n/client");
-jest.mock("@/hooks/api/useCollectionStatus");
+jest.mock("@/feature/game-collection/hooks/useCollectionStatus");
 
 describe("Status Button", () => {
   test.each(["own", "wanttoplay", "wishlist"])(

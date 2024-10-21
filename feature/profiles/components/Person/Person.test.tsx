@@ -8,7 +8,7 @@ const AvatarMock = ({ name, image }: AvatarProps) => (
   <span data-testid="avatarmock" data-name={name} data-image={image} />
 );
 
-jest.mock("@/components/Avatar/Avatar", () => ({
+jest.mock("@/feature/profiles/components/Avatar/Avatar", () => ({
   __esModule: true,
   namedExport: jest.fn(),
   default: jest.fn(),

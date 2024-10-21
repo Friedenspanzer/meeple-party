@@ -7,8 +7,8 @@ import { StatusByUser } from "../../../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
 
 jest.mock("@/i18n/client");
-jest.mock("@/hooks/api/useCollectionStatus");
-jest.mock("@/components/Avatar/Avatar", () => ({
+jest.mock("@/feature/game-collection/hooks/useCollectionStatus");
+jest.mock("@/feature/profiles/components/Avatar/Avatar", () => ({
   __esModule: true,
   namedExport: jest.fn(),
   default: jest.fn(),
