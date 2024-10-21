@@ -3,8 +3,8 @@
 import Avatar from "@/components/Avatar/Avatar";
 import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
 import { UserProfile } from "@/datatypes/userProfile";
+import GameName from "@/feature/game-database/components/GameName/GameName";
 import { useTranslation } from "@/i18n/client";
-import GameName from "@/lib/components/parts/GameName/GameName";
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";

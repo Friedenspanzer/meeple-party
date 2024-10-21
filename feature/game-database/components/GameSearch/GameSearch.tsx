@@ -1,12 +1,12 @@
 "use client";
 
 import { ExtendedGameCollection } from "@/datatypes/collection";
+import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../../../components/Spinner/Spinner";
 import styles from "./gamesearch.module.css";
-import { useTranslation } from "@/i18n/client";
 
 export interface GameSearchChildren {
   searchResult: ExtendedGameCollection[];

@@ -1,6 +1,6 @@
 "use client";
 
-import useGame from "@/hooks/api/useGame";
+import useGame from "@/feature/game-database/hooks/useGame";
 import classNames from "classnames";
 import Image from "next/image";
 import styles from "./gamepill.module.css";

@@ -2,7 +2,7 @@ import { GameGetResult } from "@/app/api/v2/game/[gameId]/route";
 import { ExpandedGame, Game } from "@/datatypes/game";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { Result } from "./types";
+import { Result } from "../../../hooks/api/types";
 
 const twoWeeksInMilliSeconds = 1000 * 60 * 60 * 24 * 14;
 

@@ -3,7 +3,7 @@ import { useModal } from "@/context/modalContext";
 import { ExpandedGame } from "@/datatypes/game";
 import useCollectionStatus from "@/hooks/api/useCollectionStatus";
 import { generateArray, generateUserProfile, render } from "@/utility/test";
-import { StatusByUser } from "../../../../datatypes/collection";
+import { StatusByUser } from "../../../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";
 
 jest.mock("@/i18n/client");

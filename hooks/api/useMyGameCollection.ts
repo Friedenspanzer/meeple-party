@@ -4,8 +4,8 @@ import { Game } from "@/datatypes/game";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useMemo } from "react";
+import { useGameQueryKey } from "../../feature/game-database/hooks/useGame";
 import { Result } from "./types";
-import { useGameQueryKey } from "./useGame";
 
 interface MyGameCollection {
   gameId: number;

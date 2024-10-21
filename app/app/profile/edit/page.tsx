@@ -1,13 +1,13 @@
 "use client";
 
 import CriticalError from "@/components/CriticalError/CriticalError";
-import GamePill from "@/components/GamePill/GamePill";
-import GameSearch, {
-  GameSearchChildren,
-} from "@/components/GameSearch/GameSearch";
 import Spinner from "@/components/Spinner/Spinner";
 import { Game } from "@/datatypes/game";
-import { useGameQuery } from "@/hooks/api/useGame";
+import GamePill from "@/feature/game-database/components/GamePill/GamePill";
+import GameSearch, {
+  GameSearchChildren,
+} from "@/feature/game-database/components/GameSearch/GameSearch";
+import { useGameQuery } from "@/feature/game-database/hooks/useGame";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
