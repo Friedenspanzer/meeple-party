@@ -1,7 +1,7 @@
-import Avatar from "@/components/Avatar/Avatar";
 import { useModal } from "@/context/modalContext";
 import { ExpandedGame } from "@/datatypes/game";
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
+import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import { generateArray, generateUserProfile, render } from "@/utility/test";
 import { StatusByUser } from "../../../../../../datatypes/collection";
 import GameBoxBig from "./GameBoxBig";

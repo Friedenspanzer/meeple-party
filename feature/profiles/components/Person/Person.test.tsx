@@ -1,4 +1,4 @@
-import Avatar, { AvatarProps } from "@/components/Avatar/Avatar";
+import Avatar, { AvatarProps } from "@/feature/profiles/components/Avatar/Avatar";
 import { generateString } from "@/utility/test";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";

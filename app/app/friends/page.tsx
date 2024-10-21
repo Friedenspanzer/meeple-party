@@ -1,7 +1,7 @@
 import CollectionChange from "@/components/CollectionChange/CollectionChange";
-import Person from "@/components/Person/Person";
 import { ExpandedGame, prismaGameToExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
+import Person from "@/feature/profiles/components/Person/Person";
 import { getGameLanguage, getTranslation } from "@/i18n";
 import { getFriends } from "@/selectors/relationships";
 import { getServerUser } from "@/utility/serverSession";

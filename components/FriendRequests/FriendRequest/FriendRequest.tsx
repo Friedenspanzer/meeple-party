@@ -1,7 +1,7 @@
-import Avatar from "@/components/Avatar/Avatar";
-import ProfileRealName from "@/components/Profile/RealName/ProfileRealName";
-import ProfileUsername from "@/components/Profile/Username/ProfileUsername";
 import { Relationship } from "@/datatypes/relationship";
+import Avatar from "@/feature/profiles/components/Avatar/Avatar";
+import ProfileRealName from "@/feature/profiles/components/RealName/ProfileRealName";
+import ProfileUsername from "@/feature/profiles/components/Username/ProfileUsername";
 import { Card, Group, Stack } from "@mantine/core";
 import FriendRequestStatus from "../FriendRequestStatus/FriendRequestStatus";
 

@@ -1,6 +1,7 @@
 "use client";
 
 import FriendRequestStatus from "@/components/FriendRequests/FriendRequestStatus/FriendRequestStatus";
+import LinkButton from "@/components/LinkButton/LinkButton";
 import { RelationshipType } from "@/datatypes/relationship";
 import { UserProfile } from "@/datatypes/userProfile";
 import useRelationship from "@/hooks/api/useRelationship";
@@ -8,9 +9,8 @@ import useLayout from "@/hooks/useLayout";
 import { useTranslation } from "@/i18n/client";
 import { Group, MantineTheme, Stack, Text } from "@mantine/core";
 import { Role } from "@prisma/client";
-import Avatar from "../../Avatar/Avatar";
-import LinkButton from "../../LinkButton/LinkButton";
 import { ProfileAdditionalInformation } from "../AdditionalInformation/ProfileAdditionalInformation";
+import Avatar from "../Avatar/Avatar";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 import ProfileRealName from "../RealName/ProfileRealName";
 import ShareProfile from "../ShareProfile/ShareProfile";

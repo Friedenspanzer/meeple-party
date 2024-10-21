@@ -3,8 +3,8 @@
 import { UserProfile } from "@/datatypes/userProfile";
 import { MantineTheme, Stack } from "@mantine/core";
 import { Role } from "@prisma/client";
-import Avatar from "../../Avatar/Avatar";
 import { ProfileAdditionalInformation } from "../AdditionalInformation/ProfileAdditionalInformation";
+import Avatar from "../Avatar/Avatar";
 import ProfileBadge from "../ProfileBadge/ProfileBadge";
 import ProfileUsername from "../Username/ProfileUsername";
 

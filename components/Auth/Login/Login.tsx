@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 "use client";
 
-import Avatar from "@/components/Avatar/Avatar";
 import { useUser } from "@/context/userContext";
+import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
 import { signOut } from "next-auth/react";

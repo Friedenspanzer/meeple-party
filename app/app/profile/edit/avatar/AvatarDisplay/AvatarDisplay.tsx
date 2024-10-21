@@ -1,7 +1,7 @@
 "use client";
 
-import Avatar from "@/components/Avatar/Avatar";
 import Spinner from "@/components/Spinner/Spinner";
+import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
 import { useCallback, useState } from "react";

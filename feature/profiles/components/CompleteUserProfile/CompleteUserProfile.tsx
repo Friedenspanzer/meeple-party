@@ -1,10 +1,10 @@
 "use client";
 
+import Spinner from "@/components/Spinner/Spinner";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Spinner from "../Spinner/Spinner";
 
 export default function CompleteUserProfile() {
   const { isLoading, userProfile, invalidate } = useUserProfile();

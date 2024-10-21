@@ -1,4 +1,4 @@
-import Avatar from "@/components/Avatar/Avatar";
+import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import {
   generateArray,
   generateCssProperties,

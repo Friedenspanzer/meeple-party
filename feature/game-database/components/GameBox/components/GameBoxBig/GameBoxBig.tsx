@@ -1,7 +1,5 @@
 "use client";
 
-import AvatarStack from "@/components/AvatarStack/AvatarStack";
-import PersonList from "@/components/PersonList/PersonList";
 import StatusButton from "@/components/StatusButton/StatusButton";
 import { useModal } from "@/context/modalContext";
 import { StatusByUser } from "@/datatypes/collection";
@@ -9,6 +7,8 @@ import { Game } from "@/datatypes/game";
 import { UserProfile } from "@/datatypes/userProfile";
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import GameName from "@/feature/game-database/components/GameName/GameName";
+import AvatarStack from "@/feature/profiles/components/AvatarStack/AvatarStack";
+import PersonList from "@/feature/profiles/components/PersonList/PersonList";
 import { useTranslation } from "@/i18n/client";
 import Metric from "@/lib/components/parts/Metric/Metric";
 import classNames from "classnames";
@@ -61,10 +61,7 @@ function MetricList({ game }: Readonly<{ game: Game }>) {
         label={t("Attributes.Weight")}
       />
       <hr className={styles.metricDivider} />
-      <Metric
-        value={game.playingTime}
-        label={t("Attributes.PlayingTime")}
-      />
+      <Metric value={game.playingTime} label={t("Attributes.PlayingTime")} />
       <hr className={styles.metricDivider} />
       <Metric
         value={

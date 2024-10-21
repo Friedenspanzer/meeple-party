@@ -1,5 +1,6 @@
 "use client";
 
+import Person from "@/feature/profiles/components/Person/Person";
 import useUserProfile from "@/hooks/useUserProfile";
 import { useTranslation } from "@/i18n/client";
 import classNames from "classnames";
@@ -9,7 +10,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback } from "react";
 import FriendRequestsBadge from "../FriendRequests/FriendRequestsBadge/FriendRequestsBadge";
 import Logo from "../Logo/Logo";
-import Person from "../Person/Person";
 import styles from "./topnav.module.css";
 
 export default function TopNav() {

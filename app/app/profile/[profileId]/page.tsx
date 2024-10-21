@@ -1,8 +1,8 @@
-import ProfileHeader from "@/components/Profile/ProfileHeader/ProfileHeader";
 import { prismaGameToExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
 import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
 import GamePill from "@/feature/game-database/components/GamePill/GamePill";
+import ProfileHeader from "@/feature/profiles/components/ProfileHeader/ProfileHeader";
 import { getTranslation } from "@/i18n";
 import { cleanUserDetails } from "@/pages/api/user";
 import { getServerUser } from "@/utility/serverSession";

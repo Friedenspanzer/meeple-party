@@ -1,7 +1,7 @@
-import Person from "@/components/Person/Person";
 import { UserProfile } from "@/datatypes/userProfile";
 import { Stack } from "@mantine/core";
 import Link from "next/link";
+import Person from "../Person/Person";
 import styles from "./personlist.module.css";
 
 export interface PersonListProps {
