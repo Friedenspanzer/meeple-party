@@ -1,6 +1,6 @@
 import { getTranslation } from "@/i18n";
-import AvatarDisplay from "./AvatarDisplay/AvatarDisplay";
-import AvatarUpload from "./AvatarUpload/AvatarUpload";
+import AvatarDisplay from "./_components/AvatarDisplay/AvatarDisplay";
+import AvatarUpload from "./_components/AvatarUpload/AvatarUpload";
 
 export const metadata = {
   title: "Edit your avatar",

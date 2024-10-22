@@ -1,9 +1,9 @@
 "use client";
 
 import { useTranslation } from "@/i18n/client";
+import AutoUpdateToggle from "@/lib/components/AutoUpdateToggle/AutoUpdateToggle";
 import Spinner from "@/lib/components/Spinner/Spinner";
 import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
-import AutoUpdateToggle from "../AutoUpdateToggle";
 
 export default function ShowPlaceInProfile() {
   const { t } = useTranslation("settings");
