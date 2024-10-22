@@ -9,7 +9,7 @@ import {
 import useUserProfile from "@/lib/hooks/useUserProfile";
 import { useCallback, useId, useState } from "react";
 
-const AvatarUpload: React.FC = () => {
+export default function AvatarUpload() {
   const { t } = useTranslation("profile");
   const fileUploadId = useId();
   const { invalidate } = useUserProfile();
@@ -84,6 +84,4 @@ const AvatarUpload: React.FC = () => {
       </div>
     </>
   );
-};
-
-export default AvatarUpload;
+}

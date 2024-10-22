@@ -6,7 +6,7 @@ import Spinner from "@/lib/components/Spinner/Spinner";
 import useUserProfile from "@/lib/hooks/useUserProfile";
 import { useCallback, useState } from "react";
 
-const AvatarDisplay: React.FC = () => {
+export default function AvatarDisplay() {
   const { t } = useTranslation("profile");
   const { isLoading, userProfile, invalidate } = useUserProfile();
   const [loading, setLoading] = useState(false);
@@ -49,6 +49,4 @@ const AvatarDisplay: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default AvatarDisplay;
+}
