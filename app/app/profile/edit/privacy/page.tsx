@@ -1,9 +1,9 @@
+import HideProfile from "@/app/app/profile/edit/privacy/_components/HideProfile/HideProfile";
+import PlaceSearchable from "@/app/app/profile/edit/privacy/_components/PlaceSearchable";
 import { getTranslation } from "@/i18n";
-import HideProfile from "@/lib/components/AutoUpdateToggle/Toggles/HideProfile/HideProfile";
-import PlaceSearchable from "@/lib/components/AutoUpdateToggle/Toggles/PlaceSearchable";
-import SendAnalyticsData from "@/lib/components/AutoUpdateToggle/Toggles/SendAnalyticsData";
-import ShowPlaceInProfile from "@/lib/components/AutoUpdateToggle/Toggles/ShowPlaceInProfile";
-import ShowRealName from "@/lib/components/AutoUpdateToggle/Toggles/ShowRealName";
+import SendAnalyticsData from "./_components/SendAnalyticsData";
+import ShowPlaceInProfile from "./_components/ShowPlaceInProfile";
+import ShowRealName from "./_components/ShowRealName";
 
 export const metadata = {
   title: "Privacy settings",

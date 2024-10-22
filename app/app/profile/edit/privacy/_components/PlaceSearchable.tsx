@@ -3,9 +3,9 @@
 import { useTranslation } from "@/i18n/client";
 import Spinner from "@/lib/components/Spinner/Spinner";
 import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
-import AutoUpdateToggle from "../../AutoUpdateToggle";
+import AutoUpdateToggle from "../../../../../../lib/components/AutoUpdateToggle/AutoUpdateToggle";
 
-export default function HideProfile() {
+export default function PlaceSearchable() {
   const { t } = useTranslation("settings");
   const { preferences, loading } = useUserPreferences();
   if (loading) {
@@ -13,11 +13,11 @@ export default function HideProfile() {
   } else {
     return (
       <AutoUpdateToggle
-        value={preferences.hideProfile}
-        onChange={(value) => ({ ...preferences, hideProfile: value })}
-        title={t("Privacy.HideProfile.Title")}
+        value={preferences.allowSearchByPlace}
+        onChange={(value) => ({ ...preferences, allowSearchByPlace: value })}
+        title={t("Privacy.SearchByPlace.Title")}
       >
-        <p>{t("Privacy.HideProfile.Description")}</p>
+        <p>{t("Privacy.SearchByPlace.Description")}</p>
       </AutoUpdateToggle>
     );
   }
