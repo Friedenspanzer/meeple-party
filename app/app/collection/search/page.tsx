@@ -1,5 +1,3 @@
-"use client";
-
 import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
 import GameSearch, {
   GameSearchChildren,
