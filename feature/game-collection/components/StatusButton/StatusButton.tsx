@@ -1,13 +1,13 @@
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
-import classNames from "classnames";
+import { useTranslation } from "@/i18n/client";
+import { ActionIcon } from "@mantine/core";
 import { useCallback, useMemo } from "react";
-import Spinner from "../../../../lib/components/Spinner/Spinner";
 import IconCollectionOwn from "../../../../lib/icons/CollectionOwn";
 import IconCollectionWantToPlay from "../../../../lib/icons/CollectionWantToPlay";
 import IconCollectionWishlist from "../../../../lib/icons/CollectionWishlist";
 import styles from "./statusbutton.module.css";
 
-interface StatusButtonProps extends React.HTMLAttributes<HTMLDivElement> {
+interface StatusButtonProps {
   gameId: number;
   status: "own" | "wanttoplay" | "wishlist";
 }
@@ -15,9 +15,9 @@ interface StatusButtonProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function StatusButton({
   status,
   gameId,
-  ...props
 }: Readonly<StatusButtonProps>) {
-  const { data, isLoading, mutate } = useCollectionStatus(gameId);
+  const { data, isLoading, updateMutation } = useCollectionStatus(gameId);
+  const { t } = useTranslation();
   const icon = useMemo(() => {
     if (status === "own") {
       return <IconCollectionOwn />;
@@ -51,41 +51,43 @@ export default function StatusButton({
     if (!data) {
       return;
     } else if (status === "own") {
-      mutate({ ...data, own: !data.own });
+      updateMutation.mutate({ ...data, own: !data.own });
     } else if (status === "wanttoplay") {
-      mutate({ ...data, wantToPlay: !data.wantToPlay });
+      updateMutation.mutate({ ...data, wantToPlay: !data.wantToPlay });
     } else if (status === "wishlist") {
-      mutate({ ...data, wishlist: !data.wishlist });
+      updateMutation.mutate({ ...data, wishlist: !data.wishlist });
     }
-  }, [status, mutate, data]);
+  }, [status, updateMutation, data]);
 
-  if (isLoading) {
-    return (
-      <Spinner
-        {...props}
-        className={classNames(styles.spinner, props.className)}
-      />
-    );
-  } else {
-    return (
-      <div
-        {...props}
-        onClick={updateStatus}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            updateStatus();
-          }
-        }}
-        tabIndex={0}
-        className={classNames(styles.button, props.className)}
-        style={{
-          ...props.style,
-          color: active ? activeColor : "unset",
-        }}
-        role="button"
-      >
-        {icon}
-      </div>
-    );
-  }
+  const translationBaseKey = useMemo(() => {
+    if (status === "own") {
+      return "Own";
+    } else if (status === "wanttoplay") {
+      return "WantToPlay";
+    } else if (status === "wishlist") {
+      return "Wishlist";
+    }
+  }, [status]);
+
+  const label = `States.${active ? "Not" : ""}${translationBaseKey}`;
+
+  return (
+    <ActionIcon
+      onClick={updateStatus}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          updateStatus();
+        }
+      }}
+      className={styles.button}
+      tabIndex={0}
+      variant="subtle"
+      color={active ? activeColor : "gray"}
+      size="xl"
+      disabled={isLoading}
+      aria-label={t(label)}
+    >
+      {icon}
+    </ActionIcon>
+  );
 }

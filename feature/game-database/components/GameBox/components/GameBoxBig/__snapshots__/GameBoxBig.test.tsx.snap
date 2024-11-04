@@ -90,15 +90,23 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <div
       class="myStatusOwn"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.NotOwn"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: color-mix(in srgb, var(--color-collection-own), transparent 88%); --ai-color: var(--color-collection-own); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-box-seam-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-box-seam-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -133,15 +141,23 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <div
       class="myStatusWantToPlay"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.NotWantToPlay"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: color-mix(in srgb, var(--color-collection-want-to-play), transparent 88%); --ai-color: var(--color-collection-want-to-play); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-dice-3-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-dice-3-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -176,15 +192,23 @@ exports[`GameBoxBig Matches snapshot 1`] = `
     <div
       class="myStatusWishlist"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.NotWishlist"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: color-mix(in srgb, var(--color-collection-wishlist), transparent 88%); --ai-color: var(--color-collection-wishlist); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-gift-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-gift-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -310,15 +334,23 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <div
       class="myStatusOwn"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.Own"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: var(--mantine-color-gray-light-hover); --ai-color: var(--mantine-color-gray-light-color); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-box-seam-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-box-seam-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -328,15 +360,23 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <div
       class="myStatusWantToPlay"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.WantToPlay"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: var(--mantine-color-gray-light-hover); --ai-color: var(--mantine-color-gray-light-color); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-dice-3-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-dice-3-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -346,15 +386,23 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
     <div
       class="myStatusWishlist"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.Wishlist"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: var(--mantine-color-gray-light-hover); --ai-color: var(--mantine-color-gray-light-color); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-gift-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-gift-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -455,15 +503,23 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     <div
       class="myStatusOwn"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.Own"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: var(--mantine-color-gray-light-hover); --ai-color: var(--mantine-color-gray-light-color); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-box-seam-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-box-seam-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -473,15 +529,23 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     <div
       class="myStatusWantToPlay"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.WantToPlay"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: var(--mantine-color-gray-light-hover); --ai-color: var(--mantine-color-gray-light-color); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-dice-3-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-dice-3-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -491,15 +555,23 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
     <div
       class="myStatusWishlist"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.Wishlist"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: var(--mantine-color-gray-light-hover); --ai-color: var(--mantine-color-gray-light-color); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-gift-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-gift-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -600,15 +672,23 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
     <div
       class="myStatusOwn"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.NotOwn"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: color-mix(in srgb, var(--color-collection-own), transparent 88%); --ai-color: var(--color-collection-own); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-box-seam-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-box-seam-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -643,15 +723,23 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
     <div
       class="myStatusWantToPlay"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.NotWantToPlay"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: color-mix(in srgb, var(--color-collection-want-to-play), transparent 88%); --ai-color: var(--color-collection-want-to-play); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-dice-3-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-dice-3-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >
@@ -686,15 +774,23 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
     <div
       class="myStatusWishlist"
     >
-      <div
-        class="button statusButton"
-        role="button"
+      <button
+        aria-label="States.NotWishlist"
+        class="mantine-focus-auto mantine-active button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root"
+        data-size="xl"
+        data-variant="subtle"
+        style="--ai-size: var(--ai-size-xl); --ai-bg: transparent; --ai-hover: color-mix(in srgb, var(--color-collection-wishlist), transparent 88%); --ai-color: var(--color-collection-wishlist); --ai-bd: calc(0.0625rem * var(--mantine-scale)) solid transparent;"
         tabindex="0"
+        type="button"
       >
-        <i
-          class="bi bi-gift-fill"
-        />
-      </div>
+        <span
+          class="m_8d3afb97 mantine-ActionIcon-icon"
+        >
+          <i
+            class="bi bi-gift-fill"
+          />
+        </span>
+      </button>
       <div
         class="statusText"
       >

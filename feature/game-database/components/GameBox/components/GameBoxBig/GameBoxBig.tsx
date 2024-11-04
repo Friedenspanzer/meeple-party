@@ -156,11 +156,7 @@ function Status({
           [styles.myStatusWishlist]: status === "wishlist",
         })}
       >
-        <StatusButton
-          status={status}
-          gameId={game.id}
-          className={styles.statusButton}
-        />
+        <StatusButton status={status} gameId={game.id} />
         <div className={styles.statusText}>
           {state
             ? t(`States.${translationBaseKey}`)

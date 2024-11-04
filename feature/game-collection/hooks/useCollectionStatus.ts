@@ -1,12 +1,18 @@
+import { showError } from "@/lib/utility/error";
 import { GameCollection } from "@prisma/client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  UseMutationResult,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import axios from "axios";
-import { MutableResult } from "../../../lib/types/apiHooks";
+import { Result } from "../../../lib/types/apiHooks";
 
 const twoWeeksInMilliSeconds = 1000 * 60 * 60 * 24 * 14;
 
 type CollectionStatusUpdate = Partial<
-  Omit<GameCollection, "userId" | "gameId" | "updatedAt">
+  Pick<GameCollection, "own" | "wantToPlay" | "wishlist">
 >;
 
 function getCollectionStatus(gameId: number) {
@@ -16,26 +22,22 @@ function getCollectionStatus(gameId: number) {
     .then((response) => response.data);
 }
 
+interface UseCollectionStatus extends Result<GameCollection> {
+  updateMutation: UseMutationResult<CollectionStatusUpdate, Error, any, any>;
+}
+
 export default function useCollectionStatus(
   gameId: number
-): MutableResult<GameCollection> {
+): UseCollectionStatus {
   const queryClient = useQueryClient();
-  const {
-    isLoading: queryLoading,
-    isError: queryError,
-    data: queryData,
-  } = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: getCollectionStatusQueryKey(gameId),
     queryFn: () => getCollectionStatus(gameId),
     refetchOnWindowFocus: false,
     staleTime: twoWeeksInMilliSeconds,
   });
 
-  const {
-    isPending: mutationLoading,
-    isError: mutationError,
-    mutate: mutationFunction,
-  } = useMutation({
+  const updateMutation = useMutation({
     mutationKey: getCollectionStatusQueryKey(gameId),
     mutationFn: (data: CollectionStatusUpdate) => {
       return axios
@@ -45,24 +47,42 @@ export default function useCollectionStatus(
         )
         .then((response) => response.data);
     },
-    onSuccess: (data) => {
+    onMutate: async (newData) => {
+      const queryKey = getCollectionStatusQueryKey(gameId);
+      await queryClient.cancelQueries({ queryKey });
+      const previousData = queryClient.getQueryData(queryKey);
+      queryClient.setQueryData(queryKey, (oldData: GameCollection) => ({
+        ...oldData,
+        ...newData,
+      }));
+      return { previousData };
+    },
+    onSuccess: (newData) => {
       queryClient.setQueryData(getCollectionStatusQueryKey(gameId), {
-        ...queryData,
         ...data,
+        ...newData,
       });
+    },
+    onError: (error: Error, newData, context) => {
+      console.error(error);
+      showError({ message: "Could not update collection status." });
+      queryClient.setQueryData(
+        getCollectionStatusQueryKey(gameId),
+        context?.previousData
+      );
     },
   });
 
   return {
-    isLoading: queryLoading || mutationLoading,
-    isError: queryError || mutationError,
-    data: queryData,
+    isLoading,
+    isError,
+    data,
     invalidate: () => {
       queryClient.invalidateQueries({
         queryKey: getCollectionStatusQueryKey(gameId),
       });
     },
-    mutate: (data, configuration) => mutationFunction(data),
+    updateMutation,
   };
 }
 

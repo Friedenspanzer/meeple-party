@@ -3,8 +3,10 @@ import { AVAILABLE_GAMES } from "./globalSetup";
 import {
   addGamesToCollection,
   clearCollection,
-  logInAsNewUser
+  logInAsNewUser,
 } from "./utility";
+
+const WINGSPAN = 266192;
 
 test.describe("Pagination", () => {
   test.beforeEach(async ({ page }) => {
@@ -66,8 +68,97 @@ test.describe("Pagination", () => {
     ).toBeVisible();
     await expect(page.getByRole("heading", { name: "Wingspan" })).toBeVisible();
   });
-  test("inputting pages changes current page",async ({page}) => {
+  test("inputting pages changes current page", async ({ page }) => {
     await page.goto("/app/collection");
-    await page.getByLabel('Current page')
+    await page.getByLabel("Current page");
+  });
+});
+
+test.describe("Collection updates in collection view", () => {
+  test.describe("visual tests", () => {
+    test("hovering set state", async ({ page }) => {
+      const user = await logInAsNewUser(page.context());
+      await clearCollection(user.id);
+      await addGamesToCollection(user.id, [WINGSPAN]);
+      await page.goto("/app/collection");
+
+      await expect(page.getByText("Wingspan")).toBeVisible();
+
+      await page.getByRole("button", { name: "Don't own" }).hover();
+
+      await expect(page).toHaveScreenshot({
+        clip: { x: 330, y: 200, width: 620, height: 270 },
+      });
+    });
+    test("hovering not set state", async ({ page }) => {
+      const user = await logInAsNewUser(page.context());
+      await clearCollection(user.id);
+      await addGamesToCollection(user.id, [WINGSPAN]);
+      await page.goto("/app/collection");
+
+      await expect(page.getByText("Wingspan")).toBeVisible();
+
+      await page.getByRole("button", { name: "Want To Play" }).hover();
+
+      await expect(page).toHaveScreenshot({
+        clip: { x: 330, y: 200, width: 620, height: 270 },
+      });
+    });
   })
+  test("changing collection status", async ({ page }) => {
+    const user = await logInAsNewUser(page.context());
+    await clearCollection(user.id);
+    await addGamesToCollection(user.id, [WINGSPAN]);
+    await page.goto("/app/collection");
+
+    await expect(page.getByText("Wingspan")).toBeVisible();
+
+    await expect(page.getByText("Own", { exact: true }).nth(3)).toBeVisible();
+    await page.getByRole("button", { name: "Don't own" }).click();
+    await expect(page.getByText("Don't own", { exact: true })).toBeVisible();
+
+    await page.reload();
+
+    await expect(page.getByText("Wingspan")).not.toBeVisible();
+  });
+  test("changing want to play status", async ({ page }) => {
+    const user = await logInAsNewUser(page.context());
+    await clearCollection(user.id);
+    await addGamesToCollection(user.id, [WINGSPAN]);
+    await page.goto("/app/collection");
+
+    await expect(page.getByText("Don't want to play")).toBeVisible();
+    await page.getByRole("button", { name: "Want to play" }).click();
+    await expect(page.getByText("Want To Play", { exact: true })).toBeVisible();
+
+    await page.reload();
+
+    await expect(page.getByText("Want To Play", { exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Want To Play" }).click();
+    await expect(page.getByText("Don't want to play")).toBeVisible();
+
+    await page.reload();
+
+    await expect(page.getByText("Don't want to play")).toBeVisible();
+  });
+  test("changing wishlist status", async ({ page }) => {
+    const user = await logInAsNewUser(page.context());
+    await clearCollection(user.id);
+    await addGamesToCollection(user.id, [WINGSPAN]);
+    await page.goto("/app/collection");
+
+    await expect(page.getByText("Don't wish")).toBeVisible();
+    await page.getByRole("button", { name: "Wishlist" }).click();
+    await expect(page.getByText("Wishlist", { exact: true })).toBeVisible();
+
+    await page.reload();
+
+    await expect(page.getByText("Wishlist", { exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Don't wish" }).click();
+    await expect(page.getByText("Don't wish")).toBeVisible();
+
+    await page.reload();
+
+    await expect(page.getByText("Don't wish")).toBeVisible();
+  });
 });

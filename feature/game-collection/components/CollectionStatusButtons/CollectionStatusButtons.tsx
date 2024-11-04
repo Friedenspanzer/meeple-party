@@ -19,7 +19,7 @@ export default function CollectionStatusButtons({
   ...props
 }: CollectionStatusButtonProps) {
   const { t } = useTranslation();
-  const { data, isLoading, mutate } = useCollectionStatus(gameId);
+  const { data, isLoading, updateMutation } = useCollectionStatus(gameId);
 
   return (
     <div
@@ -37,7 +37,7 @@ export default function CollectionStatusButtons({
             className={
               styles.collectionStatusButton + " " + (data.own && styles.own)
             }
-            onClick={() => mutate({ ...data, own: !data.own })}
+            onClick={() => updateMutation.mutate({ ...data, own: !data.own })}
             title={t("States.Own")}
           >
             <i className="bi bi-box-seam-fill"></i>
@@ -48,7 +48,9 @@ export default function CollectionStatusButtons({
               " " +
               (data.wantToPlay && styles.wantToPlay)
             }
-            onClick={() => mutate({ ...data, wantToPlay: !data.wantToPlay })}
+            onClick={() =>
+              updateMutation.mutate({ ...data, wantToPlay: !data.wantToPlay })
+            }
             title={t("States.WantToPlay")}
           >
             <i className="bi bi-dice-3-fill"></i>
@@ -59,7 +61,9 @@ export default function CollectionStatusButtons({
               " " +
               (data.wishlist && styles.wishlist)
             }
-            onClick={() => mutate({ ...data, wishlist: !data.wishlist })}
+            onClick={() =>
+              updateMutation.mutate({ ...data, wishlist: !data.wishlist })
+            }
             title={t("States.Wishlist")}
           >
             <i className="bi bi-gift-fill"></i>
