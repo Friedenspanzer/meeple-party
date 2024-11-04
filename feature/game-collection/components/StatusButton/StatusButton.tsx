@@ -1,6 +1,6 @@
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Stack } from "@mantine/core";
 import { useCallback, useMemo } from "react";
 import IconCollectionOwn from "../../../../lib/icons/CollectionOwn";
 import IconCollectionWantToPlay from "../../../../lib/icons/CollectionWantToPlay";
@@ -72,22 +72,29 @@ export default function StatusButton({
   const label = `States.${active ? "Not" : ""}${translationBaseKey}`;
 
   return (
-    <ActionIcon
-      onClick={updateStatus}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          updateStatus();
-        }
-      }}
-      className={styles.button}
-      tabIndex={0}
-      variant="subtle"
-      color={active ? activeColor : "gray"}
-      size="xl"
-      disabled={isLoading}
-      aria-label={t(label)}
-    >
-      {icon}
-    </ActionIcon>
+    <Stack align="center" gap="xs">
+      <ActionIcon
+        onClick={updateStatus}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            updateStatus();
+          }
+        }}
+        className={styles.button}
+        tabIndex={0}
+        variant="subtle"
+        color={active ? activeColor : "gray"}
+        size="xl"
+        disabled={isLoading}
+        aria-label={t(label)}
+      >
+        {icon}
+      </ActionIcon>
+      <div className={styles.text}>
+        {active
+          ? t(`States.${translationBaseKey}`)
+          : t(`States.Not${translationBaseKey}`)}
+      </div>
+    </Stack>
   );
 }

@@ -3,8 +3,10 @@
 import useCollectionStatus from "@/feature/game-collection/hooks/useCollectionStatus";
 import { useTranslation } from "@/i18n/client";
 import { CollectionStatus } from "@/pages/api/collection/[gameId]";
+import { Group } from "@mantine/core";
 import classNames from "classnames";
 import Spinner from "../../../../lib/components/Spinner/Spinner";
+import StatusButton from "../StatusButton/StatusButton";
 import styles from "./collectionstatusbuttons.module.css";
 
 export interface CollectionStatusButtonProps
@@ -32,43 +34,11 @@ export default function CollectionStatusButtons({
         </div>
       )}
       {!isLoading && data && (
-        <>
-          <button
-            className={
-              styles.collectionStatusButton + " " + (data.own && styles.own)
-            }
-            onClick={() => updateMutation.mutate({ ...data, own: !data.own })}
-            title={t("States.Own")}
-          >
-            <i className="bi bi-box-seam-fill"></i>
-          </button>
-          <button
-            className={
-              styles.collectionStatusButton +
-              " " +
-              (data.wantToPlay && styles.wantToPlay)
-            }
-            onClick={() =>
-              updateMutation.mutate({ ...data, wantToPlay: !data.wantToPlay })
-            }
-            title={t("States.WantToPlay")}
-          >
-            <i className="bi bi-dice-3-fill"></i>
-          </button>
-          <button
-            className={
-              styles.collectionStatusButton +
-              " " +
-              (data.wishlist && styles.wishlist)
-            }
-            onClick={() =>
-              updateMutation.mutate({ ...data, wishlist: !data.wishlist })
-            }
-            title={t("States.Wishlist")}
-          >
-            <i className="bi bi-gift-fill"></i>
-          </button>{" "}
-        </>
+        <Group align="space-around">
+          <StatusButton gameId={gameId} status="own" />
+          <StatusButton gameId={gameId} status="wanttoplay" />
+          <StatusButton gameId={gameId} status="wishlist" />
+        </Group>
       )}
     </div>
   );

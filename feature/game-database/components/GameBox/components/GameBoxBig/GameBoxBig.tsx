@@ -157,11 +157,6 @@ function Status({
         })}
       >
         <StatusButton status={status} gameId={game.id} />
-        <div className={styles.statusText}>
-          {state
-            ? t(`States.${translationBaseKey}`)
-            : t(`States.Not${translationBaseKey}`)}
-        </div>
       </div>
       {friends.length > 0 && (
         <div
