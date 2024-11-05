@@ -47,9 +47,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
         ></div>
         <div className={styles.meta}>
           <h3>{t("Page.Collections.YourCollection")}</h3>
-          <div className={styles.group}>
-            <CollectionStatusButtons gameId={bggGame.id} />
-          </div>
+          <CollectionStatusButtons gameId={bggGame.id} />
           {friendCollections.own.length > 0 && (
             <div className={styles.group}>
               <h3>{t("Page.Collections.FriendsOwn")}</h3>

@@ -91,8 +91,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       class="myStatusOwn"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.NotOwn"
@@ -147,8 +147,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       class="myStatusWantToPlay"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.NotWantToPlay"
@@ -203,8 +203,8 @@ exports[`GameBoxBig Matches snapshot 1`] = `
       class="myStatusWishlist"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.NotWishlist"
@@ -350,8 +350,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
       class="myStatusOwn"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.Own"
@@ -381,8 +381,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
       class="myStatusWantToPlay"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.WantToPlay"
@@ -412,8 +412,8 @@ exports[`GameBoxBig Matches snapshot for precise weight: default game 1`] = `
       class="myStatusWishlist"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.Wishlist"
@@ -534,8 +534,8 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
       class="myStatusOwn"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.Own"
@@ -565,8 +565,8 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
       class="myStatusWantToPlay"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.WantToPlay"
@@ -596,8 +596,8 @@ exports[`GameBoxBig Matches snapshot when not in collection: default game 1`] = 
       class="myStatusWishlist"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.Wishlist"
@@ -718,8 +718,8 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
       class="myStatusOwn"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.NotOwn"
@@ -774,8 +774,8 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
       class="myStatusWantToPlay"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.NotWantToPlay"
@@ -830,8 +830,8 @@ exports[`GameBoxBig Matches snapshot without friend collection 1`] = `
       class="myStatusWishlist"
     >
       <div
-        class="m_6d731127 mantine-Stack-root"
-        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start;"
+        class="stack m_6d731127 mantine-Stack-root"
+        style="--stack-gap: var(--mantine-spacing-xs); --stack-align: center; --stack-justify: flex-start; min-width: calc(6.25rem * var(--mantine-scale));"
       >
         <button
           aria-label="States.NotWishlist"

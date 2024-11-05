@@ -72,7 +72,7 @@ export default function StatusButton({
   const label = `States.${active ? "Not" : ""}${translationBaseKey}`;
 
   return (
-    <Stack align="center" gap="xs">
+    <Stack align="center" gap="xs" miw={100} className={styles.stack}>
       <ActionIcon
         onClick={updateStatus}
         onKeyDown={(e) => {
