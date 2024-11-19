@@ -1,16 +1,16 @@
 "use client";
 
-import CriticalError from "@/components/CriticalError/CriticalError";
-import GamePill from "@/components/GamePill/GamePill";
+import GamePill from "@/feature/game-database/components/GamePill/GamePill";
 import GameSearch, {
-  GameSearchChildren,
-} from "@/components/GameSearch/GameSearch";
-import Spinner from "@/components/Spinner/Spinner";
-import { Game } from "@/datatypes/game";
-import { useGameQuery } from "@/hooks/api/useGame";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
-import useUserProfile from "@/hooks/useUserProfile";
+    GameSearchChildren,
+} from "@/feature/game-database/components/GameSearch/GameSearch";
+import { useGameQuery } from "@/feature/game-database/hooks/useGame";
 import { useTranslation } from "@/i18n/client";
+import CriticalError from "@/lib/components/CriticalError/CriticalError";
+import Spinner from "@/lib/components/Spinner/Spinner";
+import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
+import useUserProfile from "@/lib/hooks/useUserProfile";
+import { Game } from "@/lib/types/game";
 import classNames from "classnames";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";

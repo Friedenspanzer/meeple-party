@@ -1,17 +1,17 @@
 "use client";
 
-import {
-  CollectionUpdate,
-  CollectionStatus,
-} from "@/pages/api/collection/[gameId]";
-import { useEffect, useState } from "react";
-import { ImportConfiguration, ImportMode } from "../page";
-import validator from "validator";
-import { Game, GameCollection } from "@prisma/client";
-import styles from "./import.module.css";
-import CollectionChange from "@/components/CollectionChange/CollectionChange";
-import CriticalError from "@/components/CriticalError/CriticalError";
+import CollectionChange from "@/feature/game-collection/components/CollectionChange/CollectionChange";
 import { useTranslation } from "@/i18n/client";
+import CriticalError from "@/lib/components/CriticalError/CriticalError";
+import {
+  CollectionStatus,
+  CollectionUpdate,
+} from "@/pages/api/collection/[gameId]";
+import { Game, GameCollection } from "@prisma/client";
+import { useEffect, useState } from "react";
+import validator from "validator";
+import { ImportConfiguration, ImportMode } from "../page";
+import styles from "./import.module.css";
 
 export interface ImportProps {
   configuration: ImportConfiguration;

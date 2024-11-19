@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useUserPreferences } from "@/lib/hooks/useUserPreferences";
 import i18next from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { useEffect, useState } from "react";

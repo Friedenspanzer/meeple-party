@@ -1,4 +1,4 @@
-import { getRandomPageLanguage, getRandomRealLanguage } from "@/utility/test";
+import { getRandomPageLanguage, getRandomRealLanguage } from "@/lib/utility/test";
 import { determineGameLanguage, determineLanguage } from "../lib";
 
 describe("determineLanguage", () => {

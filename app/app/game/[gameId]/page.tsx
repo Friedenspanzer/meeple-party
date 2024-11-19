@@ -1,11 +1,11 @@
-import Avatar from "@/components/Avatar/Avatar";
-import CollectionStatusButtons from "@/components/CollectionStatusButtons/CollectionStatusButtons";
+import GamePageHeader from "@/app/app/game/[gameId]/_components/GamePageHeader/GamePageHeader";
+import CollectionStatusButtons from "@/feature/game-collection/components/CollectionStatusButtons/CollectionStatusButtons";
+import Avatar from "@/feature/profiles/components/Avatar/Avatar";
 import { getTranslation } from "@/i18n";
-import GamePageHeader from "@/lib/components/structures/game/GamePageHeader/GamePageHeader";
-import { getCollectionStatusOfFriends } from "@/selectors/collections";
-import { getBggGame } from "@/utility/bgg";
-import { getGameData } from "@/utility/games";
-import { getServerUser } from "@/utility/serverSession";
+import { getCollectionStatusOfFriends } from "@/lib/selectors/collections";
+import { getBggGame } from "@/lib/utility/bgg";
+import { getGameData } from "@/lib/utility/games";
+import { getServerUser } from "@/lib/utility/serverSession";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
@@ -47,9 +47,7 @@ export default async function Game({ params }: { params: { gameId: string } }) {
         ></div>
         <div className={styles.meta}>
           <h3>{t("Page.Collections.YourCollection")}</h3>
-          <div className={styles.group}>
-            <CollectionStatusButtons gameId={bggGame.id} />
-          </div>
+          <CollectionStatusButtons gameId={bggGame.id} />
           {friendCollections.own.length > 0 && (
             <div className={styles.group}>
               <h3>{t("Page.Collections.FriendsOwn")}</h3>

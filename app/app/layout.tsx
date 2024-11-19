@@ -1,6 +1,6 @@
-import AppContainer from "@/components/AppContainer/AppContainer";
-import DataContainer from "@/components/DataContainer/DataContainer";
-import { getFeatureFlagServer } from "@/utility/featureFlag";
+import AppContainer from "@/app/app/_components/AppContainer/AppContainer";
+import DataContainer from "@/app/app/_components/DataContainer/DataContainer";
+import { getFeatureFlagServer } from "@/lib/utility/featureFlag";
 import { notFound } from "next/navigation";
 
 export default async function AppLayout({

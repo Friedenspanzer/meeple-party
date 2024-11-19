@@ -1,5 +1,5 @@
-import { getServerUser } from "@/utility/serverSession";
-import { getUserPreferences } from "@/utility/userProfile";
+import { getServerUser } from "@/lib/utility/serverSession";
+import { getUserPreferences } from "@/lib/utility/userProfile";
 import { createInstance } from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next/initReactI18next";

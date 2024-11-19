@@ -1,15 +1,15 @@
-import { defaultUserPreferences } from "@/datatypes/userProfile";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { determineGameLanguage } from "@/i18n/lib";
 import { fallbackLng } from "@/i18n/settings";
+import { defaultUserPreferences } from "@/lib/types/userProfile";
 import {
   getRandomGameLanguage,
   getRandomPageLanguage,
   getRandomRealLanguage,
-} from "@/utility/test";
+} from "@/lib/utility/test";
 import usePreferredGameLanguage from "../usePreferredGameLanguage";
+import { useUserPreferences } from "../useUserPreferences";
 
-jest.mock("@/hooks/useUserPreferences");
+jest.mock("@/lib/hooks/useUserPreferences");
 jest.mock("@/i18n/lib");
 
 describe("Hook: usePreferredGameLanguage", () => {

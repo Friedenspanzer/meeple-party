@@ -1,10 +1,10 @@
-import CollectionChange from "@/components/CollectionChange/CollectionChange";
-import Person from "@/components/Person/Person";
-import { ExpandedGame, prismaGameToExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
+import CollectionChange from "@/feature/game-collection/components/CollectionChange/CollectionChange";
+import Person from "@/feature/profiles/components/Person/Person";
 import { getGameLanguage, getTranslation } from "@/i18n";
-import { getFriends } from "@/selectors/relationships";
-import { getServerUser } from "@/utility/serverSession";
+import { getFriends } from "@/lib/selectors/relationships";
+import { ExpandedGame, prismaGameToExpandedGame } from "@/lib/types/game";
+import { getServerUser } from "@/lib/utility/serverSession";
 import { Game, GameCollection, User } from "@prisma/client";
 import { Metadata } from "next";
 import Link from "next/link";

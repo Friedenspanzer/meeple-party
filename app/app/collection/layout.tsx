@@ -1,8 +1,8 @@
+import { getTranslation } from "@/i18n";
 import {
   NavigationBar,
   NavigationItem,
-} from "@/components/NavigationBar/NavigationBar";
-import { getTranslation } from "@/i18n";
+} from "@/lib/components/NavigationBar/NavigationBar";
 
 export default async function Layout({
   children,

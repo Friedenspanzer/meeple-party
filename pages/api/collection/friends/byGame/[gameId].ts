@@ -1,5 +1,5 @@
-import { getCollectionStatusOfFriends } from "@/selectors/collections";
-import { withUser } from "@/utility/apiAuth";
+import { getCollectionStatusOfFriends } from "@/lib/selectors/collections";
+import { withUser } from "@/lib/utility/apiAuth";
 import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import validator from "validator";

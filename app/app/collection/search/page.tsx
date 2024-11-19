@@ -1,9 +1,9 @@
 "use client";
 
-import GameCollection from "@/components/GameCollection/GameCollection";
+import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
 import GameSearch, {
   GameSearchChildren,
-} from "@/components/GameSearch/GameSearch";
+} from "@/feature/game-database/components/GameSearch/GameSearch";
 
 const resultView: React.FC<GameSearchChildren> = ({ searchResult }) => {
   return <GameCollection games={searchResult} showFilter={false} />;

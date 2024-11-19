@@ -1,5 +1,5 @@
 import { getTranslation } from "@/i18n";
-import { getServerSession } from "@/utility/serverSession";
+import { getServerSession } from "@/lib/utility/serverSession";
 import { getProviders } from "next-auth/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";

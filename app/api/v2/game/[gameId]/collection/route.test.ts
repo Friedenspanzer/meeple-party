@@ -1,17 +1,17 @@
 /**
  * @jest-environment node
  */
-import { prismaMock } from "@/utility/prismaMock";
+import { prismaMock } from "@/lib/utility/prismaMock";
 import {
-  generateBoolean,
-  generateCollectionEntry,
-  generateGame,
-  generateNumber,
-  generatePrismaUser,
-  generateString,
-  getRandomEntry,
-  objectMatcher,
-} from "@/utility/test";
+    generateBoolean,
+    generateCollectionEntry,
+    generateGame,
+    generateNumber,
+    generatePrismaUser,
+    generateString,
+    getRandomEntry,
+    objectMatcher,
+} from "@/lib/utility/test";
 import { GameCollection } from "@prisma/client";
 import { mockDeep, mockReset } from "jest-mock-extended";
 import "whatwg-fetch";

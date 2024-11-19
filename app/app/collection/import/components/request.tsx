@@ -1,4 +1,4 @@
-import { useUser } from "@/context/userContext";
+import { useUser } from "@/feature/authentication/context/userContext";
 import { useTranslation } from "@/i18n/client";
 import { XMLParser } from "fast-xml-parser";
 import { useCallback, useEffect } from "react";

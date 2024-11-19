@@ -1,22 +1,22 @@
 /**
  * @jest-environment node
  */
-import { defaultUserPreferences } from "@/datatypes/userProfile";
-import { getServerUser } from "@/utility/serverSession";
+import { defaultUserPreferences } from "@/lib/types/userProfile";
+import { getServerUser } from "@/lib/utility/serverSession";
 import {
   generatePrismaUser,
   getRandomGameLanguage,
   getRandomPageLanguage,
   getRandomRealLanguage,
-} from "@/utility/test";
-import { getUserPreferences } from "@/utility/userProfile";
+} from "@/lib/utility/test";
+import { getUserPreferences } from "@/lib/utility/userProfile";
 import { mockReset } from "jest-mock-extended";
 import { getGameLanguage, getLanguage } from "..";
 
 const myUser = generatePrismaUser();
 
-jest.mock("@/utility/serverSession");
-jest.mock("@/utility/userProfile");
+jest.mock("@/lib/utility/serverSession");
+jest.mock("@/lib/utility/userProfile");
 
 const getUserMock = jest.mocked(getServerUser);
 const userPreferencesMock = jest.mocked(getUserPreferences);

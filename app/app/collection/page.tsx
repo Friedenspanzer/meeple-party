@@ -1,14 +1,14 @@
-import GameCollection from "@/components/GameCollection/GameCollection";
-import PrefetchedGameCollection from "@/components/Prefetches/PrefetchedGameCollection";
-import PrefetchedGameData from "@/components/Prefetches/PrefetchedGameData";
-import { ExpandedGame } from "@/datatypes/game";
 import { prisma } from "@/db";
+import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
 import { getTranslation } from "@/i18n";
-import { getMultipleCollectionStatusOfFriends } from "@/selectors/collections";
-import { findFriendCollection } from "@/utility/collections";
-import { emptyFilter } from "@/utility/filter";
-import { getGameData } from "@/utility/games";
-import { getServerUser } from "@/utility/serverSession";
+import PrefetchedGameCollection from "@/lib/components/Prefetches/PrefetchedGameCollection";
+import PrefetchedGameData from "@/lib/components/Prefetches/PrefetchedGameData";
+import { getMultipleCollectionStatusOfFriends } from "@/lib/selectors/collections";
+import { ExpandedGame } from "@/lib/types/game";
+import { findFriendCollection } from "@/lib/utility/collections";
+import { emptyFilter } from "@/lib/utility/filter";
+import { getGameData } from "@/lib/utility/games";
+import { getServerUser } from "@/lib/utility/serverSession";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

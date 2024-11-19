@@ -1,16 +1,16 @@
-import GameCollection from "@/components/GameCollection/GameCollection";
+import GameCollection from "@/feature/game-collection/components/GameCollection/GameCollection";
+import { getTranslation } from "@/i18n";
+import { getAllGamesOfFriends, getCollection } from "@/lib/selectors/collections";
 import {
   GameCollectionStatus,
   GameCollection as GameCollectionType,
   StatusByUser,
   UserGameCollection,
-} from "@/datatypes/collection";
-import { ExpandedGame } from "@/datatypes/game";
-import { UserProfile } from "@/datatypes/userProfile";
-import { getTranslation } from "@/i18n";
-import { getAllGamesOfFriends, getCollection } from "@/selectors/collections";
-import { emptyFilter } from "@/utility/filter";
-import { getServerUser } from "@/utility/serverSession";
+} from "@/lib/types/collection";
+import { ExpandedGame } from "@/lib/types/game";
+import { UserProfile } from "@/lib/types/userProfile";
+import { emptyFilter } from "@/lib/utility/filter";
+import { getServerUser } from "@/lib/utility/serverSession";
 import styles from "./dashboard.module.css";
 
 export const metadata = {

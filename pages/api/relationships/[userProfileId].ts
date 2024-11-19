@@ -1,7 +1,7 @@
-import { RelationshipType } from "@/datatypes/relationship";
 import { prisma } from "@/db";
-import { normalizeRelationship } from "@/selectors/relationships";
-import { withUser } from "@/utility/apiAuth";
+import { normalizeRelationship } from "@/lib/selectors/relationships";
+import { RelationshipType } from "@/lib/types/relationship";
+import { withUser } from "@/lib/utility/apiAuth";
 import {
   RelationshipType as PrismaRelationshipType,
   User,

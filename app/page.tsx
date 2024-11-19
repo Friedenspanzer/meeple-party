@@ -1,6 +1,6 @@
-import Login from "@/components/Auth/Login/Login";
-import Logo from "@/components/Logo/Logo";
+import Login from "@/feature/authentication/components/Login/Login";
 import { getTranslation } from "@/i18n";
+import Logo from "@/lib/components/Logo/Logo";
 import classNames from "classnames";
 import Image from "next/image";
 import { PropsWithChildren } from "react";

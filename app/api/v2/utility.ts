@@ -1,13 +1,13 @@
-import { Relationship, RelationshipType } from "@/datatypes/relationship";
+import { Relationship, RelationshipType } from "@/lib/types/relationship";
 import {
-  UserPreferences,
-  UserProfile,
-  defaultUserPreferences,
-} from "@/datatypes/userProfile";
+    UserPreferences,
+    UserProfile,
+    defaultUserPreferences,
+} from "@/lib/types/userProfile";
 import {
-  Prisma,
-  Relationship as PrismaRelationship,
-  User,
+    Prisma,
+    Relationship as PrismaRelationship,
+    User,
 } from "@prisma/client";
 
 export type FullPrismaRelationship = PrismaRelationship & {

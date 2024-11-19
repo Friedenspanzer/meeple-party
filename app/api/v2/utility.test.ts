@@ -1,9 +1,9 @@
 import {
-  defaultUserPreferences,
-  UserPreferences,
-  UserProfile,
-} from "@/datatypes/userProfile";
-import { generatePrismaUser, generateString } from "@/utility/test";
+    defaultUserPreferences,
+    UserPreferences,
+    UserProfile,
+} from "@/lib/types/userProfile";
+import { generatePrismaUser, generateString } from "@/lib/utility/test";
 import { convertToUserProfile, getCronAuthToken } from "./utility";
 
 describe("convertToUserProfile", () => {

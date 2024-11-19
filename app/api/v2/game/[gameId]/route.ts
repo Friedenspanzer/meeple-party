@@ -1,5 +1,5 @@
-import { ExpandedGame } from "@/datatypes/game";
-import { getGameData } from "@/utility/games";
+import { ExpandedGame } from "@/lib/types/game";
+import { getGameData } from "@/lib/utility/games";
 import { NextResponse } from "next/server";
 import validator from "validator";
 

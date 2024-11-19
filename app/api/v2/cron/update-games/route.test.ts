@@ -2,15 +2,15 @@
  * @jest-environment node
  */
 
-import { gameToExpandedGame } from "@/datatypes/game";
-import { getGameData } from "@/utility/games";
-import { prismaMock } from "@/utility/prismaMock";
+import { gameToExpandedGame } from "@/lib/types/game";
+import { getGameData } from "@/lib/utility/games";
+import { prismaMock } from "@/lib/utility/prismaMock";
 import {
-  generateArray,
-  generateGame,
-  generateNumber,
-  generateString,
-} from "@/utility/test";
+    generateArray,
+    generateGame,
+    generateNumber,
+    generateString,
+} from "@/lib/utility/test";
 import { mockDeep, mockReset } from "jest-mock-extended";
 import { getCronAuthToken } from "../../utility";
 import { PATCH } from "./route";
@@ -18,7 +18,7 @@ import { PATCH } from "./route";
 const requestMock = mockDeep<Request>();
 
 jest.mock("../../utility");
-jest.mock("@/utility/games");
+jest.mock("@/lib/utility/games");
 
 describe("PATCH cron/update-games", () => {
   beforeEach(() => {

@@ -1,13 +1,13 @@
 "use client";
 
-import FriendRequest from "@/components/FriendRequests/FriendRequest/FriendRequest";
-import { RelationshipType } from "@/datatypes/relationship";
-import useRelationships from "@/hooks/api/useRelationships";
+import FriendRequest from "@/feature/relationships/components/FriendRequest/FriendRequest";
+import useRelationships from "@/feature/relationships/hooks/useRelationships";
 import { useTranslation } from "@/i18n/client";
+import { RelationshipType } from "@/lib/types/relationship";
 import { Container, Stack, Title } from "@mantine/core";
 
 const FriendRequests: React.FC = () => {
-  const { isLoading, data: relationships } = useRelationships();
+  const { data: relationships } = useRelationships();
   const { t } = useTranslation("friends");
 
   const incoming =

@@ -1,5 +1,5 @@
-import Spinner from "@/components/Spinner/Spinner";
 import { getTranslation } from "@/i18n";
+import Spinner from "@/lib/components/Spinner/Spinner";
 import { Suspense } from "react";
 import ErrorReason from "./ErrorReason/ErrorReason";
 

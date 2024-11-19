@@ -1,7 +1,7 @@
-import { Game } from "@/datatypes/game";
 import { prisma } from "@/db";
-import { withUser } from "@/utility/apiAuth";
-import { getGameData } from "@/utility/games";
+import { Game } from "@/lib/types/game";
+import { withUser } from "@/lib/utility/apiAuth";
+import { getGameData } from "@/lib/utility/games";
 import { User } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 

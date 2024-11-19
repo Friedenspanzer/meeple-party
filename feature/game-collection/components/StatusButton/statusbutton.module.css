@@ -1,0 +1,13 @@
+.button {
+  font-size: 1.75rem;
+}
+
+.spinner {
+  margin: auto;
+}
+
+.text {
+  font-size: 0.7rem;
+  text-align: center;
+  font-weight: lighter;
+}

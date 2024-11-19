@@ -1,5 +1,5 @@
 import { prisma } from "@/db";
-import { getGameData } from "@/utility/games";
+import { getGameData } from "@/lib/utility/games";
 import { NextResponse } from "next/server";
 import { getCronAuthToken } from "../../utility";
 

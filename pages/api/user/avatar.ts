@@ -1,14 +1,14 @@
-import { withUser } from "@/utility/apiAuth";
-import { supabase } from "@/utility/supabase";
-import { User } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
-import formidable from "formidable";
-import fs from "fs";
 import { prisma } from "@/db";
 import {
   AVATAR_ALLOWED_FILE_SIZE,
   AVATAR_ALLOWED_FILE_TYPES,
-} from "@/constants/avatar";
+} from "@/lib/constants/avatar";
+import { withUser } from "@/lib/utility/apiAuth";
+import { supabase } from "@/lib/utility/supabase";
+import { User } from "@prisma/client";
+import formidable from "formidable";
+import fs from "fs";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   api: {

@@ -1,4 +1,4 @@
-import { generateString, render } from "@/utility/test";
+import { generateString, render } from "@/lib/utility/test";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ClientSafeProvider, signIn } from "next-auth/react";

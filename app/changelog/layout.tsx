@@ -1,5 +1,5 @@
-import Logo from "@/components/Logo/Logo";
 import { getTranslation } from "@/i18n";
+import Logo from "@/lib/components/Logo/Logo";
 import Link from "next/link";
 import styles from "./changelog.module.css";
 
